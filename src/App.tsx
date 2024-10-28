@@ -1,7 +1,11 @@
 function App() {
   return (
     <main className="flex h-dvh items-center justify-center">
-      <h1 className="text-8xl">Job tracker</h1>
+      <div className="container">
+        <h1 className="text-accent-primary font-nunito text-8xl font-bold">
+          Job tracker
+        </h1>
+      </div>
     </main>
   );
 }
