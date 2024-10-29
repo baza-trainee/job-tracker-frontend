@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 
 function Header() {
   const { t } = useTranslation();
-  console.log(t);
 
   return (
     <header className="flex items-center justify-between bg-gray-900 p-2 text-2xl text-white">
