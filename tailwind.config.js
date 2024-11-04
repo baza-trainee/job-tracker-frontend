@@ -20,13 +20,15 @@ export default {
           xl: "1.25rem",
         },
       },
-
+      boxShadow: {
+        button_hover: " 0px 0px 10px 0px rgba(15, 120, 241, 0.50)",
+      },
       colors: {
         accent: {
-          primary: "#0D36C9",
-          hover: "#1A48ED",
-          pressed: "#0C31B4",
+          primary: "#1976D2",
         },
+        grey: { 100: "#888888", 80: "#424242", 70: "#525252" },
+
         orang: " #FF551A",
         error: "#FF3B30",
       },
