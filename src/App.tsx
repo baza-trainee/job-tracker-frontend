@@ -1,31 +1,21 @@
-import { IconButton } from "./components/buttons/IconButton/IconButton";
-import { Button } from "./components/buttons/Button/Button";
-import { LinkButton } from "./components/buttons/LinkButton/LinkButton";
-import { FormExample } from "./components/form/FormExample/FormExample";
+import { Navigate, Route, Routes } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import Opportunities from "./components/Opportunities/Opportunities";
+import Matches from "./components/Matches/Matches";
+import Home from "./pages/Home";
+import Search from "./components/Search/Search";
 
 function App() {
-  const handleButtonClick = () => {
-    console.log("click");
-  };
-
   return (
-    <main className="flex h-dvh items-center justify-center">
-      <div className="container">
-        <h1 className="font-nunito text-8xl font-bold text-accent-primary">
-          Job tracker
-        </h1>
-        <Button variant="white" onClick={handleButtonClick}>
-          Click me
-        </Button>
-        <LinkButton variant="white" href="/">
-          Link to
-        </LinkButton>
-        <IconButton label="Close button" variant="outline">
-          x
-        </IconButton>
-        <FormExample />
-      </div>
-    </main>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="opportunities" element={<Opportunities />} />
+        <Route path="matches" element={<Matches />} />
+        <Route path="search" element={<Search />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
 }
 
