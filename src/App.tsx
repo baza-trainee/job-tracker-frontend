@@ -1,5 +1,7 @@
+import { IconButton } from "./components/buttons/IconButton/IconButton";
 import { Button } from "./components/buttons/Button/Button";
 import { LinkButton } from "./components/buttons/LinkButton/LinkButton";
+import { FormExample } from "./components/form/FormExample/FormExample";
 
 function App() {
   const handleButtonClick = () => {
@@ -15,10 +17,13 @@ function App() {
         <Button variant="white" onClick={handleButtonClick}>
           Click me
         </Button>
-
         <LinkButton variant="white" href="/">
           Link to
         </LinkButton>
+        <IconButton label="Close button" variant="outline">
+          x
+        </IconButton>
+        <FormExample />
       </div>
     </main>
   );

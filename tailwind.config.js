@@ -21,7 +21,9 @@ export default {
         },
       },
       boxShadow: {
-        button_hover: " 0px 0px 10px 0px rgba(15, 120, 241, 0.50)",
+        button_hover: "0px 0px 10px 0px rgba(15, 120, 241, 0.50)",
+        input_active: "0px 0px 10px 0px #0F78F180",
+        input_error: "0px 0px 10px 0px #EF080880",
       },
       colors: {
         accent: {
@@ -29,8 +31,8 @@ export default {
         },
         grey: { 100: "#888888", 80: "#424242", 70: "#525252" },
 
-        orang: " #FF551A",
-        error: "#FF3B30",
+        error: "#EF0808",
+        successful: "#0CC928",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
