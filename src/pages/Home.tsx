@@ -16,10 +16,13 @@ function Home() {
           {t("welcome")}
         </h1>
 
-        <Button variant="white" onClick={handleButtonClick}>
+        <Button variant="ghost" disabled size="big" onClick={handleButtonClick}>
           Click me
         </Button>
-        <LinkButton variant="white" href="/">
+        <Button variant="ghost" size="small" onClick={handleButtonClick}>
+          Click me
+        </Button>
+        <LinkButton variant="ghost" size="big" href="/">
           Link to
         </LinkButton>
         <IconButton label="Close button" variant="outline">

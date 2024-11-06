@@ -23,18 +23,30 @@ export default {
         },
       },
       boxShadow: {
-        button_hover: "0px 0px 10px 0px rgba(15, 120, 241, 0.50)",
-        input_active: "0px 0px 10px 0px #0F78F180",
-        input_error: "0px 0px 10px 0px #EF080880",
+        button_hover: "0px 0px 6px 0px rgba(198, 231, 255, 0.5)",
+        form_shadow: " 0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
       },
       colors: {
-        accent: {
-          primary: "#1976D2",
+        text: {
+          primary: "#333333",
+          gray: "rgba(51, 51, 51, 0.5)",
         },
-        grey: { 100: "#888888", 80: "#424242", 70: "#525252" },
-
-        error: "#EF0808",
-        successful: "#0CC928",
+        card: {
+          blue: "#C6E7FF",
+          red: "#FC8972",
+          yellow: "#FEEE91",
+          purple: "#CDC1FF",
+          green: "#D0E8C5",
+          gray: "#A6AEBF",
+        },
+        background: {
+          page: "#F6F6F6",
+          form: "rgba(255, 255, 255, 0.5)",
+          sidebar: "#D9D9D9",
+        },
+        accent: "#C6E7FF",
+        error: "#FC8972",
+        successful: "#D0E8C5",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],

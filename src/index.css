@@ -10,6 +10,11 @@
   font-optical-sizing: auto;
   font-weight:
     [ 200,
+    500,
     700];
   font-style: normal;
+}
+
+body {
+  @apply bg-background-page;
 }

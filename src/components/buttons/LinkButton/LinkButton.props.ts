@@ -6,7 +6,7 @@ export interface LinkButtonProps
     HTMLAnchorElement
   > {
   children: ReactNode;
-  variant?: "accent" | "white";
+  variant?: "accent" | "ghost";
   size?: "big" | "small";
   disabled?: boolean;
   href: string;
