@@ -3,30 +3,34 @@ import cn from "classnames";
 import { ButtonProps } from "./Button.props";
 
 export const Button = ({
-  variant = "accent",
+  variant = "ghost",
   disabled = false,
   children,
   className,
+  size = "small",
   ...props
 }: ButtonProps) => {
   return (
     <button
       className={cn(
-        "flex min-w-[260px] items-center justify-center rounded-xl px-8 py-3 font-nunito text-xl font-normal duration-300",
+        "text-text-primary flex h-[50px] items-center justify-center rounded-xl py-3 font-nunito text-xl font-medium duration-300",
         className,
-        // { ['w-[140px]']: size == 'small', ['w-[214px]']: size == 'big' },
+        {
+          ["min-w-[180px] px-8"]: size == "small",
+          ["min-w-[260px] px-12"]: size == "big",
+        },
 
         !disabled && {
-          ["text-grey-0 bg-accent-primary hover:bg-accent-hover focus:bg-accent-pressed"]:
-            variant == "accent",
+          // ["text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary"]:
+          //   variant == "accent",
 
-          ["ring-grey-70 text-grey-80 hover:shadow-button_hover focus:shadow-button_hover bg-white ring-1 ring-inset hover:text-accent-hover hover:ring-[3px] hover:ring-accent-primary focus:ring-[3px] focus:ring-accent-primary"]:
-            variant == "white",
+          ["ring-text-primary hover:ring-accent focus:ring-accent bg-transparent ring-1 ring-inset hover:shadow-button_hover hover:ring-[3px] focus:shadow-button_hover focus:ring-[3px]"]:
+            variant == "ghost",
         },
         disabled && {
-          ["bg-grey-40 text-grey-0 pointer-events-none"]: variant == "accent",
-          ["bg-grey-100 pointer-events-none text-white ring-transparent"]:
-            variant == "white",
+          // ["bg-grey-40 text-grey-0 pointer-events-none"]: variant == "accent",
+          ["bg-background-sidebar pointer-events-none ring-transparent"]:
+            variant == "ghost",
         },
       )}
       {...props}

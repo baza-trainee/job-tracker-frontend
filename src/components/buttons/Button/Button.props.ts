@@ -6,7 +6,7 @@ export interface ButtonProps
     HTMLButtonElement
   > {
   children: ReactNode;
-  variant?: "accent" | "white";
+  variant?: "accent" | "ghost";
   size?: "big" | "small";
   disabled?: boolean;
 }

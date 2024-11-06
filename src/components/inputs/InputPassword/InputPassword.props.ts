@@ -11,4 +11,5 @@ export interface InputPasswordProps {
   errors: FieldErrors;
   type: string;
   value?: string;
+  id?: string;
 }

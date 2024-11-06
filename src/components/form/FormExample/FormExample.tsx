@@ -44,7 +44,8 @@ export const FormExample = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty, isValid },
+    resetField,
+    formState: { errors, isDirty },
   } = useForm<z.infer<typeof RegisterSchema>>({
     defaultValues: {
       username: "",
@@ -74,25 +75,31 @@ export const FormExample = () => {
 
   return (
     <>
-      <form className="" onSubmit={handleSubmit(onSubmit)}>
-        <div className="">
+      <form
+        className="bg-background-form shadow-form_shadow space-y-[30px] rounded-[20px] px-12 py-6"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="flex flex-col gap-[30px]">
           <Input
             register={register}
+            resetField={resetField}
             key="username"
             name="username"
             placeholder="type your name"
             type="text"
-            className=""
+            label="Ім'я"
             errors={errors}
           />
 
           <Input
             register={register}
+            resetField={resetField}
             key="email"
             name="email"
             placeholder="type your email"
-            type="email"
+            type="text"
             className=""
+            label="Електронна пошта"
             errors={errors}
           />
 
@@ -102,6 +109,7 @@ export const FormExample = () => {
             name="password"
             placeholder="type your password"
             type="text"
+            label="Пароль"
             className=""
             errors={errors}
           />
@@ -110,8 +118,8 @@ export const FormExample = () => {
         <Button
           type="submit"
           className=""
-          disabled={!isDirty || isSending || !isValid}
-          variant="white"
+          disabled={!isDirty || isSending}
+          variant="ghost"
         >
           Register
         </Button>

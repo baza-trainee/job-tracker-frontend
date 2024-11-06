@@ -5,11 +5,12 @@ import { RegisterSchema } from "../../form/FormExample/FormExample";
 export interface InputProps {
   name: keyof z.infer<typeof RegisterSchema>;
   placeholder: string;
-  className: string;
+  className?: string;
   label?: string;
   register: UseFormRegister<z.infer<typeof RegisterSchema>>;
   errors: FieldErrors;
-  type: string;
+  type?: string;
   value?: string;
   id?: string;
+  resetField(name: string): void;
 }
