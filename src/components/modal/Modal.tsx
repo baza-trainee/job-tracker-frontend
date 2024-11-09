@@ -1,60 +1,87 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/store";
-import { closeModal } from "../../store/slices/modalSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { closeModal } from "../../store/slices/modalSlice/modalSlice";
+import { isOpenModal, modalCallFunction, modalContent, typeModal } from "../../store/slices/modalSlice/selectors";
 
 import { Button } from '../buttons/Button/Button';
-import CloseIcon from '../../../public/close.svg';
+import iconClose from "/close.svg";
 
+const Modal: FC = () => {
 
-interface ModalProps {
-    content?: ReactNode;
-    onCallFunction?: () => unknown;
-}
+    const dispatch = useAppDispatch();
+    const isOpen = useAppSelector(isOpenModal);
+    
+    const content = useAppSelector(modalContent);
+    const onCallFunction = useAppSelector(modalCallFunction);
+    const type = useAppSelector(typeModal);
 
-const Modal: FC<ModalProps> = ({ content, onCallFunction }) => {
+    const confirmModal = (): void => {
+        onCallFunction()
+        setTimeout(() => {
+            dispatch(closeModal())
+        }, 800)
+    }
 
-    const isOpen = useSelector((state: RootState) => state.modal.isOpen);
-    const dispatch = useDispatch();
+    const contentMap = {
+        success: <span className="text-4xl font-bold text-successful">Успіх!</span>,
+        error: <span className="text-4xl font-bold text-error">Упс!</span>,
+        confirm: <span className="text-4xl font-bold text-successful">Підтвердіть дію!</span>,
+        popup: "",
+    }
+    const buttonMap = {
+        success: "Продовжити",
+        error: "Повторити спробу",
+        confirm: "Ок",
+        popup: "",
+    }
+    const functionButtonMap = {
+        success: () => dispatch(closeModal()),
+        error: () => dispatch(closeModal()),
+        confirm: confirmModal,
+        popup: null,
+    }
 
     if (!isOpen) return null;
+    if (type === "popup") setTimeout(() => {dispatch(closeModal())}, 3000);
 
     return (
 
         <div
-            className="fixed top-0 right-0 w-full h-full z-10 flex justify-center items-center bg-black bg-opacity-50"
+            className="fixed top-0 right-0 w-full h-full z-10 flex justify-center items-center bg-black bg-opacity-50 font-nunito"
             onClick={() => dispatch(closeModal())}>
 
             <div
-                className="flex flex-row justify-between items-start w-auto h-auto container bg-white"
+                className="flex flex-row justify-between items-start w-auto h-auto bg-white rounded-lg shadow-form_shadow"
                 onClick={e => e.stopPropagation()}>
+
                 <div
-                    className="flex flex-col w-[100%] h-[100%] justify-center items-center">
-                    {content}
-                    {typeof onCallFunction === "function"
-                        ?
-                        <Button
-                            className=""
+                    className="flex flex-col w-[550px] h-[289px] justify-center items-center gap-8">
+                    {contentMap[type]}
+                    <div className="text-center text-lg">{content}</div>
+                    {type !== "popup" ? 
+                        (<Button 
                             disabled={false}
                             variant="ghost"
-                            size='big'
-                            onClick={onCallFunction}>
-                            Ok
-                        </Button>
-                        :
-                        null}
+                            size={type==="error" ? "small" : "big"}
+                            onClick={ functionButtonMap[type] || (() => dispatch(closeModal())) }>
+                            {buttonMap[type]}
+                        </Button>)
+                        : (null)
+                    }
                 </div>
-                <button
+                <button 
+                    className=""
                     onClick={() => dispatch(closeModal())}>
-                    <img src={CloseIcon} />
+                    <img src={iconClose} />
                 </button>
+
             </div>
 
         </div>
 
-    )
+    );
 
-}
+};
 
 export default Modal;
