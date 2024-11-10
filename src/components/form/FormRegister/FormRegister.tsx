@@ -36,7 +36,7 @@ export const RegisterSchema = z.object({
     .min(8, `Min 8`)
     .regex(passwordRegex, `Regex error`)
     .max(50, `Max 50`),
-    
+
   email: z
     .string()
     .min(1, "Required")
@@ -45,7 +45,7 @@ export const RegisterSchema = z.object({
     .min(4, `Min 4`),
 });
 
-export const FormExample = () => {
+export const FormRegister = () => {
   const [isSending, setIsSending] = useState(false);
 
   const {
@@ -60,7 +60,6 @@ export const FormExample = () => {
       password: "",
       email: "",
     },
-
     resolver: zodResolver(RegisterSchema),
     mode: "onChange",
   });
@@ -83,28 +82,14 @@ export const FormExample = () => {
 
   return (
     <>
-      <form
-        className="bg-background-form shadow-form_shadow space-y-[30px] rounded-[20px] px-12 py-6"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-[30px]">
-          <Input
-            register={register}
-            resetField={resetField}
-            key="username"
-            name="username"
-            placeholder="type your name"
-            type="text"
-            label="Ім'я"
-            errors={errors}
-          />
-
           <Input
             register={register}
             resetField={resetField}
             key="email"
             name="email"
-            placeholder="type your email"
+            placeholder="Введіть пошту"
             type="text"
             className=""
             label="Електронна пошта"
@@ -115,9 +100,20 @@ export const FormExample = () => {
             register={register}
             key="password"
             name="password"
-            placeholder="type your password"
+            placeholder="Введіть пароль"
             type="text"
             label="Пароль"
+            className=""
+            errors={errors}
+          />
+
+          <InputPassword
+            register={register}
+            key="confirm_password"
+            name="confirm_password"
+            placeholder="Підтвердіть пароль"
+            type="text"
+            label="Підтвердіть пароль"
             className=""
             errors={errors}
           />
@@ -125,11 +121,12 @@ export const FormExample = () => {
 
         <Button
           type="submit"
-          className=""
+          className="mx-auto mt-[50px]"
           disabled={!isDirty || isSending}
           variant="ghost"
+          size="big"
         >
-          Register
+          Зареєструватись
         </Button>
       </form>
     </>

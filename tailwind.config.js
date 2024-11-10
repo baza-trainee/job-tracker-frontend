@@ -30,6 +30,7 @@ export default {
         text: {
           primary: "#333333",
           gray: "rgba(51, 51, 51, 0.5)",
+          link:"#288dd5"
         },
         card: {
           blue: "#C6E7FF",
@@ -43,6 +44,7 @@ export default {
           page: "#F6F6F6",
           form: "rgba(255, 255, 255, 0.5)",
           sidebar: "#D9D9D9",
+          login: "#f9ce69",
         },
         accent: "#C6E7FF",
         error: "#FC8972",
