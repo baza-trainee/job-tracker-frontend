@@ -8,8 +8,8 @@ import { useAuthForm } from "./useAuth";
 import LoginCardImages from "./LoginImages/LoginCardImages";
 import { Input } from "../../components/inputs/Input/Input";
 import { InputPassword } from "../../components/inputs/InputPassword/InputPassword";
-import Checkbox from "../../components/Checkbox/Checkbox";
-import Separator from "../../components/Separator/Separator";
+import Checkbox from "../../components/checkbox/Checkbox";
+import Separator from "../../components/separator/Separator";
 import { Button } from "../../components/buttons/Button/Button";
 
 //image
