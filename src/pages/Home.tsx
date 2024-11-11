@@ -4,8 +4,6 @@ import { LinkButton } from "../components/buttons/LinkButton/LinkButton";
 import { IconButton } from "../components/buttons/IconButton/IconButton";
 import { FormExample } from "../components/form/FormExample";
 
-import { Link } from "react-router-dom";
-
 function Home() {
   const { t } = useTranslation();
   const handleButtonClick = () => {
@@ -19,7 +17,7 @@ function Home() {
         </h1>
 
         <LinkButton variant="ghost" size="big" href="/sign-up">
-          Link to
+          Авторизація
         </LinkButton>
 
         <Button variant="ghost" disabled size="big" onClick={handleButtonClick}>

@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 
 // hooks
-import { useAuthForm } from "./use-auth";
+import { useAuthForm } from "./useAuth";
 
 //components
 import LoginCardImages from "./LoginImages/LoginCardImages";

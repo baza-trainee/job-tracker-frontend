@@ -10,12 +10,9 @@ export const Checkbox = ({
   register,
   disabled = false,
   required = false,
-  onChange,
   ...props
 }: CheckboxProps) => {
-  
   const error = errors[name];
-  console.log(error)
 
   return (
     <div
@@ -31,7 +28,6 @@ export const Checkbox = ({
           id={`checkbox-${name}`}
           disabled={disabled}
           {...register(name)}
-          onChange={onChange}
           aria-describedby={`checkBoxError-${name}`}
           {...props}
           className={classNames({
