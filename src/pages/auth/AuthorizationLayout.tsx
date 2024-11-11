@@ -160,7 +160,6 @@ const SignInCard = ({ type }: SignInCardProps) => {
                 <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
                   GitHub
                 </span>
-                <span></span>
                 <span className="">
                   <figure className="max-h-[36px] max-w-[36px]">
                     <img
