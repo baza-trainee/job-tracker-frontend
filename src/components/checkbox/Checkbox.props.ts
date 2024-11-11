@@ -1,6 +1,6 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { z } from "zod";
-import { RegisterSchema } from "../../pages/Auth/useAuth";
+import { RegisterSchema } from "../../pages/auth/useAuth";
 
 export interface CheckboxProps {
   name: keyof z.infer<typeof RegisterSchema>;

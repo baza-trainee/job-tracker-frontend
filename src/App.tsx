@@ -4,7 +4,7 @@ import Opportunities from "./components/Opportunities/Opportunities";
 import Matches from "./components/Matches/Matches";
 import Home from "./pages/Home";
 import Search from "./components/Search/Search";
-import AuthorizationLayout from "./pages/Auth/AuthorizationLayout";
+import AuthorizationLayout from "./pages/auth/AuthorizationLayout";
 
 function App() {
   return (
