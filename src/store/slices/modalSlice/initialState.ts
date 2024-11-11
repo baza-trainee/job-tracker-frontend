@@ -2,7 +2,7 @@ interface ModalState {
   isModalOpen: boolean;
   typeModal: "success" | "error" | "confirm" | "popup";
   content?: string;
-  onCallFunction?: () => unknown;
+  onCallFunction?: () => void;
 }
 
 export const initialState: ModalState = {
