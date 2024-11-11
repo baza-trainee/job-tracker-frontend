@@ -3,19 +3,25 @@ import { CheckboxProps } from "./Checkbox.props";
 
 export const Checkbox = ({
   name,
+  label,
   id,
+  errors,
   type = "default",
-  label = "",
+  register,
   disabled = false,
   required = false,
   onChange,
   ...props
 }: CheckboxProps) => {
+  const error = errors[name];
+  console.log(error)
+
   return (
     <div
       className={classNames({
-        ["flex items-center px-[9.5px]"]: type === "signUp",
+        ["relative flex items-center px-[9.5px]"]: type === "signUp",
       })}
+      id={id}
     >
       <div className="relative flex items-center justify-center">
         <input
@@ -23,7 +29,9 @@ export const Checkbox = ({
           type="checkbox"
           id={`checkbox-${name}`}
           disabled={disabled}
+          {...register(name)}
           onChange={onChange}
+          aria-describedby={`checkBoxError-${name}`}
           {...props}
           className={classNames({
             ["peer relative h-6 w-6 shrink-0 appearance-none rounded-[4px] border-2 border-solid border-text-primary"]:
@@ -54,6 +62,14 @@ export const Checkbox = ({
       >
         {label}
       </label>
+      {error && (
+        <span
+          id={`inputError-${name}`}
+          className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-error"
+        >
+          {String(error?.message)}
+        </span>
+      )}
     </div>
   );
 };

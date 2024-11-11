@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // router
 import { Link } from "react-router-dom";
 
@@ -21,17 +23,12 @@ type SignInCardProps = {
 };
 
 const SignInCard = ({ type }: SignInCardProps) => {
-  const {
-    register,
-    handleSubmit,
-    resetField,
-    onSubmit,
-    errors,
-    isDirty,
-    isSending,
-  } = useAuthForm();
+  const { register, handleSubmit, resetField, onSubmit, errors, isDirty } =
+    useAuthForm(type);
 
+  const [isSending, setIsSending] = useState(false);
   const isSignUpPage = type === "signUp";
+  const isLogInPage = type === "logIn";
 
   return (
     <section>
@@ -93,10 +90,8 @@ const SignInCard = ({ type }: SignInCardProps) => {
                         errors={errors}
                       />
                       <Checkbox
-                        register={register}
                         type="signUp"
-                        name="terms"
-                        errors={errors}
+                        name="register"
                         label={
                           <p>
                             Погоджуюсь з

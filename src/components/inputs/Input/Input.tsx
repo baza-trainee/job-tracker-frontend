@@ -24,8 +24,6 @@ export const Input = ({
       {label && (
         <label
           htmlFor={`input-${name}`}
-          // ALEX
-          // className="text-text-primary mb-3 block font-nunito text-xl font-medium"
           className="mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-text-primary"
         >
           {label}

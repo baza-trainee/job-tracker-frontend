@@ -1,13 +1,20 @@
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { z } from "zod";
+import { RegisterSchema } from "../../pages/auth/use-auth";
+
 export interface CheckboxProps {
-  type?: "default" | "signUp";
-  defaultChecked?: boolean;
-  id?: string | number;
-  name: string; // нужна ли схема????????
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  label?: React.ReactNode | string;
+  name: keyof z.infer<typeof RegisterSchema>;
   className?: string;
+  label?: React.ReactNode | string;
+  register: UseFormRegister<z.infer<typeof RegisterSchema>>;
+  errors: FieldErrors;
+  type?: "default" | "signUp";
+  id?: string;
+
+  defaultChecked?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked?: boolean;
-  // value: number | string;
+  value?: string;
   disabled?: boolean;
   required?: boolean;
   ref?: React.RefObject<HTMLInputElement>;
