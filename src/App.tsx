@@ -4,7 +4,7 @@ import Opportunities from "./components/Opportunities/Opportunities";
 import Matches from "./components/Matches/Matches";
 import Home from "./pages/Home";
 import Search from "./components/Search/Search";
-import SignInCard from "./pages/Auth/AuthorizationLayout";
+import AuthorizationLayout from "./pages/Auth/AuthorizationLayout";
 
 function App() {
   return (
@@ -14,8 +14,11 @@ function App() {
         <Route path="opportunities" element={<Opportunities />} />
         <Route path="matches" element={<Matches />} />
         <Route path="search" element={<Search />} />
-        <Route path="/sign-up" element={<SignInCard type="signUp" />} />
-        <Route path="/log-in" element={<SignInCard type="logIn" />} />
+        <Route
+          path="/sign-up"
+          element={<AuthorizationLayout type="signUp" />}
+        />
+        <Route path="/log-in" element={<AuthorizationLayout type="logIn" />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
