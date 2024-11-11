@@ -9,7 +9,7 @@ import LoginCardImages from "./LoginImages/LoginCardImages";
 import { Input } from "../../components/inputs/Input/Input";
 import { InputPassword } from "../../components/inputs/InputPassword/InputPassword";
 import Checkbox from "../../components/checkbox/Checkbox";
-import Separator from "../../components/separator/Separator";
+import Separator from "../../components/Separator/Separator";
 import { Button } from "../../components/buttons/Button/Button";
 
 //image
