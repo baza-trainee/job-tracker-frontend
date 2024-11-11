@@ -4,12 +4,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button } from "../../buttons/Button/Button";
+import { Button } from "../buttons/Button/Button";
 
-import { Input } from "../../inputs/Input/Input";
-import { InputPassword } from "../../inputs/InputPassword/InputPassword";
+import { Input } from "../inputs/Input/Input";
+import { InputPassword } from "../inputs/InputPassword/InputPassword";
 
-import { RegisterSchema } from "../../../pages/auth/use-auth";
+import { RegisterSchema } from "../../pages/auth/useAuth";
 
 export const FormExample = () => {
   const [isSending, setIsSending] = useState(false);

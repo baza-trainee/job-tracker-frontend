@@ -1,8 +1,8 @@
 // components
-import InfoCard from "../info-card/info-card";
+import InfoCard from "../InfoCard/InfoCard";
 
 //consts
-import { loginCardsImages } from "./login-card-images.const";
+import { loginCardsImages } from "./LoginCardImages.const";
 
 const LoginCardImages = () => {
   return (

@@ -61,6 +61,8 @@ export function useAuthForm() {
     mode: "onChange",
   });
 
+  console.log("ERRRR", errors)
+
   const [isSending, setIsSending] = useState(false);
 
   const onSubmit: SubmitHandler<z.infer<typeof RegisterSchema>> = async (

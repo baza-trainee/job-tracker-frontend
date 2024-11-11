@@ -2,10 +2,10 @@
 import { Link } from "react-router-dom";
 
 // hooks
-import { useAuthForm } from "./use-auth";
+import { useAuthForm } from "./useAuth";
 
 //components
-import LoginCardImages from "./login-images/login-card-images";
+import LoginCardImages from "./LoginImages/LoginCardImages";
 import { Input } from "../../components/inputs/Input/Input";
 import { InputPassword } from "../../components/inputs/InputPassword/InputPassword";
 import Checkbox from "../../components/Checkbox/Checkbox";
