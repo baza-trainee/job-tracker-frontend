@@ -5,7 +5,7 @@ const modalSlice = createSlice({
   name: "modal",
   initialState: initialState,
   reducers: {
-    openModal: (state, action: PayloadAction<{ typeModal: "success" | "error" | "confirm" | "popup"; content?: string; onCallFunction?: () => unknown }>) => {
+    openModal: (state, action: PayloadAction<{ typeModal: "success" | "error" | "confirm" | "popup"; content?: string; onCallFunction?: () => void }>) => {
       state.isModalOpen = true;
       state.content = action.payload.content;
       state.onCallFunction = action.payload.onCallFunction;

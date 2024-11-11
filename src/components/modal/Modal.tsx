@@ -18,7 +18,7 @@ const Modal: FC = () => {
     const type = useAppSelector(typeModal);
 
     const confirmModal = (): void => {
-        onCallFunction();
+        onCallFunction && onCallFunction();
         setTimeout(() => {
             dispatch(closeModal())
         }, 800)
