@@ -1,9 +1,7 @@
-import { ReactNode } from "react";
-
 interface ModalState {
   isModalOpen: boolean;
   typeModal: "success" | "error" | "confirm" | "popup";
-  content?: ReactNode | string;
+  content?: string;
   onCallFunction?: () => unknown;
 }
 

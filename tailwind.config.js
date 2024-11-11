@@ -47,6 +47,8 @@ export default {
         accent: "#C6E7FF",
         error: "#FC8972",
         successful: "#D0E8C5",
+        modalWindowGreen: "#76925D",
+        modalWindowRed: "#FC8972",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
