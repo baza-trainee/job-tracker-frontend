@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { InfoCardProps } from "./info-card.type";
+import { InfoCardProps } from "./InfoCard.type";
 
 const InfoCard = ({
   margin,

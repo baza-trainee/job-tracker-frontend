@@ -13,6 +13,7 @@ export const Checkbox = ({
   onChange,
   ...props
 }: CheckboxProps) => {
+  
   const error = errors[name];
   console.log(error)
 

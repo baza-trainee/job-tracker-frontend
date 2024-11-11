@@ -1,6 +1,6 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import { z } from "zod";
-import { RegisterSchema } from "../../../pages/auth/use-auth";
+import { RegisterSchema } from "../../../pages/Auth/use-auth";
 
 export interface InputPasswordProps {
   name: keyof z.infer<typeof RegisterSchema>;
