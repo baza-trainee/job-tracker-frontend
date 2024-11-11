@@ -9,7 +9,7 @@ import LoginCardImages from "./LoginImages/LoginCardImages";
 import { Input } from "../../components/inputs/Input/Input";
 import { InputPassword } from "../../components/inputs/InputPassword/InputPassword";
 import Checkbox from "../../components/checkbox/Checkbox";
-import Separator from "../../components/Separator/Separator";
+import Separator from "../../components/separator/Separator";
 import { Button } from "../../components/buttons/Button/Button";
 
 //image
@@ -35,8 +35,8 @@ const SignInCard = ({ type }: SignInCardProps) => {
 
   return (
     <section>
-
       {/* left side of the page - images */}
+
       <div className="mx-auto flex h-screen w-screen items-center justify-center gap-[49px] px-3">
         <LoginCardImages />
 
