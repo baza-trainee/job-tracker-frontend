@@ -35,8 +35,8 @@ const SignInCard = ({ type }: SignInCardProps) => {
 
   return (
     <section>
-      {/* left side of the page - images */}
 
+      {/* left side of the page - images */}
       <div className="mx-auto flex h-screen w-screen items-center justify-center gap-[49px] px-3">
         <LoginCardImages />
 
