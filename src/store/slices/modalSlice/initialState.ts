@@ -1,13 +1,13 @@
-interface ModalState {
+export interface ModalState {
   isModalOpen: boolean;
   typeModal: "success" | "error" | "confirm" | "popup";
-  content?: string;
+  modalContent?: string;
   onCallFunction?: () => void;
 }
 
 export const initialState: ModalState = {
   isModalOpen: false,
   typeModal: "success",
-  content: undefined,
+  modalContent: undefined,
   onCallFunction: undefined,
 };
