@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 function Sidebar() {
   return (
     <aside className="flex w-full max-w-64 flex-col bg-gray-900 text-white">
-      <div className="p-4 text-2xl font-bold">Logo</div>
+      <NavLink to="/" className="p-4 text-2xl font-bold">
+        Home
+      </NavLink>
       <nav className="mb-auto flex h-full flex-col gap-3 p-4">
         <NavLink
           to="/opportunities"
@@ -13,7 +15,7 @@ function Sidebar() {
               "rounded p-2",
               isPending && "bg-red-500",
               isActive && "bg-green-600",
-              !isActive && "hover:bg-gray-700",
+              !isActive && "hover:bg-gray-700"
             )
           }
         >
@@ -26,7 +28,7 @@ function Sidebar() {
               "rounded p-2",
               isPending && "bg-red-500",
               isActive && "bg-green-600",
-              !isActive && "hover:bg-gray-700",
+              !isActive && "hover:bg-gray-700"
             )
           }
         >
@@ -39,7 +41,7 @@ function Sidebar() {
               "rounded p-2",
               isPending && "bg-red-500",
               isActive && "bg-green-600",
-              !isActive && "hover:bg-gray-700",
+              !isActive && "hover:bg-gray-700"
             )
           }
         >
