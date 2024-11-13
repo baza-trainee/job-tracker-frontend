@@ -86,19 +86,18 @@ const Modal: FC = () => {
                         className="flex flex-col w-[550px] h-[289px] justify-center items-center gap-8">
                         {contentMap[type]}
                         <div className="text-center text-lg">{content}</div>
-                        {type !== "popup" ? 
-                            (<Button 
+                        {type !== "popup" ?
+                            (<Button
                                 disabled={false}
                                 variant="ghost"
-                                size={type==="error" ? "small" : "big"}
-                                onClick={ functionButtonMap[type] || (() => dispatch(closeModal())) }>
+                                size={type === "error" ? "small" : "big"}
+                                onClick={functionButtonMap[type] || (() => dispatch(closeModal()))}>
                                 {buttonMap[type]}
                             </Button>)
                             : (null)
                         }
                     </div>
-                    <button 
-                        className=""
+                    <button
                         onClick={() => dispatch(closeModal())}>
                         <img src={iconClose} />
                     </button>
