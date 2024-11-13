@@ -7,9 +7,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../buttons/Button/Button";
 
 import { Input } from "../inputs/Input/Input";
+
 import { InputPassword } from "../inputs/InputPassword/InputPassword";
 
-import { RegisterSchema } from "../../pages/auth/useAuth";
+import { SignInSchema } from "../../pages/auth/useAuth";
 
 export const FormExample = () => {
   const [isSending, setIsSending] = useState(false);
@@ -20,18 +21,17 @@ export const FormExample = () => {
     reset,
     resetField,
     formState: { errors, isDirty },
-  } = useForm<z.infer<typeof RegisterSchema>>({
+  } = useForm<z.infer<typeof SignInSchema>>({
     defaultValues: {
-      username: "",
       password: "",
       email: "",
     },
 
-    resolver: zodResolver(RegisterSchema),
+    resolver: zodResolver(SignInSchema),
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof RegisterSchema>> = async (
+  const onSubmit: SubmitHandler<z.infer<typeof SignInSchema>> = async (
     data,
   ) => {
     try {
@@ -57,17 +57,6 @@ export const FormExample = () => {
           <Input
             register={register}
             resetField={resetField}
-            key="username"
-            name="username"
-            placeholder="type your name"
-            type="text"
-            label="Ім'я"
-            errors={errors}
-          />
-
-          <Input
-            register={register}
-            resetField={resetField}
             key="email"
             name="email"
             placeholder="type your email"
@@ -75,10 +64,11 @@ export const FormExample = () => {
             className=""
             label="Електронна пошта"
             errors={errors}
-          />
+            />
 
           <InputPassword
             register={register}
+            resetField={resetField}
             key="password"
             name="password"
             placeholder="type your password"

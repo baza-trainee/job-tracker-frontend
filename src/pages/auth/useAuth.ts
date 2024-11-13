@@ -1,73 +1,125 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const nameRegex = /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ.,'’\- ]+$/;
 const passwordRegex =
   /^(?=.*[A-Z\u0400-\u04FF])(?=.*\d)[A-Za-z\u0400-\u04FF\d]{8,}$/;
 const emailRegex =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const RegisterSchema = z.object({
-  username: z
-  .string()
-  .min(1, "Required")
-  .regex(nameRegex, `Regex error`)
-  .max(50, `Max 50}`)
-  .min(2, `Min 2`),
+export const SignInSchema = z
+  .object({
+    email: z
+      .string()
+      .min(1, "Помилка")
+      .max(40, `Max 40`)
+      .regex(emailRegex, `Електронна пошта має містити “@” та “.com”`)
+      .min(4, `Min 4`)
+      .trim(),
 
+    password: z
+      .string()
+      .min(1, "Помилка")
+      .max(50, `Пароль має містити менше 50 символів`)
+      .min(8, `Пароль має містити 8 символів`)
+      .regex(passwordRegex, `Невірний формат`),
+
+    confirmPassword: z
+    .string()
+    .min(1, "Помилка")
+    .max(50, `Пароль має містити менше 50 символів`)
+    .regex(passwordRegex, `Невірний формат`)
+    .min(8, `Пароль має містити 8 символів`),
+
+    terms: z.boolean().refine((value) => value === true, {
+      message: "Дайте згоду",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Введенные пароли не совпадают",
+  });
+
+export const LogInSchema = z.object({
   email: z
     .string()
-    .min(1, "Required")
-    .regex(emailRegex, `Regex error`)
+    .min(1, "Помилка")
     .max(40, `Max 40`)
-    .min(4, `Min 4`),
+    .regex(emailRegex, `Електронна пошта має містити “@” та “.com”`)
+    .min(4, `Min 4`)
+    .trim(),
 
   password: z
     .string()
-    .min(1, "Required")
-    .min(8, `Min 8`)
+    .min(1, "Помилка")
+    .max(50, `Пароль має містити менше 8 символів`)
     .regex(passwordRegex, `Regex error`)
-    .max(50, `Max 50`),
-
-  confirm_password: z
-    .string()
-    .min(1, "Required")
-    .min(8, `Min 8`)
-    .regex(passwordRegex, `Regex error`)
-    .max(50, `Max 50`),
-
-  terms: z.boolean().refine((value) => value === true, {
-    message: "Дайте згоду",
-  }),
+    .min(8, `Пароль має містити 8 символів`),
 });
 
-export function useAuthForm() {
+export function useAuthForm(type: "signUp" | "logIn") {
+  console.log("type - ", type);
+
+  const formConfigs = useMemo(() => {
+    return {
+      signUp: {
+        defaultValues: {
+          email: "",
+          password: "",
+          confirmPassword: "",
+          terms: false,
+        },
+        schema: SignInSchema,
+      },
+      logIn: {
+        defaultValues: {
+          email: "",
+          password: "",
+        },
+        schema: LogInSchema,
+      },
+    };
+  }, []);
+
+  const initsSchema = formConfigs[type].schema;
+  const initDefaultValues = formConfigs[type].defaultValues;
+
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     resetField,
-    formState: { errors, isDirty },
-  } = useForm<z.infer<typeof RegisterSchema>>({
-    defaultValues: {
-      email: "",
-      password: "",
-      terms: false,
-    },
-    resolver: zodResolver(RegisterSchema),
+    formState: { errors },
+  } = useForm<z.infer<typeof initsSchema>>({
+    defaultValues: initDefaultValues,
+    resolver: zodResolver(initsSchema),
     mode: "onChange",
   });
 
-  console.log("ERRRR", errors)
-
   const [isSending, setIsSending] = useState(false);
 
-  const onSubmit: SubmitHandler<z.infer<typeof RegisterSchema>> = async (
-    data,
-  ) => {
+  const isCleanInputsForm = () => {
+    const emailWatch = watch("email");
+    const passwordWatch = watch("password");
+    const confirmPasswordWatch = watch("confirmPassword");
+    const termsWatch = watch("terms");
+
+    switch (type) {
+      case "signUp":
+        return !emailWatch || !passwordWatch || !confirmPasswordWatch || !termsWatch;
+
+      case "logIn":
+        return !emailWatch || !passwordWatch;
+
+      default:
+        return "";
+    }
+  };
+
+  const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = async (data) => {
     try {
       setIsSending(true);
       console.log("data", data);
@@ -86,7 +138,7 @@ export function useAuthForm() {
     resetField,
     onSubmit,
     errors,
-    isDirty,
     isSending,
+    isCleanInputsForm,
   };
 }

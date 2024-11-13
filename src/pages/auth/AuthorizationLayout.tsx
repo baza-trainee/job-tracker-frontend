@@ -9,29 +9,32 @@ import LoginCardImages from "./LoginImages/LoginCardImages";
 import { Input } from "../../components/inputs/Input/Input";
 import { InputPassword } from "../../components/inputs/InputPassword/InputPassword";
 import Checkbox from "../../components/checkbox/Checkbox";
-import Separator from "../../components/separator/Separator"
+import Separator from "../../components/separator/Separator";
 import { Button } from "../../components/buttons/Button/Button";
 
 //image
 import GoogleLogo from "../../assets/img/Google.svg";
 import GitHubLogo from "../../assets/img/GitHub.svg";
 
-type SignInCardProps = {
+type AuthorizationLayoutProps = {
   type: "signUp" | "logIn";
 };
 
-const SignInCard = ({ type }: SignInCardProps) => {
+const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   const {
     register,
     handleSubmit,
     resetField,
     onSubmit,
     errors,
-    isDirty,
     isSending,
-  } = useAuthForm();
+    isCleanInputsForm,
+  } = useAuthForm(type);
 
   const isSignUpPage = type === "signUp";
+
+  const error = !!Object.keys(errors).length
+
 
   return (
     <section>
@@ -72,6 +75,7 @@ const SignInCard = ({ type }: SignInCardProps) => {
 
                   <InputPassword
                     register={register}
+                    resetField={resetField}
                     key="password"
                     name="password"
                     placeholder="Введіть пароль"
@@ -84,8 +88,9 @@ const SignInCard = ({ type }: SignInCardProps) => {
                     <>
                       <InputPassword
                         register={register}
-                        key="confirm_password"
-                        name="confirm_password"
+                        resetField={resetField}
+                        key="confirmPassword"
+                        name="confirmPassword"
                         placeholder="Підтвердіть пароль"
                         type="text"
                         label="Підтвердіть пароль"
@@ -117,7 +122,7 @@ const SignInCard = ({ type }: SignInCardProps) => {
                 <Button
                   type="submit"
                   className="mx-auto mt-[50px]"
-                  disabled={!isDirty || isSending}
+                  disabled={isCleanInputsForm() || error ||isSending}
                   variant="ghost"
                   size="big"
                 >
@@ -132,7 +137,6 @@ const SignInCard = ({ type }: SignInCardProps) => {
               <Button
                 type="button"
                 className="flex gap-[12px]"
-                disabled={!isDirty || isSending}
                 variant="ghost"
                 size="small"
               >
@@ -153,7 +157,6 @@ const SignInCard = ({ type }: SignInCardProps) => {
               <Button
                 type="button"
                 className="flex gap-[12px]"
-                disabled={!isDirty || isSending}
                 variant="ghost"
                 size="small"
               >
@@ -191,4 +194,4 @@ const SignInCard = ({ type }: SignInCardProps) => {
     </section>
   );
 };
-export default SignInCard;
+export default AuthorizationLayout;

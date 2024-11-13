@@ -14,12 +14,9 @@ function App() {
         <Route path="opportunities" element={<Opportunities />} />
         <Route path="matches" element={<Matches />} />
         <Route path="search" element={<Search />} />
-        <Route
-          path="/sign-up"
-          element={<AuthorizationLayout type="signUp" />}
-        />
-        <Route path="/log-in" element={<AuthorizationLayout type="logIn" />} />
       </Route>
+      <Route path="/sign-up" element={<AuthorizationLayout type="signUp" />} />
+      <Route path="/log-in" element={<AuthorizationLayout type="logIn" />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
