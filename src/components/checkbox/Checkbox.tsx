@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import classNames from "clsx";
 import { CheckboxProps } from "./Checkbox.props";
 
 export const Checkbox = ({

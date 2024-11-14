@@ -1,4 +1,4 @@
-import cn from "classnames";
+import cn from "clsx";
 import { useState } from "react";
 
 import { InputPasswordProps } from "./InputPassword.props";

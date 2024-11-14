@@ -1,4 +1,4 @@
-import cn from "classnames";
+import cn from "clsx";
 import { InputProps } from "./Input.props";
 
 export const Input = ({

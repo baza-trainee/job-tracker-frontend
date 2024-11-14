@@ -4,64 +4,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const passwordRegex =
-  /^(?=.*[A-Z\u0400-\u04FF])(?=.*\d)[A-Za-z\u0400-\u04FF\d]{8,}$/;
-const emailRegex =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+import { SignInSchema } from "../../schemas/SignInSchema";
+import { LogInSchema } from "../../schemas/LogInSchema";
+import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
+import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
 
-export const SignInSchema = z
-  .object({
-    email: z
-      .string()
-      .min(1, "Помилка")
-      .max(40, `Max 40`)
-      .regex(emailRegex, `Електронна пошта має містити “@” та “.com”`)
-      .min(4, `Min 4`)
-      .trim(),
-
-    password: z
-      .string()
-      .min(1, "Помилка")
-      .max(50, `Пароль має містити менше 50 символів`)
-      .min(8, `Пароль має містити 8 символів`)
-      .regex(passwordRegex, `Невірний формат`),
-
-    confirmPassword: z
-    .string()
-    .min(1, "Помилка")
-    .max(50, `Пароль має містити менше 50 символів`)
-    .regex(passwordRegex, `Невірний формат`)
-    .min(8, `Пароль має містити 8 символів`),
-
-    terms: z.boolean().refine((value) => value === true, {
-      message: "Дайте згоду",
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Введенные пароли не совпадают",
-  });
-
-export const LogInSchema = z.object({
-  email: z
-    .string()
-    .min(1, "Помилка")
-    .max(40, `Max 40`)
-    .regex(emailRegex, `Електронна пошта має містити “@” та “.com”`)
-    .min(4, `Min 4`)
-    .trim(),
-
-  password: z
-    .string()
-    .min(1, "Помилка")
-    .max(50, `Пароль має містити менше 8 символів`)
-    .regex(passwordRegex, `Regex error`)
-    .min(8, `Пароль має містити 8 символів`),
-});
-
-export function useAuthForm(type: "signUp" | "logIn") {
-  console.log("type - ", type);
-
+export function useAuthForm(
+  type: "signUp" | "logIn" | "forgotPassword" | "resetPassword",
+) {
   const formConfigs = useMemo(() => {
     return {
       signUp: {
@@ -79,6 +29,19 @@ export function useAuthForm(type: "signUp" | "logIn") {
           password: "",
         },
         schema: LogInSchema,
+      },
+      forgotPassword: {
+        defaultValues: {
+          email: "",
+        },
+        schema: ForgotPasswordSchema,
+      },
+      resetPassword: {
+        defaultValues: {
+          confirmCode: "",
+          newPassword: "",
+        },
+        schema: ResetPasswordSchema,
       },
     };
   }, []);
@@ -109,7 +72,9 @@ export function useAuthForm(type: "signUp" | "logIn") {
 
     switch (type) {
       case "signUp":
-        return !emailWatch || !passwordWatch || !confirmPasswordWatch || !termsWatch;
+        return (
+          !emailWatch || !passwordWatch || !confirmPasswordWatch || !termsWatch
+        );
 
       case "logIn":
         return !emailWatch || !passwordWatch;

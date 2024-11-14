@@ -1,8 +1,11 @@
 function Footer() {
   return (
-    <footer className="bg-slate-950 p-2">
-      <h2 className="text-center text-white">
-        Розробка Baza Trainee Ukraine 2024 © Усі права захищені
+    <footer className="mb-6">
+      <h2 className="text-primary text-center font-nunito text-[16px] font-medium leading-[135%]">
+        <a href="#" className="">
+          Розробка Baza Trainee Ukraine 2024
+        </a>
+        © Усі права захищені
       </h2>
     </footer>
   );

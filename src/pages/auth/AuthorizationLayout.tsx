@@ -1,5 +1,5 @@
 // router
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 // hooks
 import { useAuthForm } from "./useAuth";
@@ -11,13 +11,14 @@ import { InputPassword } from "../../components/inputs/InputPassword/InputPasswo
 import Checkbox from "../../components/checkbox/Checkbox";
 import Separator from "../../components/separator/Separator";
 import { Button } from "../../components/buttons/Button/Button";
+import Footer from "../../components/layout/Footer";
 
 //image
 import GoogleLogo from "../../assets/img/Google.svg";
 import GitHubLogo from "../../assets/img/GitHub.svg";
 
 type AuthorizationLayoutProps = {
-  type: "signUp" | "logIn";
+  type: "signUp" | "logIn" | "forgotPassword" | "resetPassword";
 };
 
 const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
@@ -32,13 +33,13 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   } = useAuthForm(type);
 
   const isSignUpPage = type === "signUp";
-
-  const error = !!Object.keys(errors).length
-
+  const isLogInPage = type === "logIn";
+ 
+  const error = !!Object.keys(errors).length;
 
   return (
     <section>
-      {/* left side of the page - images */}
+      {/* TODO: left side of the page - images */}
 
       <div className="mx-auto flex h-screen w-screen items-center justify-center gap-[49px] px-3">
         <LoginCardImages />
@@ -46,7 +47,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <div className="w-full max-w-[477px] font-nunito">
           <div className="mb-[48px]">
             <h2 className="mb-3 font-nunito text-[32px] font-bold leading-[135%] text-text-primary">
-              {isSignUpPage ? "Вітаємо!" : "Увійти"}
+              {isSignUpPage ? "Вітаємо!" : "Раді вас знову бачити! "}
             </h2>
             <p className="font-nunito text-[16px] font-medium leading-[135%] text-text-gray">
               {isSignUpPage
@@ -55,7 +56,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
             </p>
           </div>
 
-          {/* Right side of the page  */}
+          {/* TODO: Right side of the page  */}
 
           <div className="rounded-[20px] bg-background-form px-12 py-6 shadow-form_shadow">
             <div>
@@ -84,6 +85,17 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     className=""
                     errors={errors}
                   />
+                  {isLogInPage ? (
+                    <p className={"mt-[-18px] text-right"}>
+                      <Link
+                        className="font-nunito text-[16px] font-medium leading-[135%] text-text-gray"
+                        // TODO: змінити посилання на /isforgotPassword
+                        to="/sign-up"
+                      >
+                        Забули пароль?
+                      </Link>
+                    </p>
+                  ) : null}
                   {isSignUpPage ? (
                     <>
                       <InputPassword
@@ -122,7 +134,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 <Button
                   type="submit"
                   className="mx-auto mt-[50px]"
-                  disabled={isCleanInputsForm() || error ||isSending}
+                  disabled={isCleanInputsForm() || error || isSending}
                   variant="ghost"
                   size="big"
                 >
@@ -136,7 +148,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
             <div className="flex justify-between gap-[20px]">
               <Button
                 type="button"
-                className="flex gap-[12px]"
+                className="gap-[12px]"
                 variant="ghost"
                 size="small"
               >
@@ -156,7 +168,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
               <Button
                 type="button"
-                className="flex gap-[12px]"
+                className="gap-[12px]"
                 variant="ghost"
                 size="small"
               >
@@ -168,7 +180,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     <img
                       src={GitHubLogo}
                       className="max-h-full max-w-full object-cover"
-                      alt="GitHub Logo"
+                      alt="Google Logo"
                     />
                   </figure>
                 </span>
@@ -191,6 +203,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
           </div>
         </div>
       </div>
+      <Footer />
     </section>
   );
 };

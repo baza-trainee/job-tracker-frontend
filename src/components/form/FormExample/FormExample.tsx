@@ -9,7 +9,7 @@ import { Button } from "../../buttons/Button/Button";
 import { Input } from "../../inputs/Input/Input";
 import { InputPassword } from "../../inputs/InputPassword/InputPassword";
 
-import { SignInSchema } from "../../../pages/auth/useAuth";
+import { SignInSchema } from "../../../schemas/SignInSchema";
 
 export const FormExample = () => {
   const [isSending, setIsSending] = useState(false);
