@@ -1,5 +1,4 @@
-import cn from "classnames";
-
+import { cn } from "../../../utils/utils";
 import { IconButtonProps } from "./IconButton.props";
 
 export const IconButton = ({
@@ -18,21 +17,20 @@ export const IconButton = ({
       disabled={disabled}
       aria-label={label}
       className={cn(
-        "text-text-primary flex items-center justify-center rounded-2xl px-3 py-1 transition",
+        "flex items-center justify-center rounded-2xl px-3 py-1 text-text-primary transition",
         !disabled && {
           //   ["text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary"]:
           //     variant == "filled",
 
-          ["ring-text-gray hover:ring-accent focus:ring-accent bg-white ring-1 ring-inset hover:shadow-button_hover hover:ring-[3px] focus:shadow-button_hover focus:ring-[3px]"]:
+          ["bg-white ring-1 ring-inset ring-text-gray hover:shadow-button_hover hover:ring-[3px] hover:ring-accent focus:shadow-button_hover focus:ring-[3px] focus:ring-accent"]:
             variant == "outline",
         },
         disabled && {
           //   ["bg-grey-40 text-grey-0 pointer-events-none"]: variant == "filled",
-          ["bg-background-sidebar pointer-events-none ring-transparent"]:
+          ["pointer-events-none bg-background-sidebar ring-transparent"]:
             variant == "outline",
         },
-
-        className,
+        className
       )}
       {...props}
     >
