@@ -1,5 +1,4 @@
-import cn from "clsx"
-
+import { cn } from "../../../utils/utils";
 import { ButtonProps } from "./Button.props";
 
 export const Button = ({
@@ -13,10 +12,9 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "text-text-primary flex h-[50px] items-center justify-center rounded-xl py-3 font-nunito text-xl font-medium duration-300",
-        className,
+        "flex h-[50px] items-center justify-center rounded-xl font-nunito text-xl font-medium text-text-primary duration-300",
         {
-          ["min-w-[180px] px-8 h-[44px]"]: size == "small",
+          ["h-[44px] min-w-[180px] px-8"]: size == "small",
           ["min-w-[260px] px-12"]: size == "big",
         },
 
@@ -24,14 +22,15 @@ export const Button = ({
           ["text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary"]:
             variant == "accent",
 
-          ["ring-text-primary hover:ring-accent focus:ring-accent bg-transparent ring-1 ring-inset hover:shadow-button_hover hover:ring-[3px] focus:shadow-button_hover focus:ring-[3px]"]:
+          ["bg-transparent ring-1 ring-inset ring-text-primary hover:shadow-button_hover hover:ring-[3px] hover:ring-accent focus:shadow-button_hover focus:ring-[3px] focus:ring-accent"]:
             variant == "ghost",
         },
         disabled && {
           ["bg-grey-40 text-grey-0 pointer-events-none"]: variant == "accent",
-          ["bg-background-sidebar pointer-events-none ring-transparent"]:
+          ["pointer-events-none bg-background-sidebar ring-transparent"]:
             variant == "ghost",
         },
+        className
       )}
       {...props}
     >
