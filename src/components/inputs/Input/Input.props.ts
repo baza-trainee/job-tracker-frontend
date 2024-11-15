@@ -1,13 +1,11 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { z } from "zod";
-import { RegisterSchema } from "../../form/FormExample/FormExample";
 
 export interface InputProps {
-  name: keyof z.infer<typeof RegisterSchema>;
+  name: any;
   placeholder: string;
   className?: string;
   label?: string;
-  register: UseFormRegister<z.infer<typeof RegisterSchema>>;
+  register: UseFormRegister<any>
   errors: FieldErrors;
   type?: string;
   value?: string;

@@ -4,12 +4,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button } from "../../buttons/Button/Button";
+import { Button } from "../buttons/Button/Button";
 
-import { Input } from "../../inputs/Input/Input";
-import { InputPassword } from "../../inputs/InputPassword/InputPassword";
+import { Input } from "../inputs/Input/Input";
 
-import { SignInSchema } from "../../../schemas/SignInSchema";
+import { InputPassword } from "../inputs/InputPassword/InputPassword";
+
+import { SignInSchema } from "../../schemas/SignInSchema";
 
 export const FormExample = () => {
   const [isSending, setIsSending] = useState(false);
@@ -63,7 +64,7 @@ export const FormExample = () => {
             className=""
             label="Електронна пошта"
             errors={errors}
-          />
+            />
 
           <InputPassword
             register={register}

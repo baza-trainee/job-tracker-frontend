@@ -1,4 +1,4 @@
-import cn from "classnames";
+import cn from "clsx";
 import { InputProps } from "./Input.props";
 
 export const Input = ({
@@ -24,7 +24,7 @@ export const Input = ({
       {label && (
         <label
           htmlFor={`input-${name}`}
-          className="text-text-primary mb-3 block font-nunito text-xl font-medium"
+          className="mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-text-primary"
         >
           {label}
         </label>
@@ -34,7 +34,7 @@ export const Input = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "text-text-primary placeholder:text-text-gray active:border-accent placeholder-shown:border-text-primary focus:border-accent peer h-11 w-full rounded-xl border px-6 py-2 font-nunito text-base font-medium transition placeholder:font-nunito focus:outline-none",
+              "peer h-11 w-full rounded-xl border px-6 py-2 font-nunito text-base font-medium text-text-primary transition placeholder:font-nunito placeholder:text-text-gray placeholder-shown:border-text-primary focus:border-accent focus:outline-none active:border-accent ",
               {
                 ["border-successful"]: !error,
                 ["border-error placeholder-shown:border-error focus:border-error active:border-error"]:
@@ -47,7 +47,7 @@ export const Input = ({
             {...register(name)}
             aria-describedby={`inputError-${name}`}
           />
-          {errors && error ? (
+          {error ? (
             <button
               onClick={() => handleResetField(name)}
               className={
