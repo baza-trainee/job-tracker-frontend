@@ -1,18 +1,22 @@
 import { FC } from "react";
-import clsx from "clsx";
+import { cn } from "../../utils/utils";
 import Icons from "./sprite.svg";
+import { IconId } from "./icons.ts";
 
-interface IconProps {
-    id: string;
+export interface IconProps {
+    id: IconId;
     className?: string;
     dataActive?: boolean;
     useStroke?: boolean;
 }
 
+// !! use for active dataActive="true" || dataActive="false"
+
+// !! add props useStroke, if icon doesn't appear
+
 export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke }) => {
     return (
-        <svg className={clsx(
-            className,
+        <svg className={cn(
             useStroke
                 ? [
                     "stroke-gray-400 hover:stroke-gray-700 active:stroke-black",
@@ -24,9 +28,9 @@ export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke }) =>
                     "fill-gray-400 hover:fill-gray-700 active:fill-black",
                     dataActive === true && "fill-red-700",
                     dataActive === false && "fill-green-700",
-                ]
+                ],                
+            className,
         )}
-        data-active={dataActive}
         >
             <use href={`${Icons}#${id}`}></use>
         </svg>
@@ -34,4 +38,3 @@ export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke }) =>
 };
 
 export default Icon;
-

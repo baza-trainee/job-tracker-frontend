@@ -1,0 +1,46 @@
+export const ICON = {
+    LOGO: "logo",
+    DAY_MODE: "day-mode",
+    NIGHT_MODE: "night-mode",
+    GIT_HUB: "GitHub",
+    GOOGLE: "Google",
+    ACCOUNT: "account",
+    ARCHIVE: "archive-outline",
+    ARROW_DOUBLE_DOWN: "arrow-double-down",
+    ARROW_DOWN: "arrow-down",
+    ARROW_LEFT: "arrow-left",
+    ARROW_RIGHT: "arrow-right",
+    ARROW_LONG_1: "arrow-long-1",
+    ARROW_LONG_2: "arrow-long-2",
+    ARROW_ICONAMOON_SEND: "arrow-iconamoon-send", //використовувати з пропсом useStroke
+    CANCEL_IN_ROUND: "cancel-in-round",
+    CHAT_ERROR_OUTLINE: "chat-error-outline",
+    CHECK_BOX: "check-box",
+    CLOSE: "close",
+    COPY: "copy",
+    DONATE: "donate",
+    EDIT: "edit",
+    EYE: "eye-outline",
+    EYE_OFF: "eye-off-outline",
+    FILTER: "filter", //використовувати з пропсом useStroke
+    FOLDER_OFF: "folder-off",
+    FOLDER_OPEN: "folder-open",
+    FOLDER: "folder",
+    TABLER_BUCKET_GROUP: "tabler-bucket-group", //використовувати з пропсом useStroke
+    HOME_REMOTE: "home-remote",
+    HOME_OFFICE_MIX: "home-office-mix",
+    LOCATION_OFFICE: "location-office",
+    LOG_OUT: "log-out",
+    NOTE: "note",
+    NOTIFICATION: "notification",
+    PLUS: "plus",
+    SEARCH: "search",
+    SETTINGS: "settings",
+    STATISTICS: "statistics",
+    VACANCY: "vacancy",
+    VECTOR_CURVED_62: "vector-curved-62",
+    VECTOR_CURVED_63: "vector-curved-63",
+} as const;
+
+// export type IconId = keyof typeof ICON; // Тип для ключів ICON
+export type IconId = (typeof ICON)[keyof typeof ICON]; // Тип для значень ICON

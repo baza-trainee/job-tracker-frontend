@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 import Icon from "../Icon/Icon.tsx";
+import { ICON } from "../Icon/icons.ts";
 
 function Sidebar() {
   return (
@@ -48,10 +49,10 @@ function Sidebar() {
         >
           Search
         </NavLink>
-        <Icon id="day-mode" className="w-6 h-6 mx-3 my-1" dataActive={true}></Icon>
-        <Icon id="night-mode" className="w-6 h-6 mx-3 my-1" dataActive={false}></Icon>
-        <Icon id="log-out" className="w-10 h-10 mt-6"></Icon>
-        <Icon id="arrow-iconamoon-send" className="w-8 h-8 mt-4" useStroke></Icon>
+        <Icon id={ICON.DAY_MODE} className="w-6 h-6 mx-3 my-1" dataActive={true} />
+        <Icon id={ICON.NIGHT_MODE} className="w-6 h-6 mx-3 my-1" dataActive={false} />
+        <Icon id={ICON.LOG_OUT} className="w-8 h-8 mt-4" />
+        <Icon id={ICON.FILTER} className="w-8 h-8 mt-4" useStroke />
       </nav>
     </aside>
   );
