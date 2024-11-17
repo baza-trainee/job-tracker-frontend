@@ -1,17 +1,101 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
 import { SignInSchema } from "../../schemas/SignInSchema";
 import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
 
+//TODO
+interface User {
+  id: string;
+  username: string;
+}
+
+interface AuthTokens {
+  access_token: string;
+  refresh_token: string;
+}
+
 export function useAuthForm(
-  type: "signUp" | "logIn" | "forgotPassword" | "resetPassword",
+  type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
+  const [user, setUser] = useState<User | null>(null);
+  const tokensRef = useRef<AuthTokens | null>(null);
+
+  useEffect(() => {
+    const storedTokens = localStorage.getItem("auth_tokens");
+    if (storedTokens) {
+      tokensRef.current = JSON.parse(storedTokens);
+    }
+  }, []);
+
+  const saveTokens = useCallback((newTokens: AuthTokens) => {
+    localStorage.setItem("auth_tokens", JSON.stringify(newTokens));
+    tokensRef.current = newTokens;
+  }, []);
+  const clearTokens = useCallback(() => {
+    localStorage.removeItem("auth_tokens");
+    tokensRef.current = null;
+  }, []);
+
+  const refreshTokens = useCallback(async () => {
+    if (!tokensRef.current) throw new Error("No refresh token available");
+    try {
+      const response = await axios.post("/auth/refresh", {
+        refresh_token: tokensRef.current.refresh_token,
+      });
+      saveTokens(response.data);
+      return response.data.access_token;
+    } catch (error) {
+      console.error("Token refresh failed", error);
+      clearTokens();
+      throw error;
+    }
+  }, [saveTokens, clearTokens]);
+
+  const fetchUser = useCallback(async () => {
+    if (!tokensRef.current) return;
+
+    try {
+      const response = await axios.get("/user/profile", {
+        headers: { Authorization: `Bearer ${tokensRef.current.access_token}` },
+      });
+      console.log(response.data);
+      setUser(response.data);
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        try {
+          const newAccessToken = await refreshTokens();
+          const retryResponse = await axios.get("/user/profile", {
+            headers: { Authorization: `Bearer ${newAccessToken}` },
+          });
+          setUser(retryResponse.data);
+          console.log(retryResponse.data);
+        } catch (refreshError) {
+          console.error("Token refresh failed", refreshError);
+          clearTokens();
+          setUser(null);
+        }
+      } else {
+        console.error("Failed to fetch user", error);
+        setUser(null);
+      }
+    }
+  }, [refreshTokens, clearTokens]);
+
+  useEffect(() => {
+    if (tokensRef.current) {
+      fetchUser();
+    } else {
+      setUser(null);
+    }
+  }, [fetchUser]);
+
   const formConfigs = useMemo(() => {
     return {
       signUp: {
@@ -22,6 +106,8 @@ export function useAuthForm(
           terms: false,
         },
         schema: SignInSchema,
+        authRoutes: "register",
+        errorMessage: "Registration",
       },
       logIn: {
         defaultValues: {
@@ -29,12 +115,16 @@ export function useAuthForm(
           password: "",
         },
         schema: LogInSchema,
+        authRoutes: "login",
+        errorMessage: "Login",
       },
       forgotPassword: {
         defaultValues: {
           email: "",
         },
         schema: ForgotPasswordSchema,
+        authRoutes: "",
+        errorMessage: "",
       },
       resetPassword: {
         defaultValues: {
@@ -42,12 +132,16 @@ export function useAuthForm(
           newPassword: "",
         },
         schema: ResetPasswordSchema,
+        authRoutes: "",
+        errorMessage: "",
       },
     };
   }, []);
 
   const initsSchema = formConfigs[type].schema;
   const initDefaultValues = formConfigs[type].defaultValues;
+  const initAuthRoutes = formConfigs[type].authRoutes;
+  const initErrorMessage = formConfigs[type].errorMessage;
 
   const {
     register,
@@ -84,26 +178,56 @@ export function useAuthForm(
     }
   };
 
-  const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = async (data) => {
-    try {
-      setIsSending(true);
-      console.log("data", data);
-      setIsSending(false);
-    } catch (error) {
-      console.log("error", error);
-      setIsSending(false);
-    } finally {
-      setIsSending(false);
-      reset();
-    }
-  };
+  const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
+    async (data) => {
+      if ("email" in data && "password" in data) {
+        try {
+          setIsSending(true);
+          const response = await axios.post(
+            `https://job-tracker-backend-x.vercel.app/api/auth/${initAuthRoutes}`,
+            {
+              email: data.email,
+              password: data.password,
+            }
+          );
+          saveTokens(response.data);
+          await fetchUser();
+          setIsSending(false);
+          console.log("Вдало >> ", data)
+        } catch (error) {
+          console.error(`${initErrorMessage} failed`, error);
+          setIsSending(false);
+          throw new Error(`${initErrorMessage} failed`);
+        } finally {
+          setIsSending(false);
+          reset();
+        }
+      }
+    },
+    [saveTokens, fetchUser, reset, initAuthRoutes, initErrorMessage]
+  );
+
+  const handleGoogleLogin = useCallback(() => {
+    window.location.href =
+      "https://job-tracker-backend-x.vercel.app/api/auth/google";
+  }, []);
+
+  const handleGithubLogin = useCallback(() => {
+    window.location.href =
+      "https://job-tracker-backend-x.vercel.app/api/auth/github";
+  }, []);
+
   return {
     register,
     handleSubmit,
+    reset,
     resetField,
     onSubmit,
     errors,
     isSending,
     isCleanInputsForm,
+    handleGoogleLogin,
+    handleGithubLogin,
+    user
   };
 }

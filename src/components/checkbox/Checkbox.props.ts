@@ -1,7 +1,7 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 export interface CheckboxProps {
-  name: any;
+  name: string;
   className?: string;
   label?: React.ReactNode | string;
   register: UseFormRegister<any>;

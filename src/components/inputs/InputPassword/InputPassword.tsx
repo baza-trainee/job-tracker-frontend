@@ -112,7 +112,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
                 ["border-successful"]: !error,
                 ["border-error placeholder-shown:border-error focus:border-error active:border-error"]:
                   error,
-              },
+              }
             )}
             placeholder={placeholder}
             type={showPassword ? type : "password"}
@@ -148,7 +148,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           ) : (
             <div
               className={
-                "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer peer-placeholder-shown:hidden"
+                "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] peer-placeholder-shown:hidden"
               }
             >
               <svg

@@ -34,12 +34,11 @@ export const Input = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "peer h-11 w-full rounded-xl border px-6 py-2 font-nunito text-base font-medium text-text-primary transition placeholder:font-nunito placeholder:text-text-gray placeholder-shown:border-text-primary focus:border-accent focus:outline-none active:border-accent ",
-              {
-                ["border-successful"]: !error,
-                ["border-error placeholder-shown:border-error focus:border-error active:border-error"]:
-                  error,
-              },
+              "peer h-11 w-full rounded-xl border px-6 py-2 font-nunito text-base font-medium text-text-primary transition placeholder:font-nunito placeholder:text-text-gray placeholder-shown:border-text-primary focus:border-accent focus:outline-none active:border-accent",
+
+              !error && "border-successful",
+              error &&
+                "border-error placeholder-shown:border-error focus:border-error active:border-error"
             )}
             placeholder={placeholder}
             type={type}
@@ -75,7 +74,7 @@ export const Input = ({
           ) : (
             <div
               className={
-                "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer peer-placeholder-shown:hidden"
+                "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] peer-placeholder-shown:hidden"
               }
             >
               <svg

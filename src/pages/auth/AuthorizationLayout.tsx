@@ -1,10 +1,12 @@
 // router
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // hooks
 import { useAuthForm } from "./useAuth";
+import classNames from "clsx";
 
 //components
+import Logo from "../../components/Logo/JobTrackerLogo";
 import LoginCardImages from "./LoginImages/LoginCardImages";
 import { Input } from "../../components/inputs/Input/Input";
 import { InputPassword } from "../../components/inputs/InputPassword/InputPassword";
@@ -25,23 +27,33 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   const {
     register,
     handleSubmit,
+    reset,
     resetField,
     onSubmit,
     errors,
     isSending,
     isCleanInputsForm,
+    handleGoogleLogin,
+    handleGithubLogin,
   } = useAuthForm(type);
 
   const isSignUpPage = type === "signUp";
   const isLogInPage = type === "logIn";
- 
+
   const error = !!Object.keys(errors).length;
 
   return (
     <section>
       {/* TODO: left side of the page - images */}
+      <Logo />
 
-      <div className="mx-auto flex h-screen w-screen items-center justify-center gap-[49px] px-3">
+      <div
+        className={classNames(
+          "mx-auto flex items-center justify-center gap-[49px] px-3",
+          type === "signUp" && "mb-[59px] mt-[4px]",
+          type === "logIn" && "mb-[107px] mt-[54px]"
+        )}
+      >
         <LoginCardImages />
 
         <div className="w-full max-w-[477px] font-nunito">
@@ -151,19 +163,16 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 className="gap-[12px]"
                 variant="ghost"
                 size="small"
+                onClick={handleGoogleLogin}
               >
                 <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
                   Google
                 </span>
-                <span className="">
-                  <figure className="max-h-[36px] max-w-[36px]">
-                    <img
-                      src={GoogleLogo}
-                      className="max-h-full max-w-full object-cover"
-                      alt="Google Logo"
-                    />
-                  </figure>
-                </span>
+                <img
+                  src={GoogleLogo}
+                  className="h-[36px] w-[36px]"
+                  alt="Google Logo"
+                />
               </Button>
 
               <Button
@@ -171,19 +180,16 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 className="gap-[12px]"
                 variant="ghost"
                 size="small"
+                onClick={handleGithubLogin}
               >
                 <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
                   GitHub
                 </span>
-                <span className="">
-                  <figure className="max-h-[36px] max-w-[36px]">
-                    <img
-                      src={GitHubLogo}
-                      className="max-h-full max-w-full object-cover"
-                      alt="Google Logo"
-                    />
-                  </figure>
-                </span>
+                <img
+                  src={GitHubLogo}
+                  className="h-[36px] w-[36px]"
+                  alt="Google Logo"
+                />
               </Button>
             </div>
 
@@ -195,6 +201,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 <Link
                   className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-text-link"
                   to={isSignUpPage ? "/log-in" : "/sign-up"}
+                  onClick={() => reset()}
                 >
                   {isSignUpPage ? "Увійти" : "Зареєструватись"}
                 </Link>
