@@ -1,100 +1,52 @@
-import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import axios from "../../config/axios";
 
 import { SignInSchema } from "../../schemas/SignInSchema";
 import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { useAppDispatch } from "../../store/hook";
+import {
+  clearTokens,
+  saveTokens,
+} from "../../store/slices/authSlice/authSlice";
+import { fetchUser } from "../../store/slices/authSlice/authOperation";
 
 //TODO
-interface User {
-  id: string;
-  username: string;
-}
-
-interface AuthTokens {
-  access_token: string;
-  refresh_token: string;
-}
 
 export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
-  const [user, setUser] = useState<User | null>(null);
-  const tokensRef = useRef<AuthTokens | null>(null);
+  const dispatch = useAppDispatch();
+  const { tokens } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const storedTokens = localStorage.getItem("auth_tokens");
     if (storedTokens) {
-      tokensRef.current = JSON.parse(storedTokens);
+      dispatch(saveTokens(JSON.parse(storedTokens)));
     }
   }, []);
-
-  const saveTokens = useCallback((newTokens: AuthTokens) => {
-    localStorage.setItem("auth_tokens", JSON.stringify(newTokens));
-    tokensRef.current = newTokens;
-  }, []);
-  const clearTokens = useCallback(() => {
-    localStorage.removeItem("auth_tokens");
-    tokensRef.current = null;
-  }, []);
-
-  const refreshTokens = useCallback(async () => {
-    if (!tokensRef.current) throw new Error("No refresh token available");
-    try {
-      const response = await axios.post("/auth/refresh", {
-        refresh_token: tokensRef.current.refresh_token,
-      });
-      saveTokens(response.data);
-      return response.data.access_token;
-    } catch (error) {
-      console.error("Token refresh failed", error);
-      clearTokens();
-      throw error;
-    }
-  }, [saveTokens, clearTokens]);
-
-  const fetchUser = useCallback(async () => {
-    if (!tokensRef.current) return;
-
-    try {
-      const response = await axios.get("/user/profile", {
-        headers: { Authorization: `Bearer ${tokensRef.current.access_token}` },
-      });
-      console.log(response.data);
-      setUser(response.data);
-    } catch (error: any) {
-      if (error.response && error.response.status === 401) {
-        try {
-          const newAccessToken = await refreshTokens();
-          const retryResponse = await axios.get("/user/profile", {
-            headers: { Authorization: `Bearer ${newAccessToken}` },
-          });
-          setUser(retryResponse.data);
-          console.log(retryResponse.data);
-        } catch (refreshError) {
-          console.error("Token refresh failed", refreshError);
-          clearTokens();
-          setUser(null);
-        }
-      } else {
-        console.error("Failed to fetch user", error);
-        setUser(null);
-      }
-    }
-  }, [refreshTokens, clearTokens]);
 
   useEffect(() => {
-    if (tokensRef.current) {
-      fetchUser();
-    } else {
-      setUser(null);
-    }
-  }, [fetchUser]);
+    const fetchData = async () => {
+      if (tokens) {
+        try {
+          await dispatch(fetchUser()).unwrap();
+        } catch (error) {
+          console.error("Failed to fetch user:", error);
+          dispatch(clearTokens());
+        }
+      }
+    };
+
+    fetchData();
+  }, [tokens, dispatch]);
 
   const formConfigs = useMemo(() => {
     return {
@@ -158,7 +110,7 @@ export function useAuthForm(
 
   const [isSending, setIsSending] = useState(false);
 
-  const isCleanInputsForm = () => {
+  const isCleanInputsForm = useCallback(() => {
     const emailWatch = watch("email");
     const passwordWatch = watch("password");
     const confirmPasswordWatch = watch("confirmPassword");
@@ -176,25 +128,24 @@ export function useAuthForm(
       default:
         return "";
     }
-  };
+  }, [watch, type]);
 
   const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
     async (data) => {
       if ("email" in data && "password" in data) {
         try {
           setIsSending(true);
-          const response = await axios.post(
-            `https://job-tracker-backend-x.vercel.app/api/auth/${initAuthRoutes}`,
-            {
-              email: data.email,
-              password: data.password,
-            }
-          );
-          saveTokens(response.data);
-          await fetchUser();
+          const response = await axios.post(`/auth/${initAuthRoutes}`, {
+            email: data.email,
+            password: data.password,
+          });
+          dispatch(saveTokens(response.data));
+          await dispatch(fetchUser()).unwrap();
           setIsSending(false);
-          console.log("Вдало >> ", data)
-        } catch (error) {
+        } catch (error: any) {
+          if (error.response?.status === 409) {
+            alert("Обліковий запис з такою поштою існує");
+          }
           console.error(`${initErrorMessage} failed`, error);
           setIsSending(false);
           throw new Error(`${initErrorMessage} failed`);
@@ -204,7 +155,7 @@ export function useAuthForm(
         }
       }
     },
-    [saveTokens, fetchUser, reset, initAuthRoutes, initErrorMessage]
+    [dispatch, reset, initAuthRoutes, initErrorMessage]
   );
 
   const handleGoogleLogin = useCallback(() => {
@@ -228,6 +179,5 @@ export function useAuthForm(
     isCleanInputsForm,
     handleGoogleLogin,
     handleGithubLogin,
-    user
   };
 }
