@@ -38,3 +38,12 @@ export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke }) =>
 };
 
 export default Icon;
+
+
+// Example using Icon in components:
+
+// import Icon from "../Icon/Icon.tsx";
+// import { ICON } from "../Icon/icons.ts";
+
+// <Icon id={ICON.LOG-OUT} />
+// <Icon id={"log-out"} />
