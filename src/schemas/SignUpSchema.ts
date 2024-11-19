@@ -3,8 +3,7 @@ import { z } from "zod";
 import { emailRegex } from "./regSchema";
 import { passwordRegex } from "./regSchema";
 
-
-export const SignInSchema = z
+export const SignUpSchema = z
   .object({
     email: z
       .string()

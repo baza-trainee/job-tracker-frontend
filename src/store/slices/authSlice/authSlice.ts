@@ -2,11 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { AuthStateProps, AuthTokensProps, UserProps } from "./authTypes";
 
-import { fetchUser } from "./authOperation";
+import { fetchUser, signUp, logIn } from "./authOperation";
 
 const initialState: AuthStateProps = {
   user: null,
   tokens: null,
+  isLoggedIn: false,
   loading: false,
   error: null,
 };
@@ -28,20 +29,39 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
+        state.isLoggedIn = false;
         state.loading = true;
         state.error = null;
       })
       .addCase(
         fetchUser.fulfilled,
         (state, action: PayloadAction<UserProps | null>) => {
+          state.isLoggedIn = true;
           state.user = action.payload;
           state.loading = false;
         }
       )
       .addCase(fetchUser.rejected, (state, action) => {
         state.user = null;
+        state.isLoggedIn = false;
         state.loading = false;
         state.error = action.error.message || "Failed to fetch user";
+      })
+      .addCase(signUp.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signUp.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Log In failed";
+      })
+      .addCase(logIn.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logIn.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Log In failed";
       });
   },
 });

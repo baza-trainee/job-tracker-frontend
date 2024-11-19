@@ -1,22 +1,23 @@
-import { useMemo, useState, useEffect, useCallback } from "react";
+import { useMemo, useEffect, useCallback } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "../../config/axios";
 
-import { SignInSchema } from "../../schemas/SignInSchema";
+import { SignUpSchema } from "../../schemas/SignUpSchema";
 import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { useAppDispatch } from "../../store/hook";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
 import {
   clearTokens,
   saveTokens,
 } from "../../store/slices/authSlice/authSlice";
-import { fetchUser } from "../../store/slices/authSlice/authOperation";
+import {
+  fetchUser,
+  signUp,
+  logIn,
+} from "../../store/slices/authSlice/authOperation";
 
 //TODO
 
@@ -24,7 +25,8 @@ export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
   const dispatch = useAppDispatch();
-  const { tokens } = useSelector((state: RootState) => state.auth);
+  const { user, tokens } = useAppSelector((state) => state.auth);
+  console.log("user",user);
 
   useEffect(() => {
     const storedTokens = localStorage.getItem("auth_tokens");
@@ -57,9 +59,7 @@ export function useAuthForm(
           confirmPassword: "",
           terms: false,
         },
-        schema: SignInSchema,
-        authRoutes: "register",
-        errorMessage: "Registration",
+        schema: SignUpSchema,
       },
       logIn: {
         defaultValues: {
@@ -67,16 +67,12 @@ export function useAuthForm(
           password: "",
         },
         schema: LogInSchema,
-        authRoutes: "login",
-        errorMessage: "Login",
       },
       forgotPassword: {
         defaultValues: {
           email: "",
         },
         schema: ForgotPasswordSchema,
-        authRoutes: "",
-        errorMessage: "",
       },
       resetPassword: {
         defaultValues: {
@@ -84,16 +80,12 @@ export function useAuthForm(
           newPassword: "",
         },
         schema: ResetPasswordSchema,
-        authRoutes: "",
-        errorMessage: "",
       },
     };
   }, []);
 
   const initsSchema = formConfigs[type].schema;
   const initDefaultValues = formConfigs[type].defaultValues;
-  const initAuthRoutes = formConfigs[type].authRoutes;
-  const initErrorMessage = formConfigs[type].errorMessage;
 
   const {
     register,
@@ -107,8 +99,6 @@ export function useAuthForm(
     resolver: zodResolver(initsSchema),
     mode: "onChange",
   });
-
-  const [isSending, setIsSending] = useState(false);
 
   const isCleanInputsForm = useCallback(() => {
     const emailWatch = watch("email");
@@ -132,41 +122,25 @@ export function useAuthForm(
 
   const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
     async (data) => {
-      if ("email" in data && "password" in data) {
-        try {
-          setIsSending(true);
-          const response = await axios.post(`/auth/${initAuthRoutes}`, {
-            email: data.email,
-            password: data.password,
-          });
-          dispatch(saveTokens(response.data));
-          await dispatch(fetchUser()).unwrap();
-          setIsSending(false);
-        } catch (error: any) {
-          if (error.response?.status === 409) {
-            alert("Обліковий запис з такою поштою існує");
+      try {
+        if ("email" in data && "password" in data) {
+          switch (type) {
+            case "signUp":
+              return await dispatch(signUp(data));
+            case "logIn":
+              return await dispatch(logIn(data));
+            default:
+              throw new Error("Unknown form type");
           }
-          console.error(`${initErrorMessage} failed`, error);
-          setIsSending(false);
-          throw new Error(`${initErrorMessage} failed`);
-        } finally {
-          setIsSending(false);
-          reset();
         }
+      } catch (error) {
+        console.error("Submission failed:", error);
+      } finally {
+        reset();
       }
     },
-    [dispatch, reset, initAuthRoutes, initErrorMessage]
+    [type, dispatch, reset]
   );
-
-  const handleGoogleLogin = useCallback(() => {
-    window.location.href =
-      "https://job-tracker-backend-x.vercel.app/api/auth/google";
-  }, []);
-
-  const handleGithubLogin = useCallback(() => {
-    window.location.href =
-      "https://job-tracker-backend-x.vercel.app/api/auth/github";
-  }, []);
 
   return {
     register,
@@ -175,9 +149,6 @@ export function useAuthForm(
     resetField,
     onSubmit,
     errors,
-    isSending,
     isCleanInputsForm,
-    handleGoogleLogin,
-    handleGithubLogin,
   };
 }

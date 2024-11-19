@@ -9,7 +9,7 @@ import { Button } from "../../buttons/Button/Button";
 import { Input } from "../../inputs/Input/Input";
 import { InputPassword } from "../../inputs/InputPassword/InputPassword";
 
-import { SignInSchema } from "../../../schemas/SignInSchema";
+import { SignUpSchema } from "../../../schemas/SignUpSchema";
 
 export const FormExample = () => {
   const [isSending, setIsSending] = useState(false);
@@ -20,18 +20,18 @@ export const FormExample = () => {
     reset,
     resetField,
     formState: { errors, isDirty },
-  } = useForm<z.infer<typeof SignInSchema>>({
+  } = useForm<z.infer<typeof SignUpSchema>>({
     defaultValues: {
       password: "",
       email: "",
     },
 
-    resolver: zodResolver(SignInSchema),
+    resolver: zodResolver(SignUpSchema),
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof SignInSchema>> = async (
-    data,
+  const onSubmit: SubmitHandler<z.infer<typeof SignUpSchema>> = async (
+    data
   ) => {
     try {
       setIsSending(true);

@@ -1,5 +1,5 @@
 // components
-import InfoCard from "../InfoCard/InfoCard";
+import InfoCard from "./InfoCard/InfoCard";
 
 //consts
 import { loginCardsImages } from "./LoginCardImages.const";

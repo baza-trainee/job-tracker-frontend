@@ -14,7 +14,10 @@ import Checkbox from "../../components/checkbox/Checkbox";
 import Separator from "../../components/separator/Separator";
 import { Button } from "../../components/buttons/Button/Button";
 import Footer from "../../components/layout/Footer";
-
+//redax
+import { useAppSelector } from "../../store/hook";
+import { GoogleLogin } from "../../store/slices/authSlice/authOperation";
+import { GithubLogin } from "../../store/slices/authSlice/authOperation";
 //image
 import GoogleLogo from "../../assets/img/Google.svg";
 import GitHubLogo from "../../assets/img/GitHub.svg";
@@ -31,14 +34,13 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
     resetField,
     onSubmit,
     errors,
-    isSending,
     isCleanInputsForm,
-    handleGoogleLogin,
-    handleGithubLogin,
   } = useAuthForm(type);
 
   const isSignUpPage = type === "signUp";
   const isLogInPage = type === "logIn";
+
+  const { loading } = useAppSelector((state) => state.auth);
 
   const error = !!Object.keys(errors).length;
 
@@ -146,7 +148,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 <Button
                   type="submit"
                   className="mx-auto mt-[50px]"
-                  disabled={isCleanInputsForm() || error || isSending}
+                  disabled={isCleanInputsForm() || error || loading}
                   variant="ghost"
                   size="big"
                 >
@@ -163,7 +165,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 className="gap-[12px]"
                 variant="ghost"
                 size="small"
-                onClick={handleGoogleLogin}
+                onClick={GoogleLogin}
               >
                 <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
                   Google
@@ -180,7 +182,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 className="gap-[12px]"
                 variant="ghost"
                 size="small"
-                onClick={handleGithubLogin}
+                onClick={GithubLogin}
               >
                 <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
                   GitHub

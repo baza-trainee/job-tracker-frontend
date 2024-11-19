@@ -21,6 +21,10 @@ function Home() {
           Авторизація
         </LinkButton>
 
+        <Button variant="ghost" size="big" onClick={() => localStorage.clear()}>
+          Clear localStorage
+        </Button>
+
         <Button variant="ghost" disabled size="big" onClick={handleButtonClick}>
           Click me
         </Button>

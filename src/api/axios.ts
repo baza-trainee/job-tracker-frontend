@@ -1,20 +1,32 @@
-import axios from 'axios'
-import { AXIOS } from './axios-constants'
+import axios from "axios";
+import { AXIOS } from "./axios-constants";
 
-export const axiosInstance = axios.create({ baseURL: AXIOS.URL_BACKEND })
+export const axiosInstance = axios.create({
+  baseURL: AXIOS.URL_BACKEND,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem(AXIOS.ACCESS_TOKEN)
+    const accessToken = localStorage.getItem(AXIOS.ACCESS_TOKEN);
     if (accessToken) {
-      config.headers.common['Authorization'] = `${AXIOS.BEARER} ${accessToken}`
+      config.headers.common["Authorization"] = `${AXIOS.BEARER} ${accessToken}`;
     }
-    return config
+    return config;
   },
   (error) => {
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-)
+);
+
+// export const api = axios.create({
+//   baseURL: AXIOS.URL_BACKEND,
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// });
 
 // const setToken = (token: string) => {
 //   if (token) {
