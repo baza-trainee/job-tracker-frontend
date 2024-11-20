@@ -120,7 +120,8 @@ const Modal: FC = () => {
                         }
                     </div>
                     <button
-                        onClick={() => dispatch(closeModal())}>
+                        onClick={() => dispatch(closeModal())}
+                        className="rounded-md hover:bg-modalWindowRed">
                         <img src={iconClose} />
                     </button>
 
