@@ -3,9 +3,6 @@ import { AXIOS } from "./axios-constants";
 
 export const axiosInstance = axios.create({
   baseURL: AXIOS.URL_BACKEND,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 axiosInstance.interceptors.request.use(
@@ -21,12 +18,12 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// export const api = axios.create({
-//   baseURL: AXIOS.URL_BACKEND,
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// });
+export const api = axios.create({
+  baseURL: AXIOS.URL_BACKEND,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 // const setToken = (token: string) => {
 //   if (token) {

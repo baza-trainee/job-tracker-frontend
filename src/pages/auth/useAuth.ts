@@ -26,7 +26,10 @@ export function useAuthForm(
 ) {
   const dispatch = useAppDispatch();
   const { user, tokens } = useAppSelector((state) => state.auth);
-  console.log("user",user);
+
+  useMemo(() => {
+    console.log("user", user);
+  }, [user]);
 
   useEffect(() => {
     const storedTokens = localStorage.getItem("auth_tokens");
@@ -116,7 +119,7 @@ export function useAuthForm(
         return !emailWatch || !passwordWatch;
 
       default:
-        return "";
+        return false;
     }
   }, [watch, type]);
 

@@ -4,8 +4,8 @@ import { Navigate } from "react-router-dom";
 
 export const PublicRoute = ({
   children,
-  routeTo,
+  routeTo = '/home',
 }: PublicRouteProps) => {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-  return isLoggedIn ? children : <Navigate to={routeTo} />;
+  return isLoggedIn ?  <Navigate to={routeTo}/>:  children;
 };

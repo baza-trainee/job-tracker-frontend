@@ -4,6 +4,8 @@ import { AuthStateProps, AuthTokensProps, UserProps } from "./authTypes";
 
 import { fetchUser, signUp, logIn } from "./authOperation";
 
+import { AXIOS } from "../../../api/axios-constants";
+
 const initialState: AuthStateProps = {
   user: null,
   tokens: null,
@@ -18,12 +20,14 @@ const authSlice = createSlice({
   reducers: {
     saveTokens: (state, action: PayloadAction<AuthTokensProps>) => {
       state.tokens = action.payload;
-      localStorage.setItem("auth_tokens", JSON.stringify(action.payload));
+      console.log("token", { ...action.payload });
+      localStorage.setItem(AXIOS.AUTH_TOKENS, JSON.stringify(action.payload));
+      console.log("localeStorage", localStorage);
     },
     clearTokens: (state) => {
       state.tokens = null;
       state.user = null;
-      localStorage.removeItem("auth_tokens");
+      localStorage.removeItem(AXIOS.AUTH_TOKENS);
     },
   },
   extraReducers: (builder) => {
@@ -53,7 +57,7 @@ const authSlice = createSlice({
       })
       .addCase(signUp.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Log In failed";
+        state.error = action.error.message || "Sign In failed";
       })
       .addCase(logIn.pending, (state) => {
         state.loading = true;

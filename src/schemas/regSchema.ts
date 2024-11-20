@@ -3,3 +3,10 @@ export const emailRegex =
 
 export const passwordRegex =
   /^(?=.*[A-Z\u0400-\u04FF])(?=.*\d)[A-Za-z\u0400-\u04FF\d]{8,}$/;
+
+// TODO:  вимоги проекта, але поки закоментовані для тестів
+// export const emailRegex =
+//   /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?<!\.ru|\.by)$/;
+
+// export const passwordRegex =
+//   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,14}$/;
