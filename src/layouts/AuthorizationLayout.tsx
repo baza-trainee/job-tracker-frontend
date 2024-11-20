@@ -1,17 +1,17 @@
-import { useAuthForm } from "./useAuth";
+import { useAuthForm } from "../components/AuthComponents/useAuth";
 import classNames from "clsx";
 
-import Logo from "../../components/Logo/JobTrackerLogo";
-import LoginCardImages from "./LoginImages/LoginCardImages";
-import Separator from "../../components/separator/Separator";
-import Footer from "../../components/layout/Footer";
+import Logo from "../components/Logo/JobTrackerLogo";
+import LoginCardImages from "../components/LoginImages/LoginCardImages";
+import Separator from "../components/separator/Separator";
+import Footer from "../components/layout/Footer";
 
-import { useAppSelector } from "../../store/hook";
+import { useAppSelector } from "../store/hook";
 
-import { AuthHeader } from "../../components/AuthComponents/AuthHeader/AuthHeader";
-import { AuthForm } from "../../components/AuthComponents/AuthForm/AuthForm";
-import { AuthSocialButtons } from "../../components/AuthComponents/AuthSocialButtons/AuthSocialButtons";
-import { AuthFooter } from "../../components/AuthComponents/AuthFooter/AuthFooter";
+import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
+import { AuthForm } from "../components/AuthComponents/AuthForm/AuthForm";
+import { AuthSocialButtons } from "../components/AuthComponents/AuthSocialButtons/AuthSocialButtons";
+import { AuthFooter } from "../components/AuthComponents/AuthFooter/AuthFooter";
 
 type AuthorizationLayoutProps = {
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword";
