@@ -52,7 +52,7 @@ export default {
         modalWindowGreen: "#76925D",
         modalWindowRed: "#FC8972",
         modalWindowBlue: "#BFDEF5",
-        primary: "#333333",
+        blackTextColor: "#333333",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],

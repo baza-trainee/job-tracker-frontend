@@ -2,7 +2,7 @@ export const contentMap = {
     success: <span className="text-4xl font-bold text-modalWindowGreen">Успіх!</span>,
     error: <span className="text-4xl font-bold text-error">Упс!</span>,
     errorMailExist: <span className="text-4xl font-bold text-error">Упс!</span>,
-    recoveryPassword: <span className="text-4xl font-bold text-primary">Відновлення паролю</span>,
+    recoveryPassword: <span className="text-4xl font-bold text-blackTextColor">Відновлення паролю</span>,
     confirm: <span className="text-4xl font-bold text-successful">Підтвердіть дію!</span>,
     popup: "",
 }

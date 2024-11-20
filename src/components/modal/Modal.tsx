@@ -7,7 +7,7 @@ import { closeModal } from "../../store/slices/modalSlice/modalSlice";
 import { contentMap, colorType, buttonMap, modalTextMap } from "./modalMappings";
 
 import { Button } from '../buttons/Button/Button';
-import iconClose from "/close.svg";
+import Icon from "../Icon/Icon.tsx";
 
 const Modal: FC = () => {
 
@@ -122,7 +122,7 @@ const Modal: FC = () => {
                     <button
                         onClick={() => dispatch(closeModal())}
                         className="rounded-md hover:bg-modalWindowRed">
-                        <img src={iconClose} />
+                        <Icon id="close" className="w-6 h-6 fill-blackTextColor"/>
                     </button>
 
                 </div>
