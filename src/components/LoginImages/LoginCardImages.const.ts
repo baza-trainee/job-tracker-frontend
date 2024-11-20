@@ -1,8 +1,8 @@
 //images
-import ManManagement from "../../../assets/img/Man_doing_time_management_effectively.png";
-import WomanMoving from "../../../assets/img/Woman_moving_cards_on_a_Kanban_board.png";
-import MarketingTeam from "../../../assets/img/Marketing_team_collaboration_and_project_management.png";
-import WomanUsing from "../../../assets/img/Woman_using_mobile_banking_app.png";
+import ManManagement from "../../assets/img/Man_doing_time_management_effectively.png";
+import WomanMoving from "../../assets/img/Woman_moving_cards_on_a_Kanban_board.png";
+import MarketingTeam from "../../assets/img/Marketing_team_collaboration_and_project_management.png";
+import WomanUsing from "../../assets/img/Woman_using_mobile_banking_app.png";
 
 export const loginCardsImages = [
   {

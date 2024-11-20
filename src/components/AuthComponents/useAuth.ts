@@ -1,17 +1,58 @@
-import { useMemo, useState } from "react";
+import { useMemo, useEffect, useCallback } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { SignInSchema } from "../../schemas/SignInSchema";
+import { SignUpSchema } from "../../schemas/SignUpSchema";
 import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
+import {
+  clearTokens,
+  saveTokens,
+} from "../../store/slices/authSlice/authSlice";
+import {
+  fetchUser,
+  signUp,
+  logIn,
+} from "../../store/slices/authSlice/authOperation";
+
+//TODO
 
 export function useAuthForm(
-  type: "signUp" | "logIn" | "forgotPassword" | "resetPassword",
+  type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
+  const dispatch = useAppDispatch();
+  const { user, tokens } = useAppSelector((state) => state.auth);
+
+  useMemo(() => {
+    console.log("user", user);
+  }, [user]);
+
+  useEffect(() => {
+    const storedTokens = localStorage.getItem("auth_tokens");
+    if (storedTokens) {
+      dispatch(saveTokens(JSON.parse(storedTokens)));
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (tokens) {
+        try {
+          await dispatch(fetchUser()).unwrap();
+        } catch (error) {
+          console.error("Failed to fetch user:", error);
+          dispatch(clearTokens());
+        }
+      }
+    };
+
+    fetchData();
+  }, [tokens, dispatch]);
+
   const formConfigs = useMemo(() => {
     return {
       signUp: {
@@ -21,7 +62,7 @@ export function useAuthForm(
           confirmPassword: "",
           terms: false,
         },
-        schema: SignInSchema,
+        schema: SignUpSchema,
       },
       logIn: {
         defaultValues: {
@@ -62,9 +103,7 @@ export function useAuthForm(
     mode: "onChange",
   });
 
-  const [isSending, setIsSending] = useState(false);
-
-  const isCleanInputsForm = () => {
+  const isCleanInputsForm = useCallback(() => {
     const emailWatch = watch("email");
     const passwordWatch = watch("password");
     const confirmPasswordWatch = watch("confirmPassword");
@@ -80,30 +119,39 @@ export function useAuthForm(
         return !emailWatch || !passwordWatch;
 
       default:
-        return "";
+        return false;
     }
-  };
+  }, [watch, type]);
 
-  const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = async (data) => {
-    try {
-      setIsSending(true);
-      console.log("data", data);
-      setIsSending(false);
-    } catch (error) {
-      console.log("error", error);
-      setIsSending(false);
-    } finally {
-      setIsSending(false);
-      reset();
-    }
-  };
+  const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
+    async (data) => {
+      try {
+        if ("email" in data && "password" in data) {
+          switch (type) {
+            case "signUp":
+              return await dispatch(signUp(data));
+            case "logIn":
+              return await dispatch(logIn(data));
+            default:
+              throw new Error("Unknown form type");
+          }
+        }
+      } catch (error) {
+        console.error("Submission failed:", error);
+      } finally {
+        reset();
+      }
+    },
+    [type, dispatch, reset]
+  );
+
   return {
     register,
     handleSubmit,
+    reset,
     resetField,
     onSubmit,
     errors,
-    isSending,
     isCleanInputsForm,
   };
 }

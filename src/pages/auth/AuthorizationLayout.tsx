@@ -1,13 +1,13 @@
 // router
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // hooks
-import { useAuthForm } from "./useAuth";
+// import { useAuthForm } from "./useAuth";
 import { useAppDispatch } from "../../store/hook.ts";
 import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
 
 //components
-import LoginCardImages from "./LoginImages/LoginCardImages";
+// import LoginCardImages from "./LoginImages/LoginCardImages";
 import { Input } from "../../components/inputs/Input/Input";
 import { InputPassword } from "../../components/inputs/InputPassword/InputPassword";
 import Checkbox from "../../components/checkbox/Checkbox";
@@ -18,6 +18,8 @@ import Footer from "../../components/layout/Footer";
 //image
 import GoogleLogo from "../../assets/img/Google.svg";
 import GitHubLogo from "../../assets/img/GitHub.svg";
+import { useAuthForm } from "../../components/AuthComponents/useAuth.ts";
+import LoginCardImages from "../../components/LoginImages/LoginCardImages.tsx";
 
 type AuthorizationLayoutProps = {
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword";
@@ -30,13 +32,13 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
     resetField,
     onSubmit,
     errors,
-    isSending,
+    // isSending,
     isCleanInputsForm,
   } = useAuthForm(type);
 
   const isSignUpPage = type === "signUp";
   const isLogInPage = type === "logIn";
- 
+
   const error = !!Object.keys(errors).length;
 
   const dispatch = useAppDispatch();
@@ -151,7 +153,10 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 <Button
                   type="submit"
                   className="mx-auto mt-[50px]"
-                  disabled={isCleanInputsForm() || error || isSending}
+                  disabled={
+                    isCleanInputsForm() || error
+                    // || isSending
+                  }
                   variant="ghost"
                   size="big"
                   onClick={handleOpenModal}

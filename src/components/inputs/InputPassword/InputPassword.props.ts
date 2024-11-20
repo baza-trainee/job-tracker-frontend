@@ -1,7 +1,7 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 export interface InputPasswordProps {
-  name: any;
+  name: string;
   placeholder: string;
   className: string;
   label?: string;
