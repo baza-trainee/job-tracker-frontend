@@ -3,6 +3,8 @@ import { Link} from "react-router-dom";
 
 // hooks
 import { useAuthForm } from "./useAuth";
+import { useAppDispatch } from "../../store/hook.ts";
+import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
 
 //components
 import LoginCardImages from "./LoginImages/LoginCardImages";
@@ -36,6 +38,21 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   const isLogInPage = type === "logIn";
  
   const error = !!Object.keys(errors).length;
+
+  const dispatch = useAppDispatch();
+
+  const handleOpenModal = () => {
+    // console.log("Клік по кнопці спрацював!");
+    dispatch(
+      openModal({
+        // typeModal: "success",
+        // typeModal: "error",
+        typeModal: "errorMailExist",
+        // typeModal: "popup",
+        // typeModal: "recoveryPassword",
+      })
+    );
+  };
 
   return (
     <section>
@@ -137,6 +154,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                   disabled={isCleanInputsForm() || error || isSending}
                   variant="ghost"
                   size="big"
+                  onClick={handleOpenModal}
                 >
                   {isSignUpPage ? `Зареєструватись` : `Увійти`}
                 </Button>

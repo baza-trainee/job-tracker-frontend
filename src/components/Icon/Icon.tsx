@@ -10,10 +10,6 @@ export interface IconProps {
     useStroke?: boolean;
 }
 
-// !! use for active dataActive="true" || dataActive="false"
-
-// !! add props useStroke, if icon doesn't appear
-
 export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke }) => {
     return (
         <svg className={cn(
@@ -38,3 +34,20 @@ export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke }) =>
 };
 
 export default Icon;
+
+
+// Example using Icon in components:
+
+// 1 variant (в лапках для пошуку іконки комбінація клавіш cntrl+space):
+// import Icon from "../Icon/Icon.tsx";
+// <Icon id={"log-out"} />
+
+// 2 variant:
+// import Icon from "../Icon/Icon.tsx";
+// import { ICON } from "../Icon/icons.ts";
+// <Icon id={ICON.LOG-OUT} />
+
+// Atributes:
+// !! use atribute for active: dataActive="true" || dataActive="false"
+
+// !! add props useStroke, if icon doesn't appear
