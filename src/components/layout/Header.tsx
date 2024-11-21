@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { LOCALS } from "../../utils/i18n/constns";
-import i18next from "i18next";
-import i18n from "../../utils/i18n/i18n";
+// import { LOCALS } from "../../utils/i18n/constns";
+// import i18next from "i18next";
+// import i18n from "../../utils/i18n/i18n";
 import { useTranslation } from "react-i18next";
 
 function Header() {
