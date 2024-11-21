@@ -26,7 +26,8 @@ export const Icon: FC<IconProps> = ({
               dataActive === false && "stroke-green-700",
             ]
           : [
-              "fill-gray-400 hover:fill-[#436B88] active:fill-black group-hover:fill-[#436B88]",
+              // "fill-gray-400 hover:fill-[#436B88] active:fill-black group-hover:fill-[#436B88]",
+
               dataActive === true && "fill-red-700",
               dataActive === false && "fill-green-700",
             ],

@@ -31,6 +31,7 @@ export default {
           primary: "#333333",
           gray: "rgba(51, 51, 51, 0.5)",
           link: "#288dd5",
+          active: "#121212",
         },
         card: {
           blue: "#C6E7FF",
@@ -53,6 +54,7 @@ export default {
         modalWindowRed: "#FC8972",
         modalWindowBlue: "#BFDEF5",
         blackTextColor: "#333333",
+        iconHover: "#436B88",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
