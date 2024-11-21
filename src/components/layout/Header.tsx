@@ -12,7 +12,7 @@ function Header() {
       <Link to="/" className="rounded p-2 hover:bg-slate-500">
         Job Tracker
       </Link>
-      <div>
+      {/* <div>
         <button
           disabled={i18n.language === LOCALS.UA}
           onClick={() => i18n.changeLanguage(LOCALS.UA)}
@@ -31,7 +31,7 @@ function Header() {
         </button>
 
         <span>{i18next.language}</span>
-      </div>
+      </div> */}
       <span className="w-full max-w-48">{t("user")}</span>
     </header>
   );
