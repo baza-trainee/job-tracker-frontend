@@ -20,14 +20,17 @@ const authSlice = createSlice({
   reducers: {
     saveTokens: (state, action: PayloadAction<AuthTokensProps>) => {
       state.tokens = action.payload;
-      console.log("token", { ...action.payload });
       localStorage.setItem(AXIOS.AUTH_TOKENS, JSON.stringify(action.payload));
-      console.log("localeStorage", localStorage);
     },
     clearTokens: (state) => {
       state.tokens = null;
       state.user = null;
       localStorage.removeItem(AXIOS.AUTH_TOKENS);
+    },
+    logout: (state) => {
+      state.tokens = null;
+      state.user = null;
+      localStorage.removeItem("auth_tokens");
     },
   },
   extraReducers: (builder) => {
@@ -59,10 +62,19 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Sign In failed";
       })
+
       .addCase(logIn.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
+      .addCase(
+        logIn.fulfilled,
+        (state, action: PayloadAction<UserProps | null>) => {
+          state.isLoggedIn = true;
+          state.user = action.payload;
+          state.loading = false;
+        }
+      )
       .addCase(logIn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Log In failed";
@@ -70,6 +82,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { saveTokens, clearTokens } = authSlice.actions;
+export const { saveTokens, clearTokens, logout } = authSlice.actions;
 
 export default authSlice.reducer;

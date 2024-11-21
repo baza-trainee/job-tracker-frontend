@@ -8,9 +8,10 @@ export interface IconProps {
     className?: string;
     dataActive?: boolean;
     useStroke?: boolean;
+    funcIconClick?: () => void ;
 }
 
-export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke }) => {
+export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke, funcIconClick }) => {
     return (
         <svg className={cn(
             useStroke
@@ -26,7 +27,7 @@ export const Icon: FC<IconProps> = ({ id, className, dataActive, useStroke }) =>
                     dataActive === false && "fill-green-700",
                 ],                
             className,
-        )}
+        )} onClick={funcIconClick}
         >
             <use href={`${Icons}#${id}`}></use>
         </svg>

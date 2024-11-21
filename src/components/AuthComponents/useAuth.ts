@@ -9,10 +9,7 @@ import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import {
-  clearTokens,
-  saveTokens,
-} from "../../store/slices/authSlice/authSlice";
+import { saveTokens } from "../../store/slices/authSlice/authSlice";
 import {
   fetchUser,
   signUp,
@@ -25,33 +22,19 @@ export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
   const dispatch = useAppDispatch();
-  const { user, tokens } = useAppSelector((state) => state.auth);
+  const { user } = useAppSelector((state) => state.auth);
 
   useMemo(() => {
-    console.log("user", user);
+    console.log("userMemo", user);
   }, [user]);
-
+  
   useEffect(() => {
     const storedTokens = localStorage.getItem("auth_tokens");
     if (storedTokens) {
       dispatch(saveTokens(JSON.parse(storedTokens)));
     }
+    dispatch(fetchUser());
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (tokens) {
-        try {
-          await dispatch(fetchUser()).unwrap();
-        } catch (error) {
-          console.error("Failed to fetch user:", error);
-          dispatch(clearTokens());
-        }
-      }
-    };
-
-    fetchData();
-  }, [tokens, dispatch]);
 
   const formConfigs = useMemo(() => {
     return {
