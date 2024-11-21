@@ -61,10 +61,11 @@
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
-import Opportunities from "./components/Opportunities/Opportunities";
-import Matches from "./components/Matches/Matches";
+import Vacancies from "./components/Vacancies/Vacancies";
+import Statistics from "./components/Statistics/Statistics";
 import Home from "./pages/Home";
-import Search from "./components/Search/Search";
+import Profile from "./components/Profile/Profile";
+import Notes from "./components/Notes/Notes";
 import { SignUp } from "./pages/SignUp/SignUp";
 import { LogIn } from "./pages/LogIn/LogIn";
 
@@ -73,9 +74,10 @@ function App() {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path="opportunities" element={<Opportunities />} />
-        <Route path="matches" element={<Matches />} />
-        <Route path="search" element={<Search />} />
+        <Route path="vacancies" element={<Vacancies />} />
+        <Route path="statistics" element={<Statistics />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="notes" element={<Notes />} />
       </Route>
 
       <Route path="/sign-up" element={<SignUp />} />

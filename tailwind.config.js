@@ -30,7 +30,8 @@ export default {
         text: {
           primary: "#333333",
           gray: "rgba(51, 51, 51, 0.5)",
-          link:"#288dd5"
+          link: "#288dd5",
+          active: "#121212",
         },
         card: {
           blue: "#C6E7FF",
@@ -43,7 +44,7 @@ export default {
         background: {
           page: "#F6F6F6",
           form: "rgba(255, 255, 255, 0.5)",
-          sidebar: "#D9D9D9",
+          sidebar: "#ECEFF6",
           login: "#f9ce69",
         },
         accent: "#C6E7FF",
@@ -53,6 +54,7 @@ export default {
         modalWindowRed: "#FC8972",
         modalWindowBlue: "#BFDEF5",
         blackTextColor: "#333333",
+        iconHover: "#436B88",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
