@@ -16,9 +16,9 @@ export const Checkbox = ({
 
   return (
     <div
-      className={classNames({
-        ["relative flex items-center px-[9.5px]"]: type === "signUp",
-      })}
+      className={classNames(
+        type === "signUp" && "relative flex items-center px-[9.5px]"
+      )}
       id={id}
     >
       <div className="relative flex items-center justify-center">
@@ -30,10 +30,10 @@ export const Checkbox = ({
           {...register(name)}
           aria-describedby={`checkBoxError-${name}`}
           {...props}
-          className={classNames({
-            ["peer relative h-6 w-6 shrink-0 appearance-none rounded-[4px] border-2 border-solid border-text-primary"]:
-              type === "signUp",
-          })}
+          className={classNames(
+            type === "signUp" &&
+              "peer relative h-6 w-6 shrink-0 appearance-none rounded-[4px] border-2 border-solid border-text-primary"
+          )}
         />
         {type === "signUp" && (
           <svg
@@ -52,10 +52,10 @@ export const Checkbox = ({
 
       <label
         htmlFor={`checkbox-${name}`}
-        className={classNames({
-          ["ml-3 font-nunito text-[16px] font-medium leading-[135%] text-gray-700 text-text-gray"]:
-            type === "signUp",
-        })}
+        className={classNames(
+          type === "signUp" &&
+            "ml-3 font-nunito text-[16px] font-medium leading-[135%] text-gray-700 text-text-gray"
+        )}
       >
         {label}
       </label>

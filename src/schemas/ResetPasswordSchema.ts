@@ -7,8 +7,7 @@ export const ResetPasswordSchema = z.object({
 
   newPassword: z
     .string()
-    .min(1, "Помилка")
-    .max(50, `Пароль має містити менше 8 символів`)
-    .regex(passwordRegex, `Помилка`)
-    .min(8, `Пароль має містити 8 символів`),
+    .max(14, `Пароль повинен бути не більше 14 символів`)
+    .regex(passwordRegex, `Введіть коректний пароль`)
+    .min(8, `Пароль повинен бути не менше 8 символів`),
 });
