@@ -58,6 +58,14 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+      .addCase(
+        signUp.fulfilled,
+        (state, action: PayloadAction<UserProps | null>) => {
+          state.isLoggedIn = true;
+          state.user = action.payload;
+          state.loading = false;
+        }
+      )
       .addCase(signUp.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Sign In failed";

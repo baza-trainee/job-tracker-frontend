@@ -92,8 +92,6 @@ export const logIn = createAsyncThunk<
           typeModal: "success",
         })
       );
-      // TODO : якщо повертати через функцію в authSlice.ts стає більше коду
-      // dispatch(fetchUser())
       return response.data.user;
     } catch (error) {
       dispatch(
@@ -133,7 +131,7 @@ export const logIn = createAsyncThunk<
 );
 
 export const signUp = createAsyncThunk<
-  void,
+  UserProps,
   UserProps,
   { rejectValue: KnownError }
 >(
@@ -146,14 +144,20 @@ export const signUp = createAsyncThunk<
       });
       const { access_token, refresh_token } = response.data;
       dispatch(saveTokens({ access_token, refresh_token }));
-      // TODO : якщо повертати через функцію в authSlice.ts стає більше коду
-      // dispatch(fetchUser())
-      await dispatch(fetchUser()).unwrap();
-      alert("Успіх");
+      dispatch(
+        openModal({
+          typeModal: "success",
+        })
+      );
+      return response.data.user;
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.response?.status === 409) {
-          alert("Обліковий запис з такою поштою існує");
+          dispatch(
+            openModal({
+              typeModal: "errorMailExist",
+            })
+          );
           return rejectWithValue({
             message: "Обліковий запис з такою поштою існує",
             code: 409,
