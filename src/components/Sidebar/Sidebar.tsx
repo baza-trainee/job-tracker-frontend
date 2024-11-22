@@ -1,60 +1,86 @@
-import { NavLink } from "react-router-dom";
-import Icon from "../Icon/Icon.tsx";
-import { ICON } from "../Icon/icons.ts";
-import SidebarItem from "./SidebarItem.tsx";
-import LanguageToggle from "./LanguageToggle.tsx";
-import ThemeToggle from "./ThemeToggle.tsx";
+// import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import cn from "clsx";
+
+import SidebarItem from "./components/SidebarItem.tsx";
+import LanguageToggle from "./components/LanguageToggle.tsx";
+import ThemeToggle from "./components/ThemeToggle.tsx";
+import DonateItem from "./components/DonateItem.tsx";
+import NavList from "./components/NavList.tsx";
+import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
+import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
 
 function Sidebar() {
   const { t } = useTranslation();
+  const [isOpenSidebar, setIsOpenSidebar] = useState<boolean>(true);
+
+  const handleOpenSidebar = () => {
+    setIsOpenSidebar(true);
+  };
+  const handleCloseSidebar = () => {
+    setIsOpenSidebar(false);
+  };
+
   return (
-    <aside className="flex h-[1024px] w-full max-w-[276px] flex-col justify-between rounded-r-[20px] bg-background-sidebar px-6 pb-[60px] pt-10 font-nunito text-xl dark:bg-slate-800">
-      <div>
-        <NavLink to="/" className="">
-          <Icon
-            id={ICON.LOGO}
-            className="h-[52px] w-[94px] fill-black transition hover:fill-iconHover dark:fill-slate-300 dark:hover:fill-iconHover"
+    <aside
+      className={cn(
+        "flex h-[1024px] w-fit max-w-[276px] flex-col justify-between rounded-r-[20px] bg-background-sidebar px-6 pb-[60px] pt-10 font-nunito text-xl dark:bg-slate-800",
+        !isOpenSidebar && "items-center pl-3 pr-3"
+      )}
+    >
+      <div className={cn("flex flex-col", !isOpenSidebar && "items-center")}>
+        <div className="flex items-center justify-between">
+          <OpenSidebarBtn handleOpenSidebar={handleOpenSidebar} />
+          <CloseSidebarBtn
+            handleOpenSidebar={handleCloseSidebar}
+            isOpenSidebar={isOpenSidebar}
           />
-        </NavLink>
-        <nav className="mt-[60px] flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6">
-          <SidebarItem
-            icon="vacancy"
-            link="/vacancies"
-            title={t("navigation.vacancies")}
-          />
-          <SidebarItem
-            icon="statistics"
-            link="/statistics"
-            title={t("navigation.statistics")}
-          />
-          <SidebarItem
-            icon="account"
-            link="/profile"
-            title={t("navigation.account")}
-          />
-          <SidebarItem
-            icon="note"
-            link="/notes"
-            title={t("navigation.notes")}
-          />
-        </nav>
-      </div>
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6">
-          <LanguageToggle />
-          <ThemeToggle />
         </div>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex cursor-pointer items-center gap-2 rounded-xl border-[1px] border-[#525252] bg-white fill-text-primary px-6 py-2 transition hover:fill-iconHover hover:text-iconHover">
-            <Icon id={ICON.DONATE} className="h-6 w-6" />
-            {t("donate")}
-          </div>
+        <nav
+          className={cn(
+            "mt-[60px] flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6",
+            !isOpenSidebar && "items-center px-2"
+          )}
+        >
+          {NavList().map((item, index) => {
+            return (
+              <SidebarItem
+                key={index}
+                icon={item.icon}
+                link={item.link}
+                title={item.title}
+                isOpen={isOpenSidebar}
+              />
+            );
+          })}
+        </nav>
+      </div>
+      <div
+        className={cn("flex flex-col gap-6", !isOpenSidebar && "items-center")}
+      >
+        <div className="flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6">
+          <LanguageToggle isOpen={isOpenSidebar} />
+          <ThemeToggle isOpen={isOpenSidebar} />
+        </div>
+
+        <div
+          className={cn(
+            "flex flex-col gap-4",
+            !isOpenSidebar && "items-center"
+          )}
+        >
+          <DonateItem
+            icon="donate"
+            title={t("donate")}
+            isOpen={isOpenSidebar}
+          />
           <SidebarItem
             icon="log-out"
             link="/log-in"
             title={t("navigation.logOut")}
+            isOpen={isOpenSidebar}
           />
         </div>
       </div>
