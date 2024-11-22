@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { LOCALS } from "../../utils/i18n/constns";
-import i18next from "i18next";
-import i18n from "../../utils/i18n/i18n";
+// import { LOCALS } from "../../utils/i18n/constns";
+// import i18next from "i18next";
+// import i18n from "../../utils/i18n/i18n";
 import { useTranslation } from "react-i18next";
 
 function Header() {
@@ -12,7 +12,7 @@ function Header() {
       <Link to="/" className="rounded p-2 hover:bg-slate-500">
         Job Tracker
       </Link>
-      <div>
+      {/* <div>
         <button
           disabled={i18n.language === LOCALS.UA}
           onClick={() => i18n.changeLanguage(LOCALS.UA)}
@@ -31,7 +31,7 @@ function Header() {
         </button>
 
         <span>{i18next.language}</span>
-      </div>
+      </div> */}
       <span className="w-full max-w-48">{t("user")}</span>
     </header>
   );
