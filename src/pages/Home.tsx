@@ -12,8 +12,8 @@ function Home() {
     console.log("click");
   };
 
-  const {user} = useAppSelector((state) => state.auth)
-  console.log("user", user)
+  const { user } = useAppSelector((state) => state.auth);
+  console.log("user", user);
 
   return (
     <section className="p-4">

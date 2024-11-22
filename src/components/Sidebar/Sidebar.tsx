@@ -9,12 +9,12 @@ import { useTranslation } from "react-i18next";
 function Sidebar() {
   const { t } = useTranslation();
   return (
-    <aside className="flex h-[1024px] w-full max-w-[276px] flex-col justify-between rounded-r-[20px] bg-background-sidebar px-6 pb-[60px] pt-10 font-nunito text-xl">
+    <aside className="flex h-[1024px] w-full max-w-[276px] flex-col justify-between rounded-r-[20px] bg-background-sidebar px-6 pb-[60px] pt-10 font-nunito text-xl dark:bg-slate-800">
       <div>
         <NavLink to="/" className="">
           <Icon
             id={ICON.LOGO}
-            className="h-[52px] w-[94px] fill-black transition hover:fill-iconHover"
+            className="h-[52px] w-[94px] fill-black transition hover:fill-iconHover dark:fill-slate-300 dark:hover:fill-iconHover"
           />
         </NavLink>
         <nav className="mt-[60px] flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6">

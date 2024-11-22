@@ -68,8 +68,19 @@ import Profile from "./components/Profile/Profile";
 import Notes from "./components/Notes/Notes";
 import { SignUp } from "./pages/SignUp/SignUp";
 import { LogIn } from "./pages/LogIn/LogIn";
+import { useAppSelector } from "./store/hook";
+import { selectTheme } from "./store/slices/themeSlice/themeSelector";
+import { useEffect } from "react";
 
 function App() {
+  const darkMode = useAppSelector(selectTheme);
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

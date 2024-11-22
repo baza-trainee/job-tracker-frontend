@@ -10,7 +10,7 @@ const LanguageToggle = () => {
       <button
         disabled={i18n.language === LOCALS.UA}
         onClick={() => i18n.changeLanguage(LOCALS.UA)}
-        className="px-[11px] py-1 disabled:rounded-[20px] disabled:bg-white"
+        className="px-[10px] py-1 disabled:rounded-[20px] disabled:bg-white"
         type="button"
       >
         UA
@@ -18,7 +18,7 @@ const LanguageToggle = () => {
       <button
         disabled={i18n.language === LOCALS.EN}
         onClick={() => i18n.changeLanguage(LOCALS.EN)}
-        className="px-[11px] py-1 disabled:rounded-[20px] disabled:bg-white"
+        className="px-[10px] py-1 disabled:rounded-[20px] disabled:bg-white"
         type="button"
       >
         EN
