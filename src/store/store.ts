@@ -20,20 +20,22 @@ const themePersistConfig = {
   storage,
 };
 
-const authPersistConfig = {
-  key: "auth",
-  storage,
-};
+// const authPersistConfig = {
+//   key: "auth",
+//   storage,
+// };
 
-const authPersistedReducer = persistReducer(authPersistConfig, authReduser);
+//const authPersistedReducer = persistReducer(authPersistConfig, authReduser);
 const themePersistedReducer = persistReducer(themePersistConfig, themeReducer);
 
 export const store = configureStore({
   reducer: {
     example: exampleReduser,
     modal: modalReduser,
-    auth: authPersistedReducer,
     theme: themePersistedReducer,
+    auth: authReduser,
+
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
