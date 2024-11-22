@@ -11,16 +11,16 @@ const themePersistConfig = {
   storage,
 };
 
-const authPersistConfig = {
-  key: "auth",
-  storage,
-};
+// const authPersistConfig = {
+//   key: "auth",
+//   storage,
+// };
 
 export const store = configureStore({
   reducer: {
     example: exampleReduser,
     modal: modalReduser,
-    auth: persistReducer(authPersistConfig, authReduser),
+    auth: authReduser,
     theme: persistReducer(themePersistConfig, themeReducer),
   },
 });
