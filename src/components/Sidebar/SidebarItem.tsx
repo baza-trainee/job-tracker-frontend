@@ -18,10 +18,12 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ icon, link, title }) => {
       to={link}
       className={({ isActive, isPending }) =>
         clsx(
-          "group flex items-center gap-3 fill-text-primary text-text-primary transition",
+          "group flex items-center gap-3 fill-text-primary text-text-primary transition dark:fill-slate-300 dark:text-slate-300",
           isPending && "bg-red-500",
-          isActive && "fill-[#000000] font-bold text-[#000000]",
-          !isActive && "hover:fill-iconHover hover:text-iconHover"
+          isActive &&
+            "fill-[#000000] font-bold text-[#000000] dark:fill-white dark:text-white",
+          !isActive &&
+            "hover:fill-iconHover hover:text-iconHover dark:hover:fill-iconHover dark:hover:text-iconHover"
         )
       }
       // className={"group flex items-center gap-3 hover:text-iconHover"}
