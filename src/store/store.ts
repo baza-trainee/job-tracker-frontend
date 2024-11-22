@@ -3,7 +3,16 @@ import exampleReduser from "./slices/exampleSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
-import { persistStore, persistReducer } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const themePersistConfig = {
@@ -16,13 +25,22 @@ const authPersistConfig = {
   storage,
 };
 
+const authPersistedReducer = persistReducer(authPersistConfig, authReduser);
+const themePersistedReducer = persistReducer(themePersistConfig, themeReducer);
+
 export const store = configureStore({
   reducer: {
     example: exampleReduser,
     modal: modalReduser,
-    auth: persistReducer(authPersistConfig, authReduser),
-    theme: persistReducer(themePersistConfig, themeReducer),
+    auth: authPersistedReducer,
+    theme: themePersistedReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export default store;

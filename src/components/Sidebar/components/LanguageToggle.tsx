@@ -1,11 +1,8 @@
-import { LOCALS } from "../../utils/i18n/constns";
+import { LOCALS } from "../../../utils/i18n/constns";
 import { useTranslation } from "react-i18next";
+import { ToggleProps } from "./Sidebar.props";
 
-interface LanguageToggleProps {
-  isOpen: boolean;
-}
-
-const LanguageToggle: React.FC<LanguageToggleProps> = ({ isOpen }) => {
+const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   const { i18n } = useTranslation();
   const isUA = i18n.language === LOCALS.UA;
 
@@ -34,7 +31,7 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({ isOpen }) => {
         <>
           <button
             onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
-            className="w-12 rounded-[20px] bg-white px-[10px] py-1"
+            className="w-14 rounded-[20px] bg-white px-[10px] py-1 transition-colors hover:text-iconHover"
             type="button"
           >
             {isUA ? "UA" : "EN"}

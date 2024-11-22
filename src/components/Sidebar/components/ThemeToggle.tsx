@@ -1,13 +1,10 @@
-import Icon from "../Icon/Icon";
-import { selectTheme } from "../../store/slices/themeSlice/themeSelector";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { toggleTheme } from "../../store/slices/themeSlice/themeSlice";
+import Icon from "../../Icon/Icon";
+import { selectTheme } from "../../../store/slices/themeSlice/themeSelector";
+import { useAppDispatch, useAppSelector } from "../../../store/hook";
+import { toggleTheme } from "../../../store/slices/themeSlice/themeSlice";
+import { ToggleProps } from "./Sidebar.props";
 
-interface ThemeToggleProps {
-  isOpen: boolean;
-}
-
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ isOpen }) => {
+const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   const darkMode = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
 
@@ -41,7 +38,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isOpen }) => {
           {
             <button
               onClick={handleThemeToggle}
-              className="rounded-[20px] bg-white px-3 py-[6px]"
+              className="w-14 rounded-[20px] bg-white px-4 py-[6px] transition-colors hover:fill-iconHover"
               type="button"
             >
               <Icon

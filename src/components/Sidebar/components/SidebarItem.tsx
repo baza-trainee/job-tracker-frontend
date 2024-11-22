@@ -1,16 +1,8 @@
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 
-import Icon from "../Icon/Icon.tsx";
-import { IconId } from "../Icon/icons";
-
-export interface SidebarItemProps {
-  icon: IconId;
-  link: string;
-  title: string;
-  isOpen: boolean;
-  useStroke?: boolean;
-}
+import Icon from "../../Icon/Icon.tsx";
+import { SidebarItemProps } from "./Sidebar.props.ts";
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
   icon,
@@ -18,7 +10,6 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   title,
   isOpen,
 }) => {
-  console.log("isOpen", isOpen);
   return (
     <NavLink
       to={link}
@@ -34,7 +25,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       }
     >
       <Icon id={icon} className="h-10 w-10" />
-      <span className={`${isOpen ? "visible" : "hidden"}`}>{title}</span>
+      <span className={`${isOpen ? "visible" : "sr-only"}`}>{title}</span>
     </NavLink>
   );
 };
