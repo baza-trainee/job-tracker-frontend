@@ -15,7 +15,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       to={link}
       className={({ isActive, isPending }) =>
         clsx(
-          "group flex w-fit items-center gap-3 fill-text-primary text-text-primary transition dark:fill-slate-300 dark:text-slate-300",
+          "group flex w-fit items-center gap-3 fill-textBlack text-textBlack transition dark:fill-slate-300 dark:text-slate-300",
           isPending && "bg-red-500",
           isActive &&
             "fill-[#000000] font-bold text-[#000000] dark:fill-white dark:text-white",

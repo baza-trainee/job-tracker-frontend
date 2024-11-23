@@ -48,7 +48,7 @@ export const AuthForm = ({
         {isLogInPage ? (
           <p className={"mt-[-18px] text-right"}>
             <Link
-              className="font-nunito text-[16px] font-medium leading-[135%] text-text-gray"
+              className="font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
               // TODO: змінити посилання на /isforgotPassword
               to="/sign-up"
             >
@@ -77,11 +77,11 @@ export const AuthForm = ({
               label={
                 <p>
                   Погоджуюсь з
-                  <span className="text-text-link">
+                  <span className="text-textOther">
                     {" політикой конфіденційності "}
                   </span>
                   та
-                  <span className="text-text-link">
+                  <span className="text-textOther">
                     {" умовами користувача"}
                   </span>
                 </p>

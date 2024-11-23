@@ -21,12 +21,12 @@ export const Icon: FC<IconProps> = ({
       className={cn(
         useStroke
           ? [
-              "stroke-gray-400 hover:stroke-gray-700 active:stroke-black",
+              "stroke-gray-400 hover:stroke-iconHover active:stroke-black",
               dataActive === true && "stroke-red-700",
               dataActive === false && "stroke-green-700",
             ]
           : [
-              // "fill-gray-400 hover:fill-[#436B88] active:fill-black group-hover:fill-[#436B88]",
+              // "fill-gray-400 hover:fill-iconHover active:fill-black group-hover:fill-iconHover",
 
               dataActive === true && "fill-red-700",
               dataActive === false && "fill-green-700",

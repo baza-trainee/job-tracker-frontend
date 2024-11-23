@@ -12,7 +12,7 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "flex h-[50px] items-center justify-center rounded-xl font-nunito text-xl font-medium text-text-primary duration-300",
+        "flex h-[50px] items-center justify-center rounded-xl font-nunito text-xl font-medium text-textBlack duration-300",
 
         size === "small" && "h-[44px] min-w-[180px] px-8",
         size === "big" && "min-w-[260px] px-12",
@@ -23,7 +23,7 @@ export const Button = ({
 
         !disabled &&
           variant === "ghost" &&
-          "bg-transparent ring-1 ring-inset ring-text-primary hover:shadow-button_hover hover:ring-[3px] hover:ring-accent focus:shadow-button_hover focus:ring-[3px] focus:ring-accent",
+          "bg-transparent ring-1 ring-inset ring-textBlack hover:shadow-button_hover hover:ring-[3px] hover:ring-accent focus:shadow-button_hover focus:ring-[3px] focus:ring-accent",
 
         disabled &&
           variant === "accent" &&
@@ -31,7 +31,7 @@ export const Button = ({
 
         disabled &&
           variant === "ghost" &&
-          "pointer-events-none bg-background-sidebar ring-transparent",
+          "pointer-events-none bg-background-backgroundSecondary ring-transparent",
 
         className
       )}

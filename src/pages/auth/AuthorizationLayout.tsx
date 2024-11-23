@@ -65,10 +65,10 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
         <div className="w-full max-w-[477px] font-nunito">
           <div className="mb-[48px]">
-            <h2 className="mb-3 font-nunito text-[32px] font-bold leading-[135%] text-text-primary">
+            <h2 className="mb-3 font-nunito text-[32px] font-bold leading-[135%] text-textBlack">
               {isSignUpPage ? "Вітаємо!" : "Раді вас знову бачити! "}
             </h2>
-            <p className="font-nunito text-[16px] font-medium leading-[135%] text-text-gray">
+            <p className="font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight">
               {isSignUpPage
                 ? "Зареєструйтесь для того, щоб оптимізувати свій пошук роботи"
                 : "Увійдіть, щоб продовжити відслідковувати ваші відгуки"}
@@ -107,7 +107,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                   {isLogInPage ? (
                     <p className={"mt-[-18px] text-right"}>
                       <Link
-                        className="font-nunito text-[16px] font-medium leading-[135%] text-text-gray"
+                        className="font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
                         // TODO: змінити посилання на /isforgotPassword
                         to="/sign-up"
                       >
@@ -136,11 +136,11 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         label={
                           <p>
                             Погоджуюсь з
-                            <span className="text-text-link">
+                            <span className="text-textOther">
                               {" політикой конфіденційності "}
                             </span>
                             та
-                            <span className="text-text-link">
+                            <span className="text-textOther">
                               {" умовами користувача"}
                             </span>
                           </p>
@@ -175,7 +175,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 variant="ghost"
                 size="small"
               >
-                <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
+                <span className="font-nunito text-[20px] font-medium leading-[135%] text-textBlack">
                   Google
                 </span>
                 <span className="">
@@ -195,7 +195,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 variant="ghost"
                 size="small"
               >
-                <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
+                <span className="font-nunito text-[20px] font-medium leading-[135%] text-textBlack">
                   GitHub
                 </span>
                 <span className="">
@@ -211,12 +211,12 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
             </div>
 
             <div className="mt-5 flex justify-center">
-              <p className="font-nunito text-[16px] font-medium text-text-gray">
+              <p className="font-nunito text-[16px] font-medium text-textBlackLight">
                 {isSignUpPage
                   ? "Вже зареєстровані?"
                   : "Немає облікового запису?"}
                 <Link
-                  className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-text-link"
+                  className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-textOther"
                   to={isSignUpPage ? "/log-in" : "/sign-up"}
                 >
                   {isSignUpPage ? "Увійти" : "Зареєструватись"}
