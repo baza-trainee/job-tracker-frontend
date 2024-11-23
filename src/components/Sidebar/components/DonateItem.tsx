@@ -7,7 +7,7 @@ const DonateItem: React.FC<DonateItemProps> = ({ icon, title, isOpen }) => {
   return (
     <div
       className={cn(
-        "flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[1px] border-[#525252] bg-white fill-text-primary px-6 py-2 transition hover:fill-iconHover hover:text-iconHover",
+        "flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[1px] border-[#525252] bg-white fill-textBlack px-6 py-2 transition hover:fill-iconHover hover:text-iconHover",
         !isOpen && "px-4"
       )}
     >
