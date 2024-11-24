@@ -1,17 +1,20 @@
 import { useAuthForm } from "../components/AuthComponents/useAuth";
 import classNames from "clsx";
+import { Link } from "react-router-dom";
 
 import Logo from "../components/Logo/JobTrackerLogo";
 import LoginCardImages from "../components/LoginImages/LoginCardImages";
+import { Input } from "../components/inputs/Input/Input";
+import { InputPassword } from "../components/inputs/InputPassword/InputPassword";
+import Checkbox from "../components/checkbox/Checkbox";
+import { Button } from "../components/buttons/Button/Button";
 import Separator from "../components/separator/Separator";
 import Footer from "../components/layout/Footer";
 
 import { useAppSelector } from "../store/hook";
 
 import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
-import { AuthForm } from "../components/AuthComponents/AuthForm/AuthForm";
 import { AuthSocialButtons } from "../components/AuthComponents/AuthSocialButtons/AuthSocialButtons";
-import { AuthFooter } from "../components/AuthComponents/AuthFooter/AuthFooter";
 
 type AuthorizationLayoutProps = {
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword";
@@ -49,23 +52,107 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <div className="w-full max-w-[477px] font-nunito">
           <AuthHeader isSignUpPage={isSignUpPage} />
           <div className="rounded-[20px] bg-background-form px-12 py-6 shadow-form_shadow">
-            <AuthForm
-              isSignUpPage={isSignUpPage}
-              isLogInPage={isLogInPage}
-              register={register}
-              handleSubmit={handleSubmit}
-              resetField={resetField}
-              onSubmit={onSubmit}
-              errors={errors}
-              isCleanInputsForm={isCleanInputsForm}
-              loading={loading}
-              error={error}
-            />
+            <>
+              <form className="" onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex flex-col gap-[30px]">
+                  <Input
+                    register={register}
+                    resetField={resetField}
+                    key="email"
+                    name="email"
+                    placeholder="Введіть пошту"
+                    type="text"
+                    className=""
+                    label="Електронна пошта"
+                    errors={errors}
+                  />
+
+                  <InputPassword
+                    register={register}
+                    resetField={resetField}
+                    key="password"
+                    name="password"
+                    placeholder="Введіть пароль"
+                    type="text"
+                    label="Пароль"
+                    className=""
+                    errors={errors}
+                  />
+                  {isLogInPage ? (
+                    <p className={"mt-[-18px] text-right"}>
+                      <Link
+                        className="font-nunito text-[16px] font-medium leading-[135%] text-text-gray"
+                        // TODO: змінити посилання на /isforgotPassword
+                        to="/sign-up"
+                      >
+                        Забули пароль?
+                      </Link>
+                    </p>
+                  ) : null}
+                  {isSignUpPage ? (
+                    <>
+                      <InputPassword
+                        register={register}
+                        resetField={resetField}
+                        key="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Підтвердіть пароль"
+                        type="text"
+                        label="Підтвердіть пароль"
+                        className=""
+                        errors={errors}
+                      />
+                      <Checkbox
+                        register={register}
+                        type="signUp"
+                        name="terms"
+                        errors={errors}
+                        label={
+                          <p>
+                            Погоджуюсь з
+                            <span className="text-text-link">
+                              {" політикой конфіденційності "}
+                            </span>
+                            та
+                            <span className="text-text-link">
+                              {" умовами користувача"}
+                            </span>
+                          </p>
+                        }
+                      />
+                    </>
+                  ) : null}
+                </div>
+
+                <Button
+                  type="submit"
+                  className="mx-auto mt-[50px]"
+                  disabled={isCleanInputsForm() || error || loading}
+                  variant="ghost"
+                  size="big"
+                >
+                  {isSignUpPage ? `Зареєструватись` : `Увійти`}
+                </Button>
+              </form>
+            </>
             <Separator />
 
             <AuthSocialButtons />
 
-            <AuthFooter isSignUpPage={isSignUpPage} reset={reset} />
+            <div className="mt-5 flex justify-center">
+              <p className="font-nunito text-[16px] font-medium text-text-gray">
+                {isSignUpPage
+                  ? "Вже зареєстровані?"
+                  : "Немає облікового запису?"}
+                <Link
+                  className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-text-link"
+                  to={isSignUpPage ? "/log-in" : "/sign-up"}
+                  onClick={() => reset()}
+                >
+                  {isSignUpPage ? "Увійти" : "Зареєструватись"}
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

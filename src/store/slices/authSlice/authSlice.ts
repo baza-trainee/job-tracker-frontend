@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 
 import { AuthStateProps, AuthTokensProps, UserProps } from "./authTypes";
 
@@ -27,11 +27,6 @@ const authSlice = createSlice({
       state.user = null;
       localStorage.removeItem(AXIOS.AUTH_TOKENS);
     },
-    logout: (state) => {
-      state.tokens = null;
-      state.user = null;
-      localStorage.removeItem("auth_tokens");
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -54,42 +49,25 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Failed to fetch user";
       })
-      .addCase(signUp.pending, (state) => {
-        state.loading = true;
+      .addMatcher(isAnyOf(signUp.pending, logIn.pending), (state) => {
+        state.loading = false;
         state.error = null;
       })
-      .addCase(
-        signUp.fulfilled,
+      .addMatcher(
+        isAnyOf(signUp.fulfilled, logIn.fulfilled),
         (state, action: PayloadAction<UserProps | null>) => {
           state.isLoggedIn = true;
           state.user = action.payload;
           state.loading = false;
         }
       )
-      .addCase(signUp.rejected, (state, action) => {
+      .addMatcher(isAnyOf(signUp.rejected, logIn.rejected), (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Sign In failed";
-      })
-
-      .addCase(logIn.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(
-        logIn.fulfilled,
-        (state, action: PayloadAction<UserProps | null>) => {
-          state.isLoggedIn = true;
-          state.user = action.payload;
-          state.loading = false;
-        }
-      )
-      .addCase(logIn.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Log In failed";
+        state.error = action.error.message || "Failed";
       });
   },
 });
 
-export const { saveTokens, clearTokens, logout } = authSlice.actions;
+export const { saveTokens, clearTokens } = authSlice.actions;
 
 export default authSlice.reducer;

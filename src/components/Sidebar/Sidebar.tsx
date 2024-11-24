@@ -6,12 +6,12 @@ import LanguageToggle from "./LanguageToggle.tsx";
 import ThemeToggle from "./ThemeToggle.tsx";
 
 import { useAppDispatch } from "../../store/hook.ts";
-import { logout } from "../../store/slices/authSlice/authSlice.ts";
+import { clearTokens } from "../../store/slices/authSlice/authSlice.ts";
 
 function Sidebar() {
   const dispatch = useAppDispatch();
   const handleLogOut = (): void => {
-    dispatch(logout());
+    dispatch(clearTokens());
   };
   return (
     <aside className="flex h-[1024px] w-full max-w-[276px] flex-col justify-between rounded-r-[20px] bg-background-sidebar px-6 pb-[60px] pt-10 font-nunito text-xl">

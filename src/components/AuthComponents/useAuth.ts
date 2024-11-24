@@ -24,6 +24,8 @@ export function useAuthForm(
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
 
+  console.log( "windowsSeach", (new URLSearchParams(window.location.search)).get('access_token'))
+
   useMemo(() => {
     console.log("userMemo", user);
   }, [user]);

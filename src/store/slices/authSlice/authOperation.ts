@@ -101,24 +101,11 @@ export const logIn = createAsyncThunk<
       );
       if (isAxiosError(error)) {
         const errorCode = error.response?.status;
-        switch (errorCode) {
-          case 401:
-            return rejectWithValue({
-              message: "Невірний пароль або пошта",
-              code: 401,
-            });
-
-          case 404:
-            return rejectWithValue({
-              message: "Невірний пароль або пошта",
-              code: 404,
-            });
-
-          default:
-            return rejectWithValue({
-              message: "Сталася невідома помилка при обробці запиту",
-              code: undefined,
-            });
+        if (errorCode === 401 || errorCode === 404) {
+          return rejectWithValue({
+            message: "Невірний пароль або пошта",
+            code: errorCode,
+          });
         }
       } else {
         return rejectWithValue({
