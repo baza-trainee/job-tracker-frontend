@@ -16,7 +16,7 @@ export const AuthSocialButtons = () => {
         size="small"
         onClick={GoogleLogin}
       >
-        <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
+        <span className="font-nunito text-[20px] font-medium leading-[135%] text-textBlack">
           Google
         </span>
         <img src={GoogleLogo} className="h-[36px] w-[36px]" alt="Google Logo" />
@@ -29,7 +29,7 @@ export const AuthSocialButtons = () => {
         size="small"
         onClick={GithubLogin}
       >
-        <span className="font-nunito text-[20px] font-medium leading-[135%] text-text-primary">
+        <span className="font-nunito text-[20px] font-medium leading-[135%] text-textBlack">
           GitHub
         </span>
         <img src={GitHubLogo} className="h-[36px] w-[36px]" alt="Google Logo" />

@@ -32,12 +32,12 @@ export const Checkbox = ({
           {...props}
           className={classNames(
             type === "signUp" &&
-              "peer relative h-6 w-6 shrink-0 appearance-none rounded-[4px] border-2 border-solid border-text-primary"
+              "peer relative h-6 w-6 shrink-0 appearance-none rounded-[4px] border-2 border-solid border-textBlack"
           )}
         />
         {type === "signUp" && (
           <svg
-            className="peer-checked:!fill- pointer-events-none absolute h-4 w-4 fill-none stroke-background-form peer-checked:!stroke-text-link"
+            className="peer-checked:!fill- pointer-events-none absolute h-4 w-4 fill-none stroke-background-form peer-checked:!stroke-textOther"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -54,7 +54,7 @@ export const Checkbox = ({
         htmlFor={`checkbox-${name}`}
         className={classNames(
           type === "signUp" &&
-            "ml-3 font-nunito text-[16px] font-medium leading-[135%] text-gray-700 text-text-gray"
+            "ml-3 font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
         )}
       >
         {label}
@@ -62,7 +62,7 @@ export const Checkbox = ({
       {error && (
         <span
           id={`inputError-${name}`}
-          className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-error"
+          className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
         >
           {String(error?.message)}
         </span>
