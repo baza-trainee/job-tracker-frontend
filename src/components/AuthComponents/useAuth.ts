@@ -8,34 +8,21 @@ import { SignUpSchema } from "../../schemas/SignUpSchema";
 import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { saveTokens } from "../../store/slices/authSlice/authSlice";
+import { useAppDispatch } from "../../store/hook";
 import {
-  fetchUser,
+  refreshUser,
   signUp,
   logIn,
 } from "../../store/slices/authSlice/authOperation";
 
-//TODO
 
 export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
 
-  console.log( "windowsSeach", (new URLSearchParams(window.location.search)).get('access_token'))
-
-  useMemo(() => {
-    console.log("userMemo", user);
-  }, [user]);
-  
   useEffect(() => {
-    const storedTokens = localStorage.getItem("auth_tokens");
-    if (storedTokens) {
-      dispatch(saveTokens(JSON.parse(storedTokens)));
-    }
-    dispatch(fetchUser());
+    dispatch(refreshUser());
   }, []);
 
   const formConfigs = useMemo(() => {

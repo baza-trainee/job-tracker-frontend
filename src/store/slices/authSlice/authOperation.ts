@@ -17,7 +17,7 @@ export const GithubLogin = () => {
     "https://job-tracker-backend-x.vercel.app/api/auth/github";
 };
 
-export const fetchUser = createAsyncThunk(
+export const refreshUser = createAsyncThunk(
   "auth/fetchUser",
   async (_, { getState, dispatch }) => {
     const state = getState() as { auth: AuthStateProps };
