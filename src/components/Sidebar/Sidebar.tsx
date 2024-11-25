@@ -25,7 +25,7 @@ function Sidebar() {
   return (
     <aside
       className={cn(
-        "flex h-[1024px] w-fit max-w-[276px] flex-col justify-between rounded-r-[20px] bg-background-backgroundSecondary px-6 pb-[60px] pt-10 font-nunito text-xl dark:bg-slate-800",
+        "bg-backgroundSecondary flex h-screen w-fit max-w-[276px] flex-col justify-between rounded-r-[20px] p-6 font-nunito text-xl dark:bg-slate-800",
         !isOpenSidebar && "items-center pl-3 pr-3"
       )}
     >
@@ -40,7 +40,7 @@ function Sidebar() {
 
         <nav
           className={cn(
-            "mt-[60px] flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6",
+            "mt-6 flex flex-col gap-4 border-b-2 border-[#CECECE] pb-5",
             !isOpenSidebar && "items-center px-2"
           )}
         >
@@ -60,7 +60,7 @@ function Sidebar() {
       <div
         className={cn("flex flex-col gap-6", !isOpenSidebar && "items-center")}
       >
-        <div className="flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6">
+        <div className="flex flex-col gap-4 border-b-2 border-[#CECECE] pb-6">
           <LanguageToggle isOpen={isOpenSidebar} />
           <ThemeToggle isOpen={isOpenSidebar} />
         </div>

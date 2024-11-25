@@ -31,7 +31,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         <>
           <button
             onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
-            className="w-14 rounded-[20px] bg-white px-[10px] py-1 transition-colors hover:text-iconHover"
+            className="w-[72px] rounded-[20px] bg-white px-[10px] py-[5px] transition-colors hover:text-iconHover"
             type="button"
           >
             {isUA ? "UA" : "EN"}

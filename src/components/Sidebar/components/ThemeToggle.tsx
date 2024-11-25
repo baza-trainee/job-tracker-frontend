@@ -38,7 +38,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
           {
             <button
               onClick={handleThemeToggle}
-              className="w-14 rounded-[20px] bg-white px-4 py-[6px] transition-colors hover:fill-iconHover"
+              className="w-[72px] rounded-[20px] bg-white px-6 py-[7px] transition-colors hover:fill-iconHover"
               type="button"
             >
               <Icon

@@ -15,16 +15,17 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       to={link}
       className={({ isActive, isPending }) =>
         clsx(
-          "group flex w-fit items-center gap-3 fill-textBlack text-textBlack transition dark:fill-slate-300 dark:text-slate-300",
+          "fill-textBlack text-textBlack group flex w-fit items-center rounded-2xl border-2 border-transparent py-[2px] transition dark:fill-slate-300 dark:text-slate-300",
+          isOpen && "w-[192px]",
           isPending && "bg-red-500",
-          isActive &&
-            "fill-[#000000] font-bold text-[#000000] dark:fill-white dark:text-white",
           !isActive &&
-            "hover:fill-iconHover hover:text-iconHover dark:hover:fill-iconHover dark:hover:text-iconHover"
+            "hover:fill-iconHover hover:text-iconHover dark:hover:fill-iconHover dark:hover:text-iconHover",
+          isActive &&
+            "bg-backgroundMain !border-[#DBDCDD] fill-[#000000] text-[#000000] dark:fill-[#000000] dark:text-[#000000]"
         )
       }
     >
-      <Icon id={icon} className="h-10 w-10" />
+      <Icon id={icon} className="mx-4 h-10 w-10" />
       <span className={`${isOpen ? "visible" : "sr-only"}`}>{title}</span>
     </NavLink>
   );
