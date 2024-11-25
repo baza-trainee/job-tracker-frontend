@@ -12,7 +12,6 @@
 
 // export default MainLayout;
 
-
 //----------------------------------------------------------
 import { Outlet } from "react-router-dom";
 import Header from "../components/layout/Header";
@@ -34,4 +33,3 @@ function MainLayout() {
 }
 
 export default MainLayout;
-
