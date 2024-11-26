@@ -1,10 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 
 import { AuthStateProps, AuthTokensProps, UserProps } from "./authTypes";
 
-import { fetchUser, signUp, logIn } from "./authOperation";
-
-import { AXIOS } from "../../../api/axios-constants";
+import { refreshUser, signUp, logIn } from "./authOperation";
 
 const initialState: AuthStateProps = {
   user: null,
@@ -20,52 +18,47 @@ const authSlice = createSlice({
   reducers: {
     saveTokens: (state, action: PayloadAction<AuthTokensProps>) => {
       state.tokens = action.payload;
-      console.log("token", { ...action.payload });
-      localStorage.setItem(AXIOS.AUTH_TOKENS, JSON.stringify(action.payload));
-      console.log("localeStorage", localStorage);
+      state.isLoggedIn = true;
     },
     clearTokens: (state) => {
       state.tokens = null;
+      state.isLoggedIn = false;
       state.user = null;
-      localStorage.removeItem(AXIOS.AUTH_TOKENS);
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUser.pending, (state) => {
-        state.isLoggedIn = false;
+      .addCase(refreshUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
-        fetchUser.fulfilled,
+        refreshUser.fulfilled,
         (state, action: PayloadAction<UserProps | null>) => {
-          state.isLoggedIn = true;
-          state.user = action.payload;
           state.loading = false;
+          state.user = action.payload;
         }
       )
-      .addCase(fetchUser.rejected, (state, action) => {
-        state.user = null;
-        state.isLoggedIn = false;
+      .addCase(refreshUser.rejected, (state, action) => {
         state.loading = false;
+        state.user = null;
         state.error = action.error.message || "Failed to fetch user";
       })
-      .addCase(signUp.pending, (state) => {
-        state.loading = true;
+      .addMatcher(isAnyOf(signUp.pending, logIn.pending), (state) => {
+        state.loading = false;
         state.error = null;
       })
-      .addCase(signUp.rejected, (state, action) => {
+      .addMatcher(
+        isAnyOf(signUp.fulfilled, logIn.fulfilled),
+        (state, action: PayloadAction<UserProps | null>) => {
+          state.loading = false;
+          state.isLoggedIn = true;
+          state.user = action.payload;
+        }
+      )
+      .addMatcher(isAnyOf(signUp.rejected, logIn.rejected), (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Sign In failed";
-      })
-      .addCase(logIn.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(logIn.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Log In failed";
+        state.error = action.error.message || "Failed";
       });
   },
 });

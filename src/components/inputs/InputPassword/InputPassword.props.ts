@@ -10,5 +10,5 @@ export interface InputPasswordProps {
   type: string;
   value?: string;
   id?: string;
-  resetField(name: string): void;
+  resetField?(name: string): void;
 }

@@ -4,16 +4,11 @@ import { LinkButton } from "../components/buttons/LinkButton/LinkButton";
 import { IconButton } from "../components/buttons/IconButton/IconButton";
 import { FormExample } from "../components/form/FormExample";
 
-import { useAppSelector } from "../store/hook";
-
 function Home() {
   const { t } = useTranslation();
   const handleButtonClick = () => {
     console.log("click");
   };
-
-  const { user } = useAppSelector((state) => state.auth);
-  console.log("user", user);
 
   return (
     <section className="p-4">

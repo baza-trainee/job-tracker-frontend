@@ -12,7 +12,7 @@ const InfoCard = ({
 }: InfoCardProps) => {
   return (
     <div
-      className={classNames("relative flex max-w-[500px] flex-col", {
+      className={classNames("relative flex max-w-[503px] flex-col", {
         "ml-auto": margin,
       })}
     >
@@ -27,12 +27,12 @@ const InfoCard = ({
       ></span>
       <div
         className={classNames(
-          "flex items-center justify-center gap-[15px] border-[6px] border-[solid] px-[9px] py-[14px]",
+          "flex items-center justify-center gap-2 border-[6px] border-[solid] p-[14px]",
           color === "blue" ? "border-color1" : "border-color5",
           `${border}`,
         )}
       >
-        <p className="max-w-[335px] font-nunito text-[20px] font-bold leading-[135%] text-[#333]">
+        <p className="max-w-[335px] font-nunito text-[20px] font-bold leading-[135%] text-textBlack">
           {text}
         </p>
         <figure className="max-h-[120px] max-w-[120px]">

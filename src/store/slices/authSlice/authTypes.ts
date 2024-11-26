@@ -1,8 +1,9 @@
 export interface UserProps {
-  id: string;
-  username: string;
+  id?: string;
+  username?: string;
   email: string;
-  avatar: string;
+  avatar?: string;
+  password?: string;
 }
 
 export interface AuthTokensProps {
@@ -21,8 +22,4 @@ export interface AuthStateProps {
 export interface KnownError {
   message: string;
   code: number | undefined;
-}
-export interface UserAuthProps {
-  email: string;
-  password: string;
 }
