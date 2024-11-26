@@ -97,7 +97,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
       {label && (
         <label
           htmlFor={`input-${name}`}
-          className="mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-text-primary"
+          className="mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-textBlack"
         >
           {label}
         </label>
@@ -107,10 +107,10 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "peer h-11 w-full rounded-xl border py-2 pl-6 pr-16 font-nunito text-base font-medium text-text-primary transition placeholder:font-nunito placeholder:text-text-gray placeholder-shown:border-text-primary focus:border-accent focus:outline-none active:border-accent",
+              "peer h-11 w-full rounded-xl border py-2 pl-6 pr-16 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-accent focus:outline-none active:border-accent",
               {
-                ["border-successful"]: !error,
-                ["border-error placeholder-shown:border-error focus:border-error active:border-error"]:
+                ["border-color5"]: !error,
+                ["border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"]:
                   error,
               }
             )}
@@ -182,7 +182,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
         {errors[name] && (
           <span
             id={`inputError-${name}`}
-            className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-error"
+            className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
           >
             {String(errors[name]?.message)}
           </span>

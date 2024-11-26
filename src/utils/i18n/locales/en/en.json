@@ -1,4 +1,12 @@
 {
   "welcome": "Welcome to React and react-i18next",
-  "user": "користувач"
+  "user": "користувач",
+  "navigation": {
+    "vacancies": "Vacancies",
+    "statistics": "Statistics",
+    "account": "Account",
+    "notes": "Notes",
+    "logOut": "Log out"
+  },
+  "donate": "Support us"
 }

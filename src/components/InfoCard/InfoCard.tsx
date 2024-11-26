@@ -19,7 +19,7 @@ const InfoCard = ({
       <span
         className={classNames(
           "absolute top-[-30px] flex h-[30px] w-[130px] rounded-bl-[0] rounded-br-[0] rounded-tl-[12px] rounded-tr-[12px]",
-          color === "blue" ? "bg-card-blue" : "bg-card-green",
+          color === "blue" ? "bg-color1" : "bg-color5",
           position === "left"
             ? "-translate-0 left-0"
             : "left-full -translate-x-full",
@@ -28,7 +28,7 @@ const InfoCard = ({
       <div
         className={classNames(
           "flex items-center justify-center gap-[15px] border-[6px] border-[solid] px-[9px] py-[14px]",
-          color === "blue" ? "border-card-blue" : "border-card-green",
+          color === "blue" ? "border-color1" : "border-color5",
           `${border}`,
         )}
       >

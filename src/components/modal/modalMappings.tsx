@@ -1,31 +1,31 @@
 export const contentMap = {
-    success: <span className="text-4xl font-bold text-modalWindowGreen">Успіх!</span>,
-    error: <span className="text-4xl font-bold text-error">Упс!</span>,
-    errorMailExist: <span className="text-4xl font-bold text-error">Упс!</span>,
-    recoveryPassword: <span className="text-4xl font-bold text-blackTextColor">Відновлення паролю</span>,
-    confirm: <span className="text-4xl font-bold text-successful">Підтвердіть дію!</span>,
-    popup: "Привет чудики",
+    success: <span className="text-4xl font-bold text-color8">Успіх!</span>,
+    error: <span className="text-4xl font-bold text-color2">Упс!</span>,
+    errorMailExist: <span className="text-4xl font-bold text-color2">Упс!</span>,
+    recoveryPassword: <span className="text-4xl font-bold text-textBlack">Відновлення паролю</span>,
+    confirm: <span className="text-4xl font-bold text-color5">Підтвердіть дію!</span>,
+    popup: "",
 }
 export const colorType = {
     success: {
-        background: "bg-modalWindowGreen",
-        border: "border-modalWindowGreen",
+        background: "bg-color8",
+        border: "border-color8",
     },
     error: {
-        background: "bg-modalWindowRed",
-        border: "border-modalWindowRed",
+        background: "bg-color2",
+        border: "border-color2",
     },
     errorMailExist: {
-        background: "bg-modalWindowRed",
-        border: "border-modalWindowRed",
+        background: "bg-color2",
+        border: "border-color2",
     },
     recoveryPassword: {
-        background: "bg-modalWindowBlue",
-        border: "border-modalWindowBlue",
+        background: "bg-button",
+        border: "border-button",
     },
     confirm: {
-        background: "bg-modalWindowGreen",
-        border: "border-modalWindowGreen",
+        background: "bg-color8",
+        border: "border-color8",
     },
     popup: {
         background: "bg-white",

@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import exampleReduser from "./slices/exampleSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
+import themeReducer from "./slices/themeSlice/themeSlice.ts";
 import {
   persistStore,
   persistReducer,
@@ -19,13 +20,20 @@ const authPersistConfig = {
   storage,
 };
 
+const themePersistConfig = {
+  key: "theme",
+  storage,
+};
+
 const authPersistedReducer = persistReducer(authPersistConfig, authReduser);
+const themePersistedReducer = persistReducer(themePersistConfig, themeReducer);
 
 export const store = configureStore({
   reducer: {
     example: exampleReduser,
     modal: modalReduser,
     auth: authPersistedReducer,
+    theme: themePersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
