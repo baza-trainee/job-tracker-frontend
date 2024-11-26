@@ -39,125 +39,133 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   const error = !!Object.keys(errors).length;
 
   return (
-    <section>
-      <Logo />
-      <div
-        className={classNames(
-          "mx-auto flex items-center justify-center gap-[49px] px-3",
-          type === "signUp" && "mb-[59px] mt-[4px]",
-          type === "logIn" && "mb-[107px] mt-[54px]"
-        )}
-      >
-        <LoginCardImages />
-        <div className="w-full max-w-[477px] font-nunito">
-          <AuthHeader isSignUpPage={isSignUpPage} />
-          <div className="rounded-[20px] bg-background-form px-12 py-6 shadow-form_shadow">
-            <>
-              <form className="" onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex flex-col gap-[30px]">
-                  <Input
-                    register={register}
-                    resetField={resetField}
-                    key="email"
-                    name="email"
-                    placeholder="Введіть пошту"
-                    type="text"
-                    className=""
-                    label="Електронна пошта"
-                    errors={errors}
-                  />
+    <div className="grid h-screen grid-rows-[auto_1fr_auto]">
+      <header className="flex p-10">
+        <Logo />
+      </header>
 
-                  <InputPassword
-                    register={register}
-                    resetField={resetField}
-                    key="password"
-                    name="password"
-                    placeholder="Введіть пароль"
-                    type="text"
-                    label="Пароль"
-                    className=""
-                    errors={errors}
-                  />
-                  {isLogInPage ? (
-                    <p className={"mt-[-18px] text-right"}>
-                      <Link
-                        className="font-nunito text-[16px] font-medium leading-[135%] text-text-gray"
-                        // TODO: змінити посилання на /isforgotPassword
-                        to="/sign-up"
-                      >
-                        Забули пароль?
-                      </Link>
-                    </p>
-                  ) : null}
-                  {isSignUpPage ? (
-                    <>
+      <main className="flex-grow">
+        <section>
+          <div
+            className={classNames(
+              "container flex justify-center gap-6",
+              type === "signUp" && "mb-[69px]",
+              type === "logIn" && "mb-[69px]"
+            )}
+          >
+            <LoginCardImages />
+            <div className="w-full max-w-[477px] font-nunito">
+              <AuthHeader isSignUpPage={isSignUpPage} />
+              <div className="rounded-[20px] bg-background-form px-12 py-6 shadow-form_shadow">
+                <>
+                  <form className="" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="flex flex-col gap-[30px]">
+                      <Input
+                        register={register}
+                        resetField={resetField}
+                        key="email"
+                        name="email"
+                        placeholder="Введіть пошту"
+                        type="text"
+                        className=""
+                        label="Електронна пошта"
+                        errors={errors}
+                      />
+
                       <InputPassword
                         register={register}
                         resetField={resetField}
-                        key="confirmPassword"
-                        name="confirmPassword"
-                        placeholder="Підтвердіть пароль"
+                        key="password"
+                        name="password"
+                        placeholder="Введіть пароль"
                         type="text"
-                        label="Підтвердіть пароль"
+                        label="Пароль"
                         className=""
                         errors={errors}
                       />
-                      <Checkbox
-                        register={register}
-                        type="signUp"
-                        name="terms"
-                        errors={errors}
-                        label={
-                          <p>
-                            Погоджуюсь з
-                            <span className="text-text-link">
-                              {" політикой конфіденційності "}
-                            </span>
-                            та
-                            <span className="text-text-link">
-                              {" умовами користувача"}
-                            </span>
-                          </p>
-                        }
-                      />
-                    </>
-                  ) : null}
+                      {isLogInPage ? (
+                        <p className={"mt-[-18px] text-right"}>
+                          <Link
+                            className="font-nunito text-[16px] font-medium leading-[135%] text-text-gray"
+                            // TODO: змінити посилання на /isforgotPassword
+                            to="/sign-up"
+                          >
+                            Забули пароль?
+                          </Link>
+                        </p>
+                      ) : null}
+                      {isSignUpPage ? (
+                        <>
+                          <InputPassword
+                            register={register}
+                            resetField={resetField}
+                            key="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Підтвердіть пароль"
+                            type="text"
+                            label="Підтвердіть пароль"
+                            className=""
+                            errors={errors}
+                          />
+                          <Checkbox
+                            register={register}
+                            type="signUp"
+                            name="terms"
+                            errors={errors}
+                            label={
+                              <p>
+                                Погоджуюсь з
+                                <span className="text-text-link">
+                                  {" політикой конфіденційності "}
+                                </span>
+                                та
+                                <span className="text-text-link">
+                                  {" умовами користувача"}
+                                </span>
+                              </p>
+                            }
+                          />
+                        </>
+                      ) : null}
+                    </div>
+
+                    <Button
+                      type="submit"
+                      className="mx-auto mt-[50px]"
+                      disabled={isCleanInputsForm() || error || loading}
+                      variant="ghost"
+                      size="big"
+                    >
+                      {isSignUpPage ? `Зареєструватись` : `Увійти`}
+                    </Button>
+                  </form>
+                </>
+                <Separator />
+
+                <AuthSocialButtons />
+
+                <div className="mt-5 flex justify-center">
+                  <p className="font-nunito text-[16px] font-medium text-text-gray">
+                    {isSignUpPage
+                      ? "Вже зареєстровані?"
+                      : "Немає облікового запису?"}
+                    <Link
+                      className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-text-link"
+                      to={isSignUpPage ? "/log-in" : "/sign-up"}
+                      onClick={() => reset()}
+                    >
+                      {isSignUpPage ? "Увійти" : "Зареєструватись"}
+                    </Link>
+                  </p>
                 </div>
-
-                <Button
-                  type="submit"
-                  className="mx-auto mt-[50px]"
-                  disabled={isCleanInputsForm() || error || loading}
-                  variant="ghost"
-                  size="big"
-                >
-                  {isSignUpPage ? `Зареєструватись` : `Увійти`}
-                </Button>
-              </form>
-            </>
-            <Separator />
-
-            <AuthSocialButtons />
-
-            <div className="mt-5 flex justify-center">
-              <p className="font-nunito text-[16px] font-medium text-text-gray">
-                {isSignUpPage
-                  ? "Вже зареєстровані?"
-                  : "Немає облікового запису?"}
-                <Link
-                  className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-text-link"
-                  to={isSignUpPage ? "/log-in" : "/sign-up"}
-                  onClick={() => reset()}
-                >
-                  {isSignUpPage ? "Увійти" : "Зареєструватись"}
-                </Link>
-              </p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
+
       <Footer />
-    </section>
+    </div>
   );
 };
 export default AuthorizationLayout;

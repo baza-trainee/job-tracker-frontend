@@ -40,7 +40,6 @@ const authSlice = createSlice({
         }
       )
       .addCase(refreshUser.rejected, (state, action) => {
-        console.log("refreshUser.rejected");
         state.loading = false;
         state.user = null;
         state.error = action.error.message || "Failed to fetch user";
