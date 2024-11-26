@@ -120,7 +120,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             {...register(name)}
             aria-describedby={`inputError-${name}`}
           />
-          {/* {error ? (
+          {error ? (
             <button
               onClick={() => handleResetField(name)}
               className={
@@ -167,13 +167,13 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
                 </g>
               </svg>
             </div>
-          )} */}
+          )}
 
           <button
             type="button"
             onClick={toggleShowPassword}
             className={
-              "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
+              "absolute right-9 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
             }
           >
             {showPassword ? <EyeClosed_icon /> : <EyeOpen_icon />}
