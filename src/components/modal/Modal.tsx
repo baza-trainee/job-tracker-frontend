@@ -17,7 +17,7 @@ const Modal: FC = () => {
     );
 
     const confirmModal = (): void => {
-        onCallFunction && onCallFunction();
+        onCallFunction?.();
         setTimeout(() => {
             dispatch(closeModal())
         }, 800)
@@ -26,7 +26,6 @@ const Modal: FC = () => {
     const functionButtonMap = {
         success: () => dispatch(closeModal()),
         error: () => dispatch(closeModal()),
-        // errorMailExist: () => dispatch(closeModal()),
         errorMailExist: () => {
             console.log("спрацювала функція functionButtonMap");
             dispatch(closeModal())
@@ -86,7 +85,7 @@ const Modal: FC = () => {
                     <div
                         className="flex flex-col w-[550px] h-[289px] justify-center items-center gap-8">
                         {contentMap[typeModal]}
-                        <div className="text-center text-xl">{modalTextMap[typeModal] || modalContent}</div>
+                        <div className="text-center text-xl">{modalContent ? modalContent : modalTextMap[typeModal]}</div>
                         {typeModal !== "popup" ? (
                             typeModal === "errorMailExist" ? (
                                 <div className="flex gap-4">
