@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className="pb-6">
-      <h2 className="text-primary text-center font-nunito text-[16px] font-medium leading-[135%]">
+      <h2 className="text-center font-nunito text-[16px] font-medium leading-[135%] text-textBlack">
         <a href="#" className="">
           Розробка Baza Trainee Ukraine 2024
         </a>

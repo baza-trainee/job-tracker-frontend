@@ -15,7 +15,6 @@ import {
   logIn,
 } from "../../store/slices/authSlice/authOperation";
 
-
 export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
@@ -72,7 +71,7 @@ export function useAuthForm(
   } = useForm<z.infer<typeof initsSchema>>({
     defaultValues: initDefaultValues,
     resolver: zodResolver(initsSchema),
-    mode: "onChange",
+    mode: "onBlur",
   });
 
   const isCleanInputsForm = useCallback(() => {

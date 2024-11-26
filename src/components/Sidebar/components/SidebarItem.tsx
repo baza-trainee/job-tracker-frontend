@@ -9,6 +9,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   link,
   title,
   isOpen,
+  funcIcon,
 }) => {
   return (
     <NavLink
@@ -23,6 +24,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
             "hover:fill-iconHover hover:text-iconHover dark:hover:fill-iconHover dark:hover:text-iconHover"
         )
       }
+      onClick={funcIcon}
     >
       <Icon id={icon} className="h-10 w-10" />
       <span className={`${isOpen ? "visible" : "sr-only"}`}>{title}</span>

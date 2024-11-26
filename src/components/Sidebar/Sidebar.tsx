@@ -15,12 +15,10 @@ import { useAppDispatch } from "../../store/hook.ts";
 import { clearTokens } from "../../store/slices/authSlice/authSlice.ts";
 
 function Sidebar() {
-<<<<<<< HEAD
   const dispatch = useAppDispatch();
   const handleLogOut = (): void => {
     dispatch(clearTokens());
   };
-=======
   const { t } = useTranslation();
   const [isOpenSidebar, setIsOpenSidebar] = useState<boolean>(true);
 
@@ -31,7 +29,6 @@ function Sidebar() {
     setIsOpenSidebar(false);
   };
 
->>>>>>> main
   return (
     <aside
       className={cn(
@@ -48,14 +45,6 @@ function Sidebar() {
           />
         </div>
 
-<<<<<<< HEAD
-        <div className="flex flex-col gap-4">
-          <div className="hover:fill-iconHover hover:text-iconHover flex cursor-pointer items-center gap-2 rounded-xl border-[1px] border-[#525252] bg-white fill-text-primary px-6 py-2 transition">
-            <Icon id={ICON.DONATE} className="h-6 w-6" />
-            Підтримати нас
-          </div>
-          <SidebarItem icon="log-out" link="/log-in" title="Log out" funcIcon={handleLogOut}/>
-=======
         <nav
           className={cn(
             "mt-[60px] flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6",
@@ -99,8 +88,8 @@ function Sidebar() {
             link="/log-in"
             title={t("navigation.logOut")}
             isOpen={isOpenSidebar}
+            funcIcon={handleLogOut}
           />
->>>>>>> main
         </div>
       </div>
     </aside>
