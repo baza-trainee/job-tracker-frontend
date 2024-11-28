@@ -10,23 +10,22 @@ export interface SidebarItemProps {
   link: string;
   title: string;
   useStroke?: boolean;
-  funcIcon?:() => void;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ icon, link, title, funcIcon }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({ icon, link, title }) => {
   return (
     <NavLink
       to={link}
       className={({ isActive, isPending }) =>
         clsx(
-          "group flex items-center gap-3 fill-text-primary text-text-primary transition",
+          "fill-text-primary text-text-primary group flex items-center gap-3 transition",
           isPending && "bg-red-500",
           isActive && "fill-black text-black",
           !isActive && "hover:fill-iconHover hover:text-iconHover"
         )
       }
       // className={"group flex items-center gap-3 hover:text-iconHover"}
-    onClick={funcIcon}>
+    >
       <Icon id={icon} className="h-10 w-10" />
       {title}
     </NavLink>

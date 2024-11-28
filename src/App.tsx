@@ -23,6 +23,7 @@ function App() {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
+  console.log("refreshToken");
   return (
     <Routes>
       <Route element={<PrivateRoute routeTo="/sign-up" />}>

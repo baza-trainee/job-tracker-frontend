@@ -11,10 +11,11 @@ import { Button } from "../components/buttons/Button/Button";
 import Separator from "../components/separator/Separator";
 import Footer from "../components/layout/Footer";
 
-import { useAppSelector } from "../store/hook";
+import { useAppSelector, useAppDispatch } from "../store/hook";
 
 import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
 import { AuthSocialButtons } from "../components/AuthComponents/AuthSocialButtons/AuthSocialButtons";
+import { openModal } from "../store/slices/modalSlice/modalSlice";
 
 type AuthorizationLayoutProps = {
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword";
@@ -35,6 +36,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   const isLogInPage = type === "logIn";
 
   const { loading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   const error = !!Object.keys(errors).length;
 
@@ -54,7 +56,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
             )}
           >
             <LoginCardImages />
-            <div className="w-full max-w-[476px] font-nunito flex flex-col justify-center">
+            <div className="flex w-full max-w-[476px] flex-col justify-center font-nunito">
               <AuthHeader isSignUpPage={isSignUpPage} />
               <div className="rounded-[20px] bg-background-form px-12 py-10 shadow-form_shadow">
                 <form className="" onSubmit={handleSubmit(onSubmit)}>
@@ -82,14 +84,17 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                       errors={errors}
                     />
                     {isLogInPage ? (
-                      <p className={"mt-[-18px] text-right"}>
-                        <Link
-                          className="font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
-                          // TODO: змінити посилання на /isforgotPassword
-                          to="/sign-up"
-                        >
-                          Забули пароль?
-                        </Link>
+                      <p
+                        className="mt-[-18px] text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
+                        onClick={() =>
+                          dispatch(
+                            openModal({
+                              typeModal: "recoveryPassword",
+                            })
+                          )
+                        }
+                      >
+                        Забули пароль?
                       </p>
                     ) : null}
                     {isSignUpPage ? (

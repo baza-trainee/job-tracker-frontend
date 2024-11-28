@@ -18,9 +18,7 @@ export const SignUpSchema = z
       .regex(passwordRegex, `Введіть коректний пароль`)
       .min(8, `Пароль повинен бути не менше 8 символів`),
 
-    confirmPassword: z
-      .string()
-      .regex(passwordRegex, `Введіть коректний пароль`),
+    confirmPassword: z.string(),
 
     terms: z.boolean().refine((value) => value === true, {
       message: "Ви не надайли згоду",
