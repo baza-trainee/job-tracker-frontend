@@ -52,5 +52,9 @@
     "passwordMin": "Пароль повинен бути не менше 8 символів",
     "termsRequired": "Ви не надали згоду",
     "passwordMismatch": "Паролі мають збігатись"
+  },
+  "footer": {
+    "development": "Розробка Baza Trainee Ukraine 2024",
+    "rights": " © Усі права захищені"
   }
 }

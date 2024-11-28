@@ -52,5 +52,9 @@
     "passwordMin": "Password must be at least 8 characters",
     "termsRequired": "You have not given consent",
     "passwordMismatch": "Passwords must match"
+  },
+  "footer": {
+    "development": "Development of Baza Trainee Ukraine 2024",
+    "rights": " © All rights have been reserved"
   }
 }
