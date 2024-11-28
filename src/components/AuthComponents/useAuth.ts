@@ -23,7 +23,7 @@ export function useAuthForm(
   useEffect(() => {
     dispatch(refreshUser());
   }, []);
-
+    
   const formConfigs = useMemo(() => {
     return {
       signUp: {

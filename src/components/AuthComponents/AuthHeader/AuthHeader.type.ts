@@ -1,3 +1,3 @@
-export interface AuthHeaderProps {
-  isSignUpPage: boolean;
+export type AuthHeaderProps = {
+  type: "signUp" | "logIn" | "resetPassword";
 }

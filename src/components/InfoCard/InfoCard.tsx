@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { InfoCardProps } from "./InfoCard.type";
+import { useTranslation } from "react-i18next";
 
 const InfoCard = ({
   margin,
@@ -10,6 +11,7 @@ const InfoCard = ({
   image,
   alt,
 }: InfoCardProps) => {
+  const { t } = useTranslation();
   return (
     <div
       className={classNames("relative flex max-w-[503px] flex-col", {
@@ -22,18 +24,18 @@ const InfoCard = ({
           color === "blue" ? "bg-color1" : "bg-color5",
           position === "left"
             ? "-translate-0 left-0"
-            : "left-full -translate-x-full",
+            : "left-full -translate-x-full"
         )}
       ></span>
       <div
         className={classNames(
           "flex items-center justify-center gap-2 border-[6px] border-[solid] p-[14px]",
           color === "blue" ? "border-color1" : "border-color5",
-          `${border}`,
+          `${border}`
         )}
       >
         <p className="max-w-[335px] font-nunito text-[20px] font-bold leading-[135%] text-textBlack">
-          {text}
+          {t(`${text}`)}
         </p>
         <figure className="max-h-[120px] max-w-[120px]">
           <img

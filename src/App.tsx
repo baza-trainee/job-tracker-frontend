@@ -7,6 +7,7 @@ import Profile from "./components/Profile/Profile";
 import Notes from "./components/Notes/Notes";
 import { SignUp } from "./pages/SignUp/SignUp";
 import { LogIn } from "./pages/LogIn/LogIn";
+import { ResetPassword } from "./pages/ResetPassword/ResetPassword";
 import { useAppSelector } from "./store/hook";
 import { selectTheme } from "./store/slices/themeSlice/themeSelector";
 import { useEffect } from "react";
@@ -40,6 +41,7 @@ function App() {
       <Route element={<PublicRoute routeTo="/" />}>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/log-in" element={<LogIn />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="*" element={<h1>Page not found</h1>} />
       </Route>
     </Routes>

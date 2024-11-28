@@ -8,5 +8,49 @@
     "notes": "Notes",
     "logOut": "Log out"
   },
-  "donate": "Support us"
+  "donate": "Support us",
+
+  "authWelcome": "Welcome!",
+  "registerButton": "Register",
+  "loginButton": "Login",
+  "register": {
+    "header": "Register to optimize your job search",
+    "email": "Email",
+    "enterEmail": "Enter email",
+    "password": "Password",
+    "enterPassword": "Enter password",
+    "confirmPassword": "Confirm password",
+    "agreeWith": "I agree with",
+    "privacyPolicy": " the privacy policy",
+    "and": " and ",
+    "userTerms": "the user terms",
+    "alreadyRegistered": "Already registered?"
+  },
+  "login": {
+    "header": "Glad to see you again!",
+    "subHeader": "Log in to continue tracking your responses",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?"
+  },
+  "resetPassword": {
+    "header": "Set a new password",
+    "label": "Enter a new password",
+    "subHeader": "Enter a new password for further account access"
+  },
+  "infoCards": {
+    "optimizeJobSearch": "Optimize your job search: save, analyze, achieve success",
+    "pathToSuccess": "Your path to success, tailored individually",
+    "visualizeSuccess": "Visualize success: track, analyze, grow",
+    "careerInYourHands": "Your career is in your hands, wherever you are"
+  },
+  "validation": {
+    "emailMax": "Email must be no more than 254 characters",
+    "emailInvalid": "Enter a valid email",
+    "emailMin": "Email must be at least 4 characters",
+    "passwordMax": "Password must be no more than 14 characters",
+    "passwordInvalid": "Enter a valid password",
+    "passwordMin": "Password must be at least 8 characters",
+    "termsRequired": "You have not given consent",
+    "passwordMismatch": "Passwords must match"
+  }
 }

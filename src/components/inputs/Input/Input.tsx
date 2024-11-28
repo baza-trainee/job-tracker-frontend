@@ -1,6 +1,7 @@
 import cn from "clsx";
 import { InputProps } from "./Input.props";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const Input = ({
   name,
@@ -16,6 +17,7 @@ export const Input = ({
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
+  const {t} = useTranslation()
 
   const handleResetField = (name: string) => {
     resetField(name);
@@ -109,7 +111,8 @@ export const Input = ({
             id={`inputError-${name}`}
             className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
           >
-            {String(error?.message)}
+            {/* {String(error?.message)} */}
+            {t(String(error?.message))}
           </span>
         )}
       </div>
