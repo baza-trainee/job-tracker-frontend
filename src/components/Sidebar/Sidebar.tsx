@@ -32,7 +32,8 @@ function Sidebar() {
   return (
     <aside
       className={cn(
-        "flex h-screen w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium transition-all duration-500 ease-in-out dark:bg-slate-800",
+        "flex h-screen w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium dark:bg-slate-800",
+        "custom-size",
         !isOpenSidebar && "w-[92px] items-center pl-3 pr-3"
       )}
     >
@@ -48,7 +49,7 @@ function Sidebar() {
         <nav
           className={cn(
             "mt-6 flex flex-col gap-4 border-b-[1px] border-[#CECECE] pb-5",
-            !isOpenSidebar && "items-center px-2"
+            !isOpenSidebar && "items-center"
           )}
         >
           {NavList().map((item, index) => {
@@ -64,25 +65,23 @@ function Sidebar() {
           })}
         </nav>
       </div>
-      <div
-        className={cn("flex flex-col gap-6", !isOpenSidebar && "items-center")}
-      >
-        <div className="flex flex-col gap-4 border-b-[1px] border-[#CECECE] py-6">
+      <div className={cn("flex flex-col", !isOpenSidebar && "")}>
+        <div className="flex flex-col gap-4 py-6">
           <LanguageToggle isOpen={isOpenSidebar} />
-          <ThemeToggle isOpen={isOpenSidebar} />
+          {/* <ThemeToggle isOpen={isOpenSidebar} /> */}
         </div>
 
         <div
           className={cn(
-            "flex flex-col gap-4",
+            "flex flex-col gap-4 border-t-[1px] border-[#CECECE] pt-6",
             !isOpenSidebar && "items-center"
           )}
         >
-          {/* <DonateItem
+          <DonateItem
             icon="donate"
             title={t("donate")}
             isOpen={isOpenSidebar}
-          /> */}
+          />
           <SidebarItem
             icon="log-out"
             link="/log-in"

@@ -10,35 +10,44 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "flex rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD] transition-all duration-500 ease-in-out",
+        "flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
+        "custom-hover custom-size",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
     >
-      {isOpen ? (
-        <>
-          <button
-            disabled={isUA}
-            onClick={() => i18n.changeLanguage(LOCALS.UA)}
-            className={cn(
-              "py-1",
-              isUA ? "rounded-[20px] bg-white px-[17px] opacity-100" : "px-2"
-            )}
-            type="button"
-          >
-            UA
-          </button>
-          <button
-            disabled={!isUA}
-            onClick={() => i18n.changeLanguage(LOCALS.EN)}
-            className={cn(
-              "py-1",
-              !isUA ? "rounded-[20px] bg-white px-[17px] opacity-100" : "px-2"
-            )}
-            type="button"
-          >
-            EN
-          </button>
-        </>
+      {/* {isOpen ? (
+        <> */}
+      <button
+        disabled={isUA}
+        onClick={() => i18n.changeLanguage(LOCALS.UA)}
+        className={cn(
+          "py-1",
+          isUA
+            ? "w-16 rounded-[20px] bg-white px-[10px] opacity-100"
+            : isOpen
+              ? "w-[43px] hover:text-iconHover"
+              : "w-0 overflow-hidden opacity-0"
+        )}
+        type="button"
+      >
+        UA
+      </button>
+      <button
+        disabled={!isUA}
+        onClick={() => i18n.changeLanguage(LOCALS.EN)}
+        className={cn(
+          "py-1",
+          !isUA
+            ? "visible w-16 rounded-[20px] bg-white px-[17px] opacity-100"
+            : isOpen
+              ? "w-[43px] hover:text-iconHover"
+              : "w-0 overflow-hidden opacity-0"
+        )}
+        type="button"
+      >
+        EN
+      </button>
+      {/* </>
       ) : (
         <>
           <button
@@ -49,7 +58,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
             {isUA ? "UA" : "EN"}
           </button>
         </>
-      )}
+      )} */}
     </div>
   );
 };

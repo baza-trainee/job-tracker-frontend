@@ -16,35 +16,44 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "flex rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD] transition-all duration-500 ease-in-out",
+        "flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
+        "custom-hover",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
     >
-      {isOpen ? (
-        <>
-          <button
-            disabled={!darkMode}
-            onClick={handleThemeToggle}
-            className={cn(
-              "px-2 py-[6px]",
-              !darkMode && "rounded-[20px] bg-white px-5"
-            )}
-            type="button"
-          >
-            <Icon id="day-mode" className="h-6 w-6" />
-          </button>
-          <button
-            disabled={darkMode}
-            onClick={handleThemeToggle}
-            className={cn(
-              "px-2 py-[6px]",
-              darkMode && "rounded-[20px] bg-white pl-6 pr-4"
-            )}
-            type="button"
-          >
-            <Icon id="night-mode" className="h-6 w-6" />
-          </button>
-        </>
+      {/* {isOpen ? (
+        <> */}
+      <button
+        disabled={!darkMode}
+        onClick={handleThemeToggle}
+        className={cn(
+          "custom-size px-2 py-[6px]",
+          !darkMode
+            ? "visible w-16 rounded-[20px] bg-white px-5 opacity-100"
+            : isOpen
+              ? "hover:fill-iconHover"
+              : "sr-only w-0 opacity-0"
+        )}
+        type="button"
+      >
+        <Icon id="day-mode" className="h-6 w-6" />
+      </button>
+      <button
+        disabled={darkMode}
+        onClick={handleThemeToggle}
+        className={cn(
+          "custom-size px-2 py-[6px]",
+          darkMode
+            ? "visible w-16 rounded-[20px] bg-white pl-6 pr-4 opacity-100"
+            : isOpen
+              ? "hover:fill-iconHover"
+              : "sr-only w-0 opacity-0"
+        )}
+        type="button"
+      >
+        <Icon id="night-mode" className="h-6 w-6" />
+      </button>
+      {/* </>
       ) : (
         <>
           {
@@ -60,7 +69,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
             </button>
           }
         </>
-      )}
+      )} */}
     </div>
   );
 };
