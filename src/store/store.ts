@@ -38,9 +38,9 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        ignoredActionPaths: ['payload.onCallFunction'],
-        ignoredPaths: ['modal.onCallFunction'],
+        ignoredActions: ['modal/openModal', 'modal/closeModal', FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActionPaths: ['payload.modalContent'],
+        ignoredPaths: ['modal.modalContent', 'modal.onCallFunction'],
       },
     }),
 });
