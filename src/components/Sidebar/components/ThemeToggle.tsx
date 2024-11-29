@@ -3,6 +3,7 @@ import { selectTheme } from "../../../store/slices/themeSlice/themeSelector";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import { toggleTheme } from "../../../store/slices/themeSlice/themeSlice";
 import { ToggleProps } from "./Sidebar.props";
+import cn from "clsx";
 
 const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   const darkMode = useAppSelector(selectTheme);
@@ -13,13 +14,21 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   };
 
   return (
-    <div className="flex w-fit rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]">
+    <div
+      className={cn(
+        "flex rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD] transition-all duration-500 ease-in-out",
+        isOpen ? "w-[108px]" : "w-[68px]"
+      )}
+    >
       {isOpen ? (
         <>
           <button
             disabled={!darkMode}
             onClick={handleThemeToggle}
-            className="px-3 py-[6px] disabled:rounded-[20px] disabled:bg-white"
+            className={cn(
+              "px-2 py-[6px]",
+              !darkMode && "rounded-[20px] bg-white px-5"
+            )}
             type="button"
           >
             <Icon id="day-mode" className="h-6 w-6" />
@@ -27,7 +36,10 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
           <button
             disabled={darkMode}
             onClick={handleThemeToggle}
-            className="px-3 py-[6px] disabled:rounded-[20px] disabled:bg-white"
+            className={cn(
+              "px-2 py-[6px]",
+              darkMode && "rounded-[20px] bg-white pl-6 pr-4"
+            )}
             type="button"
           >
             <Icon id="night-mode" className="h-6 w-6" />
@@ -38,7 +50,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
           {
             <button
               onClick={handleThemeToggle}
-              className="w-[72px] rounded-[20px] bg-white px-6 py-[7px] transition-colors hover:fill-iconHover"
+              className="w-[68px] rounded-[20px] bg-white px-5 py-[7px] text-center transition-colors hover:fill-iconHover"
               type="button"
             >
               <Icon

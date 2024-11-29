@@ -32,8 +32,8 @@ function Sidebar() {
   return (
     <aside
       className={cn(
-        "flex h-screen w-fit max-w-[276px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium dark:bg-slate-800",
-        !isOpenSidebar && "items-center pl-3 pr-3"
+        "flex h-screen w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium transition-all duration-500 ease-in-out dark:bg-slate-800",
+        !isOpenSidebar && "w-[92px] items-center pl-3 pr-3"
       )}
     >
       <div className={cn("flex flex-col", !isOpenSidebar && "items-center")}>
@@ -67,7 +67,7 @@ function Sidebar() {
       <div
         className={cn("flex flex-col gap-6", !isOpenSidebar && "items-center")}
       >
-        <div className="flex flex-col gap-4 border-b-[1px] border-[#CECECE] pb-6">
+        <div className="flex flex-col gap-4 border-b-[1px] border-[#CECECE] py-6">
           <LanguageToggle isOpen={isOpenSidebar} />
           <ThemeToggle isOpen={isOpenSidebar} />
         </div>
@@ -78,11 +78,11 @@ function Sidebar() {
             !isOpenSidebar && "items-center"
           )}
         >
-          <DonateItem
+          {/* <DonateItem
             icon="donate"
             title={t("donate")}
             isOpen={isOpenSidebar}
-          />
+          /> */}
           <SidebarItem
             icon="log-out"
             link="/log-in"
