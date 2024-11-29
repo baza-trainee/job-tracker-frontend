@@ -1,5 +1,6 @@
 import cn from "clsx";
 import { InputProps } from "./Input.props";
+import { useState } from "react";
 
 export const Input = ({
   name,
@@ -14,13 +15,19 @@ export const Input = ({
   id,
 }: InputProps) => {
   const error = errors[name];
+  const [isIcon, setIsIcon] = useState<boolean>(false);
 
   const handleResetField = (name: string) => {
     resetField(name);
   };
 
   return (
-    <div className={cn("relative", [className])} id={id}>
+    <div
+      className={cn("relative", [className])}
+      id={id}
+      onFocus={() => setIsIcon(true)}
+      onBlur={() => setIsIcon(false)}
+    >
       {label && (
         <label
           htmlFor={`input-${name}`}
@@ -34,7 +41,7 @@ export const Input = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "peer h-11 w-full rounded-xl border px-6 py-2 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-accent focus:outline-none active:border-accent",
+              "peer h-11 w-full rounded-xl border px-6 py-2 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
 
               !error && "border-color5",
               error &&
@@ -72,27 +79,29 @@ export const Input = ({
               </svg>
             </button>
           ) : (
-            <div
-              className={
-                "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] peer-placeholder-shown:hidden"
-              }
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            !isIcon && (
+              <div
+                className={
+                  "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] peer-placeholder-shown:hidden"
+                }
               >
-                <g id="Icons/check_box">
-                  <path
-                    id="icon"
-                    d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM17.99 9L16.58 7.58L9.99 14.17L7.41 11.6L5.99 13.01L9.99 17L17.99 9Z"
-                    fill="#D0E8C5"
-                  />
-                </g>
-              </svg>
-            </div>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="Icons/check_box">
+                    <path
+                      id="icon"
+                      d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM17.99 9L16.58 7.58L9.99 14.17L7.41 11.6L5.99 13.01L9.99 17L17.99 9Z"
+                      fill="#D0E8C5"
+                    />
+                  </g>
+                </svg>
+              </div>
+            )
           )}
         </div>
         {error && (

@@ -1,11 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../../api/axios";
 import { saveTokens, clearTokens } from "./authSlice";
-import { AuthStateProps, UserAuthProps, KnownError } from "./authTypes";
+import { AuthStateProps, KnownError, UserProps } from "./authTypes";
 
 import { isAxiosError } from "axios";
 
-export const fetchUser = createAsyncThunk(
+import { openModal } from "../modalSlice/modalSlice";
+
+export const GoogleLogin = () => {
+  window.location.href =
+    "https://job-tracker-backend-x.vercel.app/api/auth/google";
+};
+
+export const GithubLogin = () => {
+  window.location.href =
+    "https://job-tracker-backend-x.vercel.app/api/auth/github";
+};
+
+export const refreshUser = createAsyncThunk(
   "auth/fetchUser",
   async (_, { getState, dispatch }) => {
     const state = getState() as { auth: AuthStateProps };
@@ -61,103 +73,39 @@ export const refreshTokens = createAsyncThunk(
   }
 );
 
-export const GoogleLogin = () => {
-  window.location.href =
-    "https://job-tracker-backend-x.vercel.app/api/auth/google";
-};
-
-export const GithubLogin = () => {
-  window.location.href =
-    "https://job-tracker-backend-x.vercel.app/api/auth/github";
-};
-
-// export const signUp = createAsyncThunk(
-//   "auth/signIn",
-//   async (
-//     { email, password }: { email: string; password: string },
-//     { dispatch }
-//   ) => {
-//     try {
-//       const response = await api.post("/auth/register", {
-//         email,
-//         password,
-//       });
-//       dispatch(saveTokens(response.data));
-//       await dispatch(fetchUser()).unwrap();
-//       alert("Успіх");
-//     } catch (error: any) {
-//       if (error.response?.status === 409) {
-//         alert("Обліковий запис з такою поштою існує");
-//       }
-//       console.error("Registration failed", error);
-//       throw new Error("Registration failed");
-//     }
-//   }
-// );
-
-// export const logIn = createAsyncThunk(
-//   "auth/logIn",
-//   async (
-//     { email, password }: { email: string; password: string },
-//     { dispatch }
-//   ) => {
-//     try {
-//       const response = await api.post("/auth/login", {
-//         email,
-//         password,
-//       });
-//       dispatch(saveTokens(response.data));
-//       await dispatch(fetchUser()).unwrap();
-//       alert("З поверненням");
-//     } catch (error: any) {
-//       if (error.response?.status === 409) {
-//         alert("Обліковий запис з такою поштою існує");
-//       }
-//       console.error("Registration failed", error);
-//       throw new Error("Registration failed");
-//     }
-//   }
-// );
-
-// -------------------------------------------------------------------------------
 export const logIn = createAsyncThunk<
-  void,
-  UserAuthProps,
+  UserProps,
+  UserProps,
   { rejectValue: KnownError }
 >(
   "auth/logIn",
-  async ({ email, password }: UserAuthProps, { dispatch, rejectWithValue }) => {
+  async ({ email, password }: UserProps, { dispatch, rejectWithValue }) => {
     try {
       const response = await api.post("/auth/login", {
         email,
         password,
       });
-      dispatch(saveTokens(response.data));
-      await dispatch(fetchUser()).unwrap();
-      alert("З поверненням");
+      const { access_token, refresh_token } = response.data;
+      dispatch(saveTokens({ access_token, refresh_token }));
+      dispatch(
+        openModal({
+          typeModal: "success",
+        })
+      );
+      return response.data.user;
     } catch (error) {
+      dispatch(
+        openModal({
+          typeModal: "error",
+        })
+      );
       if (isAxiosError(error)) {
         const errorCode = error.response?.status;
-        switch (errorCode) {
-          case 401:
-            alert("Невірний пароль");
-            return rejectWithValue({
-              message: "Невірний пароль або пошта",
-              code: 401,
-            });
-
-          case 404:
-            alert("Невірна пошта");
-            return rejectWithValue({
-              message: "Невірна пошта",
-              code: 404,
-            });
-
-          default:
-            return rejectWithValue({
-              message: "Сталася невідома помилка при обробці запиту",
-              code: undefined,
-            });
+        if (errorCode === 401 || errorCode === 404) {
+          return rejectWithValue({
+            message: "Невірний пароль або пошта",
+            code: errorCode,
+          });
         }
       } else {
         return rejectWithValue({
@@ -169,26 +117,34 @@ export const logIn = createAsyncThunk<
   }
 );
 
-
 export const signUp = createAsyncThunk<
-  void,
-  UserAuthProps,
+  UserProps,
+  UserProps,
   { rejectValue: KnownError }
 >(
   "auth/signIn",
-  async ({ email, password }: UserAuthProps, { dispatch, rejectWithValue }) => {
+  async ({ email, password }: UserProps, { dispatch, rejectWithValue }) => {
     try {
       const response = await api.post("/auth/register", {
         email,
         password,
       });
-      dispatch(saveTokens(response.data));
-      await dispatch(fetchUser()).unwrap();
-      alert("Успіх");
+      const { access_token, refresh_token } = response.data;
+      dispatch(saveTokens({ access_token, refresh_token }));
+      dispatch(
+        openModal({
+          typeModal: "success",
+        })
+      );
+      return response.data.user;
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.response?.status === 409) {
-          alert("Обліковий запис з такою поштою існує");
+          dispatch(
+            openModal({
+              typeModal: "errorMailExist",
+            })
+          );
           return rejectWithValue({
             message: "Обліковий запис з такою поштою існує",
             code: 409,

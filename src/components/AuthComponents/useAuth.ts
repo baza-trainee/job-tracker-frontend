@@ -8,50 +8,21 @@ import { SignUpSchema } from "../../schemas/SignUpSchema";
 import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { useAppDispatch } from "../../store/hook";
 import {
-  clearTokens,
-  saveTokens,
-} from "../../store/slices/authSlice/authSlice";
-import {
-  fetchUser,
+  refreshUser,
   signUp,
   logIn,
 } from "../../store/slices/authSlice/authOperation";
-
-//TODO
 
 export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
   const dispatch = useAppDispatch();
-  const { user, tokens } = useAppSelector((state) => state.auth);
-
-  useMemo(() => {
-    console.log("user", user);
-  }, [user]);
 
   useEffect(() => {
-    const storedTokens = localStorage.getItem("auth_tokens");
-    if (storedTokens) {
-      dispatch(saveTokens(JSON.parse(storedTokens)));
-    }
+    dispatch(refreshUser());
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (tokens) {
-        try {
-          await dispatch(fetchUser()).unwrap();
-        } catch (error) {
-          console.error("Failed to fetch user:", error);
-          dispatch(clearTokens());
-        }
-      }
-    };
-
-    fetchData();
-  }, [tokens, dispatch]);
 
   const formConfigs = useMemo(() => {
     return {
@@ -100,7 +71,7 @@ export function useAuthForm(
   } = useForm<z.infer<typeof initsSchema>>({
     defaultValues: initDefaultValues,
     resolver: zodResolver(initsSchema),
-    mode: "onChange",
+    mode: "onBlur",
   });
 
   const isCleanInputsForm = useCallback(() => {

@@ -15,32 +15,32 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+const authPersistConfig = {
+  key: "auth",
+  storage,
+};
+
 const themePersistConfig = {
   key: "theme",
   storage,
 };
 
-// const authPersistConfig = {
-//   key: "auth",
-//   storage,
-// };
-
-//const authPersistedReducer = persistReducer(authPersistConfig, authReduser);
+const authPersistedReducer = persistReducer(authPersistConfig, authReduser);
 const themePersistedReducer = persistReducer(themePersistConfig, themeReducer);
 
 export const store = configureStore({
   reducer: {
     example: exampleReduser,
     modal: modalReduser,
+    auth: authPersistedReducer,
     theme: themePersistedReducer,
-    auth: authReduser,
-
-
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActions: ['modal/openModal', 'modal/closeModal', FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActionPaths: ['payload.modalContent'],
+        ignoredPaths: ['modal.modalContent', 'modal.onCallFunction'],
       },
     }),
 });

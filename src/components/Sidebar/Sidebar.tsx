@@ -11,7 +11,14 @@ import NavList from "./components/NavList.tsx";
 import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
 import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
 
+import { useAppDispatch } from "../../store/hook.ts";
+import { clearTokens } from "../../store/slices/authSlice/authSlice.ts";
+
 function Sidebar() {
+  const dispatch = useAppDispatch();
+  const handleLogOut = (): void => {
+    dispatch(clearTokens());
+  };
   const { t } = useTranslation();
   const [isOpenSidebar, setIsOpenSidebar] = useState<boolean>(true);
 
@@ -81,6 +88,7 @@ function Sidebar() {
             link="/log-in"
             title={t("navigation.logOut")}
             isOpen={isOpenSidebar}
+            funcIcon={handleLogOut}
           />
         </div>
       </div>

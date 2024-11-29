@@ -9,6 +9,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   link,
   title,
   isOpen,
+  funcIcon,
 }) => {
   return (
     <NavLink
@@ -24,6 +25,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
             "bg-backgroundMain !border-[#DBDCDD] fill-[#000000] text-[#000000] dark:fill-[#000000] dark:text-[#000000]"
         )
       }
+      onClick={funcIcon}
     >
       <Icon id={icon} className="mx-4 h-10 w-10" />
       <span className={`${isOpen ? "visible" : "sr-only"}`}>{title}</span>

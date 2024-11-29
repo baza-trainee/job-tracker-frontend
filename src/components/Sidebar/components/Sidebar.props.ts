@@ -14,6 +14,7 @@ export interface SidebarItemProps {
   title: string;
   isOpen: boolean;
   useStroke?: boolean;
+  funcIcon?:() => void;
 }
 
 export interface ToggleProps {
