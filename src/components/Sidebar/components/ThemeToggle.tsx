@@ -17,59 +17,43 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
     <div
       className={cn(
         "flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
-        "custom-hover",
+        "custom-hover custom-size",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
     >
-      {/* {isOpen ? (
-        <> */}
       <button
-        disabled={!darkMode}
+        disabled={!darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "custom-size px-2 py-[6px]",
-          !darkMode
-            ? "visible w-16 rounded-[20px] bg-white px-5 opacity-100"
-            : isOpen
-              ? "hover:fill-iconHover"
-              : "sr-only w-0 opacity-0"
+          "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
+          {
+            "visible w-16 rounded-[20px] bg-white px-5 text-center opacity-100":
+              !darkMode, // Відкрита тема
+            "w-10 opacity-100": darkMode && isOpen, // Закрита тема
+            "sr-only w-0 opacity-0": darkMode && !isOpen, // Схована кнопка
+          }
         )}
         type="button"
       >
         <Icon id="day-mode" className="h-6 w-6" />
       </button>
       <button
-        disabled={darkMode}
+        disabled={darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "custom-size px-2 py-[6px]",
-          darkMode
-            ? "visible w-16 rounded-[20px] bg-white pl-6 pr-4 opacity-100"
-            : isOpen
-              ? "hover:fill-iconHover"
-              : "sr-only w-0 opacity-0"
+          "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
+
+          {
+            "visible w-16 rounded-[20px] bg-white px-5 text-center opacity-100":
+              darkMode, // Відкрита тема
+            "w-10 opacity-100": !darkMode && isOpen, // Закрита тема
+            "sr-only w-0 opacity-0": !darkMode && !isOpen, // Схована кнопка
+          }
         )}
         type="button"
       >
         <Icon id="night-mode" className="h-6 w-6" />
       </button>
-      {/* </>
-      ) : (
-        <>
-          {
-            <button
-              onClick={handleThemeToggle}
-              className="w-[68px] rounded-[20px] bg-white px-5 py-[7px] text-center transition-colors hover:fill-iconHover"
-              type="button"
-            >
-              <Icon
-                id={`${darkMode ? "night-mode" : "day-mode"}`}
-                className="h-6 w-6"
-              />
-            </button>
-          }
-        </>
-      )} */}
     </div>
   );
 };

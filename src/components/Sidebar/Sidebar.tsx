@@ -67,8 +67,8 @@ function Sidebar() {
       </div>
       <div className={cn("flex flex-col", !isOpenSidebar && "")}>
         <div className="flex flex-col gap-4 py-6">
-          <LanguageToggle isOpen={isOpenSidebar} />
-          {/* <ThemeToggle isOpen={isOpenSidebar} /> */}
+          {/* <LanguageToggle isOpen={isOpenSidebar} /> */}
+          <ThemeToggle isOpen={isOpenSidebar} />
         </div>
 
         <div

@@ -10,7 +10,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
+        "box-border flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
         "custom-hover custom-size",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
@@ -23,14 +23,14 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         className={cn(
           "py-1",
           isUA
-            ? "w-16 rounded-[20px] bg-white px-[10px] opacity-100"
+            ? "relative w-16 rounded-[20px] bg-white px-[10px] opacity-100"
             : isOpen
-              ? "w-[43px] hover:text-iconHover"
+              ? "w-[40px] hover:text-iconHover"
               : "w-0 overflow-hidden opacity-0"
         )}
         type="button"
       >
-        UA
+        {/* <span className="absolute"> UA</span> */}
       </button>
       <button
         disabled={!isUA}
@@ -38,14 +38,14 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         className={cn(
           "py-1",
           !isUA
-            ? "visible w-16 rounded-[20px] bg-white px-[17px] opacity-100"
+            ? "visible relative w-16 overflow-hidden rounded-[20px] bg-white px-[17px] opacity-100"
             : isOpen
-              ? "w-[43px] hover:text-iconHover"
-              : "w-0 overflow-hidden opacity-0"
+              ? "w-[40px] hover:text-iconHover"
+              : "w-0 opacity-0"
         )}
         type="button"
       >
-        EN
+        {/* <span className="absolute"> EN</span> */}
       </button>
       {/* </>
       ) : (

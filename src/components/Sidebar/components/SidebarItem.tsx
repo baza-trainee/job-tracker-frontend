@@ -32,7 +32,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       <Icon id={icon} className="mx-3 h-8 w-8" />
       <span
         className={cn(
-          "custom-size",
+          "custom-size overflow-hidden text-nowrap",
           isOpen
             ? "visible w-[148px] opacity-100"
             : "sr-only w-0 -translate-x-5 opacity-0"
