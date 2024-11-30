@@ -37,8 +37,8 @@ function Sidebar() {
         !isOpenSidebar && "w-[92px] items-center pl-3 pr-3"
       )}
     >
-      <div className={cn("flex flex-col", !isOpenSidebar && "items-center")}>
-        <div className="flex items-center justify-between">
+      <div className={cn("flex flex-col")}>
+        <div className={cn("flex items-center justify-between")}>
           <OpenSidebarBtn handleOpenSidebar={handleOpenSidebar} />
           <CloseSidebarBtn
             handleOpenSidebar={handleCloseSidebar}
@@ -67,7 +67,7 @@ function Sidebar() {
       </div>
       <div className={cn("flex flex-col", !isOpenSidebar && "")}>
         <div className="flex flex-col gap-4 py-6">
-          {/* <LanguageToggle isOpen={isOpenSidebar} /> */}
+          <LanguageToggle isOpen={isOpenSidebar} />
           <ThemeToggle isOpen={isOpenSidebar} />
         </div>
 

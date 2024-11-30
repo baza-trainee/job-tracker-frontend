@@ -24,7 +24,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           !isActive &&
             "hover:fill-iconHover hover:text-iconHover dark:hover:fill-iconHover dark:hover:text-iconHover",
           isActive &&
-            "!border-[#DBDCDD] bg-backgroundMain fill-[#000000] text-[#000000] dark:fill-[#000000] dark:text-[#000000]"
+            "!border-[#DBDCDD] bg-backgroundMain fill-textBlack text-textBlack dark:fill-textBlack dark:text-textBlack"
         )
       }
       onClick={funcIcon}

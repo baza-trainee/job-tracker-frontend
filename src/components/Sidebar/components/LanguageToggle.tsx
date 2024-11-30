@@ -10,55 +10,44 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "box-border flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
-        "custom-hover custom-size",
+        "flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
+        "custom-hover custom-size text-textBlack",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
     >
-      {/* {isOpen ? (
-        <> */}
       <button
-        disabled={isUA}
-        onClick={() => i18n.changeLanguage(LOCALS.UA)}
+        disabled={isUA && isOpen}
+        onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
         className={cn(
-          "py-1",
-          isUA
-            ? "relative w-16 rounded-[20px] bg-white px-[10px] opacity-100"
-            : isOpen
-              ? "w-[40px] hover:text-iconHover"
-              : "w-0 overflow-hidden opacity-0"
+          "overflow-hidden py-1 hover:text-iconHover disabled:hover:text-textBlack",
+          {
+            "relative w-16 rounded-[20px] bg-backgroundMain px-[10px] opacity-100":
+              isUA,
+            "w-10 opacity-100": !isUA && isOpen,
+            "w-0 opacity-0": !isUA && !isOpen,
+          }
         )}
         type="button"
       >
-        {/* <span className="absolute"> UA</span> */}
+        UA
       </button>
       <button
-        disabled={!isUA}
-        onClick={() => i18n.changeLanguage(LOCALS.EN)}
+        disabled={!isUA && isOpen}
+        onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
         className={cn(
-          "py-1",
-          !isUA
-            ? "visible relative w-16 overflow-hidden rounded-[20px] bg-white px-[17px] opacity-100"
-            : isOpen
-              ? "w-[40px] hover:text-iconHover"
-              : "w-0 opacity-0"
+          "overflow-hidden py-1 hover:text-iconHover disabled:hover:text-textBlack",
+
+          {
+            "relative w-16 rounded-[20px] bg-backgroundMain px-[10px] opacity-100":
+              !isUA,
+            "w-10 opacity-100": isUA && isOpen,
+            "w-0 opacity-0": isUA && !isOpen,
+          }
         )}
         type="button"
       >
-        {/* <span className="absolute"> EN</span> */}
+        EN
       </button>
-      {/* </>
-      ) : (
-        <>
-          <button
-            onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
-            className="w-[68px] rounded-[20px] bg-white px-[10px] py-[5px] transition-colors hover:text-iconHover"
-            type="button"
-          >
-            {isUA ? "UA" : "EN"}
-          </button>
-        </>
-      )} */}
     </div>
   );
 };

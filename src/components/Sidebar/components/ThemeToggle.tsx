@@ -27,7 +27,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         className={cn(
           "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
           {
-            "visible w-16 rounded-[20px] bg-white px-5 text-center opacity-100":
+            "visible w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
               !darkMode, // Відкрита тема
             "w-10 opacity-100": darkMode && isOpen, // Закрита тема
             "sr-only w-0 opacity-0": darkMode && !isOpen, // Схована кнопка
@@ -44,7 +44,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
           "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
 
           {
-            "visible w-16 rounded-[20px] bg-white px-5 text-center opacity-100":
+            "visible w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
               darkMode, // Відкрита тема
             "w-10 opacity-100": !darkMode && isOpen, // Закрита тема
             "sr-only w-0 opacity-0": !darkMode && !isOpen, // Схована кнопка
