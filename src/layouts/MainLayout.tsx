@@ -4,8 +4,8 @@ import Sidebar from "../components/Sidebar/Sidebar";
 function MainLayout() {
   return (
     <div className="flex h-dvh w-full flex-col">
-      <main className="flex h-full">
-        <Sidebar />
+      <Sidebar />
+      <main className="ml-[92px] flex h-full">
         <Outlet />
       </main>
     </div>

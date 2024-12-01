@@ -11,7 +11,7 @@ function Home() {
   };
 
   return (
-    <section className="overflow-y-auto p-4">
+    <section className="p-4">
       <div className="container">
         <h1 className="text-accent-primary font-nunito text-8xl font-bold">
           {t("welcome")}

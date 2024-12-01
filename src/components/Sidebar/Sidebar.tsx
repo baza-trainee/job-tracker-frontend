@@ -36,7 +36,7 @@ function Sidebar() {
   return (
     <aside
       className={cn(
-        "sticky top-0 flex h-dvh w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium dark:bg-slate-800",
+        "fixed top-0 z-20 flex h-dvh w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium dark:bg-slate-800",
         "custom-size",
         !isOpenSidebar && "w-[92px] items-center pl-3 pr-3"
       )}
