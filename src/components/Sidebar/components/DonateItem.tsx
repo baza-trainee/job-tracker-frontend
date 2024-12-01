@@ -7,12 +7,20 @@ const DonateItem: React.FC<DonateItemProps> = ({ icon, title, isOpen }) => {
   return (
     <div
       className={cn(
-        "flex w-fit cursor-pointer items-center gap-2 rounded-xl border-[1px] border-[#525252] bg-white fill-textBlack px-6 py-2 transition hover:fill-iconHover hover:text-iconHover",
-        !isOpen && "px-4"
+        "fill-text-primary flex h-[43px] cursor-pointer items-center gap-2 rounded-xl border-[1px] border-textBlack bg-button px-3 hover:fill-iconHover hover:text-iconHover",
+        "custom-size",
+        isOpen ? "w-[206px]" : "w-[68px] pl-[22px]"
       )}
     >
       <Icon id={icon} className="h-6 w-6" />
-      <span className={`${isOpen ? "visible" : "sr-only"} w-[148px]`}>
+      <span
+        className={cn(
+          "custom-size overflow-hidden whitespace-nowrap",
+          isOpen
+            ? "visible w-[148px] opacity-100"
+            : "sr-only w-0 -translate-x-5 opacity-0"
+        )}
+      >
         {title}
       </span>
     </div>
