@@ -1,5 +1,3 @@
-// import { NavLink } from "react-router-dom";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import cn from "clsx";
 
@@ -11,28 +9,34 @@ import NavList from "./components/NavList.tsx";
 import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
 import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
 
-import { useAppDispatch } from "../../store/hook.ts";
+import { useAppDispatch, useAppSelector } from "../../store/hook.ts";
 import { clearTokens } from "../../store/slices/authSlice/authSlice.ts";
+import { selectSidebar } from "../../store/slices/sibebarSlice/sidebarSelector.ts";
+import {
+  closeSidebar,
+  openSidebar,
+} from "../../store/slices/sibebarSlice/sidebarSlice.ts";
 
 function Sidebar() {
   const dispatch = useAppDispatch();
   const handleLogOut = (): void => {
     dispatch(clearTokens());
   };
-  const { t } = useTranslation();
-  const [isOpenSidebar, setIsOpenSidebar] = useState<boolean>(true);
+  const isOpenSidebar = useAppSelector(selectSidebar);
 
   const handleOpenSidebar = () => {
-    setIsOpenSidebar(true);
+    dispatch(openSidebar());
   };
   const handleCloseSidebar = () => {
-    setIsOpenSidebar(false);
+    dispatch(closeSidebar());
   };
+
+  const { t } = useTranslation();
 
   return (
     <aside
       className={cn(
-        "flex h-screen w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium dark:bg-slate-800",
+        "sticky top-0 flex h-dvh w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium dark:bg-slate-800",
         "custom-size",
         !isOpenSidebar && "w-[92px] items-center pl-3 pr-3"
       )}
