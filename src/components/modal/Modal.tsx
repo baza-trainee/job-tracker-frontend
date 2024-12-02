@@ -2,12 +2,15 @@ import { FC, useEffect } from "react";
 import clsx from "clsx";
 
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { closeModal } from "../../store/slices/modalSlice/modalSlice";
+import { closeModal, openModal } from "../../store/slices/modalSlice/modalSlice";
 
 import { contentMap, colorType, buttonMap, modalTextMap } from "./modalMappings";
 
 import { Button } from '../buttons/Button/Button';
 import Icon from "../Icon/Icon.tsx";
+
+// Alex
+import { useNavigate } from "react-router-dom";
 
 const Modal: FC = () => {
 
@@ -56,11 +59,16 @@ const Modal: FC = () => {
         if (typeModal === "popup") {
             timerModalPopup = setTimeout(() => {
                 dispatch(closeModal());
-            }, 3000);
+            // TODO: 3000 -> 10000
+            }, 10000);
         };
         return () => clearTimeout(timerModalPopup);
-
+        
     }, [typeModal, dispatch]);
+    
+    //Alex
+    const navigate = useNavigate()
+
 
     if (!isModalOpen) return null;
 
@@ -83,7 +91,7 @@ const Modal: FC = () => {
                     onClick={e => e.stopPropagation()}>
 
                     <div
-                        className="flex flex-col w-[550px] h-[289px] justify-center items-center gap-8">
+                        className="flex flex-col w-[550px] min-h-[289px] justify-center items-center gap-8">
                         {contentMap[typeModal]}
                         <div className="text-center text-xl">{modalContent ? modalContent : modalTextMap[typeModal]}</div>
                         {typeModal !== "popup" ? (
@@ -97,8 +105,10 @@ const Modal: FC = () => {
                                             size="small"
                                             onClick={
                                                 index === 0
-                                                    ? () => {console.log("Увійти натиснуто"); functionButtonMap[typeModal]()}
-                                                    : () => {console.log("Відновити натиснуто"); functionButtonMap[typeModal]()}
+                                                    // ? () => {console.log("Увійти натиснуто"); functionButtonMap[typeModal]()}
+                                                    // : () => {console.log("Відновити натиснуто"); functionButtonMap[typeModal]()}
+                                                    ? () => {console.log("Увійти натиснуто"); functionButtonMap[typeModal](); navigate("log-in")}
+                                                    : () => {console.log("Відновити натиснуто"); functionButtonMap[typeModal](); dispatch(openModal({typeModal:"popup"}))}
                                             }
                                         >
                                             {buttonText}

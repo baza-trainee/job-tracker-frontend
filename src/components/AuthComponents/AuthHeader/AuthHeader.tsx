@@ -11,6 +11,8 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
         return t("authWelcome");
       case "logIn":
         return t("login.header");
+      case "forgotPassword":
+        return t("forgotPassword.header");
       case "resetPassword":
         return t("resetPassword.header");
       default:
@@ -24,6 +26,8 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
         return t("register.header");
       case "logIn":
         return t("login.subHeader");
+      case "forgotPassword":
+        return t("forgotPassword.subHeader");
       case "resetPassword":
         return t("resetPassword.subHeader");
       default:
@@ -33,9 +37,9 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
   return (
     <div
       className={classNames(
-        "mb-10",
         type === "resetPassword" &&
-          "absolute left-[50%] w-full translate-x-[-50%] mt-[10px]"
+          "absolute left-[50%] mt-[10px] w-full translate-x-[-50%]",
+        type === "forgotPassword" ? "mb-[50px]" : "mb-10"
       )}
     >
       <h2 className="mb-3 text-center font-nunito text-[32px] font-bold leading-[135%] text-textBlack">
@@ -43,11 +47,11 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
       </h2>
       <p
         className={classNames(
-          "text-center font-nunito font-medium leading-[135%] mx-auto",
+          "mx-auto max-w-[380px] text-center font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight",
           // вопрос как перекрыть стили
-          type === "resetPassword"
-            ? "text-[14px] text-textBlack"
-            : "text-[16px] text-textBlackLight max-w-[380px]"
+          (type === "forgotPassword" || type === "resetPassword") &&
+            "!text-[14px] !text-textBlack",
+          type === "forgotPassword" && "!text-left"
         )}
       >
         {authSubTitle()}

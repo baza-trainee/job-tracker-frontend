@@ -1,6 +1,8 @@
 import { useMemo, useEffect, useCallback } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+import { useNavigate } from "react-router-dom";
+
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -13,17 +15,20 @@ import {
   refreshUser,
   signUp,
   logIn,
+  forgotPassword,
+  resetPassword,
 } from "../../store/slices/authSlice/authOperation";
 
 export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, []);
-    
+
   const formConfigs = useMemo(() => {
     return {
       signUp: {
@@ -50,8 +55,8 @@ export function useAuthForm(
       },
       resetPassword: {
         defaultValues: {
-          confirmCode: "",
-          newPassword: "",
+          password: "",
+          confirmPassword: "",
         },
         schema: ResetPasswordSchema,
       },
@@ -89,6 +94,12 @@ export function useAuthForm(
       case "logIn":
         return !emailWatch || !passwordWatch;
 
+      case "forgotPassword":
+        return !emailWatch;
+
+      case "resetPassword":
+        return !passwordWatch || !confirmPasswordWatch;
+
       default:
         return false;
     }
@@ -97,15 +108,35 @@ export function useAuthForm(
   const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
     async (data) => {
       try {
-        if ("email" in data && "password" in data) {
-          switch (type) {
-            case "signUp":
-              return await dispatch(signUp(data));
-            case "logIn":
-              return await dispatch(logIn(data));
-            default:
-              throw new Error("Unknown form type");
-          }
+        switch (type) {
+          case "signUp":
+          case "logIn":
+            if ("email" in data && "password" in data) {
+              return type === "signUp"
+                ? await dispatch(signUp(data))
+                : await dispatch(logIn(data));
+            }
+            throw new Error("Missing email or password for sign-up or login");
+
+          case "forgotPassword":
+            if ("email" in data) {
+              return await dispatch(forgotPassword(data));
+            }
+            throw new Error("Missing email for password recovery");
+
+          case "resetPassword":
+            if ("password" in data) {
+              const queryParams = new URLSearchParams(window.location.search);
+              const tokenFromUrl = queryParams.get("verify");
+              const token = tokenFromUrl || "";
+              await dispatch(resetPassword({ ...data, token }));
+              navigate("/log-in");
+              return;
+            }
+            throw new Error("Missing password or token for reset password");
+
+          default:
+            throw new Error("Unknown form type");
         }
       } catch (error) {
         console.error("Submission failed:", error);
@@ -113,7 +144,7 @@ export function useAuthForm(
         reset();
       }
     },
-    [type, dispatch, reset]
+    [type, dispatch, reset, navigate]
   );
 
   return {

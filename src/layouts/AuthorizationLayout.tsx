@@ -96,21 +96,26 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     />
 
                     {isLogInPage ? (
-                      // удалить временный переход
-                      <Link to="/reset-password">
-                        <p
-                          className="-mt-3 text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
-                          onClick={() =>
-                            dispatch(
-                              openModal({
-                                typeModal: "recoveryPassword",
-                              })
-                            )
-                          }
-                        >
-                          {t("login.forgotPassword")}
-                        </p>
-                      </Link>
+                      <p
+                        className="-mt-3 cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
+                        onClick={() =>
+                          dispatch(
+                            openModal({
+                              typeModal: "popup",
+                            })
+                          )
+                        }
+                        // onClick={() =>
+                        //   dispatch(
+                        //     openModal({
+                        //       typeModal: "popup",
+                        //       modalContent: <ForgotPassword/>
+                        //     })
+                        //   )
+                        // }
+                      >
+                        {t("login.forgotPassword")}
+                      </p>
                     ) : null}
 
                     {!isLogInPage ? (
@@ -177,12 +182,11 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         to={isSignUpPage ? "/log-in" : "/sign-up"}
                         onClick={() => reset()}
                       >
-                        {isSignUpPage ? t("registerButton") : t("loginButton")}
+                        {isSignUpPage ? t("loginButton") : t("registerButton")}
                       </Link>
                     </p>
                   </div>
                 ) : null}
-
               </div>
             </div>
           </div>
@@ -190,7 +194,6 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
       </main>
 
       <Footer />
-      
     </div>
   );
 };

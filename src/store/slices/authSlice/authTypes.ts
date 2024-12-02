@@ -3,7 +3,7 @@ export interface UserProps {
   username?: string;
   email: string;
   avatar?: string;
-  password?: string;
+  password: string;
 }
 
 export interface AuthTokensProps {
@@ -19,7 +19,16 @@ export interface AuthStateProps {
   error: string | null;
 }
 
-export interface KnownError {
+export interface forgotPasswordProps {
+  email: string;
+}
+
+export interface resetPasswordProps {
+  password: string;
+  token: string;
+}
+
+export interface KnownErrorProps {
   message: string;
   code: number | undefined;
 }

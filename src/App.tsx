@@ -24,10 +24,10 @@ function App() {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
-  console.log("refreshToken");
+
   return (
     <Routes>
-      <Route element={<PrivateRoute routeTo="/sign-up" />}>
+      <Route element={<PrivateRoute routeTo="/log-in" />}>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="vacancies" element={<Vacancies />} />
@@ -42,6 +42,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/log-in" element={<LogIn />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        {/* <Route path="/reset-password/:token" element={<ResetPassword />} /> */}
         <Route path="*" element={<h1>Page not found</h1>} />
       </Route>
     </Routes>

@@ -40,7 +40,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         ignoredActionPaths: ['payload.onCallFunction'],
-        ignoredPaths: ['modal.onCallFunction'],
+        ignoredPaths: ['modal.onCallFunction', 'modal.modalContent'],
       },
     }),
 });

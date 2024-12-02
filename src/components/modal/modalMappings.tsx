@@ -1,10 +1,12 @@
+import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword"
 export const contentMap = {
     success: <span className="text-4xl font-bold text-color8">Успіх!</span>,
     error: <span className="text-4xl font-bold text-color2">Упс!</span>,
     errorMailExist: <span className="text-4xl font-bold text-color2">Упс!</span>,
     recoveryPassword: <span className="text-4xl font-bold text-textBlack">Відновлення паролю</span>,
     confirm: <span className="text-4xl font-bold text-color5">Підтвердіть дію!</span>,
-    popup: "",
+    // popup: "",
+    popup: <ForgotPassword/>,
 }
 export const colorType = {
     success: {
@@ -28,8 +30,10 @@ export const colorType = {
         border: "border-color8",
     },
     popup: {
-        background: "bg-white",
-        border: "border-white",
+        // background: "bg-white",
+        // border: "border-white",
+        background: "bg-button",
+        border: "border-button",
     }
 }
 export const buttonMap = {

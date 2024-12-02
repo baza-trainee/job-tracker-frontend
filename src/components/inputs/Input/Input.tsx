@@ -111,7 +111,6 @@ export const Input = ({
             id={`inputError-${name}`}
             className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
           >
-            {/* {String(error?.message)} */}
             {t(String(error?.message))}
           </span>
         )}

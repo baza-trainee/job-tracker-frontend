@@ -37,6 +37,11 @@
     "label": "Enter a new password",
     "subHeader": "Enter a new password for further account access"
   },
+  "forgotPassword": {
+    "header": "Password recovery",
+    "subHeader": "Enter the email associated with your account to recover your password.",
+    "button": "Recover"
+  },
   "infoCards": {
     "optimizeJobSearch": "Optimize your job search: save, analyze, achieve success",
     "pathToSuccess": "Your path to success, tailored individually",

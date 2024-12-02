@@ -1,3 +1,3 @@
 export type AuthHeaderProps = {
-  type: "signUp" | "logIn" | "resetPassword";
+  type: "signUp" | "logIn" | "forgotPassword"|"resetPassword";
 }
