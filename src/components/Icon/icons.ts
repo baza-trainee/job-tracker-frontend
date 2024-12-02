@@ -40,6 +40,10 @@ export const ICON = {
     VACANCY: "vacancy",
     VECTOR_CURVED_62: "vector-curved-62",
     VECTOR_CURVED_63: "vector-curved-63",
+    DASHBOARD: "dashboard",
+    GIRL_AND_DASHBOARD: "girl-and-dashboard",
+    GIRL_WITH_PHONE: "girl-with-phone",
+    MAN_AND_TIME: "man-and-time",
 } as const;
 
 // export type IconId = keyof typeof ICON; // Тип для ключів ICON
