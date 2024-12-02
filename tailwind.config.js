@@ -44,7 +44,7 @@ export default {
         color5: "#D0E8C5", // green-light
         color6: "#A6AEBF", // grey
         color7: "#B1D690", // green
-        color7Light: "rgba(177, 214, 144, 0.3)",
+        color7Light: "rgba(177, 214, 144, 0.3)", // це колір #B1D690 з opacity
         color8: "#76925D", // green-dark
    
         // text: {
