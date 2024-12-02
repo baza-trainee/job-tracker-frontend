@@ -1,4 +1,4 @@
-import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword"
+import { ForgotPassword } from "../../pages/ForgotPassword"
 export const contentMap = {
     success: <span className="text-4xl font-bold text-color8">Успіх!</span>,
     error: <span className="text-4xl font-bold text-color2">Упс!</span>,

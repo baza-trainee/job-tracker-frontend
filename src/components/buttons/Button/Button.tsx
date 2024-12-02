@@ -31,7 +31,7 @@ export const Button = ({
 
         disabled &&
           variant === "ghost" &&
-          "bg-background-backgroundSecondary pointer-events-none ring-transparent",
+          "bg-backgroundSecondary pointer-events-none ring-transparent",
 
         className
       )}

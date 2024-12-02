@@ -1,4 +1,4 @@
-import AuthorizationLayout from "../../layouts/AuthorizationLayout";
+import AuthorizationLayout from "../layouts/AuthorizationLayout";
 
 export const LogIn = () => {
   return <AuthorizationLayout type="logIn" />;
