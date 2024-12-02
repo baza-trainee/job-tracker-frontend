@@ -3,6 +3,7 @@ import exampleReduser from "./slices/exampleSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
+import sidebarReducer from "./slices/sibebarSlice/sidebarSlice.ts";
 import {
   persistStore,
   persistReducer,
@@ -25,8 +26,17 @@ const themePersistConfig = {
   storage,
 };
 
+const sidebarPersistConfig = {
+  key: "sidebar",
+  storage,
+};
+
 const authPersistedReducer = persistReducer(authPersistConfig, authReduser);
 const themePersistedReducer = persistReducer(themePersistConfig, themeReducer);
+const sidebarPersistedReducer = persistReducer(
+  sidebarPersistConfig,
+  sidebarReducer
+);
 
 export const store = configureStore({
   reducer: {
@@ -34,13 +44,23 @@ export const store = configureStore({
     modal: modalReduser,
     auth: authPersistedReducer,
     theme: themePersistedReducer,
+    sidebar: sidebarPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['modal/openModal', 'modal/closeModal', FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        ignoredActionPaths: ['payload.modalContent'],
-        ignoredPaths: ['modal.modalContent', 'modal.onCallFunction'],
+        ignoredActions: [
+          "modal/openModal",
+          "modal/closeModal",
+          FLUSH,
+          REHYDRATE,
+          PAUSE,
+          PERSIST,
+          PURGE,
+          REGISTER,
+        ],
+        ignoredActionPaths: ["payload.modalContent"],
+        ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
       },
     }),
 });
