@@ -2,7 +2,13 @@ import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 
 import { AuthStateProps, AuthTokensProps, UserProps } from "./authTypes";
 
-import { refreshUser, signUp, logIn } from "./authOperation";
+import {
+  refreshUser,
+  signUp,
+  logIn,
+  forgotPassword,
+  resetPassword,
+} from "./authOperation";
 
 const initialState: AuthStateProps = {
   user: null,
@@ -44,10 +50,18 @@ const authSlice = createSlice({
         state.user = null;
         state.error = action.error.message || "Failed to fetch user";
       })
-      .addMatcher(isAnyOf(signUp.pending, logIn.pending), (state) => {
-        state.loading = false;
-        state.error = null;
-      })
+      .addMatcher(
+        isAnyOf(
+          signUp.pending,
+          logIn.pending,
+          forgotPassword.pending,
+          resetPassword.pending
+        ),
+        (state) => {
+          state.loading = false;
+          state.error = null;
+        }
+      )
       .addMatcher(
         isAnyOf(signUp.fulfilled, logIn.fulfilled),
         (state, action: PayloadAction<UserProps | null>) => {
@@ -56,10 +70,18 @@ const authSlice = createSlice({
           state.user = action.payload;
         }
       )
-      .addMatcher(isAnyOf(signUp.rejected, logIn.rejected), (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed";
-      });
+      .addMatcher(
+        isAnyOf(
+          signUp.rejected,
+          logIn.rejected,
+          forgotPassword.rejected,
+          resetPassword.rejected
+        ),
+        (state, action) => {
+          state.loading = false;
+          state.error = action.error.message || "Failed";
+        }
+      );
   },
 });
 

@@ -1,5 +1,6 @@
 import classNames from "clsx";
 import { CheckboxProps } from "./Checkbox.props";
+import { useTranslation } from "react-i18next";
 
 export const Checkbox = ({
   name,
@@ -13,6 +14,7 @@ export const Checkbox = ({
   ...props
 }: CheckboxProps) => {
   const error = errors[name];
+  const { t } = useTranslation();
 
   return (
     <div
@@ -64,7 +66,7 @@ export const Checkbox = ({
           id={`inputError-${name}`}
           className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
         >
-          {String(error?.message)}
+          {t(String(error?.message))}
         </span>
       )}
     </div>

@@ -23,7 +23,7 @@ export const Button = ({
 
         !disabled &&
           variant === "ghost" &&
-          "hover:ring-accent focus:ring-accent bg-transparent ring-1 ring-inset ring-textBlack hover:shadow-button_hover hover:ring-[3px] focus:shadow-button_hover focus:ring-[3px]",
+          "border-[1px] border-[solid] border-iconHover bg-transperent hover:border-textBlack hover:bg-[#bfdef5] active:border-none active:bg-iconHover active:text-textWhite",
 
         disabled &&
           variant === "accent" &&
@@ -31,7 +31,7 @@ export const Button = ({
 
         disabled &&
           variant === "ghost" &&
-          "bg-background-backgroundSecondary pointer-events-none ring-transparent",
+          "bg-backgroundSecondary pointer-events-none ring-transparent",
 
         className
       )}

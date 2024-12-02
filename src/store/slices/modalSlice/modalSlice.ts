@@ -1,10 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "./initialState";
-import { ReactNode } from "react";
 
 type modalPayload =
-  | { typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "popup" | "custom"; modalContent?: string | ReactNode; onCallFunction?: () => void }
-  | { typeModal: "confirm"; modalContent?: string | ReactNode; onCallFunction: () => void };
+  | { typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "popup"; modalContent?: string; onCallFunction?: () => void }
+  | { typeModal: "confirm"; modalContent?: string; onCallFunction: () => void };
 
 
 const modalSlice = createSlice({

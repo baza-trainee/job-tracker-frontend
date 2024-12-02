@@ -7,26 +7,24 @@ export const SignUpSchema = z
   .object({
     email: z
       .string()
-      .max(254, `email повинен бути не більше 254 символів`)
-      .regex(emailRegex, `Введіть коректний email`)
-      .min(4, `email повинен бути не менше 4 символів`)
+      .max(254, `validation.emailMax`)
+      .regex(emailRegex, `validation.emailInvalid`)
+      .min(4, `validation.emailMin`)
       .trim(),
 
     password: z
       .string()
-      .max(14, `Пароль повинен бути не більше 14 символів`)
-      .regex(passwordRegex, `Введіть коректний пароль`)
-      .min(8, `Пароль повинен бути не менше 8 символів`),
+      .max(14, `validation.passwordMax`)
+      .regex(passwordRegex, `validation.passwordInvalid`)
+      .min(8, `validation.passwordMin`),
 
-    confirmPassword: z
-      .string()
-      .regex(passwordRegex, `Введіть коректний пароль`),
+    confirmPassword: z.string(),
 
     terms: z.boolean().refine((value) => value === true, {
-      message: "Ви не надайли згоду",
+      message: `validation.termsRequired`,
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
-    message: "Паролі мають збігатись",
+    message: `validation.passwordMismatch`,
   });

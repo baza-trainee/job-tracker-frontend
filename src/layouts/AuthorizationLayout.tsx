@@ -11,13 +11,15 @@ import { Button } from "../components/buttons/Button/Button";
 import Separator from "../components/separator/Separator";
 import Footer from "../components/layout/Footer";
 
-import { useAppSelector } from "../store/hook";
+import { useAppSelector, useAppDispatch } from "../store/hook";
+import { useTranslation } from "react-i18next";
 
 import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
 import { AuthSocialButtons } from "../components/AuthComponents/AuthSocialButtons/AuthSocialButtons";
+import { openModal } from "../store/slices/modalSlice/modalSlice";
 
 type AuthorizationLayoutProps = {
-  type: "signUp" | "logIn" | "forgotPassword" | "resetPassword";
+  type: "signUp" | "logIn" | "resetPassword";
 };
 
 const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
@@ -33,8 +35,11 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
   const isSignUpPage = type === "signUp";
   const isLogInPage = type === "logIn";
+  const isResetPasswordPage = type === "resetPassword";
 
   const { loading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const error = !!Object.keys(errors).length;
 
@@ -46,83 +51,107 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
       <main className="flex-grow">
         <section>
-          <div
-            className={classNames(
-              "container flex justify-center gap-6",
-              type === "signUp" && "mb-[81px]",
-              type === "logIn" && "mb-[179px]"
-            )}
-          >
+          <div className="container mb-4 flex justify-center gap-6">
             <LoginCardImages />
-            <div className="w-full max-w-[476px] font-nunito flex flex-col justify-center">
-              <AuthHeader isSignUpPage={isSignUpPage} />
-              <div className="rounded-[20px] bg-background-form px-12 py-10 shadow-form_shadow">
+            <div
+              className={classNames(
+                "flex w-full max-w-[476px] flex-col font-nunito",
+                type === "resetPassword" && "mt-20"
+              )}
+            >
+              {!isResetPasswordPage ? <AuthHeader type={type} /> : null}
+
+              <div className="relative rounded-[20px] bg-background-form px-12 py-10 shadow-form_shadow">
                 <form className="" onSubmit={handleSubmit(onSubmit)}>
+                  {isResetPasswordPage ? <AuthHeader type={type} /> : null}
+
                   <div className="flex flex-col gap-6">
-                    <Input
-                      register={register}
-                      resetField={resetField}
-                      key="email"
-                      name="email"
-                      placeholder="Введіть пошту"
-                      type="text"
-                      className=""
-                      label="Електронна пошта"
-                      errors={errors}
-                    />
+                    {!isResetPasswordPage ? (
+                      <Input
+                        register={register}
+                        resetField={resetField}
+                        key="email"
+                        name="email"
+                        placeholder={t("register.enterEmail")}
+                        type="text"
+                        className=""
+                        label={t("register.email")}
+                        errors={errors}
+                      />
+                    ) : null}
 
                     <InputPassword
                       register={register}
                       key="password"
                       name="password"
-                      placeholder="Введіть пароль"
+                      placeholder={t("register.enterPassword")}
                       type="text"
-                      label="Пароль"
-                      className=""
+                      label={
+                        isResetPasswordPage
+                          ? t("resetPassword.label")
+                          : t("register.password")
+                      }
+                      className={isResetPasswordPage ? "pt-[122px]" : ""}
                       errors={errors}
                     />
+
                     {isLogInPage ? (
-                      <p className={"mt-[-18px] text-right"}>
-                        <Link
-                          className="font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
-                          // TODO: змінити посилання на /isforgotPassword
-                          to="/sign-up"
-                        >
-                          Забули пароль?
-                        </Link>
+                      <p
+                        className="-mt-3 cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
+                        onClick={() =>
+                          dispatch(
+                            openModal({
+                              typeModal: "popup",
+                            })
+                          )
+                        }
+                        // onClick={() =>
+                        //   dispatch(
+                        //     openModal({
+                        //       typeModal: "popup",
+                        //       modalContent: <ForgotPassword/>
+                        //     })
+                        //   )
+                        // }
+                      >
+                        {t("login.forgotPassword")}
                       </p>
                     ) : null}
-                    {isSignUpPage ? (
+
+                    {!isLogInPage ? (
                       <>
                         <InputPassword
                           register={register}
                           resetField={resetField}
                           key="confirmPassword"
                           name="confirmPassword"
-                          placeholder="Підтвердіть пароль"
+                          placeholder={t("register.confirmPassword")}
                           type="text"
-                          label="Підтвердіть пароль"
+                          label={t("register.confirmPassword")}
                           className=""
                           errors={errors}
                         />
-                        <Checkbox
-                          register={register}
-                          type="signUp"
-                          name="terms"
-                          errors={errors}
-                          label={
-                            <p>
-                              Погоджуюсь з
-                              <span className="text-textOther">
-                                {" політикой конфіденційності "}
-                              </span>
-                              та
-                              <span className="text-textOther">
-                                {" умовами користувача"}
-                              </span>
-                            </p>
-                          }
-                        />
+
+                        {isSignUpPage ? (
+                          <Checkbox
+                            register={register}
+                            type="signUp"
+                            name="terms"
+                            errors={errors}
+                            label={
+                              <p>
+                                {t("register.agreeWith")}
+                                <span className="cursor-pointer text-textOther">
+                                  {t("register.privacyPolicy")}
+                                </span>
+                                {t("register.and")}
+                                <span className="cursor-pointer text-textOther">
+                                  {t("register.userTerms")}
+                                </span>
+                              </p>
+                            }
+                          />
+                        ) : null}
                       </>
                     ) : null}
                   </div>
@@ -134,28 +163,30 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     variant="ghost"
                     size="big"
                   >
-                    {isSignUpPage ? `Зареєструватись` : `Увійти`}
+                    {isSignUpPage ? t("registerButton") : t("loginButton")}
                   </Button>
                 </form>
 
-                <Separator />
+                {!isResetPasswordPage ? <Separator /> : null}
 
-                <AuthSocialButtons />
+                {!isResetPasswordPage ? <AuthSocialButtons /> : null}
 
-                <div className="mt-5 flex justify-center">
-                  <p className="font-nunito text-[16px] font-medium text-textBlackLight">
-                    {isSignUpPage
-                      ? "Вже зареєстровані?"
-                      : "Немає облікового запису?"}
-                    <Link
-                      className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-textOther"
-                      to={isSignUpPage ? "/log-in" : "/sign-up"}
-                      onClick={() => reset()}
-                    >
-                      {isSignUpPage ? "Увійти" : "Зареєструватись"}
-                    </Link>
-                  </p>
-                </div>
+                {!isResetPasswordPage ? (
+                  <div className="mt-5 flex justify-center">
+                    <p className="font-nunito text-[16px] font-medium text-textBlackLight">
+                      {isSignUpPage
+                        ? t("register.alreadyRegistered")
+                        : t("login.noAccount")}
+                      <Link
+                        className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-textOther"
+                        to={isSignUpPage ? "/log-in" : "/sign-up"}
+                        onClick={() => reset()}
+                      >
+                        {isSignUpPage ? t("loginButton") : t("registerButton")}
+                      </Link>
+                    </p>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>

@@ -1,11 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../../api/axios";
 import { saveTokens, clearTokens } from "./authSlice";
-import { AuthStateProps, KnownError, UserProps } from "./authTypes";
+import {
+  AuthStateProps,
+  KnownErrorProps,
+  UserProps,
+  forgotPasswordProps,
+  resetPasswordProps,
+} from "./authTypes";
 
 import { isAxiosError } from "axios";
 
-import { openModal } from "../modalSlice/modalSlice";
+import { openModal} from "../modalSlice/modalSlice";
 
 export const GoogleLogin = () => {
   window.location.href =
@@ -76,7 +82,7 @@ export const refreshTokens = createAsyncThunk(
 export const logIn = createAsyncThunk<
   UserProps,
   UserProps,
-  { rejectValue: KnownError }
+  { rejectValue: KnownErrorProps }
 >(
   "auth/logIn",
   async ({ email, password }: UserProps, { dispatch, rejectWithValue }) => {
@@ -90,6 +96,8 @@ export const logIn = createAsyncThunk<
       dispatch(
         openModal({
           typeModal: "success",
+          modalContent:
+            "Авторизація пройшла успішно. Зараз ви можете налаштувати свій профіль.",
         })
       );
       return response.data.user;
@@ -120,7 +128,7 @@ export const logIn = createAsyncThunk<
 export const signUp = createAsyncThunk<
   UserProps,
   UserProps,
-  { rejectValue: KnownError }
+  { rejectValue: KnownErrorProps }
 >(
   "auth/signIn",
   async ({ email, password }: UserProps, { dispatch, rejectWithValue }) => {
@@ -145,6 +153,7 @@ export const signUp = createAsyncThunk<
               typeModal: "errorMailExist",
             })
           );
+
           return rejectWithValue({
             message: "Обліковий запис з такою поштою існує",
             code: 409,
@@ -155,6 +164,92 @@ export const signUp = createAsyncThunk<
             code: undefined,
           });
         }
+      }
+    }
+  }
+);
+
+export const forgotPassword = createAsyncThunk<
+  void,
+  forgotPasswordProps,
+  { rejectValue: KnownErrorProps }
+>(
+  "auth/forgotPassword",
+  async ({ email }: forgotPasswordProps, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await api.post("/auth/forgot-password", {
+        email,
+      });
+      dispatch(
+        openModal({
+          typeModal: "success",
+          modalContent:
+            "Зміна пароля успішна. Вам надіслано повідомлення на електронну пошту.",
+        })
+      );
+      console.log("forgotPasswprd", response);
+    } catch (error) {
+      dispatch(
+        openModal({
+          typeModal: "error",
+        })
+      );
+      if (isAxiosError(error)) {
+        const errorCode = error.response?.status;
+        if (errorCode === 401) {
+          return rejectWithValue({
+            message: "Невірна пошта",
+            code: errorCode,
+          });
+        }
+      } else {
+        return rejectWithValue({
+          message: "Сталася невідома помилка при обробці запиту",
+          code: undefined,
+        });
+      }
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  "auth/resetPassword",
+  async (
+    { password, token }: resetPasswordProps,
+    { dispatch, rejectWithValue }
+  ) => {
+    try {
+      const response = await api.post("/auth/reset-password", {
+        token,
+        password,
+      });
+      dispatch(
+        openModal({
+          typeModal: "success",
+          modalContent: "Зміна пароля успішна.Увійдіть з новим паролем",
+        })
+      );
+
+      console.log("ResetPassword", response);
+    } catch (error) {
+      dispatch(
+        openModal({
+          typeModal: "error",
+        })
+      );
+      if (isAxiosError(error)) {
+        const errorCode = error.response?.status;
+        if (errorCode === 401) {
+          return rejectWithValue({
+            message: "Невірна пошта",
+            code: errorCode,
+          });
+        }
+      } else {
+        return rejectWithValue({
+          message: "Сталася невідома помилка при обробці запиту",
+          code: undefined,
+        });
       }
     }
   }

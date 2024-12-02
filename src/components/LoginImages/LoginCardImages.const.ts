@@ -10,7 +10,8 @@ export const loginCardsImages = [
     color: "blue",
     position: "left",
     border: `rounded-bl-[12px] rounded-br-[12px] rounded-tl-[0] rounded-tr-[12px] border-[6px] border-[solid]`,
-    text: "Оптимізуй свій пошук роботи: зберігай, аналізуй, досягай успіху",
+    // TODO: loginCardsImages.text - src/utils/i18n/locales/uk/uk/json
+    text: "infoCards.optimizeJobSearch",
     image: ManManagement,
     alt: "Man doing time management effectively.png",
   },
@@ -19,7 +20,7 @@ export const loginCardsImages = [
     color: "blue",
     position: "rigth",
     border: `rounded-bl-[12px] rounded-br-[12px] rounded-tl-[12px] rounded-tr-[0]`,
-    text: "Твій шлях до успіху, підібраний індивідуально",
+    text: "infoCards.pathToSuccess",
     image: WomanMoving,
     alt: "Woman moving cards on a Kanban board.png",
   },
@@ -30,7 +31,7 @@ export const loginCardsImages = [
     border: `rounded-bl-[12px] rounded-br-[12px] rounded-tl-[0] rounded-tr-[12px]`,
     image: MarketingTeam,
     alt: "Marketing team collaboration and project management.png",
-    text: "Візуалізуй успіх: відстежуй, аналізуй, розвивайся",
+    text: "infoCards.visualizeSuccess",
   },
   {
     margin: true,
@@ -39,6 +40,6 @@ export const loginCardsImages = [
     border: `rounded-bl-[12px] rounded-br-[12px] rounded-tl-[12px] rounded-tr-[0]`,
     image: WomanUsing,
     alt: "Woman using mobile banking app.png",
-    text: "Твоя кар'єра в твоїх руках, де б ти не був.",
+    text: "infoCards.careerInYourHands",
   },
 ];

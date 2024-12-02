@@ -91,7 +91,7 @@ function Sidebar() {
             link="/log-in"
             title={t("navigation.logOut")}
             isOpen={isOpenSidebar}
-            funcIcon={handleLogOut}
+            funcLogOut={handleLogOut}
           />
         </div>
       </div>

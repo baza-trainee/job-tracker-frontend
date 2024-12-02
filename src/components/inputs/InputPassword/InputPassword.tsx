@@ -2,6 +2,7 @@ import cn from "clsx";
 import { useState } from "react";
 
 import { InputPasswordProps } from "./InputPassword.props";
+import { useTranslation } from "react-i18next";
 
 const EyeClosed_icon = ({ className, ...props }: { className?: string }) => {
   return (
@@ -87,6 +88,9 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  const {t} = useTranslation()
+
   return (
     <div className={cn("relative", [className])} id={id}>
       {label && (
@@ -131,7 +135,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             id={`inputError-${name}`}
             className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
           >
-            {String(errors[name]?.message)}
+            {t(String(errors[name]?.message))}
           </span>
         )}
       </div>

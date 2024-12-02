@@ -9,7 +9,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   link,
   title,
   isOpen,
-  funcIcon,
+  funcLogOut,
 }) => {
   return (
     <NavLink
@@ -26,7 +26,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
             "!border-[#DBDCDD] bg-backgroundMain fill-textBlack text-textBlack dark:fill-textBlack dark:text-textBlack"
         )
       }
-      onClick={funcIcon}
+      onClick={funcLogOut}
     >
       <Icon id={icon} className="mx-3 h-8 w-8" />
       <span
