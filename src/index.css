@@ -18,3 +18,17 @@
 body {
   @apply bg-backgroundMain;
 }
+
+.custom-hover {
+  transition:
+    fill 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
+
+.custom-size {
+  transition:
+    width 500ms ease-in-out,
+    padding 500ms ease-in-out,
+    opacity 500ms ease-in-out,
+    transform 500ms ease-in-out;
+}

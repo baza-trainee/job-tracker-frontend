@@ -7,6 +7,7 @@ export const contentMap = {
     confirm: <span className="text-4xl font-bold text-color5">Підтвердіть дію!</span>,
     // popup: "",
     popup: <ForgotPassword/>,
+    custom: "",
 }
 export const colorType = {
     success: {
@@ -34,7 +35,11 @@ export const colorType = {
         // border: "border-white",
         background: "bg-button",
         border: "border-button",
-    }
+    },
+    custom: {
+        background: "bg-white",
+        border: "border-white",
+    },
 }
 export const buttonMap = {
     success: "Продовжити",
@@ -43,6 +48,7 @@ export const buttonMap = {
     recoveryPassword: "Відновити",
     confirm: "Ок",
     popup: "",
+    custom : "",
 }
 export const modalTextMap = {
     success: "Реєстрація пройшла успішно. Зараз ви можете налаштувати свій профіль.",
@@ -51,4 +57,5 @@ export const modalTextMap = {
     recoveryPassword: "Обліковий запис з такою поштою вже існує. Спробуйте увійти або відновити пароль.",
     confirm: undefined,
     popup: undefined,
+    custom: undefined,
 }

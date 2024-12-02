@@ -10,7 +10,10 @@ const CloseSidebarBtn: React.FC<SidebarBtnProps> = ({
   return (
     <div
       onClick={handleOpenSidebar}
-      className={cn("cursor-pointer p-[10px]", !isOpenSidebar && "hidden")}
+      className={cn(
+        "cursor-pointer p-[10px] transition-all duration-1000 ease-in-out",
+        !isOpenSidebar ? "sr-only opacity-0" : "visible opacity-100"
+      )}
     >
       <Icon
         id={ICON.ARROW_LEFT}

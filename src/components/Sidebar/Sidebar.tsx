@@ -1,5 +1,3 @@
-// import { NavLink } from "react-router-dom";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import cn from "clsx";
 
@@ -11,33 +9,40 @@ import NavList from "./components/NavList.tsx";
 import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
 import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
 
-import { useAppDispatch } from "../../store/hook.ts";
+import { useAppDispatch, useAppSelector } from "../../store/hook.ts";
 import { clearTokens } from "../../store/slices/authSlice/authSlice.ts";
+import { selectSidebar } from "../../store/slices/sibebarSlice/sidebarSelector.ts";
+import {
+  closeSidebar,
+  openSidebar,
+} from "../../store/slices/sibebarSlice/sidebarSlice.ts";
 
 function Sidebar() {
   const dispatch = useAppDispatch();
   const handleLogOut = (): void => {
     dispatch(clearTokens());
   };
-  const { t } = useTranslation();
-  const [isOpenSidebar, setIsOpenSidebar] = useState<boolean>(true);
+  const isOpenSidebar = useAppSelector(selectSidebar);
 
   const handleOpenSidebar = () => {
-    setIsOpenSidebar(true);
+    dispatch(openSidebar());
   };
   const handleCloseSidebar = () => {
-    setIsOpenSidebar(false);
+    dispatch(closeSidebar());
   };
+
+  const { t } = useTranslation();
 
   return (
     <aside
       className={cn(
-        "bg-background-backgroundSecondary flex h-[1024px] w-fit max-w-[276px] flex-col justify-between rounded-r-[20px] px-6 pb-[60px] pt-10 font-nunito text-xl dark:bg-slate-800",
-        !isOpenSidebar && "items-center pl-3 pr-3"
+        "fixed top-0 z-20 flex h-dvh w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium dark:bg-slate-800",
+        "custom-size",
+        !isOpenSidebar && "w-[92px] items-center pl-3 pr-3"
       )}
     >
-      <div className={cn("flex flex-col", !isOpenSidebar && "items-center")}>
-        <div className="flex items-center justify-between">
+      <div className={cn("flex flex-col")}>
+        <div className={cn("flex items-center justify-between")}>
           <OpenSidebarBtn handleOpenSidebar={handleOpenSidebar} />
           <CloseSidebarBtn
             handleOpenSidebar={handleCloseSidebar}
@@ -47,8 +52,8 @@ function Sidebar() {
 
         <nav
           className={cn(
-            "mt-[60px] flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6",
-            !isOpenSidebar && "items-center px-2"
+            "mt-6 flex flex-col gap-4 border-b-[1px] border-[#CECECE] pb-5",
+            !isOpenSidebar && "items-center"
           )}
         >
           {NavList().map((item, index) => {
@@ -64,17 +69,15 @@ function Sidebar() {
           })}
         </nav>
       </div>
-      <div
-        className={cn("flex flex-col gap-6", !isOpenSidebar && "items-center")}
-      >
-        <div className="flex flex-col gap-6 border-b-2 border-[#CECECE] pb-6">
+      <div className={cn("flex flex-col", !isOpenSidebar && "")}>
+        <div className="flex flex-col gap-4 py-6">
           <LanguageToggle isOpen={isOpenSidebar} />
           <ThemeToggle isOpen={isOpenSidebar} />
         </div>
 
         <div
           className={cn(
-            "flex flex-col gap-4",
+            "flex flex-col gap-4 border-t-[1px] border-[#CECECE] pt-6",
             !isOpenSidebar && "items-center"
           )}
         >
