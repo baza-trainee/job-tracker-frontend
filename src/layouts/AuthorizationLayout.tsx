@@ -105,14 +105,6 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                             })
                           )
                         }
-                        // onClick={() =>
-                        //   dispatch(
-                        //     openModal({
-                        //       typeModal: "popup",
-                        //       modalContent: <ForgotPassword/>
-                        //     })
-                        //   )
-                        // }
                       >
                         {t("login.forgotPassword")}
                       </p>

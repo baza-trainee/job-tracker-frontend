@@ -8,28 +8,35 @@ import Notes from "./components/Notes/Notes";
 import { SignUp } from "./pages/SignUp";
 import { LogIn } from "./pages/LogIn";
 import { ResetPassword } from "./pages/ResetPassword";
+import { AuthCallback } from "./pages/AuthCallback";
 import { useAppSelector } from "./store/hook";
 import { selectTheme } from "./store/slices/themeSlice/themeSelector";
 import { useEffect } from "react";
 
 import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import { useAppDispatch } from "./store/hook";
+import { refreshUser } from "./store/slices/authSlice/authOperation";
 
 function App() {
   const darkMode = useAppSelector(selectTheme);
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
+    dispatch(refreshUser());
     if (darkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [darkMode]);
+  }, [darkMode, dispatch]);
 
   return (
     <Routes>
       <Route element={<PrivateRoute routeTo="/log-in" />}>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
+          <Route path="vacancies" element={<Vacancies />} />
           <Route path="vacancies" element={<Vacancies />} />
           <Route path="statistics" element={<Statistics />} />
           <Route path="profile" element={<Profile />} />
@@ -42,7 +49,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/log-in" element={<LogIn />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        {/* <Route path="/reset-password/:token" element={<ResetPassword />} /> */}
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="*" element={<h1>Page not found</h1>} />
       </Route>
     </Routes>

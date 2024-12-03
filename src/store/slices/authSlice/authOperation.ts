@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../../api/axios";
-import { saveTokens, clearTokens } from "./authSlice";
+import { saveTokens, clearTokens, isLoggedIn } from "./authSlice";
 import {
   AuthStateProps,
   KnownErrorProps,
@@ -11,7 +11,7 @@ import {
 
 import { isAxiosError } from "axios";
 
-import { openModal} from "../modalSlice/modalSlice";
+import { openModal } from "../modalSlice/modalSlice";
 
 export const GoogleLogin = () => {
   window.location.href =
@@ -35,7 +35,8 @@ export const refreshUser = createAsyncThunk(
       const response = await api.get("/user/profile", {
         headers: { Authorization: `Bearer ${tokens.access_token}` },
       });
-      return response.data;
+      dispatch(isLoggedIn());
+      return response.data; // id, email, username
     } catch (error: any) {
       if (error.response?.status === 401) {
         try {
@@ -43,6 +44,11 @@ export const refreshUser = createAsyncThunk(
           const retryResponse = await api.get("/user/profile", {
             headers: { Authorization: `Bearer ${newAccessToken}` },
           });
+          saveTokens({
+            access_token: newAccessToken,
+            refresh_token: tokens.refresh_token,
+          });
+          dispatch(isLoggedIn());
           return retryResponse.data;
         } catch (refreshError) {
           console.error("Token refresh failed:", refreshError);
@@ -69,7 +75,6 @@ export const refreshTokens = createAsyncThunk(
       const response = await api.post("/auth/refresh", {
         refresh_token: tokens.refresh_token,
       });
-      dispatch(saveTokens(response.data));
       return response.data.access_token;
     } catch (error) {
       console.error("Token refresh failed:", error);
@@ -177,7 +182,7 @@ export const forgotPassword = createAsyncThunk<
   "auth/forgotPassword",
   async ({ email }: forgotPasswordProps, { dispatch, rejectWithValue }) => {
     try {
-      const response = await api.post("/auth/forgot-password", {
+      await api.post("/auth/forgot-password", {
         email,
       });
       dispatch(
@@ -187,7 +192,6 @@ export const forgotPassword = createAsyncThunk<
             "Зміна пароля успішна. Вам надіслано повідомлення на електронну пошту.",
         })
       );
-      console.log("forgotPasswprd", response);
     } catch (error) {
       dispatch(
         openModal({
@@ -219,18 +223,16 @@ export const resetPassword = createAsyncThunk(
     { dispatch, rejectWithValue }
   ) => {
     try {
-      const response = await api.post("/auth/reset-password", {
+      await api.post("/auth/reset-password", {
         token,
         password,
       });
       dispatch(
         openModal({
           typeModal: "success",
-          modalContent: "Зміна пароля успішна.Увійдіть з новим паролем",
+          modalContent: "Зміна пароля успішна. Увійдіть з новим паролем",
         })
       );
-
-      console.log("ResetPassword", response);
     } catch (error) {
       dispatch(
         openModal({
@@ -240,8 +242,15 @@ export const resetPassword = createAsyncThunk(
       if (isAxiosError(error)) {
         const errorCode = error.response?.status;
         if (errorCode === 401) {
+          dispatch(
+            openModal({
+              typeModal: "error",
+              modalContent:
+                "Посилання на відновлення паролю не дійсне. Спробуйте ще раз",
+            })
+          );
           return rejectWithValue({
-            message: "Невірна пошта",
+            message: "Токен не дійсний",
             code: errorCode,
           });
         }
@@ -254,3 +263,50 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+// export const isValidToken = createAsyncThunk(
+//   "auth/isValidToken",
+//   async (
+//     { password, token }: resetPasswordProps,
+//     { dispatch, rejectWithValue }
+//   ) => {
+//     try {
+//       await api.post("/auth/reset-password", {
+//         token,
+//         password,
+//       });
+//       dispatch(
+//         openModal({
+//           typeModal: "success",
+//           modalContent: "Токен Валідний",
+//         })
+//       );
+//     } catch (error) {
+//       dispatch(
+//         openModal({
+//           typeModal: "error",
+//         })
+//       );
+//       if (isAxiosError(error)) {
+//         const errorCode = error.response?.status;
+//         if (errorCode === 401) {
+//           dispatch(
+//             openModal({
+//               typeModal: "error",
+//               modalContent: "Токен Невалідний",
+//             })
+//           );
+//           return rejectWithValue({
+//             message: "Токен не дійсний",
+//             code: errorCode,
+//           });
+//         }
+//       } else {
+//         return rejectWithValue({
+//           message: "Сталася невідома помилка при обробці запиту",
+//           code: undefined,
+//         });
+//       }
+//     }
+//   }
+// );
