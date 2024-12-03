@@ -17,7 +17,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       className={({ isActive, isPending }) =>
         cn(
           "flex items-center rounded-[20px] border-2 border-transparent fill-textBlack py-[2px] text-textBlack dark:fill-slate-300 dark:text-slate-300",
-          "custom-hover custom-size",
+          "custom-transition",
           isOpen ? "w-[206px]" : "w-[64px]",
           isPending && "bg-red-500",
           !isActive &&

@@ -16,8 +16,8 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
-        "custom-hover custom-size",
+        "relative flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
+        "custom-transition",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
     >
@@ -27,32 +27,44 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         className={cn(
           "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
           {
-            "visible w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
+            "visible absolute left-0 z-[2] w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
               !darkMode, // Відкрита тема
-            "w-10 opacity-100": darkMode && isOpen, // Закрита тема
+            "flex-grow opacity-100": darkMode && isOpen, // Закрита тема
             "sr-only w-0 opacity-0": darkMode && !isOpen, // Схована кнопка
           }
         )}
         type="button"
       >
-        <Icon id="day-mode" className="h-6 w-6" />
+        <Icon
+          id="day-mode"
+          className={cn("h-6 w-6 duration-1000", {
+            "opacity-0": darkMode && !isOpen,
+            "opacity-100": darkMode && isOpen,
+          })}
+        />
       </button>
       <button
         disabled={darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
+          "flex justify-end overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
 
           {
-            "visible w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
+            "visible absolute right-0 w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
               darkMode, // Відкрита тема
-            "w-10 opacity-100": !darkMode && isOpen, // Закрита тема
+            "flex-grow opacity-100": !darkMode && isOpen, // Закрита тема
             "sr-only w-0 opacity-0": !darkMode && !isOpen, // Схована кнопка
           }
         )}
         type="button"
       >
-        <Icon id="night-mode" className="h-6 w-6" />
+        <Icon
+          id="night-mode"
+          className={cn("h-6 w-6 duration-1000", {
+            "opacity-0": !darkMode && !isOpen,
+            "opacity-100": !darkMode && isOpen,
+          })}
+        />
       </button>
     </div>
   );
