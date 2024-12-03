@@ -32,3 +32,13 @@ body {
     opacity 500ms ease-in-out,
     transform 500ms ease-in-out;
 }
+
+.custom-transition {
+  transition:
+    width 500ms ease-in-out,
+    padding 500ms ease-in-out,
+    opacity 500ms ease-in-out,
+    transform 500ms ease-in-out,
+    fill 300ms ease-in-out,
+    color 300ms ease-in-out;
+}
