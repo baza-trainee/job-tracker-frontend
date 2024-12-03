@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
 import { useAppDispatch } from "../../store/hook";
 import {
-  refreshUser,
+  // refreshUser,
   signUp,
   logIn,
   forgotPassword,
@@ -24,10 +24,6 @@ export function useAuthForm(
 ) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, []);
 
   const formConfigs = useMemo(() => {
     return {

@@ -24,6 +24,8 @@ const authSlice = createSlice({
   reducers: {
     saveTokens: (state, action: PayloadAction<AuthTokensProps>) => {
       state.tokens = action.payload;
+    },
+    isLoggedIn: (state) => {
       state.isLoggedIn = true;
     },
     clearTokens: (state) => {
@@ -85,6 +87,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { saveTokens, clearTokens } = authSlice.actions;
+export const { saveTokens, clearTokens, isLoggedIn } = authSlice.actions;
 
 export default authSlice.reducer;
