@@ -1,17 +1,16 @@
 import { Button } from "../../buttons/Button/Button";
 
-import GoogleLogo from "../../../assets/img/Google.svg";
-import GitHubLogo from "../../../assets/img/GitHub.svg";
-
 import { GoogleLogin } from "../../../store/slices/authSlice/authOperation";
 import { GithubLogin } from "../../../store/slices/authSlice/authOperation";
 
+import Icon from "../../Icon/Icon";
+
 export const AuthSocialButtons = () => {
   return (
-    <div className="flex justify-between gap-[20px]">
+    <div className="flex justify-between gap-8 px-2">
       <Button
         type="button"
-        className="gap-[12px]"
+        className="gap-3"
         variant="ghost"
         size="small"
         onClick={GoogleLogin}
@@ -19,12 +18,12 @@ export const AuthSocialButtons = () => {
         <span className="font-nunito text-[20px] font-medium leading-[135%] text-textBlack">
           Google
         </span>
-        <img src={GoogleLogo} className="h-[36px] w-[36px]" alt="Google Logo" />
+        <Icon id="Google" className="h-6 w-6" />
       </Button>
 
       <Button
         type="button"
-        className="gap-[12px]"
+        className="gap-3"
         variant="ghost"
         size="small"
         onClick={GithubLogin}
@@ -32,7 +31,7 @@ export const AuthSocialButtons = () => {
         <span className="font-nunito text-[20px] font-medium leading-[135%] text-textBlack">
           GitHub
         </span>
-        <img src={GitHubLogo} className="h-[36px] w-[36px]" alt="Google Logo" />
+        <Icon id="GitHub" className="h-6 w-6" />
       </Button>
     </div>
   );
