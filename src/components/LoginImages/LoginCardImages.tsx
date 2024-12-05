@@ -15,8 +15,7 @@ const LoginCardImages = () => {
           position={elem.position}
           border={elem.border}
           text={elem.text}
-          image={elem.image}
-          alt={elem.alt}
+          icon={elem.icon}
         />
       ))}
     </div>

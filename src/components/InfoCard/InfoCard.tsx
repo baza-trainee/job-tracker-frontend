@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { InfoCardProps } from "./InfoCard.type";
 import { useTranslation } from "react-i18next";
+import Icon from "../Icon/Icon";
 
 const InfoCard = ({
   margin,
@@ -8,8 +9,7 @@ const InfoCard = ({
   position,
   border,
   text,
-  image,
-  alt,
+  icon,
 }: InfoCardProps) => {
   const { t } = useTranslation();
   return (
@@ -37,13 +37,7 @@ const InfoCard = ({
         <p className="max-w-[335px] font-nunito text-[20px] font-bold leading-[135%] text-textBlack">
           {t(`${text}`)}
         </p>
-        <figure className="max-h-[120px] max-w-[120px]">
-          <img
-            src={image}
-            className="max-h-full max-w-full object-cover"
-            alt={alt}
-          />
-        </figure>
+        <Icon id={icon} className="h-[120px] w-[120px] p-1" />
       </div>
     </div>
   );

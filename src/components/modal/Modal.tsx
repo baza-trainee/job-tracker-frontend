@@ -11,6 +11,7 @@ import Icon from "../Icon/Icon.tsx";
 
 // Alex
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Modal: FC = () => {
 
@@ -68,7 +69,8 @@ const Modal: FC = () => {
     }, [typeModal, dispatch]);
     
     //Alex
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {t} = useTranslation();
 
 
     if (!isModalOpen) return null;
@@ -94,7 +96,7 @@ const Modal: FC = () => {
                     <div
                         className="flex flex-col min-w-[550px] min-h-[289px] justify-center items-center gap-8">
                         {contentMap[typeModal]}
-                        <div className="text-center text-xl">{modalContent ? modalContent : modalTextMap[typeModal]}</div>
+                        <div className="text-center text-xl">{modalContent ? t(`${modalContent}`) : modalTextMap[typeModal]}</div>
                         {typeModal !== "popup" && typeModal !== "custom" ? (
                             typeModal === "errorMailExist" ? (
                                 <div className="flex gap-4">
