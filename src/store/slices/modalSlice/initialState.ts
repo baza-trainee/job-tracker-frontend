@@ -5,7 +5,7 @@ export interface ModalState {
   typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "confirm" | "popup" | "custom";
   modalContent?: string | ReactNode;
   onCallFunction?: () => void;
-  colorModal?: string | undefined;
+  colorModal?: string;
 }
 
 export const initialState: ModalState = {

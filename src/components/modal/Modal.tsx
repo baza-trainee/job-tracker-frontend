@@ -18,8 +18,8 @@ const Modal: FC = () => {
     const { isModalOpen, modalContent, onCallFunction, typeModal, colorModal } = useAppSelector(
         (state) => state.modal,
     );
-    const bgColor: string | undefined = colorModal;
-    const borderColor: string | undefined = colorModal;
+    const bgColor = colorModal;
+    const borderColor = colorModal;
 
     const confirmModal = (): void => {
         onCallFunction?.();
@@ -83,7 +83,7 @@ const Modal: FC = () => {
             <div>
                 <div className={clsx(
                     "relative top-1 w-[130px] h-[30px] rounded-tr-xl z-30 rounded-tl-xl",
-                    colorModal?.length > 1
+                    (colorModal && colorModal?.length > 1)
                         ? `bg-${bgColor}`
                         : colorType[typeModal]?.background
                 )}>
@@ -91,7 +91,7 @@ const Modal: FC = () => {
                 <div
                     className={clsx(
                         "flex flex-row justify-between items-start p-4 w-auto h-auto z-40 bg-white rounded-lg rounded-tl-none shadow-form_shadow border-4",
-                        colorModal?.length > 1
+                        (colorModal && colorModal?.length > 1)
                             ? `border-${borderColor}`
                             : colorType[typeModal]?.border
                     )}

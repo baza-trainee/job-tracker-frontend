@@ -3,8 +3,8 @@ import { initialState } from "./initialState";
 import { ReactNode } from "react";
 
 type modalPayload =
-  | { typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "popup" | "custom"; modalContent?: string | ReactNode; onCallFunction?: () => void; colorModal?: string | undefined }
-  | { typeModal: "confirm"; modalContent?: string | ReactNode; onCallFunction: () => void };
+  | { typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "popup" | "custom"; modalContent?: string | ReactNode; onCallFunction?: () => void; colorModal?: string }
+  | { typeModal: "confirm"; modalContent?: string | ReactNode; onCallFunction: () => void; colorModal?: string };
 
 
 const modalSlice = createSlice({
