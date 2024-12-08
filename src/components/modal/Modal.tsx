@@ -15,9 +15,11 @@ import { useNavigate } from "react-router-dom";
 const Modal: FC = () => {
 
     const dispatch = useAppDispatch();
-    const { isModalOpen, modalContent, onCallFunction, typeModal } = useAppSelector(
+    const { isModalOpen, modalContent, onCallFunction, typeModal, colorModal } = useAppSelector(
         (state) => state.modal,
     );
+    const bgColor = colorModal;
+    const borderColor = colorModal;
 
     const confirmModal = (): void => {
         onCallFunction?.();
@@ -60,15 +62,14 @@ const Modal: FC = () => {
         if (typeModal === "popup") {
             timerModalPopup = setTimeout(() => {
                 dispatch(closeModal());
-            // TODO: 3000 -> 10000
             }, 10000);
         };
         return () => clearTimeout(timerModalPopup);
-        
+
     }, [typeModal, dispatch]);
-    
+
     //Alex
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
 
     if (!isModalOpen) return null;
@@ -82,13 +83,18 @@ const Modal: FC = () => {
             <div>
                 <div className={clsx(
                     "relative top-1 w-[130px] h-[30px] rounded-tr-xl z-30 rounded-tl-xl",
-                    colorType[typeModal]?.background
+                    (colorModal && colorModal?.length > 1)
+                        ? `bg-${bgColor}`
+                        : colorType[typeModal]?.background
                 )}>
                 </div>
                 <div
                     className={clsx(
                         "flex flex-row justify-between items-start p-4 w-auto h-auto z-40 bg-white rounded-lg rounded-tl-none shadow-form_shadow border-4",
-                        colorType[typeModal]?.border)}
+                        (colorModal && colorModal?.length > 1)
+                            ? `border-${borderColor}`
+                            : colorType[typeModal]?.border
+                    )}
                     onClick={e => e.stopPropagation()}>
 
                     <div
@@ -108,8 +114,8 @@ const Modal: FC = () => {
                                                 index === 0
                                                     // ? () => {console.log("Увійти натиснуто"); functionButtonMap[typeModal]()}
                                                     // : () => {console.log("Відновити натиснуто"); functionButtonMap[typeModal]()}
-                                                    ? () => {console.log("Увійти натиснуто"); functionButtonMap[typeModal](); navigate("log-in")}
-                                                    : () => {console.log("Відновити натиснуто"); functionButtonMap[typeModal](); dispatch(openModal({typeModal:"popup"}))}
+                                                    ? () => { console.log("Увійти натиснуто"); functionButtonMap[typeModal](); navigate("log-in") }
+                                                    : () => { console.log("Відновити натиснуто"); functionButtonMap[typeModal](); dispatch(openModal({ typeModal: "custom" })) }
                                             }
                                         >
                                             {buttonText}
@@ -132,7 +138,7 @@ const Modal: FC = () => {
                     <button
                         onClick={() => dispatch(closeModal())}
                         className="rounded-md hover:bg-color2">
-                        <Icon id="close" className="w-6 h-6 fill-textBlack"/>
+                        <Icon id="close" className="w-6 h-6 fill-textBlack" />
                     </button>
 
                 </div>

@@ -30,17 +30,21 @@
     "header": "Glad to see you again!",
     "subHeader": "Log in to continue tracking your responses",
     "forgotPassword": "Forgot password?",
-    "noAccount": "Don't have an account?"
+    "noAccount": "Don't have an account?",
+    "message": "Authorisation was successful. Now you can set up your profile."
   },
   "resetPassword": {
     "header": "Set a new password",
     "label": "Enter a new password",
-    "subHeader": "Enter a new password for further account access"
+    "subHeader": "Enter a new password for further account access",
+    "passwordChange": "Password change was successful. Log in with your new password",
+    "resetLink":"The password reset link is not valid. Please try again"
   },
   "forgotPassword": {
     "header": "Password recovery",
     "subHeader": "Enter the email associated with your account to recover your password.",
-    "button": "Recover"
+    "button": "Recover",
+    "passwordChange": "An email notification has been sent to you."
   },
   "infoCards": {
     "optimizeJobSearch": "Optimize your job search: save, analyze, achieve success",

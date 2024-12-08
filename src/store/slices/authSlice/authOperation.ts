@@ -102,7 +102,7 @@ export const logIn = createAsyncThunk<
         openModal({
           typeModal: "success",
           modalContent:
-            "Авторизація пройшла успішно. Зараз ви можете налаштувати свій профіль.",
+            "login.message",
         })
       );
       return response.data.user;
@@ -188,8 +188,7 @@ export const forgotPassword = createAsyncThunk<
       dispatch(
         openModal({
           typeModal: "success",
-          modalContent:
-            "Зміна пароля успішна. Вам надіслано повідомлення на електронну пошту.",
+          modalContent: "forgotPassword.passwordChange",
         })
       );
     } catch (error) {
@@ -230,7 +229,7 @@ export const resetPassword = createAsyncThunk(
       dispatch(
         openModal({
           typeModal: "success",
-          modalContent: "Зміна пароля успішна. Увійдіть з новим паролем",
+          modalContent: "resetPassword.passwordChange",
         })
       );
     } catch (error) {
@@ -245,8 +244,7 @@ export const resetPassword = createAsyncThunk(
           dispatch(
             openModal({
               typeModal: "error",
-              modalContent:
-                "Посилання на відновлення паролю не дійсне. Спробуйте ще раз",
+              modalContent: "resetPassword.resetLink",
             })
           );
           return rejectWithValue({

@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "./initialState";
+import { ReactNode } from "react";
 
 type modalPayload =
-  | { typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "popup"; modalContent?: string; onCallFunction?: () => void }
-  | { typeModal: "confirm"; modalContent?: string; onCallFunction: () => void };
+  | { typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "popup" | "custom"; modalContent?: string | ReactNode; onCallFunction?: () => void; colorModal?: string }
+  | { typeModal: "confirm"; modalContent?: string | ReactNode; onCallFunction: () => void; colorModal?: string };
 
 
 const modalSlice = createSlice({
@@ -15,12 +16,14 @@ const modalSlice = createSlice({
       state.modalContent = action.payload.modalContent;
       state.onCallFunction = action.payload.onCallFunction;
       state.typeModal = action.payload.typeModal;
+      state.colorModal = action.payload.colorModal;
     },
     closeModal: (state) => {
       state.isModalOpen = false;
       state.modalContent = undefined;
       state.onCallFunction = undefined;
       state.typeModal = "success";
+      state.colorModal = "";
     },
   },
 });
