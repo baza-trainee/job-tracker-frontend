@@ -6,6 +6,7 @@
     "statistics": "Statistics",
     "account": "Account",
     "notes": "Notes",
+    "сontact": "Contact Us",
     "logOut": "Log out"
   },
   "donate": "Support us",
@@ -38,7 +39,7 @@
     "label": "Enter a new password",
     "subHeader": "Enter a new password for further account access",
     "passwordChange": "Password change was successful. Log in with your new password",
-    "resetLink":"The password reset link is not valid. Please try again"
+    "resetLink": "The password reset link is not valid. Please try again"
   },
   "forgotPassword": {
     "header": "Password recovery",

@@ -81,6 +81,13 @@ function Sidebar() {
             !isOpenSidebar && "items-center"
           )}
         >
+          <SidebarItem
+            icon="log-out"
+            link="/log-in"
+            title={t("navigation.сontact")}
+            isOpen={isOpenSidebar}
+            funcLogOut={handleLogOut}
+          />
           <DonateItem
             icon="donate"
             title={t("donate")}
