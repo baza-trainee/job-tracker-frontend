@@ -138,7 +138,7 @@ const Modal: FC = () => {
                     <button
                         onClick={() => dispatch(closeModal())}
                         className="rounded-md hover:bg-color2">
-                        <Icon id="close" className="w-6 h-6 fill-textBlack" />
+                        <Icon id="close-default" className="w-6 h-6 fill-textBlack" />
                     </button>
 
                 </div>
