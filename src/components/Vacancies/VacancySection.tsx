@@ -1,13 +1,13 @@
 import { FC} from "react";
 import clsx from "clsx";
-// import VacancyCard from "./VacancyCard";
+// import VacancyCard from "./VacancyCard.tsx";
 
 type VacancySectionProps = {
     titleSection: string;
     colorSectionBorder: string;
     colorSectionBG: string;
   // vacancies: Vacancy[];
-}
+};
 
 const VacancySection: FC<VacancySectionProps> = ({ titleSection, colorSectionBorder, colorSectionBG }) => {
   
@@ -26,6 +26,6 @@ const VacancySection: FC<VacancySectionProps> = ({ titleSection, colorSectionBor
 
     </section>
   )
-}
+};
 
 export default VacancySection;
