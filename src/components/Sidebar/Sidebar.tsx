@@ -52,7 +52,7 @@ function Sidebar() {
 
         <nav
           className={cn(
-            "mt-6 flex flex-col gap-4 border-b-[1px] border-borderLight pb-5",
+            "border-borderLight mt-6 flex flex-col gap-4 border-b-[1px] pb-5",
             !isOpenSidebar && "items-center"
           )}
         >
@@ -77,16 +77,15 @@ function Sidebar() {
 
         <div
           className={cn(
-            "flex flex-col gap-4 border-t-[1px] border-borderLight pt-6",
+            "border-borderLight flex flex-col gap-4 border-t-[1px] pt-6",
             !isOpenSidebar && "items-center"
           )}
         >
           <SidebarItem
-            icon="log-out"
+            icon="support"
             link="/log-in"
-            title={t("navigation.сontact")}
+            title={t("navigation.support")}
             isOpen={isOpenSidebar}
-            funcLogOut={handleLogOut}
           />
           <DonateItem
             icon="donate"
