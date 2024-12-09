@@ -1,5 +1,6 @@
 import { FC} from "react";
 import VacancySection from "./VacancySection.tsx";
+import VacancyCard from "./VacancyCard.tsx"
 
 const Vacancies: FC = () => {
   return (
@@ -8,38 +9,59 @@ const Vacancies: FC = () => {
         titleSection="Збережені"
         colorSectionBorder="border-color5"
         colorSectionBG="bg-color5"
+      >
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" locationType="office" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" locationType="office" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
+      </VacancySection>
 
-      />
       <VacancySection 
         titleSection="Відправлені"
         colorSectionBorder="border-color1"
         colorSectionBG="bg-color1"
-      />
+      >
+        <VacancyCard colorSectionBG="bg-color1-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
+      </VacancySection>
+
       <VacancySection 
         titleSection="HR"
         colorSectionBorder="border-color4"
         colorSectionBG="bg-color4"
-      />
+      >
+      </VacancySection>
+
       <VacancySection 
         titleSection="Тестове завдання"
-        colorSectionBorder="border-[#FFF3CC]"
-        colorSectionBG="bg-[#FFF3CC]"
-      />
+        colorSectionBorder="border-color3"
+        colorSectionBG="bg-color3"
+      >
+      </VacancySection>
+
       <VacancySection 
         titleSection="Технічна співбесіда"
         colorSectionBorder="border-color6"
         colorSectionBG="bg-color6"
-      />
+      >
+      </VacancySection>
+
       <VacancySection 
         titleSection="Відмова"
         colorSectionBorder="border-color2"
         colorSectionBG="bg-color2"
-      />
+      >
+      </VacancySection>
+
       <VacancySection 
         titleSection="Офер"
         colorSectionBorder="border-color7"
         colorSectionBG="bg-color7"
-      />
+      >
+      </VacancySection>
     </div>
   )
 }
