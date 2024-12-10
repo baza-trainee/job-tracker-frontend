@@ -12,23 +12,29 @@ export const ICON = {
     ARROW_RIGHT: "arrow-right",
     ARROW_LONG_1: "arrow-long-1",
     ARROW_LONG_2: "arrow-long-2",
-    ARROW_ICONAMOON_SEND: "arrow-iconamoon-send", //використовувати з пропсом useStroke
+    ARROW_ICONAMOON_SEND: "arrow-iconamoon-send", // фарбувати stroke
     CANCEL_IN_ROUND: "cancel-in-round",
     CHAT_ERROR_OUTLINE: "chat-error-outline",
     CHECK_BOX: "check-box",
-    CLOSE: "close",
+    CHECK_BOX_GREEN: "check-box-green",
+    CHECK_SMALL: "check-small",
+    CHECK_BIG: "check-big",
+    CLOSE_DEFAULT: "close-default",
     COPY: "copy",
+    DELETE: "delete",
     DONATE: "donate",
     EDIT: "edit",
     EYE: "eye-outline",
     EYE_OFF: "eye-off-outline",
-    FILTER: "filter", //використовувати з пропсом useStroke
+    FILTER: "filter",       // фарбувати stroke
     FOLDER_OFF: "folder-off",
     FOLDER_OPEN: "folder-open",
     FOLDER: "folder",
-    TABLER_BUCKET_GROUP: "tabler-bucket-group", //використовувати з пропсом useStroke
-    HOME_REMOTE: "home-remote",
-    HOME_OFFICE_MIX: "home-office-mix",
+    TABLER_BUCKET_GROUP: "tabler-bucket-group", // фарбувати stroke
+    LOCATION_HOME: "location-home",
+    LOCATION_REMOTE: "location-remote",
+    LOCATION_HOME_WORK: "location-home-work",
+    LOCATION_HYBRID: "location-hybrid",
     LOCATION_OFFICE: "location-office",
     LOG_OUT: "log-out",
     NOTE: "note",
@@ -44,6 +50,10 @@ export const ICON = {
     GIRL_AND_DASHBOARD: "girl-and-dashboard",
     GIRL_WITH_PHONE: "girl-with-phone",
     MAN_AND_TIME: "man-and-time",
+    SUPPORT: "support",
+    RESTORE: "restore",
+    BASELINE_MORE_HORIZ: "baseline-more-horiz",
+    STAR: "star",   // фарбувати stroke
 } as const;
 
 // export type IconId = keyof typeof ICON; // Тип для ключів ICON
