@@ -29,7 +29,7 @@ const ForgotPasswordLayout = ({ type }: AuthorizationLayoutProps) => {
 
   return (
     <section>
-      <div className="px-12 py-[50px]">
+      <div className="text-left px-12 py-[50px]">
         <form className="" onSubmit={handleSubmit(onSubmit)}>
           <AuthHeader type={type} />
 
