@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import cn from "clsx";
 
-import SidebarItem from "./components/SidebarItem.tsx";
+import SidebarNavItem from "./components/SidebarNavItem.tsx";
 import LanguageToggle from "./components/LanguageToggle.tsx";
 import ThemeToggle from "./components/ThemeToggle.tsx";
-import DonateItem from "./components/DonateItem.tsx";
+import SidebarActionItem from "./components/SidebarActionItem.tsx";
 import NavList from "./components/NavList.tsx";
 import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
 import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
@@ -58,7 +58,7 @@ function Sidebar() {
         >
           {NavList().map((item, index) => {
             return (
-              <SidebarItem
+              <SidebarNavItem
                 key={index}
                 icon={item.icon}
                 link={item.link}
@@ -81,17 +81,27 @@ function Sidebar() {
             !isOpenSidebar && "items-center"
           )}
         >
-          <DonateItem
+          <SidebarActionItem
+            icon="support"
+            title={t("navigation.support")}
+            isOpen={isOpenSidebar}
+            donateIcon={false}
+            className="border-transparent dark:fill-slate-300 dark:text-slate-300"
+          />
+          <SidebarActionItem
             icon="donate"
             title={t("donate")}
             isOpen={isOpenSidebar}
+            className="border-textBlack bg-button px-3"
+            donateIcon={true}
           />
-          <SidebarItem
+          <SidebarActionItem
             icon="log-out"
-            link="/log-in"
             title={t("navigation.logOut")}
             isOpen={isOpenSidebar}
-            funcLogOut={handleLogOut}
+            className="border-transparent dark:fill-slate-300 dark:text-slate-300"
+            donateIcon={false}
+            action={handleLogOut}
           />
         </div>
       </div>
