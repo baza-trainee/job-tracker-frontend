@@ -1,11 +1,14 @@
 import { IconId } from "../../Icon/icons";
 
-export interface DonateItemProps {
+export interface SidebarActionItemProps {
   icon: IconId;
   link?: string;
   title: string;
   isOpen: boolean;
   useStroke?: boolean;
+  className?: string;
+  donateIcon?: boolean;
+  action?: () => void;
 }
 
 export interface SidebarItemProps {

@@ -9,7 +9,6 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   link,
   title,
   isOpen,
-  funcLogOut,
 }) => {
   return (
     <NavLink
@@ -26,14 +25,13 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
             "!border-[#DBDCDD] bg-backgroundMain fill-textBlack text-textBlack dark:fill-textBlack dark:text-textBlack"
         )
       }
-      onClick={funcLogOut}
     >
-      <Icon id={icon} className="mx-3 h-8 w-8" />
+      <Icon id={icon} className="mx-[14px] h-8 w-8" />
       <span
         className={cn(
           "custom-size overflow-hidden text-nowrap",
           isOpen
-            ? "visible w-[148px] opacity-100"
+            ? "visible w-[108px] opacity-100"
             : "sr-only w-0 -translate-x-5 opacity-0"
         )}
       >
