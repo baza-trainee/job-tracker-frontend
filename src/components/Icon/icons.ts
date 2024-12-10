@@ -31,8 +31,10 @@ export const ICON = {
     FOLDER_OPEN: "folder-open",
     FOLDER: "folder",
     TABLER_BUCKET_GROUP: "tabler-bucket-group", // фарбувати stroke
-    HOME: "home",
-    HOMEWORK: "homework",
+    LOCATION_HOME: "location-home",
+    LOCATION_REMOTE: "location-remote",
+    LOCATION_HOME_WORK: "location-home-work",
+    LOCATION_HYBRID: "location-hybrid",
     LOCATION_OFFICE: "location-office",
     LOG_OUT: "log-out",
     NOTE: "note",
