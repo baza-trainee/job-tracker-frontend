@@ -92,7 +92,7 @@ function Sidebar() {
             icon="donate"
             title={t("donate")}
             isOpen={isOpenSidebar}
-            className="border-textBlack bg-button px-3 hover:fill-iconHover hover:text-iconHover"
+            className="border-textBlack bg-button px-3"
             donateIcon={true}
           />
           <SidebarActionItem

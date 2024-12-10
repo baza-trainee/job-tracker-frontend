@@ -14,7 +14,7 @@ const SidebarActionItem: React.FC<SidebarActionItemProps> = ({
   return (
     <div
       className={cn(
-        "fill-text-primary flex h-[43px] cursor-pointer items-center gap-2 rounded-xl border-[1px]",
+        "fill-text-primary flex h-[43px] cursor-pointer items-center gap-2 rounded-xl border-[1px] hover:fill-iconHover hover:text-iconHover",
         "custom-transition",
         isOpen ? "w-[206px]" : "w-[68px]",
         className
