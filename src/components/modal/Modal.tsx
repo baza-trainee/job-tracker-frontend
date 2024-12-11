@@ -2,15 +2,12 @@ import { FC, useEffect } from "react";
 import clsx from "clsx";
 
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { closeModal, openModal } from "../../store/slices/modalSlice/modalSlice";
+import { closeModal } from "../../store/slices/modalSlice/modalSlice";
 
 import { contentMap, colorType, buttonMap, modalTextMap } from "./modalMappings";
 
 import { Button } from '../buttons/Button/Button';
 import Icon from "../Icon/Icon.tsx";
-
-// Alex
-import { useNavigate } from "react-router-dom";
 
 const Modal: FC = () => {
 
@@ -68,10 +65,6 @@ const Modal: FC = () => {
 
     }, [typeModal, dispatch]);
 
-    //Alex
-    const navigate = useNavigate();
-
-
     if (!isModalOpen) return null;
 
     return (
@@ -102,27 +95,7 @@ const Modal: FC = () => {
                         {contentMap[typeModal]}
                         <div className="text-center text-xl">{modalContent ? modalContent : modalTextMap[typeModal]}</div>
                         {typeModal !== "popup" && typeModal !== "custom" ? (
-                            typeModal === "errorMailExist" ? (
-                                <div className="flex gap-4">
-                                    {buttonMap[typeModal].map((buttonText, index) => (
-                                        <Button
-                                            key={index}
-                                            disabled={false}
-                                            variant="ghost"
-                                            size="small"
-                                            onClick={
-                                                index === 0
-                                                    // ? () => {console.log("Увійти натиснуто"); functionButtonMap[typeModal]()}
-                                                    // : () => {console.log("Відновити натиснуто"); functionButtonMap[typeModal]()}
-                                                    ? () => { console.log("Увійти натиснуто"); functionButtonMap[typeModal](); navigate("log-in") }
-                                                    : () => { console.log("Відновити натиснуто"); functionButtonMap[typeModal](); dispatch(openModal({ typeModal: "custom" })) }
-                                            }
-                                        >
-                                            {buttonText}
-                                        </Button>
-                                    ))}
-                                </div>
-                            ) : (
+                            (
                                 (<Button
                                     disabled={false}
                                     variant="ghost"

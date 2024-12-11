@@ -66,5 +66,30 @@
   "footer": {
     "development": "Development of Baza Trainee Ukraine 2024",
     "rights": " © All rights have been reserved"
+  },
+  "modalMappingContentMap": {
+    "success": "Success!",
+    "error": "Oops!",
+    "confirm": "Confirm action!",
+    "errorMailExist": "Oops!",
+    "recoveryPassword": "Password recovery"
+  },
+  "modalMappingModalTextMap": {
+    "success": "Registration was successful. Now you can customize your profile.",
+    "error": "Check the entered data and try again.",
+    "confirm": "",
+    "popup": "",
+    "custom": "",
+    "errorMailExist": "An account with this email already exists. Try logging in or resetting your password.",
+    "recoveryPassword": "An account with this email already exists. Try logging in or resetting your password."
+  },
+  "modalMappingButtonMap": {
+    "success": "Continue",
+    "error": "Retry",
+    "confirm": "Ok",
+    "popup": "",
+    "custom": "",
+    "errorMailExist": "Log In",
+    "recoveryPassword": "Recover"
   }
 }
