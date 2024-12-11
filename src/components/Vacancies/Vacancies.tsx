@@ -1,77 +1,15 @@
-import { FC} from "react";
-import VacancySection from "./VacancySection.tsx";
-import VacancyCard from "./VacancyCard.tsx"
+import { FC } from "react";
+import VacancyHeader from "./components/VacanсyHeader.tsx";
+import VacancyMain from "./components/VacanсyMain.tsx";
 
 const Vacancies: FC = () => {
   return (
-    <div className="w-full px-6 pt-10 flex flex-col gap-6">
-      <VacancySection 
-        titleSection="Збережені"
-        colorSectionBorder="border-color5"
-        colorSectionBG="bg-color5"
-      >
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" locationType="office" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" locationType="office" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
-      </VacancySection>
+    <div className="w-full flex flex-col py-10 px-6">
+      <VacancyHeader />
 
-      <VacancySection 
-        titleSection="Відправлені"
-        colorSectionBorder="border-color1"
-        colorSectionBG="bg-color1"
-      >
-        <VacancyCard colorSectionBG="bg-color1-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
-      </VacancySection>
-
-      <VacancySection 
-        titleSection="HR"
-        colorSectionBorder="border-color4"
-        colorSectionBG="bg-color4"
-      >
-      </VacancySection>
-
-      <VacancySection 
-        titleSection="Тестове завдання"
-        colorSectionBorder="border-color3"
-        colorSectionBG="bg-color3"
-      >
-      </VacancySection>
-
-      <VacancySection 
-        titleSection="Технічна співбесіда"
-        colorSectionBorder="border-color6"
-        colorSectionBG="bg-color6"
-      >
-      </VacancySection>
-
-      <VacancySection 
-        titleSection="Відмова"
-        colorSectionBorder="border-color2"
-        colorSectionBG="bg-color2"
-      >
-      </VacancySection>
-
-      <VacancySection 
-        titleSection="Офер"
-        colorSectionBorder="border-color7"
-        colorSectionBG="bg-color7"
-      >
-      </VacancySection>
+      <VacancyMain />
     </div>
   )
 }
-
-// function Vacancies() {
-//   return (
-//     <div className="flex w-full items-center justify-center">
-//       <h2 className="text-2xl">Vacancies</h2>
-//     </div>
-//   );
-// }
 
 export default Vacancies;

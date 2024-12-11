@@ -1,6 +1,6 @@
 import { FC, ReactNode} from "react";
 import clsx from "clsx";
-// import VacancyCard from "./VacancyCard.tsx";
+import Icon from "../../Icon/Icon.tsx";
 
 type VacancySectionProps = {
     titleSection: string;
@@ -17,9 +17,7 @@ const VacancySection: FC<VacancySectionProps> = ({
   children, 
 }) => {  
     return (
-    <section 
-        className={clsx("text-textBlack")}
-    >
+    <section className={clsx("text-textBlack")} >
 
       <div className={clsx(
           "w-fit px-3 py-[6px] text-xl font-medium rounded-tl-lg rounded-tr-lg", 
@@ -29,11 +27,14 @@ const VacancySection: FC<VacancySectionProps> = ({
 
       <div className={clsx("w-full flex justify-center p-6 border-4 border-solid rounded-[0px_12px_12px_12px]", 
           colorSectionBorder)}>
-        <div className="w-[1172px] grid grid-cols-4 gap-5" >
-          { children? children : <p>Немає вакансій</p> }
+        <div className="w-full flex gap-4 items-center section-contant">
+          <Icon id="arrow-left" className="w-6 h-6" />
+          <div className="w-full flex gap-5 flex-wrap overflow-x-auto max-h-56" >
+            { children? children : <p>Немає вакансій</p> }
+          </div>
+          <Icon id="arrow-right" className="w-6 h-6" />
         </div>
       </div>
-
 
     </section>
   )
