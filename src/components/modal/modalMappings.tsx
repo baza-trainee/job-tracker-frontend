@@ -1,11 +1,13 @@
+import { Trans } from 'react-i18next';
+
 export const contentMap = {
-    success: <span className="text-4xl font-bold text-color8">Успіх!</span>,
-    error: <span className="text-4xl font-bold text-color2">Упс!</span>,
-    confirm: <span className="text-4xl font-bold text-color5">Підтвердіть дію!</span>,
+    success: <span className="text-4xl font-bold text-color8"><Trans i18nKey="modalMappingContentMap.success" /></span>,
+    error: <span className="text-4xl font-bold text-color2"><Trans i18nKey="modalMappingContentMap.error" /></span>,
+    confirm: <span className="text-4xl font-bold text-color5"><Trans i18nKey="modalMappingContentMap.confirm" /></span>,
     popup: "",
     custom: "",
-    errorMailExist: <span className="text-4xl font-bold text-color2">Упс!</span>,
-    recoveryPassword: <span className="text-4xl font-bold text-textBlack">Відновлення паролю</span>,
+    errorMailExist: <span className="text-4xl font-bold text-color2"><Trans i18nKey="modalMappingContentMap.errorMailExist" /></span>,
+    recoveryPassword: <span className="text-4xl font-bold text-textBlack"><Trans i18nKey="modalMappingContentMap.recoveryPassword" /></span>,
 }
 export const colorType = {
     success: {
@@ -38,20 +40,20 @@ export const colorType = {
     },
 }
 export const buttonMap = {
-    success: "Продовжити",
-    error: "Повторити спробу",
-    confirm: "Ок",
+    success: <Trans i18nKey="modalMappingButtonMap.success" />,
+    error: <Trans i18nKey="modalMappingButtonMap.error" />,
+    confirm: <Trans i18nKey="modalMappingButtonMap.confirm" />,
     popup: "",
     custom : "",
-    errorMailExist: ["Увійти", "Відновити"],
-    recoveryPassword: "Відновити",
+    errorMailExist: <Trans i18nKey="modalMappingButtonMap.errorMailExist" />,
+    recoveryPassword: <Trans i18nKey="modalMappingButtonMap.recoveryPassword" />,
 }
 export const modalTextMap = {
-    success: "Реєстрація пройшла успішно. Зараз ви можете налаштувати свій профіль.",
-    error: "Перевірте введені дані та спробуйте ще раз.",
+    success: <Trans i18nKey="modalMappingModalTextMap.success" />,
+    error: <Trans i18nKey="modalMappingModalTextMap.error" />,
     confirm: undefined,
     popup: undefined,
     custom: undefined,
-    errorMailExist: "Обліковий запис з такою поштою вже існує. Спробуйте увійти або відновити пароль.",
-    recoveryPassword: "Обліковий запис з такою поштою вже існує. Спробуйте увійти або відновити пароль.",
+    errorMailExist: <Trans i18nKey="modalMappingModalTextMap.errorMailExist" />,
+    recoveryPassword: <Trans i18nKey="modalMappingModalTextMap.recoveryPassword" />,
 }
