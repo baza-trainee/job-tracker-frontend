@@ -38,43 +38,50 @@ export default {
         backgroundTertiary: "#F7F8FB",
         iconHover: "#436B88",
         color1: {
-          DEFAULT: "#C6E7FF",  // blue
-          transparent: "rgba(198, 231, 255, 0.40)"}, // blue with opacity
+          DEFAULT: "#C6E7FF", // blue
+          transparent: "rgba(198, 231, 255, 0.40)",
+        }, // blue with opacity
         color2: {
-          DEFAULT: "#FC8972",  // error red
-          transparent: "rgba(252, 137, 114, 0.40)"}, // error red with opacity
+          DEFAULT: "#FC8972", // error red
+          transparent: "rgba(252, 137, 114, 0.40)",
+        }, // error red with opacity
         color3: {
-          DEFAULT: "#FEEE91",  // yellow
-          transparent: "rgba(254, 238, 145, 0.40)"}, // yellow with opacity
+          DEFAULT: "#FEEE91", // yellow
+          transparent: "rgba(254, 238, 145, 0.40)",
+        }, // yellow with opacity
         color4: {
-          DEFAULT: "#CDC1FF",  // purple
-          transparent: "rgba(205, 193, 255, 0.40)"}, // purple with opacity
+          DEFAULT: "#CDC1FF", // purple
+          transparent: "rgba(205, 193, 255, 0.40)",
+        }, // purple with opacity
         color5: {
-          DEFAULT: "#D0E8C5",  // green-light
-          transparent: "rgba(208, 232, 197, 0.40)"}, // green-light with opacity
+          DEFAULT: "#D0E8C5", // green-light
+          transparent: "rgba(208, 232, 197, 0.40)",
+        }, // green-light with opacity
         color6: {
-          DEFAULT: "#A6AEBF",  // grey
-          transparent: "rgba(166, 174, 191, 0.40)"}, // grey with opacity
+          DEFAULT: "#A6AEBF", // grey
+          transparent: "rgba(166, 174, 191, 0.40)",
+        }, // grey with opacity
         color7: {
-          DEFAULT: "#B1D690",  // green
-          transparent: "rgba(177, 214, 144, 0.40)"}, // green with opacity 0.4
+          DEFAULT: "#B1D690", // green
+          transparent: "rgba(177, 214, 144, 0.40)",
+        }, // green with opacity 0.4
         color7Light: "rgba(177, 214, 144, 0.3)", // color7 green with opacity 0.3
         color8: "#76925D", // green-dark
         borderLight: "#CECECE", // немає в дизайні, додати
-   
+
         // text: {
-          // primary: "#333333",  // дубль
-          // gray: "rgba(51, 51, 51, 0.5)", // немає в дизайні, це колір #333333 з opacity
-          // link: "#288dd5",  // дубль
-          // active: "#121212",  // не використовується
+        // primary: "#333333",  // дубль
+        // gray: "rgba(51, 51, 51, 0.5)", // немає в дизайні, це колір #333333 з opacity
+        // link: "#288dd5",  // дубль
+        // active: "#121212",  // не використовується
         // },
         // card: {
-          // blue: "#C6E7FF", // дубль
-          // red: "#FC8972", // дубль
-          // yellow: "#FEEE91", // дубль
-          // purple: "#CDC1FF", // дубль
-          // green: "#D0E8C5", // дубль
-          // gray: "#A6AEBF", // дубль
+        // blue: "#C6E7FF", // дубль
+        // red: "#FC8972", // дубль
+        // yellow: "#FEEE91", // дубль
+        // purple: "#CDC1FF", // дубль
+        // green: "#D0E8C5", // дубль
+        // gray: "#A6AEBF", // дубль
         // },
         background: {
           // page: "#F6F6F6", // замінила на backgroundMain
@@ -95,4 +102,9 @@ export default {
     },
   },
   plugins: [],
+  safelist: [
+    {
+      pattern: /(bg|text|border)-(color2|color8|button)/,
+    },
+  ],
 };

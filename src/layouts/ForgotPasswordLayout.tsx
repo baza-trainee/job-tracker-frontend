@@ -8,11 +8,11 @@ import { useTranslation } from "react-i18next";
 
 import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
 
-type AuthorizationLayoutProps = {
+type ForgotPasswordLayoutProps = {
   type: "forgotPassword";
 };
 
-const ForgotPasswordLayout = ({ type }: AuthorizationLayoutProps) => {
+const ForgotPasswordLayout = ({ type }: ForgotPasswordLayoutProps) => {
   const {
     register,
     handleSubmit,
@@ -29,7 +29,7 @@ const ForgotPasswordLayout = ({ type }: AuthorizationLayoutProps) => {
 
   return (
     <section>
-      <div className="text-left px-12 py-[50px]">
+      <div className="px-12 py-[50px] text-left">
         <form className="" onSubmit={handleSubmit(onSubmit)}>
           <AuthHeader type={type} />
 

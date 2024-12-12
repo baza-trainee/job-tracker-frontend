@@ -107,7 +107,7 @@ export const Textarea = ({
         {error && (
           <span
             id={`inputError-${name}`}
-            className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
+            className="absolute left-0 -bottom-6 inline-block font-nunito text-base font-medium text-color2"
           >
             {t(String(error?.message))}
           </span>

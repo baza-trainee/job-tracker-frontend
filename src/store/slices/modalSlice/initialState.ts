@@ -1,17 +1,20 @@
-import { ReactNode } from "react";
-
-export interface ModalState {
-  isModalOpen: boolean;
-  typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "confirm" | "popup" | "custom";
-  modalContent?: string | ReactNode;
-  onCallFunction?: () => void;
-  colorModal?: string;
+export interface ModalProps {
+  isModalOpen?: boolean;
+  typeModal:
+    | "close"
+    | "forgotPassword"
+    | "logInSuccess"
+    | "logInError"
+    | "signUpSuccess"
+    | "signUpError"
+    | "forgotPasswordSuccess"
+    | "resetPasswordErrorLink"
+    | "resetPasswordSuccess"
+    | "contactUs"
+    | "logOut";
 }
 
-export const initialState: ModalState = {
+export const initialState: ModalProps = {
   isModalOpen: false,
-  typeModal: "success",
-  modalContent: undefined,
-  onCallFunction: undefined,
-  colorModal: "",
+  typeModal: "close",
 };

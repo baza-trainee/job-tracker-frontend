@@ -1,14 +1,18 @@
-import { Input } from "../../inputs/Input/Input";
-import { Button } from "../../buttons/Button/Button";
-import { Textarea } from "../../Textarea/Textarea";
+import { Input } from "../../../inputs/Input/Input";
+import { Button } from "../../../buttons/Button/Button";
+import { Textarea } from "../../../Textarea/Textarea";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
-import { ContactUsSchema } from "../../../schemas/ContactUsSchema";
+import { ContactUsSchema } from "../../../../schemas/ContactUsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAppDispatch } from "../../../../store/hook";
+import { closeModal } from "../../../../store/slices/modalSlice/modalSlice";
 
 const ContactUs = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  // пізніше написати хук для перевірки та відправки форм
   const {
     register,
     handleSubmit,
@@ -29,11 +33,16 @@ const ContactUs = () => {
     reset();
     console.log(data);
   };
+  // -------------------------------------------------------------
+  const handleCancel = (): void => {
+    reset();
+    dispatch(closeModal());
+  };
 
   const error = !!Object.keys(errors).length;
 
   return (
-    <div className="w-[449px] text-left my-12">
+    <div className="my-12 w-[449px] text-left">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-4">
           <Input
@@ -77,7 +86,7 @@ const ContactUs = () => {
               disabled={error}
               variant="ghost"
               size="small"
-              onClick={() => reset()}
+              onClick={() => handleCancel()}
             >
               Скасувати
             </Button>

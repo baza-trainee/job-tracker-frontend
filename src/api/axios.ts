@@ -1,15 +1,23 @@
 import axios from "axios";
 import { AXIOS } from "./axios-constants";
+// import { useAppDispatch } from "../store/hook";
+// import { saveTokens } from "../store/slices/authSlice/authSlice";
+// export const axiosInstance = axios.create({
+//   baseURL: AXIOS.URL_BACKEND,
+// });
 
-export const axiosInstance = axios.create({
+export const api = axios.create({
   baseURL: AXIOS.URL_BACKEND,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-axiosInstance.interceptors.request.use(
+api.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem(AXIOS.ACCESS_TOKEN);
     if (accessToken) {
-      config.headers.common["Authorization"] = `${AXIOS.BEARER} ${accessToken}`;
+      config.headers["Authorization"] = `${AXIOS.BEARER} ${accessToken}`;
     }
     return config;
   },
@@ -18,12 +26,45 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-export const api = axios.create({
-  baseURL: AXIOS.URL_BACKEND,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+// api.interceptors.response.use(
+//   (response) => response,
+//   async (error) => {
+//     if (error.response.status == 401) {
+//       const refreshToken = localStorage.getItem(AXIOS.ACCESS_TOKEN);
+//       try {
+//         const { data } = await api.post("/user/profile", {
+//           refreshToken,
+//         });
+//         const dispatch = useAppDispatch();
+//         dispatch(
+//           saveTokens({
+//             access_token: data.access_token,
+//             refresh_token:data.access_token
+//           })
+//         );
+//         localStorage.setItem(AXIOS.REFRESH_TOKEN, data.refreshToken);
+//         localStorage.setItem(AXIOS.ACCESS_TOKEN, data.accessToken);
+//         return api(error.config);
+//       } catch (refreshError) {
+//         return Promise.reject(refreshError);
+//       }
+//     }
+//     return Promise.reject(error);
+//   }
+// );
+
+// axiosInstance.interceptors.request.use(
+//   (config) => {
+//     const accessToken = localStorage.getItem(AXIOS.ACCESS_TOKEN);
+//     if (accessToken) {
+//       config.headers.common["Authorization"] = `${AXIOS.BEARER} ${accessToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 // const setToken = (token: string) => {
 //   if (token) {
