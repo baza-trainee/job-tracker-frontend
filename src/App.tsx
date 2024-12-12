@@ -17,6 +17,7 @@ import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { useAppDispatch } from "./store/hook";
 import { refreshUser } from "./store/slices/authSlice/authOperation";
+import Archive from "./components/Archive/Archive";
 
 function App() {
   const darkMode = useAppSelector(selectTheme);
@@ -41,6 +42,7 @@ function App() {
           <Route path="statistics" element={<Statistics />} />
           <Route path="profile" element={<Profile />} />
           <Route path="notes" element={<Notes />} />
+          <Route path="archive" element={<Archive />} />
           <Route path="*" element={<h1>Page not found</h1>} />
         </Route>
       </Route>

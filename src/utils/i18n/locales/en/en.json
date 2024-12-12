@@ -63,6 +63,12 @@
     "termsRequired": "You have not given consent",
     "passwordMismatch": "Passwords must match"
   },
+  "vacanciesHeader": {
+    "search": "Search",
+    "sortBy": "Sort by",
+    "archive": "Feedback archive",
+    "addVacancy": "Add vacancy"
+  },
   "footer": {
     "development": "Development of Baza Trainee Ukraine 2024",
     "rights": " © All rights have been reserved"
