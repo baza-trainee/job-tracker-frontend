@@ -6,14 +6,16 @@ type VacancyCardProps = {
     colorSectionBG: string;
     titleVacancy: string;
     company: string;
-    locationType: "office" | "remote" | "hybrid";
+    location: string;
+    workType: "office" | "remote" | "hybrid";
 };
 
 const VacancyCard: FC<VacancyCardProps> = ({ 
     colorSectionBG,
     titleVacancy, 
     company, 
-    locationType 
+    location, 
+    workType 
 }) => {
     const locationLabel = {
         office: "Офіс",
@@ -31,8 +33,9 @@ const VacancyCard: FC<VacancyCardProps> = ({
                 <p className="text-xs">{company}</p>
             </div>
             <div className="flex gap-1 items-center">
-                <Icon id={`location-${locationType}`} className="w-6 h-6"/>
-                <span className="text-sm">{locationLabel[locationType]}</span>
+                <Icon id={`location-${workType}`} className="w-6 h-6"/>
+                <span className="text-sm">{locationLabel[workType]}</span>
+                <span className="text-sm">{location}</span>
             </div>
         </div>
     )

@@ -1,8 +1,33 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/hook.ts";
+import { fetchVacancies } from "../../../store/slices/vacanciesSlice.ts";
+
 import VacancySection from "./VacancySection.tsx";
 import VacancyCard from "./VacancyCard.tsx";
 
 const VacancyMain: FC = () => {
+  const dispatch = useAppDispatch();
+  const { vacancies, status, error } = useAppSelector((state) => state.vacancies);
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchVacancies());
+    }
+  }, [dispatch, status]);
+
+  const getVacanciesByStatus = (statusName: string) =>
+    vacancies.filter((vacancy) =>
+      vacancy.statuses.some((status) => status.name === statusName)
+    );
+
+  const savedVacancies = getVacanciesByStatus("saved");
+  // const sentVacancies = getVacanciesByStatus("sent");
+  // const hrVacancies = getVacanciesByStatus("hr");
+  // const testTaskVacancies = getVacanciesByStatus("testTask");
+  // const techInterviewVacancies = getVacanciesByStatus("technicalInterview");
+  // const rejectedVacancies = getVacanciesByStatus("rejected");
+  // const offerVacancies = getVacanciesByStatus("offer");
+
 
   return (
     <div className="w-full flex flex-col gap-6">
@@ -11,14 +36,26 @@ const VacancyMain: FC = () => {
         colorSectionBorder="border-color5"
         colorSectionBG="bg-color5"
       >
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" locationType="office" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" locationType="office" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" locationType="hybrid" />
-        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
+        {savedVacancies.length > 0 ? (
+          savedVacancies.map((vacancy) => (
+            <VacancyCard 
+              key={vacancy.id} 
+              colorSectionBG="bg-color5-transparent" 
+              titleVacancy={vacancy.vacancy} 
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))
+        ): (<p>Немає збережених вакансій</p>)}
+        {/* <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="kharkiv" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
+        <VacancyCard colorSectionBG="bg-color5-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" /> */}
       </VacancySection>
 
       <VacancySection
@@ -26,7 +63,7 @@ const VacancyMain: FC = () => {
         colorSectionBorder="border-color1"
         colorSectionBG="bg-color1"
       >
-        <VacancyCard colorSectionBG="bg-color1-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" locationType="remote" />
+        <VacancyCard colorSectionBG="bg-color1-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
       </VacancySection>
 
       <VacancySection
