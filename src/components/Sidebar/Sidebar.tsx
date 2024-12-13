@@ -10,18 +10,33 @@ import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
 import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
 
 import { useAppDispatch, useAppSelector } from "../../store/hook.ts";
-import { clearTokens } from "../../store/slices/authSlice/authSlice.ts";
 import { selectSidebar } from "../../store/slices/sibebarSlice/sidebarSelector.ts";
 import {
   closeSidebar,
   openSidebar,
 } from "../../store/slices/sibebarSlice/sidebarSlice.ts";
 
+import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
+
 function Sidebar() {
   const dispatch = useAppDispatch();
+
   const handleLogOut = (): void => {
-    dispatch(clearTokens());
+    dispatch(
+      openModal({
+        typeModal: "logOut",
+      })
+    );
   };
+
+  const handleSupportModal = (): void => {
+    dispatch(
+      openModal({
+        typeModal: "contactUs",
+      })
+    );
+  };
+
   const isOpenSidebar = useAppSelector(selectSidebar);
 
   const handleOpenSidebar = () => {
@@ -87,6 +102,7 @@ function Sidebar() {
             isOpen={isOpenSidebar}
             donateIcon={false}
             className="border-transparent dark:fill-slate-300 dark:text-slate-300"
+            action={handleSupportModal}
           />
           <SidebarActionItem
             icon="donate"
