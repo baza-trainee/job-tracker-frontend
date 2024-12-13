@@ -100,16 +100,14 @@ export const logIn = createAsyncThunk<
       dispatch(saveTokens({ access_token, refresh_token }));
       dispatch(
         openModal({
-          typeModal: "success",
-          modalContent:
-            "login.message",
+          typeModal: "logInSuccess",
         })
       );
       return response.data.user;
     } catch (error) {
       dispatch(
         openModal({
-          typeModal: "error",
+          typeModal: "logInError",
         })
       );
       if (isAxiosError(error)) {
@@ -146,7 +144,7 @@ export const signUp = createAsyncThunk<
       dispatch(saveTokens({ access_token, refresh_token }));
       dispatch(
         openModal({
-          typeModal: "success",
+          typeModal: "signUpSuccess",
         })
       );
       return response.data.user;
@@ -155,7 +153,7 @@ export const signUp = createAsyncThunk<
         if (error.response?.status === 409) {
           dispatch(
             openModal({
-              typeModal: "errorMailExist",
+              typeModal: "signUpError",
             })
           );
 
@@ -187,14 +185,13 @@ export const forgotPassword = createAsyncThunk<
       });
       dispatch(
         openModal({
-          typeModal: "success",
-          modalContent: "forgotPassword.passwordChange",
+          typeModal: "forgotPasswordSuccess",
         })
       );
     } catch (error) {
       dispatch(
         openModal({
-          typeModal: "error",
+          typeModal: "logInError",
         })
       );
       if (isAxiosError(error)) {
@@ -228,14 +225,13 @@ export const resetPassword = createAsyncThunk(
       });
       dispatch(
         openModal({
-          typeModal: "success",
-          modalContent: "resetPassword.passwordChange",
+          typeModal: "resetPasswordSuccess",
         })
       );
     } catch (error) {
       dispatch(
         openModal({
-          typeModal: "error",
+          typeModal: "logInError",
         })
       );
       if (isAxiosError(error)) {
@@ -243,8 +239,7 @@ export const resetPassword = createAsyncThunk(
         if (errorCode === 401) {
           dispatch(
             openModal({
-              typeModal: "error",
-              modalContent: "resetPassword.resetLink",
+              typeModal: "resetPasswordErrorLink",
             })
           );
           return rejectWithValue({
@@ -261,50 +256,3 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
-
-// export const isValidToken = createAsyncThunk(
-//   "auth/isValidToken",
-//   async (
-//     { password, token }: resetPasswordProps,
-//     { dispatch, rejectWithValue }
-//   ) => {
-//     try {
-//       await api.post("/auth/reset-password", {
-//         token,
-//         password,
-//       });
-//       dispatch(
-//         openModal({
-//           typeModal: "success",
-//           modalContent: "Токен Валідний",
-//         })
-//       );
-//     } catch (error) {
-//       dispatch(
-//         openModal({
-//           typeModal: "error",
-//         })
-//       );
-//       if (isAxiosError(error)) {
-//         const errorCode = error.response?.status;
-//         if (errorCode === 401) {
-//           dispatch(
-//             openModal({
-//               typeModal: "error",
-//               modalContent: "Токен Невалідний",
-//             })
-//           );
-//           return rejectWithValue({
-//             message: "Токен не дійсний",
-//             code: errorCode,
-//           });
-//         }
-//       } else {
-//         return rejectWithValue({
-//           message: "Сталася невідома помилка при обробці запиту",
-//           code: undefined,
-//         });
-//       }
-//     }
-//   }
-// );

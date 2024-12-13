@@ -10,7 +10,6 @@ import Checkbox from "../components/checkbox/Checkbox";
 import { Button } from "../components/buttons/Button/Button";
 import Separator from "../components/separator/Separator";
 import Footer from "../components/layout/Footer";
-import { ForgotPassword } from "../pages/ForgotPassword";
 
 import { useAppSelector, useAppDispatch } from "../store/hook";
 import { useTranslation } from "react-i18next";
@@ -102,9 +101,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         onClick={() =>
                           dispatch(
                             openModal({
-                              typeModal: "custom",
-                              modalContent: <ForgotPassword/>,
-                              colorModal: "button"
+                              typeModal: "forgotPassword",
                             })
                           )
                         }

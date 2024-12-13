@@ -4,6 +4,11 @@ export const emailRegex =
 export const passwordRegex =
   /^(?=.*[A-Z\u0400-\u04FF])(?=.*\d)[A-Za-z\u0400-\u04FF\d]{8,}$/;
 
+export const nameRegex = /^(?!.*[ЁёЫыЭэЪъ])[A-Za-zА-Яа-я’`’\-\s]{2,30}$/;
+
+export const textContactUsRegex =
+  /^(?!.*[ЁёЫыЭэЪъ])(?!(?:.*?[<>"'`/\\|]){5,})[\wа-яА-Я\s,.!?;:()\[\]{}@#$%^&*+=~\-]{10,4000}$/;
+
 // TODO:  вимоги проекта, але поки закоментовані для тестів
 // export const emailRegex =
 //   /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?<!\.ru|\.by)$/;

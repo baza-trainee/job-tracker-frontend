@@ -17,7 +17,9 @@ import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { useAppDispatch } from "./store/hook";
 import { refreshUser } from "./store/slices/authSlice/authOperation";
+import { axiosInstance } from "./api/axios";
 import Archive from "./components/Archive/Archive";
+//alex
 
 function App() {
   const darkMode = useAppSelector(selectTheme);
@@ -31,6 +33,18 @@ function App() {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode, dispatch]);
+
+  // TODO: перевірка axiosInstance потім видалити
+  const func = async () => {
+    try {
+      const response = await axiosInstance.get("/vacancies");
+      return response;
+    } catch (error) {
+      console.log("errorGet", error);
+    }
+  };
+  func().then((rezult) => console.log("axiosInstance", rezult));
+  // ----------------------------------------------------------------
 
   return (
     <Routes>
