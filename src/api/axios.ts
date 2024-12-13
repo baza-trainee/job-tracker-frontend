@@ -39,10 +39,6 @@ axiosInstance.interceptors.request.use(
     const accessToken = parseAccessToken();
     if (accessToken) {
       config.headers["Authorization"] = `${AXIOS.BEARER} ${accessToken}`;
-      // можна видалити
-      console.log("accessToken", accessToken);
-      console.log("config", config);
-      // ------------------------------------------------------------------------
     }
     return config;
   },
