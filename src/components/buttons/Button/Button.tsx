@@ -12,26 +12,26 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "flex h-[50px] items-center justify-center rounded-xl font-nunito text-xl font-medium text-textBlack duration-300",
+        "flex h-[51px] items-center justify-center rounded-xl border-[1px] border-textBlack font-nunito text-xl font-medium text-textBlack duration-300",
 
         size === "small" && "px-8",
-        size === "big" && "h-[51px] px-12",
+        size === "big" && "px-12",
 
         !disabled &&
           variant === "accent" &&
-          "text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary",
+          "bg-button hover:border-iconHover hover:bg-backgroundSecondary active:border-iconHover active:bg-iconHover active:fill-textWhite active:text-textWhite",
 
         !disabled &&
           variant === "ghost" &&
-          "border-[1px] border-[solid] border-iconHover bg-transperent hover:border-textBlack hover:bg-[#bfdef5] active:border-none active:bg-iconHover active:text-textWhite",
+          "relative bg-transparent hover:border-iconHover hover:bg-backgroundSecondary active:border-transparent active:bg-transparent active:ring-[2px] active:ring-inset active:ring-iconHover",
 
         disabled &&
           variant === "accent" &&
-          "bg-grey-40 text-grey-0 pointer-events-none",
+          "pointer-events-none border-transparent bg-backgroundSecondary text-color6",
 
         disabled &&
           variant === "ghost" &&
-          "bg-backgroundSecondary pointer-events-none ring-transparent",
+          "pointer-events-none border-transparent bg-backgroundSecondary text-color6 ring-transparent",
 
         className
       )}
