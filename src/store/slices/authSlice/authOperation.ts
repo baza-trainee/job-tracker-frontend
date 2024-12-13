@@ -274,7 +274,7 @@ export const logOut = createAsyncThunk<
     );
     console.log("logOut error", error);
     return rejectWithValue({
-      message: "Сталася невідома помилка при обробці запиту",
+      message: "Сталася невідома помилка при обробці запиту ",
       code: undefined,
     });
   }
