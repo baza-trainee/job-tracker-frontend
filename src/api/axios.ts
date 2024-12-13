@@ -1,10 +1,6 @@
 import axios from "axios";
 import { AXIOS } from "./axios-constants";
-// import { useAppDispatch } from "../store/hook";
-// import { saveTokens } from "../store/slices/authSlice/authSlice";
-// export const axiosInstance = axios.create({
-//   baseURL: AXIOS.URL_BACKEND,
-// });
+// import { useAppSelector } from "../store/hook";
 
 export const api = axios.create({
   baseURL: AXIOS.URL_BACKEND,
@@ -37,6 +33,11 @@ const parseAccessToken = (): string | null => {
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = parseAccessToken();
+
+    // TODO для використання треба зробити розширення tsx, бо хуки можна викликати лише в функціональних компонентах
+    // const { tokens } = useAppSelector((state) => state.auth);
+    // const accessToken = tokens?.access_token;
+
     if (accessToken) {
       config.headers["Authorization"] = `${AXIOS.BEARER} ${accessToken}`;
     }
