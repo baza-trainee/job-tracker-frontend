@@ -7,7 +7,7 @@ import VacancyCard from "./VacancyCard.tsx";
 
 const VacancyMain: FC = () => {
   const dispatch = useAppDispatch();
-  const { vacancies, status, error } = useAppSelector((state) => state.vacancies);
+  const { vacancies, status } = useAppSelector((state) => state.vacancies);
 
   useEffect(() => {
     if (status === "idle") {
@@ -21,13 +21,12 @@ const VacancyMain: FC = () => {
     );
 
   const savedVacancies = getVacanciesByStatus("saved");
-  // const sentVacancies = getVacanciesByStatus("sent");
+  // const sentVacancies = getVacanciesByStatus("resume");
   // const hrVacancies = getVacanciesByStatus("hr");
-  // const testTaskVacancies = getVacanciesByStatus("testTask");
-  // const techInterviewVacancies = getVacanciesByStatus("technicalInterview");
-  // const rejectedVacancies = getVacanciesByStatus("rejected");
+  // const testTaskVacancies = getVacanciesByStatus("test");
+  // const techInterviewVacancies = getVacanciesByStatus("tech");
+  // const rejectedVacancies = getVacanciesByStatus("reject");
   // const offerVacancies = getVacanciesByStatus("offer");
-
 
   return (
     <div className="w-full flex flex-col gap-6">

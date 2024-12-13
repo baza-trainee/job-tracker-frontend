@@ -3,7 +3,7 @@ import { axiosInstance } from "../../api/axios.ts";
 
 interface Status {
   id: string;
-  name: "saved" | "sent" | "hr" | "testTask" | "technicalInterview" | "rejected" | "offer";
+  name: "saved" | "resume" | "hr" | "test" | "tech" | "reject" | "offer";
   date: string;
   rejectReason: string | null;
   resume: string | null;

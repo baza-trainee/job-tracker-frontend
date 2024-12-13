@@ -25,7 +25,7 @@ const VacancyCard: FC<VacancyCardProps> = ({
 
     return (
         <div className={clsx(
-            "w-[278px] p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2", 
+            "w-[278px] shrink-0 p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2", 
             colorSectionBG
         )}>
             <div>

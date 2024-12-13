@@ -68,6 +68,9 @@ export default {
         color7Light: "rgba(177, 214, 144, 0.3)", // color7 green with opacity 0.3
         color8: "#76925D", // green-dark
         borderLight: "#CECECE", // немає в дизайні, додати
+        scrollbarThumb: "#C2C2C2", // Колір повзунка, немає в дизайні, додати
+        scrollbarTrack: "#EAEEF2", // Колір треку, немає в дизайні, додати
+
 
         // text: {
         // primary: "#333333",  // дубль
@@ -99,9 +102,14 @@ export default {
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
       },
+      // borderRadius: {
+      //   scrollbar: "4px", // Border-radius для скролу
+      // },
     },
   },
-  plugins: [],
+  // plugins: [
+  //   require("tailwind-scrollbar"),
+  // ],
   safelist: [
     {
       pattern: /(bg|text|border)-(color2|color8|button)/,
