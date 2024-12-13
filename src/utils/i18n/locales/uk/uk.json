@@ -66,5 +66,30 @@
   "footer": {
     "development": "Розробка Baza Trainee Ukraine 2024",
     "rights": " © Усі права захищені"
+  },
+  "modalMappingContentMap": {
+    "success": "Успіх!",
+    "error": "Упс!",
+    "confirm": "Підтвердіть дію!",
+    "errorMailExist": "Упс!",
+    "recoveryPassword": "Відновлення паролю"
+  },
+  "modalMappingModalTextMap": {
+    "success": "Реєстрація пройшла успішно. Зараз ви можете налаштувати свій профіль.",
+    "error": "Перевірте введені дані та спробуйте ще раз.",
+    "confirm": "",
+    "popup": "",
+    "custom": "",
+    "errorMailExist": "Обліковий запис з такою поштою вже існує. Спробуйте увійти або відновити пароль.",
+    "recoveryPassword": "Обліковий запис з такою поштою вже існує. Спробуйте увійти або відновити пароль."
+  },
+  "modalMappingButtonMap": {
+    "success": "Продовжити",
+    "error": "Повторити спробу",
+    "confirm": "Ок",
+    "popup": "",
+    "custom": "",
+    "errorMailExist": "Увійти",
+    "recoveryPassword": "Відновити"
   }
 }
