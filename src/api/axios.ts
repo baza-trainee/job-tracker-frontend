@@ -13,12 +13,36 @@ export const api = axios.create({
   },
 });
 
-api.interceptors.request.use(
+// axiosInstance - START
+export const axiosInstance = axios.create({
+  baseURL: AXIOS.URL_BACKEND,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+const parseAccessToken = (): string | null => {
+  const persistAuth = localStorage.getItem("persist:auth");
+  if (!persistAuth) return null;
+
+  try {
+    const authData = JSON.parse(persistAuth);
+    const tokens = authData.tokens ? JSON.parse(authData.tokens) : null;
+    return tokens?.access_token || null;
+  } catch {
+    return null;
+  }
+};
+
+axiosInstance.interceptors.request.use(
   (config) => {
-    console.log("axios")
-    const accessToken = localStorage.getItem(AXIOS.ACCESS_TOKEN);
+    const accessToken = parseAccessToken();
     if (accessToken) {
       config.headers["Authorization"] = `${AXIOS.BEARER} ${accessToken}`;
+      // можна видалити
+      console.log("accessToken", accessToken);
+      console.log("config", config);
+      // ------------------------------------------------------------------------
     }
     return config;
   },
@@ -26,6 +50,8 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+// axiosInstance - END
 
 // api.interceptors.response.use(
 //   (response) => response,
