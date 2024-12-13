@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { api } from "../../../api/axios";
+import { api, axiosInstance } from "../../../api/axios";
 import { saveTokens, clearTokens, isLoggedIn } from "./authSlice";
 import {
   AuthStateProps,
@@ -11,7 +11,7 @@ import {
 
 import { isAxiosError } from "axios";
 
-import { openModal } from "../modalSlice/modalSlice";
+import { closeModal, openModal } from "../modalSlice/modalSlice";
 
 export const GoogleLogin = () => {
   window.location.href =
@@ -256,3 +256,26 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+export const logOut = createAsyncThunk<
+  void,
+  void,
+  { rejectValue: KnownErrorProps }
+>("auth/logOut", async (_, { dispatch, rejectWithValue }) => {
+  try {
+    await axiosInstance.post("/auth/logout");
+    dispatch(clearTokens());
+    dispatch(closeModal());
+  } catch (error) {
+    dispatch(
+      openModal({
+        typeModal: "logInError",
+      })
+    );
+    console.log("logOut error", error);
+    return rejectWithValue({
+      message: "Сталася невідома помилка при обробці запиту",
+      code: undefined,
+    });
+  }
+});
