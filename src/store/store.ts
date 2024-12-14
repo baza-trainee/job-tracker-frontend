@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import exampleReduser from "./slices/exampleSlice.ts";
+import vacanciesReducer  from "./slices/vacanciesSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
@@ -40,7 +40,7 @@ const sidebarPersistedReducer = persistReducer(
 
 export const store = configureStore({
   reducer: {
-    example: exampleReduser,
+    vacancies: vacanciesReducer,
     modal: modalReduser,
     auth: authPersistedReducer,
     theme: themePersistedReducer,
