@@ -17,7 +17,7 @@ const VacancyHeader: FC<VacancyHeaderProps> = ({ isArchive }) => {
   };
 
   return (
-    <div className="flex w-full items-center justify-between pb-6">
+    <div className="flex w-full items-start justify-between pb-6">
       <SearchForm />
       <div className="flex gap-8">
         <Button variant="ghost" size="small" onClick={handleButtonClick}>

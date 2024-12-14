@@ -67,7 +67,10 @@
     "search": "Search",
     "sortBy": "Sort by",
     "archive": "Feedback archive",
-    "addVacancy": "Add vacancy"
+    "addVacancy": "Add vacancy",
+    "searchResult": "search result",
+    "searchResult234": "search results",
+    "searchResults": "search results"
   },
   "footer": {
     "development": "Development of Baza Trainee Ukraine 2024",
