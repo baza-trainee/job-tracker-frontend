@@ -19,8 +19,6 @@ import { useAppDispatch } from "./store/hook";
 import { refreshUser } from "./store/slices/authSlice/authOperation";
 import { axiosInstance } from "./api/axios";
 
-//alex
-
 function App() {
   const darkMode = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
