@@ -83,7 +83,6 @@ const ContactUs = () => {
               type="button"
               className="mx-auto mt-8"
               // disabled={isCleanInputsForm() || errors || loading}
-              disabled={error}
               variant="ghost"
               size="small"
               onClick={() => handleCancel()}

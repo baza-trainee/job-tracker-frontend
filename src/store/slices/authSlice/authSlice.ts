@@ -8,6 +8,7 @@ import {
   logIn,
   forgotPassword,
   resetPassword,
+  logOut,
 } from "./authOperation";
 
 const initialState: AuthStateProps = {
@@ -57,7 +58,8 @@ const authSlice = createSlice({
           signUp.pending,
           logIn.pending,
           forgotPassword.pending,
-          resetPassword.pending
+          resetPassword.pending,
+          logOut.pending
         ),
         (state) => {
           state.loading = false;
@@ -77,7 +79,8 @@ const authSlice = createSlice({
           signUp.rejected,
           logIn.rejected,
           forgotPassword.rejected,
-          resetPassword.rejected
+          resetPassword.rejected,
+          logOut.rejected
         ),
         (state, action) => {
           state.loading = false;

@@ -5,7 +5,8 @@ import {
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
-import { clearTokens } from "../../../../store/slices/authSlice/authSlice";
+// import { clearTokens } from "../../../../store/slices/authSlice/authSlice";
+import { logOut } from "../../../../store/slices/authSlice/authOperation";
 
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
@@ -25,8 +26,8 @@ const InfoModalMap = () => {
   }, [navigate, dispatch]);
 
   const handleLogOut = useCallback((): void => {
-    dispatch(clearTokens());
-    dispatch(closeModal());
+    dispatch(logOut());
+    // dispatch(closeModal());
   }, [dispatch]);
 
   return {
