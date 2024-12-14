@@ -21,12 +21,12 @@ const VacancyMain: FC = () => {
     );
 
   const savedVacancies = getVacanciesByStatus("saved");
-  // const sentVacancies = getVacanciesByStatus("resume");
-  // const hrVacancies = getVacanciesByStatus("hr");
-  // const testTaskVacancies = getVacanciesByStatus("test");
-  // const techInterviewVacancies = getVacanciesByStatus("tech");
-  // const rejectedVacancies = getVacanciesByStatus("reject");
-  // const offerVacancies = getVacanciesByStatus("offer");
+  const resumeVacancies = getVacanciesByStatus("resume");
+  const hrVacancies = getVacanciesByStatus("hr");
+  const testVacancies = getVacanciesByStatus("test");
+  const techVacancies = getVacanciesByStatus("tech");
+  const rejectVacancies = getVacanciesByStatus("reject");
+  const offerVacancies = getVacanciesByStatus("offer");
 
   return (
     <div className="w-full flex flex-col gap-6">
@@ -62,7 +62,19 @@ const VacancyMain: FC = () => {
         colorSectionBorder="border-color1"
         colorSectionBG="bg-color1"
       >
-        <VacancyCard colorSectionBG="bg-color1-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
+        {resumeVacancies.length > 0 ? (
+          resumeVacancies.map((vacancy) => (
+            <VacancyCard 
+              key={vacancy.id} 
+              colorSectionBG="bg-color1-transparent" 
+              titleVacancy={vacancy.vacancy} 
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))
+        ): (<p>Немає збережених вакансій</p>)}
+        {/* <VacancyCard colorSectionBG="bg-color1-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" /> */}
       </VacancySection>
 
       <VacancySection
@@ -70,6 +82,18 @@ const VacancyMain: FC = () => {
         colorSectionBorder="border-color4"
         colorSectionBG="bg-color4"
       >
+        {hrVacancies.length > 0 ? (
+          hrVacancies.map((vacancy) => (
+            <VacancyCard 
+              key={vacancy.id} 
+              colorSectionBG="bg-color4-transparent" 
+              titleVacancy={vacancy.vacancy} 
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))
+        ): (<p>Немає збережених вакансій</p>)}
       </VacancySection>
 
       <VacancySection
@@ -77,6 +101,18 @@ const VacancyMain: FC = () => {
         colorSectionBorder="border-color3"
         colorSectionBG="bg-color3"
       >
+        {testVacancies.length > 0 ? (
+          testVacancies.map((vacancy) => (
+            <VacancyCard 
+              key={vacancy.id} 
+              colorSectionBG="bg-color3-transparent" 
+              titleVacancy={vacancy.vacancy} 
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))
+        ): (<p>Немає збережених вакансій</p>)}
       </VacancySection>
 
       <VacancySection
@@ -84,6 +120,18 @@ const VacancyMain: FC = () => {
         colorSectionBorder="border-color6"
         colorSectionBG="bg-color6"
       >
+        {techVacancies.length > 0 ? (
+          techVacancies.map((vacancy) => (
+            <VacancyCard 
+              key={vacancy.id} 
+              colorSectionBG="bg-color6-transparent" 
+              titleVacancy={vacancy.vacancy} 
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))
+        ): (<p>Немає збережених вакансій</p>)}
       </VacancySection>
 
       <VacancySection
@@ -91,6 +139,18 @@ const VacancyMain: FC = () => {
         colorSectionBorder="border-color2"
         colorSectionBG="bg-color2"
       >
+        {rejectVacancies.length > 0 ? (
+          rejectVacancies.map((vacancy) => (
+            <VacancyCard 
+              key={vacancy.id} 
+              colorSectionBG="bg-color2-transparent" 
+              titleVacancy={vacancy.vacancy} 
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))
+        ): (<p>Немає збережених вакансій</p>)}
       </VacancySection>
 
       <VacancySection
@@ -98,6 +158,18 @@ const VacancyMain: FC = () => {
         colorSectionBorder="border-color7"
         colorSectionBG="bg-color7"
       >
+        {offerVacancies.length > 0 ? (
+          offerVacancies.map((vacancy) => (
+            <VacancyCard 
+              key={vacancy.id} 
+              colorSectionBG="bg-color7-transparent" 
+              titleVacancy={vacancy.vacancy} 
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))
+        ): (<p>Немає збережених вакансій</p>)}
       </VacancySection>
     </div>
   )
