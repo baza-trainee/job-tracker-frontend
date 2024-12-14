@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hook.ts";
 import { fetchVacancies } from "../../../store/slices/vacanciesSlice.ts";
 
@@ -20,13 +20,13 @@ const VacancyMain: FC = () => {
       vacancy.statuses.some((status) => status.name === statusName)
     );
 
-  const savedVacancies = getVacanciesByStatus("saved");
-  const resumeVacancies = getVacanciesByStatus("resume");
-  const hrVacancies = getVacanciesByStatus("hr");
-  const testVacancies = getVacanciesByStatus("test");
-  const techVacancies = getVacanciesByStatus("tech");
-  const rejectVacancies = getVacanciesByStatus("reject");
-  const offerVacancies = getVacanciesByStatus("offer");
+  const savedVacancies = useMemo(() => getVacanciesByStatus("saved"), [vacancies]);
+  const resumeVacancies = useMemo(() => getVacanciesByStatus("resume"), [vacancies]);
+  const hrVacancies = useMemo(() => getVacanciesByStatus("hr"), [vacancies]);
+  const testVacancies = useMemo(() => getVacanciesByStatus("test"), [vacancies]);
+  const techVacancies = useMemo(() => getVacanciesByStatus("tech"), [vacancies]);
+  const rejectVacancies = useMemo(() => getVacanciesByStatus("reject"), [vacancies]);
+  const offerVacancies = useMemo(() => getVacanciesByStatus("offer"), [vacancies]);
 
   return (
     <div className="w-full flex flex-col gap-6">
