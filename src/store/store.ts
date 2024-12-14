@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import vacanciesReducer from "./slices/vacanciesSlice.ts";
+import vacanciesReducer from "./slices/vacanciesSlice/vacanciesSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";

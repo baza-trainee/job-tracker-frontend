@@ -10,6 +10,8 @@ import { cn } from "../../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuery } from "../../../store/slices/searchSlice/searchSlice";
 import { selectSearchQuery } from "../../../store/slices/searchSlice/searchSelector";
+import { filterVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSlice";
+import { selectVacanciesQuantity } from "../../../store/slices/vacanciesSlice/vacanciesSelector";
 
 const SearchSchema = z.object({
   query: z.string().min(1, "Search query cannot be empty"),
@@ -21,11 +23,10 @@ export const SearchForm: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  // const [savedQuery, setSavedQuery] = useState<string>("");
   const [isSearching, setIsSearching] = useState(false);
 
   const queryFromRedux = useSelector(selectSearchQuery);
-  console.log("queryFromRedux", queryFromRedux);
+  const vacanciesQuantity = useSelector(selectVacanciesQuantity);
 
   const {
     register,
@@ -41,24 +42,21 @@ export const SearchForm: FC = () => {
     mode: "onSubmit",
   });
 
-  // useEffect(() => {
-  //   dispatch(
-  //     setQuery({
-  //       searchQuery: savedQuery,
-  //     })
-  //   );
-  // }, [savedQuery, dispatch]);
+  const handleSearch = (query: string) => {
+    dispatch(
+      setQuery({
+        searchQuery: query,
+      })
+    );
+    dispatch(filterVacancies(query));
+  };
 
   const onSubmit: SubmitHandler<SearchFormData> = async (data) => {
     try {
       setIsSearching(true);
       const trimmedQuery = data.query.trim();
       if (trimmedQuery && trimmedQuery !== queryFromRedux) {
-        dispatch(
-          setQuery({
-            searchQuery: trimmedQuery,
-          })
-        );
+        handleSearch(trimmedQuery);
       }
       setIsSearching(false);
     } catch (error) {
@@ -70,28 +68,24 @@ export const SearchForm: FC = () => {
 
   const handleClear = () => {
     if (queryFromRedux) {
-      dispatch(
-        setQuery({
-          searchQuery: "",
-        })
-      );
+      handleSearch("");
     }
     resetField("query");
   };
   const error = errors["query"];
 
-  // const getSearchResultsText = (count: number): string => {
-  //   if (count === 1 || (count > 20 && count % 10 === 1)) {
-  //     return `${count} ${t("vacanciesHeader.searchResult")}`;
-  //   } else if (
-  //     [2, 3, 4].includes(count) ||
-  //     (count > 20 && [2, 3, 4].includes(count % 10))
-  //   ) {
-  //     return `${count} ${t("vacanciesHeader.searchResult234")}`;
-  //   } else {
-  //     return `${count} ${t("vacanciesHeader.searchResults")}`;
-  //   }
-  // };
+  const getSearchResultsText = (count: number): string => {
+    if (count === 1 || (count > 20 && count % 10 === 1)) {
+      return `${count} ${t("vacanciesHeader.searchResult")}`;
+    } else if (
+      [2, 3, 4].includes(count) ||
+      (count > 20 && [2, 3, 4].includes(count % 10))
+    ) {
+      return `${count} ${t("vacanciesHeader.searchResult234")}`;
+    } else {
+      return `${count} ${t("vacanciesHeader.searchResults")}`;
+    }
+  };
 
   return (
     <div>
@@ -172,7 +166,7 @@ export const SearchForm: FC = () => {
       {queryFromRedux && (
         <div className="mt-6 flex items-center font-nunito text-xl leading-[135%] text-textBlack">
           <p>
-            {t("vacanciesHeader.searchResults")}
+            {getSearchResultsText(vacanciesQuantity)}
             <span className="pl-4 text-textOther">{queryFromRedux}</span>
           </p>
           <IconButton
