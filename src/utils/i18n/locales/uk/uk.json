@@ -63,6 +63,15 @@
     "termsRequired": "Ви не надали згоду",
     "passwordMismatch": "Паролі мають збігатись"
   },
+  "vacanciesHeader": {
+    "search": "Пошук",
+    "sortBy": "Сортувати",
+    "archive": "Архів відгуків",
+    "addVacancy": "Додати вакансію",
+    "searchResult": "результат з пошуку",
+    "searchResult234": "результати з пошуку",
+    "searchResults": "результатів з пошуку"
+  },
   "footer": {
     "development": "Розробка Baza Trainee Ukraine 2024",
     "rights": " © Усі права захищені"
