@@ -45,12 +45,12 @@ export const fetchVacancies = createAsyncThunk<
 >("vacancies/fetchVacancies", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get<Vacancy[]>("/vacancies");
-    console.log("Вакансії з бекенду:", response.data);
+    console.log("Vacancies from backend:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching vacancies:", error);
     return rejectWithValue(
-      error instanceof Error ? error.message : "Не вдалося отримати вакансії"
+      error instanceof Error ? error.message : "Unable to get vacancies"
     );
   }
 });
@@ -88,7 +88,7 @@ const vacanciesSlice = createSlice({
       )
       .addCase(fetchVacancies.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload ?? "Помилка під час отримання вакансій";
+        state.error = action.payload ?? "Error while getting vacancies";
       });
   },
 });
