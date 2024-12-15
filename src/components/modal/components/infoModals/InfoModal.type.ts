@@ -8,5 +8,5 @@ export type InfoModalProps = {
     | "resetPasswordSuccess"
     | "resetPasswordErrorLink"
     | "logOut";
-  color: "button" | "color2" | "color8";
+  textColor: string;
 };

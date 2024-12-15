@@ -6,57 +6,88 @@ import { ReactNode } from "react";
 type ContentMapProps = {
   [propsTypeName: string]: {
     content: ReactNode;
-    color: "button" | "color2" | "color8";
+    bgColor: string;
+    borderColor: string;
   };
 };
 
-const colorButton = "button";
-const colorSuccess = "color8";
-const colorError = "color2";
+const colorButton = {
+  text: "text-button",
+  bg: "bg-button",
+  border: "border-button",
+};
+
+const colorError = {
+  text: "text-color2",
+  bg: "bg-color2",
+  border: "border-color2",
+};
+const colorSuccess = {
+  text: "text-color8",
+  bg: "bg-color8",
+  border: "border-color8",
+};
 
 export const contentMap: ContentMapProps = {
   forgotPassword: {
     content: <ForgotPassword />,
-    color: colorButton,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
   contactUs: {
     content: <ContactUs />,
-    color: colorButton,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
   logInSuccess: {
-    content: <InfoModal type="logInSuccess" color={colorSuccess} />,
-    color: colorSuccess,
+    content: <InfoModal type="logInSuccess" textColor={colorSuccess.text } />,
+    bgColor: colorSuccess.bg,
+    borderColor: colorSuccess.border,
   },
   logInError: {
-    content: <InfoModal type="logInError" color={colorError} />,
-    color: colorError,
+    content: <InfoModal type="logInError" textColor={colorError.text} />,
+    bgColor: colorError.bg,
+    borderColor: colorError.border,
   },
   signUpSuccess: {
-    content: <InfoModal type="signUpSuccess" color={colorSuccess} />,
-    color: colorSuccess,
+    content: <InfoModal type="signUpSuccess" textColor={colorSuccess.text} />,
+    bgColor: colorSuccess.bg,
+    borderColor: colorSuccess.border,
   },
   signUpError: {
-    content: <InfoModal type="signUpError" color={colorError} />,
-    color: colorError,
+    content: <InfoModal type="signUpError" textColor={colorError.text} />,
+    bgColor: colorError.bg,
+    borderColor: colorError.border,
   },
   forgotPasswordSuccess: {
-    content: <InfoModal type="forgotPasswordSuccess" color={colorSuccess} />,
-    color: colorSuccess,
+    content: (
+      <InfoModal type="forgotPasswordSuccess" textColor={colorSuccess.text} />
+    ),
+    bgColor: colorSuccess.bg,
+    borderColor: colorSuccess.border,
   },
   resetPasswordSuccess: {
-    content: <InfoModal type="resetPasswordSuccess" color={colorSuccess} />,
-    color: colorSuccess,
+    content: (
+      <InfoModal type="resetPasswordSuccess" textColor={colorSuccess.text} />
+    ),
+    bgColor: colorSuccess.bg,
+    borderColor: colorSuccess.border,
   },
   resetPasswordErrorLink: {
-    content: <InfoModal type="resetPasswordErrorLink" color={colorError} />,
-    color: colorError,
+    content: (
+      <InfoModal type="resetPasswordErrorLink" textColor={colorError.text} />
+    ),
+    bgColor: colorError.bg,
+    borderColor: colorError.border,
   },
   logOut: {
-    content: <InfoModal type="logOut" color={colorButton} />,
-    color: colorButton,
+    content: <InfoModal type="logOut" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
   close: {
     content: "close modal",
-    color: colorButton,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
 };
