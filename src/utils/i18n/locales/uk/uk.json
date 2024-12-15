@@ -72,6 +72,23 @@
     "searchResult234": "результати з пошуку",
     "searchResults": "результатів з пошуку"
   },
+  "sortDropdown": {
+    "sortBy": "Сортувати",
+    "newFirst": "Спочатку нові",
+    "oldFirst": "Спочатку старі",
+    "workType": "По типу роботи",
+    "office": "Офіс",
+    "remote": "Дистанційно",
+    "mixed": "Змішаний",
+    "status": "По статусу",
+    "saved": "Збережені",
+    "sent": "Відправлені",
+    "hrInterview": "HR співбесіда",
+    "testTask": "Тестове завдання",
+    "techInterview": "Технічна співбесіда",
+    "rejection": "Відмова",
+    "offer": "Оффер"
+  },
   "footer": {
     "development": "Розробка Baza Trainee Ukraine 2024",
     "rights": " © Усі права захищені"

@@ -5,6 +5,7 @@ import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
 import sidebarReducer from "./slices/sibebarSlice/sidebarSlice.ts";
 import searchReduser from "./slices/searchSlice/searchSlice.ts";
+import sortReduser from "./slices/sortiSlice/sortSlice.ts";
 import {
   persistStore,
   persistReducer,
@@ -47,6 +48,7 @@ export const store = configureStore({
     theme: themePersistedReducer,
     sidebar: sidebarPersistedReducer,
     search: searchReduser,
+    sort: sortReduser,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

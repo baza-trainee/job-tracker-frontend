@@ -4,6 +4,7 @@ import { LinkButton } from "../../buttons/LinkButton/LinkButton";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../buttons/Button/Button";
 import { SearchForm } from "./SearchForm";
+import SortDropdown from "./SortingDropdown";
 
 type VacancyHeaderProps = {
   isArchive: boolean;
@@ -20,6 +21,7 @@ const VacancyHeader: FC<VacancyHeaderProps> = ({ isArchive }) => {
     <div className="flex w-full items-start justify-between pb-6">
       <SearchForm />
       <div className="flex gap-8">
+        <SortDropdown />
         <Button variant="ghost" size="small" onClick={handleButtonClick}>
           <div className="flex items-center gap-3">
             <span className="w-[92px] text-base leading-[135%]">
