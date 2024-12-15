@@ -3,12 +3,15 @@ import { Button } from "../components/buttons/Button/Button";
 import { LinkButton } from "../components/buttons/LinkButton/LinkButton";
 import { IconButton } from "../components/buttons/IconButton/IconButton";
 import { FormExample } from "../components/form/FormExample";
+import { useAppDispatch } from "../store/hook";
+import { openModal } from "../store/slices/modalSlice/modalSlice";
 
 function Home() {
   const { t } = useTranslation();
   const handleButtonClick = () => {
     console.log("click");
   };
+  const dispatch = useAppDispatch();
 
   return (
     <section className="p-4">
@@ -28,7 +31,11 @@ function Home() {
         <Button variant="ghost" disabled size="big" onClick={handleButtonClick}>
           Click me
         </Button>
-        <Button variant="ghost" size="small" onClick={handleButtonClick}>
+        <Button variant="ghost" size="small" onClick={() => {
+          dispatch(openModal({
+            typeModal: "addVacancy"
+          }))
+        }}>
           Click me
         </Button>
         <LinkButton variant="ghost" size="big" href="/">

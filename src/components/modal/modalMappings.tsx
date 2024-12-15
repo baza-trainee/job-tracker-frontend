@@ -1,34 +1,27 @@
+import { ReactNode } from "react";
+
 import { ForgotPassword } from "./components/formModals/ForgotPassword";
+
 import ContactUs from "./components/formModals/ContacUs";
 import InfoModal from "./components/infoModals/InfoModal";
-import { ReactNode } from "react";
+import AddVacancy from "./components/addVacancyModals/AddVacancy";
 
 type ContentMapProps = {
   [propsTypeName: string]: {
     content: ReactNode;
-    bgColor: string;
-    borderColor: string;
+    color: "button" | "color2" | "color8";
   };
 };
 
-const colorButton = {
-  text: "text-button",
-  bg: "bg-button",
-  border: "border-button",
-};
-
-const colorError = {
-  text: "text-color2",
-  bg: "bg-color2",
-  border: "border-color2",
-};
-const colorSuccess = {
-  text: "text-color8",
-  bg: "bg-color8",
-  border: "border-color8",
-};
+const colorButton = "button";
+const colorSuccess = "color8";
+const colorError = "color2";
 
 export const contentMap: ContentMapProps = {
+  addVacancy: {
+    content: <AddVacancy />,
+    color: colorDefault,
+  },
   forgotPassword: {
     content: <ForgotPassword />,
     bgColor: colorButton.bg,
