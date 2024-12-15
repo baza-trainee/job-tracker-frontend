@@ -71,7 +71,6 @@ export default {
         // scrollbarThumb: "#C2C2C2", // Колір повзунка, немає в дизайні, додати
         // scrollbarTrack: "#EAEEF2", // Колір треку, немає в дизайні, додати
 
-
         // text: {
         // primary: "#333333",  // дубль
         // gray: "rgba(51, 51, 51, 0.5)", // немає в дизайні, це колір #333333 з opacity
@@ -110,9 +109,4 @@ export default {
   // plugins: [
   //   require("tailwind-scrollbar"),
   // ],
-  safelist: [
-    {
-      pattern: /(bg|text|border)-(color2|color8|button)/,
-    },
-  ],
 };

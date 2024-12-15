@@ -32,18 +32,23 @@ export const refreshUser = createAsyncThunk(
     if (!tokens) return null;
 
     try {
-      const response = await api.get("/user/profile", {
-        headers: { Authorization: `Bearer ${tokens.access_token}` },
-      });
+      const response = await axiosInstance.get("/user/profile");
+      const {id, username, email} = response.data
+      // axiosInstance самостійно передає в config  headers: { Authorization: `Bearer ${tokens.access_token}` }
+      // і немає потреби його передавати, як в api
+      // --
+      // const response = await api.get("/user/profile", {
+      //   headers: { Authorization: `Bearer ${tokens.access_token}` },
+      // });
+
       dispatch(isLoggedIn());
-      return response.data; // id, email, username
+      console.log("refUser", response.data);
+      return {id, username, email}; // id, email, username
     } catch (error: any) {
       if (error.response?.status === 401) {
         try {
           const newAccessToken = await dispatch(refreshTokens()).unwrap();
-          const retryResponse = await api.get("/user/profile", {
-            headers: { Authorization: `Bearer ${newAccessToken}` },
-          });
+          const retryResponse = await axiosInstance.get("/user/profile");
           saveTokens({
             access_token: newAccessToken,
             refresh_token: tokens.refresh_token,
@@ -59,6 +64,8 @@ export const refreshUser = createAsyncThunk(
         console.error("Failed to fetch user:", error);
         throw error;
       }
+    } finally {
+      console.log("user", state);
     }
   }
 );

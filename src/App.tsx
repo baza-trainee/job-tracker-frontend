@@ -19,6 +19,9 @@ import { useAppDispatch } from "./store/hook";
 import { refreshUser } from "./store/slices/authSlice/authOperation";
 import { axiosInstance } from "./api/axios";
 
+import Archive from "./components/Archive/Archive";
+//alex
+
 function App() {
   const darkMode = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
@@ -36,9 +39,9 @@ function App() {
   const func = async () => {
     try {
       const response = await axiosInstance.get("/vacancies");
-      return response
+      return response;
     } catch (error) {
-      console.log("errorGet", error)
+      console.log("errorGet", error);
     }
   };
   func().then((rezult) => console.log("axiosInstance", rezult));
@@ -54,6 +57,7 @@ function App() {
           <Route path="statistics" element={<Statistics />} />
           <Route path="profile" element={<Profile />} />
           <Route path="notes" element={<Notes />} />
+          <Route path="archive" element={<Archive />} />
           <Route path="*" element={<h1>Page not found</h1>} />
         </Route>
       </Route>
