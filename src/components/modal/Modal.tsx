@@ -11,6 +11,7 @@ import Icon from "../Icon/Icon.tsx";
 const Modal: FC = () => {
   const dispatch = useAppDispatch();
   const { isModalOpen, typeModal } = useAppSelector((state) => state.modal);
+  const modalData = contentMap[typeModal]
 
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -38,17 +39,19 @@ const Modal: FC = () => {
       <div>
         <div
           className={clsx(
-            `relative top-1 z-30 h-[30px] w-[130px] rounded-tl-xl rounded-tr-xl bg-${contentMap[typeModal].color}`
+            "relative top-1 z-30 h-[30px] w-[130px] rounded-tl-xl rounded-tr-xl",
+            modalData.bgColor
           )}
         ></div>
         <div
           className={clsx(
-            `z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow border-${contentMap[typeModal].color}`
+            "z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow",
+            modalData.borderColor
           )}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex min-h-[289px] min-w-[550px] items-center justify-center">
-            {contentMap[typeModal].content}
+            {modalData.content}
           </div>
           <button
             onClick={() => dispatch(closeModal())}
