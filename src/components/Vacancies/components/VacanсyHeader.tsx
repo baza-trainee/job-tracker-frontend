@@ -20,16 +20,16 @@ const VacancyHeader: FC<VacancyHeaderProps> = ({ isArchive }) => {
   return (
     <div className="flex w-full items-start justify-between pb-6">
       <SearchForm />
-      <div className="flex gap-8">
+      <div className="relative flex gap-8">
         <SortDropdown />
-        <Button variant="ghost" size="small" onClick={handleButtonClick}>
+        {/* <Button variant="ghost" size="small" onClick={handleButtonClick}>
           <div className="flex items-center gap-3">
             <span className="w-[92px] text-base leading-[135%]">
               {t("vacanciesHeader.sortBy")}
             </span>
             <Icon id={"arrow-down"} className="h-6 w-6" />
           </div>
-        </Button>
+        </Button> */}
         {!isArchive && (
           <LinkButton variant="ghost" size="small" href="/archive">
             <div className="flex items-center gap-3">

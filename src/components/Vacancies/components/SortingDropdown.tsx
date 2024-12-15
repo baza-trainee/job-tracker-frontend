@@ -17,7 +17,13 @@ const SortDropdown = () => {
   const dispatch = useDispatch();
   const selectedSortType = useSelector(selectSortType);
 
-  const mainOptions = [
+  type SortOption = {
+    id: string;
+    label: string;
+    subOptions?: SortOption[]; // Поле `subOptions` необов'язкове
+  };
+
+  const mainOptions: SortOption[] = [
     { id: "1", label: t("sortDropdown.newFirst") },
     { id: "2", label: t("sortDropdown.oldFirst") },
     {
@@ -46,7 +52,7 @@ const SortDropdown = () => {
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
-  const handleOptionSelect = (option: string) => {
+  const handleOptionSelect = (option: string | null) => {
     dispatch(setSortType(option));
     setDropdownOpen(false);
     setOpenSubMenu(null);
@@ -65,6 +71,38 @@ const SortDropdown = () => {
       setOpenSubMenu(null);
     }
   };
+
+  //   const handleKeyDown = (event: KeyboardEvent) => {
+  //     if (event.key === "Escape") {
+  //       // Закриваємо меню по натисканню ESC
+  //       setDropdownOpen(false);
+  //       setOpenSubMenu(null);
+  //     }
+
+  //     if (event.key === "ArrowDown") {
+  //       // Перемикання вниз
+  //       event.preventDefault();
+  //       moveFocus(1);
+  //     }
+
+  //     if (event.key === "ArrowUp") {
+  //       // Перемикання вверх
+  //       event.preventDefault();
+  //       moveFocus(-1);
+  //     }
+
+  //     if (event.key === "Enter" && focusedOption) {
+  //       // Вибір пункту за Enter
+  //       const focusedMainOption = mainOptions.find(
+  //         (opt) => opt.id === focusedOption
+  //       );
+  //       if (focusedMainOption?.subOptions) {
+  //         handleSubMenuToggle(focusedOption);
+  //       } else {
+  //         handleOptionSelect(focusedMainOption?.label || "");
+  //       }
+  //     }
+  //   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -86,14 +124,21 @@ const SortDropdown = () => {
     }
 
     if (event.key === "Enter" && focusedOption) {
-      // Вибір пункту за Enter
-      const focusedMainOption = mainOptions.find(
-        (opt) => opt.id === focusedOption
+      event.preventDefault(); // Запобігаємо стандартному дії Enter
+      const allOptions = mainOptions.flatMap((opt) =>
+        opt.subOptions ? [opt, ...opt.subOptions] : [opt]
       );
-      if (focusedMainOption?.subOptions) {
-        handleSubMenuToggle(focusedOption);
+
+      const selectedOption = allOptions.find((opt) => opt.id === focusedOption);
+
+      if (!selectedOption) return;
+
+      if (selectedOption.subOptions) {
+        // Якщо є підменю, відкриваємо його
+        handleSubMenuToggle(selectedOption.id);
       } else {
-        handleOptionSelect(focusedMainOption?.label || "");
+        // Якщо це основна опція, обираємо її
+        handleOptionSelect(selectedOption.label);
       }
     }
   };
@@ -124,15 +169,17 @@ const SortDropdown = () => {
     <div
       ref={dropdownRef}
       className={cn(
-        "relative inline-block w-[216px] rounded-xl border border-textBlack text-left font-nunito text-base text-textBlack",
+        "absolute -left-[248px] inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base text-textBlack",
         isDropdownOpen ? "h-[210px]" : "h-[51px]"
       )}
     >
       {/* Головна кнопка */}
       <button
-        onClick={toggleDropdown}
+        onClick={() =>
+          isDropdownOpen ? handleOptionSelect(null) : toggleDropdown()
+        }
         className={cn(
-          "flex w-full items-center justify-between px-4 pb-2 pt-3 text-textBlack"
+          "flex w-full items-center justify-between rounded-t-xl px-4 py-2 pt-3 text-textBlack hover:bg-button"
         )}
       >
         {selectedSortType
@@ -152,17 +199,15 @@ const SortDropdown = () => {
 
       {/* Випадаючий список */}
       {isDropdownOpen && (
-        <div className="absolute left-0 z-10 w-full bg-backgroundMain">
-          <ul className="pb-1">
+        <div className="absolute left-0 z-10 w-full rounded-b-xl bg-backgroundMain">
+          <ul className="rounded-b-xl">
             {mainOptions.map((option) => (
               <li
                 key={option.id}
-                className={`relative ${
-                  focusedOption === option.id ? "bg-gray-100" : ""
-                }`}
+                className={`relative px-4 py-2 last:rounded-b-xl last:pb-3 hover:bg-button ${focusedOption === option.id ? "bg-button" : ""}`}
               >
                 <div
-                  className={`cursor-pointer px-4 py-2 hover:bg-gray-100 ${
+                  className={`cursor-pointer ${
                     option.subOptions ? "flex justify-between" : ""
                   }`}
                   onClick={() =>
@@ -192,8 +237,8 @@ const SortDropdown = () => {
                     {option.subOptions.map((subOption) => (
                       <li
                         key={subOption.id}
-                        className={`cursor-pointer px-4 py-2 hover:bg-gray-100 ${
-                          focusedOption === subOption.id ? "bg-gray-100" : ""
+                        className={`cursor-pointer px-4 py-2 hover:bg-button ${
+                          focusedOption === subOption.id ? "bg-button" : ""
                         }`}
                         onClick={() => handleOptionSelect(subOption.label)}
                         onMouseEnter={() => setFocusedOption(subOption.id)}

@@ -12,7 +12,7 @@ const sortSlice = createSlice({
   name: "sort",
   initialState,
   reducers: {
-    setSortType(state, action: PayloadAction<string>) {
+    setSortType(state, action: PayloadAction<string | null>) {
       state.type = action.payload; // Оновлюємо вибраний тип сортування
     },
   },
