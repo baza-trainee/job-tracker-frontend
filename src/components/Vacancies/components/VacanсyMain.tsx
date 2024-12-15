@@ -23,13 +23,13 @@ const VacancyMain: FC = () => {
       vacancy.statuses.some((status) => status.name === statusName)
     );
 
-  const savedVacancies = useMemo(() => getVacanciesByStatus("saved"), [vacancies]);
-  const resumeVacancies = useMemo(() => getVacanciesByStatus("resume"), [vacancies]);
-  const hrVacancies = useMemo(() => getVacanciesByStatus("hr"), [vacancies]);
-  const testVacancies = useMemo(() => getVacanciesByStatus("test"), [vacancies]);
-  const techVacancies = useMemo(() => getVacanciesByStatus("tech"), [vacancies]);
-  const rejectVacancies = useMemo(() => getVacanciesByStatus("reject"), [vacancies]);
-  const offerVacancies = useMemo(() => getVacanciesByStatus("offer"), [vacancies]);
+  const savedVacancies = useMemo(() => getVacanciesByStatus("saved"), [filteredVacancies]);
+  const resumeVacancies = useMemo(() => getVacanciesByStatus("resume"), [filteredVacancies]);
+  const hrVacancies = useMemo(() => getVacanciesByStatus("hr"), [filteredVacancies]);
+  const testVacancies = useMemo(() => getVacanciesByStatus("test"), [filteredVacancies]);
+  const techVacancies = useMemo(() => getVacanciesByStatus("tech"), [filteredVacancies]);
+  const rejectVacancies = useMemo(() => getVacanciesByStatus("reject"), [filteredVacancies]);
+  const offerVacancies = useMemo(() => getVacanciesByStatus("offer"), [filteredVacancies]);
 
   return (
     <div className="flex w-full flex-col gap-6">
