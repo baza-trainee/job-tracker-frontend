@@ -1,26 +1,47 @@
-import { ReactNode } from "react";
-
 import { ForgotPassword } from "./components/formModals/ForgotPassword";
-
 import ContactUs from "./components/formModals/ContacUs";
 import InfoModal from "./components/infoModals/InfoModal";
+import { ReactNode } from "react";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
 
 type ContentMapProps = {
   [propsTypeName: string]: {
     content: ReactNode;
-    color: "button" | "color2" | "color8";
+    nameModal?: string;
+    bgColor: string;
+    borderColor: string;
   };
 };
 
-const colorButton = "button";
-const colorSuccess = "color8";
-const colorError = "color2";
+const colorDefault = {
+  text: "text-white",
+  bg: "bg-white",
+  border: "border-white",
+}
+
+const colorButton = {
+  text: "text-button",
+  bg: "bg-button",
+  border: "border-button",
+};
+
+const colorError = {
+  text: "text-color2",
+  bg: "bg-color2",
+  border: "border-color2",
+};
+const colorSuccess = {
+  text: "text-color8",
+  bg: "bg-color8",
+  border: "border-color8",
+};
 
 export const contentMap: ContentMapProps = {
   addVacancy: {
     content: <AddVacancy />,
-    color: colorDefault,
+    nameModal: "Додати нову вакансію",
+    bgColor: colorDefault.bg,
+    borderColor: colorDefault.border,
   },
   forgotPassword: {
     content: <ForgotPassword />,
@@ -33,7 +54,7 @@ export const contentMap: ContentMapProps = {
     borderColor: colorButton.border,
   },
   logInSuccess: {
-    content: <InfoModal type="logInSuccess" textColor={colorSuccess.text } />,
+    content: <InfoModal type="logInSuccess" textColor={colorSuccess.text} />,
     bgColor: colorSuccess.bg,
     borderColor: colorSuccess.border,
   },
