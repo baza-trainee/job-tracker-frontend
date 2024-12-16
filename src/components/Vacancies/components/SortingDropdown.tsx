@@ -72,38 +72,6 @@ const SortDropdown = () => {
     }
   };
 
-  //   const handleKeyDown = (event: KeyboardEvent) => {
-  //     if (event.key === "Escape") {
-  //       // Закриваємо меню по натисканню ESC
-  //       setDropdownOpen(false);
-  //       setOpenSubMenu(null);
-  //     }
-
-  //     if (event.key === "ArrowDown") {
-  //       // Перемикання вниз
-  //       event.preventDefault();
-  //       moveFocus(1);
-  //     }
-
-  //     if (event.key === "ArrowUp") {
-  //       // Перемикання вверх
-  //       event.preventDefault();
-  //       moveFocus(-1);
-  //     }
-
-  //     if (event.key === "Enter" && focusedOption) {
-  //       // Вибір пункту за Enter
-  //       const focusedMainOption = mainOptions.find(
-  //         (opt) => opt.id === focusedOption
-  //       );
-  //       if (focusedMainOption?.subOptions) {
-  //         handleSubMenuToggle(focusedOption);
-  //       } else {
-  //         handleOptionSelect(focusedMainOption?.label || "");
-  //       }
-  //     }
-  //   };
-
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       // Закриваємо меню по натисканню ESC
@@ -169,8 +137,10 @@ const SortDropdown = () => {
     <div
       ref={dropdownRef}
       className={cn(
-        "absolute -left-[248px] inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base text-textBlack",
-        isDropdownOpen ? "h-[210px]" : "h-[51px]"
+        "absolute -left-[248px] inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base text-textBlack outline-none duration-300",
+        isDropdownOpen
+          ? "h-[210px]"
+          : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary"
       )}
     >
       {/* Головна кнопка */}
@@ -179,7 +149,8 @@ const SortDropdown = () => {
           isDropdownOpen ? handleOptionSelect(null) : toggleDropdown()
         }
         className={cn(
-          "flex w-full items-center justify-between rounded-t-xl px-4 py-2 pt-3 text-textBlack hover:bg-button"
+          "flex w-full items-center justify-between rounded-t-xl px-4 py-2 pt-3 text-textBlack outline-none",
+          isDropdownOpen && "hover:bg-button"
         )}
       >
         {selectedSortType
@@ -204,40 +175,36 @@ const SortDropdown = () => {
             {mainOptions.map((option) => (
               <li
                 key={option.id}
-                className={`relative px-4 py-2 last:rounded-b-xl last:pb-3 hover:bg-button ${focusedOption === option.id ? "bg-button" : ""}`}
+                className={`relative cursor-pointer ${
+                  option.subOptions ? "flex justify-between" : ""
+                } px-4 py-2 last:rounded-b-xl last:pb-3 hover:bg-button ${focusedOption === option.id ? "bg-button" : ""}`}
+                onClick={() =>
+                  option.subOptions
+                    ? handleSubMenuToggle(option.id)
+                    : handleOptionSelect(option.label)
+                }
+                onMouseEnter={() => setFocusedOption(option.id)}
               >
-                <div
-                  className={`cursor-pointer ${
-                    option.subOptions ? "flex justify-between" : ""
-                  }`}
-                  onClick={() =>
-                    option.subOptions
-                      ? handleSubMenuToggle(option.id)
-                      : handleOptionSelect(option.label)
-                  }
-                  onMouseEnter={() => setFocusedOption(option.id)}
-                >
-                  {option.label}
-                  {option.subOptions && (
-                    <Icon
-                      id={"arrow-down"}
-                      className={cn(
-                        "h-6 w-6",
-                        openSubMenu === option.id
-                          ? "rotate-180 duration-500"
-                          : "rotate-0 duration-500"
-                      )}
-                    />
-                  )}
-                </div>
+                {option.label}
+                {option.subOptions && (
+                  <Icon
+                    id={"arrow-down"}
+                    className={cn(
+                      "h-6 w-6",
+                      openSubMenu === option.id
+                        ? "rotate-180 duration-500"
+                        : "rotate-0 duration-500"
+                    )}
+                  />
+                )}
 
                 {/* Підсписок */}
                 {option.subOptions && openSubMenu === option.id && (
-                  <ul className="absolute left-full top-0 z-20 mt-0 w-48 rounded border border-gray-300 bg-white shadow-lg">
+                  <ul className="absolute left-1/2 top-10 z-20 mt-0 w-48 rounded-xl border border-textBlack bg-backgroundMain">
                     {option.subOptions.map((subOption) => (
                       <li
                         key={subOption.id}
-                        className={`cursor-pointer px-4 py-2 hover:bg-button ${
+                        className={`cursor-pointer px-4 py-2 first:rounded-t-xl last:rounded-b-xl hover:bg-button ${
                           focusedOption === subOption.id ? "bg-button" : ""
                         }`}
                         onClick={() => handleOptionSelect(subOption.label)}
