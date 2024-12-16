@@ -50,7 +50,34 @@ const SortDropdown = () => {
     },
   ];
 
-  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+  // const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+
+  const toggleDropdown = () => {
+    setDropdownOpen((prev) => {
+      if (!prev) {
+        // Меню відкривається
+        if (selectedSortType) {
+          setFocusedOption(selectedSortType);
+
+          // Перевіряємо, чи це підменю, і відкриваємо його
+          const parentOption = mainOptions.find((option) =>
+            option.subOptions?.some((sub) => sub.id === selectedSortType)
+          );
+          if (parentOption) {
+            setOpenSubMenu(parentOption.id);
+          }
+        } else {
+          // Якщо немає збереженого значення, фокус на кнопку
+          setFocusedOption("sortButton");
+        }
+      } else {
+        // Меню закривається
+        setFocusedOption(null);
+        setOpenSubMenu(null);
+      }
+      return !prev;
+    });
+  };
 
   const handleOptionSelect = (option: string | null) => {
     dispatch(setSortType(option));
