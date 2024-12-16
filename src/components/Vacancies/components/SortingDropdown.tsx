@@ -24,28 +24,28 @@ const SortDropdown = () => {
   };
 
   const mainOptions: SortOption[] = [
-    { id: "1", label: t("sortDropdown.newFirst") },
-    { id: "2", label: t("sortDropdown.oldFirst") },
+    { id: "newFirst", label: t("sortDropdown.newFirst") },
+    { id: "oldFirst", label: t("sortDropdown.oldFirst") },
     {
-      id: "3",
+      id: "workType",
       label: t("sortDropdown.workType"),
       subOptions: [
-        { id: "3-1", label: t("sortDropdown.office") },
-        { id: "3-2", label: t("sortDropdown.remote") },
-        { id: "3-3", label: t("sortDropdown.mixed") },
+        { id: "office", label: t("sortDropdown.office") },
+        { id: "remote", label: t("sortDropdown.remote") },
+        { id: "mixed", label: t("sortDropdown.mixed") },
       ],
     },
     {
-      id: "4",
+      id: "status",
       label: t("sortDropdown.status"),
       subOptions: [
-        { id: "4-1", label: t("sortDropdown.saved") },
-        { id: "4-2", label: t("sortDropdown.sent") },
-        { id: "4-3", label: t("sortDropdown.hrInterview") },
-        { id: "4-4", label: t("sortDropdown.testTask") },
-        { id: "4-5", label: t("sortDropdown.techInterview") },
-        { id: "4-6", label: t("sortDropdown.rejection") },
-        { id: "4-7", label: t("sortDropdown.offer") },
+        { id: "saved", label: t("sortDropdown.saved") },
+        { id: "sent", label: t("sortDropdown.sent") },
+        { id: "hrInterview", label: t("sortDropdown.hrInterview") },
+        { id: "testTask", label: t("sortDropdown.testTask") },
+        { id: "techInterview", label: t("sortDropdown.techInterview") },
+        { id: "rejection", label: t("sortDropdown.rejection") },
+        { id: "offer", label: t("sortDropdown.offer") },
       ],
     },
   ];
@@ -133,6 +133,18 @@ const SortDropdown = () => {
     };
   }, [focusedOption]);
 
+  // Динамічний текст кнопки
+  const getButtonLabel = () => {
+    if (!selectedSortType || isDropdownOpen) return t("sortDropdown.sortBy");
+    const allOptions = mainOptions.flatMap((opt) =>
+      opt.subOptions ? [opt, ...opt.subOptions] : [opt]
+    );
+    const selectedOption = allOptions.find(
+      (opt) => opt.id === selectedSortType
+    );
+    return selectedOption ? selectedOption.label : t("sortDropdown.sortBy");
+  };
+
   return (
     <div
       ref={dropdownRef}
@@ -153,11 +165,7 @@ const SortDropdown = () => {
           isDropdownOpen && "hover:bg-button"
         )}
       >
-        {selectedSortType
-          ? isDropdownOpen
-            ? t("sortDropdown.sortBy")
-            : selectedSortType
-          : t("sortDropdown.sortBy")}
+        {getButtonLabel()}
 
         <Icon
           id={"arrow-down"}
@@ -181,7 +189,7 @@ const SortDropdown = () => {
                 onClick={() =>
                   option.subOptions
                     ? handleSubMenuToggle(option.id)
-                    : handleOptionSelect(option.label)
+                    : handleOptionSelect(option.id)
                 }
                 onMouseEnter={() => setFocusedOption(option.id)}
               >
@@ -207,7 +215,7 @@ const SortDropdown = () => {
                         className={`cursor-pointer px-4 py-2 first:rounded-t-xl last:rounded-b-xl hover:bg-button ${
                           focusedOption === subOption.id ? "bg-button" : ""
                         }`}
-                        onClick={() => handleOptionSelect(subOption.label)}
+                        onClick={() => handleOptionSelect(subOption.id)}
                         onMouseEnter={() => setFocusedOption(subOption.id)}
                       >
                         {subOption.label}
