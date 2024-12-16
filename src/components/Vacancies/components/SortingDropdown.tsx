@@ -56,6 +56,7 @@ const SortDropdown = () => {
     dispatch(setSortType(option));
     setDropdownOpen(false);
     setOpenSubMenu(null);
+    setFocusedOption(null);
   };
 
   const handleSubMenuToggle = (menuId: string) => {
@@ -72,27 +73,105 @@ const SortDropdown = () => {
     }
   };
 
+  // const handleKeyDown = (event: KeyboardEvent) => {
+  //   if (event.key === "Escape") {
+  //     // Закриваємо меню по натисканню ESC
+  //     setDropdownOpen(false);
+  //     setOpenSubMenu(null);
+  //   }
+
+  //   if (event.key === "ArrowDown") {
+  //     // Перемикання вниз
+  //     event.preventDefault();
+  //     moveFocus(1);
+  //   }
+
+  //   if (event.key === "ArrowUp") {
+  //     // Перемикання вверх
+  //     event.preventDefault();
+  //     moveFocus(-1);
+  //   }
+
+  //   if (event.key === "Enter" && focusedOption) {
+  //     event.preventDefault(); // Запобігаємо стандартному дії Enter
+  //     const allOptions = mainOptions.flatMap((opt) =>
+  //       opt.subOptions ? [opt, ...opt.subOptions] : [opt]
+  //     );
+
+  //     const selectedOption = allOptions.find((opt) => opt.id === focusedOption);
+
+  //     if (!selectedOption) return;
+
+  //     if (selectedOption.subOptions) {
+  //       // Якщо є підменю, відкриваємо його
+  //       handleSubMenuToggle(selectedOption.id);
+  //     } else {
+  //       // Якщо це основна опція, обираємо її
+  //       handleOptionSelect(selectedOption.id);
+  //     }
+  //   }
+  // };
+
+  // const moveFocus = (direction: 1 | -1) => {
+  //   const allOptions = mainOptions.flatMap((opt) =>
+  //     opt.subOptions ? [opt, ...opt.subOptions] : [opt]
+  //   );
+  //   const currentIndex = allOptions.findIndex(
+  //     (opt) => opt.id === focusedOption
+  //   );
+  //   const nextIndex =
+  //     (currentIndex + direction + allOptions.length) % allOptions.length;
+  //   setFocusedOption(allOptions[nextIndex].id);
+  // };
+
+  const moveFocus = (direction: 1 | -1) => {
+    // Отримуємо всі елементи списку (з урахуванням відкритого сабменю)
+    const allOptions = [
+      { id: "sortButton", label: "Button" }, // Додаємо кнопку як перший елемент
+      ...mainOptions.flatMap((opt) =>
+        opt.subOptions && openSubMenu === opt.id
+          ? [opt, ...opt.subOptions]
+          : [opt]
+      ),
+    ];
+
+    const currentIndex = allOptions.findIndex(
+      (opt) => opt.id === focusedOption
+    );
+
+    // Рахуємо новий індекс з урахуванням циклічного перемикання
+    const nextIndex =
+      (currentIndex + direction + allOptions.length) % allOptions.length;
+
+    setFocusedOption(allOptions[nextIndex].id);
+  };
+
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      // Закриваємо меню по натисканню ESC
       setDropdownOpen(false);
       setOpenSubMenu(null);
+      setFocusedOption(null);
     }
 
     if (event.key === "ArrowDown") {
-      // Перемикання вниз
       event.preventDefault();
       moveFocus(1);
     }
 
     if (event.key === "ArrowUp") {
-      // Перемикання вверх
       event.preventDefault();
       moveFocus(-1);
     }
 
     if (event.key === "Enter" && focusedOption) {
-      event.preventDefault(); // Запобігаємо стандартному дії Enter
+      event.preventDefault();
+
+      if (focusedOption === "sortButton") {
+        // Якщо фокус на кнопці, то скидаємо вибір і закриваємо меню
+        handleOptionSelect(null); // Скидає сортування до "Сортувати"
+        return;
+      }
+
       const allOptions = mainOptions.flatMap((opt) =>
         opt.subOptions ? [opt, ...opt.subOptions] : [opt]
       );
@@ -102,25 +181,13 @@ const SortDropdown = () => {
       if (!selectedOption) return;
 
       if (selectedOption.subOptions) {
-        // Якщо є підменю, відкриваємо його
+        // Якщо є підменю, відкриваємо/закриваємо
         handleSubMenuToggle(selectedOption.id);
       } else {
         // Якщо це основна опція, обираємо її
-        handleOptionSelect(selectedOption.label);
+        handleOptionSelect(selectedOption.id);
       }
     }
-  };
-
-  const moveFocus = (direction: 1 | -1) => {
-    const allOptions = mainOptions.flatMap((opt) =>
-      opt.subOptions ? [opt, ...opt.subOptions] : [opt]
-    );
-    const currentIndex = allOptions.findIndex(
-      (opt) => opt.id === focusedOption
-    );
-    const nextIndex =
-      (currentIndex + direction + allOptions.length) % allOptions.length;
-    setFocusedOption(allOptions[nextIndex].id);
   };
 
   useEffect(() => {
@@ -131,7 +198,7 @@ const SortDropdown = () => {
       document.removeEventListener("click", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [focusedOption]);
+  }, [focusedOption, openSubMenu]);
 
   // Динамічний текст кнопки
   const getButtonLabel = () => {
@@ -149,7 +216,7 @@ const SortDropdown = () => {
     <div
       ref={dropdownRef}
       className={cn(
-        "absolute -left-[248px] inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base text-textBlack outline-none duration-300",
+        "absolute -left-[248px] z-[2] inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base text-textBlack duration-300",
         isDropdownOpen
           ? "h-[210px]"
           : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary"
@@ -157,12 +224,15 @@ const SortDropdown = () => {
     >
       {/* Головна кнопка */}
       <button
+        id="sortButton"
         onClick={() =>
           isDropdownOpen ? handleOptionSelect(null) : toggleDropdown()
         }
+        onMouseEnter={() => setFocusedOption("sortButton")}
         className={cn(
           "flex w-full items-center justify-between rounded-t-xl px-4 py-2 pt-3 text-textBlack outline-none",
-          isDropdownOpen && "hover:bg-button"
+          isDropdownOpen && "hover:bg-button",
+          focusedOption === "sortButton" && isDropdownOpen ? "bg-button" : ""
         )}
       >
         {getButtonLabel()}
@@ -198,17 +268,17 @@ const SortDropdown = () => {
                   <Icon
                     id={"arrow-down"}
                     className={cn(
-                      "h-6 w-6",
+                      "h-6 w-6 rotate-[270deg]",
                       openSubMenu === option.id
-                        ? "rotate-180 duration-500"
-                        : "rotate-0 duration-500"
+                        ? "rotate-90 duration-500"
+                        : "rotate-[270deg] duration-500"
                     )}
                   />
                 )}
 
                 {/* Підсписок */}
                 {option.subOptions && openSubMenu === option.id && (
-                  <ul className="absolute left-1/2 top-10 z-20 mt-0 w-48 rounded-xl border border-textBlack bg-backgroundMain">
+                  <ul className="absolute left-full top-0 z-20 mt-0 w-48 rounded-xl border border-textBlack bg-backgroundMain">
                     {option.subOptions.map((subOption) => (
                       <li
                         key={subOption.id}
