@@ -45,27 +45,28 @@ body {
     color 300ms ease-in-out;
 }
 
-/* Основні стилі для горизонтального скролу */
-.scrollbar {
-  overflow-x: auto; /* Додаємо горизонтальний скрол */
-  scrollbar-width: thin; /* Для браузерів Firefox — тонкий скрол */
-  scrollbar-color: #c2c2c2 #eaeef2; /* Колір повзунка і треку у Firefox */
-}
+/* Firefox cтилі для горизонтального скролу - не коректно працюють */
+/*.scrollbar {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #c2c2c2 #eaeef2;
+} */
 
 .scrollbar::-webkit-scrollbar {
-  height: 8px; /* Висота горизонтального скролу */
+  height: 8px;
+  margin-top: 20px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background-color: #c2c2c2; /* Колір повзунка */
-  border-radius: 14px; /* Закруглені кути повзунка */
+  background-color: #c2c2c2;
+  border-radius: 4px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  background-color: #eaeef2; /* Колір треку */
-  border-radius: 4px; /* Закруглені кути треку */
+  background-color: #eaeef2;
+  border-radius: 4px;
 }
 
 .scrollbar::-webkit-scrollbar-button {
-  display: none; /* Видаляємо стрілочки по краях */
+  display: none;
 }
