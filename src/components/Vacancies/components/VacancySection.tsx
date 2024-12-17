@@ -73,7 +73,6 @@ const VacancySection: FC<VacancySectionProps> = ({
       container.addEventListener("scroll", checkScrollPosition);
     }
 
-    // Перевірка скролу при першому рендері
     checkScrollPosition();
     checkRowLayout();
 
@@ -102,7 +101,7 @@ const VacancySection: FC<VacancySectionProps> = ({
   };
 
   return (
-    <section className={clsx("text-textBlack")} >
+    <section className="text-textBlack">
 
       <div className={clsx(
         "w-fit px-3 py-[6px] text-xl font-medium rounded-tl-lg rounded-tr-lg",
@@ -125,7 +124,7 @@ const VacancySection: FC<VacancySectionProps> = ({
 
           <div
             ref={containerRef}
-            className={clsx("w-full flex flex-col gap-4 overflow-x-auto scrollbar", {"pb-5": hasScroll})}
+            className={clsx("w-full flex flex-col gap-5 overflow-x-auto scrollbar test", {"pb-5": hasScroll})}
           >
             {/* Перший ряд, непарні картки */}
             <div className="flex gap-5 flex-nowrap">
@@ -151,7 +150,6 @@ const VacancySection: FC<VacancySectionProps> = ({
         </div>
 
       </div>
-
     </section>
   )
 };

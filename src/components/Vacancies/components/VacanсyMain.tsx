@@ -33,7 +33,27 @@ const VacancyMain: FC = () => {
 
   return (
     <div className="flex w-full flex-col gap-6">
-      <VacancySection
+
+      {savedVacancies.length > 0 && (
+        <VacancySection
+          titleSection="Збережені"
+          colorSectionBorder="border-color5"
+          colorSectionBG="bg-color5"
+        >
+          {savedVacancies.map((vacancy) => (
+            <VacancyCard
+              key={vacancy.id}
+              colorSectionBG="bg-color5-transparent"
+              titleVacancy={vacancy.vacancy}
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))}
+        </VacancySection>
+      )}
+
+      {/* <VacancySection
         titleSection="Збережені"
         colorSectionBorder="border-color5"
         colorSectionBG="bg-color5"
@@ -55,9 +75,28 @@ const VacancyMain: FC = () => {
         ) : (
           <p>Немає збережених вакансій</p>
         )}
-      </VacancySection>
+      </VacancySection> */}
 
-      <VacancySection
+      {resumeVacancies.length > 0 && (
+        <VacancySection
+          titleSection="Відправлені"
+          colorSectionBorder="border-color1"
+          colorSectionBG="bg-color1"
+        >
+          {resumeVacancies.map((vacancy) => (
+            <VacancyCard
+              key={vacancy.id}
+              colorSectionBG="bg-color1-transparent"
+              titleVacancy={vacancy.vacancy}
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))}
+        </VacancySection>
+      )}
+
+      {/* <VacancySection
         titleSection="Відправлені"
         colorSectionBorder="border-color1"
         colorSectionBG="bg-color1"
@@ -76,9 +115,28 @@ const VacancyMain: FC = () => {
         ) : (
           <p>Немає збережених вакансій</p>
         )}
-      </VacancySection>
+      </VacancySection> */}
 
-      <VacancySection
+      {hrVacancies.length > 0 && (
+        <VacancySection
+          titleSection="HR"
+          colorSectionBorder="border-color4"
+          colorSectionBG="bg-color4"
+        >
+          {hrVacancies.map((vacancy) => (
+            <VacancyCard
+              key={vacancy.id}
+              colorSectionBG="bg-color4-transparent"
+              titleVacancy={vacancy.vacancy}
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))}
+        </VacancySection>
+      )}
+
+      {/* <VacancySection
         titleSection="HR"
         colorSectionBorder="border-color4"
         colorSectionBG="bg-color4"
@@ -97,9 +155,28 @@ const VacancyMain: FC = () => {
         ) : (
           <p>Немає збережених вакансій</p>
         )}
-      </VacancySection>
+      </VacancySection> */}
 
-      <VacancySection
+      {testVacancies.length > 0 && (
+        <VacancySection
+          titleSection="Тестове завдання"
+          colorSectionBorder="border-color3"
+          colorSectionBG="bg-color3"
+        >
+          {testVacancies.map((vacancy) => (
+            <VacancyCard
+              key={vacancy.id}
+              colorSectionBG="bg-color3-transparent"
+              titleVacancy={vacancy.vacancy}
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))}
+        </VacancySection>
+      )}
+
+      {/* <VacancySection
         titleSection="Тестове завдання"
         colorSectionBorder="border-color3"
         colorSectionBG="bg-color3"
@@ -118,9 +195,28 @@ const VacancyMain: FC = () => {
         ) : (
           <p>Немає збережених вакансій</p>
         )}
-      </VacancySection>
+      </VacancySection> */}
 
-      <VacancySection
+      {techVacancies.length > 0 && (
+        <VacancySection
+          titleSection="Технічна співбесіда"
+          colorSectionBorder="border-color6"
+          colorSectionBG="bg-color6"
+        >
+          {techVacancies.map((vacancy) => (
+            <VacancyCard
+              key={vacancy.id}
+              colorSectionBG="bg-color6-transparent"
+              titleVacancy={vacancy.vacancy}
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))}
+        </VacancySection>
+      )}
+
+      {/* <VacancySection
         titleSection="Технічна співбесіда"
         colorSectionBorder="border-color6"
         colorSectionBG="bg-color6"
@@ -139,14 +235,36 @@ const VacancyMain: FC = () => {
         ) : (
           <p>Немає збережених вакансій</p>
         )}
-      </VacancySection>
+      </VacancySection> */}
 
-      <VacancySection
+      {/* {rejectVacancies.length > 0 && ( */}
+      {rejectVacancies.length >= 0 && (
+        <VacancySection
+          titleSection="Технічна співбесіда"
+          colorSectionBorder="border-color2"
+          colorSectionBG="bg-color2"
+        >
+          {/* {rejectVacancies.map((vacancy) => (
+            <VacancyCard
+              key={vacancy.id}
+              colorSectionBG="bg-color2-transparent"
+              titleVacancy={vacancy.vacancy}
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))} */}
+          <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
+          <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
+        </VacancySection>
+      )}
+
+      {/* <VacancySection
         titleSection="Відмова"
         colorSectionBorder="border-color2"
         colorSectionBG="bg-color2"
       >
-        {/* {rejectVacancies.length > 0 ? (
+        {rejectVacancies.length > 0 ? (
           rejectVacancies.map((vacancy) => (
             <VacancyCard
               key={vacancy.id}
@@ -159,17 +277,46 @@ const VacancyMain: FC = () => {
           ))
         ) : (
           <p>Немає збережених вакансій</p>
-        )} */}
+        )}
         <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
         <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-      </VacancySection>
+      </VacancySection> */}
 
-      <VacancySection
+      {/* {offerVacancies.length > 0 && ( */}
+      {offerVacancies.length >= 0 && (
+        <VacancySection
+          titleSection="Офер"
+          colorSectionBorder="border-color7"
+          colorSectionBG="bg-color7"
+        >
+          {/* {offerVacancies.map((vacancy) => (
+            <VacancyCard
+              key={vacancy.id}
+              colorSectionBG="bg-color7-transparent"
+              titleVacancy={vacancy.vacancy}
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))} */}
+          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
+          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="kharkiv" />
+          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
+          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
+          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
+          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
+          {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" /> */}
+          {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" /> */}
+          {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" /> */}
+        </VacancySection>
+      )}
+
+      {/* <VacancySection
         titleSection="Офер"
         colorSectionBorder="border-color7"
         colorSectionBG="bg-color7"
       >
-        {/* {offerVacancies.length > 0 ? (
+        {offerVacancies.length > 0 ? (
           offerVacancies.map((vacancy) => (
             <VacancyCard
               key={vacancy.id}
@@ -182,17 +329,17 @@ const VacancyMain: FC = () => {
           ))
         ) : (
           <p>Немає збережених вакансій</p>
-        )} */}
+        )}
         <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
         <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="kharkiv" />
         <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-        <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />        
+        <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
         <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
         <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
-        {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" /> */}
-        {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" /> */}
-        {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" /> */}
-      </VacancySection>
+        <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
+        <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
+        <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
+      </VacancySection> */}
     </div>
   );
 };
