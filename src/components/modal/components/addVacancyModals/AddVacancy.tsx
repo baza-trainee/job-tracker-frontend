@@ -3,7 +3,6 @@ import { Button } from "../../../buttons/Button/Button";
 import { Textarea } from "../../../Textarea/Textarea";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { ContactUsSchema } from "../../../../schemas/ContactUsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddVacancySchema } from "../../../../schemas/AddVacancySchema";
 import Checkbox from "../../../checkbox/Checkbox";
@@ -22,18 +21,17 @@ const AddVacancy = () => {
             link: "",
             communication: "",
             location: "",
+            notes: "",
 
         },
-        resolver: zodResolver(ContactUsSchema),
+        resolver: zodResolver(AddVacancySchema),
         mode: "onBlur",
     });
-
-    const error = !!Object.keys(errors).length;
 
     return (
         <div
             className="">
-            <form onSubmit={() => { }}>
+            <form onSubmit={() => {}}>
                 <div
                     className="flex flex-col items-center">
 
@@ -42,7 +40,7 @@ const AddVacancy = () => {
                         <div
                             className="flex flex-col gap-6 justify-between w-[445px]">
                             <div
-                                className="flex flex-col gap-3">
+                                className="flex flex-col gap-5">
                                 <Input
                                     register={register}
                                     resetField={resetField}
@@ -52,7 +50,7 @@ const AddVacancy = () => {
                                     type="text"
                                     className=""
                                     label="Компанія"
-                                    errors={error} />
+                                    errors={errors} />
                                 <Input
                                     register={register}
                                     resetField={resetField}
@@ -62,7 +60,7 @@ const AddVacancy = () => {
                                     type="text"
                                     className=""
                                     label="Позиція"
-                                    errors={error} />
+                                    errors={errors} />
                                 <Input
                                     register={register}
                                     resetField={resetField}
@@ -72,7 +70,7 @@ const AddVacancy = () => {
                                     type="text"
                                     className=""
                                     label="Лінк на вакансію"
-                                    errors={error} />
+                                    errors={errors} />
                                 <Input
                                     register={register}
                                     resetField={resetField}
@@ -82,7 +80,7 @@ const AddVacancy = () => {
                                     type="text"
                                     className=""
                                     label="Канал зв'язку"
-                                    errors={error} />
+                                    errors={errors} />
                                 <Input
                                     register={register}
                                     resetField={resetField}
@@ -92,18 +90,18 @@ const AddVacancy = () => {
                                     type="text"
                                     className=""
                                     label="Локація"
-                                    errors={error} />
+                                    errors={errors} />
                             </div>
 
                             <div
-                                className="-mt-4 flex justify-between">
+                                className="flex justify-between mt-2">
                                 <Checkbox
                                     name="distance"
                                     id="distance"
                                     label="Дистанційно"
                                     register={register}
                                     type="signUp"
-                                    errors={error}
+                                    errors={errors}
                                 />
                                 <Checkbox
                                     name="office"
@@ -111,7 +109,7 @@ const AddVacancy = () => {
                                     label="Офіс"
                                     register={register}
                                     type="signUp"
-                                    errors={error}
+                                    errors={errors}
                                 />
                                 <Checkbox
                                     name="Mixed"
@@ -119,7 +117,7 @@ const AddVacancy = () => {
                                     label="Змішаний"
                                     register={register}
                                     type="signUp"
-                                    errors={error}
+                                    errors={errors}
                                 />
                             </div>
                         </div>
@@ -140,7 +138,7 @@ const AddVacancy = () => {
                                         label="Відправлено резюме"
                                         register={register}
                                         type="signUp"
-                                        errors={error}
+                                        errors={errors}
                                     />
                                     <Checkbox
                                         name="HR"
@@ -148,7 +146,7 @@ const AddVacancy = () => {
                                         label="HR"
                                         register={register}
                                         type="signUp"
-                                        errors={error}
+                                        errors={errors}
                                     />
                                     <Checkbox
                                         name="testTask"
@@ -156,7 +154,7 @@ const AddVacancy = () => {
                                         label="Тестове завдання"
                                         register={register}
                                         type="signUp"
-                                        errors={error}
+                                        errors={errors}
                                     />
                                     <Checkbox
                                         name="technicalInterview"
@@ -164,7 +162,7 @@ const AddVacancy = () => {
                                         label="Технічна співбесіда"
                                         register={register}
                                         type="signUp"
-                                        errors={error}
+                                        errors={errors}
                                     />
                                     <Checkbox
                                         name="rejection"
@@ -172,7 +170,7 @@ const AddVacancy = () => {
                                         label="Відмова"
                                         register={register}
                                         type="signUp"
-                                        errors={error}
+                                        errors={errors}
                                     />
                                     <Checkbox
                                         name="Offer"
@@ -180,7 +178,7 @@ const AddVacancy = () => {
                                         label="Офер"
                                         register={register}
                                         type="signUp"
-                                        errors={error}
+                                        errors={errors}
                                     />
                                 </div>
 
@@ -189,8 +187,8 @@ const AddVacancy = () => {
                             <Textarea
                                 register={register}
                                 resetField={resetField}
-                                key="Notes"
-                                name="Notes"
+                                key="notes"
+                                name="notes"
                                 placeholder="Місце для ваших нотаток"
                                 className=""
                                 label="Нотатки"
