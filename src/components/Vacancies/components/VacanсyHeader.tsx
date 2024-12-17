@@ -4,6 +4,8 @@ import { LinkButton } from "../../buttons/LinkButton/LinkButton";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../buttons/Button/Button";
 import { SearchForm } from "./SearchForm";
+import { useAppDispatch } from "../../../store/hook";
+import { openModal } from "../../../store/slices/modalSlice/modalSlice";
 import SortDropdown from "./sortingDropdown/SortingDropdown";
 
 type VacancyHeaderProps = {
@@ -16,6 +18,8 @@ const VacancyHeader: FC<VacancyHeaderProps> = ({ isArchive }) => {
   const handleButtonClick = () => {
     console.log("click");
   };
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className="flex w-full items-start justify-between pb-6">
@@ -41,7 +45,17 @@ const VacancyHeader: FC<VacancyHeaderProps> = ({ isArchive }) => {
           </LinkButton>
         )}
 
-        <Button variant="accent" size="big" onClick={handleButtonClick}>
+        <Button
+          variant="accent"
+          size="big"
+          onClick={() => {
+            dispatch(
+              openModal({
+                typeModal: "addVacancy",
+              })
+            );
+          }}
+        >
           <div className="flex items-center gap-3">
             <span className="w-[130px] text-base leading-[135%]">
               {t("vacanciesHeader.addVacancy")}
