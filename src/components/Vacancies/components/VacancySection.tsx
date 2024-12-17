@@ -19,13 +19,11 @@ const VacancySection: FC<VacancySectionProps> = ({
 
   const [isScrollLeftDisabled, setIsScrollLeftDisabled] = useState(true)
   const [isScrollRightDisabled, setIsScrollRightDisabled] = useState(true)
-  const [isTwoRows, setIsTwoRows] = useState(false);
+  const [, setIsTwoRows] = useState(false);
   const [hasScroll, setHasScroll] = useState(false);
 
   const validChildren = Array.isArray(children) ? children : [children];
 
-  // const row1 = validChildren.filter((_, index) => index % 2 === 0);
-  // const row2 = validChildren.filter((_, index) => index % 2 !== 0);
   let row1: ReactNode[] = [];
   let row2: ReactNode[] = [];
 
