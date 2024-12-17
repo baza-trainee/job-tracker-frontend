@@ -4,7 +4,7 @@ import { LinkButton } from "../../buttons/LinkButton/LinkButton";
 import { useTranslation } from "react-i18next";
 import { Button } from "../../buttons/Button/Button";
 import { SearchForm } from "./SearchForm";
-import SortDropdown from "./SortingDropdown";
+import SortDropdown from "./sortingDropdown/SortingDropdown";
 
 type VacancyHeaderProps = {
   isArchive: boolean;

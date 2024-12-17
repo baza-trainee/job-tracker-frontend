@@ -8,8 +8,8 @@ import { IconButton } from "../../buttons/IconButton/IconButton";
 import { useTranslation } from "react-i18next";
 import { cn } from "../../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
-import { setQuery } from "../../../store/slices/searchSlice/searchSlice";
-import { selectSearchQuery } from "../../../store/slices/searchSlice/searchSelector";
+// import { setQuery } from "../../../store/slices/vacanciesSlice/vacanciesSlice";
+import { selectSearchQuery } from "../../../store/slices/vacanciesSlice/vacanciesSelector";
 import { filterVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSlice";
 import { selectVacanciesQuantity } from "../../../store/slices/vacanciesSlice/vacanciesSelector";
 
@@ -43,11 +43,6 @@ export const SearchForm: FC = () => {
   });
 
   const handleSearch = (query: string) => {
-    dispatch(
-      setQuery({
-        searchQuery: query,
-      })
-    );
     dispatch(filterVacancies(query));
   };
 
