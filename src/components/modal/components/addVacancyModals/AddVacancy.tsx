@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddVacancySchema } from "../../../../schemas/AddVacancySchema";
+import { t } from "i18next";
 import Checkbox from "../../../checkbox/Checkbox";
 import Icon from "../../../Icon/Icon";
 
@@ -46,50 +47,50 @@ const AddVacancy = () => {
                                     resetField={resetField}
                                     key="company"
                                     name="company"
-                                    placeholder={"Вкажіть назву компанії"}
+                                    placeholder={t("addVacancy.placeholders.company")}
                                     type="text"
                                     className=""
-                                    label="Компанія"
+                                    label={t("addVacancy.form.company")}
                                     errors={errors} />
                                 <Input
                                     register={register}
                                     resetField={resetField}
                                     key="position"
                                     name="position"
-                                    placeholder={"Вкажіть посаду"}
+                                    placeholder={t("addVacancy.placeholders.position")}
                                     type="text"
                                     className=""
-                                    label="Позиція"
+                                    label={t("addVacancy.form.position")}
                                     errors={errors} />
                                 <Input
                                     register={register}
                                     resetField={resetField}
                                     key="link"
                                     name="link"
-                                    placeholder={"Додайте посилання на вакансію"}
+                                    placeholder={t("addVacancy.placeholders.link")}
                                     type="text"
                                     className=""
-                                    label="Лінк на вакансію"
+                                    label={t("addVacancy.form.link")}
                                     errors={errors} />
                                 <Input
                                     register={register}
                                     resetField={resetField}
                                     key="communication"
                                     name="communication"
-                                    placeholder={"Вкажіть канал зв'язку з рекрутером"}
+                                    placeholder={t("addVacancy.placeholders.communication")}
                                     type="text"
                                     className=""
-                                    label="Канал зв'язку"
+                                    label={t("addVacancy.form.communication")}
                                     errors={errors} />
                                 <Input
                                     register={register}
                                     resetField={resetField}
                                     key="location"
                                     name="location"
-                                    placeholder={"Вкажіть місце розташування компанії"}
+                                    placeholder={t("addVacancy.placeholders.location")}
                                     type="text"
                                     className=""
-                                    label="Локація"
+                                    label={t("addVacancy.form.location")}
                                     errors={errors} />
                             </div>
 
@@ -98,7 +99,7 @@ const AddVacancy = () => {
                                 <Checkbox
                                     name="distance"
                                     id="distance"
-                                    label="Дистанційно"
+                                    label={t("addVacancy.form.distance")}
                                     register={register}
                                     type="signUp"
                                     errors={errors}
@@ -106,15 +107,15 @@ const AddVacancy = () => {
                                 <Checkbox
                                     name="office"
                                     id="office"
-                                    label="Офіс"
+                                    label={t("addVacancy.form.office")}
                                     register={register}
                                     type="signUp"
                                     errors={errors}
                                 />
                                 <Checkbox
-                                    name="Mixed"
-                                    id="Mixed"
-                                    label="Змішаний"
+                                    name="mixed"
+                                    id="mixed"
+                                    label={t("addVacancy.form.mixed")}
                                     register={register}
                                     type="signUp"
                                     errors={errors}
@@ -135,7 +136,7 @@ const AddVacancy = () => {
                                     <Checkbox
                                         name="sendSummary"
                                         id="sendSummary"
-                                        label="Відправлено резюме"
+                                        label={t("addVacancy.form.sendSummary")}
                                         register={register}
                                         type="signUp"
                                         errors={errors}
@@ -143,7 +144,7 @@ const AddVacancy = () => {
                                     <Checkbox
                                         name="HR"
                                         id="HR"
-                                        label="HR"
+                                        label={t("addVacancy.form.HR")}
                                         register={register}
                                         type="signUp"
                                         errors={errors}
@@ -151,7 +152,7 @@ const AddVacancy = () => {
                                     <Checkbox
                                         name="testTask"
                                         id="testTask"
-                                        label="Тестове завдання"
+                                        label={t("addVacancy.form.testTask")}
                                         register={register}
                                         type="signUp"
                                         errors={errors}
@@ -159,7 +160,7 @@ const AddVacancy = () => {
                                     <Checkbox
                                         name="technicalInterview"
                                         id="technicalInterview"
-                                        label="Технічна співбесіда"
+                                        label={t("addVacancy.form.technicalInterview")}
                                         register={register}
                                         type="signUp"
                                         errors={errors}
@@ -167,15 +168,15 @@ const AddVacancy = () => {
                                     <Checkbox
                                         name="rejection"
                                         id="rejection"
-                                        label="Відмова"
+                                        label={t("addVacancy.form.rejection")}
                                         register={register}
                                         type="signUp"
                                         errors={errors}
                                     />
                                     <Checkbox
-                                        name="Offer"
-                                        id="Offer"
-                                        label="Офер"
+                                        name="offer"
+                                        id="offer"
+                                        label={t("addVacancy.form.offer")}
                                         register={register}
                                         type="signUp"
                                         errors={errors}
@@ -189,9 +190,9 @@ const AddVacancy = () => {
                                 resetField={resetField}
                                 key="notes"
                                 name="notes"
-                                placeholder="Місце для ваших нотаток"
+                                placeholder={t("addVacancy.placeholders.notes")}
                                 className=""
-                                label="Нотатки"
+                                label={t("addVacancy.form.notes")}
                                 errors={errors}
                             />
                         </div>
@@ -205,14 +206,14 @@ const AddVacancy = () => {
                             variant="ghost"
                             size="small"
                         >
-                            В архів <Icon id={"send"} className="w-6 ml-3" />
+                            {t("addVacancy.form.archive")} <Icon id={"send"} className="w-6 ml-3" />
                         </Button>
                         <Button
                             type="button"
                             className="mx-auto mt-8 bg-button"
                             variant="ghost"
                             size="big">
-                            Зберегти <Icon id={"check-box"} className="w-6 ml-3" />
+                            {t("addVacancy.form.save")} <Icon id={"check-box"} className="w-6 ml-3" />
                         </Button>
                     </div>
 

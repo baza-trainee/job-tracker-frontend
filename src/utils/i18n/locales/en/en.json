@@ -100,5 +100,64 @@
     "custom": "",
     "errorMailExist": "Log In",
     "recoveryPassword": "Recover"
+  },
+  "addVacancy": {
+    "form": {
+      "company": "Company",
+      "position": "Position",
+      "link": "Job link",
+      "communication": "Communication channel",
+      "location": "Location",
+      "notes": "Notes",
+      "distance": "Remote",
+      "office": "Office",
+      "mixed": "Mixed",
+      "status": "Status",
+      "sendSummary": "Resume sent",
+      "HR": "HR",
+      "testTask": "Test task",
+      "technicalInterview": "Technical interview",
+      "rejection": "Rejection",
+      "offer": "Offer",
+      "archive": "Archive",
+      "save": "Save"
+    },
+    "placeholders": {
+      "company": "Enter company name",
+      "position": "Enter position",
+      "link": "Add job link",
+      "communication": "Enter communication channel with recruiter",
+      "location": "Enter company location",
+      "notes": "Place for your notes"
+    },
+    "nameModal": {
+      "name": "Add a new vacancy"
+    }
+  },
+  "addVacancySchema": {
+    "company": {
+      "max": "Maximum length is 40 characters",
+      "min": "Minimum length is 2 characters"
+    },
+    "position": {
+      "max": "Maximum length is 30 characters",
+      "min": "Minimum length is 2 characters"
+    },
+    "link": {
+      "url": "Invalid URL format",
+      "max": "Maximum length is 254 characters",
+      "min": "Minimum length is 4 characters"
+    },
+    "communication": {
+      "max": "Maximum length is 4000 characters",
+      "min": "Minimum length is 10 characters"
+    },
+    "location": {
+      "max": "Maximum length is 400 characters",
+      "min": "Minimum length is 4 characters"
+    },
+    "notes": {
+      "max": "Maximum length is 4000 characters"
+    }
   }
 }
