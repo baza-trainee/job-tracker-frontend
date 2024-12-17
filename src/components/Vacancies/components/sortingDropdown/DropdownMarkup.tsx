@@ -54,60 +54,67 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
         </button>
 
         {/*** Випадаючий список ***/}
-        {isDropdownOpen && (
-          <div className="absolute left-0 z-10 w-full rounded-b-xl bg-backgroundMain">
-            <ul className="rounded-b-xl">
-              {mainOptions.map((option) => (
-                <li
-                  key={option.id}
-                  className={cn(
-                    "relative cursor-pointer px-4 py-2 last:rounded-b-xl last:pb-3",
-                    option.subOptions && "flex justify-between",
-                    focusedOption === option.id && "bg-button"
-                  )}
-                  onClick={() =>
-                    option.subOptions
-                      ? handleSubMenuToggle(option.id)
-                      : handleOptionSelect(option.id)
-                  }
-                  onMouseEnter={() => setFocusedOption(option.id)}
-                >
-                  {option.label}
-                  {option.subOptions && (
-                    <Icon
-                      id={"arrow-down"}
-                      className={cn(
-                        "h-6 w-6 rotate-[270deg]",
-                        openSubMenu === option.id
-                          ? "rotate-90 duration-500"
-                          : "rotate-[270deg] duration-500"
-                      )}
-                    />
-                  )}
+        {/* {isDropdownOpen && ( */}
+        <div
+          className={cn(
+            "custom-size absolute left-0 z-10 w-full rounded-b-xl bg-backgroundMain",
+            isDropdownOpen
+              ? "visible h-[162px] opacity-100"
+              : "sr-only m-0 h-0 opacity-0"
+          )}
+        >
+          <ul className="rounded-b-xl">
+            {mainOptions.map((option) => (
+              <li
+                key={option.id}
+                className={cn(
+                  "relative cursor-pointer px-4 py-2 last:rounded-b-xl last:pb-3",
+                  option.subOptions && "flex justify-between",
+                  focusedOption === option.id && "bg-button"
+                )}
+                onClick={() =>
+                  option.subOptions
+                    ? handleSubMenuToggle(option.id)
+                    : handleOptionSelect(option.id)
+                }
+                onMouseEnter={() => setFocusedOption(option.id)}
+              >
+                {option.label}
+                {option.subOptions && (
+                  <Icon
+                    id={"arrow-down"}
+                    className={cn(
+                      "h-6 w-6 rotate-[270deg]",
+                      openSubMenu === option.id
+                        ? "rotate-90 duration-500"
+                        : "rotate-[270deg] duration-500"
+                    )}
+                  />
+                )}
 
-                  {/***  Підсписок ***/}
-                  {option.subOptions && openSubMenu === option.id && (
-                    <ul className="absolute left-full top-0 z-20 mt-0 w-48 rounded-xl border border-textBlack bg-backgroundMain">
-                      {option.subOptions.map((subOption) => (
-                        <li
-                          key={subOption.id}
-                          className={cn(
-                            "cursor-pointer px-4 py-2 first:rounded-t-xl last:rounded-b-xl",
-                            focusedOption === subOption.id && "bg-button"
-                          )}
-                          onClick={() => handleOptionSelect(subOption.id)}
-                          onMouseEnter={() => setFocusedOption(subOption.id)}
-                        >
-                          {subOption.label}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                {/***  Підсписок ***/}
+                {option.subOptions && openSubMenu === option.id && (
+                  <ul className="absolute left-full top-0 z-20 mt-0 w-48 rounded-xl border border-textBlack bg-backgroundMain">
+                    {option.subOptions.map((subOption) => (
+                      <li
+                        key={subOption.id}
+                        className={cn(
+                          "cursor-pointer px-4 py-2 first:rounded-t-xl last:rounded-b-xl",
+                          focusedOption === subOption.id && "bg-button"
+                        )}
+                        onClick={() => handleOptionSelect(subOption.id)}
+                        onMouseEnter={() => setFocusedOption(subOption.id)}
+                      >
+                        {subOption.label}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* )} */}
       </div>
     );
   }

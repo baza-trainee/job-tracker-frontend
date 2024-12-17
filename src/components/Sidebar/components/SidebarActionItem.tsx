@@ -35,7 +35,7 @@ const SidebarActionItem: React.FC<SidebarActionItemProps> = ({
           "custom-size overflow-hidden whitespace-nowrap",
           isOpen
             ? "visible w-[148px] opacity-100"
-            : "sr-only w-0 -translate-x-5 opacity-0"
+            : "sr-only m-0 w-0 -translate-x-5 opacity-0"
         )}
       >
         {title}
