@@ -3,6 +3,7 @@ import ContactUs from "./components/formModals/ContacUs";
 import InfoModal from "./components/infoModals/InfoModal";
 import { ReactNode } from "react";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
+import { t } from "i18next";
 
 type ContentMapProps = {
   [propsTypeName: string]: {
@@ -39,7 +40,7 @@ const colorSuccess = {
 export const contentMap: ContentMapProps = {
   addVacancy: {
     content: <AddVacancy />,
-    nameModal: "Додати нову вакансію",
+    nameModal: t("addVacancy.nameModal.name"),
     bgColor: colorDefault.bg,
     borderColor: colorDefault.border,
   },
