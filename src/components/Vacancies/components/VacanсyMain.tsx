@@ -19,21 +19,41 @@ const VacancyMain: FC = () => {
   console.log("filteredVacancies", filteredVacancies);
 
   const getVacanciesByStatus = (statusName: string) =>
-    filteredVacancies.filter((vacancy) =>
-      vacancy.statuses.some((status) => status.name === statusName)
+    filteredVacancies.filter(
+      (v) => v.statuses[v.statuses.length - 1].name === statusName
     );
 
-  const savedVacancies = useMemo(() => getVacanciesByStatus("saved"), [filteredVacancies]);
-  const resumeVacancies = useMemo(() => getVacanciesByStatus("resume"), [filteredVacancies]);
-  const hrVacancies = useMemo(() => getVacanciesByStatus("hr"), [filteredVacancies]);
-  const testVacancies = useMemo(() => getVacanciesByStatus("test"), [filteredVacancies]);
-  const techVacancies = useMemo(() => getVacanciesByStatus("tech"), [filteredVacancies]);
-  const rejectVacancies = useMemo(() => getVacanciesByStatus("reject"), [filteredVacancies]);
-  const offerVacancies = useMemo(() => getVacanciesByStatus("offer"), [filteredVacancies]);
+  const savedVacancies = useMemo(
+    () => getVacanciesByStatus("saved"),
+    [filteredVacancies]
+  );
+  const resumeVacancies = useMemo(
+    () => getVacanciesByStatus("resume"),
+    [filteredVacancies]
+  );
+  const hrVacancies = useMemo(
+    () => getVacanciesByStatus("hr"),
+    [filteredVacancies]
+  );
+  const testVacancies = useMemo(
+    () => getVacanciesByStatus("test"),
+    [filteredVacancies]
+  );
+  const techVacancies = useMemo(
+    () => getVacanciesByStatus("tech"),
+    [filteredVacancies]
+  );
+  const rejectVacancies = useMemo(
+    () => getVacanciesByStatus("reject"),
+    [filteredVacancies]
+  );
+  const offerVacancies = useMemo(
+    () => getVacanciesByStatus("offer"),
+    [filteredVacancies]
+  );
 
   return (
     <div className="flex w-full flex-col gap-6">
-
       {savedVacancies.length > 0 && (
         <VacancySection
           titleSection="Збережені"
@@ -254,8 +274,20 @@ const VacancyMain: FC = () => {
               location={vacancy.location}
             />
           ))} */}
-          <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
+          <VacancyCard
+            colorSectionBG="bg-color2-transparent"
+            titleVacancy="Junior FrontEnd"
+            company="Ajax Systems"
+            workType="office"
+            location="Kyiv"
+          />
+          <VacancyCard
+            colorSectionBG="bg-color2-transparent"
+            titleVacancy="QA Engineer"
+            company="Ajax Systems"
+            workType="hybrid"
+            location="Lviv"
+          />
         </VacancySection>
       )}
 
@@ -299,12 +331,48 @@ const VacancyMain: FC = () => {
               location={vacancy.location}
             />
           ))} */}
-          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="kharkiv" />
-          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
+          <VacancyCard
+            colorSectionBG="bg-color7-transparent"
+            titleVacancy="Junior FrontEnd"
+            company="Ajax Systems"
+            workType="office"
+            location="Kyiv"
+          />
+          <VacancyCard
+            colorSectionBG="bg-color7-transparent"
+            titleVacancy="Junior FrontEnd"
+            company="Ajax Systems"
+            workType="office"
+            location="kharkiv"
+          />
+          <VacancyCard
+            colorSectionBG="bg-color7-transparent"
+            titleVacancy="QA Engineer"
+            company="Ajax Systems"
+            workType="hybrid"
+            location="Lviv"
+          />
+          <VacancyCard
+            colorSectionBG="bg-color7-transparent"
+            titleVacancy="Junior UX/Ui designer"
+            company="DUDECODE"
+            workType="remote"
+            location="Kyiv"
+          />
+          <VacancyCard
+            colorSectionBG="bg-color7-transparent"
+            titleVacancy="QA Engineer"
+            company="Ajax Systems"
+            workType="hybrid"
+            location="Kyiv"
+          />
+          <VacancyCard
+            colorSectionBG="bg-color7-transparent"
+            titleVacancy="Junior UX/Ui designer"
+            company="DUDECODE"
+            workType="remote"
+            location="Poland"
+          />
           {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" /> */}
           {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" /> */}
           {/* <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" /> */}

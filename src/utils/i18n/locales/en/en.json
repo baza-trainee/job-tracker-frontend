@@ -72,6 +72,23 @@
     "searchResult234": "search results",
     "searchResults": "search results"
   },
+  "sortDropdown": {
+    "sortBy": "Sort by",
+    "newFirst": "New first",
+    "oldFirst": "Old first",
+    "workType": "By work type",
+    "office": "Office",
+    "remote": "Remote",
+    "mixed": "Mixed",
+    "status": "By status",
+    "saved": "Saved",
+    "sent": "Sent",
+    "hrInterview": "HR interview",
+    "testTask": "Test task",
+    "techInterview": "Technical interview",
+    "rejection": "Rejection",
+    "offer": "Offer"
+  },
   "footer": {
     "development": "Development of Baza Trainee Ukraine 2024",
     "rights": " © All rights have been reserved"
