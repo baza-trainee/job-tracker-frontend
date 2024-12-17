@@ -54,6 +54,7 @@ export const ICON = {
     RESTORE: "restore",
     BASELINE_MORE_HORIZ: "baseline-more-horiz",
     STAR: "star",   // фарбувати stroke
+    SEND: "send",
 } as const;
 
 // export type IconId = keyof typeof ICON; // Тип для ключів ICON

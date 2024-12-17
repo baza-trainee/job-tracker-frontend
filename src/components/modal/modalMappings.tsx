@@ -2,14 +2,22 @@ import { ForgotPassword } from "./components/formModals/ForgotPassword";
 import ContactUs from "./components/formModals/ContacUs";
 import InfoModal from "./components/infoModals/InfoModal";
 import { ReactNode } from "react";
+import AddVacancy from "./components/addVacancyModals/AddVacancy";
 
 type ContentMapProps = {
   [propsTypeName: string]: {
     content: ReactNode;
+    nameModal?: string;
     bgColor: string;
     borderColor: string;
   };
 };
+
+const colorDefault = {
+  text: "text-white",
+  bg: "bg-white",
+  border: "border-white",
+}
 
 const colorButton = {
   text: "text-button",
@@ -29,6 +37,12 @@ const colorSuccess = {
 };
 
 export const contentMap: ContentMapProps = {
+  addVacancy: {
+    content: <AddVacancy />,
+    nameModal: "Додати нову вакансію",
+    bgColor: colorDefault.bg,
+    borderColor: colorDefault.border,
+  },
   forgotPassword: {
     content: <ForgotPassword />,
     bgColor: colorButton.bg,
@@ -40,7 +54,7 @@ export const contentMap: ContentMapProps = {
     borderColor: colorButton.border,
   },
   logInSuccess: {
-    content: <InfoModal type="logInSuccess" textColor={colorSuccess.text } />,
+    content: <InfoModal type="logInSuccess" textColor={colorSuccess.text} />,
     bgColor: colorSuccess.bg,
     borderColor: colorSuccess.border,
   },

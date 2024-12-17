@@ -39,10 +39,12 @@ const Modal: FC = () => {
       <div>
         <div
           className={clsx(
-            "relative top-1 z-30 h-[30px] w-[130px] rounded-tl-xl rounded-tr-xl",
+            "top-1 z-30 h-[51px] min-w-[130px] max-w-[260px] flex justify-center items-center rounded-tl-xl rounded-tr-xl",
             modalData.bgColor
           )}
-        ></div>
+        >
+        <span className="text-xl">{modalData.nameModal}</span>
+        </div>
         <div
           className={clsx(
             "z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow",
