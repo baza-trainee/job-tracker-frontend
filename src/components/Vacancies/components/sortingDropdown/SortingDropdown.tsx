@@ -135,7 +135,6 @@ const SortDropdown = () => {
     };
   }, [focusedOption, openSubMenu]);
 
-  // Динамічний текст кнопки
   const getButtonLabel = () => {
     if (!selectedSortType || isDropdownOpen) return t("sortDropdown.sortBy");
     const allOptions = mainOptions.flatMap((opt) =>
