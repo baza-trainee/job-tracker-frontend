@@ -85,7 +85,9 @@
     "sent": "Відправлені",
     "hrInterview": "HR співбесіда",
     "testTask": "Тестове завдання",
+    "testTaskShort": "Тест. завдання",
     "techInterview": "Технічна співбесіда",
+    "techInterviewShort": "Тех. співбесіда",
     "rejection": "Відмова",
     "offer": "Оффер"
   },
