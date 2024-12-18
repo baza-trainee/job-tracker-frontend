@@ -18,7 +18,7 @@ export interface Vacancy {
   location: string;
   work_type: "office" | "remote" | "hybrid";
   note: string;
-  isArchive: boolean;
+  isArchived: boolean;
   createdAt: string;
   updatedAt: string;
   statuses: Status[];

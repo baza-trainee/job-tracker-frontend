@@ -135,7 +135,6 @@ const SortDropdown = () => {
     };
   }, [focusedOption, openSubMenu]);
 
-  // Динамічний текст кнопки
   const getButtonLabel = () => {
     if (!selectedSortType || isDropdownOpen) return t("sortDropdown.sortBy");
     const allOptions = mainOptions.flatMap((opt) =>
@@ -144,7 +143,13 @@ const SortDropdown = () => {
     const selectedOption = allOptions.find(
       (opt) => opt.id === selectedSortType
     );
-    return selectedOption ? selectedOption.label : t("sortDropdown.sortBy");
+    return selectedOption
+      ? selectedOption.label === t("sortDropdown.techInterview")
+        ? t("sortDropdown.techInterviewShort")
+        : selectedOption.label === t("sortDropdown.testTask")
+          ? t("sortDropdown.testTaskShort")
+          : selectedOption.label
+      : t("sortDropdown.sortBy");
   };
 
   return (

@@ -85,7 +85,9 @@
     "sent": "Sent",
     "hrInterview": "HR interview",
     "testTask": "Test task",
+    "testTaskShort": "Test task",
     "techInterview": "Technical interview",
+    "techInterviewShort": "Tech interview",
     "rejection": "Rejection",
     "offer": "Offer"
   },

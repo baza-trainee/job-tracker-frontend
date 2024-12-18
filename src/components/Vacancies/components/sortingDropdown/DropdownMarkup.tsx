@@ -36,7 +36,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           }
           onMouseEnter={() => setFocusedOption("sortButton")}
           className={cn(
-            "flex w-full items-center justify-between rounded-t-xl px-4 py-2 pt-3 text-textBlack outline-none",
+            "flex w-full items-center justify-between rounded-t-xl py-2 pl-8 pr-[22px] pt-3 text-textBlack outline-none",
             isDropdownOpen && "hover:bg-button",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button"
           )}
@@ -54,7 +54,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
         </button>
 
         {/*** Випадаючий список ***/}
-        {/* {isDropdownOpen && ( */}
+
         <div
           className={cn(
             "custom-size absolute left-0 z-10 w-full rounded-b-xl bg-backgroundMain",
@@ -68,7 +68,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
               <li
                 key={option.id}
                 className={cn(
-                  "relative cursor-pointer px-4 py-2 last:rounded-b-xl last:pb-3",
+                  "relative cursor-pointer py-2 pl-8 pr-[22px] last:rounded-b-xl last:pb-3",
                   option.subOptions && "flex justify-between",
                   focusedOption === option.id && "bg-button"
                 )}
@@ -99,7 +99,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                       <li
                         key={subOption.id}
                         className={cn(
-                          "cursor-pointer px-4 py-2 first:rounded-t-xl last:rounded-b-xl",
+                          "cursor-pointer px-5 py-2 first:rounded-t-xl last:rounded-b-xl",
                           focusedOption === subOption.id && "bg-button"
                         )}
                         onClick={() => handleOptionSelect(subOption.id)}
@@ -114,7 +114,6 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
             ))}
           </ul>
         </div>
-        {/* )} */}
       </div>
     );
   }
