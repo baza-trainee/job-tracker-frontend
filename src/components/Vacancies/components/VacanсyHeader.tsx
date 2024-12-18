@@ -10,11 +10,11 @@ import { Button } from "../../buttons/Button/Button";
 import { SearchForm } from "./SearchForm";
 import SortDropdown from "./sortingDropdown/SortingDropdown";
 
-type VacancyHeaderProps = {
+export type VacancyProps = {
   isArchive: boolean;
 };
 
-const VacancyHeader: FC<VacancyHeaderProps> = ({ isArchive }) => {
+const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();

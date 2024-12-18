@@ -17,8 +17,8 @@ const VacancySection: FC<VacancySectionProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const [isScrollLeftDisabled, setIsScrollLeftDisabled] = useState(true)
-  const [isScrollRightDisabled, setIsScrollRightDisabled] = useState(true)
+  const [isScrollLeftDisabled, setIsScrollLeftDisabled] = useState(true);
+  const [isScrollRightDisabled, setIsScrollRightDisabled] = useState(true);
   const [, setIsTwoRows] = useState(false);
   const [hasScroll, setHasScroll] = useState(false);
 
@@ -44,7 +44,7 @@ const VacancySection: FC<VacancySectionProps> = ({
         container.scrollLeft + container.clientWidth >= container.scrollWidth
       );
     }
-  }
+  };
 
   const checkRowLayout = () => {
     const container = containerRef.current;
@@ -55,7 +55,7 @@ const VacancySection: FC<VacancySectionProps> = ({
 
       setIsTwoRows(contentWidth > containerWidth);
     }
-  }
+  };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -100,38 +100,48 @@ const VacancySection: FC<VacancySectionProps> = ({
 
   return (
     <section className="text-textBlack">
-
-      <div className={clsx(
-        "w-fit px-3 py-[6px] text-xl font-medium rounded-tl-lg rounded-tr-lg",
-        colorSectionBG)}>
+      <div
+        className={clsx(
+          "w-fit rounded-tl-lg rounded-tr-lg px-3 py-[6px] text-xl font-medium",
+          colorSectionBG
+        )}
+      >
         {titleSection}
       </div>
 
-      <div className={clsx("w-full flex justify-center p-6 border-4 border-solid rounded-[0px_12px_12px_12px]",
-        colorSectionBorder)}>
-
-        <div className="w-full flex gap-4 items-center section-contant">
+      <div
+        className={clsx(
+          "flex w-full justify-center rounded-[0px_12px_12px_12px] border-4 border-solid p-6",
+          colorSectionBorder
+        )}
+      >
+        <div className="section-contant flex w-full items-center gap-4">
           <button
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
             disabled={isScrollLeftDisabled}
-            className={clsx("transition", { "opacity-50 cursor-not-allowed": isScrollLeftDisabled })}
+            className={clsx("transition", {
+              "cursor-not-allowed opacity-50": isScrollLeftDisabled,
+            })}
           >
-            <Icon id="arrow-left" className="w-6 h-6" />
+            <Icon id="arrow-left" className="h-6 w-6" />
           </button>
 
           <div
             ref={containerRef}
-            className={clsx("w-full flex flex-col gap-5 overflow-x-auto scrollbar test", {"pb-5": hasScroll})}
+            className={clsx(
+              "scrollbar test flex w-full flex-col gap-5 overflow-x-auto",
+              { "pb-5": hasScroll }
+            )}
           >
             {/* Перший ряд, непарні картки */}
-            <div className="flex gap-5 flex-nowrap">
+            <div className="flex flex-nowrap gap-5">
               {row1.length > 0 ? row1 : <p>Немає вакансій</p>}
             </div>
 
             {/* Другий ряд, парні картки */}
             {row2.length > 0 && (
-              <div className="flex gap-5 flex-nowrap">
+              <div className="flex flex-nowrap gap-5">
                 {row2.length > 0 ? row2 : null}
               </div>
             )}
@@ -141,15 +151,16 @@ const VacancySection: FC<VacancySectionProps> = ({
             onClick={handleScrollRight}
             aria-label="Scroll Right"
             disabled={isScrollRightDisabled}
-            className={clsx("transition", { "opacity-50 cursor-not-allowed": isScrollRightDisabled, })}
+            className={clsx("transition", {
+              "cursor-not-allowed opacity-50": isScrollRightDisabled,
+            })}
           >
-            <Icon id="arrow-right" className="w-6 h-6" />
+            <Icon id="arrow-right" className="h-6 w-6" />
           </button>
         </div>
-
       </div>
     </section>
-  )
+  );
 };
 
 export default VacancySection;

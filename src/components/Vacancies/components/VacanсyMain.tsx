@@ -1,14 +1,44 @@
 import { FC, useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hook.ts";
-import { fetchVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSlice.ts";
+import {
+  Vacancy,
+  fetchVacancies,
+} from "../../../store/slices/vacanciesSlice/vacanciesSlice.ts";
 
 import VacancySection from "./VacancySection.tsx";
 import VacancyCard from "./VacancyCard.tsx";
 import { selectVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSelector.ts";
+import { VacancyProps } from "./VacanсyHeader.tsx";
 
-const VacancyMain: FC = () => {
+const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const dispatch = useAppDispatch();
-  const { filteredVacancies, status } = useAppSelector(selectVacancies);
+  const { filteredVacancies, status, sortType } =
+    useAppSelector(selectVacancies);
+
+  //вакансії які будуть відмальовуватися на картках
+  let renderedVacancies: Vacancy[] = [];
+
+  //визначаємо які саме вакансії архівні чи ні потрібно відмалювати, в залежності від сторінки, пропс isArchive вказує на це
+  if (isArchive) {
+    renderedVacancies = filteredVacancies.filter((v) => v.isArchived === true);
+  } else {
+    renderedVacancies = filteredVacancies.filter((v) => v.isArchived === false);
+  }
+
+  // визначаємо як повинна виглядати секція в залежності від наявності сортування за статусом, чи рендеру архівної сторінки
+  const validStatuses = [
+    "saved",
+    "resume",
+    "hr",
+    "test",
+    "tech",
+    "reject",
+    "offer",
+  ];
+  const isStatus = validStatuses.includes(sortType);
+  //пропс для секцій, якщо він true то секція має виглядати без скрола и стрілок
+  const isSorting = isStatus || isArchive;
+  console.log("isSorting", isSorting);
 
   useEffect(() => {
     if (status === "idle") {
@@ -18,8 +48,9 @@ const VacancyMain: FC = () => {
 
   console.log("filteredVacancies", filteredVacancies);
 
+  //тепер використовуємо для рендеру секцій renderedVacancies замість filteredVacancies
   const getVacanciesByStatus = (statusName: string) =>
-    filteredVacancies.filter(
+    renderedVacancies.filter(
       (v) => v.statuses[v.statuses.length - 1].name === statusName
     );
 
@@ -54,7 +85,26 @@ const VacancyMain: FC = () => {
 
   return (
     <div className="flex w-full flex-col gap-6">
-      {savedVacancies.length > 0 && (
+      {/* секція з архівними вакансіями, повинна мати вигляд такий самий, як секція при сортуванні за статусом; пропс isSorting визначає вигляд секцій, потрібно додати сірий колір в конфіг */}
+      {isArchive && renderedVacancies.length > 0 && (
+        <VacancySection
+          titleSection="Архів"
+          colorSectionBorder="[#DBDCDD]"
+          colorSectionBG="[#DBDCDD]"
+        >
+          {savedVacancies.map((vacancy) => (
+            <VacancyCard
+              key={vacancy.id}
+              colorSectionBG="[#DBDCDD]"
+              titleVacancy={vacancy.vacancy}
+              company={vacancy.company}
+              workType={vacancy.work_type}
+              location={vacancy.location}
+            />
+          ))}
+        </VacancySection>
+      )}
+      {!isArchive && savedVacancies.length > 0 && (
         <VacancySection
           titleSection="Збережені"
           colorSectionBorder="border-color5"
