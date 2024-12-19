@@ -69,3 +69,32 @@ body {
 .scrollbar::-webkit-scrollbar-button {
   display: none; /* Видаляємо стрілочки по краях */
 }
+
+/* notification animation react-toastify*/
+.notificationAnimation-in {
+  animation: notificationAnimation-in 1s ease-out both;
+}
+@keyframes notificationAnimation-in {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.notificationAnimation-out {
+  animation: notificationAnimation-out 1s ease-in both;
+}
+@keyframes notificationAnimation-out {
+  0% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
