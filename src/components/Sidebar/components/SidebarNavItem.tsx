@@ -32,7 +32,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           "custom-size overflow-hidden text-nowrap",
           isOpen
             ? "visible w-[108px] opacity-100"
-            : "sr-only w-0 -translate-x-5 opacity-0"
+            : "sr-only m-0 w-0 -translate-x-5 opacity-0"
         )}
       >
         {title}

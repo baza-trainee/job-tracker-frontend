@@ -4,10 +4,11 @@ import VacancyMain from "./components/VacanсyMain.tsx";
 
 const Vacancies: FC = () => {
   return (
-    <div className="flex w-full flex-col px-6 py-10">
-      <VacancyHeader isArchive={false} />
-
-      <VacancyMain />
+    <div className="w-full px-6 py-10">
+      <div className="m-auto flex w-[1308px] flex-col">
+        <VacancyHeader isArchive={false} />
+        <VacancyMain isArchive={false} />
+      </div>
     </div>
   );
 };

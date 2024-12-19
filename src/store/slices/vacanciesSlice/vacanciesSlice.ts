@@ -18,7 +18,7 @@ export interface Vacancy {
   location: string;
   work_type: "office" | "remote" | "hybrid";
   note: string;
-  isArchive: boolean;
+  isArchived: boolean;
   createdAt: string;
   updatedAt: string;
   statuses: Status[];
@@ -27,12 +27,16 @@ export interface Vacancy {
 interface VacanciesState {
   vacancies: Vacancy[];
   filteredVacancies: Vacancy[];
+  searchQuery: string;
+  sortType: string;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
 const initialState: VacanciesState = {
   vacancies: [],
+  searchQuery: "",
+  sortType: "",
   filteredVacancies: [],
   status: "idle",
   error: null,
@@ -45,12 +49,12 @@ export const fetchVacancies = createAsyncThunk<
 >("vacancies/fetchVacancies", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get<Vacancy[]>("/vacancies");
-    console.log("Вакансії з бекенду:", response.data);
+    console.log("Vacancies from backend:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching vacancies:", error);
     return rejectWithValue(
-      error instanceof Error ? error.message : "Не вдалося отримати вакансії"
+      error instanceof Error ? error.message : "Unable to get vacancies"
     );
   }
 });
@@ -60,16 +64,66 @@ const vacanciesSlice = createSlice({
   initialState,
   reducers: {
     filterVacancies(state, action: PayloadAction<string>) {
-      const query = action.payload.toLowerCase();
-      if (query) {
-        state.filteredVacancies = state.vacancies.filter(
+      state.searchQuery = action.payload.toLowerCase();
+      vacanciesSlice.caseReducers.applyFiltersAndSorting(state);
+    },
+    setSortType(state, action: PayloadAction<string>) {
+      state.sortType = action.payload;
+      vacanciesSlice.caseReducers.applyFiltersAndSorting(state);
+    },
+    applyFiltersAndSorting(state) {
+      let result = [...state.vacancies];
+
+      //Фільтрація за текстовим запитом
+      if (state.searchQuery) {
+        result = result.filter(
           (v) =>
-            v.company.toLowerCase().includes(query) ||
-            v.vacancy.toLowerCase().includes(query)
+            v.company.toLowerCase().includes(state.searchQuery) ||
+            v.vacancy.toLowerCase().includes(state.searchQuery) ||
+            v.location.toLowerCase().includes(state.searchQuery)
         );
-      } else {
-        state.filteredVacancies = state.vacancies;
       }
+
+      // Сортування / фільтрація за типом
+      switch (state.sortType) {
+        case "newFirst":
+          result = result.sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+          break;
+
+        case "oldFirst":
+          result = result.sort(
+            (a, b) =>
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          );
+          break;
+
+        case "office":
+        case "remote":
+        case "hybrid":
+          result = result.filter((v) => v.work_type === state.sortType);
+          break;
+
+        case "saved":
+        case "resume":
+        case "hr":
+        case "test":
+        case "tech":
+        case "reject":
+        case "offer":
+          result = result.filter(
+            (v) => v.statuses[v.statuses.length - 1].name === state.sortType
+          );
+          break;
+
+        default:
+          break;
+      }
+
+      // Оновити фільтрований список
+      state.filteredVacancies = result;
     },
   },
   extraReducers: (builder) => {
@@ -88,11 +142,11 @@ const vacanciesSlice = createSlice({
       )
       .addCase(fetchVacancies.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload ?? "Помилка під час отримання вакансій";
+        state.error = action.payload ?? "Error while getting vacancies";
       });
   },
 });
 
-export const { filterVacancies } = vacanciesSlice.actions;
+export const { filterVacancies, setSortType } = vacanciesSlice.actions;
 
 export default vacanciesSlice.reducer;
