@@ -24,7 +24,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
             "visible absolute left-0 z-[2] w-16 justify-center rounded-[20px] bg-backgroundMain opacity-100":
               isUA,
             "flex-grow opacity-100": !isUA && isOpen,
-            "sr-only w-0 opacity-0": !isUA && !isOpen,
+            "sr-only m-0 w-0 opacity-0": !isUA && !isOpen,
           }
         )}
         type="button"
@@ -48,7 +48,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
             "visible absolute right-0 w-16 justify-center rounded-[20px] bg-backgroundMain opacity-100":
               !isUA,
             "flex-grow opacity-100": isUA && isOpen,
-            "sr-only w-0 opacity-0": isUA && !isOpen,
+            "sr-only m-0 w-0 opacity-0": isUA && !isOpen,
           }
         )}
         type="button"
