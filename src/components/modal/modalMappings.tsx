@@ -100,6 +100,11 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
+  saveChangesVacancies: {
+    content: <InfoModal type="saveChangesVacancies" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
   close: {
     content: "close modal",
     bgColor: colorButton.bg,

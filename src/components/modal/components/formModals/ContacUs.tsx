@@ -7,7 +7,7 @@ import { z } from "zod";
 import { ContactUsSchema } from "../../../../schemas/ContactUsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../../store/hook";
-import { closeModal, openModal, openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
+import { closeModal, openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
 
 const ContactUs = () => {
   const { t } = useTranslation();
