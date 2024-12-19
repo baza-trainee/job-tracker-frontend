@@ -37,12 +37,19 @@ const Modal: FC = () => {
     };
   }, [dispatch, isModalOpen, isConfirmationOpen]);
 
+  const handleCloseModal = () => {
+    if (isConfirmationOpen) {
+      return;
+    }
+    dispatch(closeModal());
+  };
+
   if (!isModalOpen) return null;
 
   return (
     <div
       className="fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50 font-nunito"
-      onClick={() => dispatch(closeModal())}
+      onClick={() => handleCloseModal()}
     >
       <div>
         <ModalMain
@@ -52,11 +59,13 @@ const Modal: FC = () => {
         />
       </div>
       {isConfirmationOpen ? (
-        <ModalMain
-          className="fixed top-[25%] z-50"
-          modalData={confirmationData}
-          btnFunc={() => dispatch(closeConfirmation())}
-        />
+        <div className="absolute right-0 top-0 z-50 flex h-full w-full items-center justify-center">
+          <ModalMain
+            className="fixed top-[25%] z-50"
+            modalData={confirmationData}
+            btnFunc={() => dispatch(closeConfirmation())}
+          />
+        </div>
       ) : null}
     </div>
   );

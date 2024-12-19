@@ -62,7 +62,7 @@ function App() {
         </Route>
       </Route>
 
-      <Route element={<PublicRoute routeTo="/" />}>
+      <Route element={<PublicRoute routeTo="/vacancies" />}>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/log-in" element={<LogIn />} />
         <Route path="/reset-password" element={<ResetPassword />} />
