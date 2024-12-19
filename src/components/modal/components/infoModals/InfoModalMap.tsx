@@ -1,12 +1,18 @@
 import { useCallback } from "react";
 import {
+  closeConfirmation,
   closeModal,
   openModal,
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
-// import { clearTokens } from "../../../../store/slices/authSlice/authSlice";
 import { logOut } from "../../../../store/slices/authSlice/authOperation";
+
+import {
+  notifyError,
+  notifySuccess,
+  notifyInfo,
+} from "../../../Notifications/NotificationService";
 
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
@@ -27,10 +33,21 @@ const InfoModalMap = () => {
 
   const handleLogOut = useCallback((): void => {
     dispatch(logOut());
-    // dispatch(closeModal());
   }, [dispatch]);
 
-  return {
+  const handleSaveChangesVacancies = useCallback((): void => {
+    notifySuccess("Дані успшно збережено. Дякую");       // test
+    dispatch(closeConfirmation());
+    dispatch(closeModal());
+  }, [dispatch]);
+
+  const handleCloseConfirmation = useCallback((): void => {
+    notifyError("Щось пішло не так, дані не збережено"); // test
+    notifyInfo("Інформацію не збережно");                // test
+    dispatch(closeConfirmation());
+  }, [dispatch]);
+
+  const map = {
     logInSuccess: {
       title: "Успіх!",
       text: ["Авторизація пройшла успішно."],
@@ -153,7 +170,9 @@ const InfoModalMap = () => {
     },
     logOut: {
       title: "Ви впевнені, що хочете вийти?",
-      text: ["Вихід з акаунту призведе до завершення вашої сесії. Для повторного входу потрібно буде ввести ваші облікові дані."],
+      text: [
+        "Вихід з акаунту призведе до завершення вашої сесії. Для повторного входу потрібно буде ввести ваші облікові дані.",
+      ],
       button: [
         {
           label: "Скасувати",
@@ -173,7 +192,31 @@ const InfoModalMap = () => {
         },
       ],
     },
+    saveChangesVacancies: {
+      title: "Зберегти зміни?",
+      text: ["Якщо ви не збережете данні, вони будуть втрачені"],
+      button: [
+        {
+          label: "Вийти",
+          type: "button",
+          className: "",
+          variant: "ghost",
+          size: "small",
+          funcButton: handleCloseConfirmation,
+        },
+        {
+          label: "Зберегти",
+          type: "button",
+          className: "",
+          variant: "ghost",
+          size: "big",
+          funcButton: handleSaveChangesVacancies,
+        },
+      ],
+    },
   };
+  return map
 };
+
 
 export default InfoModalMap;
