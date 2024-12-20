@@ -130,7 +130,7 @@ const VacancySection: FC<VacancySectionProps> = ({
           <div
             ref={containerRef}
             className={clsx(
-              "scrollbar test flex w-full flex-col gap-5 overflow-x-auto",
+              "scrollbar flex w-full flex-col gap-5 overflow-x-auto",
               { "pb-5": hasScroll }
             )}
           >
