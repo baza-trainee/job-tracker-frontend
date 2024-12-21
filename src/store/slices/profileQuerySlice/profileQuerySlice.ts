@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../../fetchBaseQuery";
 import { VacancyProps } from "./profileProps";
 
-export const profileApiSlice = createApi({
+export const profileQuerySlice = createApi({
   reducerPath: "profileApiSlice",
 
   baseQuery,
@@ -22,6 +22,7 @@ export const profileApiSlice = createApi({
         body: vacancy,
       }),
     }),
+
     getAllVacancy: build.mutation({
       query: () => ({
         url: "/api/vacancies",
@@ -32,4 +33,4 @@ export const profileApiSlice = createApi({
 });
 
 export const { useGetAllUserDataQuery, useCreateVacancyMutation } =
-  profileApiSlice;
+  profileQuerySlice;
