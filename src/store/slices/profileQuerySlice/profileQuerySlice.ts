@@ -1,11 +1,10 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "../../fetchBaseQuery";
-import { VacancyProps } from "./profileProps";
+import { baseQueryWithReauth } from "../../fetchBaseQuery";
 
 export const profileQuerySlice = createApi({
   reducerPath: "profileApiSlice",
 
-  baseQuery,
+  baseQuery: baseQueryWithReauth,
 
   endpoints: (build) => ({
     getAllUserData: build.query({
@@ -14,23 +13,7 @@ export const profileQuerySlice = createApi({
         method: "GET",
       }),
     }),
-
-    createVacancy: build.mutation<VacancyProps, VacancyProps>({
-      query: (vacancy) => ({
-        url: "/api/vacancies",
-        method: "POST",
-        body: vacancy,
-      }),
-    }),
-
-    getAllVacancy: build.mutation({
-      query: () => ({
-        url: "/api/vacancies",
-        method: "GET",
-      }),
-    }),
   }),
 });
 
-export const { useGetAllUserDataQuery, useCreateVacancyMutation } =
-  profileQuerySlice;
+export const { useGetAllUserDataQuery } = profileQuerySlice;

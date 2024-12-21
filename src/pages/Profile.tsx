@@ -2,13 +2,13 @@ import { useGetAllUserDataQuery } from "../store/slices/profileQuerySlice/profil
 
 function Profile() {
   const {
-    //  data,
-    // isSuccess,
-    // isFetching,
-    // error,
+    data,
+    //  isSuccess, isFetching, error,
     isLoading,
     isError,
   } = useGetAllUserDataQuery({});
+
+  console.log("User all data>> ", data);
 
   if (isLoading) {
     return <h2>Loading....</h2>;
