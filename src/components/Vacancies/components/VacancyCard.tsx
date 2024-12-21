@@ -49,14 +49,3 @@ const VacancyCard: FC<VacancyCardProps> = ({
 };
 
 export default VacancyCard;
-
-
-// Додаткові стилі:
-
-// Додав ефекти при ховері та кліку: 
-// hover:scale-[1.02] (легке збільшення) 
-// active:scale-[0.98] (зменшення при натисканні).
-
-// Додав focus:outline-none та focus:ring для кращої доступності.
-
-// "w-[278px] shrink-0 p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2 transition-transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",

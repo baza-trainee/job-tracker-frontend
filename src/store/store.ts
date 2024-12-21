@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { PersistState } from "redux-persist/es/types";
 import vacanciesReducer from "./slices/vacanciesSlice/vacanciesSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
@@ -67,7 +68,17 @@ export const store = configureStore({
 });
 
 export default store;
-
-export type RootState = ReturnType<typeof store.getState>;
+// export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState> & {
+  _persist: PersistState;
+};
+// export type RootState = ReturnType<typeof store.getState> & {
+//   _persist: {
+//     version: number;
+//     rehydrated: boolean;
+//   }
+// };
 export type AppDispatch = typeof store.dispatch;
-export const persistor = persistStore(store);
+export const persistor = persistStore(store, {}, () => {
+  console.log("Redux Persist rehydrated");
+});

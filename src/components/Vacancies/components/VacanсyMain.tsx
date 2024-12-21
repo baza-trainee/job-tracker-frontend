@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hook.ts";
+import { useAppDispatch, useAppSelector, usePersistRehydrated } from "../../../store/hook.ts";
 import { fetchVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSlice.ts";
 
 import VacancySection from "./VacancySection.tsx";
@@ -14,6 +14,7 @@ import { sectionsConfig, getVacanciesByStatus } from "./VacancyMain.config";
 const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const dispatch = useAppDispatch();
   const { filteredVacancies, status, vacancies, sortType } = useAppSelector(selectVacancies);
+  const rehydrated = usePersistRehydrated();
 
   // визначаємо як повинна виглядати секція в залежності від наявності сортування за статусом, чи рендеру архівної сторінки
   const validStatuses = [
@@ -40,10 +41,16 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   // console.log("filteredVacancies: ", filteredVacancies);
 
   useEffect(() => {
-    if (status === "idle") {
+    console.log("rehydrated:", rehydrated);
+    console.log("status:", status);
+    console.log("vacancies.length:", vacancies.length);
+    if (status === "idle" || (status === "succeeded" && vacancies.length === 0)) {
+    // if (rehydrated && status === "idle") {
+    // if (rehydrated && (status === "idle" || vacancies.length === 0)) {
       dispatch(fetchVacancies());
     }
-  }, [dispatch, status]);
+    // }, [dispatch, status, vacancies.length]);
+  }, [dispatch, status, rehydrated, vacancies.length]);
 
   return (
     <div className="test-watch flex w-full flex-col gap-6">
@@ -122,6 +129,11 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
         </VacancySectionBox>
       )}
 
+      {/* Секція не має вакансій - під час сортування*/}
+      {status !== "loading" && renderedVacancies.length === 0 && (
+        <p className="text-xl mt-4 font-nunito">В цій секції не має вакансій...</p>
+      )}
+
       {/* Секції активних вакансій */}
       {status !== "loading" && !isArchive && (
         <>
@@ -135,6 +147,13 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                     colorSectionBorder={section.borderColor}
                     colorSectionBG={section.backgroundColor}
                   >
+                    {/* <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
+                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
+                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
+                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
+                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
+                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
+                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />  */}
                     {getVacanciesByStatus(renderedVacancies, section.sectionName
                     ).map((vacancy) => (
                       <VacancyCard
