@@ -22,6 +22,7 @@ export const profileApiSlice = createApi({
         body: vacancy,
       }),
     }),
+
     getAllVacancy: build.mutation({
       query: () => ({
         url: "/api/vacancies",

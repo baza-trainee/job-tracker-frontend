@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Vacancies from "./pages/Vacancies";
 import Statistics from "./pages/Statistics";
@@ -49,13 +49,14 @@ function App() {
   return (
     <Routes>
       <Route element={<PrivateRoute routeTo="/log-in" />}>
+        <Route path="/" element={<Navigate to="/vacancies" />} />
         <Route path="/" element={<MainLayout />}>
           <Route path="vacancies" element={<Vacancies />} />
           <Route path="statistics" element={<Statistics />} />
           <Route path="profile" element={<Profile />} />
           <Route path="notes" element={<Notes />} />
           <Route path="archive" element={<Archive />} />
-          <Route path="*" element={<h1>Page not found</h1>} />
+          <Route path="*" element={<Navigate to="/vacancies" />} />
         </Route>
       </Route>
 
@@ -64,7 +65,7 @@ function App() {
         <Route path="/log-in" element={<LogIn />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
-        <Route path="*" element={<h1>Page not found</h1>} />
+        <Route path="*" element={<Navigate to="/vacancies" />} />
       </Route>
     </Routes>
   );

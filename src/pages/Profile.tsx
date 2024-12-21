@@ -1,10 +1,21 @@
 import { useGetAllUserDataQuery } from "../store/slices/profileApiSlice/profileApiSlice";
 
 function Profile() {
-  const { data } = useGetAllUserDataQuery({});
+  const {
+    //  data,
+    // isSuccess,
+    // isFetching,
+    // error,
+    isLoading,
+    isError,
+  } = useGetAllUserDataQuery({});
 
-  console.log(data);
-
+  if (isLoading) {
+    return <h2>Loading....</h2>;
+  }
+  if (isError) {
+    return <h2>Error... </h2>;
+  }
   return (
     <div className="flex w-full items-center justify-center">
       <h2>Profile</h2>
