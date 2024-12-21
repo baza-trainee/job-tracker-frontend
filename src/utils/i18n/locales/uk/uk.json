@@ -70,7 +70,8 @@
     "addVacancy": "Додати вакансію",
     "searchResult": "результат з пошуку",
     "searchResult234": "результати з пошуку",
-    "searchResults": "результатів з пошуку"
+    "searchResults": "результатів з пошуку",
+    "emptySection": "В цій секції не має вакансій..."
   },
   "sortDropdown": {
     "sortBy": "Сортувати",
