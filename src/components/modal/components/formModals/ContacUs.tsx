@@ -7,7 +7,7 @@ import { z } from "zod";
 import { ContactUsSchema } from "../../../../schemas/ContactUsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../../store/hook";
-import { closeModal } from "../../../../store/slices/modalSlice/modalSlice";
+import { closeModal, openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
 
 const ContactUs = () => {
   const { t } = useTranslation();
@@ -37,6 +37,9 @@ const ContactUs = () => {
   const handleCancel = (): void => {
     reset();
     dispatch(closeModal());
+  };
+  const handleGood = (): void => {
+    dispatch(openConfirmation({typeConfirmation:"logInSuccess"}));
   };
 
   const error = !!Object.keys(errors).length;
@@ -95,6 +98,7 @@ const ContactUs = () => {
               disabled={error}
               variant="ghost"
               size="big"
+              onClick={() => handleGood()}
             >
               Надіслати
             </Button>

@@ -7,6 +7,7 @@ export type InfoModalProps = {
     | "forgotPasswordSuccess"
     | "resetPasswordSuccess"
     | "resetPasswordErrorLink"
-    | "logOut";
+    | "logOut"
+    | "saveChangesVacancies";
   textColor: string;
 };
