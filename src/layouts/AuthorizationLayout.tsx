@@ -9,7 +9,6 @@ import { InputPassword } from "../components/inputs/InputPassword/InputPassword"
 import Checkbox from "../components/checkbox/Checkbox";
 import { Button } from "../components/buttons/Button/Button";
 import Separator from "../components/separator/Separator";
-import Footer from "../components/layout/Footer";
 
 import { useAppSelector, useAppDispatch } from "../store/hook";
 import { useTranslation } from "react-i18next";
@@ -17,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
 import { AuthSocialButtons } from "../components/AuthComponents/AuthSocialButtons/AuthSocialButtons";
 import { openModal } from "../store/slices/modalSlice/modalSlice";
+import Footer from "../components/commonComponents/Footer";
 
 type AuthorizationLayoutProps = {
   type: "signUp" | "logIn" | "resetPassword";

@@ -1,4 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
+import { profileApiSlice } from "./slices/profileApiSlice/profileApiSlice.ts";
 import vacanciesReducer from "./slices/vacanciesSlice/vacanciesSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
@@ -41,6 +43,7 @@ const sidebarPersistedReducer = persistReducer(
 
 export const store = configureStore({
   reducer: {
+    [profileApiSlice.reducerPath]: profileApiSlice.reducer,
     vacancies: vacanciesReducer,
     modal: modalReduser,
     auth: authPersistedReducer,
@@ -63,8 +66,10 @@ export const store = configureStore({
         ignoredActionPaths: ["payload.modalContent"],
         ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
       },
-    }),
+    }).concat(profileApiSlice.middleware),
 });
+
+setupListeners(store.dispatch);
 
 export default store;
 
