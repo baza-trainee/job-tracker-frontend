@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
-import { useAppDispatch, useAppSelector, usePersistRehydrated } from "../../../store/hook.ts";
+import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "../../../store/hook.ts";
 import { fetchVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSlice.ts";
 
 import VacancySection from "./VacancySection.tsx";
@@ -9,12 +10,13 @@ import VacancyCardFirst from "./VacancyCardFirst.tsx";
 import VacancySectionSkeleton from "./VacancySectionSceleton";
 import { selectVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSelector.ts";
 import { VacancyProps } from "./VacanсyHeader.tsx";
-import { sectionsConfig, getVacanciesByStatus } from "./VacancyMain.config";
+import { getLocalizedSectionConfig, getVacanciesByStatus } from "./VacancyMainConfig.ts";
 
 const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const dispatch = useAppDispatch();
   const { filteredVacancies, status, vacancies, sortType } = useAppSelector(selectVacancies);
-  const rehydrated = usePersistRehydrated();
+  const { t } = useTranslation();
+  const localizedSections = getLocalizedSectionConfig();
 
   // визначаємо як повинна виглядати секція в залежності від наявності сортування за статусом, чи рендеру архівної сторінки
   const validStatuses = [
@@ -29,7 +31,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const isStatus = validStatuses.includes(sortType);
   //пропс для секцій, якщо він true то секція має виглядати без скрола и стрілок
   const isSorting = isStatus || isArchive;
-  console.log("isSorting", isSorting);
+  // console.log("isSorting", isSorting);
 
   // Визначаємо архівні або активні вакансії
   const renderedVacancies = isArchive
@@ -41,16 +43,10 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   // console.log("filteredVacancies: ", filteredVacancies);
 
   useEffect(() => {
-    console.log("rehydrated:", rehydrated);
-    console.log("status:", status);
-    console.log("vacancies.length:", vacancies.length);
     if (status === "idle" || (status === "succeeded" && vacancies.length === 0)) {
-    // if (rehydrated && status === "idle") {
-    // if (rehydrated && (status === "idle" || vacancies.length === 0)) {
       dispatch(fetchVacancies());
     }
-    // }, [dispatch, status, vacancies.length]);
-  }, [dispatch, status, rehydrated, vacancies.length]);
+    }, [dispatch, status, vacancies.length]);
 
   return (
     <div className="test-watch flex w-full flex-col gap-6">
@@ -76,43 +72,10 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
       {/* Архівні вакансії */}
       {status !== "loading" && isArchive && renderedVacancies.length > 0 && (
         <VacancySectionBox
-          titleSection="Архів"
+          titleSection={t("vacanciesHeader.archive")}
           colorSectionBorder="border-color9"
           colorSectionBG="bg-color9"
         >
-          {/* <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="kharkiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="kharkiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="kharkiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-          <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" /> */}
           {renderedVacancies.map((vacancy) => (
 
             <VacancyCard
@@ -129,15 +92,15 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
         </VacancySectionBox>
       )}
 
-      {/* Секція не має вакансій - під час сортування*/}
+      {/* В цій секції не має вакансій... - під час сортування*/}
       {status !== "loading" && renderedVacancies.length === 0 && (
-        <p className="text-xl mt-4 font-nunito">В цій секції не має вакансій...</p>
+        <p className="text-xl mt-4 font-nunito">{t("vacanciesHeader.emptySection")}</p>
       )}
 
       {/* Секції активних вакансій */}
       {status !== "loading" && !isArchive && (
         <>
-          {sectionsConfig.map(
+          {localizedSections.map(
             (section) =>
               getVacanciesByStatus(renderedVacancies, section.sectionName).length > 0 && (
                 !isSorting ?
@@ -147,13 +110,6 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                     colorSectionBorder={section.borderColor}
                     colorSectionBG={section.backgroundColor}
                   >
-                    {/* <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />  */}
                     {getVacanciesByStatus(renderedVacancies, section.sectionName
                     ).map((vacancy) => (
                       <VacancyCard
@@ -177,13 +133,6 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                     colorSectionBorder={section.borderColor}
                     colorSectionBG={section.backgroundColor}
                   >
-                    {/* <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-                    <VacancyCard colorSectionBG="bg-color9-transparent" colorHoverBG="bg-color9" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" /> */}
                     {getVacanciesByStatus(renderedVacancies, section.sectionName
                     ).map((vacancy) => (
                       <VacancyCard

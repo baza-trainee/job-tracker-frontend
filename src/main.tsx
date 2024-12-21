@@ -15,8 +15,7 @@ import NotificationContainer from "./components/Notifications/NotificationContai
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
-      <PersistGate loading={<p>Завантаження...</p>} persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <App />
           <Modal />

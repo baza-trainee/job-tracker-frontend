@@ -1,4 +1,5 @@
 // import { useMemo } from "react";
+import i18n from "i18next";
 import { Vacancy } from "../../../store/slices/vacanciesSlice/vacanciesSlice.ts";
 
 export type SectionConfig = {
@@ -22,7 +23,7 @@ export const getVacanciesByStatus = (
 export const sectionsConfig: SectionConfig[] = [
     {
         sectionName: "saved",
-        title: "Збережені",
+        title: "sortDropdown.saved",
         borderColor: "border-color5",
         backgroundColor: "bg-color5",
         backgroundTransparent: "bg-color5-transparent",
@@ -30,7 +31,7 @@ export const sectionsConfig: SectionConfig[] = [
     },
     {
         sectionName: "resume",
-        title: "Відправлені",
+        title: "sortDropdown.sent",
         borderColor: "border-color1",
         backgroundColor: "bg-color1",
         backgroundTransparent: "bg-color1-transparent",
@@ -38,7 +39,7 @@ export const sectionsConfig: SectionConfig[] = [
     },
     {
         sectionName: "hr",
-        title: "HR",
+        title: "sortDropdown.hrInterview",
         borderColor: "border-color4",
         backgroundColor: "bg-color4",
         backgroundTransparent: "bg-color4-transparent",
@@ -46,7 +47,7 @@ export const sectionsConfig: SectionConfig[] = [
     },
     {
         sectionName: "test",
-        title: "Тестове завдання",
+        title: "sortDropdown.testTask",
         borderColor: "border-color3",
         backgroundColor: "bg-color3",
         backgroundTransparent: "bg-color3-transparent",
@@ -54,7 +55,7 @@ export const sectionsConfig: SectionConfig[] = [
     },
     {
         sectionName: "tech",
-        title: "Технічна співбесіда",
+        title: "sortDropdown.techInterview",
         borderColor: "border-color6",
         backgroundColor: "bg-color6",
         backgroundTransparent: "bg-color6-transparent",
@@ -62,7 +63,7 @@ export const sectionsConfig: SectionConfig[] = [
     },
     {
         sectionName: "reject",
-        title: "Відмова",
+        title: "sortDropdown.rejection",
         borderColor: "border-color2",
         backgroundColor: "bg-color2",
         backgroundTransparent: "bg-color2-transparent",
@@ -70,10 +71,18 @@ export const sectionsConfig: SectionConfig[] = [
     },
     {
         sectionName: "offer",
-        title: "Оффер",
+        title: "sortDropdown.offer",
         borderColor: "border-color7",
         backgroundColor: "bg-color7",
         backgroundTransparent: "bg-color7-transparent",
         hoverColor: "hover:bg-color7",
     },
 ];
+
+// Функція для отримання локалізованого тексту
+export const getLocalizedSectionConfig = (): SectionConfig[] => {
+    return sectionsConfig.map((section) => ({
+        ...section,
+        title: i18n.t(section.title),
+    }));
+};
