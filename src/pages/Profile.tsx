@@ -1,4 +1,4 @@
-import { useGetAllUserDataQuery } from "../store/slices/profileApiSlice/profileApiSlice";
+import { useGetAllUserDataQuery } from "../store/slices/profileQuerySlice/profileQuerySlice";
 
 function Profile() {
   const {
