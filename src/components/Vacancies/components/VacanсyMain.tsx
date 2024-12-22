@@ -27,7 +27,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const { t } = useTranslation();
   const localizedSections = getLocalizedSectionConfig();
 
-  const { data, isLoading, isError } = useGetAllUserDataQuery(undefined);
+  const { data, isLoading, isError } = useGetAllUserDataQuery();
 
   const vacancies = data?.vacancies || [];
   const filteredVacancies = useFilteredVacancies(
