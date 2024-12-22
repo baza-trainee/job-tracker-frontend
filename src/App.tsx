@@ -15,21 +15,17 @@ import { useEffect } from "react";
 
 import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-import { useAppDispatch } from "./store/hook";
-import { refreshUser } from "./store/slices/authSlice/authOperation";
 
 function App() {
   const darkMode = useAppSelector(selectTheme);
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(refreshUser());
     if (darkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [darkMode, dispatch]);
+  }, [darkMode]);
 
   return (
     <Routes>
