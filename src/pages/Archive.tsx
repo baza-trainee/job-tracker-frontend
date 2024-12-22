@@ -1,5 +1,5 @@
-import VacancyHeader from "../Vacancies/components/VacanсyHeader";
-import VacancyMain from "../Vacancies/components/VacanсyMain";
+import VacancyHeader from "../components/Vacancies/components/VacanсyHeader";
+import VacancyMain from "../components/Vacancies/components/VacanсyMain";
 
 function Archive() {
   return (

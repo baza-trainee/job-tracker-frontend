@@ -16,7 +16,7 @@ import { useGetAllUserDataQuery } from "../../../../store/slices/profileQuerySli
 // import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
 
 const AddVacancy = () => {
-  const { refetch } = useGetAllUserDataQuery(undefined);
+  const { refetch } = useGetAllUserDataQuery({});
   const [createVacancy] = useCreateVacancyMutation();
   // const dispatch = useAppDispatch();
 
