@@ -1,49 +1,71 @@
 import { Input } from "../../../inputs/Input/Input";
 import { Button } from "../../../buttons/Button/Button";
 import { Textarea } from "../../../Textarea/Textarea";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddVacancySchema } from "../../../../schemas/AddVacancySchema";
 import { t } from "i18next";
 import Checkbox from "../../../checkbox/Checkbox";
 import Icon from "../../../Icon/Icon";
+import { useCreateVacancyMutation } from "../../../../store/slices/vacanciesQuerySlice/vacanciesQuerySlice";
 
 //alex
-import { useAppDispatch } from "../../../../store/hook";
-import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
+// import { useAppDispatch } from "../../../../store/hook";
+// import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
 
 const AddVacancy = () => {
-  const dispatch = useAppDispatch();
+  const [createVacancy] = useCreateVacancyMutation();
+  // const dispatch = useAppDispatch();
 
-  const handleModal = () => {
-    dispatch(
-      openConfirmation({
-        typeConfirmation: "saveChangesVacancies",
-      })
-    );
-  };
+  // const handleModal = () => {
+  //   dispatch(
+  //     openConfirmation({
+  //       typeConfirmation: "saveChangesVacancies",
+  //     })
+  //   );
+  // };
 
   const {
     register,
     resetField,
+    reset,
+    handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<z.infer<typeof AddVacancySchema>>({
     defaultValues: {
       company: "",
-      position: "",
+      vacancy: "",
       link: "",
       communication: "",
       location: "",
-      notes: "",
+      note: "",
+      work_type: "office",
+      isArchived: false,
     },
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
   });
+  const onSubmit: SubmitHandler<z.infer<typeof AddVacancySchema>> = async (
+    data
+  ) => {
+    try {
+      console.log(data);
+      await createVacancy(data).unwrap();
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleSubmitArchive = () => {
+    setValue("isArchived", true);
+    handleSubmit(onSubmit)();
+  };
 
   return (
     <div className="">
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col items-center">
           <div className="flex flex-row gap-6">
             <div className="flex w-[445px] flex-col justify-between gap-6">
@@ -62,8 +84,8 @@ const AddVacancy = () => {
                 <Input
                   register={register}
                   resetField={resetField}
-                  key="position"
-                  name="position"
+                  key="vacancy"
+                  name="vacancy"
                   placeholder={t("addVacancy.placeholders.position")}
                   type="text"
                   className=""
@@ -107,8 +129,8 @@ const AddVacancy = () => {
 
               <div className="mt-2 flex justify-between">
                 <Checkbox
-                  name="distance"
-                  id="distance"
+                  name="remote"
+                  id="remote"
                   label={t("addVacancy.form.distance")}
                   register={register}
                   type="signUp"
@@ -208,19 +230,21 @@ const AddVacancy = () => {
               className="mx-auto mt-8"
               variant="ghost"
               size="small"
+              onClick={handleSubmitArchive}
             >
               {t("addVacancy.form.archive")}{" "}
-              <Icon id={"send"} className="ml-3 w-6 h-6" />
+              <Icon id={"send"} className="ml-3 h-6 w-6" />
             </Button>
             <Button
-              type="button"
+              // type="button"
+              type="submit"
               className="mx-auto mt-8 bg-button"
               variant="ghost"
               size="big"
-              onClick={() => handleModal()}
+              // onClick={() => handleModal()}
             >
               {t("addVacancy.form.save")}
-              <Icon id={"check-box"} className="ml-3 w-6 h-6" />
+              <Icon id={"check-box"} className="ml-3 h-6 w-6" />
             </Button>
           </div>
         </div>

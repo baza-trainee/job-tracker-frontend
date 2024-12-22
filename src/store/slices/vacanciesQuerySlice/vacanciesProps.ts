@@ -4,6 +4,7 @@ export type VacancyProps = {
   communication: string;
   company: string;
   location: string;
-  work_type: string;
+  work_type: "remote" | "office" | "mixed";
   note: string;
+  isArchived?: boolean;
 };

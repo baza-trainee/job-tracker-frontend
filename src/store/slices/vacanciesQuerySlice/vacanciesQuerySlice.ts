@@ -10,7 +10,7 @@ export const vacanciesQuerySlice = createApi({
   endpoints: (build) => ({
     createVacancy: build.mutation<VacancyProps, VacancyProps>({
       query: (vacancy) => ({
-        url: "/api/vacancies",
+        url: "/vacancies",
         method: "POST",
         body: vacancy,
       }),
@@ -18,7 +18,7 @@ export const vacanciesQuerySlice = createApi({
 
     getAllVacancy: build.query({
       query: () => ({
-        url: "/api/vacancies",
+        url: "/vacancies",
         method: "GET",
       }),
     }),
