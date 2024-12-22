@@ -3,7 +3,7 @@ import { baseQueryWithReauth } from "../../fetchBaseQuery";
 import { TAG_TYPES } from "../../tagQueryConstans";
 
 export const profileQuerySlice = createApi({
-  reducerPath: "profileApiSlice",
+  reducerPath: "profileQuerySlice",
 
   baseQuery: baseQueryWithReauth,
   tagTypes: [TAG_TYPES.USERDATA],
@@ -13,8 +13,8 @@ export const profileQuerySlice = createApi({
       query: () => ({
         url: "/user/profile",
         method: "GET",
-        providesTags: () => [TAG_TYPES.USERDATA],
       }),
+      providesTags: () => [TAG_TYPES.USERDATA],
     }),
   }),
 });

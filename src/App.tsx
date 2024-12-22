@@ -17,7 +17,7 @@ import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { useAppDispatch } from "./store/hook";
 import { refreshUser } from "./store/slices/authSlice/authOperation";
 
-import Archive from "./components/Archive/Archive";
+import Archive from "./pages/Archive";
 
 function App() {
   const darkMode = useAppSelector(selectTheme);
