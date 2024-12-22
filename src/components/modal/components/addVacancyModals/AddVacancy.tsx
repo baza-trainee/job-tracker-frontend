@@ -9,12 +9,14 @@ import { t } from "i18next";
 import Checkbox from "../../../checkbox/Checkbox";
 import Icon from "../../../Icon/Icon";
 import { useCreateVacancyMutation } from "../../../../store/slices/vacanciesQuerySlice/vacanciesQuerySlice";
+import { useGetAllUserDataQuery } from "../../../../store/slices/profileQuerySlice/profileQuerySlice";
 
 //alex
 // import { useAppDispatch } from "../../../../store/hook";
 // import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
 
 const AddVacancy = () => {
+  const { refetch } = useGetAllUserDataQuery(undefined);
   const [createVacancy] = useCreateVacancyMutation();
   // const dispatch = useAppDispatch();
 
@@ -51,8 +53,8 @@ const AddVacancy = () => {
     data
   ) => {
     try {
-      console.log(data);
       await createVacancy(data).unwrap();
+      refetch();
       reset();
     } catch (error) {
       console.log(error);

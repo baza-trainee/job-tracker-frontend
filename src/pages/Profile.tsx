@@ -6,7 +6,7 @@ function Profile() {
     //  isSuccess, isFetching, error,
     isLoading,
     isError,
-  } = useGetAllUserDataQuery({});
+  } = useGetAllUserDataQuery(undefined);
 
   console.log("User all data>> ", data);
 
@@ -17,8 +17,9 @@ function Profile() {
     return <h2>Error... </h2>;
   }
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex min-h-96 w-full items-center justify-center">
       <h2>Profile</h2>
+      <div>{JSON.stringify(data)}</div>
     </div>
   );
 }

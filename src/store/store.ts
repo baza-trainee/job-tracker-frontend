@@ -11,12 +11,12 @@ import sidebarReducer from "./slices/sibebarSlice/sidebarSlice.ts";
 import {
   persistStore,
   persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
+  // FLUSH,
+  // REHYDRATE,
+  // PAUSE,
+  // PERSIST,
+  // PURGE,
+  // REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -54,20 +54,21 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [
-          "modal/openModal",
-          "modal/closeModal",
-          FLUSH,
-          REHYDRATE,
-          PAUSE,
-          PERSIST,
-          PURGE,
-          REGISTER,
-        ],
-        ignoredActionPaths: ["payload.modalContent"],
-        ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
-      },
+      serializableCheck: false,
+      //  {
+      //   ignoredActions: [
+      //     "modal/openModal",
+      //     "modal/closeModal",
+      //     FLUSH,
+      //     REHYDRATE,
+      //     PAUSE,
+      //     PERSIST,
+      //     PURGE,
+      //     REGISTER,
+      //   ],
+      //   ignoredActionPaths: ["payload.modalContent"],
+      //   ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
+      // },
     }).concat(profileQuerySlice.middleware, vacanciesQuerySlice.middleware),
 });
 
