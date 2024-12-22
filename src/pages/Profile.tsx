@@ -6,7 +6,7 @@ function Profile() {
     //  isSuccess, isFetching, error,
     isLoading,
     isError,
-  } = useGetAllUserDataQuery(undefined);
+  } = useGetAllUserDataQuery({});
 
   console.log("User all data>> ", data);
 

@@ -35,6 +35,19 @@ export const AddVacancySchema = z.object({
   isArchived: z.boolean(),
 });
 
+export const changeStatusVacancy = z.object({
+  name: z.enum(["hr"]),
+  rejectReason: z.string(),
+  resumeId: z.string(),
+  statusId: z.string(),
+});
+export type NewVacancyProps = z.infer<typeof AddVacancySchema>;
+
+export type UpdateVacancyById = NewVacancyProps & { id: string };
+
+export type ChangeStatusVacancy = z.infer<typeof changeStatusVacancy> & {
+  vacancyId: string;
+};
 // const vacancyFromSwager = {
 //   vacancy: "Senior TypeScript Developer",
 //   link: "https://example.com/job-posting",
@@ -43,4 +56,11 @@ export const AddVacancySchema = z.object({
 //   location: "string",
 //   work_type: "remote",
 //   note: "string",
+// };
+
+// const changeStatusFromSwager = {
+//   name: "hr",
+//   rejectReason: "SoftSkills",
+//   resumeId: "123e4567-e89b-12d3-a456-426614174000",
+//   statusId: "123e4567-e89b-12d3-a456-426614174000",
 // };
