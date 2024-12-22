@@ -67,6 +67,49 @@ body {
   border-radius: 4px;
 }
 
-.scrollbar::-webkit-scrollbar-button {
+.scrollbar-y::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-y::-webkit-scrollbar-thumb {
+  background-color: #c2c2c2;
+  border-radius: 4px;
+}
+
+.scrollbar-y::-webkit-scrollbar-track {
+  background-color: #eaeef2;
+  border-radius: 4px;
+}
+
+.scrollbar-y::-webkit-scrollbar-button {
   display: none;
+}
+
+/* notification animation react-toastify*/
+.notificationAnimation-in {
+  animation: notificationAnimation-in 1s ease-out both;
+}
+@keyframes notificationAnimation-in {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.notificationAnimation-out {
+  animation: notificationAnimation-out 1s ease-in both;
+}
+@keyframes notificationAnimation-out {
+  0% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
 }

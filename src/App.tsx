@@ -1,10 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
-import Vacancies from "./components/Vacancies/Vacancies";
-import Statistics from "./components/Statistics/Statistics";
-import Home from "./pages/Home";
-import Profile from "./components/Profile/Profile";
-import Notes from "./components/Notes/Notes";
+import Vacancies from "./pages/Vacancies";
+import Statistics from "./pages/Statistics";
+import Profile from "./pages/Profile";
+import Notes from "./pages/Notes";
 import { SignUp } from "./pages/SignUp";
 import { LogIn } from "./pages/LogIn";
 import { ResetPassword } from "./pages/ResetPassword";
@@ -17,10 +16,8 @@ import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { useAppDispatch } from "./store/hook";
 import { refreshUser } from "./store/slices/authSlice/authOperation";
-import { axiosInstance } from "./api/axios";
 
 import Archive from "./components/Archive/Archive";
-//alex
 
 function App() {
   const darkMode = useAppSelector(selectTheme);
@@ -35,39 +32,26 @@ function App() {
     }
   }, [darkMode, dispatch]);
 
-  // TODO: перевірка axiosInstance потім видалити
-  const func = async () => {
-    try {
-      const response = await axiosInstance.get("/vacancies");
-      return response;
-    } catch (error) {
-      console.log("errorGet", error);
-    }
-  };
-  func().then((rezult) => console.log("axiosInstance", rezult));
-  // ----------------------------------------------------------------
-
   return (
     <Routes>
       <Route element={<PrivateRoute routeTo="/log-in" />}>
+        <Route path="/" element={<Navigate to="/vacancies" />} />
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="vacancies" element={<Vacancies />} />
           <Route path="vacancies" element={<Vacancies />} />
           <Route path="statistics" element={<Statistics />} />
           <Route path="profile" element={<Profile />} />
           <Route path="notes" element={<Notes />} />
           <Route path="archive" element={<Archive />} />
-          <Route path="*" element={<h1>Page not found</h1>} />
+          <Route path="*" element={<Navigate to="/vacancies" />} />
         </Route>
       </Route>
 
-      <Route element={<PublicRoute routeTo="/" />}>
+      <Route element={<PublicRoute routeTo="/vacancies" />}>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/log-in" element={<LogIn />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
-        <Route path="*" element={<h1>Page not found</h1>} />
+        <Route path="*" element={<Navigate to="/vacancies" />} />
       </Route>
     </Routes>
   );

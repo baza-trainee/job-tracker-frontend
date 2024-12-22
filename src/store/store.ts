@@ -1,4 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
+import { profileQuerySlice } from "./slices/profileQuerySlice/profileQuerySlice.ts";
+import { vacanciesQuerySlice } from "./slices/vacanciesQuerySlice/vacanciesQuerySlice.ts";
 import vacanciesReducer from "./slices/vacanciesSlice/vacanciesSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
@@ -8,12 +11,12 @@ import sidebarReducer from "./slices/sibebarSlice/sidebarSlice.ts";
 import {
   persistStore,
   persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
+  // FLUSH,
+  // REHYDRATE,
+  // PAUSE,
+  // PERSIST,
+  // PURGE,
+  // REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -41,6 +44,8 @@ const sidebarPersistedReducer = persistReducer(
 
 export const store = configureStore({
   reducer: {
+    [profileQuerySlice.reducerPath]: profileQuerySlice.reducer,
+    [vacanciesQuerySlice.reducerPath]: vacanciesQuerySlice.reducer,
     vacancies: vacanciesReducer,
     modal: modalReduser,
     auth: authPersistedReducer,
@@ -49,22 +54,25 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [
-          "modal/openModal",
-          "modal/closeModal",
-          FLUSH,
-          REHYDRATE,
-          PAUSE,
-          PERSIST,
-          PURGE,
-          REGISTER,
-        ],
-        ignoredActionPaths: ["payload.modalContent"],
-        ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
-      },
-    }),
+      serializableCheck: false,
+      //  {
+      //   ignoredActions: [
+      //     "modal/openModal",
+      //     "modal/closeModal",
+      //     FLUSH,
+      //     REHYDRATE,
+      //     PAUSE,
+      //     PERSIST,
+      //     PURGE,
+      //     REGISTER,
+      //   ],
+      //   ignoredActionPaths: ["payload.modalContent"],
+      //   ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
+      // },
+    }).concat(profileQuerySlice.middleware, vacanciesQuerySlice.middleware),
 });
+
+setupListeners(store.dispatch);
 
 export default store;
 

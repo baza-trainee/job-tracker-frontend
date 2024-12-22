@@ -49,6 +49,7 @@ export const fetchVacancies = createAsyncThunk<
 >("vacancies/fetchVacancies", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get<Vacancy[]>("/vacancies");
+    // console.log("Response fetchVacancies status:", response.status);
     console.log("Vacancies from backend:", response.data);
     return response.data;
   } catch (error) {

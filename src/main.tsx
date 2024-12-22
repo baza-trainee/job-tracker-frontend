@@ -10,6 +10,8 @@ import "./index.css";
 import "./utils/i18n/i18n.ts";
 import Modal from "./components/modal/Modal.tsx";
 
+import NotificationContainer from "./components/Notifications/NotificationContainer.tsx";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
@@ -17,6 +19,7 @@ createRoot(document.getElementById("root")!).render(
         <BrowserRouter>
           <App />
           <Modal />
+          <NotificationContainer />
         </BrowserRouter>
       </PersistGate>
     </Provider>
