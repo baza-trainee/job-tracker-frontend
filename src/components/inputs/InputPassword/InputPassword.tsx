@@ -89,14 +89,20 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
     setShowPassword(!showPassword);
   };
 
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <div className={cn("relative", [className])} id={id}>
       {label && (
         <label
           htmlFor={`input-${name}`}
-          className="mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-textBlack"
+          className={cn(
+            "mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-textBlack",
+            "sm:mb-[2px] sm:text-[14px]",
+            "md:mb-2 md:text-[18px]",
+            "xl:mb-2 xl:text-[16px]",
+            "2xl:mb-3 2xl:text-[20px]"
+          )}
         >
           {label}
         </label>
@@ -106,7 +112,11 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "peer h-11 w-full rounded-xl border py-2 pl-6 pr-16 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-accent focus:outline-none active:border-accent",
+              "focus:border-accent active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:outline-none",
+              "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
+              "md:h-11 md:px-6 md:py-3 md:text-[14px]",
+              "xl:text-[14px]",
+              "2xl:text-[16px]",
               {
                 ["border-color5"]: !error,
                 ["border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"]:
@@ -119,7 +129,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             {...register(name)}
             aria-describedby={`inputError-${name}`}
           />
-  
+
           <button
             type="button"
             onClick={toggleShowPassword}
