@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Vacancies from "./pages/Vacancies";
+import Archive from "./pages/Archive";
 import Statistics from "./pages/Statistics";
 import Profile from "./pages/Profile";
 import Notes from "./pages/Notes";
@@ -16,8 +17,6 @@ import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { useAppDispatch } from "./store/hook";
 import { refreshUser } from "./store/slices/authSlice/authOperation";
-
-import Archive from "./pages/Archive";
 
 function App() {
   const darkMode = useAppSelector(selectTheme);

@@ -12,7 +12,7 @@ const CloseSidebarBtn: React.FC<SidebarBtnProps> = ({
       onClick={handleOpenSidebar}
       className={cn(
         "custom-hover cursor-pointer p-[10px]",
-        !isOpenSidebar ? "sr-only opacity-0" : "visible opacity-100"
+        !isOpenSidebar ? "sr-only m-0 opacity-0" : "visible opacity-100"
       )}
     >
       <Icon
