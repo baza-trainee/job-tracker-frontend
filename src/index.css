@@ -67,7 +67,21 @@ body {
   border-radius: 4px;
 }
 
-.scrollbar::-webkit-scrollbar-button {
+.scrollbar-y::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-y::-webkit-scrollbar-thumb {
+  background-color: #c2c2c2;
+  border-radius: 4px;
+}
+
+.scrollbar-y::-webkit-scrollbar-track {
+  background-color: #eaeef2;
+  border-radius: 4px;
+}
+
+.scrollbar-y::-webkit-scrollbar-button {
   display: none;
 }
 

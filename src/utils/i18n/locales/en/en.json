@@ -70,7 +70,8 @@
     "addVacancy": "Add vacancy",
     "searchResult": "search result",
     "searchResult234": "search results",
-    "searchResults": "search results"
+    "searchResults": "search results",
+    "emptySection": "There are no vacancies in this section..."
   },
   "sortDropdown": {
     "sortBy": "Sort by",

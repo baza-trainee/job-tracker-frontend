@@ -17,7 +17,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         cn(
           "flex items-center rounded-[20px] border-2 border-transparent fill-textBlack py-[2px] text-textBlack dark:fill-slate-300 dark:text-slate-300",
           "custom-transition",
-          isOpen ? "w-[206px]" : "w-[64px]",
+          isOpen ? "w-[206px]" : "w-[68px]",
           isPending && "bg-red-500",
           !isActive &&
             "hover:fill-iconHover hover:text-iconHover dark:hover:fill-iconHover dark:hover:text-iconHover",
@@ -26,10 +26,10 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         )
       }
     >
-      <Icon id={icon} className="mx-[14px] h-8 w-8" />
+      <Icon id={icon} className={cn("mx-[16px] h-8 w-8")} />
       <span
         className={cn(
-          "custom-size overflow-hidden text-nowrap",
+          "custom-size overflow-hidden whitespace-nowrap",
           isOpen
             ? "visible w-[108px] opacity-100"
             : "sr-only m-0 w-0 -translate-x-5 opacity-0"

@@ -49,6 +49,7 @@ export const fetchVacancies = createAsyncThunk<
 >("vacancies/fetchVacancies", async (_, { rejectWithValue }) => {
   try {
     const response = await axiosInstance.get<Vacancy[]>("/vacancies");
+    // console.log("Response fetchVacancies status:", response.status);
     console.log("Vacancies from backend:", response.data);
     return response.data;
   } catch (error) {
@@ -63,68 +64,69 @@ const vacanciesSlice = createSlice({
   name: "vacancies",
   initialState,
   reducers: {
-    filterVacancies(state, action: PayloadAction<string>) {
+    setSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload.toLowerCase();
-      vacanciesSlice.caseReducers.applyFiltersAndSorting(state);
+      // vacanciesSlice.caseReducers.applyFiltersAndSorting(state);
     },
     setSortType(state, action: PayloadAction<string>) {
       state.sortType = action.payload;
-      vacanciesSlice.caseReducers.applyFiltersAndSorting(state);
+      // vacanciesSlice.caseReducers.applyFiltersAndSorting(state);
     },
-    applyFiltersAndSorting(state) {
-      let result = [...state.vacancies];
-
-      //Фільтрація за текстовим запитом
-      if (state.searchQuery) {
-        result = result.filter(
-          (v) =>
-            v.company.toLowerCase().includes(state.searchQuery) ||
-            v.vacancy.toLowerCase().includes(state.searchQuery) ||
-            v.location.toLowerCase().includes(state.searchQuery)
-        );
-      }
-
-      // Сортування / фільтрація за типом
-      switch (state.sortType) {
-        case "newFirst":
-          result = result.sort(
-            (a, b) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
-          break;
-
-        case "oldFirst":
-          result = result.sort(
-            (a, b) =>
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-          );
-          break;
-
-        case "office":
-        case "remote":
-        case "hybrid":
-          result = result.filter((v) => v.work_type === state.sortType);
-          break;
-
-        case "saved":
-        case "resume":
-        case "hr":
-        case "test":
-        case "tech":
-        case "reject":
-        case "offer":
-          result = result.filter(
-            (v) => v.statuses[v.statuses.length - 1].name === state.sortType
-          );
-          break;
-
-        default:
-          break;
-      }
-
-      // Оновити фільтрований список
-      state.filteredVacancies = result;
+    setFilteredVacancies(state, action: PayloadAction<Vacancy[]>) {
+      state.filteredVacancies = action.payload;
+      // vacanciesSlice.caseReducers.applyFiltersAndSorting(state);
     },
+    // applyFiltersAndSorting(state) {
+    //   let result = [...state.vacancies];
+
+    //   //Фільтрація за текстовим запитом
+    //   if (state.searchQuery) {
+    //     result = result.filter(
+    //       (v) =>
+    //         v.company.toLowerCase().includes(state.searchQuery) ||
+    //         v.vacancy.toLowerCase().includes(state.searchQuery) ||
+    //         v.location.toLowerCase().includes(state.searchQuery)
+    //     );
+    //   }
+
+    //   // Сортування / фільтрація за типом
+    //   switch (state.sortType) {
+    //     case "newFirst":
+    //       result = result.sort(
+    //         (a, b) =>
+    //           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    //       );
+    //       break;
+
+    //     case "oldFirst":
+    //       result = result.sort(
+    //         (a, b) =>
+    //           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    //       );
+    //       break;
+
+    //     case "office":
+    //     case "remote":
+    //     case "hybrid":
+    //       result = result.filter((v) => v.work_type === state.sortType);
+    //       break;
+
+    //     case "saved":
+    //     case "resume":
+    //     case "hr":
+    //     case "test":
+    //     case "tech":
+    //     case "reject":
+    //     case "offer":
+    //       result = result.filter((v) => v.statuses[0].name === state.sortType);
+    //       break;
+
+    //     default:
+    //       break;
+    //   }
+
+    //   state.filteredVacancies = result;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -147,6 +149,7 @@ const vacanciesSlice = createSlice({
   },
 });
 
-export const { filterVacancies, setSortType } = vacanciesSlice.actions;
+export const { setSearchQuery, setSortType, setFilteredVacancies } =
+  vacanciesSlice.actions;
 
 export default vacanciesSlice.reducer;

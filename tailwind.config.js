@@ -69,6 +69,10 @@ export default {
         }, // green with opacity 0.4
         color7Light: "rgba(177, 214, 144, 0.3)", // color7 green with opacity 0.3
         color8: "#76925D", // green-dark
+        color9: {
+          DEFAULT: "#DBDCDD", // grey
+          transparent: "rgba(219, 220, 221, 0.40)",
+        }, // grey with opacity
         borderLight: "#CECECE", // немає в дизайні, додати
         // scrollbarThumb: "#C2C2C2", // Колір повзунка, немає в дизайні, додати
         // scrollbarTrack: "#EAEEF2", // Колір треку, немає в дизайні, додати
