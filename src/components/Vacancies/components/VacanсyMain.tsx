@@ -5,8 +5,8 @@ import {
   useAppSelector,
   useFilteredVacancies,
 } from "../../../store/hook.ts";
-import { setFilteredVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSlice.ts";
-import { selectVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSelector.ts";
+import { setFilteredVacancies } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice.ts";
+import { selectfilteredVacancies } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector.ts";
 import { useGetAllUserDataQuery } from "../../../store/slices/profileQuerySlice/profileQuerySlice.ts";
 
 import VacancySection from "./VacancySection.tsx";
@@ -22,7 +22,7 @@ import {
 } from "./VacancyMainConfig.ts";
 
 const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
-  const { sortType, searchQuery } = useAppSelector(selectVacancies);
+  const { sortType, searchQuery } = useAppSelector(selectfilteredVacancies);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const localizedSections = getLocalizedSectionConfig();
@@ -55,7 +55,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   //oновлюємо кількість відфільтрованих вакансій
   useEffect(() => {
     dispatch(setFilteredVacancies(renderedVacancies));
-  }, [searchQuery, dispatch]);
+  }, [searchQuery, sortType, dispatch]);
 
   return (
     <div className="test-watch flex w-full flex-col gap-6">
