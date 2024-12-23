@@ -5,9 +5,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { cn } from "../../../utils/utils";
-import { selectSearchQuery } from "../../../store/slices/vacanciesSlice/vacanciesSelector";
-import { setSearchQuery } from "../../../store/slices/vacanciesSlice/vacanciesSlice";
-import { selectVacanciesQuantity } from "../../../store/slices/vacanciesSlice/vacanciesSelector";
+import { selectSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+import { setSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
+import { selectVacanciesQuantity } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 
 import Icon from "../../Icon/Icon";
 import { IconButton } from "../../buttons/IconButton/IconButton";

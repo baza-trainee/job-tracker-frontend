@@ -1,7 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "./store";
 import { useMemo } from "react";
-import { Vacancy } from "./slices/vacanciesSlice/vacanciesSlice";
+import { Vacancy } from "./slices/filteredVacanciesSlice/filteredVacanciesSlice";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
