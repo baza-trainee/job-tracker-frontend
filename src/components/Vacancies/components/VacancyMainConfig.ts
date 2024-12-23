@@ -1,6 +1,6 @@
 // import { useMemo } from "react";
 import i18n from "i18next";
-import { Vacancy } from "../../../store/slices/vacanciesSlice/vacanciesSlice.ts";
+import { Vacancy } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice.ts";
 
 export type SectionConfig = {
   sectionName: string;
