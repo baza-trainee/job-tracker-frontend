@@ -1,3 +1,11 @@
-export type CoverLetter = { name: string; text: string };
+import { User } from "../profileQuerySlice/profileProps";
 
-export type CoverLetterWithId = CoverLetter & { id: string };
+export type CoverLetter = {
+  id?: string;
+  name: string;
+  text: string;
+  userId: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  user?: User;
+};

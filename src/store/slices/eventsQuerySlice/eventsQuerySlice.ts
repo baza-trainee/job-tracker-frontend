@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { Event, EventWithId } from "./eventProps";
+import { Event } from "./eventProps";
 
 export const eventQuerySlice = createApi({
   reducerPath: "eventsQuerySlice",
@@ -25,7 +25,7 @@ export const eventQuerySlice = createApi({
       query: (id) => `/events/${id}`,
     }),
 
-    updateEventById: build.mutation<Event, EventWithId>({
+    updateEventById: build.mutation<Event, Event>({
       query: ({ id, ...updatedEvent }) => ({
         url: `/events/${id}`,
         method: "PATCH",

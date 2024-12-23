@@ -1,13 +1,13 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { CoverLetter, CoverLetterWithId } from "./coverLettersProps";
+import { CoverLetter } from "./coverLettersProps";
 
 export const coverLetterQuerySlice = createApi({
   reducerPath: "coverLetterQuerySlice",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["coverLetter"],
   endpoints: (build) => ({
-    createCoverLeter: build.mutation<CoverLetterWithId, CoverLetter>({
+    createCoverLeter: build.mutation<CoverLetter, CoverLetter>({
       query: (coverLetter) => ({
         url: "/cover-letter",
         method: "POST",
@@ -16,25 +16,23 @@ export const coverLetterQuerySlice = createApi({
       invalidatesTags: ["coverLetter"],
     }),
 
-    getAllCoverLetters: build.query<CoverLetterWithId[], void>({
+    getAllCoverLetters: build.query<CoverLetter[], void>({
       query: () => "/cover-letter",
       providesTags: ["coverLetter"],
     }),
 
-    getCoverLetterById: build.query<CoverLetterWithId, string>({
+    getCoverLetterById: build.query<CoverLetter, string>({
       query: (id) => `/cover-letter/${id}`,
     }),
 
-    updateCoverLetterById: build.mutation<CoverLetterWithId, CoverLetterWithId>(
-      {
-        query: ({ id, ...updtedCovetLetter }) => ({
-          url: `/cover-letter/${id}`,
-          method: "PATCH",
-          body: updtedCovetLetter,
-        }),
-        invalidatesTags: ["coverLetter"],
-      }
-    ),
+    updateCoverLetterById: build.mutation<CoverLetter, CoverLetter>({
+      query: ({ id, ...updtedCovetLetter }) => ({
+        url: `/cover-letter/${id}`,
+        method: "PATCH",
+        body: updtedCovetLetter,
+      }),
+      invalidatesTags: ["coverLetter"],
+    }),
 
     deleteCoverLetterById: build.mutation<void, string>({
       query: (id) => ({
