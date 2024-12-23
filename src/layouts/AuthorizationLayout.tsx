@@ -51,21 +51,53 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
       <main className="flex-grow">
         <section>
-          <div className="container mb-4 flex justify-center gap-6">
+          <div
+            className={classNames(
+              "container mb-4 flex justify-center",
+              "sm:mt-[18px]",
+              "md:-mt-12",
+              "xl:mt-0 xl:gap-10",
+              "2xl:gap-6",
+              "3xl:gap-[158px]"
+            )}
+          >
             <LoginCardImages />
             <div
               className={classNames(
-                "flex w-full max-w-[476px] flex-col font-nunito",
-                type === "resetPassword" && "mt-20"
+                "flex w-full flex-col font-nunito",
+                "md:max-w-[444px]",
+                "2xl:max-w-[476px]",
+                "3xl:max-w-[498px]",
+                type === "resetPassword"
+                  ? "mt-20 xl:max-w-[444px] 3xl:mt-[180px]"
+                  : "xl:max-w-[499px]"
               )}
             >
               {!isResetPasswordPage ? <AuthHeader type={type} /> : null}
 
-              <div className="relative rounded-[20px] bg-background-form px-12 py-10 shadow-form_shadow">
+              <div
+                className={classNames(
+                  "relative rounded-[20px] bg-background-form shadow-form_shadow",
+                  "sm:px-2 sm:py-4",
+                  "md:p-8",
+                  "xl:px-14 xl:py-14",
+                  "2xl:px-12 2xl:py-10",
+                  "3xl:px-8 3xl:py-[34px]"
+                )}
+              >
                 <form className="" onSubmit={handleSubmit(onSubmit)}>
                   {isResetPasswordPage ? <AuthHeader type={type} /> : null}
 
-                  <div className="flex flex-col gap-6">
+                  <div
+                    className={classNames(
+                      "flex flex-col",
+                      "sm:gap-2",
+                      "md:gap-4",
+                      "xl:gap-6",
+                      "2xl:gap-6",
+                      "3xl:"
+                    )}
+                  >
                     {!isResetPasswordPage ? (
                       <Input
                         register={register}
@@ -91,13 +123,20 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                           ? t("resetPassword.label")
                           : t("register.password")
                       }
-                      className={isResetPasswordPage ? "pt-[122px]" : ""}
+                      className={
+                        isResetPasswordPage ? "pt-[122px] xl:pt-[164px]" : ""
+                      }
                       errors={errors}
                     />
 
                     {isLogInPage ? (
                       <p
-                        className="-mt-3 cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
+                        className={classNames(
+                          "cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight",
+                          "sm:mt-0 sm:text-[12px]",
+                          "md:text-[16px]",
+                          "xl:-mt-3"
+                        )}
                         onClick={() =>
                           dispatch(
                             openModal({
@@ -150,7 +189,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
                   <Button
                     type="submit"
-                    className="mx-auto mt-8"
+                    className="mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
                     disabled={isCleanInputsForm() || error || loading}
                     variant="ghost"
                     size="big"
@@ -164,13 +203,35 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 {!isResetPasswordPage ? <AuthSocialButtons /> : null}
 
                 {!isResetPasswordPage ? (
-                  <div className="mt-5 flex justify-center">
-                    <p className="font-nunito text-[16px] font-medium text-textBlackLight">
+                  <div
+                    className={classNames(
+                      "flex justify-center",
+                      "sm:mt-2",
+                      "md:mt-4",
+                      "xl:mt-6",
+                      "2xl:mt-5"
+                    )}
+                  >
+                    <p
+                      className={classNames(
+                        "font-nunito text-[12px] font-medium text-textBlackLight md:text-[16px]",
+                        "md:text-[14px]",
+                        "xl:text-4",
+                        "2xl:",
+                        "3xl:"
+                      )}
+                    >
                       {isSignUpPage
                         ? t("register.alreadyRegistered")
                         : t("login.noAccount")}
                       <Link
-                        className="ml-[6px] font-nunito text-[16px] font-medium leading-[135%] text-textOther"
+                        className={classNames(
+                          "ml-[6px] font-nunito text-[12px] font-medium leading-[135%] text-textOther",
+                          "md:text-[14px]",
+                          "xl:text-4",
+                          "2xl:ml-[6px]",
+                          "3xl:"
+                        )}
                         to={isSignUpPage ? "/log-in" : "/sign-up"}
                         onClick={() => reset()}
                       >

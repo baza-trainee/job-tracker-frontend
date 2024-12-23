@@ -1,6 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { TAG_TYPES } from "../../tagQueryConstans";
 import {
   ChangeStatusVacancy,
   NewVacancyProps,
@@ -11,7 +10,7 @@ export const vacanciesQuerySlice = createApi({
   reducerPath: "vacanciesQuerySlice",
 
   baseQuery: baseQueryWithReauth,
-  tagTypes: [TAG_TYPES.GET_ALL_VACANCIES, TAG_TYPES.USERDATA],
+  tagTypes: ["vacanies"],
 
   endpoints: (build) => ({
     createVacancy: build.mutation<NewVacancyProps, NewVacancyProps>({
@@ -20,7 +19,7 @@ export const vacanciesQuerySlice = createApi({
         method: "POST",
         body: vacancy,
       }),
-      invalidatesTags: [TAG_TYPES.USERDATA],
+      invalidatesTags: ["vacanies"],
     }),
 
     updateVacancyById: build.mutation<UpdateVacancyById, UpdateVacancyById>({
@@ -29,22 +28,16 @@ export const vacanciesQuerySlice = createApi({
         method: "PATCH",
         body: vacancy,
       }),
-      invalidatesTags: [TAG_TYPES.USERDATA],
+      invalidatesTags: ["vacanies"],
     }),
 
     getAllVacancy: build.query<UpdateVacancyById[], void>({
-      query: () => ({
-        url: "/vacancies",
-        method: "GET",
-      }),
-      providesTags: [TAG_TYPES.GET_ALL_VACANCIES],
+      query: () => "/vacancies",
+      providesTags: ["vacanies"],
     }),
 
     getVacancyById: build.query<UpdateVacancyById, string>({
-      query: (id) => ({
-        url: `/vacancies/${id}`,
-        method: "GET",
-      }),
+      query: (id) => `/vacancies/${id}`,
     }),
 
     deleteVacancyById: build.mutation({
@@ -52,7 +45,7 @@ export const vacanciesQuerySlice = createApi({
         url: `/vacancies/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [TAG_TYPES.USERDATA],
+      invalidatesTags: ["vacanies"],
     }),
 
     archiveVacancyById: build.mutation({
@@ -60,7 +53,7 @@ export const vacanciesQuerySlice = createApi({
         url: `/vacancies/${id}/archive`,
         method: "PATCH",
       }),
-      invalidatesTags: [TAG_TYPES.USERDATA],
+      invalidatesTags: ["vacanies"],
     }),
 
     createStatusVacancyById: build.mutation<
@@ -72,7 +65,7 @@ export const vacanciesQuerySlice = createApi({
         method: "POST",
         body: newStatus,
       }),
-      invalidatesTags: [TAG_TYPES.USERDATA],
+      invalidatesTags: ["vacanies"],
     }),
 
     updateSpecificStatusVacancyById: build.mutation<
@@ -84,7 +77,7 @@ export const vacanciesQuerySlice = createApi({
         method: "PATCH",
         body: { newStatus, statusId },
       }),
-      invalidatesTags: [TAG_TYPES.USERDATA],
+      invalidatesTags: ["vacanies"],
     }),
 
     deleteStatusVacancyById: build.mutation<
@@ -95,7 +88,7 @@ export const vacanciesQuerySlice = createApi({
         url: `/vacancies/${vacancyId}/status/${statusId}`,
         method: "DELETE",
       }),
-      invalidatesTags: [TAG_TYPES.USERDATA],
+      invalidatesTags: ["vacanies"],
     }),
   }),
 });

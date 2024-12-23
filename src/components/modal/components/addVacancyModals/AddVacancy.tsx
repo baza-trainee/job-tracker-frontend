@@ -15,11 +15,10 @@ import { useAppDispatch } from "../../../../store/hook";
 import { closeModal } from "../../../../store/slices/modalSlice/modalSlice";
 
 const AddVacancy = () => {
-  const { refetch } = useGetAllUserDataQuery({});
+  const { refetch } = useGetAllUserDataQuery();
   const [createVacancy] = useCreateVacancyMutation();
   const dispatch = useAppDispatch();
-
-
+  
   const {
     register,
     resetField,

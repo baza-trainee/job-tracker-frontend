@@ -34,7 +34,8 @@ export const Checkbox = ({
           {...props}
           className={classNames(
             type === "signUp" &&
-              "peer relative h-6 w-6 shrink-0 appearance-none rounded-[4px] border-2 border-solid border-textBlack"
+              "peer relative h-5 w-5 shrink-0 appearance-none rounded-[4px] border-[1px] border-solid border-textBlack",
+            "md:border-2 md:h-6 md:w-6"
           )}
         />
         {type === "signUp" && (
@@ -56,7 +57,7 @@ export const Checkbox = ({
         htmlFor={`checkbox-${name}`}
         className={classNames(
           type === "signUp" &&
-            "ml-3 font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight"
+            "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px]"
         )}
       >
         {label}

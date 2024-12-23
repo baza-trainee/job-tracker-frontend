@@ -6,9 +6,9 @@ function Profile() {
     //  isSuccess, isFetching, error,
     isLoading,
     isError,
-  } = useGetAllUserDataQuery({});
+  } = useGetAllUserDataQuery();
 
-  console.log("User all data>> ", data);
+  // console.log("User all data>> ", data);
 
   if (isLoading) {
     return <h2>Loading....</h2>;

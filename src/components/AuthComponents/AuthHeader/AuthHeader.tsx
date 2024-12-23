@@ -38,19 +38,24 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
     <div
       className={classNames(
         type === "resetPassword" &&
-          "absolute left-[50%] mt-[10px] w-full translate-x-[-50%]",
-        type === "forgotPassword" ? "mb-[50px]" : "mb-10"
+          "absolute left-[50%] mt-[10px] w-full translate-x-[-50%] xl:max-w-[380px]",
+        type === "forgotPassword"
+          ? "mb-[50px]"
+          : "mb-1 md:mb-2 xl:mb-8 2xl:mb-10"
       )}
     >
-      <h2 className="mb-3 text-center font-nunito text-[32px] font-bold leading-[135%] text-textBlack">
+      <h2 className="mb-1 text-center font-nunito text-[20px] font-bold leading-[135%] text-textBlack md:mb-2 md:text-[24px] xl:text-[32px] 2xl:mb-3">
         {authTitle()}
       </h2>
       <p
         className={classNames(
-          "mx-auto max-w-[380px] text-center font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight",
-          // вопрос как перекрыть стили
-          (type === "forgotPassword" || type === "resetPassword") &&
-            "!text-[14px] !text-textBlack",
+          "mx-auto max-w-[380px] text-center font-nunito text-[14px] font-medium leading-[135%] text-textBlackLight 2xl:text-[16px]",
+          "xl:max-w-[424px]",
+          "2xl:max-w-[424px]",
+          "3xl:max-w-[434px]",
+          type === "forgotPassword" || type === "resetPassword"
+            ? "!text-[14px] !text-textBlack"
+            : "md:max-w-[424px]",
           type === "forgotPassword" && "!text-left"
         )}
       >

@@ -21,6 +21,8 @@ export default {
           sm: "1.25rem",
           md: "1.25rem",
           xl: "1.25rem",
+          "2xl": "1.25rem",
+          "3xl": "1.25rem",
         },
       },
       boxShadow: {

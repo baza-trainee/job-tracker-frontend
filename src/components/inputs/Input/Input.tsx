@@ -17,7 +17,7 @@ export const Input = ({
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   const handleResetField = (name: string) => {
     resetField(name);
@@ -33,7 +33,13 @@ export const Input = ({
       {label && (
         <label
           htmlFor={`input-${name}`}
-          className="mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-textBlack"
+          className={cn(
+            "mb-3 block font-nunito font-medium leading-[135%] text-textBlack sm:text-[14px] md:text-[18px]",
+            "sm:mb-[2px] sm:text-[14px]",
+            "md:mb-2 md:text-[18px]",
+            "xl:mb-2 xl:text-[16px]",
+            "2xl:mb-3 2xl:text-[20px]"
+          )}
         >
           {label}
         </label>
@@ -43,8 +49,11 @@ export const Input = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "peer h-11 w-full rounded-xl border px-6 py-2 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
-
+              "peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+              "sm:px-4 sm:py-2 sm:text-[12px] sm:h-[34px]",
+              "md:px-6 md:py-3 md:text-[14px] md:h-11",
+              "xl:text-[14px]",
+              "2xl:text-[16px]",
               !error && "border-color5",
               error &&
                 "border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"
