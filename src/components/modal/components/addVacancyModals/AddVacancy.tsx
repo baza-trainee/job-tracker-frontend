@@ -11,22 +11,14 @@ import Icon from "../../../Icon/Icon";
 import { useCreateVacancyMutation } from "../../../../store/slices/vacanciesQuerySlice/vacanciesQuerySlice";
 import { useGetAllUserDataQuery } from "../../../../store/slices/profileQuerySlice/profileQuerySlice";
 
-//alex
-// import { useAppDispatch } from "../../../../store/hook";
-// import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
+import { useAppDispatch } from "../../../../store/hook";
+import { closeModal } from "../../../../store/slices/modalSlice/modalSlice";
 
 const AddVacancy = () => {
   const { refetch } = useGetAllUserDataQuery({});
   const [createVacancy] = useCreateVacancyMutation();
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-  // const handleModal = () => {
-  //   dispatch(
-  //     openConfirmation({
-  //       typeConfirmation: "saveChangesVacancies",
-  //     })
-  //   );
-  // };
 
   const {
     register,
@@ -56,6 +48,7 @@ const AddVacancy = () => {
       await createVacancy(data).unwrap();
       refetch();
       reset();
+      dispatch(closeModal());
     } catch (error) {
       console.log(error);
     }
@@ -216,8 +209,8 @@ const AddVacancy = () => {
               <Textarea
                 register={register}
                 resetField={resetField}
-                key="notes"
-                name="notes"
+                key="note"
+                name="note"
                 placeholder={t("addVacancy.placeholders.notes")}
                 className=""
                 label={t("addVacancy.form.notes")}
@@ -238,12 +231,10 @@ const AddVacancy = () => {
               <Icon id={"send"} className="ml-3 h-6 w-6" />
             </Button>
             <Button
-              // type="button"
               type="submit"
               className="mx-auto mt-8 bg-button"
               variant="ghost"
               size="big"
-              // onClick={() => handleModal()}
             >
               {t("addVacancy.form.save")}
               <Icon id={"check-box"} className="ml-3 h-6 w-6" />

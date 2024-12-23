@@ -20,6 +20,7 @@ import {
   getLocalizedSectionConfig,
   getVacanciesByStatus,
 } from "./VacancyMainConfig.ts";
+import { openModal } from "../../../store/slices/modalSlice/modalSlice.ts";
 
 const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const { sortType, searchQuery } = useAppSelector(selectVacancies);
@@ -91,7 +92,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
               company={vacancy.company}
               workType={vacancy.work_type}
               location={vacancy.location}
-              onClick={() => alert("Модалка для редагування картки")}
+              onClick={() => {dispatch(openModal({typeModal:"editVacancy"}))}}
             />
           ))}
         </VacancySectionBox>
@@ -128,7 +129,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                     company={vacancy.company}
                     workType={vacancy.work_type}
                     location={vacancy.location}
-                    onClick={() => alert("Модалка для редагування картки")}
+                    onClick={() => {dispatch(openModal({typeModal:"editVacancy", idCardVacancy: vacancy.id}))}}
                   />
                 ))}
               </VacancySection>
@@ -151,7 +152,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                     company={vacancy.company}
                     workType={vacancy.work_type}
                     location={vacancy.location}
-                    onClick={() => alert("Модалка для редагування картки")}
+                    onClick={() => {dispatch(openModal({typeModal:"editVacancy"}))}}
                   />
                 ))}
               </VacancySectionBox>
