@@ -32,18 +32,12 @@ export const vacanciesQuerySlice = createApi({
     }),
 
     getAllVacancy: build.query<UpdateVacancyById[], void>({
-      query: () => ({
-        url: "/vacancies",
-        method: "GET",
-      }),
+      query: () => "/vacancies",
       providesTags: ["vacanies"],
     }),
 
     getVacancyById: build.query<UpdateVacancyById, string>({
-      query: (id) => ({
-        url: `/vacancies/${id}`,
-        method: "GET",
-      }),
+      query: (id) => `/vacancies/${id}`,
     }),
 
     deleteVacancyById: build.mutation({

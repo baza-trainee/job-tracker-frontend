@@ -19,6 +19,12 @@ import {
   // REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { resumesQuerySlices } from "./slices/resumesQuerySlices/resumesQuerySlices.ts";
+import { projectQuerySlice } from "./slices/projectsQuerySlice/projectQuerySlice.ts";
+import { coverLetterQuerySlice } from "./slices/coverLettersQuerySlice/coverLettersQuerySlice.ts";
+import { notesQuerySlice } from "./slices/notesQuerySlice/nitesQuerySlice.ts";
+import { eventQuerySlice } from "./slices/eventsQuerySlice/eventsQuerySlice.ts";
+import { predictionsQuerySlice } from "./slices/predictionsQuerySlice/predictionsQuerySlice.ts";
 
 const authPersistConfig = {
   key: "auth",
@@ -46,6 +52,12 @@ export const store = configureStore({
   reducer: {
     [profileQuerySlice.reducerPath]: profileQuerySlice.reducer,
     [vacanciesQuerySlice.reducerPath]: vacanciesQuerySlice.reducer,
+    [resumesQuerySlices.reducerPath]: resumesQuerySlices.reducer,
+    [projectQuerySlice.reducerPath]: projectQuerySlice.reducer,
+    [coverLetterQuerySlice.reducerPath]: coverLetterQuerySlice.reducer,
+    [notesQuerySlice.reducerPath]: notesQuerySlice.reducer,
+    [eventQuerySlice.reducerPath]: eventQuerySlice.reducer,
+    [predictionsQuerySlice.reducerPath]: predictionsQuerySlice.reducer,
     vacancies: vacanciesReducer,
     modal: modalReduser,
     auth: authPersistedReducer,
@@ -69,7 +81,16 @@ export const store = configureStore({
       //   ignoredActionPaths: ["payload.modalContent"],
       //   ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
       // },
-    }).concat(profileQuerySlice.middleware, vacanciesQuerySlice.middleware),
+    }).concat(
+      profileQuerySlice.middleware,
+      vacanciesQuerySlice.middleware,
+      resumesQuerySlices.middleware,
+      projectQuerySlice.middleware,
+      coverLetterQuerySlice.middleware,
+      notesQuerySlice.middleware,
+      eventQuerySlice.middleware,
+      predictionsQuerySlice.middleware
+    ),
 });
 
 setupListeners(store.dispatch);
