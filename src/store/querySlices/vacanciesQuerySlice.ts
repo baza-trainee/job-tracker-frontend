@@ -1,11 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../../fetchBaseQuery";
+import { baseQueryWithReauth } from "../fetchBaseQuery";
 import {
   NewVacancy,
   NewVacancyStatus,
   Vacancy,
   VacancyStatus,
-} from "../../../types/vacancies.types";
+} from "../../types/vacancies.types";
 
 export const vacanciesQuerySlice = createApi({
   reducerPath: "vacanciesQuerySlice",

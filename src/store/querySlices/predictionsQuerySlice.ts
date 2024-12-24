@@ -1,10 +1,10 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../../fetchBaseQuery";
+import { baseQueryWithReauth } from "../fetchBaseQuery";
 import {
   Prediction,
   PredictionRequest,
   PredictionsSeed,
-} from "./predictionsProps";
+} from "../../types/predictions.types";
 
 export const predictionsQuerySlice = createApi({
   reducerPath: "predictionsQuerySlice",

@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { Note } from "./notesProps";
+import { baseQueryWithReauth } from "../fetchBaseQuery";
+import { Note } from "../../types/notes.types";
 
 export const notesQuerySlice = createApi({
   baseQuery: baseQueryWithReauth,

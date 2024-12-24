@@ -1,5 +1,3 @@
-import { User } from "../../../types/profile.types";
-
 export type Project = {
   id?: string;
   userId: string;
@@ -8,5 +6,4 @@ export type Project = {
   liveProjectLink: string;
   createdAt?: Date;
   updatedAt?: Date;
-  user?: User;
 };

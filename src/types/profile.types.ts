@@ -1,8 +1,8 @@
-import { CoverLetter } from "../store/slices/coverLettersQuerySlice/coverLettersProps";
-import { Note } from "../store/slices/notesQuerySlice/notesProps";
-import { Project } from "../store/slices/projectsQuerySlice/projectsProps";
-import { Resume } from "../store/slices/resumesQuerySlices/resumesProps";
-import { Event } from "../store/slices/eventsQuerySlice/eventProps";
+import { CoverLetter } from "./coverLetters.types";
+import { Note } from "./notes.types";
+import { Project } from "./projects.types";
+import { Resume } from "./resumes.types";
+import { Event } from "./event.types";
 import { Vacancy } from "./vacancies.types";
 
 export type Profile = {

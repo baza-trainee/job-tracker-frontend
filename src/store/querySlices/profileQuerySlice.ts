@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { Profile } from "../../../types/profile.types";
+import { baseQueryWithReauth } from "../fetchBaseQuery";
+import { Profile } from "../../types/profile.types";
 
 export const profileQuerySlice = createApi({
   reducerPath: "profileQuerySlice",

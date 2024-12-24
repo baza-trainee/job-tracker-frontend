@@ -1,10 +1,8 @@
-import { User } from "../../../types/profile.types";
-
-export type Note = {
+export type CoverLetter = {
   id?: string;
   name: string;
   text: string;
-  user?: User;
+  userId: string;
   createdAt?: Date;
   updatedAt?: Date;
 };

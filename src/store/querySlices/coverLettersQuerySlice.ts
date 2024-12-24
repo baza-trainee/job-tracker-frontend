@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { CoverLetter } from "./coverLettersProps";
+import { baseQueryWithReauth } from "../fetchBaseQuery";
+import { CoverLetter } from "../../types/coverLetters.types";
 
 export const coverLetterQuerySlice = createApi({
   reducerPath: "coverLetterQuerySlice",

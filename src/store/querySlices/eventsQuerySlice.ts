@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { Event } from "./eventProps";
+import { baseQueryWithReauth } from "../fetchBaseQuery";
+import { Event } from "../../types/event.types";
 
 export const eventQuerySlice = createApi({
   reducerPath: "eventsQuerySlice",

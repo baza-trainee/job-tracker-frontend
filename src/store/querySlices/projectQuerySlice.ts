@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { Project } from "./projectsProps";
+import { baseQueryWithReauth } from "../fetchBaseQuery";
+import { Project } from "../../types/projects.types";
 
 export const projectQuerySlice = createApi({
   reducerPath: "projectQuerySlice",
