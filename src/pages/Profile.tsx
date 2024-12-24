@@ -7,6 +7,7 @@ function Profile() {
     isLoading,
     isError,
   } = useGetAllUserDataQuery();
+  console.log(data);
 
   if (isLoading) {
     return <h2>Loading....</h2>;
