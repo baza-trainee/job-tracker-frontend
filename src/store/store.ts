@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-import { profileQuerySlice } from "./slices/profileQuerySlice/profileQuerySlice.ts";
-import { vacanciesQuerySlice } from "./slices/vacanciesQuerySlice/vacanciesQuerySlice.ts";
+import { profileQuerySlice } from "./querySlices/profileQuerySlice.ts";
+import { vacanciesQuerySlice } from "./querySlices/vacanciesQuerySlice.ts";
 import filteredVacanciesReducer from "./slices/filteredVacanciesSlice/filteredVacanciesSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
@@ -19,12 +19,12 @@ import {
   // REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { resumesQuerySlices } from "./slices/resumesQuerySlices/resumesQuerySlices.ts";
-import { projectQuerySlice } from "./slices/projectsQuerySlice/projectQuerySlice.ts";
-import { coverLetterQuerySlice } from "./slices/coverLettersQuerySlice/coverLettersQuerySlice.ts";
-import { notesQuerySlice } from "./slices/notesQuerySlice/nitesQuerySlice.ts";
-import { eventQuerySlice } from "./slices/eventsQuerySlice/eventsQuerySlice.ts";
-import { predictionsQuerySlice } from "./slices/predictionsQuerySlice/predictionsQuerySlice.ts";
+import { resumesQuerySlices } from "./querySlices/resumesQuerySlices.ts";
+import { projectQuerySlice } from "./querySlices/projectQuerySlice.ts";
+import { coverLetterQuerySlice } from "./querySlices/coverLettersQuerySlice.ts";
+import { notesQuerySlice } from "./querySlices/notesQuerySlice.ts";
+import { eventQuerySlice } from "./querySlices/eventsQuerySlice.ts";
+import { predictionsQuerySlice } from "./querySlices/predictionsQuerySlice.ts";
 
 const authPersistConfig = {
   key: "auth",

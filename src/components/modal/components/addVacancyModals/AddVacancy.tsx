@@ -8,8 +8,8 @@ import { AddVacancySchema } from "../../../../schemas/AddVacancySchema";
 import { t } from "i18next";
 import Checkbox from "../../../checkbox/Checkbox";
 import Icon from "../../../Icon/Icon";
-import { useCreateVacancyMutation } from "../../../../store/slices/vacanciesQuerySlice/vacanciesQuerySlice";
-import { useGetAllUserDataQuery } from "../../../../store/slices/profileQuerySlice/profileQuerySlice";
+import { useCreateVacancyMutation } from "../../../../store/querySlices/vacanciesQuerySlice";
+import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
 
 //alex
 // import { useAppDispatch } from "../../../../store/hook";
@@ -54,7 +54,9 @@ const AddVacancy = () => {
     data
   ) => {
     try {
-      await createVacancy(data).unwrap();
+      const response = await createVacancy(data).unwrap();
+      console.log(response);
+
       refetch();
       reset();
     } catch (error) {

@@ -7,7 +7,7 @@ import {
 } from "../../../store/hook.ts";
 import { setFilteredVacancies } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice.ts";
 import { selectfilteredVacancies } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector.ts";
-import { useGetAllUserDataQuery } from "../../../store/slices/profileQuerySlice/profileQuerySlice.ts";
+import { useGetAllUserDataQuery } from "../../../store/querySlices/profileQuerySlice.ts";
 
 import VacancySection from "./VacancySection.tsx";
 import VacancySectionBox from "./VacancySectionBox.tsx";

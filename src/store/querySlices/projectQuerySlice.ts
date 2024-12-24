@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { Project, ProjectWithId } from "./projectsProps";
+import { baseQueryWithReauth } from "../fetchBaseQuery";
+import { Project } from "../../types/projects.types";
 
 export const projectQuerySlice = createApi({
   reducerPath: "projectQuerySlice",
@@ -10,21 +10,21 @@ export const projectQuerySlice = createApi({
   tagTypes: ["projects"],
 
   endpoints: (build) => ({
-    createProject: build.mutation<ProjectWithId, Project>({
+    createProject: build.mutation<Project, Project>({
       query: (project) => ({ url: "/projects", method: "POST", body: project }),
       invalidatesTags: ["projects"],
     }),
 
-    getAllProjects: build.query<ProjectWithId[], void>({
+    getAllProjects: build.query<Project[], void>({
       query: () => "/projects",
       providesTags: ["projects"],
     }),
 
-    getProjectById: build.query<ProjectWithId, string>({
+    getProjectById: build.query<Project, string>({
       query: (id) => `/projects/${id}`,
     }),
 
-    updateProjectById: build.mutation<ProjectWithId, ProjectWithId>({
+    updateProjectById: build.mutation<Project, Project>({
       query: ({ id, ...project }) => ({
         url: `/projects/${id}`,
         method: "PATCH",
