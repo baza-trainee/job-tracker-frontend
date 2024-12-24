@@ -7,7 +7,10 @@ export const coverLetterQuerySlice = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["coverLetter"],
   endpoints: (build) => ({
-    createCoverLeter: build.mutation<CoverLetter, CoverLetter>({
+    createCoverLeter: build.mutation<
+      CoverLetter,
+      Pick<CoverLetter, "name" | "text">
+    >({
       query: (coverLetter) => ({
         url: "/cover-letter",
         method: "POST",
@@ -21,11 +24,14 @@ export const coverLetterQuerySlice = createApi({
       providesTags: ["coverLetter"],
     }),
 
-    getCoverLetterById: build.query<CoverLetter, string>({
-      query: (id) => `/cover-letter/${id}`,
+    getCoverLetterById: build.query<CoverLetter, Pick<CoverLetter, "id">>({
+      query: ({ id }) => `/cover-letter/${id}`,
     }),
 
-    updateCoverLetterById: build.mutation<CoverLetter, CoverLetter>({
+    updateCoverLetterById: build.mutation<
+      CoverLetter,
+      Pick<CoverLetter, "id"> & Partial<Pick<CoverLetter, "name" | "text">>
+    >({
       query: ({ id, ...updtedCovetLetter }) => ({
         url: `/cover-letter/${id}`,
         method: "PATCH",
@@ -34,8 +40,8 @@ export const coverLetterQuerySlice = createApi({
       invalidatesTags: ["coverLetter"],
     }),
 
-    deleteCoverLetterById: build.mutation<void, string>({
-      query: (id) => ({
+    deleteCoverLetterById: build.mutation<void, Pick<CoverLetter, "id">>({
+      query: ({ id }) => ({
         url: `/cover-letter/${id}`,
         method: "DELETE",
       }),

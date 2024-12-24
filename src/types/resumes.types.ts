@@ -1,8 +1,8 @@
 export type Resume = {
-  id?: string;
+  id: string;
   userId: string;
   name: string;
   link: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };

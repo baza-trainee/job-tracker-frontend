@@ -1,9 +1,9 @@
-export type PredictionRequest = { textUk: string; textEn: string };
-
-export type Prediction = PredictionRequest & {
-  id?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+export type Prediction = {
+  id: string;
+  textUk: string;
+  textEn: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type PredictionsSeed = {

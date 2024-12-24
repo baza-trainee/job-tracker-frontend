@@ -7,7 +7,7 @@ import { Vacancy } from "./vacancies.types";
 
 export type Profile = {
   coverLetters: CoverLetter[];
-  createdAt: Date | string;
+  createdAt: Date;
   email: string;
   events: Event[];
   id: string;

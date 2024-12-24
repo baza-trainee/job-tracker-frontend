@@ -10,7 +10,10 @@ export const projectQuerySlice = createApi({
   tagTypes: ["projects"],
 
   endpoints: (build) => ({
-    createProject: build.mutation<Project, Project>({
+    createProject: build.mutation<
+      Project,
+      Pick<Project, "githubLink" | "liveProjectLink" | "name">
+    >({
       query: (project) => ({ url: "/projects", method: "POST", body: project }),
       invalidatesTags: ["projects"],
     }),
@@ -20,11 +23,15 @@ export const projectQuerySlice = createApi({
       providesTags: ["projects"],
     }),
 
-    getProjectById: build.query<Project, string>({
-      query: (id) => `/projects/${id}`,
+    getProjectById: build.query<Project, Pick<Project, "id">>({
+      query: ({ id }) => `/projects/${id}`,
     }),
 
-    updateProjectById: build.mutation<Project, Project>({
+    updateProjectById: build.mutation<
+      Project,
+      Pick<Project, "id"> &
+        Partial<Pick<Project, "githubLink" | "liveProjectLink" | "name">>
+    >({
       query: ({ id, ...project }) => ({
         url: `/projects/${id}`,
         method: "PATCH",
@@ -33,8 +40,8 @@ export const projectQuerySlice = createApi({
       invalidatesTags: ["projects"],
     }),
 
-    deleteProjectById: build.mutation<void, string>({
-      query: (id) => ({
+    deleteProjectById: build.mutation<void, Pick<Project, "id">>({
+      query: ({ id }) => ({
         url: `/projects/${id}`,
         method: "DELETE",
       }),

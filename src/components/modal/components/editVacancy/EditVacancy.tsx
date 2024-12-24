@@ -27,7 +27,7 @@ const EditVacancy = () => {
   const { idCardVacancy } = useAppSelector((state) => state.modal);
   const { refetch } = useGetAllUserDataQuery();
   const { data: vacancy } = useGetVacancyByIdQuery({
-    vacancyId: idCardVacancy as string,
+    id: idCardVacancy as string,
   });
 
   const [deleteVacancyById] = useDeleteVacancyByIdMutation();
@@ -75,7 +75,7 @@ const EditVacancy = () => {
   ) => {
     try {
       await updateVacancyById({
-        vacancyId: idCardVacancy as string,
+        id: idCardVacancy as string,
         company: formData.company,
         vacancy: formData.vacancy,
         link: formData.link,
@@ -94,7 +94,7 @@ const EditVacancy = () => {
 
   const handleDelete = async () => {
     try {
-      await deleteVacancyById({ vacancyId: idCardVacancy as string }).unwrap();
+      await deleteVacancyById({ id: idCardVacancy as string }).unwrap();
       refetch();
       reset();
       dispatch(closeModal());
