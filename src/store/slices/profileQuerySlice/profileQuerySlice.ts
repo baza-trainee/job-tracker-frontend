@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../../fetchBaseQuery";
-// import { User } from "./profileProps";
+import { Profile } from "../../../types/profile.types";
 
 export const profileQuerySlice = createApi({
   reducerPath: "profileQuerySlice",
@@ -8,7 +8,7 @@ export const profileQuerySlice = createApi({
   baseQuery: baseQueryWithReauth,
 
   endpoints: (build) => ({
-    getAllUserData: build.query<any, void>({
+    getAllUserData: build.query<Profile | any, void>({
       query: () => "/user/profile",
     }),
   }),

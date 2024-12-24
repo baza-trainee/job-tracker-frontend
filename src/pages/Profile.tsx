@@ -1,4 +1,8 @@
 import { useGetAllUserDataQuery } from "../store/slices/profileQuerySlice/profileQuerySlice";
+import {
+  useGetAllVacancyQuery,
+  useGetVacancyByIdQuery,
+} from "../store/slices/vacanciesQuerySlice/vacanciesQuerySlice";
 
 function Profile() {
   const {
@@ -7,8 +11,12 @@ function Profile() {
     isLoading,
     isError,
   } = useGetAllUserDataQuery();
-
-  // console.log("User all data>> ", data);
+  const { data: Vacancies } = useGetAllVacancyQuery();
+  console.log("User all vacancies>> ", Vacancies);
+  const { data: vacancyById } = useGetVacancyByIdQuery({
+    vacancyId: "ffe13cf6-8cd6-4d46-88f4-1a518a184791",
+  });
+  console.log("vacancyById", vacancyById);
 
   if (isLoading) {
     return <h2>Loading....</h2>;

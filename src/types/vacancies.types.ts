@@ -1,30 +1,32 @@
-import { User } from "../profileQuerySlice/profileProps";
-
 export type WorkType = "remote" | "office" | "hybrid";
 
-export type Vacancy = {
-  id?: string;
-  vacancy: string;
-  link: string;
-  communication: string;
-  company: string;
-  location: string;
-  work_type: WorkType;
-  note: string;
-  isArchived?: boolean;
-  user?: User;
-  statuses?: VacancyStatus[];
-  createdAt?: Date;
-  updatedAt?: Date;
+export type Vacancy = NewVacancy & {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
-export type VacancyStatus = {
-  vacancyId?: string;
-  vacancy: Vacancy;
+export type NewVacancy = {
+  vacancy: string;
+  link: string;
+  communication?: string;
+  company: string;
+  location?: string;
+  work_type: WorkType;
+  note?: string;
+  isArchived: boolean;
+  statuses?: VacancyStatus[];
+};
+
+export type VacancyStatus = NewVacancyStatus & {
+  date: string;
+};
+
+export type NewVacancyStatus = {
   name: StatusName;
-  date: Date;
-  rejectReason?: RejectReason;
+  rejectReason: RejectReason;
   resumeId?: string;
+  statusId?: string;
 };
 
 export enum StatusName {

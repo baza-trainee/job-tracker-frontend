@@ -1,15 +1,21 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../../fetchBaseQuery";
-import { Vacancy, VacancyStatus } from "./vacanciesProps";
+import {
+  NewVacancy,
+  NewVacancyStatus,
+  Vacancy,
+  VacancyStatus,
+} from "../../../types/vacancies.types";
 
 export const vacanciesQuerySlice = createApi({
   reducerPath: "vacanciesQuerySlice",
 
   baseQuery: baseQueryWithReauth,
+
   tagTypes: ["vacanies"],
 
   endpoints: (build) => ({
-    createVacancy: build.mutation<Vacancy, Vacancy>({
+    createVacancy: build.mutation<Vacancy, NewVacancy>({
       query: (vacancy) => ({
         url: "/vacancies",
         method: "POST",
@@ -18,9 +24,12 @@ export const vacanciesQuerySlice = createApi({
       invalidatesTags: ["vacanies"],
     }),
 
-    updateVacancyById: build.mutation<Vacancy, Vacancy>({
-      query: ({ id, ...vacancy }) => ({
-        url: `/vacancies/${id}`,
+    updateVacancyById: build.mutation<
+      Vacancy,
+      Partial<NewVacancy> & { vacancyId: string }
+    >({
+      query: ({ vacancyId, ...vacancy }) => ({
+        url: `/vacancies/${vacancyId}`,
         method: "PATCH",
         body: vacancy,
       }),
@@ -32,27 +41,30 @@ export const vacanciesQuerySlice = createApi({
       providesTags: ["vacanies"],
     }),
 
-    getVacancyById: build.query<Vacancy, string>({
-      query: (id) => `/vacancies/${id}`,
+    getVacancyById: build.query<Vacancy, { vacancyId: string }>({
+      query: ({ vacancyId }) => `/vacancies/${vacancyId}`,
     }),
 
-    deleteVacancyById: build.mutation<void, string>({
-      query: (id) => ({
-        url: `/vacancies/${id}`,
+    deleteVacancyById: build.mutation<void, { vacancyId: string }>({
+      query: ({ vacancyId }) => ({
+        url: `/vacancies/${vacancyId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["vacanies"],
     }),
 
-    archiveVacancyById: build.mutation({
-      query: (id) => ({
-        url: `/vacancies/${id}/archive`,
+    archiveVacancyById: build.mutation<Vacancy, { vacancyId: string }>({
+      query: ({ vacancyId }) => ({
+        url: `/vacancies/${vacancyId}/archive`,
         method: "PATCH",
       }),
       invalidatesTags: ["vacanies"],
     }),
 
-    createStatusVacancyById: build.mutation<VacancyStatus, VacancyStatus>({
+    createStatusVacancyById: build.mutation<
+      VacancyStatus,
+      NewVacancyStatus & { vacancyId: string }
+    >({
       query: ({ vacancyId, ...newStatus }) => ({
         url: `/vacancies/${vacancyId}/status`,
         method: "POST",
@@ -63,7 +75,7 @@ export const vacanciesQuerySlice = createApi({
 
     updateSpecificStatusVacancyById: build.mutation<
       VacancyStatus,
-      VacancyStatus
+      NewVacancyStatus & { vacancyId: string }
     >({
       query: ({ vacancyId, resumeId, ...newStatus }) => ({
         url: `/vacancies/${vacancyId}/status/${resumeId}`,
@@ -73,9 +85,12 @@ export const vacanciesQuerySlice = createApi({
       invalidatesTags: ["vacanies"],
     }),
 
-    deleteStatusVacancyById: build.mutation<VacancyStatus, VacancyStatus>({
-      query: ({ vacancyId, resumeId }) => ({
-        url: `/vacancies/${vacancyId}/status/${resumeId}`,
+    deleteStatusVacancyById: build.mutation<
+      void,
+      { vacancyId: string; statusId: string }
+    >({
+      query: ({ vacancyId, statusId }) => ({
+        url: `/vacancies/${vacancyId}/status/${statusId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["vacanies"],

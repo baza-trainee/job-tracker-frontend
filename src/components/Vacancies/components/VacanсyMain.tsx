@@ -28,6 +28,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const localizedSections = getLocalizedSectionConfig();
 
   const { data, isLoading, isError } = useGetAllUserDataQuery();
+  console.log("profile>>", data);
 
   const vacancies = data?.vacancies || [];
   const filteredVacancies = useFilteredVacancies(

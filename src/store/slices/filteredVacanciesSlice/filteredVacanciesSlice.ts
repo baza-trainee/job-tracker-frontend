@@ -7,7 +7,12 @@ interface Status {
   rejectReason: string | null;
   resume: string | null;
 }
-
+// vacancyId?: string;
+// vacancy: Vacancy;
+// name: StatusName;
+// date: string;
+// rejectReason?: RejectReason;
+// resumeId?: string;
 export interface Vacancy {
   id: string;
   vacancy: string;

@@ -54,7 +54,9 @@ const AddVacancy = () => {
     data
   ) => {
     try {
-      await createVacancy(data).unwrap();
+      const response = await createVacancy(data).unwrap();
+      console.log(response);
+
       refetch();
       reset();
     } catch (error) {

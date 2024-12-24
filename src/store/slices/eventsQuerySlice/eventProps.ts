@@ -1,4 +1,4 @@
-import { User } from "../profileQuerySlice/profileProps";
+import { User } from "../../../types/profile.types";
 
 export type Event = {
   id?: string;
