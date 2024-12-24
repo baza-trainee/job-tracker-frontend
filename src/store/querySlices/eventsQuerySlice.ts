@@ -7,7 +7,10 @@ export const eventQuerySlice = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["events"],
   endpoints: (build) => ({
-    createEvent: build.mutation<Event, Event>({
+    createEvent: build.mutation<
+      Event,
+      Pick<Event, "date" | "name" | "text" | "time">
+    >({
       query: (newEvent) => ({
         url: "/events",
         method: "POST",
@@ -21,11 +24,15 @@ export const eventQuerySlice = createApi({
       providesTags: ["events"],
     }),
 
-    getEventById: build.query<Event, string>({
-      query: (id) => `/events/${id}`,
+    getEventById: build.query<Event, Pick<Event, "id">>({
+      query: ({ id }) => `/events/${id}`,
     }),
 
-    updateEventById: build.mutation<Event, Event>({
+    updateEventById: build.mutation<
+      Event,
+      Pick<Event, "id"> &
+        Partial<Pick<Event, "date" | "name" | "text" | "time">>
+    >({
       query: ({ id, ...updatedEvent }) => ({
         url: `/events/${id}`,
         method: "PATCH",
@@ -34,8 +41,8 @@ export const eventQuerySlice = createApi({
       invalidatesTags: ["events"],
     }),
 
-    deleteEventById: build.mutation<void, string>({
-      query: (id) => `/events/${id}`,
+    deleteEventById: build.mutation<void, Pick<Event, "id">>({
+      query: ({ id }) => `/events/${id}`,
       invalidatesTags: ["events"],
     }),
   }),

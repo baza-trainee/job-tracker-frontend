@@ -1,10 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithReauth } from "../fetchBaseQuery";
-import {
-  Prediction,
-  PredictionRequest,
-  PredictionsSeed,
-} from "../../types/predictions.types";
+import { Prediction, PredictionsSeed } from "../../types/predictions.types";
 
 export const predictionsQuerySlice = createApi({
   reducerPath: "predictionsQuerySlice",
@@ -14,7 +10,10 @@ export const predictionsQuerySlice = createApi({
   tagTypes: ["predictions"],
 
   endpoints: (build) => ({
-    createPrediction: build.mutation<Prediction, PredictionRequest>({
+    createPrediction: build.mutation<
+      Prediction,
+      Pick<Prediction, "textEn" | "textUk">
+    >({
       query: (newPrediction) => ({
         url: "/predictions",
         method: "POST",
@@ -32,13 +31,13 @@ export const predictionsQuerySlice = createApi({
       query: () => "/predictions/daily",
     }),
 
-    getPredictionById: build.query<Prediction, string>({
-      query: (id) => `/predictions/${id}`,
+    getPredictionById: build.query<Prediction, Pick<Prediction, "id">>({
+      query: ({ id }) => `/predictions/${id}`,
     }),
 
     updatePredictionById: build.mutation<
       Prediction,
-      PredictionRequest & { id: string }
+      Pick<Prediction, "id"> & Partial<Pick<Prediction, "textEn" | "textUk">>
     >({
       query: ({ id, ...updatetPrediction }) => ({
         url: `/predictions/${id}`,
@@ -48,12 +47,12 @@ export const predictionsQuerySlice = createApi({
       invalidatesTags: ["predictions"],
     }),
 
-    deletePredictionById: build.mutation<void, string>({
-      query: (id) => `/predictions/${id}`,
+    deletePredictionById: build.mutation<void, Pick<Prediction, "id">>({
+      query: ({ id }) => `/predictions/${id}`,
       invalidatesTags: ["predictions"],
     }),
 
-    seedPredictions: build.query<PredictionsSeed, void>({
+    getSeedPredictions: build.query<PredictionsSeed, void>({
       query: () => `/predictions/seed`,
     }),
   }),
@@ -65,6 +64,6 @@ export const {
   useGetAllPredictionsQuery,
   useGetPredictionByIdQuery,
   useGetPredictionDailyQuery,
-  useSeedPredictionsQuery,
+  useGetSeedPredictionsQuery,
   useUpdatePredictionByIdMutation,
 } = predictionsQuerySlice;

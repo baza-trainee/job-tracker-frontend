@@ -1,9 +1,9 @@
 export type Project = {
-  id?: string;
-  userId: string;
+  id: string;
   name: string;
+  userId: string;
   githubLink: string;
   liveProjectLink: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };

@@ -1,8 +1,8 @@
 export type CoverLetter = {
-  id?: string;
+  id: string;
   name: string;
   text: string;
   userId: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };
