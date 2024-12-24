@@ -8,10 +8,12 @@ const modalSlice = createSlice({
     openModal: (state, action: PayloadAction<ModalProps>) => {
       state.isModalOpen = true;
       state.typeModal = action.payload.typeModal;
+      state.idCardVacancy = action.payload.idCardVacancy;
     },
     closeModal: (state) => {
       state.isModalOpen = false;
       state.typeModal = "close";
+      state.idCardVacancy = "";
     },
     openConfirmation: (state, action: PayloadAction<ModalProps>) => {
       state.isConfirmationOpen = true;

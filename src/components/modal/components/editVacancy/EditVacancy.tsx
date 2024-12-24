@@ -1,32 +1,43 @@
 import { Input } from "../../../inputs/Input/Input";
 import { Button } from "../../../buttons/Button/Button";
 import { Textarea } from "../../../Textarea/Textarea";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AddVacancySchema } from "../../../../schemas/AddVacancySchema";
-import { t } from "i18next";
 import Checkbox from "../../../checkbox/Checkbox";
 import Icon from "../../../Icon/Icon";
-import { useCreateVacancyMutation } from "../../../../store/querySlices/vacanciesQuerySlice";
-import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
 
-import { useAppDispatch } from "../../../../store/hook";
+import { EditVacancySchema } from "../../../../schemas/EditVacancySchema";
+import { t } from "i18next";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useEffect } from "react";
+
+import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { closeModal } from "../../../../store/slices/modalSlice/modalSlice";
 
-const AddVacancy = () => {
-  const { refetch } = useGetAllUserDataQuery();
-  const [createVacancy] = useCreateVacancyMutation();
+import { useGetVacancyByIdQuery } from "../../../../store/slices/vacanciesQuerySlice/vacanciesQuerySlice";
+import { useDeleteVacancyByIdMutation } from "../../../../store/slices/vacanciesQuerySlice/vacanciesQuerySlice";
+import { useGetAllUserDataQuery } from "../../../../store/slices/profileQuerySlice/profileQuerySlice";
+import { useUpdateVacancyByIdMutation } from "../../../../store/slices/vacanciesQuerySlice/vacanciesQuerySlice";
+
+const EditVacancy = () => {
   const dispatch = useAppDispatch();
-  
+
+  const { idCardVacancy } = useAppSelector((state) => state.modal);
+  const { refetch } = useGetAllUserDataQuery();
+  const { data: vacancy } = useGetVacancyByIdQuery(idCardVacancy as string);
+
+  const [deleteVacancyById] = useDeleteVacancyByIdMutation();
+  const [updateVacancyById] = useUpdateVacancyByIdMutation();
+
   const {
     register,
-    resetField,
-    reset,
-    handleSubmit,
     setValue,
+    handleSubmit,
+    reset,
+    resetField,
     formState: { errors },
-  } = useForm<z.infer<typeof AddVacancySchema>>({
+  } = useForm<z.infer<typeof EditVacancySchema>>({
     defaultValues: {
       company: "",
       vacancy: "",
@@ -37,26 +48,56 @@ const AddVacancy = () => {
       work_type: "office",
       isArchived: false,
     },
-    resolver: zodResolver(AddVacancySchema),
+    resolver: zodResolver(EditVacancySchema),
     mode: "onBlur",
   });
-  const onSubmit: SubmitHandler<z.infer<typeof AddVacancySchema>> = async (
-    data
+
+  useEffect(() => {
+    if (vacancy) {
+      console.log(idCardVacancy, vacancy);
+      //load input
+      setValue("company", vacancy.company);
+      setValue("vacancy", vacancy.vacancy);
+      setValue("link", vacancy.link);
+      setValue("communication", vacancy.communication);
+      setValue("location", vacancy.location);
+      setValue("note", vacancy.note);
+      setValue("work_type", vacancy.work_type);
+      setValue("isArchived", vacancy.isArchived);
+    }
+  }, [idCardVacancy, vacancy, setValue]);
+
+  const onSubmit: SubmitHandler<z.infer<typeof EditVacancySchema>> = async (
+    formData
   ) => {
     try {
-      const response = await createVacancy(data).unwrap();
-      console.log(response);
+      await updateVacancyById({
+        id: idCardVacancy as string,
+        company: formData.company,
+        vacancy: formData.vacancy,
+        link: formData.link,
+        communication: formData.communication,
+        location: formData.location,
+        note: formData.note,
+        work_type: formData.work_type,
+        isArchived: formData.isArchived,
+      }).unwrap();
+      refetch();
+      dispatch(closeModal());
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  const handleDelete = async () => {
+    try {
+      await deleteVacancyById(idCardVacancy).unwrap();
       refetch();
       reset();
       dispatch(closeModal());
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
-  };
-  const handleSubmitArchive = () => {
-    setValue("isArchived", true);
-    handleSubmit(onSubmit)();
   };
 
   return (
@@ -149,6 +190,16 @@ const AddVacancy = () => {
                   errors={errors}
                 />
               </div>
+              <Textarea
+                register={register}
+                resetField={resetField}
+                key="note"
+                name="note"
+                placeholder={t("addVacancy.placeholders.notes")}
+                className=""
+                label={t("addVacancy.form.notes")}
+                errors={errors}
+              />
             </div>
 
             <div className="flex w-[445px] flex-col justify-between gap-4">
@@ -204,19 +255,15 @@ const AddVacancy = () => {
                     type="signUp"
                     errors={errors}
                   />
+                  {/* замінити на функціональний компонент :( */}
+                  <span
+                    onClick={() => {}}
+                    className="-ml-[2px] flex flex-row gap-3 hover:cursor-pointer"
+                  >
+                    <Icon id={"plus"} className="ml-3 h-6 w-6" /> Додати етап
+                  </span>
                 </div>
               </div>
-
-              <Textarea
-                register={register}
-                resetField={resetField}
-                key="note"
-                name="note"
-                placeholder={t("addVacancy.placeholders.notes")}
-                className=""
-                label={t("addVacancy.form.notes")}
-                errors={errors}
-              />
             </div>
           </div>
 
@@ -226,7 +273,17 @@ const AddVacancy = () => {
               className="mx-auto mt-8"
               variant="ghost"
               size="small"
-              onClick={handleSubmitArchive}
+              onClick={handleDelete}
+            >
+              Видалити
+              <Icon id={"delete"} className="ml-3 h-6 w-6" />
+            </Button>
+            <Button
+              type="button"
+              className="mx-auto mt-8"
+              variant="ghost"
+              size="small"
+              onClick={() => {}}
             >
               {t("addVacancy.form.archive")}{" "}
               <Icon id={"send"} className="ml-3 h-6 w-6" />
@@ -247,4 +304,4 @@ const AddVacancy = () => {
   );
 };
 
-export default AddVacancy;
+export default EditVacancy;
