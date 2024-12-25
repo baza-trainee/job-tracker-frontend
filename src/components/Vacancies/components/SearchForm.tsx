@@ -1,17 +1,16 @@
 import { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { Input } from "../../inputs/Input/Input";
-import Icon from "../../Icon/Icon";
-import { IconButton } from "../../buttons/IconButton/IconButton";
 import { useTranslation } from "react-i18next";
 import { cn } from "../../../utils/utils";
-import { useDispatch, useSelector } from "react-redux";
-// import { setQuery } from "../../../store/slices/vacanciesSlice/vacanciesSlice";
-import { selectSearchQuery } from "../../../store/slices/vacanciesSlice/vacanciesSelector";
-import { filterVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSlice";
-import { selectVacanciesQuantity } from "../../../store/slices/vacanciesSlice/vacanciesSelector";
+import { selectSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+import { setSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
+import { selectVacanciesQuantity } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+
+import Icon from "../../Icon/Icon";
+import { IconButton } from "../../buttons/IconButton/IconButton";
 
 const SearchSchema = z.object({
   query: z.string().min(1, "Search query cannot be empty"),
@@ -43,7 +42,7 @@ export const SearchForm: FC = () => {
   });
 
   const handleSearch = (query: string) => {
-    dispatch(filterVacancies(query));
+    dispatch(setSearchQuery(query));
   };
 
   const onSubmit: SubmitHandler<SearchFormData> = async (data) => {

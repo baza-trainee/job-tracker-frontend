@@ -3,6 +3,7 @@ export interface ModalProps {
   typeModal?: string;
   isConfirmationOpen?: boolean;
   typeConfirmation?: string;
+  idCardVacancy?: string;
 }
 
 export const initialState: ModalProps = {
@@ -10,6 +11,7 @@ export const initialState: ModalProps = {
   typeModal: "close",
   isConfirmationOpen: false,
   typeConfirmation: "close",
+  idCardVacancy: "",
 };
 
 // TODO: коли всі модалки будуть готові дописати їх типи в typeModal замість string

@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Vacancies from "./pages/Vacancies";
+import Archive from "./pages/Archive";
 import Statistics from "./pages/Statistics";
 import Profile from "./pages/Profile";
 import Notes from "./pages/Notes";
@@ -14,23 +15,21 @@ import { useEffect } from "react";
 
 import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-import { useAppDispatch } from "./store/hook";
-import { refreshUser } from "./store/slices/authSlice/authOperation";
-
-import Archive from "./components/Archive/Archive";
+// import { useAppDispatch } from "./store/hook";
+// import { refreshUser } from "./store/slices/authSlice/authOperation";
 
 function App() {
   const darkMode = useAppSelector(selectTheme);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(refreshUser());
+    // dispatch(refreshUser());
     if (darkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [darkMode, dispatch]);
+  }, [darkMode]);
 
   return (
     <Routes>

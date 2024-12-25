@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
-import { profileQuerySlice } from "./slices/profileQuerySlice/profileQuerySlice.ts";
-import { vacanciesQuerySlice } from "./slices/vacanciesQuerySlice/vacanciesQuerySlice.ts";
-import vacanciesReducer from "./slices/vacanciesSlice/vacanciesSlice.ts";
+import { profileQuerySlice } from "./querySlices/profileQuerySlice.ts";
+import { vacanciesQuerySlice } from "./querySlices/vacanciesQuerySlice.ts";
+import filteredVacanciesReducer from "./slices/filteredVacanciesSlice/filteredVacanciesSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
@@ -19,6 +19,12 @@ import {
   // REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { resumesQuerySlices } from "./querySlices/resumesQuerySlices.ts";
+import { projectQuerySlice } from "./querySlices/projectQuerySlice.ts";
+import { coverLetterQuerySlice } from "./querySlices/coverLettersQuerySlice.ts";
+import { notesQuerySlice } from "./querySlices/notesQuerySlice.ts";
+import { eventQuerySlice } from "./querySlices/eventsQuerySlice.ts";
+import { predictionsQuerySlice } from "./querySlices/predictionsQuerySlice.ts";
 
 const authPersistConfig = {
   key: "auth",
@@ -46,7 +52,13 @@ export const store = configureStore({
   reducer: {
     [profileQuerySlice.reducerPath]: profileQuerySlice.reducer,
     [vacanciesQuerySlice.reducerPath]: vacanciesQuerySlice.reducer,
-    vacancies: vacanciesReducer,
+    [resumesQuerySlices.reducerPath]: resumesQuerySlices.reducer,
+    [projectQuerySlice.reducerPath]: projectQuerySlice.reducer,
+    [coverLetterQuerySlice.reducerPath]: coverLetterQuerySlice.reducer,
+    [notesQuerySlice.reducerPath]: notesQuerySlice.reducer,
+    [eventQuerySlice.reducerPath]: eventQuerySlice.reducer,
+    [predictionsQuerySlice.reducerPath]: predictionsQuerySlice.reducer,
+    filteredVacancies: filteredVacanciesReducer,
     modal: modalReduser,
     auth: authPersistedReducer,
     theme: themePersistedReducer,
@@ -69,7 +81,16 @@ export const store = configureStore({
       //   ignoredActionPaths: ["payload.modalContent"],
       //   ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
       // },
-    }).concat(profileQuerySlice.middleware, vacanciesQuerySlice.middleware),
+    }).concat(
+      profileQuerySlice.middleware,
+      vacanciesQuerySlice.middleware,
+      resumesQuerySlices.middleware,
+      projectQuerySlice.middleware,
+      coverLetterQuerySlice.middleware,
+      notesQuerySlice.middleware,
+      eventQuerySlice.middleware,
+      predictionsQuerySlice.middleware
+    ),
 });
 
 setupListeners(store.dispatch);

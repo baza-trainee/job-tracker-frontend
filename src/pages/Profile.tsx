@@ -1,4 +1,4 @@
-import { useGetAllUserDataQuery } from "../store/slices/profileQuerySlice/profileQuerySlice";
+import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice";
 
 function Profile() {
   const {
@@ -6,9 +6,8 @@ function Profile() {
     //  isSuccess, isFetching, error,
     isLoading,
     isError,
-  } = useGetAllUserDataQuery(undefined);
-
-  console.log("User all data>> ", data);
+  } = useGetAllUserDataQuery();
+  console.log(data);
 
   if (isLoading) {
     return <h2>Loading....</h2>;

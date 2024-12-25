@@ -1,25 +1,44 @@
 import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../../store/hook.ts";
-import { fetchVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSlice.ts";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useFilteredVacancies,
+} from "../../../store/hook.ts";
+import { setFilteredVacancies } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice.ts";
+import { selectfilteredVacancies } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector.ts";
+import { useGetAllUserDataQuery } from "../../../store/querySlices/profileQuerySlice.ts";
 
 import VacancySection from "./VacancySection.tsx";
 import VacancySectionBox from "./VacancySectionBox.tsx";
 import VacancyCard from "./VacancyCard.tsx";
 import VacancyCardFirst from "./VacancyCardFirst.tsx";
 import VacancySectionSkeleton from "./VacancySectionSceleton";
-import { selectVacancies } from "../../../store/slices/vacanciesSlice/vacanciesSelector.ts";
+
 import { VacancyProps } from "./VacanсyHeader.tsx";
-import { getLocalizedSectionConfig, getVacanciesByStatus } from "./VacancyMainConfig.ts";
+import {
+  getLocalizedSectionConfig,
+  getVacanciesByStatus,
+} from "./VacancyMainConfig.ts";
+import { openModal } from "../../../store/slices/modalSlice/modalSlice.ts";
 
 const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
+  const { sortType, searchQuery } = useAppSelector(selectfilteredVacancies);
   const dispatch = useAppDispatch();
-  const { filteredVacancies, status, vacancies, sortType } = useAppSelector(selectVacancies);
   const { t } = useTranslation();
   const localizedSections = getLocalizedSectionConfig();
 
-  // визначаємо як повинна виглядати секція в залежності від наявності сортування за статусом, чи рендеру архівної сторінки
-  const validStatuses = [
+  const { data, isLoading, isError } = useGetAllUserDataQuery();
+
+  const vacancies = data?.vacancies || [];
+  const filteredVacancies = useFilteredVacancies(
+    vacancies,
+    searchQuery,
+    sortType
+  );
+
+  // Логіка рендерингу вакансій
+  const isStatus = [
     "saved",
     "resume",
     "hr",
@@ -27,57 +46,44 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
     "tech",
     "reject",
     "offer",
-  ];
-  const isStatus = validStatuses.includes(sortType);
-  //пропс для секцій, якщо він true то секція має виглядати без скрола и стрілок
+  ].includes(sortType);
   const isSorting = isStatus || isArchive;
-  // console.log("isSorting", isSorting);
 
-  // Визначаємо архівні або активні вакансії
   const renderedVacancies = isArchive
     ? filteredVacancies.filter((v) => v.isArchived === true)
     : filteredVacancies.filter((v) => v.isArchived === false);
 
-  // console.log("vacancies: ", vacancies);
-  // console.log("renderedVacancies: ", renderedVacancies);
-  // console.log("filteredVacancies: ", filteredVacancies);
-
+  //oновлюємо кількість відфільтрованих вакансій
   useEffect(() => {
-    if (status === "idle" || (status === "succeeded" && vacancies.length === 0)) {
-      dispatch(fetchVacancies());
-    }
-    }, [dispatch, status, vacancies.length]);
+    dispatch(setFilteredVacancies(renderedVacancies));
+  }, [searchQuery, sortType, dispatch]);
 
   return (
     <div className="test-watch flex w-full flex-col gap-6">
-      {/* Скелетон при завантаженні */}
-      {status === "loading" && (
-        <>
-          <VacancySectionSkeleton />
-        </>
-      )}
-
+      {/* Показ скелетону під час завантаження */}
+      {isLoading && <VacancySectionSkeleton />}
+      {isError && <h2>Error...</h2>}
       {/* Заглушка "картка Створити", якщо взагалі вакансій немає */}
-      {status !== "loading" && vacancies?.length === 0 && (
+      {!isLoading && vacancies.length === 0 && (
         <VacancySection
           titleSection="Збережені"
           colorSectionBorder="border-color5"
           colorSectionBG="bg-color5"
         >
-          <VacancyCardFirst colorSectionBG="bg-color5-transparent" colorHoverBG="hover:bg-color5" />
+          <VacancyCardFirst
+            colorSectionBG="bg-color5-transparent"
+            colorHoverBG="hover:bg-color5"
+          />
         </VacancySection>
-
       )}
-
       {/* Архівні вакансії */}
-      {status !== "loading" && isArchive && renderedVacancies.length > 0 && (
+      {isArchive && renderedVacancies.length > 0 && (
         <VacancySectionBox
           titleSection={t("vacanciesHeader.archive")}
           colorSectionBorder="border-color9"
           colorSectionBG="bg-color9"
         >
           {renderedVacancies.map((vacancy) => (
-
             <VacancyCard
               key={vacancy.id}
               colorSectionBG="bg-color9-transparent"
@@ -86,81 +92,77 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
               company={vacancy.company}
               workType={vacancy.work_type}
               location={vacancy.location}
-              onClick={() => alert("Модалка для редагування картки")}
+              onClick={() => {dispatch(openModal({typeModal:"editVacancy"}))}}
             />
           ))}
         </VacancySectionBox>
       )}
-
       {/* В цій секції не має вакансій... - під час сортування*/}
-      {status !== "loading" && renderedVacancies.length === 0 && (
-        <p className="text-xl mt-4 font-nunito">{t("vacanciesHeader.emptySection")}</p>
+      {!isLoading && renderedVacancies.length === 0 && (
+        <p className="mt-4 font-nunito text-xl">
+          {t("vacanciesHeader.emptySection")}
+        </p>
       )}
 
       {/* Секції активних вакансій */}
-      {status !== "loading" && !isArchive && (
-        <>
-          {localizedSections.map(
-            (section) =>
-              getVacanciesByStatus(renderedVacancies, section.sectionName).length > 0 && (
-                !isSorting ?
-                  <VacancySection
-                    key={section.sectionName}
-                    titleSection={section.title}
-                    colorSectionBorder={section.borderColor}
-                    colorSectionBG={section.backgroundColor}
-                  >
-                    {getVacanciesByStatus(renderedVacancies, section.sectionName
-                    ).map((vacancy) => (
-                      <VacancyCard
-                        key={vacancy.id}
-                        colorSectionBG={section.backgroundTransparent}
-                        colorHoverBG={section.hoverColor}
-                        titleVacancy={vacancy.vacancy}
-                        company={vacancy.company}
-                        workType={vacancy.work_type}
-                        location={vacancy.location}
-                        onClick={() =>
-                          alert("Модалка для редагування картки")
-                        }
-                      />
-                    ))}
-                  </VacancySection>
-                  :
-                  <VacancySectionBox
-                    key={section.sectionName}
-                    titleSection={section.title}
-                    colorSectionBorder={section.borderColor}
-                    colorSectionBG={section.backgroundColor}
-                  >
-                    {getVacanciesByStatus(renderedVacancies, section.sectionName
-                    ).map((vacancy) => (
-                      <VacancyCard
-                        key={vacancy.id}
-                        colorSectionBG={section.backgroundTransparent}
-                        colorHoverBG={section.hoverColor}
-                        titleVacancy={vacancy.vacancy}
-                        company={vacancy.company}
-                        workType={vacancy.work_type}
-                        location={vacancy.location}
-                        onClick={() =>
-                          alert("Модалка для редагування картки")
-                        }
-                      />
-                    ))}
-                  </VacancySectionBox>
-              )
-          )}
-        </>
-      )}
+      {!isArchive &&
+        localizedSections.map(
+          (section) =>
+            getVacanciesByStatus(renderedVacancies, section.sectionName)
+              .length > 0 &&
+            (!isSorting ? (
+              <VacancySection
+                key={section.sectionName}
+                titleSection={section.title}
+                colorSectionBorder={section.borderColor}
+                colorSectionBG={section.backgroundColor}
+              >
+                {getVacanciesByStatus(
+                  renderedVacancies,
+                  section.sectionName
+                ).map((vacancy) => (
+                  <VacancyCard
+                    key={vacancy.id}
+                    colorSectionBG={section.backgroundTransparent}
+                    colorHoverBG={section.hoverColor}
+                    titleVacancy={vacancy.vacancy}
+                    company={vacancy.company}
+                    workType={vacancy.work_type}
+                    location={vacancy.location}
+                    onClick={() => {dispatch(openModal({typeModal:"editVacancy", idCardVacancy: vacancy.id}))}}
+                  />
+                ))}
+              </VacancySection>
+            ) : (
+              <VacancySectionBox
+                key={section.sectionName}
+                titleSection={section.title}
+                colorSectionBorder={section.borderColor}
+                colorSectionBG={section.backgroundColor}
+              >
+                {getVacanciesByStatus(
+                  renderedVacancies,
+                  section.sectionName
+                ).map((vacancy) => (
+                  <VacancyCard
+                    key={vacancy.id}
+                    colorSectionBG={section.backgroundTransparent}
+                    colorHoverBG={section.hoverColor}
+                    titleVacancy={vacancy.vacancy}
+                    company={vacancy.company}
+                    workType={vacancy.work_type}
+                    location={vacancy.location}
+                    onClick={() => {dispatch(openModal({typeModal:"editVacancy"}))}}
+                  />
+                ))}
+              </VacancySectionBox>
+            ))
+        )}
     </div>
   );
 };
 
 export default VacancyMain;
-
-
-
 
 // import { FC, useEffect } from "react";
 // import { useAppDispatch, useAppSelector } from "../../../store/hook.ts";

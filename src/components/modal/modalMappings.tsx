@@ -4,6 +4,7 @@ import InfoModal from "./components/infoModals/InfoModal";
 import { ReactNode } from "react";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import { t } from "i18next";
+import EditVacancy from "./components/editVacancy/EditVacancy";
 
 type ContentMapProps = {
   [propsTypeName: string]: {
@@ -43,6 +44,12 @@ export const contentMap: ContentMapProps = {
     nameModal: t("addVacancy.nameModal.name"),
     bgColor: colorDefault.bg,
     borderColor: colorDefault.border,
+  },
+  editVacancy: {
+    content: <EditVacancy />,
+    nameModal: "Редагувати вакансію",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
   forgotPassword: {
     content: <ForgotPassword />,

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { setSortType } from "../../../../store/slices/vacanciesSlice/vacanciesSlice";
-import { selectSortType } from "../../../../store/slices/vacanciesSlice/vacanciesSelector";
+import { setSortType } from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
+import { selectSortType } from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 
 import { DropdownInfo } from "./DropdownInfo";
 import { DropdowmMarkup } from "./DropdownMarkup";

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { t } from "i18next";
 
-export const AddVacancySchema = z.object({
+export const EditVacancySchema = z.object({
   vacancy: z
     .string()
     .max(30, t("addVacancySchema.position.max"))
@@ -41,3 +41,10 @@ export const changeStatusVacancy = z.object({
   resumeId: z.string(),
   statusId: z.string(),
 });
+export type NewVacancyProps = z.infer<typeof EditVacancySchema>;
+
+export type UpdateVacancyById = NewVacancyProps & { id: string };
+
+export type ChangeStatusVacancy = z.infer<typeof changeStatusVacancy> & {
+  vacancyId: string;
+};
