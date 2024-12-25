@@ -28,7 +28,7 @@ export const AddVacancySchema = z.object({
     .max(400, t("addVacancySchema.location.max"))
     .min(4, t("addVacancySchema.location.min"))
     .trim(),
-  work_type: z.enum(["remote", "office", "mixed"], {
+  work_type: z.enum(["remote", "office", "hybrid"], {
     errorMap: () => ({ message: "addVacancySchema.workType.invalid" }),
   }),
 

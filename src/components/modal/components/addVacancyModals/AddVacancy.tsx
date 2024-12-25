@@ -117,17 +117,17 @@ const AddVacancy = () => {
   const onSubmit: SubmitHandler<z.infer<typeof AddVacancySchema>> = async (
     data
   ) => {
-    console.dir(data);
-    // try {
-    //   const response = await createVacancy(data).unwrap();
-    //   console.log(response);
+    console.log(data);
+    try {
+      const response = await createVacancy(data).unwrap();
+      console.log(response);
 
-    //   refetch();
-    //   reset();
-    //   dispatch(closeModal());
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      refetch();
+      reset();
+      dispatch(closeModal());
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleSubmitArchive = () => {
     setValue("isArchived", true);
@@ -219,12 +219,12 @@ const AddVacancy = () => {
                 />
                 <InputRadio
                   name="work_type"
-                  id="mixed"
+                  id="hybrid"
                   label={t("addVacancy.form.mixed")}
                   register={register}
                   type="signUp"
                   errors={errors}
-                  value="mixed"
+                  value="hybrid"
                 />
               </div>
             </div>

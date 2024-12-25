@@ -12,16 +12,19 @@ export const resumesQuerySlices = createApi({
       providesTags: ["resumes"],
     }),
 
-    createResume: build.mutation<Resume, Resume>({
+    createResume: build.mutation<Resume, Pick<Resume, "link" | "name">>({
       query: (resume) => ({ url: "/resumes", method: "POST", body: resume }),
       invalidatesTags: ["resumes"],
     }),
 
-    getResumeById: build.query<Resume, string>({
-      query: (id) => `/resumes/${id}`,
+    getResumeById: build.query<Resume, Pick<Resume, "id">>({
+      query: ({ id }) => `/resumes/${id}`,
     }),
 
-    updateResumeById: build.mutation<Resume, Resume>({
+    updateResumeById: build.mutation<
+      Resume,
+      Pick<Resume, "id"> & Partial<Pick<Resume, "link" | "name">>
+    >({
       query: ({ id, ...resume }) => ({
         url: `/resumes/${id}`,
         method: "PATCH",
@@ -30,8 +33,8 @@ export const resumesQuerySlices = createApi({
       invalidatesTags: ["resumes"],
     }),
 
-    deleteResumeById: build.mutation<void, string>({
-      query: (id) => ({
+    deleteResumeById: build.mutation<void, Pick<Resume, "id">>({
+      query: ({ id }) => ({
         url: `/resumes/${id}`,
         method: "DELETE",
       }),

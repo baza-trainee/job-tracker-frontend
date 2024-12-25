@@ -7,7 +7,10 @@ export const notesQuerySlice = createApi({
   reducerPath: "notesQuerySlice",
   tagTypes: ["notes"],
   endpoints: (build) => ({
-    createNote: build.mutation<Note, Note>({
+    createNote: build.mutation<
+      Note,
+      Pick<Note, "name"> & Partial<Pick<Note, "text">>
+    >({
       query: (newNote) => ({
         url: "/notes",
         method: "POST",
@@ -21,11 +24,14 @@ export const notesQuerySlice = createApi({
       providesTags: ["notes"],
     }),
 
-    getNoteById: build.query<Note, string>({
-      query: (id) => `/note/${id}`,
+    getNoteById: build.query<Note, Pick<Note, "id">>({
+      query: ({ id }) => `/note/${id}`,
     }),
 
-    updateNoteById: build.mutation<Note, Note>({
+    updateNoteById: build.mutation<
+      Note,
+      Pick<Note, "id" | "name"> & Partial<Pick<Note, "text">>
+    >({
       query: ({ id, ...updatedNote }) => ({
         url: `/note/${id}`,
         method: "PATCH",
@@ -34,8 +40,8 @@ export const notesQuerySlice = createApi({
       invalidatesTags: ["notes"],
     }),
 
-    deleteNoteById: build.mutation<void, string>({
-      query: (id) => ({
+    deleteNoteById: build.mutation<void, Pick<Note, "id">>({
+      query: ({ id }) => ({
         url: `/note/${id}`,
         method: "DELETE",
       }),

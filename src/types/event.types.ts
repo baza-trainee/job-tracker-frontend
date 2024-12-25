@@ -1,9 +1,9 @@
 export type Event = {
-  id?: string;
+  id: string;
   name: string;
   text: string;
-  date: Date;
+  date: string;
   time: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };

@@ -1,32 +1,26 @@
 export type WorkType = "remote" | "office" | "hybrid";
 
-export type Vacancy = NewVacancy & {
+export type Vacancy = {
   id: string;
   createdAt: string;
   updatedAt: string;
-};
-
-export type NewVacancy = {
   vacancy: string;
   link: string;
-  communication?: string;
+  communication: string;
   company: string;
-  location?: string;
+  location: string;
   work_type: WorkType;
-  note?: string;
+  note: string;
   isArchived: boolean;
-  statuses?: VacancyStatus[];
+  statuses: VacancyStatus[];
 };
 
-export type VacancyStatus = NewVacancyStatus & {
+export type VacancyStatus = {
   date: string;
-};
-
-export type NewVacancyStatus = {
   name: StatusName;
-  rejectReason: RejectReason;
-  resumeId?: string;
-  statusId?: string;
+  rejectReason: RejectReason | null;
+  resumeId: string | null;
+  id: string;
 };
 
 export enum StatusName {

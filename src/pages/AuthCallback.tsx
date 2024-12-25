@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../store/hook";
-import { saveTokens } from "../store/slices/authSlice/authSlice";
+import { isLoggedIn, saveTokens } from "../store/slices/authSlice/authSlice";
 import { useEffect } from "react";
 import { openModal } from "../store/slices/modalSlice/modalSlice";
 
@@ -9,6 +9,7 @@ export const AuthCallback = () => {
   const dispatch = useAppDispatch();
 
   const urlParams = new URLSearchParams(window.location.search);
+
   const access_token = urlParams.get("access_token");
   const refresh_token = urlParams.get("refresh_token");
 
@@ -16,7 +17,10 @@ export const AuthCallback = () => {
     if (access_token && refresh_token) {
       dispatch(saveTokens({ access_token, refresh_token }));
       dispatch(openModal({ typeModal: "logInSuccess" }));
-      alert("hello")
+      dispatch(isLoggedIn()); //+
+    } else {
+      dispatch(openModal({ typeModal: "logInError" })); //+
+      navigate("/log-in"); //+
     }
   }, [dispatch, navigate, access_token, refresh_token]);
 
