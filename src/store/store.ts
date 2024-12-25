@@ -25,6 +25,10 @@ import { coverLetterQuerySlice } from "./querySlices/coverLettersQuerySlice.ts";
 import { notesQuerySlice } from "./querySlices/notesQuerySlice.ts";
 import { eventQuerySlice } from "./querySlices/eventsQuerySlice.ts";
 import { predictionsQuerySlice } from "./querySlices/predictionsQuerySlice.ts";
+import {
+  authPrivateQuerySlice,
+  authPublicQuerySlice,
+} from "./querySlices/authQuerySlice.ts";
 
 const authPersistConfig = {
   key: "auth",
@@ -58,6 +62,8 @@ export const store = configureStore({
     [notesQuerySlice.reducerPath]: notesQuerySlice.reducer,
     [eventQuerySlice.reducerPath]: eventQuerySlice.reducer,
     [predictionsQuerySlice.reducerPath]: predictionsQuerySlice.reducer,
+    [authPrivateQuerySlice.reducerPath]: authPrivateQuerySlice.reducer,
+    [authPublicQuerySlice.reducerPath]: authPublicQuerySlice.reducer,
     filteredVacancies: filteredVacanciesReducer,
     modal: modalReduser,
     auth: authPersistedReducer,
@@ -89,7 +95,9 @@ export const store = configureStore({
       coverLetterQuerySlice.middleware,
       notesQuerySlice.middleware,
       eventQuerySlice.middleware,
-      predictionsQuerySlice.middleware
+      predictionsQuerySlice.middleware,
+      authPrivateQuerySlice.middleware,
+      authPublicQuerySlice.middleware
     ),
 });
 

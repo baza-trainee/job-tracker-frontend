@@ -17,7 +17,10 @@ export const AuthCallback = () => {
     if (access_token && refresh_token) {
       dispatch(saveTokens({ access_token, refresh_token }));
       dispatch(openModal({ typeModal: "logInSuccess" }));
-      dispatch(isLoggedIn());
+      dispatch(isLoggedIn()); //+
+    } else {
+      dispatch(openModal({ typeModal: "logInError" })); //+
+      navigate("/log-in"); //+
     }
   }, [dispatch, navigate, access_token, refresh_token]);
 
