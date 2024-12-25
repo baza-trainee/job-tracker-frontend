@@ -13,6 +13,10 @@ import {
   notifySuccess,
   notifyInfo,
 } from "../../../Notifications/NotificationService";
+import {
+  setSearchQuery,
+  setSortType,
+} from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
@@ -33,17 +37,19 @@ const InfoModalMap = () => {
 
   const handleLogOut = useCallback((): void => {
     dispatch(logOut());
+    dispatch(setSearchQuery(""));
+    dispatch(setSortType(""));
   }, [dispatch]);
 
   const handleSaveChangesVacancies = useCallback((): void => {
-    notifySuccess("Дані успшно збережено. Дякую");       // test
+    notifySuccess("Дані успшно збережено. Дякую"); // test
     dispatch(closeConfirmation());
     dispatch(closeModal());
   }, [dispatch]);
 
   const handleCloseConfirmation = useCallback((): void => {
     notifyError("Щось пішло не так, дані не збережено"); // test
-    notifyInfo("Інформацію не збережно");                // test
+    notifyInfo("Інформацію не збережно"); // test
     dispatch(closeConfirmation());
   }, [dispatch]);
 
@@ -215,8 +221,7 @@ const InfoModalMap = () => {
       ],
     },
   };
-  return map
+  return map;
 };
-
 
 export default InfoModalMap;

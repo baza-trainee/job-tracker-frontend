@@ -18,8 +18,8 @@ export type Vacancy = {
 export type VacancyStatus = {
   date: string;
   name: StatusName;
-  rejectReason: RejectReason;
-  resumeId: string;
+  rejectReason: RejectReason | null;
+  resumeId: string | null;
   id: string;
 };
 
