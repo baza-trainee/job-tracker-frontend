@@ -8,7 +8,7 @@ export const profileQuerySlice = createApi({
   baseQuery: baseQueryWithReauth,
 
   endpoints: (build) => ({
-    getAllUserData: build.query<Profile | any, void>({
+    getAllUserData: build.query<Profile, void>({
       query: () => "/user/profile",
     }),
   }),

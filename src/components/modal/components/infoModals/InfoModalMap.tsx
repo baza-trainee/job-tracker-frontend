@@ -13,7 +13,14 @@ import {
   notifySuccess,
   notifyInfo,
 } from "../../../Notifications/NotificationService";
+
+import {
+  setSearchQuery,
+  setSortType,
+} from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
+
 import { useLogOutUserMutation } from "../../../../store/querySlices/authQuerySlice";
+
 
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
@@ -33,8 +40,13 @@ const InfoModalMap = () => {
   }, [navigate, dispatch]);
 
   const handleLogOut = useCallback((): void => {
+
+    dispatch(setSearchQuery(""));
+    dispatch(setSortType(""));
+
     // dispatch(logOut());
     logOut();
+
   }, [dispatch]);
 
   const handleSaveChangesVacancies = useCallback((): void => {
