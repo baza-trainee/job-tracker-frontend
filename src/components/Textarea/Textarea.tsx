@@ -1,6 +1,6 @@
 import cn from "clsx";
 import { TextareaProps } from "./Textarea.props";
-import { useState } from "react";
+// import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const Textarea = ({
@@ -9,25 +9,24 @@ export const Textarea = ({
   label,
   className,
   register,
-  resetField,
+  // resetField,
   errors,
   value,
   id,
 }: TextareaProps) => {
   const error = errors[name];
-  const [isIcon, setIsIcon] = useState<boolean>(false);
   const { t } = useTranslation();
 
-  const handleResetField = (name: string) => {
-    resetField(name);
-  };
+  // const handleResetField = (name: string) => {
+  //   resetField(name);
+  // };
 
   return (
     <div
       className={cn("relative", [className])}
       id={id}
-      onFocus={() => setIsIcon(true)}
-      onBlur={() => setIsIcon(false)}
+      // onFocus={() => setIsIcon(true)}
+      // onBlur={() => setIsIcon(false)}
     >
       {label && (
         <label
@@ -44,16 +43,16 @@ export const Textarea = ({
             className={cn(
               "peer h-32 w-full resize-none rounded-xl border px-6 py-2 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
 
-              !error && "border-color5",
-              error &&
-                "border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"
+              // !error && "border-color5",
+              // error &&
+              //   "border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"
             )}
             placeholder={placeholder}
             {...(value && { value })}
             {...register(name)}
             aria-describedby={`textareaError-${name}`}
           ></textarea>
-          {error ? (
+          {/* {error ? (
             <button
               onClick={() => handleResetField(name)}
               className={
@@ -102,7 +101,7 @@ export const Textarea = ({
                 </svg>
               </div>
             )
-          )}
+          )} */}
         </div>
         {error && (
           <span
