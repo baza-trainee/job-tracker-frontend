@@ -6,22 +6,26 @@ import {
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
-import { logOut } from "../../../../store/slices/authSlice/authOperation";
+// import { logOut } from "../../../../store/slices/authSlice/authOperation";
 
 import {
   notifyError,
   notifySuccess,
   notifyInfo,
 } from "../../../Notifications/NotificationService";
+
 import {
   setSearchQuery,
   setSortType,
 } from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 
+import { useLogOutUserMutation } from "../../../../store/querySlices/authQuerySlice";
+
+
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const [logOut] = useLogOutUserMutation();
   const handleButton = useCallback((): void => {
     dispatch(closeModal());
   }, [dispatch]);
@@ -36,9 +40,13 @@ const InfoModalMap = () => {
   }, [navigate, dispatch]);
 
   const handleLogOut = useCallback((): void => {
-    dispatch(logOut());
+
     dispatch(setSearchQuery(""));
     dispatch(setSortType(""));
+
+    // dispatch(logOut());
+    logOut();
+
   }, [dispatch]);
 
   const handleSaveChangesVacancies = useCallback((): void => {
