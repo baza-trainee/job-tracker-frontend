@@ -28,9 +28,24 @@ export const AddVacancySchema = z.object({
     .max(400, t("addVacancySchema.location.max"))
     .min(4, t("addVacancySchema.location.min"))
     .trim(),
-  work_type: z.enum(["remote", "office", "hybrid"], {
+  work_type: z.enum(["remote", "office", "mixed"], {
     errorMap: () => ({ message: "addVacancySchema.workType.invalid" }),
   }),
+
+  sendSummary: z.boolean(),
+  HR: z.boolean(),
+  testTask: z.boolean(),
+  technicalInterview: z.boolean(),
+  rejection: z.boolean(),
+  offer: z.boolean(),
+
+  sendSummaryCalendar: z.string(),
+  HRCalendar: z.string(),
+  testTaskCalendar: z.string(),
+  technicalInterviewCalendar: z.string(),
+  rejectionCalendar: z.string(),
+  offerCalendar: z.string(),
+
   note: z.string().max(4000, t("addVacancySchema.notes.max")).trim(),
   isArchived: z.boolean(),
 });

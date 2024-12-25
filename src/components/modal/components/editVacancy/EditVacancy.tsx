@@ -164,6 +164,7 @@ const EditVacancy = () => {
                   className=""
                   label={t("addVacancy.form.location")}
                   errors={errors}
+                  // value={vacancy ? vacancy.location : ""}
                 />
               </div>
 
