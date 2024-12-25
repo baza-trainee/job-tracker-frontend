@@ -1,8 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api, axiosInstance } from "../../../api/axios";
-import { saveTokens, clearTokens, isLoggedIn } from "./authSlice";
 import {
-  AuthStateProps,
+  saveTokens,
+  clearTokens,
+  //  isLoggedIn
+} from "./authSlice";
+import {
+  // AuthStateProps,
   KnownErrorProps,
   UserProps,
   forgotPasswordProps,
@@ -23,73 +27,74 @@ export const GithubLogin = () => {
     "https://job-tracker-backend-x.vercel.app/api/auth/github";
 };
 
-export const refreshUser = createAsyncThunk(
-  "auth/fetchUser",
-  async (_, { getState, dispatch }) => {
-    const state = getState() as { auth: AuthStateProps };
-    const tokens = state.auth.tokens;
+// export const refreshUser = createAsyncThunk(
+//   "auth/fetchUser",
+//   async (_, { getState, dispatch }) => {
+//     const state = getState() as { auth: AuthStateProps };
+//     const tokens = state.auth.tokens;
+//     console.log("startRefresh", tokens);
 
-    if (!tokens) return null;
+//     if (!tokens) return null;
 
-    try {
-      const response = await axiosInstance.get("/user/profile");
-      const {id, username, email} = response.data
-      // axiosInstance самостійно передає в config  headers: { Authorization: `Bearer ${tokens.access_token}` }
-      // і немає потреби його передавати, як в api
-      // --
-      // const response = await api.get("/user/profile", {
-      //   headers: { Authorization: `Bearer ${tokens.access_token}` },
-      // });
+//     try {
+//       const response = await axiosInstance.get("/user/profile");
+//       const { id, username, email } = response.data;
+//       // axiosInstance самостійно передає в config  headers: { Authorization: `Bearer ${tokens.access_token}` }
+//       // і немає потреби його передавати, як в api
+//       // --
+//       // const response = await api.get("/user/profile", {
+//       //   headers: { Authorization: `Bearer ${tokens.access_token}` },
+//       // });
 
-      dispatch(isLoggedIn());
-      console.log("refUser", response.data);
-      return {id, username, email}; // id, email, username
-    } catch (error: any) {
-      if (error.response?.status === 401) {
-        try {
-          const newAccessToken = await dispatch(refreshTokens()).unwrap();
-          const retryResponse = await axiosInstance.get("/user/profile");
-          saveTokens({
-            access_token: newAccessToken,
-            refresh_token: tokens.refresh_token,
-          });
-          dispatch(isLoggedIn());
-          return retryResponse.data;
-        } catch (refreshError) {
-          console.error("Token refresh failed:", refreshError);
-          dispatch(clearTokens());
-          throw refreshError;
-        }
-      } else {
-        console.error("Failed to fetch user:", error);
-        throw error;
-      }
-    } finally {
-      console.log("user", state);
-    }
-  }
-);
+//       dispatch(isLoggedIn());
+//       console.log("refUser", response.data);
+//       return { id, username, email }; // id, email, username
+//     } catch (error: any) {
+//       if (error.response?.status === 401) {
+//         try {
+//           const newAccessToken = await dispatch(refreshTokens()).unwrap();
+//           const retryResponse = await axiosInstance.get("/user/profile");
+//           saveTokens({
+//             access_token: newAccessToken,
+//             refresh_token: tokens.refresh_token,
+//           });
+//           dispatch(isLoggedIn());
+//           return retryResponse.data;
+//         } catch (refreshError) {
+//           console.error("Token refresh failed:", refreshError);
+//           dispatch(clearTokens());
+//           throw refreshError;
+//         }
+//       } else {
+//         console.error("Failed to fetch user:", error);
+//         throw error;
+//       }
+//     } finally {
+//       console.log("user", state);
+//     }
+//   }
+// );
 
-export const refreshTokens = createAsyncThunk(
-  "auth/refreshTokens",
-  async (_, { getState, dispatch }) => {
-    const state = getState() as { auth: AuthStateProps };
-    const tokens = state.auth.tokens;
+// export const refreshTokens = createAsyncThunk(
+//   "auth/refreshTokens",
+//   async (_, { getState, dispatch }) => {
+//     const state = getState() as { auth: AuthStateProps };
+//     const tokens = state.auth.tokens;
 
-    if (!tokens) throw new Error("No refresh token available");
+//     if (!tokens) throw new Error("No refresh token available");
 
-    try {
-      const response = await api.post("/auth/refresh", {
-        refresh_token: tokens.refresh_token,
-      });
-      return response.data.access_token;
-    } catch (error) {
-      console.error("Token refresh failed:", error);
-      dispatch(clearTokens());
-      throw error;
-    }
-  }
-);
+//     try {
+//       const response = await api.post("/auth/refresh", {
+//         refresh_token: tokens.refresh_token,
+//       });
+//       return response.data.access_token;
+//     } catch (error) {
+//       console.error("Token refresh failed:", error);
+//       dispatch(clearTokens());
+//       throw error;
+//     }
+//   }
+// );
 
 export const logIn = createAsyncThunk<
   UserProps,

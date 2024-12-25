@@ -3,7 +3,7 @@ import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { AuthStateProps, AuthTokensProps, UserProps } from "./authTypes";
 
 import {
-  refreshUser,
+  // refreshUser,
   signUp,
   logIn,
   forgotPassword,
@@ -37,22 +37,22 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(refreshUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(
-        refreshUser.fulfilled,
-        (state, action: PayloadAction<UserProps | null>) => {
-          state.loading = false;
-          state.user = action.payload;
-        }
-      )
-      .addCase(refreshUser.rejected, (state, action) => {
-        state.loading = false;
-        state.user = null;
-        state.error = action.error.message || "Failed to fetch user";
-      })
+      // .addCase(refreshUser.pending, (state) => {
+      //   state.loading = true;
+      //   state.error = null;
+      // })
+      // .addCase(
+      //   refreshUser.fulfilled,
+      //   (state, action: PayloadAction<UserProps | null>) => {
+      //     state.loading = false;
+      //     state.user = action.payload;
+      //   }
+      // )
+      // .addCase(refreshUser.rejected, (state, action) => {
+      //   state.loading = false;
+      //   state.user = null;
+      //   state.error = action.error.message || "Failed to fetch user";
+      // })
       .addMatcher(
         isAnyOf(
           signUp.pending,
