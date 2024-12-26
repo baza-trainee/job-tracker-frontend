@@ -14,6 +14,7 @@ export type Options = {
 
 export interface SortDropdownProps {
   options: Options;
+  isInModal: boolean;
   action?: (option: string) => void;
   selectedType?: string;
 }
@@ -29,4 +30,5 @@ export type DropdownMarkupProps = {
   mainOptions: SortOption[];
   handleSubMenuToggle: (menuId: string) => void;
   openSubMenu: string | null;
+  isInModal: boolean;
 };

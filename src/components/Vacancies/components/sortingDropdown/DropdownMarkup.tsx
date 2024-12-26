@@ -15,6 +15,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
       mainOptions,
       handleSubMenuToggle,
       openSubMenu,
+      isInModal,
     },
     ref
   ) => {
@@ -38,14 +39,15 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           className={cn(
             "flex w-full items-center justify-between rounded-t-xl py-2 pl-8 pr-[22px] pt-3 text-textBlack outline-none",
             isDropdownOpen && "hover:bg-button",
-            focusedOption === "sortButton" && isDropdownOpen && "bg-button"
+            focusedOption === "sortButton" && isDropdownOpen && "bg-button",
+            isInModal && "fill-textBlackLight text-textBlackLight"
           )}
         >
           {getButtonLabel()}
           <Icon
             id={"arrow-down"}
             className={cn(
-              "h-6 w-6",
+              "size-6",
               isDropdownOpen
                 ? "rotate-180 duration-500"
                 : "rotate-0 duration-500"

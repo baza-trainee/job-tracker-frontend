@@ -29,7 +29,11 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
     <div className="flex w-full items-start justify-between pb-6">
       <SearchForm />
       <div className="relative flex gap-8">
-        <SortDropdown options={DropdownInfo()} action={handleSetType} />
+        <SortDropdown
+          options={DropdownInfo()}
+          action={handleSetType}
+          isInModal={false}
+        />
 
         {!isArchive && (
           <LinkButton variant="ghost" size="small" href="/archive">

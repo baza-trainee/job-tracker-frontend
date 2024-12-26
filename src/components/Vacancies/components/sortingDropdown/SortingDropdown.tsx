@@ -10,10 +10,11 @@ const SortDropdown: FC<SortDropdownProps> = ({
   options,
   action,
   selectedType,
+  isInModal,
 }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
-  const [focusedOption, setFocusedOption] = useState<string | null>(null); // Для збереження фокусу на пункті
+  const [focusedOption, setFocusedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const mainOptions = options.mainOptions;
@@ -168,6 +169,7 @@ const SortDropdown: FC<SortDropdownProps> = ({
       mainOptions={mainOptions}
       handleSubMenuToggle={handleSubMenuToggle}
       openSubMenu={openSubMenu}
+      isInModal={isInModal}
     />
   );
 };
