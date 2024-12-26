@@ -113,3 +113,125 @@ body {
     opacity: 0;
   }
 }
+
+/* react-calendar */
+.react-calendar {
+  position: absolute;
+  top:34px;
+  right: 0px;
+  border: 1px solid #436b88;
+  border-radius: 12px;
+  padding: 24px;
+  width: 385px;
+  max-width: 100%;
+  font-family: "Inter";
+  font-weight: 500;
+  background: #fdfeff;
+  font-size: 20px;
+  line-height: 160%;
+  text-align: center;
+  color: #0a0a0a;
+}
+
+/* ------------------------------------------------------------------- */
+/* ------------------ навигация--------------------------------------- */
+.react-calendar__navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 0px;
+  /* border:1px solid red; */
+}
+
+/* кнопки скрола месяцев (периода) и заголовок (декабрь 2024г)*/
+button.react-calendar__navigation__label {
+  min-width: 24px;
+  flex-grow: 0 !important;
+  text-align: center;
+}
+
+/* стиль всех стрелок сразу */
+/* .react-calendar__navigation__arrow {
+  display: none;
+} */
+
+/* кнопки скрола годов (периода) и заголовок (2023 - 2024г - 2025)*/
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+/* заголовок декабрь 2024 */
+.react-calendar__navigation button {
+  font-family: "Nunito";
+  text-transform: capitalize;
+  font-weight: 500;
+  line-height: 160%;
+  text-align: center;
+  margin-bottom:10px;
+}
+
+/* кнопки навигации после нажатия */
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #fdfeff;
+}
+.react-calendar__navigation button[disabled] {
+  background-color: #fdfeff;
+}
+
+/* ПН-ВТ-СР-ЧТ-ПТ-СБ-ВС - весь блок*/
+.react-calendar__month-view__weekdays {
+  /* border: 1px solid green; */
+  margin-bottom: 48px;
+  border-bottom: 1px solid #f5f5f5;
+}
+/* ПН - каждый день отдельно -  */
+abbr[title] {
+  font-weight: 500;
+  text-decoration: none;
+}
+abbr {
+  text-transform: uppercase;
+  font-family: "Nunito";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 133%;
+  text-align: center;
+}
+
+.react-calendar__month-view__days__day--weekend,
+.react-calendar__month-view__weekdays > div:nth-child(6),
+.react-calendar__month-view__weekdays > div:nth-child(7) {
+  color: #e9897c;
+}
+/* высота и ширина ячейки с датой */
+.react-calendar__month-view__days > button {
+  width: 48px;
+  height: 48px;
+}
+
+/* параметры текущей даты */
+.react-calendar__tile--now {
+  background: #bfdef5;
+  border-radius: 6px;
+  font-weight: 700;
+  color: #0a0a0a;
+}
+
+/* параметры выбранной даты */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: rgba(208, 232, 197, 0.4);
+  border-radius: 6px;
+  color: #0a0a0a;
+}
+
+/* параметры предыдущей даты даты */
+.react-calendar__tile--active {
+  /* background: #bfdef5;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #0a0a0a; */
+}

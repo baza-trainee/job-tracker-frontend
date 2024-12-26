@@ -1,6 +1,6 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
-export interface CheckboxProps {
+export interface InputRadioProps {
   name: string;
   className?: string;
   label?: React.ReactNode | string;
@@ -10,5 +10,6 @@ export interface CheckboxProps {
   id?: string;
   disabled?: boolean;
   required?: boolean;
-  onClick?:() => void;
+  onClick?: () => void;
+  value?:string
 }

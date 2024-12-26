@@ -6,24 +6,54 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddVacancySchema } from "../../../../schemas/AddVacancySchema";
 import { t } from "i18next";
-import Checkbox from "../../../checkbox/Checkbox";
 import Icon from "../../../Icon/Icon";
 import { useCreateVacancyMutation } from "../../../../store/querySlices/vacanciesQuerySlice";
 import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
+import { useState } from "react";
 
 import { useAppDispatch } from "../../../../store/hook";
 import { closeModal } from "../../../../store/slices/modalSlice/modalSlice";
+import classNames from "classnames";
+
+//CheckBox
+import { CheckboxCalendarItem } from "./CheckboxCalendarItem";
+import Calendar from "react-calendar";
+import moment from "moment";
+
+//Input Radio
+import { InputRadio } from "../../../inputs/InputRadio/InputRadio";
+
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+type CheckBoxValue =
+  | "sendSummaryCalendar"
+  | "HRCalendar"
+  | "testTaskCalendar"
+  | "technicalInterviewCalendar"
+  | "rejectionCalendar"
+  | "offerCalendar";
+
+type CheckBoxCalendarValue =
+  | "sendSummaryCalendar"
+  | "HRCalendar"
+  | "testTaskCalendar"
+  | "technicalInterviewCalendar"
+  | "rejectionCalendar"
+  | "offerCalendar";
 
 const AddVacancy = () => {
   const { refetch } = useGetAllUserDataQuery();
   const [createVacancy] = useCreateVacancyMutation();
   const dispatch = useAppDispatch();
-  
+
   const {
     register,
     resetField,
     reset,
     handleSubmit,
+    getValues,
     setValue,
     formState: { errors },
   } = useForm<z.infer<typeof AddVacancySchema>>({
@@ -36,13 +66,58 @@ const AddVacancy = () => {
       note: "",
       work_type: "office",
       isArchived: false,
+      sendSummary: false,
+      
+      HR: false,
+
+      testTask: false,
+      technicalInterview: false,
+      rejection: false,
+      offer: false,
+
+      sendSummaryCalendar: "",
+      
+      HRCalendar: "",
+
+      testTaskCalendar: "",
+      technicalInterviewCalendar: "",
+      rejectionCalendar: "",
+      offerCalendar: "",
     },
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
   });
+
+  // CheckBox and Calendar
+  const [dateState, setDateState] = useState<Value>(new Date());
+  const [isOpenCalendar, setIsOpenCalendar] = useState<boolean>(false);
+  const [nameStatus, setNameStatus] = useState<string>("");
+  
+  const changeDate = (e: Value) => {
+    setDateState(e);
+    if (e instanceof Date) {
+      setValue(
+        `${nameStatus}Calendar` as CheckBoxCalendarValue,
+        moment(e).format("DD.MM.YY")
+      );
+    }
+    setIsOpenCalendar(false);
+  };
+
+  const openCalendarCheckbox = (checkboxName: string) => {
+    setNameStatus(checkboxName);
+    if (!getValues(checkboxName as CheckBoxValue)) {
+      setIsOpenCalendar(true);
+    } else {
+      setValue(`${checkboxName}Calendar` as CheckBoxCalendarValue, "");
+      setIsOpenCalendar(false);
+    }
+  };
+
   const onSubmit: SubmitHandler<z.infer<typeof AddVacancySchema>> = async (
     data
   ) => {
+    console.log(data);
     try {
       const response = await createVacancy(data).unwrap();
       console.log(response);
@@ -124,85 +199,118 @@ const AddVacancy = () => {
               </div>
 
               <div className="mt-2 flex justify-between">
-                <Checkbox
-                  name="remote"
+                <InputRadio
+                  name="work_type"
                   id="remote"
                   label={t("addVacancy.form.distance")}
                   register={register}
                   type="signUp"
                   errors={errors}
+                  value="remote"
                 />
-                <Checkbox
-                  name="office"
+                <InputRadio
+                  name="work_type"
                   id="office"
                   label={t("addVacancy.form.office")}
                   register={register}
                   type="signUp"
                   errors={errors}
+                  value="office"
                 />
-                <Checkbox
-                  name="mixed"
-                  id="mixed"
+                <InputRadio
+                  name="work_type"
+                  id="hybrid"
                   label={t("addVacancy.form.mixed")}
                   register={register}
                   type="signUp"
                   errors={errors}
+                  value="hybrid"
                 />
               </div>
             </div>
 
             <div className="flex w-[445px] flex-col justify-between gap-4">
-              <div className="flex flex-col gap-4 pt-2">
+              <div className="relative flex flex-col gap-4 pt-2">
                 <label>Статус</label>
 
                 <div className="flex flex-col gap-4">
-                  <Checkbox
+                  <CheckboxCalendarItem
                     name="sendSummary"
                     id="sendSummary"
                     label={t("addVacancy.form.sendSummary")}
-                    register={register}
                     type="signUp"
+                    register={register}
                     errors={errors}
+                    getValues={getValues}
+                    openCalendarCheckbox={openCalendarCheckbox}
                   />
-                  <Checkbox
+
+                  <CheckboxCalendarItem
                     name="HR"
                     id="HR"
                     label={t("addVacancy.form.HR")}
-                    register={register}
                     type="signUp"
+                    register={register}
                     errors={errors}
+                    getValues={getValues}
+                    openCalendarCheckbox={openCalendarCheckbox}
                   />
-                  <Checkbox
+
+                  <CheckboxCalendarItem
                     name="testTask"
                     id="testTask"
                     label={t("addVacancy.form.testTask")}
-                    register={register}
                     type="signUp"
+                    register={register}
                     errors={errors}
+                    getValues={getValues}
+                    openCalendarCheckbox={openCalendarCheckbox}
                   />
-                  <Checkbox
+
+                  <CheckboxCalendarItem
                     name="technicalInterview"
                     id="technicalInterview"
                     label={t("addVacancy.form.technicalInterview")}
-                    register={register}
                     type="signUp"
+                    register={register}
                     errors={errors}
+                    getValues={getValues}
+                    openCalendarCheckbox={openCalendarCheckbox}
                   />
-                  <Checkbox
+                  <CheckboxCalendarItem
                     name="rejection"
                     id="rejection"
                     label={t("addVacancy.form.rejection")}
-                    register={register}
                     type="signUp"
+                    register={register}
                     errors={errors}
+                    getValues={getValues}
+                    openCalendarCheckbox={openCalendarCheckbox}
                   />
-                  <Checkbox
+                  <CheckboxCalendarItem
                     name="offer"
                     id="offer"
                     label={t("addVacancy.form.offer")}
-                    register={register}
                     type="signUp"
+                    register={register}
                     errors={errors}
+                    getValues={getValues}
+                    openCalendarCheckbox={openCalendarCheckbox}
+                  />
+                  <Calendar
+                    className={classNames(
+                      "custom-size z-10 w-full rounded-b-xl bg-backgroundMain",
+                      isOpenCalendar
+                        ? "visible opacity-100"
+                        : "sr-only h-0 opacity-0"
+                    )}
+                    nextLabel={<Icon id={"arrow-right"} className="h-6 w-6" />}
+                    prevLabel={<Icon id={"arrow-left"} className="h-6 w-6" />}
+                    formatMonthYear={(locale, date) =>
+                      `${date.toLocaleDateString(locale, { month: "long" })} ${date.getFullYear()}`
+                    }
+                    onChange={changeDate}
+                    value={dateState}
                   />
                 </div>
               </div>

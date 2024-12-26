@@ -6,8 +6,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { AXIOS } from "../api/axios-constants";
 import { RootState } from "./store";
-import { saveTokens } from "./slices/authSlice/authSlice";
-import { logOut } from "./slices/authSlice/authOperation";
+import { clearTokens, saveTokens } from "./slices/authSlice/authSlice";
 import { AuthTokensProps } from "./slices/authSlice/authTypes";
 
 export const baseQuery = fetchBaseQuery({
@@ -59,10 +58,10 @@ export const baseQueryWithReauth: BaseQueryFn<
         );
         result = await baseQuery(args, store, extraOptions);
       } else {
-        store.dispatch(logOut());
+        store.dispatch(clearTokens());
       }
     } else {
-      store.dispatch(logOut());
+      store.dispatch(clearTokens());
     }
   }
   return result;
