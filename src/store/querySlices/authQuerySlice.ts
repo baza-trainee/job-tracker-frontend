@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AXIOS } from "../../api/axios-constants";
+
 import { baseQueryWithReauth } from "../fetchBaseQuery";
 import {
   clearTokens,
@@ -7,6 +7,7 @@ import {
   saveTokens,
 } from "../slices/authSlice/authSlice";
 import { closeModal, openModal } from "../slices/modalSlice/modalSlice";
+import { BACKEND_ENDPOINTS } from "../api/api-routes";
 
 type AuthResponse = { access_token: string; refresh_token: string };
 type AuthRequest = { email: string; password: string };
@@ -20,7 +21,7 @@ export const authPublicQuerySlice = createApi({
   reducerPath: "authPublicQuerySlice",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: AXIOS.URL_BACKEND,
+    baseUrl: BACKEND_ENDPOINTS.JOB_TRACKER_BACKEND + "/auth",
   }),
 
   endpoints: (build) => ({

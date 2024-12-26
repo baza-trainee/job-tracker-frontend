@@ -4,13 +4,13 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
-import { AXIOS } from "../api/axios-constants";
 import { RootState } from "./store";
 import { clearTokens, saveTokens } from "./slices/authSlice/authSlice";
 import { AuthTokensProps } from "./slices/authSlice/authTypes";
+import { BACKEND_ENDPOINTS } from "./api/api-routes";
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: AXIOS.URL_BACKEND,
+  baseUrl: BACKEND_ENDPOINTS.JOB_TRACKER_BACKEND,
   prepareHeaders: (headers, { getState }) => {
     const accessToken = (getState() as RootState).auth.tokens?.access_token;
     if (accessToken) {
