@@ -29,7 +29,7 @@ const VacancyCard: FC<VacancyCardProps> = ({
 
     return (
         <button className={clsx(
-            "w-[278px] shrink-0 p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2", 
+            "w-[278px] shrink-0 border border-transparent box-border p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2 overflow-hidden transition-all duration-300 active:border-iconHover focus:border-iconHover focus-visible:border-iconHover focus:outline-none", 
             colorSectionBG,
             colorHoverBG
             )}

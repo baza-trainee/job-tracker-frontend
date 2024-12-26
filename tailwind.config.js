@@ -27,7 +27,8 @@ export default {
       },
       boxShadow: {
         button_hover: "0px 0px 6px 0px rgba(198, 231, 255, 0.5)",
-        form_shadow: " 0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+        form_shadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+        section_shadow: "0px 0px 3px 0px rgba(0, 0, 0, 0.20)",
       },
       colors: {
         textBlack: "#333333",

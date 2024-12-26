@@ -76,7 +76,6 @@ export const sectionsConfig: SectionConfig[] = [
   },
 ];
 
-// Функція для отримання локалізованого тексту
 export const getLocalizedSectionConfig = (): SectionConfig[] => {
   return sectionsConfig.map((section) => ({
     ...section,

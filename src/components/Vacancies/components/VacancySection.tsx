@@ -102,7 +102,7 @@ const VacancySection: FC<VacancySectionProps> = ({
     <section className="text-textBlack">
       <div
         className={clsx(
-          "w-fit rounded-tl-lg rounded-tr-lg px-3 py-[6px] text-xl font-medium",
+          "w-fit rounded-tl-lg rounded-tr-lg px-3 py-[6px] text-xl font-medium shadow-section_shadow",
           colorSectionBG
         )}
       >
