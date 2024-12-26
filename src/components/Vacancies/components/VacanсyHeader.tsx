@@ -9,6 +9,8 @@ import { LinkButton } from "../../buttons/LinkButton/LinkButton";
 import { Button } from "../../buttons/Button/Button";
 import { SearchForm } from "./SearchForm";
 import SortDropdown from "./sortingDropdown/SortingDropdown";
+import { DropdownInfo } from "./sortingDropdown/DropdownInfo";
+import { setSortType } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -19,11 +21,15 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
 
   const dispatch = useAppDispatch();
 
+  const handleSetType = (option: string): void => {
+    dispatch(setSortType(option));
+  };
+
   return (
     <div className="flex w-full items-start justify-between pb-6">
       <SearchForm />
       <div className="relative flex gap-8">
-        <SortDropdown />
+        <SortDropdown options={DropdownInfo()} action={handleSetType} />
 
         {!isArchive && (
           <LinkButton variant="ghost" size="small" href="/archive">
