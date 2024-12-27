@@ -71,7 +71,8 @@
     "searchResult": "search result",
     "searchResult234": "search results",
     "searchResults": "search results",
-    "emptySection": "There are no vacancies in this section..."
+    "emptySection": "There are no vacancies in this section...",
+    "cardFirst": "Save your first job"
   },
   "sortDropdown": {
     "sortBy": "Sort by",
