@@ -19,7 +19,7 @@ import { VacancyProps } from "./VacanсyHeader.tsx";
 import {
   getLocalizedSectionConfig,
   getVacanciesByStatus,
-} from "./VacancyMainConfig.ts";
+} from "./VacanсyMainConfig.ts";
 import { openModal } from "../../../store/slices/modalSlice/modalSlice.ts";
 
 const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
@@ -64,10 +64,10 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
       {isLoading && <VacancySectionSkeleton />}
       {isError && <h2>Error...</h2>}
 
-      {/* Заглушка "картка Створити", якщо взагалі вакансій немає */}
+      {/* Заглушка "картка Створіть вашу першу вакансію", якщо взагалі вакансій немає, секція "Збережені" */}
       {!isLoading && vacancies.length === 0 && (
         <VacancySection
-          titleSection="Збережені"
+          titleSection={t("sortDropdown.saved")}
           colorSectionBorder="border-color5"
           colorSectionBG="bg-color5"
         >

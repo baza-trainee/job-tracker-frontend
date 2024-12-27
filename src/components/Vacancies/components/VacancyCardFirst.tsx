@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import Icon from "../../Icon/Icon.tsx";
 
@@ -11,6 +12,7 @@ type VacancyCardFirstProps = {
 const VacancyCardFirst: FC<VacancyCardFirstProps> = ({
     colorSectionBG, colorHoverBG, onClick
 }) => {
+    const { t } = useTranslation();
 
     return (
         <button className={clsx(
@@ -24,7 +26,7 @@ const VacancyCardFirst: FC<VacancyCardFirstProps> = ({
                 <Icon id="plus" className="w-6 h-6" />
             </div>
             <div className="w-full">
-                <p className="text-base w-[154px]">Збережіть вашу першу вакансію</p>
+                <p className="text-base w-[154px]">{t("vacanciesHeader.cardFirst")}</p>
             </div>
 
         </button>

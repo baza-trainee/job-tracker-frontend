@@ -1,4 +1,5 @@
 import { FC} from "react";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import Icon from "../../Icon/Icon.tsx";
 
@@ -21,10 +22,12 @@ const VacancyCard: FC<VacancyCardProps> = ({
     workType,
     onClick, 
 }) => {
+    const { t } = useTranslation();
+
     const locationLabel = {
-        office: "Офіс",
-        remote: "Дистанційно",
-        hybrid: "Змішаний",
+        office: t("sortDropdown.office"),
+        remote: t("sortDropdown.remote"),
+        hybrid: t("sortDropdown.mixed"),
     }
 
     return (
@@ -40,7 +43,7 @@ const VacancyCard: FC<VacancyCardProps> = ({
                 <p className="text-xs truncate">{company}</p>
             </div>
             <div className="flex gap-1 items-center">
-                <Icon id={`location-${workType}`} className="w-6 h-6"/>
+                <Icon id={`location-${workType}`} className="w-6 h-6 shrink-0"/>
                 <span className="text-sm">{locationLabel[workType]}</span>
                 <span className="w-[50%] text-sm truncate">{location}</span>
             </div>
