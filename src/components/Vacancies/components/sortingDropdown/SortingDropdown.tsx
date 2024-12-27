@@ -18,6 +18,7 @@ const SortDropdown: FC<SortDropdownProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const mainOptions = options.mainOptions;
+  const buttonOptions = options.buttonOption;
 
   const selectedSortType = selectedType
     ? selectedType
@@ -157,6 +158,9 @@ const SortDropdown: FC<SortDropdownProps> = ({
       : options.buttonOption.label;
   };
 
+  const buttonLabel = getButtonLabel();
+  const isTypeSelected = buttonLabel === buttonOptions.label;
+
   return (
     <DropdowmMarkup
       ref={dropdownRef}
@@ -165,11 +169,12 @@ const SortDropdown: FC<SortDropdownProps> = ({
       toggleDropdown={toggleDropdown}
       setFocusedOption={setFocusedOption}
       focusedOption={focusedOption}
-      getButtonLabel={getButtonLabel}
       mainOptions={mainOptions}
       handleSubMenuToggle={handleSubMenuToggle}
       openSubMenu={openSubMenu}
       isInModal={isInModal}
+      buttonLabel={buttonLabel}
+      isTypeSelected={isTypeSelected}
     />
   );
 };

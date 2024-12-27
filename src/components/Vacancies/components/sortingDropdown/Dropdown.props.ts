@@ -26,9 +26,10 @@ export type DropdownMarkupProps = {
   toggleDropdown: () => void;
   setFocusedOption: (optionId: string | null) => void;
   focusedOption: string | null;
-  getButtonLabel: () => string;
   mainOptions: SortOption[];
   handleSubMenuToggle: (menuId: string) => void;
   openSubMenu: string | null;
   isInModal: boolean;
+  buttonLabel: string;
+  isTypeSelected: boolean;
 };
