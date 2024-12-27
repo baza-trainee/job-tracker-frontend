@@ -1,5 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialState, ModalProps } from "./initialState";
+import { ModalProps } from "./initialState";
+
+const initialState: ModalProps = {
+  isModalOpen: false,
+  typeModal: "close",
+  isConfirmationOpen: false,
+  typeConfirmation: "close",
+  idCardVacancy: "",
+  dataConfirmation: null, // alex
+};
 
 const modalSlice = createSlice({
   name: "modal",
@@ -18,10 +27,12 @@ const modalSlice = createSlice({
     openConfirmation: (state, action: PayloadAction<ModalProps>) => {
       state.isConfirmationOpen = true;
       state.typeConfirmation = action.payload.typeConfirmation;
+      state.dataConfirmation = action.payload.dataConfirmation;
     },
     closeConfirmation: (state) => {
       state.isConfirmationOpen = false;
       state.typeConfirmation = "close";
+      state.dataConfirmation = null;
     },
   },
 });

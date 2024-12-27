@@ -40,6 +40,7 @@ export const authPublicQuerySlice = createApi({
               typeModal: "logInSuccess",
             })
           );
+          console.log("user", data)
           dispatch(isLoggedIn());
         } catch (error) {
           dispatch(

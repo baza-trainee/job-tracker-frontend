@@ -1,14 +1,28 @@
 import Checkbox from "../../../checkbox/Checkbox";
-import { UseFormGetValues } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { CheckboxProps } from "../../../checkbox/Checkbox.props";
+import { useState } from "react";
+import moment from "moment";
+import classNames from "classnames";
+import { JobCalendar } from "../../../Calendar/JobCalendar";
 
 type CheckboxCalendarFunctionProps = {
-  openCalendarCheckbox: (name: string) => void;
   getValues: UseFormGetValues<any>;
+  setValue: UseFormSetValue<any>;
 };
 
 type CheckboxWithCalendarItemProps = CheckboxProps &
   CheckboxCalendarFunctionProps;
+
+type CheckBoxCalendarValue =
+  | "sendSummaryCalendar"
+  | "HRCalendar"
+  | "testTaskCalendar"
+  | "technicalInterviewCalendar"
+  | "rejectionCalendar"
+  | "offerCalendar";
+
+import { ValueCalendar } from "../../../Calendar/JobCalendarProps";
 
 export const CheckboxCalendarItem = ({
   name,
@@ -16,14 +30,38 @@ export const CheckboxCalendarItem = ({
   register,
   errors,
   getValues,
-  openCalendarCheckbox,
+  setValue,
 }: CheckboxWithCalendarItemProps) => {
-  const isChecked = getValues(name);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const [dateState, setDateState] = useState<ValueCalendar>(new Date());
   const calendarValue = getValues(`${name}Calendar`);
+  const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+
+  const handleCheckbox = () => {
+    setIsChecked((prev: boolean) => !prev);
+    setValue(
+      `${name}Calendar` as CheckBoxCalendarValue,
+      !isChecked ? moment(new Date()).format("DD.MM.YY") : "delete status"
+    );
+    setIsOpenCalendar(false);
+  };
+
+  const changeDate = (e: ValueCalendar) => {
+    setDateState(e);
+    if (e instanceof Date) {
+      setValue(
+        `${name}Calendar` as CheckBoxCalendarValue,
+        moment(e).format("DD.MM.YY")
+      );
+    }
+    setIsOpenCalendar(false);
+  };
+  // console.log(name, getValues(name), getValues(`${name}Calendar`));
 
   return (
-    <div className="flex h-10 w-full items-center justify-between">
-      <div>
+    <div className="relative">
+      <div className="flex w-full items-center justify-between">
         <Checkbox
           name={name}
           id={name}
@@ -31,10 +69,21 @@ export const CheckboxCalendarItem = ({
           register={register}
           type="signUp"
           errors={errors}
-          onClick={() => openCalendarCheckbox(name)}
+          onClick={() => handleCheckbox()}
         />
+        <span onClick={() => setIsOpenCalendar(true)}>
+          {isChecked && calendarValue}
+        </span>
       </div>
-      <span>{isChecked && calendarValue}</span>
+      <div
+        className={classNames(
+          isOpenCalendar && isChecked
+            ? "visible opacity-100"
+            : "sr-only h-0 opacity-0"
+        )}
+      >
+        <JobCalendar changeDate={changeDate} dateState={dateState} />
+      </div>
     </div>
   );
 };

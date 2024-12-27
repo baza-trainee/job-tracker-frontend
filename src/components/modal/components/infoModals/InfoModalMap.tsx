@@ -4,13 +4,11 @@ import {
   closeModal,
   openModal,
 } from "../../../../store/slices/modalSlice/modalSlice";
-import { useAppDispatch } from "../../../../store/hook";
+import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
-// import { logOut } from "../../../../store/slices/authSlice/authOperation";
 
 import {
   notifyError,
-  notifySuccess,
   notifyInfo,
 } from "../../../Notifications/NotificationService";
 
@@ -20,12 +18,17 @@ import {
 } from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 
 import { useLogOutUserMutation } from "../../../../store/querySlices/authQuerySlice";
-
+import useVacancy from "../addVacancyModals/useVacancy";
 
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [logOut] = useLogOutUserMutation();
+  const dataAddVacancy = useAppSelector(
+    (state) => state.modal.dataConfirmation
+  );
+  const { onSubmit } = useVacancy();
+
   const handleButton = useCallback((): void => {
     dispatch(closeModal());
   }, [dispatch]);
@@ -40,20 +43,17 @@ const InfoModalMap = () => {
   }, [navigate, dispatch]);
 
   const handleLogOut = useCallback((): void => {
-
     dispatch(setSearchQuery(""));
     dispatch(setSortType(""));
 
-    // dispatch(logOut());
     logOut();
+  }, [dispatch, logOut]);
 
-  }, [dispatch]);
-
-  const handleSaveChangesVacancies = useCallback((): void => {
-    notifySuccess("Дані успшно збережено. Дякую"); // test
-    dispatch(closeConfirmation());
-    dispatch(closeModal());
-  }, [dispatch]);
+  // відправка збереженої вакансії
+  const handleAddVacancy = useCallback((): void => {
+    console.log("handleAddVacancy", dataAddVacancy);
+    onSubmit(dataAddVacancy);
+  }, [onSubmit, dataAddVacancy]);
 
   const handleCloseConfirmation = useCallback((): void => {
     notifyError("Щось пішло не так, дані не збережено"); // test
@@ -224,7 +224,7 @@ const InfoModalMap = () => {
           className: "",
           variant: "ghost",
           size: "big",
-          funcButton: handleSaveChangesVacancies,
+          funcButton: handleAddVacancy,
         },
       ],
     },

@@ -7,10 +7,10 @@ export const InputRadio = ({
   label,
   id,
   errors,
-  type = "default",
   register,
   disabled = false,
   required = false,
+  className,
   ...props
 }: InputRadioProps) => {
   const error = errors[name];
@@ -19,7 +19,7 @@ export const InputRadio = ({
   return (
     <div
       className={classNames(
-        type === "signUp" && "relative flex items-center px-[9.5px]"
+        className === "addVacancy" && "relative flex items-center px-[9.5px]"
       )}
       id={id}
     >
@@ -33,12 +33,12 @@ export const InputRadio = ({
           aria-describedby={`radioError-${name}`}
           {...props}
           className={classNames(
-            type === "signUp" &&
+            className === "addVacancy" &&
               "peer relative h-5 w-5 shrink-0 appearance-none rounded-[4px] border-[1px] border-solid border-textBlack",
             "md:h-6 md:w-6 md:border-2"
           )}
         />
-        {type === "signUp" && (
+        {className === "addVacancy" && (
           <svg
             className="peer-checked:!fill- pointer-events-none absolute h-4 w-4 fill-none stroke-background-form peer-checked:!stroke-textOther"
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@ export const InputRadio = ({
       <label
         htmlFor={`radio-${name}`}
         className={classNames(
-          type === "signUp" &&
+          className === "addVacancy" &&
             "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px]"
         )}
       >

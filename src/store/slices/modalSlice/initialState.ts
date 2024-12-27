@@ -4,15 +4,8 @@ export interface ModalProps {
   isConfirmationOpen?: boolean;
   typeConfirmation?: string;
   idCardVacancy?: string;
+  dataConfirmation?: any | null; // alex
 }
-
-export const initialState: ModalProps = {
-  isModalOpen: false,
-  typeModal: "close",
-  isConfirmationOpen: false,
-  typeConfirmation: "close",
-  idCardVacancy: "",
-};
 
 // TODO: коли всі модалки будуть готові дописати їх типи в typeModal замість string
 // export interface ModalProps {
