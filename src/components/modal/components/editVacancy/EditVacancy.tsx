@@ -32,6 +32,8 @@ const EditVacancy = () => {
 
   const [deleteVacancyById] = useDeleteVacancyByIdMutation();
   const [updateVacancyById] = useUpdateVacancyByIdMutation();
+  const {data:userData} = useGetAllUserDataQuery()
+  console.log("user", userData?.vacancies)
 
   const {
     register,
