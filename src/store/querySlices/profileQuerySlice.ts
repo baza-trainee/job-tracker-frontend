@@ -6,7 +6,7 @@ export const profileQuerySlice = createApi({
   reducerPath: "profileQuerySlice",
 
   baseQuery: baseQueryWithReauth,
-
+  keepUnusedDataFor: 0,
   endpoints: (build) => ({
     getAllUserData: build.query<Profile, void>({
       query: () => "/user/profile",
