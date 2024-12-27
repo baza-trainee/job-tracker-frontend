@@ -19,9 +19,9 @@ type RequestChangePassword = {
 
 export const authPublicQuerySlice = createApi({
   reducerPath: "authPublicQuerySlice",
-
+  keepUnusedDataFor: 0,
   baseQuery: fetchBaseQuery({
-    baseUrl: BACKEND_ENDPOINTS.JOB_TRACKER_BACKEND + "/auth",
+    baseUrl: BACKEND_ENDPOINTS.JOB_TRACKER_BACKEND,
   }),
 
   endpoints: (build) => ({
