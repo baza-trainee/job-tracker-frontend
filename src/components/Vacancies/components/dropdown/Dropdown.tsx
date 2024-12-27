@@ -1,24 +1,28 @@
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { FC, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
-import { setSortType } from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 import { selectSortType } from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 
-import { DropdownInfo } from "./DropdownInfo";
 import { DropdowmMarkup } from "./DropdownMarkup";
+import { SortDropdownProps } from "./Dropdown.props";
 
-const SortDropdown = () => {
-  const { t } = useTranslation();
+const Dropdown: FC<SortDropdownProps> = ({
+  options,
+  action,
+  selectedType,
+  isInModal,
+}) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
-  const [focusedOption, setFocusedOption] = useState<string | null>(null); // Для збереження фокусу на пункті
+  const [focusedOption, setFocusedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const dispatch = useDispatch();
-  const selectedSortType = useSelector(selectSortType);
+  const mainOptions = options.mainOptions;
+  const buttonOptions = options.buttonOption;
 
-  const mainOptions = DropdownInfo();
+  const selectedSortType = selectedType
+    ? selectedType
+    : useSelector(selectSortType);
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => {
@@ -44,7 +48,9 @@ const SortDropdown = () => {
   };
 
   const handleOptionSelect = (option: string) => {
-    dispatch(setSortType(option));
+    if (action) {
+      action(option);
+    }
     setDropdownOpen(false);
     setOpenSubMenu(null);
     setFocusedOption(null);
@@ -136,21 +142,24 @@ const SortDropdown = () => {
   }, [focusedOption, openSubMenu]);
 
   const getButtonLabel = () => {
-    if (!selectedSortType || isDropdownOpen) return t("sortDropdown.sortBy");
+    if (!selectedSortType || isDropdownOpen) return options.buttonOption.label;
     const allOptions = mainOptions.flatMap((opt) =>
       opt.subOptions ? [opt, ...opt.subOptions] : [opt]
     );
+
     const selectedOption = allOptions.find(
       (opt) => opt.id === selectedSortType
     );
+
     return selectedOption
-      ? selectedOption.label === t("sortDropdown.techInterview")
-        ? t("sortDropdown.techInterviewShort")
-        : selectedOption.label === t("sortDropdown.testTask")
-          ? t("sortDropdown.testTaskShort")
-          : selectedOption.label
-      : t("sortDropdown.sortBy");
+      ? selectedOption.shortLabel
+        ? selectedOption.shortLabel
+        : selectedOption.label
+      : options.buttonOption.label;
   };
+
+  const buttonLabel = getButtonLabel();
+  const isTypeSelected = buttonLabel === buttonOptions.label;
 
   return (
     <DropdowmMarkup
@@ -160,12 +169,14 @@ const SortDropdown = () => {
       toggleDropdown={toggleDropdown}
       setFocusedOption={setFocusedOption}
       focusedOption={focusedOption}
-      getButtonLabel={getButtonLabel}
       mainOptions={mainOptions}
       handleSubMenuToggle={handleSubMenuToggle}
       openSubMenu={openSubMenu}
+      isInModal={isInModal}
+      buttonLabel={buttonLabel}
+      isTypeSelected={isTypeSelected}
     />
   );
 };
 
-export default SortDropdown;
+export default Dropdown;
