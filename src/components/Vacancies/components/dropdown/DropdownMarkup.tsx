@@ -11,21 +11,29 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
       toggleDropdown,
       setFocusedOption,
       focusedOption,
-      getButtonLabel,
       mainOptions,
       handleSubMenuToggle,
       openSubMenu,
+      isInModal,
+      buttonLabel,
+      isTypeSelected,
     },
     ref
   ) => {
+    console.log("isInModal", isDropdownOpen && isInModal);
     return (
       <div
         ref={ref}
         className={cn(
-          "absolute -left-[248px] z-[2] inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base text-textBlack duration-300",
+          "absolute -left-[248px] z-[2] inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300",
+          isInModal && "w-[449px] rounded-lg",
           isDropdownOpen
-            ? "h-[210px]"
-            : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary"
+            ? isInModal
+              ? "h-fit"
+              : "h-[205px]"
+            : isInModal
+              ? "h-[44px] hover:border-iconHover hover:bg-backgroundMain"
+              : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary"
         )}
       >
         {/* Головна кнопка */}
@@ -38,14 +46,16 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           className={cn(
             "flex w-full items-center justify-between rounded-t-xl py-2 pl-8 pr-[22px] pt-3 text-textBlack outline-none",
             isDropdownOpen && "hover:bg-button",
-            focusedOption === "sortButton" && isDropdownOpen && "bg-button"
+            focusedOption === "sortButton" && isDropdownOpen && "bg-button",
+            isInModal && "rounded-t-lg px-6 py-[11px] text-textBlackLight",
+            !isTypeSelected && isInModal && "text-textBlack"
           )}
         >
-          {getButtonLabel()}
+          {buttonLabel}
           <Icon
             id={"arrow-down"}
             className={cn(
-              "h-6 w-6",
+              "size-6",
               isDropdownOpen
                 ? "rotate-180 duration-500"
                 : "rotate-0 duration-500"
@@ -57,18 +67,22 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
 
         <div
           className={cn(
-            "custom-size absolute left-0 z-10 w-full rounded-b-xl bg-backgroundMain",
+            "custom-size left-0 z-10 w-full rounded-b-xl bg-backgroundMain",
+            isInModal && "rounded-b-lg",
             isDropdownOpen
-              ? "visible h-[162px] opacity-100"
+              ? isInModal
+                ? "visible h-fit opacity-100"
+                : "visible h-[158px] opacity-100"
               : "sr-only m-0 h-0 opacity-0"
           )}
         >
-          <ul className="rounded-b-xl">
+          <ul className={cn("rounded-b-xl", isInModal && "rounded-b-lg")}>
             {mainOptions.map((option) => (
               <li
                 key={option.id}
                 className={cn(
                   "relative cursor-pointer py-2 pl-8 pr-[22px] last:rounded-b-xl last:pb-3",
+                  isInModal && "last:rounded-b-lg",
                   option.subOptions && "flex justify-between",
                   focusedOption === option.id && "bg-button"
                 )}

@@ -23,13 +23,22 @@ export const DropdownInfo = () => {
         { id: "saved", label: t("sortDropdown.saved") },
         { id: "resume", label: t("sortDropdown.sent") },
         { id: "hr", label: t("sortDropdown.hrInterview") },
-        { id: "test", label: t("sortDropdown.testTask") },
-        { id: "tech", label: t("sortDropdown.techInterview") },
+        {
+          id: "test",
+          label: t("sortDropdown.testTask"),
+          shortLabel: t("sortDropdown.testTaskShort"),
+        },
+        {
+          id: "tech",
+          label: t("sortDropdown.techInterview"),
+          shortLabel: t("sortDropdown.techInterviewShort"),
+        },
         { id: "reject", label: t("sortDropdown.rejection") },
         { id: "offer", label: t("sortDropdown.offer") },
       ],
     },
   ];
+  const buttonOption = { id: "", label: t("sortDropdown.sortBy") };
 
-  return mainOptions;
+  return { mainOptions: mainOptions, buttonOption: buttonOption };
 };
