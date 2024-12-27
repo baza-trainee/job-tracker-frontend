@@ -6,6 +6,7 @@ export const resumesQuerySlices = createApi({
   reducerPath: "resumesQuerySlices",
   baseQuery: baseQueryWithReauth,
   tagTypes: ["resumes"],
+  keepUnusedDataFor: 0,
   endpoints: (build) => ({
     getAllResumes: build.query<Resume[], void>({
       query: () => "/resumes",

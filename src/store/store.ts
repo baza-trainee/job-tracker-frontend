@@ -8,16 +8,7 @@ import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
 import sidebarReducer from "./slices/sibebarSlice/sidebarSlice.ts";
 
-import {
-  persistStore,
-  persistReducer,
-  // FLUSH,
-  // REHYDRATE,
-  // PAUSE,
-  // PERSIST,
-  // PURGE,
-  // REGISTER,
-} from "redux-persist";
+import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { resumesQuerySlices } from "./querySlices/resumesQuerySlices.ts";
 import { projectQuerySlice } from "./querySlices/projectQuerySlice.ts";
@@ -73,20 +64,6 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-      //  {
-      //   ignoredActions: [
-      //     "modal/openModal",
-      //     "modal/closeModal",
-      //     FLUSH,
-      //     REHYDRATE,
-      //     PAUSE,
-      //     PERSIST,
-      //     PURGE,
-      //     REGISTER,
-      //   ],
-      //   ignoredActionPaths: ["payload.modalContent"],
-      //   ignoredPaths: ["modal.modalContent", "modal.onCallFunction"],
-      // },
     }).concat(
       profileQuerySlice.middleware,
       vacanciesQuerySlice.middleware,
