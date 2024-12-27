@@ -57,8 +57,8 @@ export const CheckboxCalendarItem = ({
     }
     setIsOpenCalendar(false);
   };
-
   // console.log(name, getValues(name), getValues(`${name}Calendar`));
+
   return (
     <div className="relative">
       <div className="flex w-full items-center justify-between">
