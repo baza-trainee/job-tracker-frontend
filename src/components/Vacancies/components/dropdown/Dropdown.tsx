@@ -6,7 +6,7 @@ import { selectSortType } from "../../../../store/slices/filteredVacanciesSlice/
 import { DropdowmMarkup } from "./DropdownMarkup";
 import { SortDropdownProps } from "./Dropdown.props";
 
-const SortDropdown: FC<SortDropdownProps> = ({
+const Dropdown: FC<SortDropdownProps> = ({
   options,
   action,
   selectedType,
@@ -179,4 +179,4 @@ const SortDropdown: FC<SortDropdownProps> = ({
   );
 };
 
-export default SortDropdown;
+export default Dropdown;

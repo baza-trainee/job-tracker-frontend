@@ -8,8 +8,8 @@ import Icon from "../../Icon/Icon";
 import { LinkButton } from "../../buttons/LinkButton/LinkButton";
 import { Button } from "../../buttons/Button/Button";
 import { SearchForm } from "./SearchForm";
-import SortDropdown from "./sortingDropdown/SortingDropdown";
-import { DropdownInfo } from "./sortingDropdown/DropdownInfo";
+import Dropdown from "./dropdown/Dropdown";
+import { DropdownInfo } from "./dropdown/DropdownInfo";
 import { setSortType } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 
 export type VacancyProps = {
@@ -29,7 +29,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
     <div className="flex w-full items-start justify-between pb-6">
       <SearchForm />
       <div className="relative flex gap-8">
-        <SortDropdown
+        <Dropdown
           options={DropdownInfo()}
           action={handleSetType}
           isInModal={false}
