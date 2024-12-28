@@ -25,7 +25,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
       <div
         ref={ref}
         className={cn(
-          "absolute -left-[248px] z-[2] inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300",
+          "inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300",
           isInModal && "w-[449px] rounded-lg",
           isDropdownOpen
             ? isInModal
