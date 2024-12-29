@@ -51,6 +51,8 @@ const useVacancy = () => {
       technicalInterviewCalendar: "",
       rejectionCalendar: "",
       offerCalendar: "",
+
+      resumeVacansy: "",
     },
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",

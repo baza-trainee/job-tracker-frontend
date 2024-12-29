@@ -5,6 +5,8 @@ import { useState } from "react";
 import moment from "moment";
 import classNames from "classnames";
 import { JobCalendar } from "../../../Calendar/JobCalendar";
+import Dropdown from "../../../Vacancies/components/dropdown/Dropdown";
+import { CheckboxDropdown } from "./CheckboxDropdown";
 
 type CheckboxCalendarFunctionProps = {
   getValues: UseFormGetValues<any>;
@@ -57,7 +59,9 @@ export const CheckboxCalendarItem = ({
     }
     setIsOpenCalendar(false);
   };
+  const selectedType:string  = "resumeVacansy"
   // console.log(name, getValues(name), getValues(`${name}Calendar`));
+ 
 
   return (
     <div className="relative">
@@ -75,6 +79,21 @@ export const CheckboxCalendarItem = ({
           {isChecked && calendarValue}
         </span>
       </div>
+
+      <div
+        className={classNames(
+          isChecked ? "visible opacity-100" : "sr-only h-0 opacity-0"
+        )}
+      >
+        <Dropdown
+          options={CheckboxDropdown()}
+          action={() => setValue(
+            "resume", "Yes") }
+          selectedType={selectedType || ""}
+          isInModal={true}
+        />
+      </div>
+
       <div
         className={classNames(
           isOpenCalendar && isChecked
