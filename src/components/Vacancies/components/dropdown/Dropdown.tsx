@@ -9,7 +9,6 @@ import { SortDropdownProps } from "./Dropdown.props";
 const Dropdown: FC<SortDropdownProps> = ({
   options,
   setValue,
-
   isInModal,
   name,
   register,
@@ -135,14 +134,14 @@ const Dropdown: FC<SortDropdownProps> = ({
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [focusedOption, openSubMenu]);
+  }, [focusedOption, openSubMenu, isDropdownOpen]);
 
   const getButtonLabel = () => {
     if (!selectedSortType || isDropdownOpen) return options.buttonOption.label;
