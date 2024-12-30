@@ -59,9 +59,8 @@ export const CheckboxCalendarItem = ({
     }
     setIsOpenCalendar(false);
   };
-  const selectedType:string  = "resumeVacansy"
-  // console.log(name, getValues(name), getValues(`${name}Calendar`));
- 
+  // const selectedType: string = "resumeVacansy";
+  // // console.log(name, getValues(name), getValues(`${name}Calendar`));
 
   return (
     <div className="relative">
@@ -82,15 +81,19 @@ export const CheckboxCalendarItem = ({
 
       <div
         className={classNames(
-          isChecked ? "visible opacity-100" : "sr-only h-0 opacity-0"
+          isChecked
+            ? "visible relative mt-3 h-[44px] opacity-100"
+            : "sr-only h-0 opacity-0"
         )}
       >
         <Dropdown
           options={CheckboxDropdown()}
-          action={() => setValue(
-            "resume", "Yes") }
-          selectedType={selectedType || ""}
+          setValue={setValue}
           isInModal={true}
+          name={`${name}Dropdown`}
+          // name="sendSummaryDropdown"
+          register={register}
+          getValues={getValues}
         />
       </div>
 

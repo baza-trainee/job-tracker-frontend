@@ -8,9 +8,12 @@ import { SortDropdownProps } from "./Dropdown.props";
 
 const Dropdown: FC<SortDropdownProps> = ({
   options,
-  action,
-  selectedType,
+  setValue,
+
   isInModal,
+  name,
+  register,
+  getValues,
 }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
@@ -20,8 +23,8 @@ const Dropdown: FC<SortDropdownProps> = ({
   const mainOptions = options.mainOptions;
   const buttonOptions = options.buttonOption;
 
-  const selectedSortType = selectedType
-    ? selectedType
+  const selectedSortType = getValues
+    ? getValues(name)
     : useSelector(selectSortType);
 
   const toggleDropdown = () => {
@@ -48,8 +51,8 @@ const Dropdown: FC<SortDropdownProps> = ({
   };
 
   const handleOptionSelect = (option: string) => {
-    if (action) {
-      action(option);
+    if (setValue) {
+      name !== "" ? setValue(name, option) : setValue(option);
     }
     setDropdownOpen(false);
     setOpenSubMenu(null);
@@ -162,20 +165,24 @@ const Dropdown: FC<SortDropdownProps> = ({
   const isTypeSelected = buttonLabel === buttonOptions.label;
 
   return (
-    <DropdowmMarkup
-      ref={dropdownRef}
-      isDropdownOpen={isDropdownOpen}
-      handleOptionSelect={handleOptionSelect}
-      toggleDropdown={toggleDropdown}
-      setFocusedOption={setFocusedOption}
-      focusedOption={focusedOption}
-      mainOptions={mainOptions}
-      handleSubMenuToggle={handleSubMenuToggle}
-      openSubMenu={openSubMenu}
-      isInModal={isInModal}
-      buttonLabel={buttonLabel}
-      isTypeSelected={isTypeSelected}
-    />
+    <>
+      {register && <input type="hidden" {...register(name)} />}
+      <DropdowmMarkup
+        id={name}
+        ref={dropdownRef}
+        isDropdownOpen={isDropdownOpen}
+        handleOptionSelect={handleOptionSelect}
+        toggleDropdown={toggleDropdown}
+        setFocusedOption={setFocusedOption}
+        focusedOption={focusedOption}
+        mainOptions={mainOptions}
+        handleSubMenuToggle={handleSubMenuToggle}
+        openSubMenu={openSubMenu}
+        isInModal={isInModal}
+        buttonLabel={buttonLabel}
+        isTypeSelected={isTypeSelected}
+      />
+    </>
   );
 };
 

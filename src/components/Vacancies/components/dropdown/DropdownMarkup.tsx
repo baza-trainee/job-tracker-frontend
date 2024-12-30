@@ -20,16 +20,15 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
     },
     ref
   ) => {
-    console.log("isInModal", isDropdownOpen && isInModal);
     return (
       <div
         ref={ref}
         className={cn(
-          "inline-block w-[216px] rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300",
-          isInModal && "w-[449px] rounded-lg",
+          "absolute z-[2] inline-block w-full rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300",
+          isInModal && "w-full",
           isDropdownOpen
             ? isInModal
-              ? "h-fit"
+              ? "z-10 h-fit"
               : "h-[205px]"
             : isInModal
               ? "h-[44px] hover:border-iconHover hover:bg-backgroundMain"
@@ -39,6 +38,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
         {/* Головна кнопка */}
         <button
           id="sortButton"
+          type="button"
           onClick={() =>
             isDropdownOpen ? handleOptionSelect("") : toggleDropdown()
           }
@@ -47,7 +47,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
             "flex w-full items-center justify-between rounded-t-xl py-2 pl-8 pr-[22px] pt-3 text-textBlack outline-none",
             isDropdownOpen && "hover:bg-button",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button",
-            isInModal && "rounded-t-lg px-6 py-[11px] text-textBlackLight",
+            isInModal && "px-6 py-[11px] text-textBlackLight",
             !isTypeSelected && isInModal && "text-textBlack"
           )}
         >
@@ -67,8 +67,8 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
 
         <div
           className={cn(
-            "custom-size left-0 z-10 w-full rounded-b-xl bg-backgroundMain",
-            isInModal && "rounded-b-lg",
+            "custom-size left-0 z-20 w-full rounded-b-xl bg-backgroundMain",
+            isInModal && "rounded-b-xl",
             isDropdownOpen
               ? isInModal
                 ? "visible h-fit opacity-100"
@@ -76,13 +76,13 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
               : "sr-only m-0 h-0 opacity-0"
           )}
         >
-          <ul className={cn("rounded-b-xl", isInModal && "rounded-b-lg")}>
+          <ul className={cn("rounded-b-xl", isInModal && "rounded-b-xl")}>
             {mainOptions.map((option) => (
               <li
                 key={option.id}
                 className={cn(
                   "relative cursor-pointer py-2 pl-8 pr-[22px] last:rounded-b-xl last:pb-3",
-                  isInModal && "last:rounded-b-lg",
+                  isInModal && "pl-6 last:rounded-b-xl",
                   option.subOptions && "flex justify-between",
                   focusedOption === option.id && "bg-button"
                 )}

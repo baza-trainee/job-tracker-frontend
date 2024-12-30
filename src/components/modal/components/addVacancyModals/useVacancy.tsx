@@ -52,7 +52,12 @@ const useVacancy = () => {
       rejectionCalendar: "",
       offerCalendar: "",
 
-      resumeVacansy: "",
+      sendSummaryDropdown: "",
+      HRDropdown: "",
+      testTaskDropdown: "",
+      technicalInterviewDropdown: "",
+      rejectionDropdown: "",
+      offerDropdown: "",
     },
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
