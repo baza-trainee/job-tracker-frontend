@@ -29,11 +29,12 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
     <div className="flex w-full items-start justify-between pb-6">
       <SearchForm />
       <div className="relative flex gap-8">
-        <div className="absolute -left-[248px] z-[2]">
+        <div className="relative w-[216px]">
           <Dropdown
             options={DropdownInfo()}
-            action={handleSetType}
+            setValue={handleSetType}
             isInModal={false}
+            name=""
           />
         </div>
 
