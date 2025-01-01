@@ -46,7 +46,12 @@ export const AddVacancySchema = z.object({
   rejectionCalendar: z.string(),
   offerCalendar: z.string(),
 
-  resumeVacansy: z.string(),
+  sendSummaryDropdown: z.string(),
+  HRDropdown: z.string(),
+  testTaskDropdown: z.string(),
+  technicalInterviewDropdown: z.string(),
+  rejectionDropdown: z.string(),
+  offerDropdown: z.string(),
 
   note: z.string().max(4000, t("addVacancySchema.notes.max")).trim(),
   isArchived: z.boolean(),
