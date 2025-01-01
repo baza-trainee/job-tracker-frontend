@@ -120,9 +120,9 @@ body {
 
 /* react-calendar */
 .react-calendar {
-  position: absolute;
-  top:34px;
-  right: 0px;
+  /* position: absolute; */
+  /* top:34px; */
+  /* right: 0px; */
   border: 1px solid #436b88;
   border-radius: 12px;
   padding: 24px;
