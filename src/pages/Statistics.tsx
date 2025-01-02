@@ -1,10 +1,12 @@
-import Calendar from "react-calendar";
+import StatisticsPanel from "../components/Statistics/componets/statisticsPanel/StatisticsPanel";
 
 function Statistics() {
   return (
-    <div className="flex w-full items-center justify-center">
-      <h2>Statistics</h2>
-      <Calendar className={"size-16"}></Calendar>
+    <div className="container pb-8 pt-10">
+      <div className="m-auto flex w-[1308px] flex-col">
+        <StatisticsPanel />
+        {/* <Calendar className={"size-16"}></Calendar> */}
+      </div>
     </div>
   );
 }
