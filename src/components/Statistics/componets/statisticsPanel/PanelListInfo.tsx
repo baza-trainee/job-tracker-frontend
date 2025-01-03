@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import { Vacancy } from "../../../../types/vacancies.types";
 
-const PanelList = (vacancies: Vacancy[]) => {
+const PanelListInfo = (vacancies: Vacancy[]) => {
   const { t } = useTranslation();
 
   const vacanciesForStat = vacancies.filter((v) => v.isArchived === false);
@@ -48,4 +48,4 @@ const PanelList = (vacancies: Vacancy[]) => {
   ];
 };
 
-export default PanelList;
+export default PanelListInfo;

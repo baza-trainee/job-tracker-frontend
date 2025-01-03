@@ -7,14 +7,14 @@ import AddVacancyButton from "../../../buttons/AddVacancyButton/AddVacancyButton
 import FirstVacancyMessage from "../../../Sceleton/FirstVacancyMessage.tsx";
 import PredictionCard from "./PredictionCard.tsx";
 import StatisticsCard from "./StatisticsCard.tsx";
-import PanelList from "./PanelList.tsx";
+import PanelListInfo from "./PanelListInfo.tsx";
 import StatisticsCardSkeleton from "./StatisticsPanelSkeleton.tsx";
 
 const StatisticsPanel: FC = ({}) => {
   const { data, isLoading, isError } = useGetAllUserDataQuery();
   const vacancies = data?.vacancies || [];
 
-  const panelList = PanelList(vacancies);
+  const panelList = PanelListInfo(vacancies);
 
   return (
     <>
