@@ -2,15 +2,16 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAppDispatch } from "../../../store/hook";
-import { openModal } from "../../../store/slices/modalSlice/modalSlice";
+// import { openModal } from "../../../store/slices/modalSlice/modalSlice";
 
 import Icon from "../../Icon/Icon";
 import { LinkButton } from "../../buttons/LinkButton/LinkButton";
-import { Button } from "../../buttons/Button/Button";
+// import { Button } from "../../buttons/Button/Button";
 import { SearchForm } from "./SearchForm";
 import Dropdown from "./dropdown/Dropdown";
 import { DropdownInfo } from "./dropdown/DropdownInfo";
 import { setSortType } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
+import AddVacancyButton from "../../buttons/AddVacancyButton/AddVacancyButton";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -37,7 +38,6 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             name=""
           />
         </div>
-
         {!isArchive && (
           <LinkButton variant="ghost" size="small" href="/archive">
             <div className="flex items-center gap-3">
@@ -48,8 +48,8 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             </div>
           </LinkButton>
         )}
-
-        <Button
+        <AddVacancyButton />
+        {/* <Button
           variant="accent"
           size="big"
           onClick={() => {
@@ -66,7 +66,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             </span>
             <Icon id={"plus"} className="h-6 w-6" />
           </div>
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

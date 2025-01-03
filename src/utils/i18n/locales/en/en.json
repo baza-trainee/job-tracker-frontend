@@ -97,7 +97,9 @@
     "vacancies": "Total Vacancies",
     "resumes": "Resumes Sent",
     "testTasks": "Test Tasks Completed",
-    "interviews": "Interviews Attended"
+    "interviews": "Interviews Attended",
+    "firstMessage": "Save at least one vacancy to see statistics!",
+    "predictions": "Predictions for today"
   },
   "footer": {
     "development": "Development of Baza Trainee Ukraine 2024",
