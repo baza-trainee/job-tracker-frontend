@@ -8,6 +8,7 @@ import {
 } from "../slices/authSlice/authSlice";
 import { closeModal, openModal } from "../slices/modalSlice/modalSlice";
 import { BACKEND_ENDPOINTS } from "../api/api-routes";
+import { profileQuerySlice } from "./profileQuerySlice";
 
 type AuthResponse = { access_token: string; refresh_token: string };
 type AuthRequest = { email: string; password: string };
@@ -19,7 +20,7 @@ type RequestChangePassword = {
 
 export const authPublicQuerySlice = createApi({
   reducerPath: "authPublicQuerySlice",
-  keepUnusedDataFor: 0,
+
   baseQuery: fetchBaseQuery({
     baseUrl: BACKEND_ENDPOINTS.JOB_TRACKER_BACKEND,
   }),
@@ -34,14 +35,18 @@ export const authPublicQuerySlice = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+
           dispatch(saveTokens(data));
+
           dispatch(
             openModal({
               typeModal: "logInSuccess",
             })
           );
-          console.log("user", data)
+
           dispatch(isLoggedIn());
+
+          dispatch(profileQuerySlice.util.invalidateTags(["Profile"]));
         } catch (error) {
           dispatch(
             openModal({
@@ -67,7 +72,10 @@ export const authPublicQuerySlice = createApi({
               typeModal: "signUpSuccess",
             })
           );
+
           dispatch(isLoggedIn());
+
+          dispatch(profileQuerySlice.util.invalidateTags(["Profile"]));
         } catch (error) {
           dispatch(
             openModal({

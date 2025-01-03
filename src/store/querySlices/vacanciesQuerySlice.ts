@@ -6,7 +6,7 @@ export const vacanciesQuerySlice = createApi({
   reducerPath: "vacanciesQuerySlice",
 
   baseQuery: baseQueryWithReauth,
-  keepUnusedDataFor: 0,
+
   tagTypes: ["vacanies"],
 
   endpoints: (build) => ({

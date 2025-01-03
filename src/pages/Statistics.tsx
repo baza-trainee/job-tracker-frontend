@@ -1,11 +1,16 @@
 import StatisticsPanel from "../components/Statistics/componets/statisticsPanel/StatisticsPanel";
+import StatisticsCalendarTab from "../components/Calendar/StatisticsCalendarTab.tsx";
+import StatisticsCalendar from "../components/Calendar/StatisticsCalendar.tsx";
+import ChartBar from "../components/charts/ChartBar.tsx";
 
 function Statistics() {
   return (
     <div className="container pb-8 pt-10">
-      <div className="m-auto flex w-[1308px] flex-col">
-        <StatisticsPanel />
-        {/* <Calendar className={"size-16"}></Calendar> */}
+      <StatisticsPanel />
+      <div className="flex h-auto w-96 flex-col">
+        <StatisticsCalendarTab></StatisticsCalendarTab>
+        <StatisticsCalendar></StatisticsCalendar>
+        <ChartBar></ChartBar>
       </div>
     </div>
   );
