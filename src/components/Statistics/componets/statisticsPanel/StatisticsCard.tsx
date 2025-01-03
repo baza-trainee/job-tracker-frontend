@@ -14,7 +14,7 @@ const StatisticsCard: FC<StatisticsCardProps> = ({
   return (
     <li
       className={cn(
-        "flex h-[133px] w-[192px] flex-col items-center justify-center gap-1 rounded-2xl bg-color5 px-[35px] py-4 text-center even:bg-color1"
+        "flex h-[139px] w-[192px] flex-col items-center justify-center gap-1 rounded-2xl bg-color5 px-[35px] py-4 text-center even:bg-color1"
       )}
     >
       <h3 className="text-xl leading-[135%]">{cardName}</h3>

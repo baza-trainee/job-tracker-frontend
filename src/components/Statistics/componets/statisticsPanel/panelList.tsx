@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 
 import { Vacancy } from "../../../../types/vacancies.types";
-// import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
 
 const PanelList = (vacancies: Vacancy[]) => {
   const { t } = useTranslation();
@@ -29,31 +28,22 @@ const PanelList = (vacancies: Vacancy[]) => {
     );
   }, 0);
 
-  console.log("vacanciesForStat", vacanciesForStat);
-  console.log("totalVacancies", totalVacancies);
-  console.log("totalResumes", totalResumes);
-  console.log("totalTestTasks", totalTestTasks);
-  console.log("totalInterviews", totalInterviews);
   return [
     {
       cardName: t("statisticsHeader.vacancies"),
       cardQuantity: totalVacancies,
-      // cardQuantity: 5,
     },
     {
       cardName: t("statisticsHeader.resumes"),
       cardQuantity: totalResumes,
-      // cardQuantity: 8,
     },
     {
       cardName: t("statisticsHeader.testTasks"),
       cardQuantity: totalTestTasks,
-      // cardQuantity: 49,
     },
     {
       cardName: t("statisticsHeader.interviews"),
       cardQuantity: totalInterviews,
-      // cardQuantity: 6,
     },
   ];
 };
