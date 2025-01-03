@@ -10,10 +10,7 @@ type SkeletonProps = {
 const Skeleton: FC<SkeletonProps> = ({ width, height, className }) => {
   return (
     <div
-      className={clsx(
-        "animate-pulse bg-gray-300 rounded",
-        className
-      )}
+      className={clsx("animate-pulse rounded bg-gray-300", className)}
       style={{ width, height }}
     />
   );
