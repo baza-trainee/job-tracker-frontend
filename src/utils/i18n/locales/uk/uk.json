@@ -93,6 +93,13 @@
     "rejection": "Відмова",
     "offer": "Оффер"
   },
+  "statisticsHeader": {
+    "vacancies": "Всього вакансій",
+    "resumes": "Надісланих резюме",
+    "testTasks": "Зроблено тестових",
+    "interviews": "Пройдених інтерв’ю"
+  },
+
   "footer": {
     "development": "Розробка Baza Trainee Ukraine 2024",
     "rights": " © Усі права захищені"

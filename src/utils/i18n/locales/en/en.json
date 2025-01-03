@@ -93,6 +93,12 @@
     "rejection": "Rejection",
     "offer": "Offer"
   },
+  "statisticsHeader": {
+    "vacancies": "Total Vacancies",
+    "resumes": "Resumes Sent",
+    "testTasks": "Test Tasks Completed",
+    "interviews": "Interviews Attended"
+  },
   "footer": {
     "development": "Development of Baza Trainee Ukraine 2024",
     "rights": " © All rights have been reserved"
