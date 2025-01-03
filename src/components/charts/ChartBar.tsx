@@ -25,24 +25,24 @@ import {
     ],
   };
   
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false, // Це дозволяє графіку займати заданий розмір контейнера
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      tooltip: {
-        mode: 'index',
-        intersect: false,
-      },
-    },
-  };
+  // const options = {
+  //   responsive: true,
+  //   maintainAspectRatio: false, // Це дозволяє графіку займати заданий розмір контейнера
+  //   scales: {
+  //     y: {
+  //       beginAtZero: true,
+  //     },
+  //   },
+  //   plugins: {
+  //     legend: {
+  //       position: 'top',
+  //     },
+  //     tooltip: {
+  //       mode: 'index',
+  //       intersect: false,
+  //     },
+  //   },
+  // };
   
   export default function ChartBar() {
     return (
