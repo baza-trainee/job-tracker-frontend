@@ -6,7 +6,7 @@ export const projectQuerySlice = createApi({
   reducerPath: "projectQuerySlice",
 
   baseQuery: baseQueryWithReauth,
-  keepUnusedDataFor: 0,
+
   tagTypes: ["projects"],
 
   endpoints: (build) => ({

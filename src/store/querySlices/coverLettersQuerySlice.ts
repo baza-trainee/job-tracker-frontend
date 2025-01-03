@@ -4,9 +4,11 @@ import { CoverLetter } from "../../types/coverLetters.types";
 
 export const coverLetterQuerySlice = createApi({
   reducerPath: "coverLetterQuerySlice",
+
   baseQuery: baseQueryWithReauth,
-  keepUnusedDataFor: 0,
+
   tagTypes: ["coverLetter"],
+
   endpoints: (build) => ({
     createCoverLeter: build.mutation<
       CoverLetter,
