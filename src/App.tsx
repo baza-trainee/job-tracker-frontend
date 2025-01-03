@@ -15,15 +15,14 @@ import { useEffect } from "react";
 
 import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-// import { useAppDispatch } from "./store/hook";
-// import { refreshUser } from "./store/slices/authSlice/authOperation";
+import { useGetAllUserDataQuery } from "./store/querySlices/profileQuerySlice";
 
 function App() {
   const darkMode = useAppSelector(selectTheme);
-  // const dispatch = useAppDispatch();
+  const { refetch } = useGetAllUserDataQuery();
 
   useEffect(() => {
-    // dispatch(refreshUser());
+    refetch();
     if (darkMode) {
       document.documentElement.classList.add("dark");
     } else {

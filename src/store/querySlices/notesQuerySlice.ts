@@ -4,9 +4,11 @@ import { Note } from "../../types/notes.types";
 
 export const notesQuerySlice = createApi({
   baseQuery: baseQueryWithReauth,
+
   reducerPath: "notesQuerySlice",
-  keepUnusedDataFor: 0,
+
   tagTypes: ["notes"],
+
   endpoints: (build) => ({
     createNote: build.mutation<
       Note,

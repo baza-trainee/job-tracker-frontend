@@ -6,7 +6,7 @@ export const predictionsQuerySlice = createApi({
   reducerPath: "predictionsQuerySlice",
 
   baseQuery: baseQueryWithReauth,
-  keepUnusedDataFor: 0,
+
   tagTypes: ["predictions"],
 
   endpoints: (build) => ({
