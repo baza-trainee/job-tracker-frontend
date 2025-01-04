@@ -5,11 +5,14 @@ import { Profile } from "../../types/profile.types";
 export const profileQuerySlice = createApi({
   reducerPath: "profileQuerySlice",
 
+  tagTypes: ["Profile"],
+
   baseQuery: baseQueryWithReauth,
-  keepUnusedDataFor: 0,
+
   endpoints: (build) => ({
     getAllUserData: build.query<Profile, void>({
       query: () => "/user/profile",
+      providesTags: ["Profile"],
     }),
   }),
 });

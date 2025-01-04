@@ -35,6 +35,30 @@ const useVacancy = () => {
       note: "",
       work_type: "office",
       isArchived: false,
+      sendSummary: false,
+
+      HR: false,
+
+      testTask: false,
+      technicalInterview: false,
+      rejection: false,
+      offer: false,
+
+      sendSummaryCalendar: "",
+
+      HRCalendar: "",
+
+      testTaskCalendar: "",
+      technicalInterviewCalendar: "",
+      rejectionCalendar: "",
+      offerCalendar: "",
+
+      sendSummaryDropdown: "",
+      HRDropdown: "",
+      testTaskDropdown: "",
+      technicalInterviewDropdown: "",
+      rejectionDropdown: "",
+      offerDropdown: "",
     },
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",

@@ -1,4 +1,5 @@
 import { RefObject } from "react";
+import { UseFormGetValues, UseFormRegister } from "react-hook-form";
 
 export type SortOption = {
   id: string;
@@ -15,8 +16,11 @@ export type Options = {
 export interface SortDropdownProps {
   options: Options;
   isInModal: boolean;
-  action?: (option: string) => void;
-  selectedType?: string;
+  setValue: (option: string, name?: any) => void;
+
+  name: string;
+  register?: UseFormRegister<any>;
+  getValues?: UseFormGetValues<any>;
 }
 
 export type DropdownMarkupProps = {
@@ -32,4 +36,5 @@ export type DropdownMarkupProps = {
   isInModal: boolean;
   buttonLabel: string;
   isTypeSelected: boolean;
+  id?: string;
 };

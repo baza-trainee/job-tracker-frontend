@@ -4,9 +4,11 @@ import { Event } from "../../types/event.types";
 
 export const eventQuerySlice = createApi({
   reducerPath: "eventsQuerySlice",
+
   baseQuery: baseQueryWithReauth,
-  keepUnusedDataFor: 0,
+
   tagTypes: ["events"],
+
   endpoints: (build) => ({
     createEvent: build.mutation<
       Event,

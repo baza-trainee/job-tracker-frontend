@@ -31,12 +31,15 @@ const VacancyCard: FC<VacancyCardProps> = ({
     }
 
     return (
-        <button className={clsx(
-            "w-[278px] shrink-0 border border-transparent box-border p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2 overflow-hidden transition-all duration-300 active:border-iconHover focus:border-iconHover focus-visible:border-iconHover focus:outline-none", 
+        <div className={clsx(
+            "w-[278px] shrink-0 border border-transparent box-border p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2 overflow-hidden transition-all duration-300 cursor-pointer active:border-iconHover focus:border-iconHover focus-visible:border-iconHover focus:outline-none", 
             colorSectionBG,
             colorHoverBG
             )}
             onClick={onClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && onClick?.()}
         >
             <div className="w-full text-start">
                 <h3 className="text-base truncate">{titleVacancy}</h3>
@@ -47,7 +50,7 @@ const VacancyCard: FC<VacancyCardProps> = ({
                 <span className="text-sm">{locationLabel[workType]}</span>
                 <span className="w-[50%] text-sm truncate">{location}</span>
             </div>
-        </button>
+        </div>
     )
 };
 
