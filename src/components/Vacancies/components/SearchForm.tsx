@@ -115,6 +115,7 @@ export const SearchForm: FC = () => {
             {error && (
               <button
                 onClick={() => handleClear()}
+                type="button"
                 className={
                   "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
                 }
@@ -124,6 +125,7 @@ export const SearchForm: FC = () => {
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
+                  type="butt"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <g id="Icons/cancel_24px">
