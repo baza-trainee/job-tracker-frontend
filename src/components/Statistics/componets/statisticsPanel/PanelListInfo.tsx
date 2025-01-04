@@ -15,11 +15,13 @@ const PanelListInfo = (vacancies: Vacancy[]) => {
       vacancy.statuses.filter((status) => status.name === "resume").length
     );
   }, 0);
+
   const totalTestTasks = vacanciesForStat?.reduce((count, vacancy) => {
     return (
       count + vacancy.statuses.filter((status) => status.name === "test").length
     );
   }, 0);
+
   const totalInterviews = vacanciesForStat?.reduce((count, vacancy) => {
     return (
       count +

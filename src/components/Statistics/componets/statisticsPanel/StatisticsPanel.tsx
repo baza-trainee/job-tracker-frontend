@@ -9,20 +9,32 @@ import PredictionCard from "./PredictionCard.tsx";
 import StatisticsCard from "./StatisticsCard.tsx";
 import PanelListInfo from "./PanelListInfo.tsx";
 import StatisticsCardSkeleton from "./StatisticsPanelSkeleton.tsx";
+import { useGetPredictionDailyQuery } from "../../../../store/querySlices/predictionsQuerySlice.ts";
+import { useTranslation } from "react-i18next";
 
 const StatisticsPanel: FC = ({}) => {
   const { data, isLoading, isError } = useGetAllUserDataQuery();
   const vacancies = data?.vacancies || [];
+  const {
+    data: prediction,
+    isLoading: isPredictionLoading,
+    isError: isPredictionError,
+  } = useGetPredictionDailyQuery();
+
+  const { i18n, t } = useTranslation();
+
+  const predictionText =
+    i18n.language === "uk" ? prediction?.textUk : prediction?.textEn;
 
   const panelList = PanelListInfo(vacancies);
 
   return (
     <>
       <div className="flex w-full flex-col items-center gap-[60px]">
-        {isLoading && <StatisticsCardSkeleton />}
-        {isError && <h2>Error...</h2>}
+        {(isLoading || isPredictionLoading) && <StatisticsCardSkeleton />}
+        {(isError || isPredictionError) && <h2>Error...</h2>}
 
-        {!isLoading && vacancies && (
+        {!isLoading && vacancies && predictionText && (
           <div className="flex w-full justify-between">
             <ul className={cn("flex gap-5 self-start")}>
               {panelList.map((item, index) => {
@@ -35,7 +47,10 @@ const StatisticsPanel: FC = ({}) => {
                 );
               })}
             </ul>
-            <PredictionCard />
+            <PredictionCard
+              header={t("statisticsHeader.predictions")}
+              text={predictionText}
+            />
           </div>
         )}
         {!isLoading && vacancies.length === 0 && (
