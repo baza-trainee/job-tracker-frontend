@@ -9,12 +9,13 @@ import {
   closeConfirmation,
   closeModal,
 } from "../../../../store/slices/modalSlice/modalSlice";
-import { useAppDispatch } from "../../../../store/hook";
+import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 
 const useVacancy = () => {
   //   const { refetch } = useGetAllUserDataQuery();
   //   const [createVacancy] = useCreateVacancyMutation();
   const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.statusVacancy.statuses);
 
   const {
     register,
@@ -34,25 +35,6 @@ const useVacancy = () => {
       note: "",
       work_type: "office",
       isArchived: false,
-      sendSummary: false,
-
-      HR: false,
-
-      testTask: false,
-      technicalInterview: false,
-      rejection: false,
-      offer: false,
-
-      sendSummaryCalendar: "",
-
-      HRCalendar: "",
-
-      testTaskCalendar: "",
-      technicalInterviewCalendar: "",
-      rejectionCalendar: "",
-      offerCalendar: "",
-
-      resumeVacansy: "",
     },
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
@@ -61,20 +43,17 @@ const useVacancy = () => {
   const onSubmit: SubmitHandler<z.infer<typeof AddVacancySchema>> = async (
     data
   ) => {
-    console.log("data Backend", data);
+    const statusData = status.filter(
+      (elem) => elem.date !== "1970-01-01T00:00:00.000Z"
+    );
+    console.log("data Backend", {
+      ...data,
+      statuses: [...statusData],
+    });
 
     notifySuccess("Дані успішно збережено. Дякую");
     dispatch(closeConfirmation());
     dispatch(closeModal());
-    // try {
-    //   const response = await createVacancy(data).unwrap();
-    //   console.log(response);
-
-    //   refetch();
-    //   reset();
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return {

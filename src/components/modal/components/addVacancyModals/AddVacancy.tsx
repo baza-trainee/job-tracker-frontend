@@ -3,7 +3,7 @@ import { Button } from "../../../buttons/Button/Button";
 import { Textarea } from "../../../Textarea/Textarea";
 import { t } from "i18next";
 import Icon from "../../../Icon/Icon";
-import { useAppDispatch } from "../../../../store/hook";
+import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
 
 //CheckBox
@@ -20,10 +20,10 @@ import useVacancy from "./useVacancy";
 
 const AddVacancy = () => {
   const dispatch = useAppDispatch();
+  const statusVacancy = useAppSelector(state => state.statusVacancy.statuses)
   const { vacancyInput, vacancyInputRadio, vacancyCheckboxCalendar } =
     AddVacancyInfo();
-  const { register, resetField, handleSubmit, getValues, setValue, errors } =
-    useVacancy();
+  const { register, resetField, handleSubmit, errors } = useVacancy();
 
   const saveVacancy = () => {
     handleSubmit((data) => {
@@ -38,7 +38,6 @@ const AddVacancy = () => {
 
   return (
     <div className="">
-      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
       <form>
         <div className="flex flex-col items-center">
           <div className="flex flex-row gap-3">
@@ -94,17 +93,16 @@ const AddVacancy = () => {
               <div className="relative flex flex-col gap-4 pt-2">
                 <label>Статус</label>
                 <div className="flex flex-col gap-4">
-                  {vacancyCheckboxCalendar.map(
+                  {statusVacancy.map(
                     (checkboxCalendar: VacancyInputProps) => (
                       <CheckboxCalendarItem
                         key={checkboxCalendar.id}
                         name={checkboxCalendar.name}
                         id={checkboxCalendar.id}
-                        label={checkboxCalendar.label}
+                        label={checkboxCalendar.name}
                         register={register}
                         errors={errors}
-                        getValues={getValues}
-                        setValue={setValue}
+                        date={checkboxCalendar.date}
                       />
                     )
                   )}

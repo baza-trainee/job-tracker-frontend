@@ -7,6 +7,7 @@ import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
 import sidebarReducer from "./slices/sibebarSlice/sidebarSlice.ts";
+import statusVacancyReducer from "./slices/statusVacancy/vacancySlice.ts"
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -60,6 +61,7 @@ export const store = configureStore({
     auth: authPersistedReducer,
     theme: themePersistedReducer,
     sidebar: sidebarPersistedReducer,
+    statusVacancy:statusVacancyReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

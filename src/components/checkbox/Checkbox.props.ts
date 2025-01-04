@@ -10,5 +10,7 @@ export interface CheckboxProps {
   id?: string;
   disabled?: boolean;
   required?: boolean;
+  checked?:boolean;
+  date?:string;
   onClick?:() => void;
 }
