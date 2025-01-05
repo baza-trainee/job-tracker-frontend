@@ -28,7 +28,7 @@ export const sectionsConfig: SectionConfig[] = [
   },
   {
     sectionName: "resume",
-    title: "sortDropdown.sent",
+    title: "sortDropdown.resume",
     borderColor: "border-color1",
     backgroundColor: "bg-color1",
     backgroundTransparent: "bg-color1-transparent",
@@ -36,7 +36,7 @@ export const sectionsConfig: SectionConfig[] = [
   },
   {
     sectionName: "hr",
-    title: "sortDropdown.hrInterview",
+    title: "sortDropdown.hr",
     borderColor: "border-color4",
     backgroundColor: "bg-color4",
     backgroundTransparent: "bg-color4-transparent",
@@ -44,7 +44,7 @@ export const sectionsConfig: SectionConfig[] = [
   },
   {
     sectionName: "test",
-    title: "sortDropdown.testTask",
+    title: "sortDropdown.test",
     borderColor: "border-color3",
     backgroundColor: "bg-color3",
     backgroundTransparent: "bg-color3-transparent",
@@ -52,7 +52,7 @@ export const sectionsConfig: SectionConfig[] = [
   },
   {
     sectionName: "tech",
-    title: "sortDropdown.techInterview",
+    title: "sortDropdown.tech",
     borderColor: "border-color6",
     backgroundColor: "bg-color6",
     backgroundTransparent: "bg-color6-transparent",
@@ -60,7 +60,7 @@ export const sectionsConfig: SectionConfig[] = [
   },
   {
     sectionName: "reject",
-    title: "sortDropdown.rejection",
+    title: "sortDropdown.reject",
     borderColor: "border-color2",
     backgroundColor: "bg-color2",
     backgroundTransparent: "bg-color2-transparent",
