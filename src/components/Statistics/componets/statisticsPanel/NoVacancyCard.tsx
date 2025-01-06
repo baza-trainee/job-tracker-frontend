@@ -2,7 +2,7 @@ import Icon from "../../../Icon/Icon";
 import FirstVacancyMessage from "../../../Sceleton/FirstVacancyMessage";
 import AddVacancyButton from "../../../buttons/AddVacancyButton/AddVacancyButton";
 
-const NoVacanceCard = () => {
+const NoVacancyCard = () => {
   return (
     <div className="mt-[60px] flex flex-col items-center gap-8">
       <FirstVacancyMessage />
@@ -12,4 +12,4 @@ const NoVacanceCard = () => {
   );
 };
 
-export default NoVacanceCard;
+export default NoVacancyCard;

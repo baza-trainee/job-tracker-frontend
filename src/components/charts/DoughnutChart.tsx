@@ -157,6 +157,9 @@ export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
 
   return (
     <div className="flex h-[400px] w-[518px] flex-col gap-6">
+      <h2 className="text-center font-nunito text-[28px]">
+        {t(`statisticsDoughnatDiagram`)}
+      </h2>
       <Doughnut data={chartData} options={options} />
       <CustomLegend data={chartData} />
     </div>

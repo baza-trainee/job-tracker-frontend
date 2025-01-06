@@ -6,7 +6,7 @@ import GoughnutChart from "../components/charts/DoughnutChart.tsx";
 import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice.ts";
 import { useGetPredictionDailyQuery } from "../store/querySlices/predictionsQuerySlice.ts";
 import StatisticsPanelSkeleton from "../components/Statistics/componets/statisticsPanel/StatisticsPanelSkeleton.tsx";
-import NoVacanceCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
+import NoVacancyCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
 
 function Statistics() {
   const { data, isLoading, isError } = useGetAllUserDataQuery();
@@ -27,7 +27,7 @@ function Statistics() {
       {!isLoading && vacanciesForStat && prediction && (
         <StatisticsPanel vacancies={vacanciesForStat} prediction={prediction} />
       )}
-      {!isLoading && vacanciesForStat.length === 0 && <NoVacanceCard />}
+      {!isLoading && vacanciesForStat.length === 0 && <NoVacancyCard />}
       {!isLoading && vacanciesForStat.length !== 0 && (
         <div className="mt-10 flex justify-between">
           <div className="flex h-auto w-96 flex-col">
