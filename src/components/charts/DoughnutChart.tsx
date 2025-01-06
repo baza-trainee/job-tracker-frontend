@@ -2,14 +2,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
 import { Vacancy } from "../../types/vacancies.types";
-import { getVacanciesByStatus } from "../Vacancies/components/VacanсyMainConfig";
-// import { useGetAllUserDataQuery } from "../../store/querySlices/profileQuerySlice";
-// import { getVacanciesByStatus } from "../Vacancies/components/VacanсyMainConfig";
-// import { FC } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-// getVacanciesByStatus(vacancies, "hr");
 
 const CustomLegend = ({ data }) => {
   return (
@@ -21,7 +15,7 @@ const CustomLegend = ({ data }) => {
             display: "flex",
             alignItems: "center",
 
-            width: "223px", // Ширина одного стовпчика
+            width: "223px",
           }}
         >
           <div
@@ -29,7 +23,7 @@ const CustomLegend = ({ data }) => {
               backgroundColor: data.datasets[0].backgroundColor[index],
               width: 70,
               height: 30,
-              marginRight: 10,
+              marginRight: 8,
               borderRadius: 4,
             }}
           ></div>
@@ -43,28 +37,84 @@ const CustomLegend = ({ data }) => {
 export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
   console.log("vacancies", vacancies);
   const { t } = useTranslation();
-  //   const status = [
-  //     "sent",
-  //     "hrInterview",
-  //     "testTask",
-  //     "techInterview",
-  //     "rejection",
-  //     "offer",
-  //   ];
+
   const status = ["resume", "hr", "test", "tech", "reject", "offer"];
 
-  const data = {
+  //   const data = {
+  //     labels: status.map((s) => t(`sortDropdown.${s}`)),
+  //     datasets: [
+  //       {
+  //         label: "",
+  //         data: status.map(
+  //           (s) =>
+  //             vacancies.filter(
+  //               (v) => v.statuses && v.statuses[0] && v.statuses[0].name === s
+  //             ).length
+  //         ),
+  //         backgroundColor: [
+  //           "#C6E7FF",
+  //           "#CDC1FF",
+  //           "#FEEE91",
+  //           "#A6AEBF",
+  //           "#FC8972",
+  //           "#B1D690",
+  //         ],
+  //         borderColor: [
+  //           "#C6E7FF",
+  //           "#CDC1FF",
+  //           "#FEEE91",
+  //           "#A6AEBF",
+  //           "#FC8972",
+  //           "#B1D690",
+  //         ],
+  //         borderWidth: 1,
+  //       },
+  //     ],
+  //   };
+
+  //   const options = {
+  //     responsive: true,
+  //     maintainAspectRatio: false,
+  //     plugins: {
+  //       legend: {
+  //         display: false,
+  //         position: "bottom",
+  //         align: "start",
+  //         labels: {
+  //           font: {
+  //             size: 16,
+  //           },
+  //           color: "#333",
+  //           //  boxWidth: 20,
+  //         },
+  //       },
+  //       tooltip: {
+  //         backgroundColor: "#FDFEFF",
+  //         borderColor: "#436B88",
+  //         borderWidth: 1,
+  //         titleColor: "#333",
+  //         bodyColor: "#ccc",
+  //       },
+  //     },
+  //   };
+
+  const data = status.map((s) =>
+    Array.isArray(vacancies)
+      ? vacancies.filter(
+          (v) => v.statuses && v.statuses[0] && v.statuses[0].name === s
+        ).length
+      : 0
+  );
+
+  // Загальна сума для розрахунку відсотків
+  const total = data.reduce((sum, value) => sum + value, 0);
+
+  const chartData = {
     labels: status.map((s) => t(`sortDropdown.${s}`)),
     datasets: [
       {
         label: "",
-        // data: [10, 19, 3, 5, 2, 3],
-        data: status.map(
-          (s) =>
-            vacancies.filter(
-              (v) => v.statuses && v.statuses[0] && v.statuses[0].name === s
-            ).length
-        ),
+        data,
         backgroundColor: [
           "#C6E7FF",
           "#CDC1FF",
@@ -94,28 +144,63 @@ export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
         display: false,
         position: "bottom",
         align: "start",
+
         labels: {
+          boxWidth: 40,
+          useBorderRadius: true,
+          borderRadius: 12,
           font: {
             size: 16,
           },
           color: "#333",
-          //  boxWidth: 20,
         },
       },
       tooltip: {
+        xAlign: "left",
+        yAlign: "center",
+        displayColors: false,
+        bodyAlign: "center",
+        padding: 8,
+        cornerRadius: {
+          topLeft: 12,
+          topRight: 12,
+          bottomRight: 12,
+          bottomLeft: 0,
+        },
+        caretSize: 0,
         backgroundColor: "#FDFEFF",
         borderColor: "#436B88",
         borderWidth: 1,
         titleColor: "#333",
-        bodyColor: "#ccc",
+        bodyColor: "#333",
+        titleFont: {
+          size: 14,
+          family: "Nunito",
+          weight: "bold ",
+          lineHeight: 1.3,
+        },
+        bodyFont: {
+          size: 14,
+          family: "Nunito",
+          weight: "bold ",
+          lineHeight: 1.3,
+        },
+        callbacks: {
+          label: function (tooltipItem) {
+            const dataset = tooltipItem.dataset;
+            const currentValue = dataset.data[tooltipItem.dataIndex];
+            const percentage = Math.round((currentValue / total) * 100);
+            return `${percentage}%`;
+          },
+        },
       },
     },
   };
 
   return (
-    <div className="flex h-[400px] w-[478px] flex-col gap-6">
-      <Doughnut data={data} options={options} />
-      <CustomLegend data={data} />
+    <div className="flex h-[400px] w-[518px] flex-col gap-6">
+      <Doughnut data={chartData} options={options} />
+      <CustomLegend data={chartData} />
     </div>
   );
 }
