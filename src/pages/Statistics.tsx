@@ -5,9 +5,26 @@ import StatisticsCalendarDay from "../components/Calendar/StatisticsCalendarDay.
 import StatisticsCalendarMonth from "../components/Calendar/StatisticsCalendarMonth.tsx";
 import StatisticsCalendarYear from "../components/Calendar/StatisticsCalendarYear.tsx";
 import ChartBar from "../components/charts/ChartBar.tsx";
+
+import GoughnutChart from "../components/charts/DoughnutChart.tsx";
+import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice.ts";
+import { useGetPredictionDailyQuery } from "../store/querySlices/predictionsQuerySlice.ts";
+import StatisticsPanelSkeleton from "../components/Statistics/componets/statisticsPanel/StatisticsPanelSkeleton.tsx";
+import NoVacancyCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
 import Soon from "../components/Calendar/Soon.tsx";
 
 function Statistics() {
+  const { data, isLoading, isError } = useGetAllUserDataQuery();
+
+  const vacanciesForStat =
+    data?.vacancies.filter((v) => v.isArchived === false) || [];
+
+  const {
+    data: prediction,
+    isLoading: isPredictionLoading,
+    isError: isPredictionError,
+  } = useGetPredictionDailyQuery();
+
   const [activeTab, setActiveTab] = useState("Day");
 
   const renderCalendar = () => {
@@ -25,22 +42,33 @@ function Statistics() {
 
   return (
     <div className="container pb-8 pt-10">
-      <StatisticsPanel />
+      {(isLoading || isPredictionLoading) && <StatisticsPanelSkeleton />}
+      {(isError || isPredictionError) && <h2>Error...</h2>}
 
-      <div className="w-[712px] grid grid-col-2 auto-rows-max mt-8">
-        <div className="col-span-1 row-span-1">
-          <StatisticsCalendarTab activeTab={activeTab} setActiveTab={setActiveTab} />
+      {!isLoading && vacanciesForStat && prediction && (
+        <StatisticsPanel vacancies={vacanciesForStat} prediction={prediction} />
+      )}
+      {!isLoading && vacanciesForStat.length === 0 && <NoVacancyCard />}
+      {!isLoading && vacanciesForStat.length !== 0 && (
+        <div className="mt-10 flex justify-between">
+          <div className="grid-col-2 mt-8 grid w-[712px] auto-rows-max">
+            <div className="col-span-1 row-span-1">
+              <StatisticsCalendarTab
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+              />
+            </div>
+            <div className="col-span-1 row-span-2">
+              <Soon />
+            </div>
+            <div className="col-span-1 row-start-2">{renderCalendar()}</div>
+            <div className="col-span-2 row-start-3">
+              <ChartBar />
+            </div>
+          </div>
+          <GoughnutChart vacancies={vacanciesForStat} />
         </div>
-        <div className="col-span-1 row-span-2">
-          <Soon />
-        </div>
-        <div className="col-span-1 row-start-2">
-          {renderCalendar()}
-        </div>
-        <div className="col-span-2 row-start-3">
-          <ChartBar />
-        </div>
-      </div>
+      )}
     </div>
   );
 }

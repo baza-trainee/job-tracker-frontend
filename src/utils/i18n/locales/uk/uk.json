@@ -84,13 +84,13 @@
     "mixed": "Змішаний",
     "status": "По статусу",
     "saved": "Збережені",
-    "sent": "Відправлені",
-    "hrInterview": "HR співбесіда",
-    "testTask": "Тестове завдання",
-    "testTaskShort": "Тест. завдання",
-    "techInterview": "Технічна співбесіда",
-    "techInterviewShort": "Тех. співбесіда",
-    "rejection": "Відмова",
+    "resume": "Відправлені",
+    "hr": "HR співбесіда",
+    "test": "Тестове завдання",
+    "testShort": "Тест. завдання",
+    "tech": "Технічна співбесіда",
+    "techShort": "Тех. співбесіда",
+    "reject": "Відмова",
     "offer": "Оффер"
   },
   "statisticsHeader": {
@@ -101,7 +101,7 @@
     "firstMessage": "Збережіть хоча б одну вакансію для того, щоб бачити статистику!",
     "predictions": "Передбачення на сьогодні"
   },
-
+  "statisticsDoughnatDiagram": "Статистика всіх статусів",
   "footer": {
     "development": "Розробка Baza Trainee Ukraine 2024",
     "rights": " © Усі права захищені"
