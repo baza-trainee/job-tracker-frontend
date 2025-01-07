@@ -126,7 +126,7 @@ body {
   border: 1px solid #436b88;
   border-radius: 12px;
   padding: 24px;
-  width: 385px;
+  /* width: 385px; */
   max-width: 100%;
   font-family: "Inter";
   font-weight: 500;

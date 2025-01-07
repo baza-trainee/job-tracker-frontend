@@ -24,7 +24,7 @@ interface ChartData {
 
 const CustomLegend: React.FC<{ data: ChartData }> = ({ data }) => {
   return (
-    <div className="flex h-[200px] w-[518px] flex-col flex-wrap justify-between gap-6 rounded-2xl bg-backgroundTertiary px-6 py-4">
+    <div className="flex h-[170px] w-full flex-col flex-wrap justify-between gap-6 rounded-2xl bg-backgroundTertiary px-6 py-4">
       {data.labels.map((label, index) => (
         <div
           key={index}
@@ -156,11 +156,14 @@ export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
   };
 
   return (
-    <div className="flex h-[400px] w-[518px] flex-col gap-6">
+    <div className="flex w-[518px] flex-col gap-6">
       <h2 className="text-center font-nunito text-[28px]">
         {t(`statisticsDoughnatDiagram`)}
       </h2>
-      <Doughnut data={chartData} options={options} />
+      <div className="mx-auto h-[400px] w-[400px]">
+        <Doughnut data={chartData} options={options} />
+      </div>
+
       <CustomLegend data={chartData} />
     </div>
   );
