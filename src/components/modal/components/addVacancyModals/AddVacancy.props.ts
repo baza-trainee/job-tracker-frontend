@@ -5,4 +5,6 @@ export type VacancyInputProps = {
   label?: string;
   className?: string;
   value?: string;
+  date?: string;
+ 
 };
