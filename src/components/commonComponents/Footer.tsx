@@ -2,7 +2,12 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 function Footer() {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
+  const currentYear: number = new Date().getFullYear();
+  const link =
+    i18n.language === "uk"
+      ? "https://baza-trainee.tech/uk"
+      : "https://baza-trainee.tech/en";
   return (
     <footer className="pb-6">
       <h2
@@ -12,8 +17,15 @@ function Footer() {
           "md:text-[16px]"
         )}
       >
-        <a href="#" className="">
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          title=""
+          className=""
+        >
           {t("footer.development")}
+          {currentYear}
         </a>
         {t("footer.rights")}
       </h2>
