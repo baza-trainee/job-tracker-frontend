@@ -1,4 +1,5 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 export interface CheckboxProps {
   name: string;
@@ -10,5 +11,9 @@ export interface CheckboxProps {
   id?: string;
   disabled?: boolean;
   required?: boolean;
-  onClick?:() => void;
+  checked?: boolean;
+  date?: string;
+  onClick?: () => void;
+  getValues?: UseFormGetValues<any>;
+  setValue?: UseFormSetValue<any>;
 }

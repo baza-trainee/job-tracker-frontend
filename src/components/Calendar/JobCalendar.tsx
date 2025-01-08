@@ -11,6 +11,9 @@ export const JobCalendar = ({ changeDate, dateState }: JobCalendarProps) => {
       )}
       nextLabel={<Icon id={"arrow-right"} className="h-6 w-6" />}
       prevLabel={<Icon id={"arrow-left"} className="h-6 w-6" />}
+      formatMonthYear={(locale, date) =>
+        `${date.toLocaleDateString(locale, { month: "long" })} ${date.getFullYear()}`
+      }
       onChange={changeDate}
       value={dateState}
     />

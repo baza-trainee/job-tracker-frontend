@@ -1,99 +1,75 @@
 import { useTranslation } from "react-i18next";
 import { VacancyInputProps } from "./AddVacancy.props";
+import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
+import { SortOption } from "../../../Vacancies/components/dropdown/Dropdown.props";
 
 const AddVacancyInfo = () => {
   const { t } = useTranslation();
-  {
-    /* TODO: Компаня, Позиція, Лінк на вакансію, Канал зв'яку, Локація*/
-  }
-  const vacancyInput: VacancyInputProps[] = [
-    {
-      id: "company",
-      name: "company",
-      placeholder: t("addVacancy.placeholders.company"),
-      label: t("addVacancy.form.company"),
-    },
-    {
-      id: "vacancy",
-      name: "vacancy",
-      placeholder: t("addVacancy.placeholders.position"),
-      label: t("addVacancy.form.position"),
-    },
-    {
-      id: "link",
-      name: "link",
-      placeholder: t("addVacancy.placeholders.link"),
-      label: t("addVacancy.form.link"),
-    },
-    {
-      id: "communication",
-      name: "communication",
-      placeholder: t("addVacancy.placeholders.communication"),
-      label: t("addVacancy.form.communication"),
-    },
-    {
-      id: "location",
-      name: "location",
-      placeholder: t("addVacancy.placeholders.location"),
-      label: t("addVacancy.form.location"),
-    },
-  ];
 
-  const vacancyInputRadio: VacancyInputProps[] = [
-    {
-      id: "remote",
-      name: "work_type",
-      label: t("addVacancy.form.distance"),
-      value: "remote",
-    },
-    {
-      id: "office",
-      name: "work_type",
-      label: t("addVacancy.form.office"),
-      value: "office",
-    },
-    {
-      id: "hybrid",
-      name: "work_type",
-      label: t("addVacancy.form.hybrid"),
-      value: "hybrid",
-    },
+  /* TODO: Компаня, Позиція, Лінк на вакансію, Канал зв'яку, Локація*/
+  const vacancyFieldKeys = [
+    "company",
+    "vacancy",
+    "link",
+    "communication",
+    "location",
   ];
+  const vacancyFields: VacancyInputProps[] =
+    vacancyFieldKeys.map((fieldKey: any) => ({
+      id: fieldKey,
+      name: fieldKey,
+      placeholder: t(`addVacancy.placeholders.${fieldKey}`),
+      label: t(`addVacancy.form.${fieldKey}`),
+    })) || [];
 
-  const vacancyCheckboxCalendar: VacancyInputProps[] = [
-    {
-      id: "sendSummary",
-      name: "sendSummary",
-      label: t("addVacancy.form.sendSummary"),
-    },
-    {
-      id: "HR",
-      name: "HR",
-      label: t("addVacancy.form.HR"),
-    },
-    {
-      id: "testTask",
-      name: "testTask",
-      label: t("addVacancy.form.testTask"),
-    },
-    {
-      id: "technicalInterview",
-      name: "technicalInterview",
-      label: t("addVacancy.form.technicalInterview"),
-    },
-    {
-      id: "rejection",
-      name: "rejection",
-      label: t("addVacancy.form.rejection"),
-    },
-    {
-      id: "offer",
-      name: "offer",
-      label: t("addVacancy.form.offer"),
-    },
+  /* TODO: Формат: Дистанційно - Офіс - Змішаний */
+  const workTypeKeys = ["remote", "office", "hybrid"];
+  const workTypeOptions: VacancyInputProps[] =
+    workTypeKeys.map((typeKey: any) => ({
+      id: typeKey,
+      name: typeKey,
+      label: t(`addVacancy.form.${typeKey}`),
+      value: typeKey,
+    })) || [];
+
+  /* TODO: Статус - Відправ реюме, HR, Тест завдання, Тех співбесіда, Відмова, Офер*/
+  // 1 - запит на отримання резюме
+  const { data, isLoading, isError } = useGetAllUserDataQuery();
+  // 2 - масив з резюме
+  const resumeOptions: SortOption[] =
+    data?.resumes.map((resume: any) => ({
+      id: resume.id,
+      label: resume.name,
+    })) || [];
+  const buttonResumeOption = { id: "", label: "Оберіть відправлене резюме" };
+  // 3 - масив з причинами відмови
+  const rejectionReasonKeys = [
+    "SOFT_SKILLS",
+    "TECH_SKILLS",
+    "ENGLISH",
+    "EXPERIENCE",
+    "STOPPED",
+    "NO_ANSWER",
+    "OTHER",
   ];
+  const rejectOptions: SortOption[] =
+    rejectionReasonKeys.map((reject: any) => ({
+      id: reject,
+      label: reject,
+    })) || [];
 
-  return { vacancyInput, vacancyInputRadio, vacancyCheckboxCalendar };
+  const buttonRejectOption = { id: "", label: "Оберіть причину відмови" };
+
+  return {
+    vacancyFields,
+    workTypeOptions,
+    buttonResumeOption,
+    resumeOptions,
+    buttonRejectOption,
+    rejectOptions,
+    isLoading,
+    isError,
+  };
 };
 
 export default AddVacancyInfo;

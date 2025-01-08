@@ -214,9 +214,9 @@ const EditVacancy = () => {
 
                 <div className="flex flex-col gap-4">
                   <Checkbox
-                    name="sendSummary"
-                    id="sendSummary"
-                    label={t("addVacancy.form.sendSummary")}
+                    name="saved"
+                    id="saved"
+                    label={t("addVacancy.form.saved")}
                     register={register}
                     type="signUp"
                     errors={errors}
@@ -230,17 +230,17 @@ const EditVacancy = () => {
                     errors={errors}
                   />
                   <Checkbox
-                    name="testTask"
-                    id="testTask"
-                    label={t("addVacancy.form.testTask")}
+                    name="test"
+                    id="test"
+                    label={t("addVacancy.form.test")}
                     register={register}
                     type="signUp"
                     errors={errors}
                   />
                   <Checkbox
-                    name="technicalInterview"
-                    id="technicalInterview"
-                    label={t("addVacancy.form.technicalInterview")}
+                    name="tech"
+                    id="tech"
+                    label={t("addVacancy.form.tech")}
                     register={register}
                     type="signUp"
                     errors={errors}

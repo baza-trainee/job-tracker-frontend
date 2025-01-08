@@ -3,11 +3,13 @@ import { Button } from "../Button/Button";
 import { useAppDispatch } from "../../../store/hook";
 import { openModal } from "../../../store/slices/modalSlice/modalSlice";
 import Icon from "../../Icon/Icon";
+import { createNewStatuses } from "../../../store/slices/statusVacancy/vacancyStatusSlice";
 
 const AddVacancyButton = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
+  // alex
   return (
     <Button
       variant="accent"
@@ -19,6 +21,8 @@ const AddVacancyButton = () => {
             typeModal: "addVacancy",
           })
         );
+        // alex -- добавить функцию
+        dispatch(createNewStatuses());
       }}
     >
       <span className="w-[130px] text-base leading-[135%]">

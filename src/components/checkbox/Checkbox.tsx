@@ -9,6 +9,7 @@ export const Checkbox = ({
   errors,
   type = "default",
   register,
+  checked = false,
   disabled = false,
   required = false,
   ...props
@@ -32,10 +33,11 @@ export const Checkbox = ({
           {...register(name)}
           aria-describedby={`checkBoxError-${name}`}
           {...props}
+          checked={checked}
           className={classNames(
             type === "signUp" &&
               "peer relative h-5 w-5 shrink-0 appearance-none rounded-[4px] border-[1px] border-solid border-textBlack",
-            "md:border-2 md:h-6 md:w-6"
+            "md:h-6 md:w-6 md:border-2"
           )}
         />
         {type === "signUp" && (
