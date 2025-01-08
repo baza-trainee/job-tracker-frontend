@@ -14,6 +14,7 @@ const AddVacancyButton = () => {
     <Button
       variant="accent"
       size="big"
+      className="gap-3"
       onClick={() => {
         dispatch(
           openModal({
@@ -24,12 +25,10 @@ const AddVacancyButton = () => {
         dispatch(createNewStatuses());
       }}
     >
-      <div className="flex items-center gap-3">
-        <span className="w-[130px] text-base leading-[135%]">
-          {t("vacanciesHeader.addVacancy")}
-        </span>
-        <Icon id={"plus"} className="h-6 w-6" />
-      </div>
+      <span className="w-[130px] text-base leading-[135%]">
+        {t("vacanciesHeader.addVacancy")}
+      </span>
+      <Icon id={"plus"} className="h-6 w-6" />
     </Button>
   );
 };

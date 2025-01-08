@@ -84,13 +84,13 @@
     "mixed": "Mixed",
     "status": "By status",
     "saved": "Saved",
-    "sent": "Sent",
-    "hrInterview": "HR interview",
-    "testTask": "Test task",
-    "testTaskShort": "Test task",
-    "techInterview": "Technical interview",
-    "techInterviewShort": "Tech interview",
-    "rejection": "Rejection",
+    "resume": "Sent",
+    "hr": "HR interview",
+    "test": "Test task",
+    "testShort": "Test task",
+    "tech": "Technical interview",
+    "techShort": "Tech interview",
+    "reject": "Rejection",
     "offer": "Offer"
   },
   "statisticsHeader": {
@@ -101,8 +101,9 @@
     "firstMessage": "Save at least one vacancy to see statistics!",
     "predictions": "Predictions for today"
   },
+  "statisticsDoughnatDiagram": "Statistics of all statuses",
   "footer": {
-    "development": "Development of Baza Trainee Ukraine 2024",
+    "development": "Development of Baza Trainee Ukraine ",
     "rights": " © All rights have been reserved"
   },
   "modalMappingContentMap": {
