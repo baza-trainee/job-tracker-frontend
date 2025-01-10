@@ -18,6 +18,7 @@ import {
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { StatusName, RejectReason } from "../../../../types/vacancies.types";
+import { useState } from "react";
 
 const useVacancy = () => {
   const { refetch } = useGetAllUserDataQuery();
@@ -26,6 +27,8 @@ const useVacancy = () => {
   const [createStatusVacancyById] = useCreateStatusVacancyByIdMutation();
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.statusVacancy.newStatuses);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const {
     register,
@@ -67,6 +70,7 @@ const useVacancy = () => {
         work_type,
         isArchived,
       } = data;
+      setIsLoading(true)
 
       // 1 - запит на збереження вакансії
       const response = await createVacancy({
@@ -106,11 +110,12 @@ const useVacancy = () => {
       }
       refetch();
       reset();
+      notifySuccess("Дані успішно збережено. Дякую");
     } catch (error) {
       notifyError("Дані не збережено. Спробуйте ЩЕ");
       console.log(error);
     }
-    notifySuccess("Дані успішно збережено. Дякую");
+    setIsLoading(false)
     dispatch(closeConfirmation());
     dispatch(closeModal());
   };
@@ -124,6 +129,7 @@ const useVacancy = () => {
     setValue,
     errors,
     onSubmit,
+    isLoading
   };
 };
 
