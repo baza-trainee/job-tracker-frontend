@@ -1,34 +1,49 @@
 import { useTranslation } from "react-i18next";
 
-import { Vacancy } from "../../../../types/vacancies.types";
+import { StatusName, Vacancy } from "../../../../types/vacancies.types";
 
 const PanelListInfo = (vacancies: Vacancy[]) => {
   const { t } = useTranslation();
 
-  const vacanciesForStat = vacancies.filter((v) => v.isArchived === false);
+  const totalVacancies = vacancies?.length || 0;
 
-  const totalVacancies = vacanciesForStat?.length || 0;
+  // const totalResumes = vacancies?.reduce((count, vacancy) => {
+  //   return (
+  //     count +
+  //     vacancy.statuses.filter((status) => status.name === "resume").length
+  //   );
+  // }, 0);
 
-  const totalResumes = vacanciesForStat?.reduce((count, vacancy) => {
-    return (
-      count +
-      vacancy.statuses.filter((status) => status.name === "resume").length
-    );
-  }, 0);
+  // const totalTestTasks = vacancies?.reduce((count, vacancy) => {
+  //   return (
+  //     count + vacancy.statuses.filter((status) => status.name === "test").length
+  //   );
+  // }, 0);
 
-  const totalTestTasks = vacanciesForStat?.reduce((count, vacancy) => {
-    return (
-      count + vacancy.statuses.filter((status) => status.name === "test").length
-    );
-  }, 0);
+  // const totalInterviews = vacancies?.reduce((count, vacancy) => {
+  //   return (
+  //     count +
+  //     vacancy.statuses.filter((status) => status.name === "hr").length +
+  //     vacancy.statuses.filter((status) => status.name === "tech").length
+  //   );
+  // }, 0);
 
-  const totalInterviews = vacanciesForStat?.reduce((count, vacancy) => {
-    return (
-      count +
-      vacancy.statuses.filter((status) => status.name === "hr").length +
-      vacancy.statuses.filter((status) => status.name === "tech").length
-    );
-  }, 0);
+  const countQuantity = (
+    firstStatus: StatusName,
+    secondStatus?: StatusName
+  ) => {
+    return vacancies?.reduce((count, vacancy) => {
+      return secondStatus
+        ? count +
+            vacancy.statuses.filter((status) => status.name === firstStatus)
+              .length +
+            vacancy.statuses.filter((status) => status.name === secondStatus)
+              .length
+        : count +
+            vacancy.statuses.filter((status) => status.name === firstStatus)
+              .length;
+    }, 0);
+  };
 
   return [
     {
@@ -37,15 +52,15 @@ const PanelListInfo = (vacancies: Vacancy[]) => {
     },
     {
       cardName: t("statisticsHeader.resumes"),
-      cardQuantity: totalResumes,
+      cardQuantity: countQuantity(StatusName.RESUME),
     },
     {
       cardName: t("statisticsHeader.testTasks"),
-      cardQuantity: totalTestTasks,
+      cardQuantity: countQuantity(StatusName.TEST),
     },
     {
       cardName: t("statisticsHeader.interviews"),
-      cardQuantity: totalInterviews,
+      cardQuantity: countQuantity(StatusName.HR, StatusName.TECH),
     },
   ];
 };

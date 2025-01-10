@@ -31,7 +31,6 @@ const CustomLegend: React.FC<{ data: ChartData }> = ({ data }) => {
           style={{
             display: "flex",
             alignItems: "center",
-
             width: "223px",
           }}
         >

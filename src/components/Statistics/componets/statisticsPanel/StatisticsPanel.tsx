@@ -7,13 +7,14 @@ import StatisticsCard from "./StatisticsCard.tsx";
 import PanelListInfo from "./PanelListInfo.tsx";
 
 import { Vacancy } from "../../../../types/vacancies.types.ts";
+import { Prediction } from "../../../../types/predictions.types.ts";
 
-interface Prediction {
-  createdAt: Date;
-  id: string;
-  textUk: string;
-  textEn: string;
-}
+// interface Prediction {
+//   createdAt: Date;
+//   id: string;
+//   textUk: string;
+//   textEn: string;
+// }
 
 interface StatisticsPanelProps {
   vacancies: Vacancy[];
