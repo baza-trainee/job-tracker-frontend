@@ -27,7 +27,7 @@ const AddVacancyInfo = () => {
   const workTypeOptions: VacancyInputProps[] =
     workTypeKeys.map((typeKey: any) => ({
       id: typeKey,
-      name: typeKey,
+      name: "work_type",
       label: t(`addVacancy.form.${typeKey}`),
       value: typeKey,
     })) || [];
