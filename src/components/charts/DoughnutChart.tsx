@@ -157,14 +157,10 @@ export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
 
   return (
     <div className="flex w-[518px] flex-col gap-6">
-      {/* <h2 className="text-center font-nunito text-[28px]">
-        {t(`statisticsDoughnatDiagram`)}
-      </h2> */}
       <DiagramTitle title={t(`statisticsDoughnatDiagram`)} />
       <div className="mx-auto h-[400px] w-[400px]">
         <Doughnut data={chartData} options={options} />
       </div>
-
       <CustomLegend data={chartData} />
     </div>
   );

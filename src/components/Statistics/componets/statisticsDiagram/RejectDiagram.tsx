@@ -1,11 +1,10 @@
-import {
-  RejectReason,
-  StatusName,
-  Vacancy,
-} from "../../../../types/vacancies.types";
+import { useTranslation } from "react-i18next";
+import { RejectReason, Vacancy } from "../../../../types/vacancies.types";
 import { cn } from "../../../../utils/utils";
+import DiagramTitle from "./DiagramTitle";
 
 const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
+  const { t } = useTranslation();
   const rejects = vacancies.flatMap((vacancy) =>
     vacancy.statuses.filter((status) => status.name === "reject")
   );
@@ -60,7 +59,8 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
   console.log("rejects", rejects);
   console.log("test", test);
   return (
-    <div className="w-full">
+    <div className="mb-3 flex w-full flex-col gap-6">
+      <DiagramTitle title={t(`statisticsRejectDiagram.title`)} />
       <ul className={cn("flex h-20 w-full overflow-hidden rounded-xl")}>
         {rejectList.map((item, index) => {
           return (

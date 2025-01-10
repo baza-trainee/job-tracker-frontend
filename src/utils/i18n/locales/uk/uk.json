@@ -102,6 +102,7 @@
     "predictions": "Передбачення на сьогодні"
   },
   "statisticsDoughnatDiagram": "Статистика всіх статусів",
+  "statisticsRejectDiagram": { "title": "Причини відмов" },
   "footer": {
     "development": "Розробка Baza Trainee Ukraine ",
     "rights": " © Усі права захищені"

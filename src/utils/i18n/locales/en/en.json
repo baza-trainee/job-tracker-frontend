@@ -102,6 +102,7 @@
     "predictions": "Predictions for today"
   },
   "statisticsDoughnatDiagram": "Statistics of all statuses",
+  "statisticsRejectDiagram": { "title": "Reasons for rejections" },
   "footer": {
     "development": "Development of Baza Trainee Ukraine ",
     "rights": " © All rights have been reserved"
