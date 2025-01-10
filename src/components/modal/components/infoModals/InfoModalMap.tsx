@@ -27,7 +27,7 @@ const InfoModalMap = () => {
   const dataAddVacancy = useAppSelector(
     (state) => state.modal.dataConfirmation
   );
-  const { onSubmit } = useVacancy();
+  const { onSubmit, isLoading } = useVacancy();
 
   const handleButton = useCallback((): void => {
     dispatch(closeModal());
@@ -73,6 +73,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "big",
           funcButton: handleButton,
+          disabled: false,
         },
       ],
     },
@@ -87,6 +88,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "big",
           funcButton: handleButton,
+          disabled: false,
         },
       ],
     },
@@ -104,6 +106,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "big",
           funcButton: handleButton,
+          disabled: false,
         },
       ],
     },
@@ -121,6 +124,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "small",
           funcButton: handleForgotPassword,
+          disabled: false,
         },
         {
           label: "Увійти",
@@ -129,6 +133,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "small",
           funcButton: handleLogIn,
+          disabled: false,
         },
       ],
     },
@@ -143,6 +148,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "big",
           funcButton: handleButton,
+          disabled: false,
         },
       ],
     },
@@ -157,6 +163,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "big",
           funcButton: handleLogIn,
+          disabled: false,
         },
       ],
     },
@@ -171,6 +178,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "small",
           funcButton: handleButton,
+          disabled: false,
         },
         {
           label: "Спробувати",
@@ -179,6 +187,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "small",
           funcButton: handleForgotPassword,
+          disabled: false,
         },
       ],
     },
@@ -195,6 +204,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "small",
           funcButton: handleButton,
+          disabled: false,
         },
         {
           label: "Вийти",
@@ -203,6 +213,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "small",
           funcButton: handleLogOut,
+          disabled: false,
         },
       ],
     },
@@ -217,6 +228,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "small",
           funcButton: handleCloseConfirmation,
+          disabled: isLoading,
         },
         {
           label: "Зберегти",
@@ -225,6 +237,7 @@ const InfoModalMap = () => {
           variant: "ghost",
           size: "big",
           funcButton: handleAddVacancy,
+          disabled: isLoading,
         },
       ],
     },
