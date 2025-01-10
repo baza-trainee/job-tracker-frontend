@@ -110,11 +110,11 @@ const useVacancy = () => {
       }
       refetch();
       reset();
+      notifySuccess("Дані успішно збережено. Дякую");
     } catch (error) {
-      notifyError("Дані не збережено. Спробуйте ЩЕ");
+      notifyError("Дані не збережено. Спробуйте ще");
       console.log(error);
     }
-    notifySuccess("Дані успішно збережено. Дякую");
     setIsLoading(false)
     dispatch(closeConfirmation());
     dispatch(closeModal());
