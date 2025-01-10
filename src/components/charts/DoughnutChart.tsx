@@ -9,6 +9,7 @@ import {
 import { Doughnut } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
 import { Vacancy } from "../../types/vacancies.types";
+import DiagramTitle from "../Statistics/componets/statisticsDiagram/DiagramTitle";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -50,7 +51,7 @@ const CustomLegend: React.FC<{ data: ChartData }> = ({ data }) => {
   );
 };
 
-export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
+export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
   const { t } = useTranslation();
 
   const status = ["resume", "hr", "test", "tech", "reject", "offer"];
@@ -156,9 +157,10 @@ export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
 
   return (
     <div className="flex w-[518px] flex-col gap-6">
-      <h2 className="text-center font-nunito text-[28px]">
+      {/* <h2 className="text-center font-nunito text-[28px]">
         {t(`statisticsDoughnatDiagram`)}
-      </h2>
+      </h2> */}
+      <DiagramTitle title={t(`statisticsDoughnatDiagram`)} />
       <div className="mx-auto h-[400px] w-[400px]">
         <Doughnut data={chartData} options={options} />
       </div>
