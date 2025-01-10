@@ -119,20 +119,19 @@ body {
 }
 
 /* react-calendar */
-.react-calendar {
+.job-calendar.react-calendar {
   /* position: absolute; */
   /* top:34px; */
   /* right: 0px; */
   border: 1px solid #436b88;
   border-radius: 12px;
   padding: 24px;
-  /* width: 385px; */
+  width: 385px;
   max-width: 100%;
-  font-family: "Inter";
+  /* font-family: "Inter"; */
   font-weight: 500;
   background: #fdfeff;
-  font-size: 20px;
-  line-height: 160%;
+  font-family: "Nunito";
   text-align: center;
   color: #0a0a0a;
 }
@@ -141,8 +140,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 0px;
+  gap: 14px;  
+  font-size: 20px;
+  line-height: 160%;
+  font-weight: 500;
+}
+
+.react-calendar__navigation button {
+  text-transform: capitalize;
+}
+
+/* .job-calendar .react-calendar__navigation {
+  margin-bottom:10px;
+} */
+
+.job-calendar .react-calendar__navigation,
+.statistics-calendar__day .react-calendar__navigation {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.statistics-calendar__months .react-calendar__navigation,
+.statistics-calendar__years .react-calendar__navigation {
+  margin-bottom: 24px;
 }
 
 button.react-calendar__navigation__label {
@@ -156,28 +176,24 @@ button.react-calendar__navigation__label {
   display: none;
 }
 
-.react-calendar__navigation button {
-  font-family: "Nunito";
-  text-transform: capitalize;
-  font-weight: 500;
-  line-height: 160%;
-  text-align: center;
-  margin-bottom:10px;
+.job-calendar .react-calendar__navigation button:enabled:hover,
+.job-calendar .react-calendar__navigation button:enabled:focus {
+  background-color: #fffefd;
 }
-
-.react-calendar__navigation button:enabled:hover,
-.react-calendar__navigation button:enabled:focus {
-  background-color: #fdfeff;
-}
-.react-calendar__navigation button[disabled] {
+.job-calendar .react-calendar__navigation button[disabled] {
   background-color: #fdfeff;
 }
 
-
-.react-calendar__month-view__weekdays {
-  margin-bottom: 48px;
+.react-calendar__month-view__weekdays {  
   border-bottom: 1px solid #f5f5f5;
+  text-align: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
+
+/* .job-calendar .react-calendar__month-view__weekdays {
+  margin-bottom: 48px;
+} */
 
 abbr[title] {
   font-weight: 500;
@@ -203,22 +219,90 @@ abbr {
   height: 48px;
 }
 
-
 .react-calendar__tile--now {
+  background: #DBDCDD;
+  border-radius: 100px;
+  font-weight: 500;
+  color: #333
+}
+
+/* .job-calendar .react-calendar__tile--now {
   background: #bfdef5;
   border-radius: 6px;
   font-weight: 700;
   color: #0a0a0a;
 }
 
+.statistics-calendar__day .react-calendar__tile--now,
+.statistics-calendar__months .react-calendar__tile--now,
+.statistics-calendar__years .react-calendar__tile--now {
+  background: #DBDCDD;
+  border-radius: 100px;
+  font-weight: 500;
+  color: #333
+} */
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
+  background: #C6E7FF;
+  border-radius: 100px;
+  color: #333;
+}
+
+/* .job-calendar .react-calendar__tile:enabled:hover,
+.job-calendar .react-calendar__tile:enabled:focus {
   background: rgba(208, 232, 197, 0.4);
   border-radius: 6px;
   color: #0a0a0a;
 }
 
+.statistics-calendar__day .react-calendar__tile:enabled:hover,
+.statistics-calendar__day .react-calendar__tile:enabled:focus,
+.statistics-calendar__months .react-calendar__tile:enabled:hover,
+.statistics-calendar__months .react-calendar__tile:enabled:focus,
+.statistics-calendar__years .react-calendar__tile:enabled:hover,
+.statistics-calendar__years .react-calendar__tile:enabled:focus {
+  background: #C6E7FF;
+  border-radius: 100px;
+  color: #333;
+} */
+
+.react-calendar__year-view__months,
+.react-calendar__decade-view__years {
+  gap: 16px;
+  padding-left: 55px;
+  padding-right: 55px;
+}
+
+.react-calendar__year-view__months > button,
+.react-calendar__decade-view__years > button {
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+  margin-inline-end: unset !important;
+}
+
+.react-calendar__year-view__months .react-calendar__tile--now,
+.react-calendar__year-view__months .react-calendar__tile:enabled:hover,
+.react-calendar__year-view__months .react-calendar__tile:enabled:focus,
+.react-calendar__decade-view__years .react-calendar__tile--now,
+.react-calendar__decade-view__years .react-calendar__tile:enabled:hover,
+.react-calendar__decade-view__years .react-calendar__tile:enabled:focus {
+  border-radius: 24px;
+}
+
+.react-calendar__year-view__months__month > abbr {
+  display: none; /* приховуємо стандартний текст місяців */
+}
+.react-calendar__year-view__months__month > span {
+  display: inline-block; /* кастомний скорочений текст місяців*/
+}
+
+/* Приховані клітинки для днів з іншого місяця */
+.calendar-hidden-cell {
+  visibility: hidden; /* Приховує текст і контент клітинки */
+  pointer-events: none; /* Вимикає взаємодію */
+  background-color: transparent; /* Зберігає прозорий фон */
+}
 
 .modalScroll{
   height: auto;

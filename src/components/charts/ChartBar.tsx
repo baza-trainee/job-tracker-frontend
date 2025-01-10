@@ -59,7 +59,7 @@ import {
   export default function ChartBar() {
     return (
       // <div className={"size-96"}>
-      <div className={"w-full h-auto mt-4"}>
+      <div className={"w-full h-auto min-h-56 mt-4"}>
         <Bar data={data} options={options} />
         {/* <Bar data={data} /> */}
       </div>
