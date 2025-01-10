@@ -11,8 +11,9 @@ export const StatisticsCalendarMonth = () => {
     return (
         <div className="statistics-calendar w-[356px] h-auto box-border bg-backgroundTertiary px-2 py-6 rounded-[20px]">
             <Calendar
-                view="year" // Відображає рік і 12 місяців
-                locale={i18n.language} className="custom-calendar"
+                view="year" // Відображає 1 рік, в ньому місяців
+                locale={i18n.language} 
+                className="statistics-calendar__months"
                 nextLabel={<Icon id={"arrow-right"} className="size-6" />}
                 prevLabel={<Icon id={"arrow-left"} className="size-6" />}
                 tileContent={({ date, view }) => {
