@@ -189,5 +189,8 @@
     "notes": {
       "max": "Maximum length is 4000 characters"
     }
+  },
+  "calendar": {
+    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   }
 }
