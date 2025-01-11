@@ -102,7 +102,16 @@
     "predictions": "Predictions for today"
   },
   "statisticsDoughnatDiagram": "Statistics of all statuses",
-  "statisticsRejectDiagram": { "title": "Reasons for rejections" },
+  "statisticsRejectDiagram": {
+    "title": "Reasons for rejections",
+    "OTHER": "Other",
+    "NO_ANSWER": "No answer",
+    "STOPPED": "Stopped",
+    "SOFT_SKILLS": "Soft Skills",
+    "TECH_SKILLS": "Tech-skills",
+    "ENGLISH": "English",
+    "EXPERIENCE": "Experience"
+  },
   "footer": {
     "development": "Development of Baza Trainee Ukraine ",
     "rights": " © All rights have been reserved"
