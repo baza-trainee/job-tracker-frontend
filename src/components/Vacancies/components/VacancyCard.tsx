@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import Icon from "../../Icon/Icon.tsx";
 
-type VacancyCardProps = {
+export type VacancyCardProps = {
     colorSectionBG: string;
     colorHoverBG: string;
     titleVacancy: string;

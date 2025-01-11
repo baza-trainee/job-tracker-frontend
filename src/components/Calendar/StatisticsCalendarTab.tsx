@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
 type StatisticsCalendarTabProps = {
@@ -6,19 +7,24 @@ type StatisticsCalendarTabProps = {
 };
 
 export const StatisticsCalendarTab: React.FC<StatisticsCalendarTabProps> = ({ activeTab, setActiveTab }) => {
-    const tabs = ["Day", "Month", "Year"];
+    const { t } = useTranslation();
+    const tabs = [
+        {key: "day", label: t("calendarTabs.day")},
+        {key: "month", label: t("calendarTabs.month")},
+        {key: "year", label: t("calendarTabs.year")}
+    ];
 
     return (
         <div className="w-[356px] flex justify-center gap-4 text-xl mb-6 box-border text-textBlack">
             {tabs.map((tab) => (
                 <button
-                    key={tab}
+                    key={tab.key}
                     className={clsx("h-full px-4 py-2 border-b",
-                        activeTab === tab ? "border-b-textBlack" : "border-b-color9"
+                        activeTab === tab.key ? "border-b-textBlack" : "border-b-color9"
                     )}
-                    onClick={() => setActiveTab(tab)}
+                    onClick={() => setActiveTab(tab.key)}
                 >
-                    {tab}
+                    {tab.label}
                 </button>
             ))}
         </div>

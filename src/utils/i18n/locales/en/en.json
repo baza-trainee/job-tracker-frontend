@@ -192,5 +192,14 @@
   },
   "calendar": {
     "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  },
+  "calendarTabs": {
+    "day": "Day",
+    "month": "Month",
+    "year": "Year"
+  },
+  "soonSection": {
+    "soon": "Soon",
+    "addEvent": "Add event"
   }
 }
