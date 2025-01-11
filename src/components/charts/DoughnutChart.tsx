@@ -26,6 +26,11 @@ export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
         ).length
       : 0
   );
+  console.log("data", data);
+
+  if (!data.some((v) => v !== 0)) {
+    return null;
+  }
 
   const total = data.reduce((sum, value) => sum + value, 0);
 

@@ -162,7 +162,7 @@ button.react-calendar__navigation__label {
   font-weight: 500;
   line-height: 160%;
   text-align: center;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .react-calendar__navigation button:enabled:hover,
@@ -172,7 +172,6 @@ button.react-calendar__navigation__label {
 .react-calendar__navigation button[disabled] {
   background-color: #fdfeff;
 }
-
 
 .react-calendar__month-view__weekdays {
   margin-bottom: 48px;
@@ -203,14 +202,12 @@ abbr {
   height: 48px;
 }
 
-
 .react-calendar__tile--now {
   background: #bfdef5;
   border-radius: 6px;
   font-weight: 700;
   color: #0a0a0a;
 }
-
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
@@ -219,10 +216,22 @@ abbr {
   color: #0a0a0a;
 }
 
-
-.modalScroll{
+.modalScroll {
   height: auto;
-  max-height: calc(100vh*0.75);
+  max-height: calc(100vh * 0.75);
   overflow: hidden auto;
   scrollbar-width: thin;
+}
+
+@keyframes expandWidth {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: var(--target-width);
+  }
+}
+
+.bar {
+  animation: expandWidth 0.5s ease-out forwards;
 }
