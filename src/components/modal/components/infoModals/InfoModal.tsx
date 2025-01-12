@@ -33,6 +33,7 @@ const InfoModal = ({ type, textColor }: InfoModalProps) => {
             variant={value.variant as "ghost" | "accent"}
             size={value.size as "big" | "small"}
             onClick={() => value.funcButton()}
+            disabled={value.disabled || false}
           >
             {value.label}
           </Button>

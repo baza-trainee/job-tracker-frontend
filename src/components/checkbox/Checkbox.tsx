@@ -9,7 +9,7 @@ export const Checkbox = ({
   errors,
   type = "default",
   register,
-  checked = false,
+  checked,
   disabled = false,
   required = false,
   ...props
