@@ -1,7 +1,7 @@
-import cn from "clsx";
 import { InputProps } from "./Input.props";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { cn } from "../../../utils/utils";
 import Icon from "../../Icon/Icon";
 
 export const Input = ({
@@ -15,6 +15,11 @@ export const Input = ({
   errors,
   value,
   id,
+  isButtonCopy = false,
+  isButtonRemoveInput = false,
+  handleClickButtonRemoveInput,
+  handleClickButtonCopyInput,
+  isCheckButtons = true,
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -26,7 +31,7 @@ export const Input = ({
 
   return (
     <div
-      className={cn("relative", [className])}
+      className={cn("relative", className)}
       id={id}
       onFocus={() => setIsIcon(true)}
       onBlur={() => setIsIcon(false)}
@@ -46,13 +51,19 @@ export const Input = ({
         </label>
       )}
       <div className="relative">
-        <div className={"relative flex w-full items-center"}>
+        <div
+          className={cn(
+            "relative flex w-full items-center bg-white",
+            "peer rounded-xl border font-nunito text-base font-medium text-textBlack transition focus-within:border-textOther",
+            "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
+            "md:h-11 md:px-6 md:py-3 md:text-[14px]"
+          )}
+        >
           <input
             id={`input-${name}`}
             className={cn(
-              "peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
-              "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
-              "md:h-11 md:px-6 md:py-3 md:text-[14px]",
+              "w-full",
+              "placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:outline-none active:border-textOther",
               "xl:text-[14px]",
               "2xl:text-[16px]",
               !error && "border-color5",
@@ -65,31 +76,52 @@ export const Input = ({
             {...register(name)}
             aria-describedby={`inputError-${name}`}
           />
-          {error ? (
-            <button
-              onClick={() => handleResetField(name)}
-              className={
-                "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
-              }
-            >
-              <Icon id="cancel-in-round" className="h-6 w-6 fill-color2" />
-            </button>
-          ) : (
-            !isIcon && (
-              <div
-                className={
-                  "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] peer-placeholder-shown:hidden"
-                }
+          <div className="flex gap-2">
+            {isButtonCopy && (
+              <button
+                type="button"
+                aria-label="copy text"
+                onClick={handleClickButtonCopyInput}
               >
-                <Icon id="check-box" className="h-6 w-6 fill-color5" />
-              </div>
-            )
-          )}
+                <Icon id="copy" className="h-6 w-6 fill-black" />
+              </button>
+            )}
+            {isButtonRemoveInput && (
+              <button
+                type="button"
+                aria-label="remove field"
+                onClick={handleClickButtonRemoveInput}
+              >
+                <Icon id="close-default" className="h-6 w-6 fill-black" />
+              </button>
+            )}
+            {isCheckButtons ? (
+              error ? (
+                <button
+                  onClick={() => handleResetField(name)}
+                  // className="absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
+                >
+                  <Icon id="cancel-in-round" className="h-6 w-6 fill-color2" />
+                </button>
+              ) : (
+                !isIcon && (
+                  <div
+                  // className="absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] peer-placeholder-shown:hidden"
+                  >
+                    <Icon id="check-box" className="h-6 w-6 fill-color5" />
+                  </div>
+                )
+              )
+            ) : null}
+          </div>
         </div>
         {error && (
           <span
             id={`inputError-${name}`}
-            className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
+            className={cn(
+              "absolute left-0 top-[46px]",
+              "inline-block font-nunito text-base font-medium text-color2"
+            )}
           >
             {t(String(error?.message))}
           </span>
