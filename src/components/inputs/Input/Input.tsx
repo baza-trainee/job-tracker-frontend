@@ -1,8 +1,8 @@
-import { InputProps } from "./Input.props";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { cn } from "../../../utils/utils";
-import Icon from "../../Icon/Icon";
+import { cn } from "@/utils/utils";
+import { InputProps } from "./Input.props";
+import Icon from "@/components/Icon/Icon";
 
 export const Input = ({
   name,
