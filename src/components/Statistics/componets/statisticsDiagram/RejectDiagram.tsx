@@ -1,10 +1,11 @@
+import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { RejectReason, Vacancy } from "../../../../types/vacancies.types";
 import { cn } from "../../../../utils/utils";
+
 import DiagramTitle from "./DiagramTitle";
 import CustomLegend from "../../../charts/CustomLegend";
 import CustomTooltip from "../../../charts/CustomTooltip";
-import { useMemo, useRef, useState } from "react";
 
 const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
   const { t } = useTranslation();
@@ -111,7 +112,6 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
     percent: string;
   }>({
     visible: false,
-
     x: null,
     y: null,
     title: "",
@@ -164,7 +164,7 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
               className={cn(
                 `bg-${item.color}`,
                 `border-${item.color}`,
-                `bar group relative border-2 transition-colors first:rounded-s-xl last:rounded-e-xl hover:border-iconHover hover:brightness-95 hover:saturate-200`
+                `bar group relative border-2 transition-colors first:rounded-s-xl last:rounded-e-xl hover:border-iconHover hover:brightness-90 hover:saturate-200`
               )}
             ></li>
           );

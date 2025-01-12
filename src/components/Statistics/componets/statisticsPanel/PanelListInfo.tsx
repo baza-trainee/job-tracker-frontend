@@ -1,66 +1,42 @@
-import { useTranslation } from "react-i18next";
-
 import { StatusName, Vacancy } from "../../../../types/vacancies.types";
+import { CardNameKeys } from "./statPanel.types";
 
 const PanelListInfo = (vacancies: Vacancy[]) => {
-  const { t } = useTranslation();
+  let totalResumes = 0;
+  let totalTestTasks = 0;
+  let totalInterviews = 0;
 
-  const totalVacancies = vacancies?.length || 0;
-
-  // const totalResumes = vacancies?.reduce((count, vacancy) => {
-  //   return (
-  //     count +
-  //     vacancy.statuses.filter((status) => status.name === "resume").length
-  //   );
-  // }, 0);
-
-  // const totalTestTasks = vacancies?.reduce((count, vacancy) => {
-  //   return (
-  //     count + vacancy.statuses.filter((status) => status.name === "test").length
-  //   );
-  // }, 0);
-
-  // const totalInterviews = vacancies?.reduce((count, vacancy) => {
-  //   return (
-  //     count +
-  //     vacancy.statuses.filter((status) => status.name === "hr").length +
-  //     vacancy.statuses.filter((status) => status.name === "tech").length
-  //   );
-  // }, 0);
-
-  const countQuantity = (
-    firstStatus: StatusName,
-    secondStatus?: StatusName
-  ) => {
-    return vacancies?.reduce((count, vacancy) => {
-      return secondStatus
-        ? count +
-            vacancy.statuses.filter((status) => status.name === firstStatus)
-              .length +
-            vacancy.statuses.filter((status) => status.name === secondStatus)
-              .length
-        : count +
-            vacancy.statuses.filter((status) => status.name === firstStatus)
-              .length;
-    }, 0);
-  };
+  vacancies.forEach((vacancy) => {
+    vacancy.statuses.forEach((status) => {
+      if (status.name === StatusName.RESUME) {
+        totalResumes++;
+      } else if (status.name === StatusName.TEST) {
+        totalTestTasks++;
+      } else if (
+        status.name === StatusName.HR ||
+        status.name === StatusName.TECH
+      ) {
+        totalInterviews++;
+      }
+    });
+  });
 
   return [
     {
-      cardName: t("statisticsHeader.vacancies"),
-      cardQuantity: totalVacancies,
+      cardName: CardNameKeys.VACANCIES,
+      cardQuantity: vacancies.length,
     },
     {
-      cardName: t("statisticsHeader.resumes"),
-      cardQuantity: countQuantity(StatusName.RESUME),
+      cardName: CardNameKeys.RESUME,
+      cardQuantity: totalResumes,
     },
     {
-      cardName: t("statisticsHeader.testTasks"),
-      cardQuantity: countQuantity(StatusName.TEST),
+      cardName: CardNameKeys.TESTTASKS,
+      cardQuantity: totalTestTasks,
     },
     {
-      cardName: t("statisticsHeader.interviews"),
-      cardQuantity: countQuantity(StatusName.HR, StatusName.TECH),
+      cardName: CardNameKeys.INTERVIEWS,
+      cardQuantity: totalInterviews,
     },
   ];
 };

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "../../../../utils/utils.ts";
 
@@ -6,20 +6,11 @@ import PredictionCard from "./PredictionCard.tsx";
 import StatisticsCard from "./StatisticsCard.tsx";
 import PanelListInfo from "./PanelListInfo.tsx";
 
-import { Vacancy } from "../../../../types/vacancies.types.ts";
-import { Prediction } from "../../../../types/predictions.types.ts";
-
-// interface Prediction {
-//   createdAt: Date;
-//   id: string;
-//   textUk: string;
-//   textEn: string;
-// }
-
-interface StatisticsPanelProps {
-  vacancies: Vacancy[];
-  prediction: Prediction | null;
-}
+import {
+  CardNameKeys,
+  Panellist,
+  StatisticsPanelProps,
+} from "./statPanel.types.ts";
 
 const StatisticsPanel: FC<StatisticsPanelProps> = ({
   vacancies,
@@ -30,7 +21,20 @@ const StatisticsPanel: FC<StatisticsPanelProps> = ({
   const predictionText =
     i18n.language === "uk" ? prediction?.textUk : prediction?.textEn;
 
-  const panelList = PanelListInfo(vacancies);
+  const localizedHeaders = useMemo(() => {
+    return {
+      [CardNameKeys.VACANCIES]: t("statisticsHeader.vacancies"),
+      [CardNameKeys.RESUME]: t("statisticsHeader.resumes"),
+      [CardNameKeys.TESTTASKS]: t("statisticsHeader.testTasks"),
+      [CardNameKeys.INTERVIEWS]: t("statisticsHeader.interviews"),
+      [CardNameKeys.PREDICTIONS]: t("statisticsHeader.predictions"),
+    };
+  }, [t]);
+
+  const panelList: Panellist[] = useMemo(
+    () => PanelListInfo(vacancies),
+    [vacancies]
+  );
 
   return (
     <>
@@ -41,14 +45,14 @@ const StatisticsPanel: FC<StatisticsPanelProps> = ({
               return (
                 <StatisticsCard
                   key={index}
-                  cardName={item.cardName}
+                  cardName={localizedHeaders[item.cardName]}
                   cardQuantity={item.cardQuantity}
                 />
               );
             })}
           </ul>
           <PredictionCard
-            header={t("statisticsHeader.predictions")}
+            header={localizedHeaders.predictions}
             text={predictionText || ""}
           />
         </div>
