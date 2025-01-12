@@ -34,11 +34,11 @@ export enum StatusName {
 }
 
 export enum RejectReason {
-  SOFT_SKILLS = "SoftSkills",
-  TECH_SKILLS = "TechSkills",
-  ENGLISH = "English",
-  EXPERIENCE = "experience",
-  STOPPED = "stoped",
-  NO_ANSWER = "no_answer",
-  OTHER = "other",
+  SOFT_SKILLS = "SOFT_SKILLS",
+  TECH_SKILLS = "TECH_SKILLS",
+  ENGLISH = "ENGLISH",
+  EXPERIENCE = "EXPERIENCE",
+  STOPPED = "STOPPED",
+  NO_ANSWER = "NO_ANSWER",
+  OTHER = "OTHER",
 }

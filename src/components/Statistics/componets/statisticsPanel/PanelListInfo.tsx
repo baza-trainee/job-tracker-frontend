@@ -1,50 +1,41 @@
-import { useTranslation } from "react-i18next";
-
-import { Vacancy } from "../../../../types/vacancies.types";
+import { StatusName, Vacancy } from "../../../../types/vacancies.types";
+import { CardNameKeys } from "./statPanel.types";
 
 const PanelListInfo = (vacancies: Vacancy[]) => {
-  const { t } = useTranslation();
+  let totalResumes = 0;
+  let totalTestTasks = 0;
+  let totalInterviews = 0;
 
-  const vacanciesForStat = vacancies.filter((v) => v.isArchived === false);
-
-  const totalVacancies = vacanciesForStat?.length || 0;
-
-  const totalResumes = vacanciesForStat?.reduce((count, vacancy) => {
-    return (
-      count +
-      vacancy.statuses.filter((status) => status.name === "resume").length
-    );
-  }, 0);
-
-  const totalTestTasks = vacanciesForStat?.reduce((count, vacancy) => {
-    return (
-      count + vacancy.statuses.filter((status) => status.name === "test").length
-    );
-  }, 0);
-
-  const totalInterviews = vacanciesForStat?.reduce((count, vacancy) => {
-    return (
-      count +
-      vacancy.statuses.filter((status) => status.name === "hr").length +
-      vacancy.statuses.filter((status) => status.name === "tech").length
-    );
-  }, 0);
+  vacancies.forEach((vacancy) => {
+    vacancy.statuses.forEach((status) => {
+      if (status.name === StatusName.RESUME) {
+        totalResumes++;
+      } else if (status.name === StatusName.TEST) {
+        totalTestTasks++;
+      } else if (
+        status.name === StatusName.HR ||
+        status.name === StatusName.TECH
+      ) {
+        totalInterviews++;
+      }
+    });
+  });
 
   return [
     {
-      cardName: t("statisticsHeader.vacancies"),
-      cardQuantity: totalVacancies,
+      cardName: CardNameKeys.VACANCIES,
+      cardQuantity: vacancies.length,
     },
     {
-      cardName: t("statisticsHeader.resumes"),
+      cardName: CardNameKeys.RESUME,
       cardQuantity: totalResumes,
     },
     {
-      cardName: t("statisticsHeader.testTasks"),
+      cardName: CardNameKeys.TESTTASKS,
       cardQuantity: totalTestTasks,
     },
     {
-      cardName: t("statisticsHeader.interviews"),
+      cardName: CardNameKeys.INTERVIEWS,
       cardQuantity: totalInterviews,
     },
   ];
