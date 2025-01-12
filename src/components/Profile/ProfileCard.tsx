@@ -1,5 +1,4 @@
-import { cn } from "../../utils/utils";
-
+import { cn } from "@/utils/utils";
 import FormProfileCard from "./FormProfileCard";
 import { PropsProfileCard } from "./profileCardProps.props";
 

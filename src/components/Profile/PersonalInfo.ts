@@ -1,3 +1,3 @@
-type PersonalInfoProps = {};
+// type PersonalInfoProps = {};
 
-const PersonalInfo = [];
+// const PersonalInfo = [];
