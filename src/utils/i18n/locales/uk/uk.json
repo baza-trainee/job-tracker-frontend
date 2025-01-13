@@ -102,6 +102,16 @@
     "predictions": "Передбачення на сьогодні"
   },
   "statisticsDoughnatDiagram": "Статистика всіх статусів",
+  "statisticsRejectDiagram": {
+    "title": "Причини відмов",
+    "OTHER": "Інше",
+    "NO_ANSWER": "Без відповіді",
+    "STOPPED": "Не актуально",
+    "SOFT_SKILLS": "Soft Skills",
+    "TECH_SKILLS": "Tech-Skills",
+    "ENGLISH": "Англійська",
+    "EXPERIENCE": "Досвід"
+  },
   "footer": {
     "development": "Розробка Baza Trainee Ukraine ",
     "rights": " © Усі права захищені"

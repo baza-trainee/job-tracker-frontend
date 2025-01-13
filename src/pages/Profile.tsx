@@ -1,23 +1,13 @@
-import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice";
+import ProfileCard from "../components/Profile/ProfileCard";
 
 function Profile() {
-  const {
-    data,
-    //  isSuccess, isFetching, error,
-    isLoading,
-    isError,
-  } = useGetAllUserDataQuery();
-
-  if (isLoading) {
-    return <h2>Loading....</h2>;
-  }
-  if (isError) {
-    return <h2>Error... </h2>;
-  }
   return (
-    <div className="flex min-h-96 w-full items-center justify-center">
-      <h2>Profile</h2>
-      <div>{JSON.stringify(data)}</div>
+    <div className="container flex flex-row flex-wrap gap-8 p-6">
+      <ProfileCard cardsType="personalInfo" className="h-auto w-[30%]" />
+      <ProfileCard cardsType="links" className="h-auto w-[50%]" />
+      <ProfileCard cardsType="projects" className="h-auto w-[25%]" />
+      <ProfileCard cardsType="resumes" className="h-auto w-[24%]" />
+      <ProfileCard cardsType="coverLetters" className="h-auto w-[25%]" />
     </div>
   );
 }
