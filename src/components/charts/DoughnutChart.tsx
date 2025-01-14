@@ -9,49 +9,12 @@ import {
 import { Doughnut } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
 import { Vacancy } from "../../types/vacancies.types";
+import DiagramTitle from "../Statistics/componets/statisticsDiagram/DiagramTitle";
+import CustomLegend from "./CustomLegend";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-interface ChartData {
-  labels: string[];
-  datasets: {
-    data: number[];
-    backgroundColor: string[];
-    borderColor: string[];
-    borderWidth: number;
-  }[];
-}
-
-const CustomLegend: React.FC<{ data: ChartData }> = ({ data }) => {
-  return (
-    <div className="flex h-[170px] w-full flex-col flex-wrap justify-between gap-6 rounded-2xl bg-backgroundTertiary px-6 py-4">
-      {data.labels.map((label, index) => (
-        <div
-          key={index}
-          style={{
-            display: "flex",
-            alignItems: "center",
-
-            width: "223px",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: data.datasets[0].backgroundColor[index],
-              width: 70,
-              height: 30,
-              marginRight: 8,
-              borderRadius: 4,
-            }}
-          ></div>
-          <span>{label}</span>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
+export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
   const { t } = useTranslation();
 
   const status = ["resume", "hr", "test", "tech", "reject", "offer"];
@@ -63,6 +26,10 @@ export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
         ).length
       : 0
   );
+
+  if (!data.some((v) => v !== 0)) {
+    return null;
+  }
 
   const total = data.reduce((sum, value) => sum + value, 0);
 
@@ -157,14 +124,11 @@ export default function GoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
 
   return (
     <div className="flex w-[518px] flex-col gap-6">
-      <h2 className="text-center font-nunito text-[28px]">
-        {t(`statisticsDoughnatDiagram`)}
-      </h2>
+      <DiagramTitle title={t(`statisticsDoughnatDiagram`)} />
       <div className="mx-auto h-[400px] w-[400px]">
         <Doughnut data={chartData} options={options} />
       </div>
-
-      <CustomLegend data={chartData} />
+      <CustomLegend data={chartData} className="h-[170px] flex-col flex-wrap" />
     </div>
   );
 }

@@ -140,7 +140,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 14px;  
+  gap: 14px;
   font-size: 20px;
   line-height: 160%;
   font-weight: 500;
@@ -184,7 +184,7 @@ button.react-calendar__navigation__label {
   background-color: #fdfeff;
 }
 
-.react-calendar__month-view__weekdays {  
+.react-calendar__month-view__weekdays {
   border-bottom: 1px solid #f5f5f5;
   text-align: center;
   padding-top: 12px;
@@ -220,10 +220,10 @@ abbr {
 }
 
 .react-calendar__tile--now {
-  background: #DBDCDD;
+  background: #dbdcdd;
   border-radius: 100px;
   font-weight: 500;
-  color: #333
+  color: #333;
 }
 
 /* .job-calendar .react-calendar__tile--now {
@@ -244,7 +244,7 @@ abbr {
 
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background: #C6E7FF;
+  background: #c6e7ff;
   border-radius: 100px;
   color: #333;
 }
@@ -304,9 +304,22 @@ abbr {
   background-color: transparent; /* Зберігає прозорий фон */
 }
 
-.modalScroll{
+.modalScroll {
   height: auto;
-  max-height: calc(100vh*0.75);
+  max-height: calc(100vh * 0.75);
   overflow: hidden auto;
   scrollbar-width: thin;
+}
+
+@keyframes expandWidth {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: var(--target-width);
+  }
+}
+
+.bar {
+  animation: expandWidth 0.5s ease-out forwards;
 }
