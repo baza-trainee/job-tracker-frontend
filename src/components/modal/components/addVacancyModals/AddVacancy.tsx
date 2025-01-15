@@ -32,7 +32,7 @@ const AddVacancy = () => {
     handleSubmit((data) => {
       dispatch(
         openConfirmation({
-          typeConfirmation: "saveChangesVacancies",
+          typeConfirmation: "saveAddVacancies",
           dataConfirmation: data,
         })
       );
@@ -43,6 +43,8 @@ const AddVacancy = () => {
     setValue("isArchived", true);
     saveVacancy();
   };
+
+  const error = !!Object.keys(errors).length;
 
   return (
     <div className="">
@@ -125,6 +127,7 @@ const AddVacancy = () => {
               className="mx-auto mt-8"
               variant="ghost"
               size="small"
+              disabled={error}
               onClick={handleSubmitArchive}
             >
               {t("addVacancy.form.archive")}{" "}
@@ -135,6 +138,7 @@ const AddVacancy = () => {
               className="mx-auto mt-8 bg-button"
               variant="ghost"
               size="big"
+              disabled={error}
               onClick={saveVacancy}
             >
               {t("addVacancy.form.save")}

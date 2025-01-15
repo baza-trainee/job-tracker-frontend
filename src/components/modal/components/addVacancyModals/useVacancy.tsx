@@ -50,7 +50,7 @@ const useVacancy = () => {
       isArchived: false,
 
       resumeDropdown: "",
-      rejectionDropdown: "",
+      rejectDropdown: "",
     },
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
@@ -112,7 +112,7 @@ const useVacancy = () => {
       reset();
       notifySuccess("Дані успішно збережено. Дякую");
     } catch (error) {
-      notifyError("Дані не збережено. Спробуйте ще раз");
+      notifyError("Помилка збереження даних");
       console.log(error);
     }
     setIsLoading(false)

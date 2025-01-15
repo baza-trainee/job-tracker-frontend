@@ -19,8 +19,11 @@ import { VacancyProps } from "./VacanсyHeader.tsx";
 import {
   getLocalizedSectionConfig,
   getVacanciesByStatus,
+  SectionConfig,
 } from "./VacanсyMainConfig.ts";
 import { openModal } from "../../../store/slices/modalSlice/modalSlice.ts";
+import { fetchUpdatedStatuses } from "@/store/slices/statusVacancy/vacancyStatusOperation.ts";
+import { Vacancy } from "@/types/vacancies.types.ts";
 
 const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const { sortType, searchQuery } = useAppSelector(selectfilteredVacancies);
@@ -50,16 +53,30 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
 
   const renderedVacancies = isArchive
     ? filteredVacancies.filter((v) => v.isArchived === true)
-    : filteredVacancies.filter((v) => v.isArchived === false)
-  ;
-
+    : filteredVacancies.filter((v) => v.isArchived === false);
   useEffect(() => {
     dispatch(setFilteredVacancies(renderedVacancies));
   }, [searchQuery, sortType, dispatch]);
 
+  //alex
+  const handleVacancyCard = (
+    vacancy: Vacancy,
+    section: SectionConfig
+  ): void => {
+    dispatch(
+      openModal({
+        typeModal: "editVacancy",
+        idCardVacancy: vacancy.id, // delete
+        borderColorModal: section.borderColor,
+        backgroundColorModal: section.backgroundColor,
+        vacancyData: vacancy,
+      })
+    );
+    dispatch(fetchUpdatedStatuses(vacancy));
+  };
+
   return (
     <div className="test-watch flex w-full flex-col gap-6">
-
       {/* Показ скелетону під час завантаження */}
       {isLoading && <VacancySectionSkeleton />}
       {isError && <h2>Error...</h2>}
@@ -94,7 +111,9 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
               company={vacancy.company}
               workType={vacancy.work_type}
               location={vacancy.location}
-              onClick={() => { dispatch(openModal({ typeModal: "editVacancy" })) }}
+              onClick={() => {
+                dispatch(openModal({ typeModal: "editVacancy" }));
+              }}
             />
           ))}
         </VacancySectionBox>
@@ -132,7 +151,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                     company={vacancy.company}
                     workType={vacancy.work_type}
                     location={vacancy.location}
-                    onClick={() => { dispatch(openModal({ typeModal: "editVacancy", idCardVacancy: vacancy.id })) }}
+                    onClick={() => handleVacancyCard(vacancy, section)}
                   />
                 ))}
               </VacancySection>
@@ -155,7 +174,9 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                     company={vacancy.company}
                     workType={vacancy.work_type}
                     location={vacancy.location}
-                    onClick={() => { dispatch(openModal({ typeModal: "editVacancy" })) }}
+                    onClick={() => {
+                      dispatch(openModal({ typeModal: "editVacancy" }));
+                    }}
                   />
                 ))}
               </VacancySectionBox>
@@ -167,8 +188,6 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
 
 export default VacancyMain;
 
-
-
 //  <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
 //  <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
 //  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
@@ -179,6 +198,3 @@ export default VacancyMain;
 //  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
 //  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
 //  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
-  
-
-

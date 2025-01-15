@@ -1,4 +1,36 @@
 import { statusActionProps } from "./vacancyStatusTypes";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createNewStatuses } from "./vacancyStatusSlice";
+import { Vacancy } from "@/types/vacancies.types";
+
+export const fetchUpdatedStatuses = createAsyncThunk(
+  "editVacancy/fetchStatuses",
+  async (vacancy: Vacancy, { dispatch }) => {
+    const currentStatuses = vacancy.statuses; // Збережені статуси вакансії
+
+    const prioritizedStatuses = vacancyStatusesInfo
+      .map((statusInfo) => {
+        //  Знаходимо співпадаючі статуси
+        const matchingStatuses = currentStatuses.filter(
+          (status) => status.name === statusInfo.name
+        );
+
+        // Знайдені статуси сортуємо по даті від меншої к більшій
+        const sortedMatchingStatuses = matchingStatuses.sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
+
+        return matchingStatuses.length === 0
+          ? statusInfo
+          : { ...statusInfo, ...sortedMatchingStatuses[0] };
+      })
+      .flat();
+
+    console.log("Результат", prioritizedStatuses);
+
+    dispatch(createNewStatuses(prioritizedStatuses));
+  }
+);
 
 export const vacancyStatusesInfo: statusActionProps[] = [
   {
@@ -42,71 +74,7 @@ export const vacancyStatusesInfo: statusActionProps[] = [
     date: "1970-01-01T00:00:00.000Z",
   },
 ];
-//------------------------------------
-// const initialState: vacancyStatusesProps = {
-//     statuses: [
-//       {
-//         id: "saved",
-//         name: "saved",
-//         date: "1970-01-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "hr",
-//         name: "hr",
-//         date: "1970-01-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "test",
-//         name: "test",
-//         date: "1970-01-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "tech",
-//         name: "tech",
-//         date: "1970-01-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "reject",
-//         name: "reject",
-//         date: "1970-01-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "offer",
-//         name: "offer",
-//         date: "1970-01-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "tech",
-//         name: "tech",
-//         date: "2024-01-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "reject",
-//         name: "reject",
-//         date: "2024-02-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "offer",
-//         name: "offer",
-//         date: "2024-03-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "hr",
-//         name: "hr",
-//         date: "2024-04-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "test",
-//         name: "test",
-//         date: "2024-05-01T00:00:00.000Z",
-//       },
-//       {
-//         id: "tech",
-//         name: "tech",
-//         date: "2024-06-01T00:00:00.000Z",
-//       },
-//     ],
-//   };
+// ----------------------------------------------------------------------------------------
 
 // const sortVacancyStatuses = (statuses: typeof initialState.statuses) => {
 //     const predefinedOrder = ["saved", "hr", "test", "tech", "reject", "offer"];

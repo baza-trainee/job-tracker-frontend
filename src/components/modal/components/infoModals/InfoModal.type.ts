@@ -8,6 +8,9 @@ export type InfoModalProps = {
     | "resetPasswordSuccess"
     | "resetPasswordErrorLink"
     | "logOut"
-    | "saveChangesVacancies";
+    | "saveAddVacancies"
+    | "deleteVacancy"
+    | "arhiveVacancy"
+    | "saveEditVacancies";
   textColor: string;
 };
