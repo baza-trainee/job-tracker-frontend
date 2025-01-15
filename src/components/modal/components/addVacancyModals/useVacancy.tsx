@@ -112,7 +112,7 @@ const useVacancy = () => {
       reset();
       notifySuccess("Дані успішно збережено. Дякую");
     } catch (error) {
-      notifyError("Дані не збережено. Спробуйте ЩЕ");
+      notifyError("Дані не збережено. Спробуйте ще раз");
       console.log(error);
     }
     setIsLoading(false)
