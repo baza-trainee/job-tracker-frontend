@@ -61,14 +61,14 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   //alex
   const handleVacancyCard = (
     vacancy: Vacancy,
-    section: SectionConfig
+    section?: SectionConfig
   ): void => {
     dispatch(
       openModal({
         typeModal: "editVacancy",
         idCardVacancy: vacancy.id, // delete
-        borderColorModal: section.borderColor,
-        backgroundColorModal: section.backgroundColor,
+        borderColorModal: section?.borderColor,
+        backgroundColorModal: section?.backgroundColor,
         vacancyData: vacancy,
       })
     );
@@ -112,7 +112,8 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
               workType={vacancy.work_type}
               location={vacancy.location}
               onClick={() => {
-                dispatch(openModal({ typeModal: "editVacancy" }));
+                // dispatch(openModal({ typeModal: "editVacancy" }));
+                handleVacancyCard(vacancy)
               }}
             />
           ))}
