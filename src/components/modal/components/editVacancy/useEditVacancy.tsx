@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AddVacancySchema } from "../../../../schemas/AddVacancySchema";
+import { AddVacancySchema } from "@/schemas/AddVacancySchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -7,9 +7,9 @@ import {
   useCreateStatusVacancyByIdMutation,
   useUpdateVacancyByIdMutation,
   useDeleteStatusVacancyByIdMutation,
-  // useUpdateSpecificStatusVacancyByIdMutation,
-} from "../../../../store/querySlices/vacanciesQuerySlice";
-import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
+  useUpdateSpecificStatusVacancyByIdMutation,
+} from "@/store/querySlices/vacanciesQuerySlice";
+import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
 import {
   notifyError,
   notifySuccess,
@@ -17,12 +17,12 @@ import {
 import {
   closeConfirmation,
   closeModal,
-} from "../../../../store/slices/modalSlice/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../../../store/hook";
-import { StatusName, RejectReason } from "../../../../types/vacancies.types";
+} from "@/store/slices/modalSlice/modalSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { StatusName, RejectReason } from "@/types/vacancies.types";
 import { useState, useEffect } from "react";
 //alex
-import { useDeleteVacancyByIdMutation } from "../../../../store/querySlices/vacanciesQuerySlice";
+import { useDeleteVacancyByIdMutation } from "@/store/querySlices/vacanciesQuerySlice";
 
 const useEditVacancy = () => {
   const { refetch } = useGetAllUserDataQuery();
@@ -30,8 +30,8 @@ const useEditVacancy = () => {
 
   const [createStatusVacancyById] = useCreateStatusVacancyByIdMutation();
   const [deleteStatusVacancyById] = useDeleteStatusVacancyByIdMutation();
-  // const [updateSpecificStatusVacancyById] =
-  //   useUpdateSpecificStatusVacancyByIdMutation();
+  const [updateSpecificStatusVacancyById] =
+    useUpdateSpecificStatusVacancyByIdMutation();
 
   const [archiveVacancyById] = useArchiveVacancyByIdMutation();
   const dispatch = useAppDispatch();
@@ -168,6 +168,8 @@ const useEditVacancy = () => {
         if (prevDate !== newDate) {
           // створити статус
           if (prevDate === "1970-01-01T00:00:00.000Z") {
+            console.log("start create status");
+
             const statusResponse = await createStatusVacancyById({
               vacancyId: idVacancy,
               name: newStatuses[i].name as StatusName,
@@ -187,15 +189,15 @@ const useEditVacancy = () => {
           }
           // редагувати статус
           if (newDate !== "1970-01-01T00:00:00.000Z") {
-            // const statusResponse = await updateSpecificStatusVacancyById({
-            //   vacancyId: idVacancy,
-            //   statusId:newStatuses[i].id,
-            //   name: newStatuses[i].name as StatusName,
-            //   date: newStatuses[i].date || "",
-            //   resumeId: newStatuses[i].resumeId,
-            //   rejectReason: newStatuses[i].rejectReason as RejectReason,
-            // }).unwrap();
-            // console.log("Редагування статусу", statusResponse);
+            const statusResponse = await updateSpecificStatusVacancyById({
+              vacancyId: idVacancy,
+              statusId: newStatuses[i].id,
+              name: newStatuses[i].name as StatusName,
+              date: newStatuses[i].date || "",
+              resumeId: newStatuses[i].resumeId as string,
+              rejectReason: newStatuses[i].rejectReason as RejectReason,
+            }).unwrap();
+            console.log("Редагування статусу", statusResponse);
             console.log("Редагування статусу", newStatuses[i]);
           }
         }
