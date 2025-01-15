@@ -19,7 +19,7 @@ const colorDefault = {
   text: "text-white",
   bg: "bg-white",
   border: "border-white",
-}
+};
 
 const colorButton = {
   text: "text-button",
@@ -107,8 +107,23 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-  saveChangesVacancies: {
-    content: <InfoModal type="saveChangesVacancies" textColor={colorButton.text} />,
+  saveAddVacancies: {
+    content: <InfoModal type="saveAddVacancies" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  deleteVacancy: {
+    content: <InfoModal type="deleteVacancy" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  arhiveVacancy: {
+    content: <InfoModal type="arhiveVacancy" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  saveEditVacancies: {
+    content: <InfoModal type="saveEditVacancies" textColor={colorButton.text} />,
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },

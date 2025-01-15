@@ -17,6 +17,7 @@ import { ValueCalendarProps } from "../../../Calendar/JobCalendarProps";
 import { Options } from "../../../Vacancies/components/dropdown/Dropdown.props";
 
 export const CheckboxWithCalendar = ({
+  id,
   name,
   label,
   register,
@@ -29,7 +30,9 @@ export const CheckboxWithCalendar = ({
     date !== "1970-01-01T00:00:00.000Z"
   );
   const [dateState, setDateState] = useState<ValueCalendarProps>(new Date());
-  const [valueCalendar, setValueCalendar] = useState<string>("");
+  const [valueCalendar, setValueCalendar] = useState<string>(
+    moment(date).format("D.MM.YY")
+  );
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const { t } = useTranslation();
 
@@ -40,7 +43,7 @@ export const CheckboxWithCalendar = ({
     setValueCalendar(moment(new Date()).format("D.MM.YY"));
     dispatch(
       changeStatus({
-        id: name,
+        id: id || "",
         name: name,
         date: !isChecked
           ? new Date().toISOString()
@@ -57,7 +60,7 @@ export const CheckboxWithCalendar = ({
       setValueCalendar(newDate);
       dispatch(
         changeStatus({
-          id: name,
+          id: id || "",
           name: name,
           date: moment(e).format("YYYY-MM-DD"),
         })
@@ -86,16 +89,17 @@ export const CheckboxWithCalendar = ({
     }
   };
 
-  const setValueDropDowm = (e: string, id: string) => {
+  const setValueDropDowm = (nameDropdown: string, resumeId: string) => {
     dispatch(
       changeStatus({
-        id: name,
+        id: id || "", // вопрос с фйди может изменить
         name: name,
-        resumeId: name === "resume" ? id : null,
-        rejectReason: name === "reject" ? id : null,
+        resumeId: name === "resume" ? resumeId : null,
+        rejectReason: name === "reject" ? resumeId : null,
       })
     );
-    return setValue?.(e, id);
+    console.log("удалить", nameDropdown, resumeId);
+    return setValue?.(nameDropdown, resumeId);
   };
 
   return (

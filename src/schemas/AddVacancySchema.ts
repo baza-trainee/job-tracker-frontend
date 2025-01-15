@@ -32,7 +32,7 @@ export const AddVacancySchema = z.object({
     errorMap: () => ({ message: "addVacancySchema.workType.invalid" }),
   }),
   resumeDropdown: z.string(),
-  rejectionDropdown: z.string(),
+  rejectDropdown: z.string(),
 
   note: z.string().max(4000, t("addVacancySchema.notes.max")).trim(),
   isArchived: z.boolean(),
