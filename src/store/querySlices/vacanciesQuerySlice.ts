@@ -70,7 +70,6 @@ export const vacanciesQuerySlice = createApi({
       query: ({ vacancyId, ...newStatus }) => ({
         url: `/vacancies/${vacancyId}/status`,
         method: "POST",
-        // body: {...newStatus},
         body: newStatus,
       }),
       invalidatesTags: ["vacanies"],
@@ -78,16 +77,15 @@ export const vacanciesQuerySlice = createApi({
 
     updateSpecificStatusVacancyById: build.mutation<
       VacancyStatus,
-      Pick<VacancyStatus, "name"> &
-        Partial<Pick<VacancyStatus, "rejectReason" | "resumeId" | "date">> & {
+      Pick<VacancyStatus, "id" | "name" | "date"> &
+        Partial<Pick<VacancyStatus, "rejectReason" | "resumeId">> & {
           vacancyId: string;
-          statusId: string;
         }
     >({
-      query: ({ vacancyId, statusId, ...newStatus }) => ({
-        url: `/vacancies/${vacancyId}/status/${statusId}`,
+      query: ({ vacancyId, id, ...newStatus }) => ({
+        url: `/vacancies/${vacancyId}/status/${id}`,
         method: "PATCH",
-        body: { ...newStatus },
+        body: newStatus,
       }),
       invalidatesTags: ["vacanies"],
     }),
