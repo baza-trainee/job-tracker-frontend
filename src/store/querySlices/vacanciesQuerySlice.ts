@@ -70,7 +70,6 @@ export const vacanciesQuerySlice = createApi({
       query: ({ vacancyId, ...newStatus }) => ({
         url: `/vacancies/${vacancyId}/status`,
         method: "POST",
-        // body: {...newStatus},
         body: newStatus,
       }),
       invalidatesTags: ["vacanies"],
