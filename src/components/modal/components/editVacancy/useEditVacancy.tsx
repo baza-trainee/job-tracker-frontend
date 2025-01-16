@@ -7,7 +7,7 @@ import {
   useCreateStatusVacancyByIdMutation,
   useUpdateVacancyByIdMutation,
   useDeleteStatusVacancyByIdMutation,
-  // useUpdateSpecificStatusVacancyByIdMutation,
+  useUpdateSpecificStatusVacancyByIdMutation,
 } from "../../../../store/querySlices/vacanciesQuerySlice";
 import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
 import {
@@ -30,8 +30,8 @@ const useEditVacancy = () => {
 
   const [createStatusVacancyById] = useCreateStatusVacancyByIdMutation();
   const [deleteStatusVacancyById] = useDeleteStatusVacancyByIdMutation();
-  // const [updateSpecificStatusVacancyById] =
-  //   useUpdateSpecificStatusVacancyByIdMutation();
+  const [updateSpecificStatusVacancyById] =
+    useUpdateSpecificStatusVacancyByIdMutation();
 
   const [archiveVacancyById] = useArchiveVacancyByIdMutation();
   const dispatch = useAppDispatch();
@@ -186,17 +186,16 @@ const useEditVacancy = () => {
             console.log("Видалення статусу статусу", statusResponse);
           }
           // редагувати статус
-          if (newDate !== "1970-01-01T00:00:00.000Z") {
-            // const statusResponse = await updateSpecificStatusVacancyById({
-            //   vacancyId: idVacancy,
-            //   statusId:newStatuses[i].id,
-            //   name: newStatuses[i].name as StatusName,
-            //   date: newStatuses[i].date || "",
-            //   resumeId: newStatuses[i].resumeId,
-            //   rejectReason: newStatuses[i].rejectReason as RejectReason,
-            // }).unwrap();
-            // console.log("Редагування статусу", statusResponse);
-            console.log("Редагування статусу", newStatuses[i]);
+          if (prevDate !== "1970-01-01T00:00:00.000Z" && newDate !== "1970-01-01T00:00:00.000Z") {
+            const statusResponse = await updateSpecificStatusVacancyById({
+              vacancyId: idVacancy,
+              id:newStatuses[i].id,
+              name: newStatuses[i].name as StatusName,
+              date: newStatuses[i].date || "",
+              resumeId: newStatuses[i].resumeId,
+              rejectReason: newStatuses[i].rejectReason as RejectReason,
+            }).unwrap();
+            console.log("Редагування статусу", statusResponse);
           }
         }
       }

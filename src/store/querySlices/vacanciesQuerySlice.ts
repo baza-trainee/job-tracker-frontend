@@ -78,15 +78,15 @@ export const vacanciesQuerySlice = createApi({
 
     updateSpecificStatusVacancyById: build.mutation<
       VacancyStatus,
-      Pick<VacancyStatus, "name" | "resumeId"> &
-        Partial<Pick<VacancyStatus, "rejectReason">> & {
+      Pick<VacancyStatus, "id" | "name" | "date"> &
+        Partial<Pick<VacancyStatus, "rejectReason" | "resumeId">> & {
           vacancyId: string;
         }
     >({
-      query: ({ vacancyId, resumeId, ...newStatus }) => ({
-        url: `/vacancies/${vacancyId}/status/${resumeId}`,
+      query: ({ vacancyId, id, ...newStatus }) => ({
+        url: `/vacancies/${vacancyId}/status/${id}`,
         method: "PATCH",
-        body: { newStatus, resumeId },
+        body: newStatus,
       }),
       invalidatesTags: ["vacanies"],
     }),
