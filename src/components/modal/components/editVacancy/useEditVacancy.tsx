@@ -168,6 +168,8 @@ const useEditVacancy = () => {
         if (prevDate !== newDate) {
           // створити статус
           if (prevDate === "1970-01-01T00:00:00.000Z") {
+            console.log("start create status");
+
             const statusResponse = await createStatusVacancyById({
               vacancyId: idVacancy,
               name: newStatuses[i].name as StatusName,

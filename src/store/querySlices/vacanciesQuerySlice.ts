@@ -81,6 +81,7 @@ export const vacanciesQuerySlice = createApi({
       Pick<VacancyStatus, "id" | "name" | "date"> &
         Partial<Pick<VacancyStatus, "rejectReason" | "resumeId">> & {
           vacancyId: string;
+          statusId: string;
         }
     >({
       query: ({ vacancyId, id, ...newStatus }) => ({
