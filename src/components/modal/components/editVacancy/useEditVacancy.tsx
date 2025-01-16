@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AddVacancySchema } from "../../../../schemas/AddVacancySchema";
+import { AddVacancySchema } from "@/schemas/AddVacancySchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -8,8 +8,8 @@ import {
   useUpdateVacancyByIdMutation,
   useDeleteStatusVacancyByIdMutation,
   useUpdateSpecificStatusVacancyByIdMutation,
-} from "../../../../store/querySlices/vacanciesQuerySlice";
-import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
+} from "@/store/querySlices/vacanciesQuerySlice";
+import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
 import {
   notifyError,
   notifySuccess,
@@ -17,12 +17,12 @@ import {
 import {
   closeConfirmation,
   closeModal,
-} from "../../../../store/slices/modalSlice/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../../../store/hook";
-import { StatusName, RejectReason } from "../../../../types/vacancies.types";
+} from "@/store/slices/modalSlice/modalSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { StatusName, RejectReason } from "@/types/vacancies.types";
 import { useState, useEffect } from "react";
 //alex
-import { useDeleteVacancyByIdMutation } from "../../../../store/querySlices/vacanciesQuerySlice";
+import { useDeleteVacancyByIdMutation } from "@/store/querySlices/vacanciesQuerySlice";
 
 const useEditVacancy = () => {
   const { refetch } = useGetAllUserDataQuery();
@@ -148,7 +148,7 @@ const useEditVacancy = () => {
         note,
         work_type,
       }).unwrap();
-      console.log("respose Edit", response);
+      console.log("Збереження редагованої вакансії", response);
 
       // 3 - архівуємо
       if (isArchived) {
@@ -183,13 +183,16 @@ const useEditVacancy = () => {
               vacancyId: idVacancy,
               id: newStatuses[i].id,
             }).unwrap();
-            console.log("Видалення статусу статусу", statusResponse);
+            console.log("Видалення статусу", statusResponse);
           }
           // редагувати статус
-          if (prevDate !== "1970-01-01T00:00:00.000Z" && newDate !== "1970-01-01T00:00:00.000Z") {
+          if (
+            prevDate !== "1970-01-01T00:00:00.000Z" &&
+            newDate !== "1970-01-01T00:00:00.000Z"
+          ) {
             const statusResponse = await updateSpecificStatusVacancyById({
               vacancyId: idVacancy,
-              id:newStatuses[i].id,
+              id: newStatuses[i].id,
               name: newStatuses[i].name as StatusName,
               date: newStatuses[i].date || "",
               resumeId: newStatuses[i].resumeId,

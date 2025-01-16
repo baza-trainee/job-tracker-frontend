@@ -83,7 +83,6 @@ const InfoModalMap = () => {
 
   // Збереження редагованої вакансії
   const handleEditVacancy = useCallback((): void => {
-    console.log("handleEditVacancy", dataAddEditVacancy);
     editVacanciesSubmit(dataAddEditVacancy);
   }, [editVacanciesSubmit, dataAddEditVacancy]);
 
