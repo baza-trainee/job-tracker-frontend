@@ -62,6 +62,8 @@ const useEditVacancy = () => {
       work_type: "office",
       isArchived: false,
 
+      resume: false,
+      reject: false,
       resumeDropdown: "",
       rejectDropdown: "",
     },
@@ -148,7 +150,7 @@ const useEditVacancy = () => {
         note,
         work_type,
       }).unwrap();
-      console.log("respose Edit", response);
+      console.log("Збереження редагованої вакансії", response);
 
       // 3 - архівуємо
       if (isArchived) {
@@ -185,20 +187,22 @@ const useEditVacancy = () => {
               vacancyId: idVacancy,
               id: newStatuses[i].id,
             }).unwrap();
-            console.log("Видалення статусу статусу", statusResponse);
+            console.log("Видалення статусу", statusResponse);
           }
           // редагувати статус
-          if (newDate !== "1970-01-01T00:00:00.000Z") {
+          if (
+            prevDate !== "1970-01-01T00:00:00.000Z" &&
+            newDate !== "1970-01-01T00:00:00.000Z"
+          ) {
             const statusResponse = await updateSpecificStatusVacancyById({
               vacancyId: idVacancy,
               statusId: newStatuses[i].id,
               name: newStatuses[i].name as StatusName,
               date: newStatuses[i].date || "",
-              resumeId: newStatuses[i].resumeId as string,
+              resumeId: newStatuses[i].resumeId,
               rejectReason: newStatuses[i].rejectReason as RejectReason,
             }).unwrap();
             console.log("Редагування статусу", statusResponse);
-            console.log("Редагування статусу", newStatuses[i]);
           }
         }
       }

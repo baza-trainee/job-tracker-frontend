@@ -20,6 +20,7 @@ export const Input = ({
   handleClickButtonRemoveInput,
   handleClickButtonCopyInput,
   isCheckButtons = true,
+  isRequired,
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -47,7 +48,7 @@ export const Input = ({
             "2xl:mb-3 2xl:text-[20px]"
           )}
         >
-          {label}
+          {label} {isRequired && <span className={cn("text-color2")}>*</span>}
         </label>
       )}
       <div className="relative">

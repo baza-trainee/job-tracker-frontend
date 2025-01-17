@@ -44,8 +44,6 @@ const AddVacancy = () => {
     saveVacancy();
   };
 
-  const error = !!Object.keys(errors).length;
-
   return (
     <div className="">
       <form>
@@ -127,7 +125,6 @@ const AddVacancy = () => {
               className="mx-auto mt-8"
               variant="ghost"
               size="small"
-              disabled={error}
               onClick={handleSubmitArchive}
             >
               {t("addVacancy.form.archive")}{" "}
@@ -138,7 +135,6 @@ const AddVacancy = () => {
               className="mx-auto mt-8 bg-button"
               variant="ghost"
               size="big"
-              disabled={error}
               onClick={saveVacancy}
             >
               {t("addVacancy.form.save")}

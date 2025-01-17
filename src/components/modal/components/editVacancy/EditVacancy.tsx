@@ -25,7 +25,6 @@ const EditVacancy = () => {
   const statusVacancy = useAppSelector(
     (state) => state.statusVacancy.newStatuses
   );
-  console.log("Статусы для чекбоксов", statusVacancy);
   const { register, resetField, handleSubmit, errors, getValues, setValue } =
     useEditVacancy();
 
@@ -38,8 +37,9 @@ const EditVacancy = () => {
   };
 
   const saveVacancy = () => {
+    console.log("er", errors)
     handleSubmit((data) => {
-      console.log("Редагування вакансії", data)
+      console.log("Редагування вакансії", data);
       dispatch(
         openConfirmation({
           typeConfirmation: "saveEditVacancies",
@@ -71,6 +71,7 @@ const EditVacancy = () => {
                     placeholder={input.placeholder || ""}
                     label={input.label}
                     errors={errors}
+                    isRequired={true}
                   />
                 ))}
               </div>
