@@ -18,6 +18,7 @@ import {
 import { useLogOutUserMutation } from "../../../../store/querySlices/authQuerySlice";
 import useVacancy from "../addVacancyModals/useVacancy";
 import useEditVacancy from "../editVacancy/useEditVacancy";
+import { TypesModal } from "../../modalMappings";
 
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
@@ -103,7 +104,24 @@ const InfoModalMap = () => {
     disabled,
   });
 
-  const map = {
+  const map: Partial<
+    Record<
+      TypesModal,
+      {
+        title: string;
+        text: string[];
+        button: {
+          label: string;
+          type: string;
+          className: string;
+          variant: string;
+          size: string;
+          funcButton: () => void;
+          disabled: boolean;
+        }[];
+      }
+    >
+  > = {
     logInSuccess: {
       title: "Успіх!",
       text: ["Авторизація пройшла успішно."],

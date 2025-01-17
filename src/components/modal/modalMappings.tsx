@@ -159,5 +159,3 @@ export const contentMap: ContentMapProps = {
     borderColor: colorButton.border,
   },
 };
-
-// export type TypesModal = keyof typeof contentMap;

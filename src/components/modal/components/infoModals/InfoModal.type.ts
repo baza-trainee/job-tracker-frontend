@@ -1,7 +1,7 @@
 import { TypesModal } from "../../modalMappings";
 
 export type InfoModalProps = {
-  type: TypesModal | null;
+  type: TypesModal;
   // | "logInSuccess"
   // | "logInError"
   // | "signUpSuccess"
