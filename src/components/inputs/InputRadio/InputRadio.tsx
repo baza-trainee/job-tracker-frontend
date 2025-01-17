@@ -19,11 +19,10 @@ export const InputRadio = ({
   return (
     <div
       className={classNames(
-        className === "addVacancy" && "relative flex items-center px-[9.5px]"
+        className === "addVacancy" && "flex items-center px-[9.5px]"
       )}
-      id={id}
     >
-      <div className="relative flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <input
           required={required}
           type="radio"
@@ -34,7 +33,7 @@ export const InputRadio = ({
           {...props}
           className={classNames(
             className === "addVacancy" &&
-              "peer relative h-5 w-5 shrink-0 appearance-none rounded-[4px] border-[1px] border-solid border-textBlack",
+              "peer relative h-5 w-5 shrink-0 appearance-none rounded-[4px] border-[1px] border-solid border-textBlack cursor-pointer",
             "md:h-6 md:w-6 md:border-2"
           )}
         />
@@ -57,7 +56,7 @@ export const InputRadio = ({
         htmlFor={id}
         className={classNames(
           className === "addVacancy" &&
-            "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px]"
+            "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px] cursor-pointer"
         )}
       >
         {label}
