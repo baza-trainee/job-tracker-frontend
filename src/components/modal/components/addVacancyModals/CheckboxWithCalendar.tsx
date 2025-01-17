@@ -115,7 +115,7 @@ export const CheckboxWithCalendar = ({
           checked={isChecked}
           onClick={handleCheckbox}
         />
-        <span onClick={() => setIsOpenCalendar(true)}>
+        <span className="cursor-pointer" onClick={() => setIsOpenCalendar(true)}>
           {isChecked && valueCalendar}
         </span>
       </div>

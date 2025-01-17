@@ -27,7 +27,7 @@ export const InputRadio = ({
         <input
           required={required}
           type="radio"
-          id={`radio-${name}`}
+          id={id}
           disabled={disabled}
           {...register(name)}
           aria-describedby={`radioError-${name}`}
@@ -54,7 +54,7 @@ export const InputRadio = ({
       </div>
 
       <label
-        htmlFor={`radio-${name}`}
+        htmlFor={id}
         className={classNames(
           className === "addVacancy" &&
             "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px]"
