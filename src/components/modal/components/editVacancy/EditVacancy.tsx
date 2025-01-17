@@ -37,6 +37,7 @@ const EditVacancy = () => {
   };
 
   const saveVacancy = () => {
+    console.log("er", errors)
     handleSubmit((data) => {
       console.log("Редагування вакансії", data);
       dispatch(

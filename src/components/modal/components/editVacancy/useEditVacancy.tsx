@@ -62,6 +62,8 @@ const useEditVacancy = () => {
       work_type: "office",
       isArchived: false,
 
+      resume: false,
+      reject: false,
       resumeDropdown: "",
       rejectDropdown: "",
     },
