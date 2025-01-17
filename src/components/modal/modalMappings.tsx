@@ -1,38 +1,62 @@
 import { ForgotPassword } from "./components/formModals/ForgotPassword";
 import ContactUs from "./components/formModals/ContacUs";
 import InfoModal from "./components/infoModals/InfoModal";
-import { ReactNode } from "react";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import { t } from "i18next";
 import EditVacancy from "./components/editVacancy/EditVacancy";
 
+export type TypesModal =
+  | "addVacancy"
+  | "editVacancy"
+  | "forgotPassword"
+  | "contactUs"
+  | "logInSuccess"
+  | "logInError"
+  | "signUpSuccess"
+  | "signUpError"
+  | "forgotPasswordSuccess"
+  | "resetPasswordSuccess"
+  | "resetPasswordErrorLink"
+  | "logOut"
+  | "saveAddVacancies"
+  | "deleteVacancy"
+  | "arhiveVacancy"
+  | "saveEditVacancies"
+  | "close";
+
+type Color = {
+  text: "text-white" | "text-button" | "text-color2" | "text-color8";
+  bg: "bg-white" | "bg-button" | "bg-color2" | "bg-color8";
+  border: "border-white" | "border-button" | "border-color2" | "border-color8";
+};
+
 type ContentMapProps = {
-  [propsTypeName: string]: {
-    content: ReactNode;
+  [K in TypesModal]: {
+    content: React.ReactNode;
     nameModal?: string;
-    bgColor: string;
-    borderColor: string;
+    bgColor: Color["bg"];
+    borderColor: Color["border"];
   };
 };
 
-const colorDefault = {
+const colorDefault: Color = {
   text: "text-white",
   bg: "bg-white",
   border: "border-white",
 };
 
-const colorButton = {
+const colorButton: Color = {
   text: "text-button",
   bg: "bg-button",
   border: "border-button",
 };
 
-const colorError = {
+const colorError: Color = {
   text: "text-color2",
   bg: "bg-color2",
   border: "border-color2",
 };
-const colorSuccess = {
+const colorSuccess: Color = {
   text: "text-color8",
   bg: "bg-color8",
   border: "border-color8",
@@ -62,7 +86,7 @@ export const contentMap: ContentMapProps = {
     borderColor: colorButton.border,
   },
   logInSuccess: {
-    content: <InfoModal type="logInSuccess" textColor={colorSuccess.text} />,
+    content: <InfoModal type="logInSuccess" textColor={colorDefault.text} />,
     bgColor: colorSuccess.bg,
     borderColor: colorSuccess.border,
   },
@@ -123,7 +147,9 @@ export const contentMap: ContentMapProps = {
     borderColor: colorButton.border,
   },
   saveEditVacancies: {
-    content: <InfoModal type="saveEditVacancies" textColor={colorButton.text} />,
+    content: (
+      <InfoModal type="saveEditVacancies" textColor={colorButton.text} />
+    ),
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },

@@ -1,10 +1,11 @@
+import { TypesModal } from "@/components/modal/modalMappings";
 import { Vacancy } from "@/types/vacancies.types";
 
 export interface ModalProps {
   isModalOpen?: boolean;
-  typeModal?: string;
+  typeModal?: TypesModal; // string
   isConfirmationOpen?: boolean;
-  typeConfirmation?: string;
+  typeConfirmation?: TypesModal | null; // string
   idCardVacancy?: string;
   vacancyData?: Vacancy | null;
   dataConfirmation?: any | null; // alex

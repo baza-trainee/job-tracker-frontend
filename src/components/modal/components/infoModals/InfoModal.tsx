@@ -5,7 +5,11 @@ import InfoModalMap from "./InfoModalMap";
 import { InfoModalProps } from "./InfoModal.type";
 
 const InfoModal = ({ type, textColor }: InfoModalProps) => {
-  const modalData = InfoModalMap()[type];
+  const modalData = InfoModalMap()[type] || {
+    title: "За замовчуванням",
+    text: ["Модальне вікно за замовчуванням"],
+    button: [],
+  };
 
   return (
     <div className="w-[449px] text-center text-textBlack">
