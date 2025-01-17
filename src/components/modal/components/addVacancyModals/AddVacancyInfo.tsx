@@ -15,7 +15,7 @@ const AddVacancyInfo = () => {
     "location",
   ];
   const vacancyFields: VacancyInputProps[] =
-    vacancyFieldKeys.map((fieldKey: any) => ({
+    vacancyFieldKeys.map((fieldKey: string) => ({
       id: fieldKey,
       name: fieldKey,
       placeholder: t(`addVacancy.placeholders.${fieldKey}`),
@@ -25,7 +25,7 @@ const AddVacancyInfo = () => {
   /* TODO: Формат: Дистанційно - Офіс - Змішаний */
   const workTypeKeys = ["remote", "office", "hybrid"];
   const workTypeOptions: VacancyInputProps[] =
-    workTypeKeys.map((typeKey: any) => ({
+    workTypeKeys.map((typeKey: string) => ({
       id: typeKey,
       name: "work_type",
       label: t(`addVacancy.form.${typeKey}`),
@@ -53,7 +53,7 @@ const AddVacancyInfo = () => {
     "OTHER",
   ];
   const rejectOptions: SortOption[] =
-    rejectionReasonKeys.map((reject: any) => ({
+    rejectionReasonKeys.map((reject: string) => ({
       id: reject,
       label: reject,
     })) || [];

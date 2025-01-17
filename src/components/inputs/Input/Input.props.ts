@@ -16,4 +16,5 @@ export interface InputProps {
   handleClickButtonRemoveInput?: () => void;
   handleClickButtonCopyInput?: () => void;
   isCheckButtons?: boolean;
+  isRequired?: boolean;
 }

@@ -31,12 +31,24 @@ export const AddVacancySchema = z.object({
   work_type: z.enum(["remote", "office", "hybrid"], {
     errorMap: () => ({ message: "addVacancySchema.workType.invalid" }),
   }),
+  //alex
+  resume: z.boolean(),
+  reject: z.boolean(),
   resumeDropdown: z.string(),
   rejectDropdown: z.string(),
 
   note: z.string().max(4000, t("addVacancySchema.notes.max")).trim(),
   isArchived: z.boolean(),
+})
+.refine((data) => !(data.resume && !data.resumeDropdown), {
+  path: ["resumeDropdown"],
+  message: "Оберіть резюме",
+})
+.refine((data) => !(data.reject && !data.rejectDropdown), {
+  path: ["rejectDropdown"],
+  message: "Оберіть причину відмови",
 });
+
 
 export const changeStatusVacancy = z.object({
   name: z.enum(["hr"]),

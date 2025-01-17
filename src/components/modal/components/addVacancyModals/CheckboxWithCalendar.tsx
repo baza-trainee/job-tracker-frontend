@@ -51,6 +51,10 @@ export const CheckboxWithCalendar = ({
       })
     );
     setIsOpenCalendar(false);
+    // відстеження помилок
+    if (name === "resume" || name === "reject") {
+      setValue?.(`${name}`, !getValues?.(`${name}`));
+    }
   };
 
   const changeDate = (e: ValueCalendarProps) => {
@@ -98,26 +102,44 @@ export const CheckboxWithCalendar = ({
         rejectReason: name === "reject" ? resumeId : null,
       })
     );
-    console.log("удалить", nameDropdown, resumeId);
     return setValue?.(nameDropdown, resumeId);
   };
 
+  const error = errors[`${name}Dropdown`];
+
   return (
     <div className="relative">
-      <div className="flex w-full items-center justify-between">
-        <Checkbox
-          name={name}
-          id={name}
-          label={t(`${label}`)}
-          register={register}
-          type="signUp"
-          errors={errors}
-          checked={isChecked}
-          onClick={handleCheckbox}
-        />
-        <span onClick={() => setIsOpenCalendar(true)}>
-          {isChecked && valueCalendar}
-        </span>
+      <div>
+        <div className="flex w-full items-center justify-between">
+          <Checkbox
+            name={name}
+            id={name}
+            label={t(`${label}`)}
+            register={register}
+            type="signUp"
+            errors={errors}
+            checked={isChecked}
+            onClick={handleCheckbox}
+          />
+          <span
+            className="cursor-pointer"
+            onClick={() => setIsOpenCalendar(true)}
+          >
+            {isChecked && valueCalendar}
+          </span>
+        </div>
+
+        {/* ----------- Error ----------------- */}
+        {error && (
+          <span
+            id={`inputError-${name}`}
+            className={classNames(
+              "inline-block pl-[9.5px] pt-1 font-nunito text-base font-medium text-color2"
+            )}
+          >
+            {t(String(error?.message))}
+          </span>
+        )}
       </div>
 
       {/* ----------- Dropdown ----------------- */}

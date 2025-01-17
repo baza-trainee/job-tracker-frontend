@@ -62,6 +62,8 @@ const useEditVacancy = () => {
       work_type: "office",
       isArchived: false,
 
+      resume: false,
+      reject: false,
       resumeDropdown: "",
       rejectDropdown: "",
     },
@@ -194,7 +196,7 @@ const useEditVacancy = () => {
           ) {
             const statusResponse = await updateSpecificStatusVacancyById({
               vacancyId: idVacancy,
-              id: newStatuses[i].id,
+              statusId: newStatuses[i].id,
               name: newStatuses[i].name as StatusName,
               date: newStatuses[i].date || "",
               resumeId: newStatuses[i].resumeId,
