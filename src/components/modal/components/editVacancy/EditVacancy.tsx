@@ -71,6 +71,7 @@ const EditVacancy = () => {
                     placeholder={input.placeholder || ""}
                     label={input.label}
                     errors={errors}
+                    isRequired={true}
                   />
                 ))}
               </div>
