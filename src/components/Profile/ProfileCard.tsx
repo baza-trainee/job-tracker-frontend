@@ -6,7 +6,7 @@ function ProfileCard({ cardsType, className }: PropsProfileCard) {
   return (
     <div className={cn("flex flex-col", className)}>
       <div className="flex">
-        <div className="rounded-[12px_12px_0_0] bg-color1 px-6 py-3">
+        <div className="rounded-[12px_12px_0_0] bg-backgroundSecondary px-6 py-3">
           <span> {cardsType}</span>
         </div>
       </div>
