@@ -18,7 +18,7 @@ import {
 import { useLogOutUserMutation } from "../../../../store/querySlices/authQuerySlice";
 import useVacancy from "../addVacancyModals/useVacancy";
 import useEditVacancy from "../editVacancy/useEditVacancy";
-import { TypesModal } from "../../modalMappings";
+import { TypesModal } from "../../ModalMain.types";
 
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();

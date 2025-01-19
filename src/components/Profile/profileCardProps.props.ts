@@ -1,4 +1,9 @@
+import { TypesModal } from "../modal/ModalMain.types";
+
 export type PropsProfileCard = {
-  cardsType: "personalInfo" | "projects" | "resumes" | "coverLetters";
+  cardsType: Extract<
+    TypesModal,
+    "addPersonalProperties" | "addProjects" | "addResumes" | "addCoverLetters"
+  >;
   className?: string;
 };

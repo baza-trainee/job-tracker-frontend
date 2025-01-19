@@ -11,13 +11,6 @@ import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
 import { useAppDispatch } from "../../store/hook";
-// import {} from
-// refreshUser,
-// signUp,
-// logIn,
-// forgotPassword,
-// resetPassword,
-// "../../store/slices/authSlice/authOperation";
 import {
   useForgotPasswordUserMutation,
   useLogInUserWithCredentialsMutation,
@@ -86,7 +79,7 @@ export function useAuthForm(
   } = useForm<z.infer<typeof initsSchema>>({
     defaultValues: initDefaultValues,
     resolver: zodResolver(initsSchema),
-    mode: "onBlur",
+    mode: "all",
   });
 
   const isCleanInputsForm = useCallback(() => {
@@ -123,13 +116,11 @@ export function useAuthForm(
           case "logIn":
             if ("email" in data && "password" in data) {
               return type === "signUp"
-                ? // await dispatch(signUp(data))
-                  await registerUser({
+                ? await registerUser({
                     email: data.email,
                     password: data.password,
                   })
-                : // await dispatch(logIn(data));
-                  await loginUser({
+                : await loginUser({
                     email: data.email,
                     password: data.password,
                   });
@@ -138,7 +129,6 @@ export function useAuthForm(
 
           case "forgotPassword":
             if ("email" in data) {
-              // return await dispatch(forgotPassword(data));
               return await forgotUserPassword({ email: data.email });
             }
             throw new Error("Missing email for password recovery");
@@ -148,10 +138,10 @@ export function useAuthForm(
               const queryParams = new URLSearchParams(window.location.search);
               const tokenFromUrl = queryParams.get("verify");
               const token = tokenFromUrl || "";
-              // await dispatch(resetPassword({ ...data, token }));
+
               await resetUserPassword({
                 password: data.password,
-                access_token: token,
+                token,
               });
               navigate("/log-in");
               return;
