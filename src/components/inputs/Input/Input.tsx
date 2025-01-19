@@ -84,7 +84,10 @@ export const Input = ({
                 aria-label="copy text"
                 onClick={handleClickButtonCopyInput}
               >
-                <Icon id="copy" className="h-6 w-6 fill-black" />
+                <Icon
+                  id="copy"
+                  className="h-6 w-6 fill-black transition-all hover:fill-green-500"
+                />
               </button>
             )}
             {isButtonRemoveInput && (
@@ -93,7 +96,10 @@ export const Input = ({
                 aria-label="remove field"
                 onClick={handleClickButtonRemoveInput}
               >
-                <Icon id="close-default" className="h-6 w-6 fill-black" />
+                <Icon
+                  id="close-default"
+                  className="h-6 w-6 fill-black transition-all hover:fill-color2"
+                />
               </button>
             )}
             {isCheckButtons ? (
