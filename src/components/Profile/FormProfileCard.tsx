@@ -8,6 +8,7 @@ import { Input } from "../inputs/Input/Input";
 import { Button } from "../buttons/Button/Button";
 import { useAppDispatch } from "@/store/hook";
 import { openModal } from "@/store/slices/modalSlice/modalSlice";
+import useProfileTexts from "./textProfile/useProfileText";
 
 type Inputs = {
   UserName: string;
@@ -17,7 +18,7 @@ type Inputs = {
 
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
-
+  const text = useProfileTexts({ cardsType });
   const {
     register,
     watch,
@@ -161,7 +162,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         variant="accent"
         onClick={() => dispatch(openModal({ typeModal: cardsType }))}
       >
-        {cardsType} +
+        {text.buttonAdd} +
       </Button>
     </form>
   );

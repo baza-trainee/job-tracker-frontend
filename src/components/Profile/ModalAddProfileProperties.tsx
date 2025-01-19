@@ -16,6 +16,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "@/store/hook";
 import { DataItem, PropsModalAddProperties } from "./modalAddProperties.types";
+// import useProfileTexts from "./textProfile/useProfileText";
 
 const data: {
   [K in PropsModalAddProperties["cardsType"]]: DataItem;
@@ -60,7 +61,7 @@ function ModalAddProfileProperties({ cardsType }: PropsModalAddProperties) {
   });
   const dispatch = useAppDispatch();
   const { refetch: refetchProfile } = useGetAllUserDataQuery();
-
+  // const text = useProfileTexts({ cardsType });
   const [
     createCoverLetter,
     {
