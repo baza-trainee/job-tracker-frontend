@@ -201,6 +201,40 @@
     }
   },
   "calendar": {
-    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-  }
+    "months": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ]
+  },
+  "addCoverLetters": {
+    "cardTitle": "Cover Letters",
+    "buttonAdd": "Add Letter",
+    "modalAddTitle": "Add a new cover letter"
+  },
+  "addProjects": {
+    "cardTitle": "Projects",
+    "buttonAdd": "Add Project Link",
+    "modalAddTitle": "Add a new project link"
+  },
+  "addResumes": {
+    "cardTitle": "Resumes",
+    "buttonAdd": "Add Resume",
+    "modalAddTitle": "Add a new resume"
+  },
+  "addPersonalProperties": {
+    "cardTitle": "Personal Information",
+    "buttonAdd": "Add Link",
+    "modalAddTitle": "Add a new link"
+  },
+  "buttonRemoveAccount": "Remove Account"
 }

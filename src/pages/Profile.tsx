@@ -1,15 +1,26 @@
+import { Button } from "@/components/buttons/Button/Button";
 import ProfileCard from "../components/Profile/ProfileCard";
+import { useTranslation } from "react-i18next";
 
 function Profile() {
+  const { t } = useTranslation();
   return (
-    <div className="container flex flex-row flex-wrap gap-8 p-6">
+    <div className="container grid grid-cols-3 place-items-stretch gap-8 p-6">
       <ProfileCard
         cardsType="addPersonalProperties"
-        className="h-auto w-[30%]"
+        className="row-span-3 h-auto"
       />
-      <ProfileCard cardsType="addProjects" className="h-auto w-[25%]" />
-      <ProfileCard cardsType="addResumes" className="h-auto w-[24%]" />
-      <ProfileCard cardsType="addCoverLetters" className="h-auto w-[25%]" />
+      <ProfileCard cardsType="addResumes" className="h-auto" />
+      <ProfileCard cardsType="addCoverLetters" className="h-auto" />
+      <ProfileCard
+        cardsType="addProjects"
+        className="col-span-2 col-start-2 h-auto"
+      />
+      <div className="col-start-3 flex justify-end pt-11">
+        <Button type="button" variant="accent">
+          {t("buttonRemoveAccount")}
+        </Button>
+      </div>
     </div>
   );
 }
