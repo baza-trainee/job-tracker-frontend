@@ -3,14 +3,12 @@ import {
   closeConfirmation,
   closeModal,
   openModal,
+  openConfirmation,
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
 
-import {
-  notifyError,
-  notifyInfo,
-} from "../../../Notifications/NotificationService";
+import { notifyInfo } from "../../../Notifications/NotificationService";
 
 import {
   setSearchQuery,
@@ -19,15 +17,23 @@ import {
 
 import { useLogOutUserMutation } from "../../../../store/querySlices/authQuerySlice";
 import useVacancy from "../addVacancyModals/useVacancy";
+import useEditVacancy from "../editVacancy/useEditVacancy";
+import { TypesModal } from "../../modalMappings";
 
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [logOut] = useLogOutUserMutation();
-  const dataAddVacancy = useAppSelector(
+  const dataAddEditVacancy = useAppSelector(
     (state) => state.modal.dataConfirmation
   );
-  const { onSubmit, isLoading } = useVacancy();
+  const { onSubmit: addVacanciesSubmit, isLoading: addVacanciesLoading } =
+    useVacancy();
+  const {
+    onSubmit: editVacanciesSubmit,
+    isLoading: editVacanciesLoading,
+    deleteVacancy,
+  } = useEditVacancy();
 
   const handleButton = useCallback((): void => {
     dispatch(closeModal());
@@ -49,48 +55,82 @@ const InfoModalMap = () => {
     logOut();
   }, [dispatch, logOut]);
 
-  // відправка збереженої вакансії
+  // Збереження вакансії
   const handleAddVacancy = useCallback((): void => {
-    console.log("handleAddVacancy", dataAddVacancy);
-    onSubmit(dataAddVacancy);
-  }, [onSubmit, dataAddVacancy]);
+    console.log("handleAddVacancy", dataAddEditVacancy);
+    addVacanciesSubmit(dataAddEditVacancy);
+  }, [addVacanciesSubmit, dataAddEditVacancy]);
 
   const handleCloseConfirmation = useCallback((): void => {
-    notifyError("Щось пішло не так, дані не збережено"); // test
     notifyInfo("Інформацію не збережно"); // test
     dispatch(closeConfirmation());
   }, [dispatch]);
 
-  const map = {
+  // Видалити вакансію
+  const handleDeleteVacancy = useCallback((): void => {
+    console.log("handleDeleteVacancy");
+    deleteVacancy();
+  }, [deleteVacancy]);
+
+  // Архівувати вакансію
+  const handleArhiveVacancy = useCallback((): void => {
+    console.log("handleArhiveVacancy - подумати ЩЕ ЩЕ ЩЕ ЩЕ");
+    dispatch(
+      openConfirmation({
+        typeConfirmation: "arhiveVacancy",
+      })
+    );
+  }, [dispatch]);
+
+  // Збереження редагованої вакансії
+  const handleEditVacancy = useCallback((): void => {
+    editVacanciesSubmit(dataAddEditVacancy);
+  }, [editVacanciesSubmit, dataAddEditVacancy]);
+
+  // Функція створення кнопок
+  const createButton = (
+    label: string,
+    funcButton: () => void,
+    size = "small",
+    variant = "ghost",
+    disabled = false
+  ) => ({
+    label,
+    type: "button",
+    className: "",
+    variant,
+    size,
+    funcButton,
+    disabled,
+  });
+
+  const map: Partial<
+    Record<
+      TypesModal,
+      {
+        title: string;
+        text: string[];
+        button: {
+          label: string;
+          type: string;
+          className: string;
+          variant: string;
+          size: string;
+          funcButton: () => void;
+          disabled: boolean;
+        }[];
+      }
+    >
+  > = {
     logInSuccess: {
       title: "Успіх!",
       text: ["Авторизація пройшла успішно."],
-      button: [
-        {
-          label: "Продовжити",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "big",
-          funcButton: handleButton,
-          disabled: false,
-        },
-      ],
+      button: [createButton("Продовжити", handleButton, "big")],
     },
     logInError: {
       title: "Упс",
       text: ["Перевірте введені дані та спробуйте ще раз."],
-      button: [
-        {
-          label: "Продовжити",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "big",
-          funcButton: handleButton,
-          disabled: false,
-        },
-      ],
+      button: [createButton("Продовжити", handleButton, "big")],
     },
     signUpSuccess: {
       title: "Успіх!",
@@ -98,17 +138,7 @@ const InfoModalMap = () => {
         "Реєстрація пройшла успішно.",
         "Зараз ви можете налаштувати свій профіль.",
       ],
-      button: [
-        {
-          label: "Продовжити",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "big",
-          funcButton: handleButton,
-          disabled: false,
-        },
-      ],
+      button: [createButton("Продовжити", handleButton, "big")],
     },
     signUpError: {
       title: "Упс",
@@ -117,78 +147,26 @@ const InfoModalMap = () => {
         "Спробуйте увійти або відновити пароль.",
       ],
       button: [
-        {
-          label: "Відновити",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "small",
-          funcButton: handleForgotPassword,
-          disabled: false,
-        },
-        {
-          label: "Увійти",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "small",
-          funcButton: handleLogIn,
-          disabled: false,
-        },
+        createButton("Відновити", handleForgotPassword),
+        createButton("Увійти", handleLogIn),
       ],
     },
     forgotPasswordSuccess: {
       title: "",
       text: ["Вам надіслано повідомлення на електронну пошту"],
-      button: [
-        {
-          label: "Продовжити",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "big",
-          funcButton: handleButton,
-          disabled: false,
-        },
-      ],
+      button: [createButton("Продовжити", handleButton, "big")],
     },
     resetPasswordSuccess: {
       title: "",
       text: ["Зміна пароля успішна.", "Авторизуйтесь з новим паролем"],
-      button: [
-        {
-          label: "Продовжити",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "big",
-          funcButton: handleLogIn,
-          disabled: false,
-        },
-      ],
+      button: [createButton("Продовжити", handleLogIn, "big")],
     },
     resetPasswordErrorLink: {
       title: "",
       text: ["Посилання на відновлення паролю не дійсне.", "Спробуйте ще раз"],
       button: [
-        {
-          label: "Скасувати",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "small",
-          funcButton: handleButton,
-          disabled: false,
-        },
-        {
-          label: "Спробувати",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "small",
-          funcButton: handleForgotPassword,
-          disabled: false,
-        },
+        createButton("Скасувати", handleButton),
+        createButton("Спробувати", handleForgotPassword),
       ],
     },
     logOut: {
@@ -197,48 +175,93 @@ const InfoModalMap = () => {
         "Вихід з акаунту призведе до завершення вашої сесії. Для повторного входу потрібно буде ввести ваші облікові дані.",
       ],
       button: [
-        {
-          label: "Скасувати",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "small",
-          funcButton: handleButton,
-          disabled: false,
-        },
-        {
-          label: "Вийти",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "small",
-          funcButton: handleLogOut,
-          disabled: false,
-        },
+        createButton("Скасувати", handleButton),
+        createButton("Вийти", handleLogOut),
       ],
     },
-    saveChangesVacancies: {
+    saveAddVacancies: {
       title: "Зберегти зміни?",
       text: ["Якщо ви не збережете данні, вони будуть втрачені"],
       button: [
-        {
-          label: "Вийти",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "small",
-          funcButton: handleCloseConfirmation,
-          disabled: isLoading,
-        },
-        {
-          label: "Зберегти",
-          type: "button",
-          className: "",
-          variant: "ghost",
-          size: "big",
-          funcButton: handleAddVacancy,
-          disabled: isLoading,
-        },
+        createButton(
+          "Вийти",
+          handleCloseConfirmation,
+          "small",
+          "ghost",
+          addVacanciesLoading
+        ),
+        createButton(
+          "Зберегти",
+          handleAddVacancy,
+          "big",
+          "ghost",
+          addVacanciesLoading
+        ),
+      ],
+    },
+    deleteVacancy: {
+      title: "Видалити вакансію?",
+      text: [
+        "Ця дія буде безповортньою. Натомість, ви можете перенести цю вакансію в архів",
+      ],
+      button: [
+        createButton(
+          "Архівувати",
+          handleArhiveVacancy,
+          "small",
+          "ghost",
+          addVacanciesLoading
+        ),
+        createButton(
+          "Видалити",
+          handleDeleteVacancy,
+          "big",
+          "ghost",
+          addVacanciesLoading
+        ),
+      ],
+    },
+    arhiveVacancy: {
+      // title: "Перенести вакансію в архів?",
+      title: "Архів ЧЕРЕЗ САБМИТ",
+      text: [
+        // "Ви завжди зможете знайти його за допомогою кнопки в верхньому правому куті",
+      ],
+      button: [
+        createButton(
+          "Відмінити",
+          handleCloseConfirmation,
+          "small",
+          "ghost",
+          addVacanciesLoading
+        ),
+        createButton(
+          "В архів",
+          handleDeleteVacancy,
+          "big",
+          "ghost",
+          addVacanciesLoading
+        ),
+      ],
+    },
+    saveEditVacancies: {
+      title: "Зберегти зміни?",
+      text: ["Якщо ви не збережете данні, вони будуть втрачені"],
+      button: [
+        createButton(
+          "Вийти",
+          handleCloseConfirmation,
+          "small",
+          "ghost",
+          editVacanciesLoading
+        ),
+        createButton(
+          "Зберегти",
+          handleEditVacancy,
+          "big",
+          "ghost",
+          editVacanciesLoading
+        ),
       ],
     },
   };

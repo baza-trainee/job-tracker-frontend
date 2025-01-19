@@ -20,6 +20,7 @@ export const Input = ({
   handleClickButtonRemoveInput,
   handleClickButtonCopyInput,
   isCheckButtons = true,
+  isRequired,
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -47,7 +48,7 @@ export const Input = ({
             "2xl:mb-3 2xl:text-[20px]"
           )}
         >
-          {label}
+          {label} {isRequired && <span className={cn("text-color2")}>*</span>}
         </label>
       )}
       <div className="relative">
@@ -97,17 +98,12 @@ export const Input = ({
             )}
             {isCheckButtons ? (
               error ? (
-                <button
-                  onClick={() => handleResetField(name)}
-                  // className="absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
-                >
+                <button onClick={() => handleResetField(name)}>
                   <Icon id="cancel-in-round" className="h-6 w-6 fill-color2" />
                 </button>
               ) : (
                 !isIcon && (
-                  <div
-                  // className="absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] peer-placeholder-shown:hidden"
-                  >
+                  <div>
                     <Icon id="check-box" className="h-6 w-6 fill-color5" />
                   </div>
                 )
@@ -118,10 +114,7 @@ export const Input = ({
         {error && (
           <span
             id={`inputError-${name}`}
-            className={cn(
-              "absolute left-0 top-[46px]",
-              "inline-block font-nunito text-base font-medium text-color2"
-            )}
+            className="inline-block font-nunito text-base font-medium text-color2"
           >
             {t(String(error?.message))}
           </span>

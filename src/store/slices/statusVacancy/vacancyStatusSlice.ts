@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { vacancyStatusesProps } from "./vacancyStatusTypes";
 import { statusActionProps } from "./vacancyStatusTypes";
-import { vacancyStatusesInfo } from "./vacancyStatusOperation";
 
 const initialState: vacancyStatusesProps = {
   previousStatuses: [],
@@ -12,8 +11,9 @@ const vacancyStatusSlice = createSlice({
   name: "vacancyStatus",
   initialState,
   reducers: {
-    createNewStatuses: (state) => {
-      state.newStatuses = vacancyStatusesInfo;
+    createNewStatuses: (state, action) => {
+      state.previousStatuses = action.payload;
+      state.newStatuses = action.payload;
     },
     saveStatus: (state, action: PayloadAction<statusActionProps>) => {
       state.newStatuses.push(action.payload);
@@ -22,19 +22,16 @@ const vacancyStatusSlice = createSlice({
       state.newStatuses.filter((elem) => elem.id !== action.payload.id);
     },
     changeStatus: (state, action: PayloadAction<statusActionProps>) => {
-      state.newStatuses = state.newStatuses.map((elem) =>
-        // elem.id === action.payload.id ? { ...elem, ...action.payload } : elem
-        elem.name === action.payload.name ? { ...elem, ...action.payload } : elem
+      state.newStatuses = state.newStatuses.map(
+        (elem) =>
+          elem.id === action.payload.id ? { ...elem, ...action.payload } : elem
+        // elem.name === action.payload.name ? { ...elem, ...action.payload } : elem
       );
     },
   },
 });
 
-export const {
-  saveStatus,
-  deleteStatus,
-  changeStatus,
-  createNewStatuses,
-} = vacancyStatusSlice.actions;
+export const { saveStatus, deleteStatus, changeStatus, createNewStatuses } =
+  vacancyStatusSlice.actions;
 
 export default vacancyStatusSlice.reducer;

@@ -1,13 +1,6 @@
+import { TypesModal } from "../../modalMappings";
+
 export type InfoModalProps = {
-  type:
-    | "logInSuccess"
-    | "logInError"
-    | "signUpSuccess"
-    | "signUpError"
-    | "forgotPasswordSuccess"
-    | "resetPasswordSuccess"
-    | "resetPasswordErrorLink"
-    | "logOut"
-    | "saveChangesVacancies";
+  type: TypesModal;
   textColor: string;
 };

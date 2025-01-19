@@ -32,7 +32,7 @@ const AddVacancy = () => {
     handleSubmit((data) => {
       dispatch(
         openConfirmation({
-          typeConfirmation: "saveChangesVacancies",
+          typeConfirmation: "saveAddVacancies",
           dataConfirmation: data,
         })
       );

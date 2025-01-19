@@ -17,6 +17,7 @@ import { ValueCalendarProps } from "../../../Calendar/JobCalendarProps";
 import { Options } from "../../../Vacancies/components/dropdown/Dropdown.props";
 
 export const CheckboxWithCalendar = ({
+  id,
   name,
   label,
   register,
@@ -29,7 +30,9 @@ export const CheckboxWithCalendar = ({
     date !== "1970-01-01T00:00:00.000Z"
   );
   const [dateState, setDateState] = useState<ValueCalendarProps>(new Date());
-  const [valueCalendar, setValueCalendar] = useState<string>("");
+  const [valueCalendar, setValueCalendar] = useState<string>(
+    moment(date).format("D.MM.YY")
+  );
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const { t } = useTranslation();
 
@@ -40,7 +43,7 @@ export const CheckboxWithCalendar = ({
     setValueCalendar(moment(new Date()).format("D.MM.YY"));
     dispatch(
       changeStatus({
-        id: name,
+        id: id || "",
         name: name,
         date: !isChecked
           ? new Date().toISOString()
@@ -48,6 +51,10 @@ export const CheckboxWithCalendar = ({
       })
     );
     setIsOpenCalendar(false);
+    // відстеження помилок
+    if (name === "resume" || name === "reject") {
+      setValue?.(`${name}`, !getValues?.(`${name}`));
+    }
   };
 
   const changeDate = (e: ValueCalendarProps) => {
@@ -57,7 +64,7 @@ export const CheckboxWithCalendar = ({
       setValueCalendar(newDate);
       dispatch(
         changeStatus({
-          id: name,
+          id: id || "",
           name: name,
           date: moment(e).format("YYYY-MM-DD"),
         })
@@ -86,34 +93,53 @@ export const CheckboxWithCalendar = ({
     }
   };
 
-  const setValueDropDowm = (e: string, id: string) => {
+  const setValueDropDowm = (nameDropdown: string, resumeId: string) => {
     dispatch(
       changeStatus({
-        id: name,
+        id: id || "", // вопрос с фйди может изменить
         name: name,
-        resumeId: name === "resume" ? id : null,
-        rejectReason: name === "reject" ? id : null,
+        resumeId: name === "resume" ? resumeId : null,
+        rejectReason: name === "reject" ? resumeId : null,
       })
     );
-    return setValue?.(e, id);
+    return setValue?.(nameDropdown, resumeId);
   };
+
+  const error = errors[`${name}Dropdown`];
 
   return (
     <div className="relative">
-      <div className="flex w-full items-center justify-between">
-        <Checkbox
-          name={name}
-          id={name}
-          label={t(`${label}`)}
-          register={register}
-          type="signUp"
-          errors={errors}
-          checked={isChecked}
-          onClick={handleCheckbox}
-        />
-        <span onClick={() => setIsOpenCalendar(true)}>
-          {isChecked && valueCalendar}
-        </span>
+      <div>
+        <div className="flex w-full items-center justify-between">
+          <Checkbox
+            name={name}
+            id={name}
+            label={t(`${label}`)}
+            register={register}
+            type="signUp"
+            errors={errors}
+            checked={isChecked}
+            onClick={handleCheckbox}
+          />
+          <span
+            className="cursor-pointer"
+            onClick={() => setIsOpenCalendar(true)}
+          >
+            {isChecked && valueCalendar}
+          </span>
+        </div>
+
+        {/* ----------- Error ----------------- */}
+        {error && (
+          <span
+            id={`inputError-${name}`}
+            className={classNames(
+              "inline-block pl-[9.5px] pt-1 font-nunito text-base font-medium text-color2"
+            )}
+          >
+            {t(String(error?.message))}
+          </span>
+        )}
       </div>
 
       {/* ----------- Dropdown ----------------- */}

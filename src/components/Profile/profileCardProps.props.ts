@@ -1,4 +1,4 @@
 export type PropsProfileCard = {
-  cardsType: "personalInfo" | "projects" | "resumes" | "coverLetters" | "links";
+  cardsType: "personalInfo" | "projects" | "resumes" | "coverLetters";
   className?: string;
 };

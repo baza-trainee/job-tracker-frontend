@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../../store/hook";
 import { openModal } from "../../../store/slices/modalSlice/modalSlice";
 import Icon from "../../Icon/Icon";
 import { createNewStatuses } from "../../../store/slices/statusVacancy/vacancyStatusSlice";
+import { vacancyStatusesInfo } from "@/store/slices/statusVacancy/vacancyStatusOperation";
 
 const AddVacancyButton = () => {
   const { t } = useTranslation();
@@ -16,13 +17,12 @@ const AddVacancyButton = () => {
       size="big"
       className="gap-3"
       onClick={() => {
+        dispatch(createNewStatuses(vacancyStatusesInfo));
         dispatch(
           openModal({
             typeModal: "addVacancy",
           })
         );
-        // alex -- добавить функцию
-        dispatch(createNewStatuses());
       }}
     >
       <span className="w-[130px] text-base leading-[135%]">
