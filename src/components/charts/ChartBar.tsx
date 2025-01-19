@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useAppSelector } from "../../store/hook.ts";
+import { RootState } from "../../store/store.ts";
 import { useGetAllVacancyQuery } from "../../store/querySlices/vacanciesQuerySlice";
 import {
   Chart as ChartJS,
@@ -36,15 +37,16 @@ interface GroupedData {
 }
 
 export default function ChartBar() {
+  const selectedDate = useAppSelector((state: RootState) => state.calendar.selectedDate);
   const { data: vacancies, isLoading, isError } = useGetAllVacancyQuery();
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching vacancies</div>;
 
-  // Крок 0: Витяг вакансій
+  // Крок 0: Витягуємо вакансії
   // console.log("Всі вакансії: ", vacancies);
 
-  // Крок 1: Витяг статусів (Проходимо по кожній вакансії, витягуємо всі статуси у вигляді одного великого масив)
+  // Крок 1: Витягуємо статуси (Проходимо по кожній вакансії, витягуємо всі статуси у вигляді одного великого масив)
   const statuses = vacancies?.flatMap((vacancy) => vacancy.statuses) || [];
   // console.log("Всі статуси:", statuses);
 
@@ -61,44 +63,51 @@ export default function ChartBar() {
     // Підраховуємо статуси
     if (status.name === "resume" || status.name === "saved") {
       acc[date].sent += 1; // "Надіслано резюме"
-    } else if (status.name === "hr" || status.name === "test" || status.name === "tech" || status.name === "offer") {
+    } else if (
+      status.name === "hr" ||
+      status.name === "test" ||
+      status.name === "tech" ||
+      status.name === "offer"
+    ) {
       acc[date].responses += 1; // "Отримано відповідей"
     }
 
     return acc;
   }, {});
 
-  // console.log("Груповані дані за датами:", groupedByDate);
+  // Генеруємо діапазон 7 днів, включаючи обрану дату
+  const getLast7Days = (endDate: Date): string[] => {
+    return Array.from({ length: 7 }, (_, i) => {
+      const date = new Date(endDate); // Копія обраної дати
+      date.setDate(endDate.getDate() - i); // Відлік назад
+      return date.toISOString().split("T")[0]; // Формат yyyy-mm-dd
+    }).reverse(); // Зворотній порядок, щоб обрана дата була останньою
+  };
 
-  const dates = Object.keys(groupedByDate);
-  // console.log("dates keys:", groupedByDate);
+  const last7Days = getLast7Days(selectedDate); // Масив із 7 дат
 
-  // Сортування ISO-дат і форматування
-  const sortedDates = dates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-  const formattedDates = sortedDates.map((date) =>
-    new Date(date).toLocaleDateString("uk-UA")
-  );
-
-  // console.log("Сортовані дати:", sortedDates);
-  // console.log("Відформатовані дати:", formattedDates);
-
-  const sentData = dates.map((date) => groupedByDate[date].sent); // Дані "Надіслано резюме"
-  const responseData = dates.map((date) => groupedByDate[date].responses); // Дані "Отримано відповідей"
+  // Фільтруємо дані за останні 7 днів
+  const filteredData = last7Days.map((date) => groupedByDate[date] || { sent: 0, responses: 0 });
 
   // Дані для Chart.js
   const chartData = {
-    labels: formattedDates, // Дати
+    // labels: formattedDates, // Дати
+    labels: last7Days.map((date) =>
+      new Date(date).toLocaleDateString("uk-UA", { day: "2-digit", month: "2-digit" })
+    ), // Відформатовані дати для осі X
     datasets: [
       {
         label: "Надіслано резюме",
-        data: sentData,
+        // data: sentData,
+        data: filteredData.map((d) => d.sent),
         backgroundColor: "rgba(208, 232, 197, 1)", // Зелений
         borderColor: "rgba(208, 232, 197, 1)",
         borderWidth: 1,
       },
       {
         label: "Отримано відповідей",
-        data: responseData,
+        // data: responseData,
+        data: filteredData.map((d) => d.responses),
         backgroundColor: "rgba(198, 231, 255, 1)", // Синій
         borderColor: "rgba(198, 231, 255, 1)",
         borderWidth: 1,
@@ -112,6 +121,26 @@ export default function ChartBar() {
     </div>
   );
 }
+
+
+
+
+// console.log("Груповані дані за датами:", groupedByDate);
+
+// const dates = Object.keys(groupedByDate);
+// console.log("dates keys:", groupedByDate);
+
+// Сортування ISO-дат і форматування
+// const sortedDates = dates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+// const formattedDates = sortedDates.map((date) =>
+//   new Date(date).toLocaleDateString("uk-UA")
+// );
+
+// console.log("Сортовані дати:", sortedDates);
+// console.log("Відформатовані дати:", formattedDates);
+
+// const sentData = dates.map((date) => groupedByDate[date].sent); // Дані "Надіслано резюме"
+// const responseData = dates.map((date) => groupedByDate[date].responses); // Дані "Отримано відповідей"
 
 
 // const dates = Object.keys(groupedByDate); // Усі унікальні дати

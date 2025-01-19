@@ -1,4 +1,6 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { RootState } from "../store/store.ts";
+import { useAppDispatch, useAppSelector } from "../store/hook.ts";
 import StatisticsPanel from "../components/Statistics/componets/statisticsPanel/StatisticsPanel";
 import StatisticsCalendarTab from "../components/Calendar/StatisticsCalendarTab.tsx";
 import StatisticsCalendarDay from "../components/Calendar/StatisticsCalendarDay.tsx";
@@ -13,8 +15,12 @@ import StatisticsPanelSkeleton from "../components/Statistics/componets/statisti
 import NoVacancyCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
 import Soon from "../components/Calendar/Soon.tsx";
 import RejectDiagram from "../components/Statistics/componets/statisticsDiagram/RejectDiagram.tsx";
+import { setActiveTab, setSelectedDate, setSelectedMonth, setSelectedYear } from "@/store/slices/calendarSlice/calendarSlice.ts";
 
 function Statistics() {
+  const dispatch = useAppDispatch();
+  const activeTab = useAppSelector((state: RootState) => state.calendar.activeTab);
+
   const { data, isLoading, isError } = useGetAllUserDataQuery();
 
   const vacanciesForStat =
@@ -26,20 +32,24 @@ function Statistics() {
     isError: isPredictionError,
   } = useGetPredictionDailyQuery();
 
-  const [activeTab, setActiveTab] = useState("Day");
-
   const renderCalendar = () => {
     switch (activeTab) {
-      case "Day":
-        return <StatisticsCalendarDay />;
-      case "Month":
-        return <StatisticsCalendarMonth />;
-      case "Year":
-        return <StatisticsCalendarYear />;
+      case "day":
+        return (
+          <StatisticsCalendarDay onDateChange={(date) => dispatch(setSelectedDate(date))} />
+        );
+      case "month":
+        return (
+          <StatisticsCalendarMonth onMonthChange={(month) => dispatch(setSelectedMonth(month))} />
+        );
+      case "year":
+        return (
+          <StatisticsCalendarYear onYearChange={(year) => dispatch(setSelectedYear(year))} />
+        );
       default:
         return null;
     }
-  };
+  }
 
   return (
     <div className="container pb-8 pt-10">
@@ -57,7 +67,8 @@ function Statistics() {
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
-                  setActiveTab={setActiveTab}
+                  // setActiveTab={setActiveTab}
+                  setActiveTab={(tab) => dispatch(setActiveTab(tab))}
                 />
               </div>
               <div className="col-span-1 row-span-2">
@@ -78,3 +89,23 @@ function Statistics() {
 }
 
 export default Statistics;
+
+
+
+
+
+
+  // const [activeTab, setActiveTab] = useState("Day");
+
+  // const renderCalendar = () => {
+  //   switch (activeTab) {
+  //     case "Day":
+  //       return <StatisticsCalendarDay />;
+  //     case "Month":
+  //       return <StatisticsCalendarMonth />;
+  //     case "Year":
+  //       return <StatisticsCalendarYear />;
+  //     default:
+  //       return null;
+  //   }
+  // };

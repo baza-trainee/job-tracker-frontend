@@ -1,14 +1,18 @@
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
+import { CalendarTab } from "../../store/slices/calendarSlice/calendarTypes.ts";
 
 type StatisticsCalendarTabProps = {
-    activeTab: string;
-    setActiveTab: (tab: string) => void;
+    activeTab: CalendarTab;
+    setActiveTab: (tab: CalendarTab) => void;
 };
 
-export const StatisticsCalendarTab: React.FC<StatisticsCalendarTabProps> = ({ activeTab, setActiveTab }) => {
+export const StatisticsCalendarTab: React.FC<StatisticsCalendarTabProps> = ({ 
+    activeTab, 
+    setActiveTab, 
+}) => {
     const { t } = useTranslation();
-    const tabs = [
+    const tabs: { key: CalendarTab; label: string }[] = [
         {key: "day", label: t("calendarTabs.day")},
         {key: "month", label: t("calendarTabs.month")},
         {key: "year", label: t("calendarTabs.year")}
