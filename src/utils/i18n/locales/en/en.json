@@ -160,7 +160,9 @@
       "reject": "Rejection",
       "offer": "Offer",
       "archive": "Archive",
-      "save": "Save"
+      "restore": "Restore",
+      "save": "Save",
+      "delete": "Delete"
     },
     "placeholders": {
       "company": "Enter company name",
@@ -200,6 +202,11 @@
     },
     "notes": {
       "max": "Maximum length is 4000 characters"
+    }
+  },
+  "editVacancy": {
+    "nameModal": {
+      "name": "Edit the vacancy"
     }
   },
   "calendar": {

@@ -25,8 +25,15 @@ const EditVacancy = () => {
   const statusVacancy = useAppSelector(
     (state) => state.statusVacancy.newStatuses
   );
-  const { register, resetField, handleSubmit, errors, getValues, setValue } =
-    useEditVacancy();
+  const {
+    register,
+    resetField,
+    handleSubmit,
+    errors,
+    getValues,
+    setValue,
+    vacancyData,
+  } = useEditVacancy();
 
   const deleteVacancy = () => {
     dispatch(
@@ -35,9 +42,9 @@ const EditVacancy = () => {
       })
     );
   };
+  const isArchived = vacancyData?.isArchived || "";
 
   const saveVacancy = () => {
-    console.log("er", errors)
     handleSubmit((data) => {
       console.log("Редагування вакансії", data);
       dispatch(
@@ -138,7 +145,7 @@ const EditVacancy = () => {
               size="small"
               onClick={deleteVacancy}
             >
-              Видалити
+              {t("addVacancy.form.delete")}
               <Icon id={"delete"} className="ml-3 h-6 w-6" />
             </Button>
             <Button
@@ -148,8 +155,11 @@ const EditVacancy = () => {
               size="small"
               onClick={handleSubmitArchive}
             >
-              {t("addVacancy.form.archive")}{" "}
-              <Icon id={"send"} className="ml-3 h-6 w-6" />
+              {t(`addVacancy.form.${isArchived ? "restore" : "archive"}`)}
+              <Icon
+                id={isArchived ? "restore" : "send"}
+                className="ml-3 h-6 w-6"
+              />
             </Button>
             <Button
               type="button"

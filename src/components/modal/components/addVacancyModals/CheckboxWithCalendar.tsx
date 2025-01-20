@@ -46,7 +46,7 @@ export const CheckboxWithCalendar = ({
         id: id || "",
         name: name,
         date: !isChecked
-          ? new Date().toISOString()
+          ? moment().add(1, "hours").toISOString()
           : "1970-01-01T00:00:00.000Z",
       })
     );
@@ -58,15 +58,25 @@ export const CheckboxWithCalendar = ({
   };
 
   const changeDate = (e: ValueCalendarProps) => {
+    console.log("call changeDate", e);
     setDateState(e);
     if (e instanceof Date) {
       const newDate = moment(e).format("D.MM.YY");
       setValueCalendar(newDate);
+
+      const updatedDate = moment(e)
+        .set({
+          hour: moment().hour(),
+          minute: moment().minute(),
+          second: moment().second(),
+          millisecond: moment().millisecond(),
+        })
+        .toISOString();
       dispatch(
         changeStatus({
           id: id || "",
           name: name,
-          date: moment(e).format("YYYY-MM-DD"),
+          date: updatedDate,
         })
       );
     }
@@ -96,10 +106,26 @@ export const CheckboxWithCalendar = ({
   const setValueDropDowm = (nameDropdown: string, resumeId: string) => {
     dispatch(
       changeStatus({
-        id: id || "", // вопрос с фйди может изменить
+        id: id || "",
         name: name,
         resumeId: name === "resume" ? resumeId : null,
         rejectReason: name === "reject" ? resumeId : null,
+      })
+    );
+    // alex
+    const updatedDate = moment(date)
+      .set({
+        hour: moment().hour(),
+        minute: moment().minute(),
+        second: moment().second(),
+        millisecond: moment().millisecond(),
+      })
+      .toISOString();
+    dispatch(
+      changeStatus({
+        id: id || "",
+        name: name,
+        date: updatedDate,
       })
     );
     return setValue?.(nameDropdown, resumeId);

@@ -2,7 +2,6 @@ import { ForgotPassword } from "./components/formModals/ForgotPassword";
 import ContactUs from "./components/formModals/ContacUs";
 import InfoModal from "./components/infoModals/InfoModal";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
-import { t } from "i18next";
 import EditVacancy from "./components/editVacancy/EditVacancy";
 import ModalAddProfileProperties from "../Profile/ModalAddProfileProperties";
 import { Color, ContentMapProps } from "./ModalMain.types";
@@ -35,14 +34,13 @@ const colorSuccess: Color = {
 export const contentMap: ContentMapProps = {
   addVacancy: {
     content: <AddVacancy />,
-    // nameModal: t("addVacancy.nameModal.name"),
     nameModal: "addVacancy.nameModal.name",
     bgColor: colorDefault.bg,
     borderColor: colorDefault.border,
   },
   editVacancy: {
     content: <EditVacancy />,
-    nameModal: "Редагувати вакансію",
+    nameModal: "editVacancy.nameModal.name",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
@@ -131,25 +129,25 @@ export const contentMap: ContentMapProps = {
   },
   addPersonalProperties: {
     content: <ModalAddProfileProperties cardsType="addPersonalProperties" />,
-    nameModal: t("addPersonalProperties.modalAddTitle"),
+    nameModal: "addPersonalProperties.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   addResumes: {
     content: <ModalAddProfileProperties cardsType="addResumes" />,
-    nameModal: t("addResumes.modalAddTitle"),
+    nameModal: "addResumes.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   addProjects: {
     content: <ModalAddProfileProperties cardsType="addProjects" />,
-    nameModal: t("addProjects.modalAddTitle"),
+    nameModal: "addProjects.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   addCoverLetters: {
     content: <ModalAddProfileProperties cardsType="addCoverLetters" />,
-    nameModal: t("addCoverLetters.modalAddTitle"),
+    nameModal: "addCoverLetters.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },

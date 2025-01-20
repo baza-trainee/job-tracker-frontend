@@ -55,7 +55,6 @@ const AddVacancyInfo = () => {
   const rejectOptions: SortOption[] =
     rejectionReasonKeys.map((reject: string) => ({
       id: reject,
-      // label: reject,
       label: t(`statisticsRejectDiagram.${reject}`),
     })) || [];
 

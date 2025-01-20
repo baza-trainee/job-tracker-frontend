@@ -128,7 +128,7 @@ const AddVacancy = () => {
               size="small"
               onClick={handleSubmitArchive}
             >
-              {t("addVacancy.form.archive")}{" "}
+              {t("addVacancy.form.archive")}
               <Icon id={"send"} className="ml-3 h-6 w-6" />
             </Button>
             <Button
