@@ -3,6 +3,9 @@ import Icon from "../Icon/Icon";
 import { ReactNode } from "react";
 import { useAppSelector } from "@/store/hook";
 
+//alex
+import { useTranslation } from "react-i18next";
+
 type ModalDataProps = {
   content: ReactNode;
   nameModal?: string | undefined;
@@ -20,6 +23,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
   const { borderColorModal, backgroundColorModal } = useAppSelector(
     (state) => state.modal
   );
+  const { t } = useTranslation();
 
   return (
     <div className={className}>
@@ -29,7 +33,9 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           backgroundColorModal || modalData.bgColor
         )}
       >
-        <span className="text-xl">{modalData && modalData.nameModal}</span>
+        {modalData?.nameModal && (
+          <span className="text-xl">{t(modalData.nameModal)}</span>
+        )}
       </div>
       <div
         className={clsx(

@@ -160,7 +160,9 @@
       "reject": "Rejection",
       "offer": "Offer",
       "archive": "Archive",
-      "save": "Save"
+      "restore": "Restore",
+      "save": "Save",
+      "delete": "Delete"
     },
     "placeholders": {
       "company": "Enter company name",
@@ -172,7 +174,9 @@
     },
     "nameModal": {
       "name": "Add a new vacancy"
-    }
+    },
+    "titleResumeList": "Select the sent CV",
+    "titleRejectList": "Select the reason for rejection"
   },
   "addVacancySchema": {
     "company": {
@@ -198,6 +202,11 @@
     },
     "notes": {
       "max": "Maximum length is 4000 characters"
+    }
+  },
+  "editVacancy": {
+    "nameModal": {
+      "name": "Edit the vacancy"
     }
   },
   "calendar": {

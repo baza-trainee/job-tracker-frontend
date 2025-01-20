@@ -74,12 +74,12 @@ const useEditVacancy = () => {
   //alex
   useEffect(() => {
     if (vacancyData) {
-      const findStatusId = (statusName: string) => {
-        return (
-          vacancyData.statuses.find((item) => item.name === statusName)
-            ?.resumeId || ""
-        );
-      };
+      const findStatusId = (
+        statusName: string,
+        key: "resumeId" | "rejectReason"
+      ) =>
+        vacancyData.statuses.find((item) => item.name === statusName)?.[key] ||
+        "";
 
       reset({
         company: vacancyData.company,
@@ -90,8 +90,8 @@ const useEditVacancy = () => {
         note: vacancyData.note,
         work_type: vacancyData.work_type,
         isArchived: vacancyData.isArchived,
-        resumeDropdown: findStatusId("resume"),
-        rejectDropdown: findStatusId("reject"),
+        resumeDropdown: findStatusId("resume", "resumeId"),
+        rejectDropdown: findStatusId("reject", "rejectReason"),
       });
     }
   }, [vacancyData, reset, dispatch]);
@@ -132,7 +132,7 @@ const useEditVacancy = () => {
         isArchived,
       } = data;
       setIsLoading(true);
-      console.log("редагування вакансії 55", data);
+      console.log("Редагування вакансії", data);
 
       // 1 - запит на збереження вакансії - пропускаємо
 
@@ -167,6 +167,7 @@ const useEditVacancy = () => {
       for (let i: number = 0; i <= newStatuses.length; i++) {
         const prevDate = previousStatuses[i]?.date || "";
         const newDate = newStatuses[i]?.date || "";
+        // перевірка СТАТУСУ по даті
         if (prevDate !== newDate) {
           // створити статус
           if (prevDate === "1970-01-01T00:00:00.000Z") {
@@ -181,6 +182,7 @@ const useEditVacancy = () => {
             }).unwrap();
             console.log("Створення статусу", statusResponse);
           }
+
           // видалити статус
           if (newDate === "1970-01-01T00:00:00.000Z") {
             const statusResponse = await deleteStatusVacancyById({
@@ -189,6 +191,7 @@ const useEditVacancy = () => {
             }).unwrap();
             console.log("Видалення статусу", statusResponse);
           }
+
           // редагувати статус
           if (
             prevDate !== "1970-01-01T00:00:00.000Z" &&

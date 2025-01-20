@@ -10,7 +10,7 @@ import Checkbox from "../components/checkbox/Checkbox";
 import { Button } from "../components/buttons/Button/Button";
 import Separator from "../components/separator/Separator";
 
-import { useAppSelector, useAppDispatch } from "../store/hook";
+import { useAppDispatch } from "../store/hook";
 import { useTranslation } from "react-i18next";
 
 import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
@@ -30,6 +30,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
     resetField,
     onSubmit,
     errors,
+    isLoading,
     isCleanInputsForm,
   } = useAuthForm(type);
 
@@ -37,7 +38,6 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   const isLogInPage = type === "logIn";
   const isResetPasswordPage = type === "resetPassword";
 
-  const { loading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
@@ -190,7 +190,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                   <Button
                     type="submit"
                     className="mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
-                    disabled={isCleanInputsForm() || error || loading}
+                    disabled={isCleanInputsForm() || error || isLoading}
                     variant="ghost"
                     size="big"
                   >

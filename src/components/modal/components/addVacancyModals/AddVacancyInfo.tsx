@@ -41,7 +41,7 @@ const AddVacancyInfo = () => {
       id: resume.id,
       label: resume.name,
     })) || [];
-  const buttonResumeOption = { id: "", label: "Оберіть відправлене резюме" };
+  const buttonResumeOption = { id: "", label: t("addVacancy.titleResumeList") };
   // 3 - масив з причинами відмови
   const rejectionReasonKeys = [
     "SOFT_SKILLS",
@@ -55,10 +55,10 @@ const AddVacancyInfo = () => {
   const rejectOptions: SortOption[] =
     rejectionReasonKeys.map((reject: string) => ({
       id: reject,
-      label: reject,
+      label: t(`statisticsRejectDiagram.${reject}`),
     })) || [];
 
-  const buttonRejectOption = { id: "", label: "Оберіть причину відмови" };
+  const buttonRejectOption = { id: "", label: t("addVacancy.titleRejectList") };
 
   return {
     vacancyFields,

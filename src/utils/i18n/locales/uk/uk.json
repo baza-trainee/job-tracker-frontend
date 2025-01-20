@@ -160,7 +160,9 @@
       "reject": "Відмова",
       "offer": "Офер",
       "archive": "В архів",
-      "save": "Зберегти"
+      "restore": "Відновити",
+      "save": "Зберегти",
+      "delete": "Видалити"
     },
     "placeholders": {
       "company": "Вкажіть назву компанії",
@@ -172,7 +174,9 @@
     },
     "nameModal": {
       "name": "Додати нову вакансію"
-    }
+    },
+    "titleResumeList": "Оберіть відправлене резюме",
+    "titleRejectList": "Оберіть причину відмови"
   },
   "addVacancySchema": {
     "company": {
@@ -198,6 +202,11 @@
     },
     "notes": {
       "max": "Максимальна довжина 4000 символів"
+    }
+  },
+  "editVacancy": {
+    "nameModal": {
+      "name": "Редагувати вакансію"
     }
   },
   "calendar": {

@@ -3,7 +3,6 @@ import { useAuthForm } from "../components/AuthComponents/useAuth";
 import { Input } from "../components/inputs/Input/Input";
 import { Button } from "../components/buttons/Button/Button";
 
-import { useAppSelector } from "../store/hook";
 import { useTranslation } from "react-i18next";
 
 import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
@@ -20,9 +19,9 @@ const ForgotPasswordLayout = ({ type }: ForgotPasswordLayoutProps) => {
     onSubmit,
     errors,
     isCleanInputsForm,
+    isLoading,
   } = useAuthForm(type);
 
-  const { loading } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();
 
   const error = !!Object.keys(errors).length;
@@ -48,7 +47,7 @@ const ForgotPasswordLayout = ({ type }: ForgotPasswordLayoutProps) => {
           <Button
             type="submit"
             className="mx-auto mt-8"
-            disabled={isCleanInputsForm() || error || loading}
+            disabled={isCleanInputsForm() || error || isLoading}
             variant="ghost"
             size="big"
           >
