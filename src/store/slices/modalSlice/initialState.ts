@@ -1,4 +1,4 @@
-import { TypesModal } from "@/components/modal/modalMappings";
+import { TypesModal } from "@/components/modal/ModalMain.types";
 import { Vacancy } from "@/types/vacancies.types";
 
 export interface ModalProps {
@@ -12,20 +12,3 @@ export interface ModalProps {
   borderColorModal?: string | null;
   backgroundColorModal?: string | null;
 }
-
-// TODO: коли всі модалки будуть готові дописати їх типи в typeModal замість string
-// export interface ModalProps {
-//   isModalOpen?: boolean;
-//   typeModal:
-//     | "close"
-//     | "forgotPassword"
-//     | "logInSuccess"
-//     | "logInError"
-//     | "signUpSuccess"
-//     | "signUpError"
-//     | "forgotPasswordSuccess"
-//     | "resetPasswordErrorLink"
-//     | "resetPasswordSuccess"
-//     | "contactUs"
-//     | "logOut";
-// }

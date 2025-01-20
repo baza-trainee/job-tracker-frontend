@@ -1,4 +1,4 @@
-import { TypesModal } from "../../modalMappings";
+import { TypesModal } from "../../ModalMain.types";
 
 export type InfoModalProps = {
   type: TypesModal;

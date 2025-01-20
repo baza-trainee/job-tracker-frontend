@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useGetAllUserDataQuery } from "../../store/querySlices/profileQuerySlice";
 import { copyInputValue } from "../../utils/copyInputValue";
 
@@ -8,6 +8,7 @@ import { Input } from "../inputs/Input/Input";
 import { Button } from "../buttons/Button/Button";
 import { useAppDispatch } from "@/store/hook";
 import { openModal } from "@/store/slices/modalSlice/modalSlice";
+import useProfileTexts from "./textProfile/useProfileText";
 
 type Inputs = {
   UserName: string;
@@ -17,11 +18,9 @@ type Inputs = {
 
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
-  console.log("profile>>", profile);
-
+  const text = useProfileTexts({ cardsType });
   const {
     register,
-    handleSubmit,
     watch,
     setValue,
     resetField,
@@ -30,19 +29,39 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
   useEffect(() => {
     setValue("UserName", profile?.username as string);
     setValue("Email", profile?.email as string);
   }, []);
 
+  const typeRemoveConfirmation = () => {
+    switch (cardsType) {
+      case "addCoverLetters":
+        return "removeCoverLetters";
+      case "addProjects":
+        return "removeProjects";
+      case "addResumes":
+        return "removeResumes";
+      case "addPersonalProperties":
+        return "removePersonalProperties";
+
+      default:
+        break;
+    }
+  };
+
+  const handleClickButtonRemoveInput = (id: string) => {
+    dispatch(
+      openModal({
+        dataConfirmation: id,
+        typeModal: typeRemoveConfirmation(),
+      })
+    );
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-3 rounded-[0_12px_12px_12px] border-[1px] border-solid border-backgroundSecondary bg-slate-50 p-6"
-    >
-      {cardsType === "personalInfo" && (
+    <form className="flex flex-col gap-3 rounded-[0_12px_12px_12px] border-[1px] border-solid border-backgroundSecondary bg-slate-50 p-6">
+      {cardsType === "addPersonalProperties" && (
         <ul>
           {["UserName", "Email", "PhoneNumber"].map((item, index, array) => {
             const value = watch(item as keyof Inputs);
@@ -69,12 +88,12 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         </ul>
       )}
 
-      {cardsType === "projects" && (
+      {cardsType === "addProjects" && (
         <>
           {profile?.projects.map((item) => (
             <Input
               key={item.id}
-              // value={item.link}
+              value={item.liveProjectLink}
               name={item.name}
               placeholder={item.name}
               register={register}
@@ -83,16 +102,22 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
+              handleClickButtonCopyInput={() =>
+                copyInputValue(item.liveProjectLink)
+              }
+              handleClickButtonRemoveInput={() => {
+                handleClickButtonRemoveInput(item.id);
+              }}
             />
           ))}
         </>
       )}
-      {cardsType === "resumes" && (
+      {cardsType === "addResumes" && (
         <>
           {profile?.resumes.map((item) => (
             <Input
               key={item.id}
-              // value={item.link}
+              value={item.link}
               name={item.name}
               label={item.name}
               placeholder={item.name}
@@ -102,11 +127,15 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
+              handleClickButtonCopyInput={() => copyInputValue(item.link)}
+              handleClickButtonRemoveInput={() => {
+                handleClickButtonRemoveInput(item.id);
+              }}
             />
           ))}
         </>
       )}
-      {cardsType === "coverLetters" && (
+      {cardsType === "addCoverLetters" && (
         <>
           {profile?.coverLetters.map((item) => (
             <Input
@@ -120,16 +149,20 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
+              handleClickButtonCopyInput={() => copyInputValue(item.name)}
+              handleClickButtonRemoveInput={() => {
+                handleClickButtonRemoveInput(item.id);
+              }}
             />
           ))}
         </>
       )}
       <Button
-        type="submit"
+        type="button"
         variant="accent"
-        onClick={() => dispatch(openModal({ typeModal: "close" }))}
+        onClick={() => dispatch(openModal({ typeModal: cardsType }))}
       >
-        Add {cardsType} +
+        {text.buttonAdd} +
       </Button>
     </form>
   );

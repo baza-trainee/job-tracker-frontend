@@ -201,15 +201,40 @@
     }
   },
   "calendar": {
-   "months": ["Січ", "Лют", "Берез", "Квіт", "Трав", "Черв", "Лип", "Серп", "Верес", "Жовт", "Лист", "Груд"]
+    "months": [
+      "Січ",
+      "Лют",
+      "Берез",
+      "Квіт",
+      "Трав",
+      "Черв",
+      "Лип",
+      "Серп",
+      "Верес",
+      "Жовт",
+      "Лист",
+      "Груд"
+    ]
   },
-  "calendarTabs": {
-    "day": "День",
-    "month": "Місяць",
-    "year": "Рік"
+  "addCoverLetters": {
+    "cardTitle": "Супровідні листи",
+    "buttonAdd": "Додати лист",
+    "modalAddTitle": "Додати супровідний лист"
   },
-  "soonSection": {
-    "soon": "Незабаром",
-    "addEvent": "Додати подію"
-  }
+  "addProjects": {
+    "cardTitle": "Проєкти",
+    "buttonAdd": "Додати посилання на проект",
+    "modalAddTitle": "Додати проект"
+  },
+  "addResumes": {
+    "cardTitle": "Резюме",
+    "buttonAdd": "Додати резюме",
+    "modalAddTitle": "Додати резюме"
+  },
+  "addPersonalProperties": {
+    "cardTitle": "Персональна інформація",
+    "buttonAdd": "Додати посилання",
+    "modalAddTitle": "Додати посилання"
+  },
+  "buttonRemoveAccount": "Видалити акаунт"
 }

@@ -99,7 +99,7 @@ export const authPublicQuerySlice = createApi({
 
     resetUserPassword: build.mutation<
       Pick<ResponseMessage, "message">,
-      Pick<AuthRequest, "password"> & Pick<AuthResponse, "access_token">
+      Pick<AuthRequest, "password"> & { token: string }
     >({
       query: (requestBody) => ({
         url: "/auth/reset-password",
