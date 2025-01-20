@@ -57,28 +57,30 @@ export const CheckboxWithCalendar = ({
     }
   };
 
+  const createUpdatedDate = (date: string): void => {
+    const newDate = moment(date)
+      .set({
+        hour: moment().hour(),
+        minute: moment().minute(),
+        second: moment().second(),
+        millisecond: moment().millisecond(),
+      })
+      .toISOString();
+    dispatch(
+      changeStatus({
+        id: id || "",
+        name: name,
+        date: newDate,
+      })
+    );
+  };
+
   const changeDate = (e: ValueCalendarProps) => {
-    console.log("call changeDate", e);
     setDateState(e);
     if (e instanceof Date) {
       const newDate = moment(e).format("D.MM.YY");
       setValueCalendar(newDate);
-
-      const updatedDate = moment(e)
-        .set({
-          hour: moment().hour(),
-          minute: moment().minute(),
-          second: moment().second(),
-          millisecond: moment().millisecond(),
-        })
-        .toISOString();
-      dispatch(
-        changeStatus({
-          id: id || "",
-          name: name,
-          date: updatedDate,
-        })
-      );
+      createUpdatedDate(e.toISOString());
     }
     setIsOpenCalendar(false);
   };
@@ -112,22 +114,9 @@ export const CheckboxWithCalendar = ({
         rejectReason: name === "reject" ? resumeId : null,
       })
     );
-    // alex
-    const updatedDate = moment(date)
-      .set({
-        hour: moment().hour(),
-        minute: moment().minute(),
-        second: moment().second(),
-        millisecond: moment().millisecond(),
-      })
-      .toISOString();
-    dispatch(
-      changeStatus({
-        id: id || "",
-        name: name,
-        date: updatedDate,
-      })
-    );
+    if (date) {
+      createUpdatedDate(date);
+    }
     return setValue?.(nameDropdown, resumeId);
   };
 
