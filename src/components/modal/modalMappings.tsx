@@ -35,7 +35,8 @@ const colorSuccess: Color = {
 export const contentMap: ContentMapProps = {
   addVacancy: {
     content: <AddVacancy />,
-    nameModal: t("addVacancy.nameModal.name"),
+    // nameModal: t("addVacancy.nameModal.name"),
+    nameModal: "addVacancy.nameModal.name",
     bgColor: colorDefault.bg,
     borderColor: colorDefault.border,
   },

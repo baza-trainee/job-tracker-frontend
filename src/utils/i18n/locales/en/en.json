@@ -172,7 +172,9 @@
     },
     "nameModal": {
       "name": "Add a new vacancy"
-    }
+    },
+    "titleResumeList": "Select the sent CV",
+    "titleRejectList": "Select the reason for rejection"
   },
   "addVacancySchema": {
     "company": {

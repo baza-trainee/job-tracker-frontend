@@ -1,4 +1,4 @@
-import { useMemo, useCallback } from "react";
+import { useMemo, useCallback, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,6 @@ import { SignUpSchema } from "../../schemas/SignUpSchema";
 import { LogInSchema } from "../../schemas/LogInSchema";
 import { ForgotPasswordSchema } from "../../schemas/ForgotPasswordSchema";
 import { ResetPasswordSchema } from "../../schemas/ResetPasswordSchema";
-import { useAppDispatch } from "../../store/hook";
 import {
   useForgotPasswordUserMutation,
   useLogInUserWithCredentialsMutation,
@@ -21,7 +20,6 @@ import {
 export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
 ) {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [loginUser] = useLogInUserWithCredentialsMutation();
@@ -31,6 +29,8 @@ export function useAuthForm(
   const [forgotUserPassword] = useForgotPasswordUserMutation();
 
   const [resetUserPassword] = useResetUserPasswordMutation();
+
+  const [isLoading, setIsLoadinfg] = useState<boolean>(false);
 
   const formConfigs = useMemo(() => {
     return {
@@ -110,6 +110,7 @@ export function useAuthForm(
 
   const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
     async (data) => {
+      setIsLoadinfg(true);
       try {
         switch (type) {
           case "signUp":
@@ -155,9 +156,18 @@ export function useAuthForm(
         console.error("Submission failed:", error);
       } finally {
         reset();
+        setIsLoadinfg(false);
       }
     },
-    [type, dispatch, reset, navigate]
+    [
+      forgotUserPassword,
+      loginUser,
+      navigate,
+      registerUser,
+      reset,
+      resetUserPassword,
+      type,
+    ]
   );
 
   return {
@@ -168,5 +178,6 @@ export function useAuthForm(
     onSubmit,
     errors,
     isCleanInputsForm,
+    isLoading
   };
 }

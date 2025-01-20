@@ -172,7 +172,9 @@
     },
     "nameModal": {
       "name": "Додати нову вакансію"
-    }
+    },
+    "titleResumeList": "Оберіть відправлене резюме",
+    "titleRejectList": "Оберіть причину відмови"
   },
   "addVacancySchema": {
     "company": {

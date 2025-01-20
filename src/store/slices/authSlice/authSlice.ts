@@ -6,7 +6,6 @@ const initialState: AuthStateProps = {
   user: null,
   tokens: null,
   isLoggedIn: false,
-  loading: false,
   error: null,
 };
 
