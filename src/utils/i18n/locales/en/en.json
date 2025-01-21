@@ -245,5 +245,59 @@
     "buttonAdd": "Add Link",
     "modalAddTitle": "Add a new link"
   },
-  "buttonRemoveAccount": "Remove Account"
+  "buttonRemoveAccount": "Remove Account",
+  "infoModal": {
+    "success": "Success",
+    "oops": "Oops",
+    "button": {
+      "cancel": "Cancel",
+      "logOut": "Log Out",
+      "save": "Save",
+      "archive": "Archive",
+      "undo": "Undo",
+      "toArchive": "To Archive",
+      "continue": "Continue",
+      "restore": "Restore",
+      "login": "Log In",
+      "try": "Try",
+      "delete": "Delete"
+    },
+    "logOut": {
+      "title": "Are you sure you want to log out?",
+      "text_1": "Logging out will end your session. To log back in, you will need to enter your credentials."
+    },
+    "saveAddVacancies": {
+      "title": "Save changes?",
+      "text_1": "If you do not save the data, it will be lost."
+    },
+    "deleteVacancy": {
+      "title": "Delete vacancy?",
+      "text_1": "This action is irreversible. Instead, you can move this vacancy to the archive."
+    },
+    "logInSuccess": {
+      "text_1": "Login was successful."
+    },
+    "logInError": {
+      "text_1": "Check the entered data and try again."
+    },
+    "signUpSuccess": {
+      "text_1": "Registration was successful.",
+      "text_2": "You can now set up your profile."
+    },
+    "signUpError": {
+      "text_1": "An account with this email already exists.",
+      "text_2": "Try logging in or resetting your password."
+    },
+    "forgotPasswordSuccess": {
+      "text_1": "A message has been sent to your email."
+    },
+    "resetPasswordSuccess": {
+      "text_1": "Password changed successfully.",
+      "text_2": "Log in with your new password."
+    },
+    "resetPasswordErrorLink": {
+      "text_1": "The password reset link is invalid.",
+      "text_2": "Try again."
+    }
+  }
 }
