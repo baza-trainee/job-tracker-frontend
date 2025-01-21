@@ -298,7 +298,8 @@
     "resetPasswordErrorLink": {
       "text_1": "The password reset link is invalid.",
       "text_2": "Try again."
-    },
+    }
+  },
   "soonSection": {
     "soon": "Soon",
     "addEvent": "Add event"
