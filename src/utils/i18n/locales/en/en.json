@@ -298,6 +298,18 @@
     "resetPasswordErrorLink": {
       "text_1": "The password reset link is invalid.",
       "text_2": "Try again."
-    }
+    },
+  "soonSection": {
+    "soon": "Soon",
+    "addEvent": "Add event"
+  },
+  "calendarTabs": {
+    "day": "Day",
+    "month": "Month",
+    "year": "Year"
+  },
+  "chartBar": {
+    "sent": "Sent resume",
+    "responses": "received responses"
   }
 }

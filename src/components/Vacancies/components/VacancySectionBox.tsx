@@ -1,12 +1,6 @@
-import { FC, ReactNode, useState, useRef, useEffect } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-
-type VacancySectionProps = {
-    titleSection: string;
-    colorSectionBorder: string;
-    colorSectionBG: string;
-    children?: ReactNode;
-};
+import { VacancySectionProps } from "./VacancySection.tsx";
 
 const VacancySectionBox: FC<VacancySectionProps> = ({
     titleSection,

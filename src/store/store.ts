@@ -8,6 +8,7 @@ import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
 import sidebarReducer from "./slices/sibebarSlice/sidebarSlice.ts";
 import statusVacancyReducer from "./slices/statusVacancy/vacancyStatusSlice.ts";
+import calendarReducer from "./slices/calendarSlice/calendarSlice.ts";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -62,6 +63,7 @@ export const store = configureStore({
     theme: themePersistedReducer,
     sidebar: sidebarPersistedReducer,
     statusVacancy: statusVacancyReducer,
+    calendar: calendarReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
