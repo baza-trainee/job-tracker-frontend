@@ -1,56 +1,30 @@
+import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store/hook.ts";
 import { RootState } from "../../store/store.ts";
-import { useGetAllVacancyQuery } from "../../store/querySlices/vacanciesQuerySlice";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { ChartOptions } from "chart.js";
-
-// Реєстрація компонентів Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
-const options: ChartOptions<"bar"> = {
-  responsive: true,
-  maintainAspectRatio: false, // Відключення пропорцій для зручності адаптації
-  scales: {
-    x: { stacked: false }, // Вимикаємо стекування стовпчиків    
-    y: { beginAtZero: true },
-  },
-  plugins: {
-    legend: { position: "bottom" },
-    tooltip: {
-      mode: "index",
-      intersect: false,
-    },
-  },
-};
+import { useGetAllVacancyQuery } from "../../store/querySlices/vacanciesQuerySlice.ts";
+import ChartBarBase from "./ChartBarBase.tsx";
 
 interface GroupedData {
   [date: string]: { sent: number; responses: number };
 }
 
-export default function ChartBar() {
+const ChartBarDay: React.FC = () => {
+  const { t } = useTranslation();
   const selectedDate = useAppSelector((state: RootState) => state.calendar.selectedDate);
   const { data: vacancies, isLoading, isError } = useGetAllVacancyQuery();
+  // console.log("Обрана дата:", selectedDate);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching vacancies</div>;
 
-  // Крок 0: Витягуємо вакансії
   // console.log("Всі вакансії: ", vacancies);
+  const notArhivedVacancies = vacancies?.filter((vacancy) => vacancy.isArchived === false);
+  // console.log("notArhivedVacancies", notArhivedVacancies);
 
-  // Крок 1: Витягуємо статуси (Проходимо по кожній вакансії, витягуємо всі статуси у вигляді одного великого масив)
-  const statuses = vacancies?.flatMap((vacancy) => vacancy.statuses) || [];
+  const statuses = notArhivedVacancies?.flatMap((vacancy) => vacancy.statuses) || [];
   // console.log("Всі статуси:", statuses);
 
-  // Крок 2: Групування статусів за датами
+  // Групування статусів за датами
   const groupedByDate = statuses.reduce<GroupedData>((acc, status) => {
     // const date = new Date(status.date).toLocaleDateString("uk-UA"); // строкове представлення дати у форматі "дд.мм.рррр"
     const date = new Date(status.date).toISOString().split("T")[0]; // Формат рррр-мм-дд
@@ -61,13 +35,14 @@ export default function ChartBar() {
     }
 
     // Підраховуємо статуси
-    if (status.name === "resume" || status.name === "saved") {
+    if (status.name === "resume") {
       acc[date].sent += 1; // "Надіслано резюме"
     } else if (
       status.name === "hr" ||
       status.name === "test" ||
       status.name === "tech" ||
-      status.name === "offer"
+      status.name === "offer" ||
+      status.name === "reject"
     ) {
       acc[date].responses += 1; // "Отримано відповідей"
     }
@@ -75,52 +50,56 @@ export default function ChartBar() {
     return acc;
   }, {});
 
-  // Генеруємо діапазон 7 днів, включаючи обрану дату
   const getLast7Days = (endDate: Date): string[] => {
-    return Array.from({ length: 7 }, (_, i) => {
-      const date = new Date(endDate); // Копія обраної дати
+    const result: string[] = [];
+
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(endDate); // Копія обраної дати для опрацювання
       date.setDate(endDate.getDate() - i); // Відлік назад
-      return date.toISOString().split("T")[0]; // Формат yyyy-mm-dd
-    }).reverse(); // Зворотній порядок, щоб обрана дата була останньою
+      result.push(
+        `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
+      ); // Формат yyyy-mm-dd
+    }
+
+    return result;
   };
 
-  const last7Days = getLast7Days(selectedDate); // Масив із 7 дат
+  const last7Days = getLast7Days(new Date(selectedDate));
+  // console.log("Діапазон 7 днів:", last7Days);
+  // console.log("Дата для обчислення діапазону:", selectedDate);
 
   // Фільтруємо дані за останні 7 днів
   const filteredData = last7Days.map((date) => groupedByDate[date] || { sent: 0, responses: 0 });
 
-  // Дані для Chart.js
-  const chartData = {
-    // labels: formattedDates, // Дати
-    labels: last7Days.map((date) =>
-      new Date(date).toLocaleDateString("uk-UA", { day: "2-digit", month: "2-digit" })
-    ), // Відформатовані дати для осі X
-    datasets: [
-      {
-        label: "Надіслано резюме",
-        // data: sentData,
-        data: filteredData.map((d) => d.sent),
-        backgroundColor: "rgba(208, 232, 197, 1)", // Зелений
-        borderColor: "rgba(208, 232, 197, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: "Отримано відповідей",
-        // data: responseData,
-        data: filteredData.map((d) => d.responses),
-        backgroundColor: "rgba(198, 231, 255, 1)", // Синій
-        borderColor: "rgba(198, 231, 255, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
+  const datasets = [
+    {
+      label: t("chartBar.sent"),
+      // data: sentData,
+      data: filteredData.map((d) => d.sent),
+      backgroundColor: "rgba(208, 232, 197, 1)", // Зелений
+      borderColor: "rgba(208, 232, 197, 1)",
+      borderWidth: 1,
+    },
+    {
+      label: t("chartBar.responses"),
+      // data: responseData,
+      data: filteredData.map((d) => d.responses),
+      backgroundColor: "rgba(198, 231, 255, 1)", // Синій
+      borderColor: "rgba(198, 231, 255, 1)",
+      borderWidth: 1,
+    },
+  ];
+
+  const labels = last7Days.map((date) =>
+    new Date(date).toLocaleDateString("uk-UA", { day: "2-digit", month: "2-digit" })
+  ); // Відформатовані дати для осі X
 
   return (
-    <div className={"w-full h-auto min-h-56 mt-4"}>
-      <Bar data={chartData} options={options} />
-    </div>
+    <ChartBarBase labels={labels} datasets={datasets} />
   );
-}
+};
+
+export default ChartBarDay;
 
 
 

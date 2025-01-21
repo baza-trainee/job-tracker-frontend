@@ -6,7 +6,9 @@ import StatisticsCalendarTab from "../components/Calendar/StatisticsCalendarTab.
 import StatisticsCalendarDay from "../components/Calendar/StatisticsCalendarDay.tsx";
 import StatisticsCalendarMonth from "../components/Calendar/StatisticsCalendarMonth.tsx";
 import StatisticsCalendarYear from "../components/Calendar/StatisticsCalendarYear.tsx";
-import ChartBar from "../components/charts/ChartBar.tsx";
+import ChartBarDay from "../components/charts/ChartBarDay.tsx";
+import ChartBarMonth from "../components/charts/ChartBarMonth.tsx";
+import ChartBarYear from "../components/charts/ChartBarYear.tsx";
 
 import DoughnutChart from "../components/charts/DoughnutChart.tsx";
 import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice.ts";
@@ -49,7 +51,20 @@ function Statistics() {
       default:
         return null;
     }
-  }
+  };
+
+  const renderChart = () => {
+    switch (activeTab) {
+      case "day":
+        return <ChartBarDay />;
+      case "month":
+        return <ChartBarMonth />;
+      case "year":
+        return <ChartBarYear />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="container pb-8 pt-10">
@@ -76,7 +91,8 @@ function Statistics() {
               </div>
               <div className="col-span-1 row-start-2">{renderCalendar()}</div>
               <div className="col-span-2 row-start-3">
-                <ChartBar />
+                {renderChart()}
+                {/* <ChartBarDay /> */}
               </div>
             </div>
             <DoughnutChart vacancies={vacanciesForStat} />
@@ -95,17 +111,17 @@ export default Statistics;
 
 
 
-  // const [activeTab, setActiveTab] = useState("Day");
+// const [activeTab, setActiveTab] = useState("Day");
 
-  // const renderCalendar = () => {
-  //   switch (activeTab) {
-  //     case "Day":
-  //       return <StatisticsCalendarDay />;
-  //     case "Month":
-  //       return <StatisticsCalendarMonth />;
-  //     case "Year":
-  //       return <StatisticsCalendarYear />;
-  //     default:
-  //       return null;
-  //   }
-  // };
+// const renderCalendar = () => {
+//   switch (activeTab) {
+//     case "Day":
+//       return <StatisticsCalendarDay />;
+//     case "Month":
+//       return <StatisticsCalendarMonth />;
+//     case "Year":
+//       return <StatisticsCalendarYear />;
+//     default:
+//       return null;
+//   }
+// };

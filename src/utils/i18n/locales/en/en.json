@@ -236,5 +236,18 @@
     "buttonAdd": "Add Link",
     "modalAddTitle": "Add a new link"
   },
-  "buttonRemoveAccount": "Remove Account"
+  "buttonRemoveAccount": "Remove Account",
+  "soonSection": {
+    "soon": "Soon",
+    "addEvent": "Add event"
+  },
+  "calendarTabs": {
+    "day": "Day",
+    "month": "Month",
+    "year": "Year"
+  },
+  "chartBar": {
+    "sent": "Sent resume",
+    "responses": "received responses"
+  }
 }
