@@ -2,9 +2,14 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import Icon from "../../Icon/Icon.tsx";
-import { VacancyCardProps } from "./VacancyCard.tsx";
 
-const VacancyCardFirst: FC<VacancyCardProps> = ({
+export type VacancyCardFirstProps = {
+    colorSectionBG: string;
+    colorHoverBG: string;
+    onClick?: () => void;
+};
+
+const VacancyCardFirst: FC<VacancyCardFirstProps> = ({
     colorSectionBG, colorHoverBG, onClick
 }) => {
     const { t } = useTranslation();
