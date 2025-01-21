@@ -7,6 +7,7 @@ import {
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { notifyInfo } from "../../../Notifications/NotificationService";
 
@@ -23,6 +24,7 @@ import { TypesModal } from "../../ModalMain.types";
 const InfoModalMap = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [logOut] = useLogOutUserMutation();
   const dataAddEditVacancy = useAppSelector(
     (state) => state.modal.dataConfirmation
@@ -35,7 +37,7 @@ const InfoModalMap = () => {
     deleteVacancy,
   } = useEditVacancy();
 
-  const handleButton = useCallback((): void => {
+  const handleCancel = useCallback((): void => {
     dispatch(closeModal());
   }, [dispatch]);
 
@@ -123,75 +125,89 @@ const InfoModalMap = () => {
     >
   > = {
     logInSuccess: {
-      title: "Успіх!",
-      text: ["Авторизація пройшла успішно."],
-      button: [createButton("Продовжити", handleButton, "big")],
+      title: t("infoModal.success"),
+      text: [t("infoModal.logInSuccess.text_1")],
+      button: [
+        createButton(t("infoModal.button.continue"), handleCancel, "big"),
+      ],
     },
     logInError: {
-      title: "Упс",
-      text: ["Перевірте введені дані та спробуйте ще раз."],
-      button: [createButton("Продовжити", handleButton, "big")],
+      title: t("infoModal.oops"),
+      text: [t("infoModal.logInError.text_1")],
+      button: [
+        createButton(t("infoModal.button.continue"), handleCancel, "big"),
+      ],
     },
     signUpSuccess: {
-      title: "Успіх!",
+      title: t("infoModal.success"),
       text: [
-        "Реєстрація пройшла успішно.",
-        "Зараз ви можете налаштувати свій профіль.",
-      ],
-      button: [createButton("Продовжити", handleButton, "big")],
-    },
-    signUpError: {
-      title: "Упс",
-      text: [
-        "Обліковий запис з такою поштою вже існує.",
-        "Спробуйте увійти або відновити пароль.",
+        t("infoModal.signUpSuccess.text_1"),
+        t("infoModal.signUpSuccess.text_2"),
       ],
       button: [
-        createButton("Відновити", handleForgotPassword),
-        createButton("Увійти", handleLogIn),
+        createButton(t("infoModal.button.continue"), handleCancel, "big"),
+      ],
+    },
+    signUpError: {
+      title: t("infoModal.oops"),
+      text: [
+        t("infoModal.signUpError.text_1"),
+        t("infoModal.signUpError.text_2"),
+      ],
+      button: [
+        createButton(t("infoModal.button.restore"), handleForgotPassword),
+        createButton(t("infoModal.button.login"), handleLogIn),
       ],
     },
     forgotPasswordSuccess: {
       title: "",
-      text: ["Вам надіслано повідомлення на електронну пошту"],
-      button: [createButton("Продовжити", handleButton, "big")],
+      text: [t("infoModal.forgotPasswordSuccess.text_1")],
+      button: [
+        createButton(t("infoModal.button.continue"), handleCancel, "big"),
+      ],
     },
     resetPasswordSuccess: {
       title: "",
-      text: ["Зміна пароля успішна.", "Авторизуйтесь з новим паролем"],
-      button: [createButton("Продовжити", handleLogIn, "big")],
+      text: [
+        t("infoModal.resetPasswordSuccess.text_1"),
+        t("infoModal.resetPasswordSuccess.text_2"),
+      ],
+      button: [
+        createButton(t("infoModal.button.continue"), handleLogIn, "big"),
+      ],
     },
     resetPasswordErrorLink: {
       title: "",
-      text: ["Посилання на відновлення паролю не дійсне.", "Спробуйте ще раз"],
+      text: [
+        t("infoModal.resetPasswordErrorLink.text_1"),
+        t("infoModal.resetPasswordErrorLink.text_2"),
+      ],
       button: [
-        createButton("Скасувати", handleButton),
-        createButton("Спробувати", handleForgotPassword),
+        createButton(t("infoModal.button.cancel"), handleCancel),
+        createButton(t("infoModal.button.try"), handleForgotPassword),
       ],
     },
     logOut: {
-      title: "Ви впевнені, що хочете вийти?",
-      text: [
-        "Вихід з акаунту призведе до завершення вашої сесії. Для повторного входу потрібно буде ввести ваші облікові дані.",
-      ],
+      title: t("infoModal.logOut.title"),
+      text: [t("infoModal.logOut.text_1")],
       button: [
-        createButton("Скасувати", handleButton),
-        createButton("Вийти", handleLogOut),
+        createButton(t("infoModal.button.cancel"), handleCancel),
+        createButton(t("infoModal.button.logOut"), handleLogOut),
       ],
     },
     saveAddVacancies: {
-      title: "Зберегти зміни?",
-      text: ["Якщо ви не збережете данні, вони будуть втрачені"],
+      title: t("infoModal.saveAddVacancies.title"),
+      text: [t("infoModal.saveAddVacancies.text_1")],
       button: [
         createButton(
-          "Вийти",
+          t("infoModal.button.logOut"),
           handleCloseConfirmation,
           "small",
           "ghost",
           addVacanciesLoading
         ),
         createButton(
-          "Зберегти",
+          t("infoModal.button.save"),
           handleAddVacancy,
           "big",
           "ghost",
@@ -200,20 +216,18 @@ const InfoModalMap = () => {
       ],
     },
     deleteVacancy: {
-      title: "Видалити вакансію?",
-      text: [
-        "Ця дія буде безповортньою. Натомість, ви можете перенести цю вакансію в архів",
-      ],
+      title: t("infoModal.deleteVacancy.title"),
+      text: [t("infoModal.deleteVacancy.text_1")],
       button: [
         createButton(
-          "Архівувати",
+          t("infoModal.button.archive"),
           handleArhiveVacancy,
           "small",
           "ghost",
           addVacanciesLoading
         ),
         createButton(
-          "Видалити",
+          t("infoModal.button.delete"),
           handleDeleteVacancy,
           "big",
           "ghost",
@@ -229,14 +243,14 @@ const InfoModalMap = () => {
       ],
       button: [
         createButton(
-          "Відмінити",
+          t("infoModal.button.undo"),
           handleCloseConfirmation,
           "small",
           "ghost",
           addVacanciesLoading
         ),
         createButton(
-          "В архів",
+          t("infoModal.button.toArchive"),
           handleDeleteVacancy,
           "big",
           "ghost",
@@ -245,18 +259,18 @@ const InfoModalMap = () => {
       ],
     },
     saveEditVacancies: {
-      title: "Зберегти зміни?",
-      text: ["Якщо ви не збережете данні, вони будуть втрачені"],
+      title: t("infoModal.saveAddVacancies.title"),
+      text: [t("infoModal.saveAddVacancies.text_1")],
       button: [
         createButton(
-          "Вийти",
+          t("infoModal.button.logOut"),
           handleCloseConfirmation,
           "small",
           "ghost",
           editVacanciesLoading
         ),
         createButton(
-          "Зберегти",
+          t("infoModal.button.save"),
           handleEditVacancy,
           "big",
           "ghost",
