@@ -10,7 +10,6 @@
     "logOut": "Вийти"
   },
   "donate": "Підтримати нас",
-
   "authWelcome": "Вітаємо!",
   "registerButton": "Зареєструватись",
   "loginButton": "Увійти",
@@ -245,5 +244,18 @@
     "buttonAdd": "Додати посилання",
     "modalAddTitle": "Додати посилання"
   },
-  "buttonRemoveAccount": "Видалити акаунт"
+  "buttonRemoveAccount": "Видалити акаунт",
+  "soonSection": {
+    "soon": "Незабаром",
+    "addEvent": "Додати подію"
+  },
+  "calendarTabs": {
+    "day": "День",
+    "month": "Місяць",
+    "year": "Рік"
+  },
+  "chartBar": {
+    "sent": "Надіслано резюме",
+    "responses": "Отримано відповідей"
+  }
 }

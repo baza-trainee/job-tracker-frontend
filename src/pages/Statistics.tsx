@@ -1,10 +1,14 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { RootState } from "../store/store.ts";
+import { useAppDispatch, useAppSelector } from "../store/hook.ts";
 import StatisticsPanel from "../components/Statistics/componets/statisticsPanel/StatisticsPanel";
 import StatisticsCalendarTab from "../components/Calendar/StatisticsCalendarTab.tsx";
 import StatisticsCalendarDay from "../components/Calendar/StatisticsCalendarDay.tsx";
 import StatisticsCalendarMonth from "../components/Calendar/StatisticsCalendarMonth.tsx";
 import StatisticsCalendarYear from "../components/Calendar/StatisticsCalendarYear.tsx";
-import ChartBar from "../components/charts/ChartBar.tsx";
+import ChartBarDay from "../components/charts/ChartBarDay.tsx";
+import ChartBarMonth from "../components/charts/ChartBarMonth.tsx";
+import ChartBarYear from "../components/charts/ChartBarYear.tsx";
 
 import DoughnutChart from "../components/charts/DoughnutChart.tsx";
 import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice.ts";
@@ -13,8 +17,12 @@ import StatisticsPanelSkeleton from "../components/Statistics/componets/statisti
 import NoVacancyCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
 import Soon from "../components/Calendar/Soon.tsx";
 import RejectDiagram from "../components/Statistics/componets/statisticsDiagram/RejectDiagram.tsx";
+import { setActiveTab, setSelectedDate, setSelectedMonth, setSelectedYear } from "@/store/slices/calendarSlice/calendarSlice.ts";
 
 function Statistics() {
+  const dispatch = useAppDispatch();
+  const activeTab = useAppSelector((state: RootState) => state.calendar.activeTab);
+
   const { data, isLoading, isError } = useGetAllUserDataQuery();
 
   const vacanciesForStat =
@@ -26,16 +34,33 @@ function Statistics() {
     isError: isPredictionError,
   } = useGetPredictionDailyQuery();
 
-  const [activeTab, setActiveTab] = useState("Day");
-
   const renderCalendar = () => {
     switch (activeTab) {
-      case "Day":
-        return <StatisticsCalendarDay />;
-      case "Month":
-        return <StatisticsCalendarMonth />;
-      case "Year":
-        return <StatisticsCalendarYear />;
+      case "day":
+        return (
+          <StatisticsCalendarDay onDateChange={(date) => dispatch(setSelectedDate(date))} />
+        );
+      case "month":
+        return (
+          <StatisticsCalendarMonth onMonthChange={(month) => dispatch(setSelectedMonth(month))} />
+        );
+      case "year":
+        return (
+          <StatisticsCalendarYear onYearChange={(year) => dispatch(setSelectedYear(year))} />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderChart = () => {
+    switch (activeTab) {
+      case "day":
+        return <ChartBarDay />;
+      case "month":
+        return <ChartBarMonth />;
+      case "year":
+        return <ChartBarYear />;
       default:
         return null;
     }
@@ -57,7 +82,8 @@ function Statistics() {
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
-                  setActiveTab={setActiveTab}
+                  // setActiveTab={setActiveTab}
+                  setActiveTab={(tab) => dispatch(setActiveTab(tab))}
                 />
               </div>
               <div className="col-span-1 row-span-2">
@@ -65,7 +91,8 @@ function Statistics() {
               </div>
               <div className="col-span-1 row-start-2">{renderCalendar()}</div>
               <div className="col-span-2 row-start-3">
-                <ChartBar />
+                {renderChart()}
+                {/* <ChartBarDay /> */}
               </div>
             </div>
             <DoughnutChart vacancies={vacanciesForStat} />
@@ -78,3 +105,23 @@ function Statistics() {
 }
 
 export default Statistics;
+
+
+
+
+
+
+// const [activeTab, setActiveTab] = useState("Day");
+
+// const renderCalendar = () => {
+//   switch (activeTab) {
+//     case "Day":
+//       return <StatisticsCalendarDay />;
+//     case "Month":
+//       return <StatisticsCalendarMonth />;
+//     case "Year":
+//       return <StatisticsCalendarYear />;
+//     default:
+//       return null;
+//   }
+// };

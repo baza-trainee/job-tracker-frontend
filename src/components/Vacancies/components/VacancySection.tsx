@@ -2,7 +2,7 @@ import { FC, ReactNode, useRef, useState, useEffect } from "react";
 import clsx from "clsx";
 import Icon from "../../Icon/Icon.tsx";
 
-type VacancySectionProps = {
+export type VacancySectionProps = {
   titleSection: string;
   colorSectionBorder: string;
   colorSectionBG: string;
