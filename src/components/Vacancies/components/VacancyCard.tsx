@@ -6,10 +6,10 @@ import Icon from "../../Icon/Icon.tsx";
 export type VacancyCardProps = {
     colorSectionBG: string;
     colorHoverBG: string;
-    titleVacancy: string;
-    company: string;
-    location: string;
-    workType: "office" | "remote" | "hybrid";
+    titleVacancy?: string;
+    company?: string;
+    location?: string;
+    workType?: "office" | "remote" | "hybrid";
     onClick?: () => void;
 };
 
