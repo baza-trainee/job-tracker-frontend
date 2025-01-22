@@ -6,9 +6,13 @@ import AddVacancyInfo from "./AddVacancyInfo";
 import { useAppDispatch } from "@/store/hook";
 import { saveStatus } from "@/store/slices/statusVacancy/vacancyStatusSlice";
 import moment from "moment";
-import { AddStageProps } from "./AddVacancy.props";
+import { AddVacancyStageProps } from "./AddVacancy.props";
 
-const AddStage = ({ register, getValues, setValue }: AddStageProps) => {
+const AddVacancyStage = ({
+  register,
+  getValues,
+  setValue,
+}: AddVacancyStageProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -32,7 +36,7 @@ const AddStage = ({ register, getValues, setValue }: AddStageProps) => {
         })
       );
     }
-    setDropdownOpen((prev) => !prev);
+    setDropdownOpen(false);
     return setValue?.(nameDropdown, stageId);
   };
 
@@ -68,4 +72,4 @@ const AddStage = ({ register, getValues, setValue }: AddStageProps) => {
   );
 };
 
-export default AddStage;
+export default AddVacancyStage;

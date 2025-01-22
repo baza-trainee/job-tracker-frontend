@@ -171,7 +171,7 @@ const useEditVacancy = () => {
 
         if (prevDate !== newDate) {
           // створити статус
-          if (prevDate === "1970-01-01T00:00:00.000Z" || !prevDate) {
+          if (prevDate === "1970-01-01T00:00:00.000Z") {
             const statusResponse = await createStatusVacancyById({
               vacancyId: idVacancy,
               name: newStatuses[i].name as StatusName,
@@ -180,11 +180,25 @@ const useEditVacancy = () => {
               rejectReason: newStatuses[i].rejectReason as RejectReason,
             }).unwrap();
             console.log("Створення статусу", statusResponse);
+          }
+
+          // створити додатковий етап
+          if (!prevDate && newDate !== "1970-01-01T00:00:00.000Z") {
+            const statusResponse = await createStatusVacancyById({
+              vacancyId: idVacancy,
+              name: newStatuses[i].name as StatusName,
+              date: newStatuses[i].date || "",
+              resumeId: newStatuses[i].resumeId,
+              rejectReason: newStatuses[i].rejectReason as RejectReason,
+            }).unwrap();
+            console.log("Створення додаткового етапу", statusResponse);
             continue;
           }
 
           // видалити статус
-          if (newDate === "1970-01-01T00:00:00.000Z") {
+          if (prevDate && newDate === "1970-01-01T00:00:00.000Z") {
+            console.log("Видалення статусу prevDate", prevDate);
+            console.log("Видалення статусу newDate", newDate);
             const statusResponse = await deleteStatusVacancyById({
               vacancyId: idVacancy,
               id: newStatuses[i].id,

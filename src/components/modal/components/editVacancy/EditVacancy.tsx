@@ -13,7 +13,7 @@ import { CheckboxWithCalendar } from "../addVacancyModals/CheckboxWithCalendar";
 import { InputRadio } from "../../../inputs/InputRadio/InputRadio";
 
 //alex
-import AddStage from "../addVacancyModals/AddStage";
+import AddVacancyStage from "../addVacancyModals/AddStage";
 
 //component
 import AddVacancyInfo from "../addVacancyModals/AddVacancyInfo";
@@ -136,7 +136,7 @@ const EditVacancy = () => {
                     />
                   ))}
                 </div>
-                <AddStage
+                <AddVacancyStage
                   register={register}
                   getValues={getValues}
                   setValue={setValue}

@@ -22,13 +22,13 @@ export const Checkbox = ({
       className={classNames(
         type === "signUp" && "relative flex items-center px-[9.5px]"
       )}
-      id={id}
+      // id={id}
     >
       <div className="relative flex items-center justify-center">
         <input
           required={required}
           type="checkbox"
-          id={`checkbox-${name}`}
+          id={id}
           disabled={disabled}
           {...register(name)}
           aria-describedby={`checkBoxError-${name}`}
@@ -56,7 +56,7 @@ export const Checkbox = ({
       </div>
 
       <label
-        htmlFor={`checkbox-${name}`}
+        htmlFor={id}
         className={classNames(
           type === "signUp" &&
             "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px]"

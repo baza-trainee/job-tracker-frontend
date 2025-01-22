@@ -14,7 +14,7 @@ export type VacancyInputProps = {
   date?: string;
 };
 
-export type AddStageProps = {
+export type AddVacancyStageProps = {
   register: UseFormRegister<any>;
   getValues?: UseFormGetValues<any>;
   setValue?: UseFormSetValue<any>;

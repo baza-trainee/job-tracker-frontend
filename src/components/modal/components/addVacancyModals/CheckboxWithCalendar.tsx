@@ -128,7 +128,7 @@ export const CheckboxWithCalendar = ({
         <div className="flex w-full items-center justify-between">
           <Checkbox
             name={name}
-            id={name}
+            id={id}
             label={t(`${label}`)}
             register={register}
             type="signUp"
