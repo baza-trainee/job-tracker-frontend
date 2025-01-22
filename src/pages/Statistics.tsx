@@ -78,7 +78,7 @@ function Statistics() {
       {!isLoading && vacanciesForStat.length !== 0 && (
         <>
           <div className="mt-10 flex justify-between">
-            <div className="grid-col-2 mt-8 grid w-[712px] auto-rows-max">
+            <div className="grid-col-2 mt-8 grid w-[1027px] auto-rows-max gap-x-6 gap-y-4">
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}

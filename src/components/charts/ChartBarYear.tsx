@@ -12,7 +12,7 @@ const ChartBarYear: React.FC = () => {
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error fetching vacancies</div>;
 
-    const notArhivedVacancies = vacancies?.filter((vacancy) => vacancy.isArchived === false);
+    const notArhivedVacancies = vacancies?.filter((vacancy) => !vacancy.isArchived) || [];
 
     const statuses = notArhivedVacancies?.flatMap((vacancy) => vacancy.statuses) || [];
 
@@ -58,7 +58,7 @@ const ChartBarYear: React.FC = () => {
         },
     ];
 
-    return <ChartBarBase labels={labels} datasets={datasets} />
+    return <ChartBarBase labels={labels} datasets={datasets} selectedIndex={2} />
 };
 
 export default ChartBarYear;

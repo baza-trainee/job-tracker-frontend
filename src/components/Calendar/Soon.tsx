@@ -5,7 +5,7 @@ export const Soon = () => {
     const { t } = useTranslation();
 
     return (
-        <div className="w-[348px] flex flex-col p-4 text-textBlack">
+        <div className="w-[461px] flex flex-col p-4 text-textBlack">
             <h3 className="w-full font-nunito px-6  text-textBlack text-2xl font-bold mb-[10px]">{t("soonSection.soon")}</h3>
             <ul className="w-full">
                 <li></li>

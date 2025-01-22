@@ -9,7 +9,7 @@ export const StatisticsCalendarYear: React.FC<StatisticsCalendarYearProps> = ({
     onYearChange
 }) => {
     return (
-        <div className="statistics-calendar w-[356px] h-auto box-border bg-backgroundTertiary px-2 py-6 rounded-[20px]">
+        <div className="statistics-calendar w-[468px] h-[514px] box-border bg-backgroundTertiary px-6 py-8 rounded-[20px]">
             <Calendar
                 view="decade" // Відображає період з 12 років, показую тільки роки
                 onClickYear={(date) => {
@@ -23,7 +23,7 @@ export const StatisticsCalendarYear: React.FC<StatisticsCalendarYearProps> = ({
                 // tileContent={({ date, view }) =>
                 //     view === "decade" ? <span>{date.getFullYear()}</span> : null
                 // }
-                tileClassName="w-[66px] h-[60px] font-Nunito text-textBlack bg-backgroundMain box-border" // Стиль клітинок
+                tileClassName="w-[80px] h-[80px] font-Nunito text-textBlack bg-backgroundMain box-border" // Стиль клітинок
                 // formatYear={(_, date) => `${date.getFullYear()}`}
             />
         </div>

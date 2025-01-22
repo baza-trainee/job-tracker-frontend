@@ -12,7 +12,7 @@ export const StatisticsCalendarDay: React.FC<StatisticsCalendarDayProps> = ({
   const { i18n } = useTranslation();
 
   return (
-    <div className="statistics-calendar w-[356px] h-auto box-border bg-backgroundTertiary p-2 rounded-[20px]">
+    <div className="statistics-calendar w-[468px] h-auto box-border bg-backgroundTertiary p-2 rounded-[20px]">
       <Calendar
         view="month"
         locale={i18n.language}
