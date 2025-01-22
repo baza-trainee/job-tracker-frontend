@@ -12,6 +12,9 @@ import { CheckboxWithCalendar } from "../addVacancyModals/CheckboxWithCalendar";
 //Input Radio
 import { InputRadio } from "../../../inputs/InputRadio/InputRadio";
 
+//alex
+import AddStage from "../addVacancyModals/AddStage";
+
 //component
 import AddVacancyInfo from "../addVacancyModals/AddVacancyInfo";
 import { VacancyInputProps } from "../addVacancyModals/AddVacancy.props";
@@ -124,7 +127,7 @@ const EditVacancy = () => {
                       key={checkboxCalendar.id}
                       name={checkboxCalendar.name}
                       id={checkboxCalendar.id}
-                      label={checkboxCalendar.label}
+                      label={`addVacancy.form.${checkboxCalendar.name}`}
                       register={register}
                       errors={errors}
                       date={checkboxCalendar.date}
@@ -133,6 +136,12 @@ const EditVacancy = () => {
                     />
                   ))}
                 </div>
+                <AddStage
+                  register={register}
+                  errors={errors}
+                  getValues={getValues}
+                  setValue={setValue}
+                />
               </div>
             </div>
           </div>

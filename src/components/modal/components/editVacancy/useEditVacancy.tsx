@@ -168,9 +168,10 @@ const useEditVacancy = () => {
         const prevDate = previousStatuses[i]?.date || "";
         const newDate = newStatuses[i]?.date || "";
         // перевірка СТАТУСУ по даті
+
         if (prevDate !== newDate) {
           // створити статус
-          if (prevDate === "1970-01-01T00:00:00.000Z") {
+          if (prevDate === "1970-01-01T00:00:00.000Z" || !prevDate) {
             console.log("start create status");
 
             const statusResponse = await createStatusVacancyById({
@@ -181,6 +182,7 @@ const useEditVacancy = () => {
               rejectReason: newStatuses[i].rejectReason as RejectReason,
             }).unwrap();
             console.log("Створення статусу", statusResponse);
+            continue;
           }
 
           // видалити статус

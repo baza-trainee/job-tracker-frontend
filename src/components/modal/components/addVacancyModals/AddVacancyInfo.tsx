@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { VacancyInputProps } from "./AddVacancy.props";
 import { useGetAllUserDataQuery } from "../../../../store/querySlices/profileQuerySlice";
 import { SortOption } from "../../../Vacancies/components/dropdown/Dropdown.props";
+import { nanoid } from "nanoid";
 
 const AddVacancyInfo = () => {
   const { t } = useTranslation();
@@ -60,6 +61,17 @@ const AddVacancyInfo = () => {
 
   const buttonRejectOption = { id: "", label: t("addVacancy.titleRejectList") };
 
+  // 4 - масив з додатковими етапами
+  const stagesKeys = ["hr", "test", "tech"];
+  const stagesOptions: SortOption[] =
+    stagesKeys.map((stage: string) => ({
+      id: nanoid(10),
+      name:stage,
+      label: t(`addVacancy.form.${stage}`),
+    })) || [];
+
+  const buttonStagesOption = { id: "", label: "Оберіть додатковий етап" };
+
   return {
     vacancyFields,
     workTypeOptions,
@@ -67,6 +79,8 @@ const AddVacancyInfo = () => {
     resumeOptions,
     buttonRejectOption,
     rejectOptions,
+    stagesOptions,
+    buttonStagesOption,
     isLoading,
     isError,
   };

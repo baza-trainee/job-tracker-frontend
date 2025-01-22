@@ -1,0 +1,73 @@
+import { useTranslation } from "react-i18next";
+import Icon from "@/components/Icon/Icon";
+import { useState } from "react";
+import Dropdown from "@/components/Vacancies/components/dropdown/Dropdown";
+import classNames from "classnames";
+import AddVacancyInfo from "./AddVacancyInfo";
+import { useAppDispatch } from "@/store/hook";
+import { saveStatus } from "@/store/slices/statusVacancy/vacancyStatusSlice";
+import moment from "moment";
+
+const AddStage = ({ register, errors, getValues, setValue }) => {
+  const { t } = useTranslation();
+  const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
+
+  const handleStage = (): void => {
+    setDropdownOpen((prev) => !prev);
+  };
+  const { stagesOptions, buttonStagesOption } = AddVacancyInfo();
+  const optionsDropDown = () => {
+    return { mainOptions: stagesOptions, buttonOption: buttonStagesOption };
+  };
+
+  const setValueDropDowm = (nameDropdown: string, stageId: string) => {
+    const statusKey = stagesOptions.find((elem) => elem.id === stageId);
+    if (statusKey) {
+      dispatch(
+        saveStatus({
+          id: statusKey.id,
+          name: statusKey.name || "",
+          label: `addVacancy.form.${statusKey.name}`,
+          date: moment().add(1, "hours").toISOString(),
+        })
+      );
+    }
+    setDropdownOpen((prev) => !prev);
+    return setValue?.(nameDropdown, stageId);
+  };
+
+  return (
+    <div>
+      <button
+        className="mx-[9.5px] flex w-fit items-center justify-start gap-2"
+        onClick={handleStage}
+        type="button"
+      >
+        <Icon id="plus" className="size-6" />
+        Додати етап
+      </button>
+
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={classNames(
+          isDropdownOpen
+            ? "visible relative z-50 mt-3 h-[44px] pl-[9.5px] opacity-100"
+            : "sr-only h-0 opacity-0"
+        )}
+      >
+        <Dropdown
+          options={optionsDropDown()}
+          setValue={setValueDropDowm}
+          isInModal={true}
+          name={"addStageDropdown"}
+          register={register}
+          getValues={getValues}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default AddStage;

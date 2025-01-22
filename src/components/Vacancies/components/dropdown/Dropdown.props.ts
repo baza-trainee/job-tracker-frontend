@@ -4,6 +4,7 @@ import { UseFormGetValues, UseFormRegister } from "react-hook-form";
 export type SortOption = {
   id: string;
   label: string;
+  name?: string;
   shortLabel?: string;
   subOptions?: SortOption[];
 };
