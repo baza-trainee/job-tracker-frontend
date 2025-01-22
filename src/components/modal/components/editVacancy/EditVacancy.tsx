@@ -138,7 +138,6 @@ const EditVacancy = () => {
                 </div>
                 <AddStage
                   register={register}
-                  errors={errors}
                   getValues={getValues}
                   setValue={setValue}
                 />

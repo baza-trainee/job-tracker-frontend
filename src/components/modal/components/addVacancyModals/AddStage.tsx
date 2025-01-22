@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import Icon from "@/components/Icon/Icon";
 import { useState } from "react";
 import Dropdown from "@/components/Vacancies/components/dropdown/Dropdown";
@@ -7,9 +6,9 @@ import AddVacancyInfo from "./AddVacancyInfo";
 import { useAppDispatch } from "@/store/hook";
 import { saveStatus } from "@/store/slices/statusVacancy/vacancyStatusSlice";
 import moment from "moment";
+import { AddStageProps } from "./AddVacancy.props";
 
-const AddStage = ({ register, errors, getValues, setValue }) => {
-  const { t } = useTranslation();
+const AddStage = ({ register, getValues, setValue }: AddStageProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -29,7 +28,6 @@ const AddStage = ({ register, errors, getValues, setValue }) => {
         saveStatus({
           id: statusKey.id,
           name: statusKey.name || "",
-          label: `addVacancy.form.${statusKey.name}`,
           date: moment().add(1, "hours").toISOString(),
         })
       );

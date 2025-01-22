@@ -157,7 +157,7 @@ const useEditVacancy = () => {
         const responseArhive = await archiveVacancyById({
           id: idVacancy,
         }).unwrap();
-        console.log("responseArhive", responseArhive);
+        console.log("Архів", responseArhive);
       }
 
       // 4 - зберігаємо статуси
@@ -172,8 +172,6 @@ const useEditVacancy = () => {
         if (prevDate !== newDate) {
           // створити статус
           if (prevDate === "1970-01-01T00:00:00.000Z" || !prevDate) {
-            console.log("start create status");
-
             const statusResponse = await createStatusVacancyById({
               vacancyId: idVacancy,
               name: newStatuses[i].name as StatusName,
