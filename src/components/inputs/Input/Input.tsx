@@ -52,24 +52,20 @@ export const Input = ({
         </label>
       )}
       <div className="relative">
-        <div
-          className={cn(
-            "relative flex w-full items-center bg-white",
-            "peer rounded-xl border font-nunito text-base font-medium text-textBlack transition focus-within:border-textOther",
-            "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
-            "md:h-11 md:px-6 md:py-3 md:text-[14px]"
-          )}
-        >
+        <div className={cn("relative flex w-full items-center")}>
           <input
             id={`input-${name}`}
             className={cn(
-              "w-full",
-              "placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:outline-none active:border-textOther",
+              "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus-within:border-textOther focus:outline-none",
+              "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
+              "md:h-11 md:px-6 md:py-3 md:text-[14px]",
               "xl:text-[14px]",
               "2xl:text-[16px]",
-              !error && "border-color5",
-              error &&
-                "border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"
+              {
+                ["border-color5"]: !error,
+                ["border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"]:
+                  error,
+              }
             )}
             placeholder={placeholder}
             type={type}
@@ -104,12 +100,21 @@ export const Input = ({
             )}
             {isCheckButtons ? (
               error ? (
-                <button onClick={() => handleResetField(name)}>
+                <button
+                  onClick={() => handleResetField(name)}
+                  className={
+                    "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
+                  }
+                >
                   <Icon id="cancel-in-round" className="h-6 w-6 fill-color2" />
                 </button>
               ) : (
                 !isIcon && (
-                  <div>
+                  <div
+                    className={
+                      "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
+                    }
+                  >
                     <Icon id="check-box" className="h-6 w-6 fill-color5" />
                   </div>
                 )

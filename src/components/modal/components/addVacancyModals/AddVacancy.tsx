@@ -5,15 +5,12 @@ import { t } from "i18next";
 import Icon from "../../../Icon/Icon";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
-
-//CheckBox
+// component
+import AddVacancyStage from "./AddStage";
 import { CheckboxWithCalendar } from "./CheckboxWithCalendar";
-
-//Input Radio
 import { InputRadio } from "../../../inputs/InputRadio/InputRadio";
-
-//component
 import AddVacancyInfo from "./AddVacancyInfo";
+// props
 import { VacancyInputProps } from "./AddVacancy.props";
 //hook
 import useVacancy from "./useVacancy";
@@ -116,6 +113,11 @@ const AddVacancy = () => {
                     />
                   ))}
                 </div>
+                <AddVacancyStage
+                  register={register}
+                  getValues={getValues}
+                  setValue={setValue}
+                />
               </div>
             </div>
           </div>
