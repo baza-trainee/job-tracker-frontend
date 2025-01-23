@@ -132,7 +132,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     {isLogInPage ? (
                       <p
                         className={classNames(
-                          "cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight",
+                          "cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight hover:text-textOther hover:underline",
                           "sm:mt-0 sm:text-[12px]",
                           "md:text-[16px]",
                           "xl:-mt-3"
@@ -172,11 +172,11 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                             label={
                               <p>
                                 {t("register.agreeWith")}
-                                <span className="cursor-pointer text-textOther">
+                                <span className="cursor-pointer text-textOther hover:underline">
                                   {t("register.privacyPolicy")}
                                 </span>
                                 {t("register.and")}
-                                <span className="cursor-pointer text-textOther">
+                                <span className="cursor-pointer text-textOther hover:underline">
                                   {t("register.userTerms")}
                                 </span>
                               </p>
@@ -191,7 +191,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     type="submit"
                     className="mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
                     disabled={isCleanInputsForm() || error || isLoading}
-                    variant="ghost"
+                    variant="accent"
                     size="big"
                   >
                     {isSignUpPage ? t("registerButton") : t("loginButton")}
@@ -214,8 +214,8 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                   >
                     <p
                       className={classNames(
-                        "font-nunito text-[12px] font-medium text-textBlackLight md:text-[16px]",
-                        "md:text-[14px]",
+                        "font-nunito text-[12px] font-medium text-textBlackLight",
+                        "md:text-[16px]",
                         "xl:text-4",
                         "2xl:",
                         "3xl:"
@@ -226,8 +226,8 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         : t("login.noAccount")}
                       <Link
                         className={classNames(
-                          "ml-[6px] font-nunito text-[12px] font-medium leading-[135%] text-textOther",
-                          "md:text-[14px]",
+                          "ml-[6px] font-nunito text-[12px] font-medium leading-[135%] text-textOther hover:underline",
+                          "md:text-[16px]",
                           "xl:text-4",
                           "2xl:ml-[6px]",
                           "3xl:"

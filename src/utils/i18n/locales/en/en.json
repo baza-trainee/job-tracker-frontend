@@ -1,4 +1,5 @@
 {
+  "or":"Or",
   "welcome": "Welcome to React and react-i18next",
   "user": "користувач",
   "navigation": {
@@ -56,6 +57,7 @@
   "validation": {
     "emailMax": "Email must be no more than 254 characters",
     "emailInvalid": "Enter a valid email",
+    "emailInvalidRuBy": "Domains of .ru and .by type are banned",
     "emailMin": "Email must be at least 4 characters",
     "passwordMax": "Password must be no more than 14 characters",
     "passwordInvalid": "Enter a valid password",

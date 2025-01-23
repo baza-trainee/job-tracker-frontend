@@ -1,7 +1,6 @@
 import { z } from "zod";
 
-import { emailRegex } from "./regSchema";
-import { passwordRegex } from "./regSchema";
+import { emailRegex, emailRuByRegex, passwordRegex } from "./regSchema";
 
 export const SignUpSchema = z
   .object({
@@ -9,6 +8,7 @@ export const SignUpSchema = z
       .string()
       .max(254, `validation.emailMax`)
       .regex(emailRegex, `validation.emailInvalid`)
+      .regex(emailRuByRegex, `validation.emailInvalidRuBy`)
       .min(4, `validation.emailMin`)
       .trim(),
 

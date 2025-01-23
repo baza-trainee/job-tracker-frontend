@@ -9,8 +9,12 @@ export const textContactUsRegex =
 
 // export const passwordRegex =
 //   /^(?=.*[A-Z\u0400-\u04FF])(?=.*\d)[A-Za-z\u0400-\u04FF\d]{8,}$/;
-export const emailRegex =
-  /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?<!\.ru|\.by)$/;
+// export const emailRegex =
+//   /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?<!\.ru|\.by)$/;
 
+// alex - 23/01/24
+export const emailRegex =
+  /^(?!.*\.\.)(?!^\.)(?!^[!#%*+='])[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(\.[a-zA-Z]{2,254})$/;
+export const emailRuByRegex = /(?<!\.ru|\.by)$/;
 export const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,14}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=\S)[A-Za-z\d!@#$%^&*]{8,14}$/;

@@ -112,7 +112,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "focus:border-accent active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:outline-none",
+              "focus-within:border-textOther active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:outline-none",
               "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
               "md:h-11 md:px-6 md:py-3 md:text-[14px]",
               "xl:text-[14px]",
@@ -128,6 +128,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             {...(value && { value })}
             {...register(name)}
             aria-describedby={`inputError-${name}`}
+            onBlur={() => (console.log("hello", error))}
           />
 
           <button
