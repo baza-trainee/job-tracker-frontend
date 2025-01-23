@@ -1,11 +1,14 @@
-import Icon from "@/components/Icon/Icon";
 import { useState } from "react";
-import Dropdown from "@/components/Vacancies/components/dropdown/Dropdown";
+
 import classNames from "classnames";
+import moment from "moment";
+// component
+import Icon from "@/components/Icon/Icon";
+import Dropdown from "@/components/Vacancies/components/dropdown/Dropdown";
 import AddVacancyInfo from "./AddVacancyInfo";
 import { useAppDispatch } from "@/store/hook";
+// redux
 import { saveStatus } from "@/store/slices/statusVacancy/vacancyStatusSlice";
-import moment from "moment";
 import { AddVacancyStageProps } from "./AddVacancy.props";
 
 const AddVacancyStage = ({

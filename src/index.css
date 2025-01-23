@@ -120,15 +120,12 @@ body {
 
 /* react-calendar */
 .job-calendar.react-calendar {
-  /* position: absolute; */
-  /* top:34px; */
-  /* right: 0px; */
+
   border: 1px solid #436b88;
   border-radius: 12px;
   padding: 24px;
   width: 385px;
   max-width: 100%;
-  /* font-family: "Inter"; */
   font-weight: 500;
   background: #fdfeff;
   font-family: "Nunito";
@@ -149,10 +146,6 @@ body {
 .react-calendar__navigation button {
   text-transform: capitalize;
 }
-
-/* .job-calendar .react-calendar__navigation {
-  margin-bottom:10px;
-} */
 
 .job-calendar .react-calendar__navigation,
 .statistics-calendar__day .react-calendar__navigation {
@@ -190,10 +183,6 @@ button.react-calendar__navigation__label {
   padding-top: 12px;
   padding-bottom: 12px;
 }
-
-/* .job-calendar .react-calendar__month-view__weekdays {
-  margin-bottom: 48px;
-} */
 
 abbr[title] {
   font-weight: 500;
