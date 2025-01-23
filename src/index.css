@@ -138,9 +138,17 @@ body {
   justify-content: center;
   align-items: center;
   gap: 14px;
+  font-weight: 500;
+}
+
+.job-calendar .react-calendar__navigation {
   font-size: 20px;
   line-height: 160%;
-  font-weight: 500;
+}
+
+.statistics-calendar .react-calendar__navigation {
+  font-size: 28px;
+  gap: 16px;
 }
 
 .react-calendar__navigation button {
@@ -156,6 +164,10 @@ body {
 .statistics-calendar__months .react-calendar__navigation,
 .statistics-calendar__years .react-calendar__navigation {
   margin-bottom: 24px;
+}
+
+.statistics-calendar__day .react-calendar__navigation {
+  margin-bottom: 16px;
 }
 
 button.react-calendar__navigation__label {
@@ -184,6 +196,16 @@ button.react-calendar__navigation__label {
   padding-bottom: 12px;
 }
 
+.statistics-calendar__day .react-calendar__month-view__weekdays {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+/* .job-calendar .react-calendar__month-view__weekdays {
+  margin-bottom: 48px;
+} */
+
 abbr[title] {
   font-weight: 500;
   text-decoration: none;
@@ -191,10 +213,18 @@ abbr[title] {
 abbr {
   text-transform: uppercase;
   font-family: "Nunito";
+  text-align: center;
+}
+
+.job-calendar abbr {
   font-weight: 400;
   font-size: 18px;
   line-height: 133%;
-  text-align: center;
+}
+
+.statistics-calendar__day abbr {
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .react-calendar__month-view__days__day--weekend,
@@ -203,9 +233,14 @@ abbr {
   color: #e9897c;
 }
 
-.react-calendar__month-view__days > button {
+.job-calendar .react-calendar__month-view__days > button {
   width: 48px;
   height: 48px;
+}
+
+.statistics-calendar__day .react-calendar__month-view__days > button {
+  width: 60px;
+  height: 60px;
 }
 
 .react-calendar__tile--now {
@@ -259,9 +294,8 @@ abbr {
 .react-calendar__year-view__months,
 .react-calendar__decade-view__years {
   gap: 24px;
-  padding-left: 55px;
-  padding-right: 55px;
-  justify-content: space-between; /* переробити, Оля */
+  padding-left: 66px;
+  padding-right: 66px;
 }
 
 .react-calendar__year-view__months > button,
@@ -269,7 +303,9 @@ abbr {
   flex: 0 0 auto !important;
   overflow: visible !important;
   margin-inline-end: unset !important;
-  border-radius: 20px;
+  border-radius: 16px;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .react-calendar__year-view__months .react-calendar__tile--now,
@@ -278,7 +314,7 @@ abbr {
 .react-calendar__decade-view__years .react-calendar__tile--now,
 .react-calendar__decade-view__years .react-calendar__tile:enabled:hover,
 .react-calendar__decade-view__years .react-calendar__tile:enabled:focus {
-  border-radius: 24px;
+  border-radius: 16px;
 }
 
 .react-calendar__year-view__months__month > abbr {
