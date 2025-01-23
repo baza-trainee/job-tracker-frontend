@@ -12,7 +12,7 @@ const ChartBarMonth: React.FC = () => {
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error fetching vacancies</div>;
 
-    const notArhivedVacancies = vacancies?.filter((vacancy) => vacancy.isArchived === false);
+    const notArhivedVacancies = vacancies?.filter((vacancy) => !vacancy.isArchived) || [];
 
     const statuses = notArhivedVacancies?.flatMap((vacancy) => vacancy.statuses) || [];
 
@@ -34,20 +34,24 @@ const ChartBarMonth: React.FC = () => {
     // Генеруємо список місяців
     const monthNames: string[] = t("calendar.months", { returnObjects: true }) as string[];
 
-    // Генеруємо діапазон
-    const months = Array.from({ length: 12 }, (_, i) => {
-        const date = new Date(selectedMonth.getFullYear(), i);
+    // Генеруємо діапазон 6 місяців
+    const rangeMonths = Array.from({ length: 6 }, (_, i) => {
+        const offset = i - 3; // 3 місяці до обраного, 2 після
+        const date = new Date(
+            selectedMonth.getFullYear(),
+            selectedMonth.getMonth() + offset
+        );
         return {
-            label: monthNames[i],
-            key: `${date.getFullYear()}-${String(i + 1).padStart(2, "0")}`,
+            label: monthNames[date.getMonth()],
+            key: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`,
         };
     });
 
     // Мітки для осі X
-    const labels = months.map((m) => m.label);
+    const labels = rangeMonths.map((m) => m.label);
 
     // Дані для діаграми
-    const filteredData = months.map((m) => groupedByMonth[m.key] || { sent: 0, response: 0 });
+    const filteredData = rangeMonths.map((m) => groupedByMonth[m.key] || { sent: 0, response: 0 });
 
     const datasets = [
         {
@@ -66,7 +70,7 @@ const ChartBarMonth: React.FC = () => {
         },
     ];
 
-    return <ChartBarBase labels={labels} datasets={datasets} />
+    return <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />
 };
 
 export default ChartBarMonth;

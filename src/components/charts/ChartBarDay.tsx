@@ -18,7 +18,7 @@ const ChartBarDay: React.FC = () => {
   if (isError) return <div>Error fetching vacancies</div>;
 
   // console.log("Всі вакансії: ", vacancies);
-  const notArhivedVacancies = vacancies?.filter((vacancy) => vacancy.isArchived === false);
+  const notArhivedVacancies = vacancies?.filter((vacancy) => !vacancy.isArchived) || [];
   // console.log("notArhivedVacancies", notArhivedVacancies);
 
   const statuses = notArhivedVacancies?.flatMap((vacancy) => vacancy.statuses) || [];
@@ -50,17 +50,32 @@ const ChartBarDay: React.FC = () => {
     return acc;
   }, {});
 
-  const getLast7Days = (endDate: Date): string[] => {
-    const result: string[] = [];
+  // const getLast7Days = (endDate: Date): string[] => {
+  //   const result: string[] = [];
 
-    for (let i = 6; i >= 0; i--) {
-      const date = new Date(endDate); // Копія обраної дати для опрацювання
-      date.setDate(endDate.getDate() - i); // Відлік назад
+  //   for (let i = 6; i >= 0; i--) {
+  //     const date = new Date(endDate); // Копія обраної дати для опрацювання
+  //     date.setDate(endDate.getDate() - i); // Відлік назад
+  //     result.push(
+  //       `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
+  //     ); // Формат yyyy-mm-dd
+  //   }
+
+  //   return result;
+  // };
+
+  const getLast7Days = (selectedDate: Date): string[] => {
+    const result: string[] = [];
+  
+    // Три дні до обраного, обраний день, і три дні після
+    for (let i = -3; i <= 3; i++) {
+      const date = new Date(selectedDate); // Копія обраної дати
+      date.setDate(selectedDate.getDate() + i); // Відлік вперед/назад від обраної дати
       result.push(
         `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
       ); // Формат yyyy-mm-dd
     }
-
+  
     return result;
   };
 
@@ -95,7 +110,7 @@ const ChartBarDay: React.FC = () => {
   ); // Відформатовані дати для осі X
 
   return (
-    <ChartBarBase labels={labels} datasets={datasets} />
+    <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />
   );
 };
 

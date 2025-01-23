@@ -15,7 +15,7 @@ export const StatisticsCalendarMonth: React.FC<StatisticsCalendarMonthProps> = (
     // console.log("Months from i18n:", months);
     // console.log("i18next resources:", i18n.getResourceBundle(i18n.language, "translation"));
     return (
-        <div className="statistics-calendar w-[356px] h-auto box-border bg-backgroundTertiary px-2 py-6 rounded-[20px]">
+        <div className="statistics-calendar w-[468px] h-[514px] box-border bg-backgroundTertiary px-6 py-8 rounded-[20px]">
             <Calendar
                 view="year" // Відображає 1 рік, в ньому місяців
                 locale={i18n.language} 
@@ -33,7 +33,7 @@ export const StatisticsCalendarMonth: React.FC<StatisticsCalendarMonthProps> = (
                     }
                     return null;
                 }}
-                tileClassName="w-[66px] h-[60px] font-Nunito text-textBlack bg-backgroundMain box-border" // Стиль клітинок
+                tileClassName="w-[80px] h-[80px] font-Nunito text-textBlack bg-backgroundMain box-border" // Стиль клітинок
             />
         </div>
     );

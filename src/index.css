@@ -269,9 +269,10 @@ abbr {
 
 .react-calendar__year-view__months,
 .react-calendar__decade-view__years {
-  gap: 16px;
+  gap: 24px;
   padding-left: 55px;
   padding-right: 55px;
+  justify-content: space-between; /* переробити, Оля */
 }
 
 .react-calendar__year-view__months > button,
@@ -279,6 +280,7 @@ abbr {
   flex: 0 0 auto !important;
   overflow: visible !important;
   margin-inline-end: unset !important;
+  border-radius: 20px;
 }
 
 .react-calendar__year-view__months .react-calendar__tile--now,

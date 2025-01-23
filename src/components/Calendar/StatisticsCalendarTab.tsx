@@ -19,7 +19,7 @@ export const StatisticsCalendarTab: React.FC<StatisticsCalendarTabProps> = ({
     ];
 
     return (
-        <div className="w-[356px] flex justify-center gap-4 text-xl mb-6 box-border text-textBlack">
+        <div className="w-[468px] flex justify-center gap-4 text-xl mb-6 box-border text-textBlack">
             {tabs.map((tab) => (
                 <button
                     key={tab.key}
