@@ -7,6 +7,7 @@ export const fetchUpdatedStatuses = createAsyncThunk(
   "editVacancy/fetchStatuses",
   async (vacancy: Vacancy, { dispatch }) => {
     const currentStatuses = vacancy.statuses; // Збережені статуси вакансії
+    const otherStatuses: statusActionProps[][] = []; // Статуси додаткових етапів
 
     const prioritizedStatuses = vacancyStatusesInfo
       .map((statusInfo) => {
@@ -19,16 +20,26 @@ export const fetchUpdatedStatuses = createAsyncThunk(
         const sortedMatchingStatuses = matchingStatuses.sort(
           (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
         );
-
+        if (matchingStatuses.length > 1) {
+          console.log("Фильтр", matchingStatuses);
+          console.log("Сорт", sortedMatchingStatuses);
+          console.log("Финиш", { ...statusInfo, ...sortedMatchingStatuses[0] });
+          otherStatuses.push(sortedMatchingStatuses.slice(1));
+        }
         return matchingStatuses.length === 0
           ? statusInfo
           : { ...statusInfo, ...sortedMatchingStatuses[0] };
       })
       .flat();
 
-    console.log("Результат", prioritizedStatuses);
+    const allVacancyStatuses: statusActionProps[] = [
+      ...prioritizedStatuses,
+      ...otherStatuses,
+    ].flat();
 
-    dispatch(createNewStatuses(prioritizedStatuses));
+    console.log("rez", allVacancyStatuses);
+
+    dispatch(createNewStatuses(allVacancyStatuses));
   }
 );
 
@@ -38,31 +49,26 @@ export const vacancyStatusesInfo: statusActionProps[] = [
     name: "resume",
     resumeId: null,
     rejectReason: null,
-    label: "addVacancy.form.resume",
     date: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "hr",
     name: "hr",
-    label: "addVacancy.form.hr",
     date: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "test",
     name: "test",
-    label: "addVacancy.form.test",
     date: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "tech",
     name: "tech",
-    label: "addVacancy.form.tech",
     date: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "reject",
     name: "reject",
-    label: "addVacancy.form.reject",
     date: "1970-01-01T00:00:00.000Z",
     rejectReason: null,
     resumeId: null,
@@ -70,7 +76,6 @@ export const vacancyStatusesInfo: statusActionProps[] = [
   {
     id: "offer",
     name: "offer",
-    label: "addVacancy.form.offer",
     date: "1970-01-01T00:00:00.000Z",
   },
 ];

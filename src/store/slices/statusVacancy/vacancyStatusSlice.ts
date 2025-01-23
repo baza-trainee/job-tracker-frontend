@@ -22,10 +22,8 @@ const vacancyStatusSlice = createSlice({
       state.newStatuses.filter((elem) => elem.id !== action.payload.id);
     },
     changeStatus: (state, action: PayloadAction<statusActionProps>) => {
-      state.newStatuses = state.newStatuses.map(
-        (elem) =>
-          elem.id === action.payload.id ? { ...elem, ...action.payload } : elem
-        // elem.name === action.payload.name ? { ...elem, ...action.payload } : elem
+      state.newStatuses = state.newStatuses.map((elem) =>
+        elem.id === action.payload.id ? { ...elem, ...action.payload } : elem
       );
     },
   },

@@ -157,7 +157,7 @@ const useEditVacancy = () => {
         const responseArhive = await archiveVacancyById({
           id: idVacancy,
         }).unwrap();
-        console.log("responseArhive", responseArhive);
+        console.log("Архів", responseArhive);
       }
 
       // 4 - зберігаємо статуси
@@ -168,11 +168,10 @@ const useEditVacancy = () => {
         const prevDate = previousStatuses[i]?.date || "";
         const newDate = newStatuses[i]?.date || "";
         // перевірка СТАТУСУ по даті
+
         if (prevDate !== newDate) {
           // створити статус
           if (prevDate === "1970-01-01T00:00:00.000Z") {
-            console.log("start create status");
-
             const statusResponse = await createStatusVacancyById({
               vacancyId: idVacancy,
               name: newStatuses[i].name as StatusName,
@@ -183,8 +182,23 @@ const useEditVacancy = () => {
             console.log("Створення статусу", statusResponse);
           }
 
+          // створити додатковий етап
+          if (!prevDate && newDate !== "1970-01-01T00:00:00.000Z") {
+            const statusResponse = await createStatusVacancyById({
+              vacancyId: idVacancy,
+              name: newStatuses[i].name as StatusName,
+              date: newStatuses[i].date || "",
+              resumeId: newStatuses[i].resumeId,
+              rejectReason: newStatuses[i].rejectReason as RejectReason,
+            }).unwrap();
+            console.log("Створення додаткового етапу", statusResponse);
+            continue;
+          }
+
           // видалити статус
-          if (newDate === "1970-01-01T00:00:00.000Z") {
+          if (prevDate && newDate === "1970-01-01T00:00:00.000Z") {
+            console.log("Видалення статусу prevDate", prevDate);
+            console.log("Видалення статусу newDate", newDate);
             const statusResponse = await deleteStatusVacancyById({
               vacancyId: idVacancy,
               id: newStatuses[i].id,

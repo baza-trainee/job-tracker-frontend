@@ -1,7 +1,6 @@
 export type statusActionProps = {
   id: string;
   name: string;
-  label?: string;
   date?: string;
   rejectReason?: string | null;
   resumeId?: string | null;

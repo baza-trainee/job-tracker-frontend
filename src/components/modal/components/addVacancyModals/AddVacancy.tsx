@@ -107,7 +107,7 @@ const AddVacancy = () => {
                       key={checkboxCalendar.id}
                       name={checkboxCalendar.name}
                       id={checkboxCalendar.id}
-                      label={checkboxCalendar.label}
+                      label={`addVacancy.form.${checkboxCalendar.name}`}
                       register={register}
                       errors={errors}
                       date={checkboxCalendar.date}
