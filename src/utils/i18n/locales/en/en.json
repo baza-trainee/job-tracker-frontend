@@ -212,7 +212,7 @@
     }
   },
   "calendar": {
-    "months": [
+    "monthsShort": [
       "Jan",
       "Feb",
       "Mar",
@@ -225,6 +225,20 @@
       "Oct",
       "Nov",
       "Dec"
+    ],
+    "monthsFull": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June ",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ]
   },
   "addCoverLetters": {

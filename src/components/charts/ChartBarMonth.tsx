@@ -32,7 +32,7 @@ const ChartBarMonth: React.FC = () => {
     );
 
     // Генеруємо список місяців
-    const monthNames: string[] = t("calendar.months", { returnObjects: true }) as string[];
+    const monthNames: string[] = t("calendar.monthsFull", { returnObjects: true }) as string[];
 
     // Генеруємо діапазон 6 місяців
     const rangeMonths = Array.from({ length: 6 }, (_, i) => {

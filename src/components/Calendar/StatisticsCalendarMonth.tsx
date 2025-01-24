@@ -11,9 +11,10 @@ export const StatisticsCalendarMonth: React.FC<StatisticsCalendarMonthProps> = (
 }) => {
     const { t, i18n } = useTranslation();
 
-    const months: string[] = t("calendar.months", { returnObjects: true }) as string[];
+    const months: string[] = t("calendar.monthsShort", { returnObjects: true }) as string[];
     // console.log("Months from i18n:", months);
     // console.log("i18next resources:", i18n.getResourceBundle(i18n.language, "translation"));
+
     return (
         <div className="statistics-calendar w-[468px] h-[514px] box-border bg-backgroundTertiary px-6 py-8 rounded-[20px]">
             <Calendar

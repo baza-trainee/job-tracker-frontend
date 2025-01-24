@@ -15,7 +15,7 @@ import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice.t
 import { useGetPredictionDailyQuery } from "../store/querySlices/predictionsQuerySlice.ts";
 import StatisticsPanelSkeleton from "../components/Statistics/componets/statisticsPanel/StatisticsPanelSkeleton.tsx";
 import NoVacancyCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
-import Soon from "../components/Calendar/Soon.tsx";
+import Soon from "../components/Soon/Soon.tsx";
 import RejectDiagram from "../components/Statistics/componets/statisticsDiagram/RejectDiagram.tsx";
 import { setActiveTab, setSelectedDate, setSelectedMonth, setSelectedYear } from "@/store/slices/calendarSlice/calendarSlice.ts";
 
