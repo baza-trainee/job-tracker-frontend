@@ -17,4 +17,5 @@ export interface InputProps {
   handleClickButtonCopyInput?: () => void;
   isCheckButtons?: boolean;
   isRequired?: boolean;
+  promptMessage?:string;
 }

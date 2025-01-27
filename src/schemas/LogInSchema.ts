@@ -5,15 +5,15 @@ import { emailRegex, emailRuByRegex, passwordRegex } from "./regSchema";
 export const LogInSchema = z.object({
   email: z
     .string()
-    .max(254, `validation.emailMax`)
+    .min(4, `validation.emailMin`)
     .regex(emailRegex, `validation.emailInvalid`)
     .regex(emailRuByRegex, `validation.emailInvalidRuBy`)
-    .min(4, `validation.emailMin`)
+    .max(254, `validation.emailMax`)
     .trim(),
 
   password: z
     .string()
-    .max(14, `validation.passwordMax`)
+    .min(8, `validation.passwordMin`)
     .regex(passwordRegex, `validation.passwordInvalid`)
-    .min(8, `validation.passwordMin`),
+    .max(14, `validation.passwordMax`),
 });

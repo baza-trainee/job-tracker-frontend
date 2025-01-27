@@ -1,5 +1,5 @@
 {
-  "or":"Або",
+  "or": "Або",
   "welcome": "Ласкаво просимо до React і react-i18next",
   "user": "user",
   "navigation": {
@@ -25,7 +25,10 @@
     "privacyPolicy": "політикой конфіденційності",
     "and": " та ",
     "userTerms": "умовами користувача",
-    "alreadyRegistered": "Вже зареєстровані?"
+    "alreadyRegistered": "Вже зареєстровані?",
+    "promptMessageEmail": "Формат: xx@xx, 2-254 символи, без .ru/.by, кирилиці, пробілів, двох крапок поспіль.",
+    "promptMessagePassword": "Формат: 8–14 символів, латиниця, 1 велика, 1 маленька літера, 1 цифра, 1 спец. символ (!@#$%^&*), без пробілів.",
+    "promptMessageConfirmPassword": ""
   },
   "login": {
     "header": "Раді вас знову бачити!",

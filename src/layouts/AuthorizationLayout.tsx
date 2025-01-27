@@ -118,6 +118,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         className=""
                         label={t("register.email")}
                         errors={errors}
+                        promptMessage={t("register.promptMessageEmail")}
                       />
                     ) : null}
 
@@ -136,6 +137,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         isResetPasswordPage ? "pt-[122px] xl:pt-[164px]" : ""
                       }
                       errors={errors}
+                      promptMessage={t("register.promptMessagePassword")}
                     />
 
                     {isLogInPage ? (

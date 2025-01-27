@@ -11,4 +11,5 @@ export interface InputPasswordProps {
   value?: string;
   id?: string;
   resetField?(name: string): void;
+  promptMessage?: string;
 }

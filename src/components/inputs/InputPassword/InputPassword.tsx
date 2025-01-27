@@ -80,6 +80,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
   label,
   value,
   id,
+  promptMessage = "",
 }) => {
   const error = errors[name];
 
@@ -128,6 +129,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             {...(value && { value })}
             {...register(name)}
             aria-describedby={`inputError-${name}`}
+            title={promptMessage}
           />
 
           <button

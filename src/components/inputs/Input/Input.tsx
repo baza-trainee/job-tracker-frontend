@@ -21,6 +21,7 @@ export const Input = ({
   handleClickButtonCopyInput,
   isCheckButtons = true,
   isRequired,
+  promptMessage = "",
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -72,6 +73,7 @@ export const Input = ({
             {...(value && { value })}
             {...register(name)}
             aria-describedby={`inputError-${name}`}
+            title={promptMessage}
           />
           <div className="flex gap-2">
             {isButtonCopy && (
