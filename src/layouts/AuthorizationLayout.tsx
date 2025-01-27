@@ -53,7 +53,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
 
   return (
-    <div className="grid h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary">
+    <div className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary">
       <header className="flex p-6 pb-[14px]">
         <Logo />
       </header>
