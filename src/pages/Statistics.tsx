@@ -15,7 +15,7 @@ import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice.t
 import { useGetPredictionDailyQuery } from "../store/querySlices/predictionsQuerySlice.ts";
 import StatisticsPanelSkeleton from "../components/Statistics/componets/statisticsPanel/StatisticsPanelSkeleton.tsx";
 import NoVacancyCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
-import Soon from "../components/Calendar/Soon.tsx";
+import Soon from "../components/Soon/Soon.tsx";
 import RejectDiagram from "../components/Statistics/componets/statisticsDiagram/RejectDiagram.tsx";
 import { setActiveTab, setSelectedDate, setSelectedMonth, setSelectedYear } from "@/store/slices/calendarSlice/calendarSlice.ts";
 
@@ -77,8 +77,8 @@ function Statistics() {
       {!isLoading && vacanciesForStat.length === 0 && <NoVacancyCard />}
       {!isLoading && vacanciesForStat.length !== 0 && (
         <>
-          <div className="mt-10 flex justify-between">
-            <div className="grid-col-2 mt-8 grid w-[1027px] auto-rows-max gap-x-6 gap-y-4">
+          <div className="my-10 flex justify-between">
+            <div className="grid-col-2 mt-8 grid w-[1027px] auto-rows-max gap-x-6">
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
