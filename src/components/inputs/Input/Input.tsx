@@ -21,6 +21,7 @@ export const Input = ({
   handleClickButtonCopyInput,
   isCheckButtons = true,
   isRequired,
+  promptMessage = "",
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -72,6 +73,7 @@ export const Input = ({
             {...(value && { value })}
             {...register(name)}
             aria-describedby={`inputError-${name}`}
+            title={promptMessage}
           />
           <div className="flex gap-2">
             {isButtonCopy && (
@@ -125,7 +127,12 @@ export const Input = ({
         {error && (
           <span
             id={`inputError-${name}`}
-            className="inline-block font-nunito text-base font-medium text-color2"
+            className={cn(
+              "inline-block font-nunito font-medium text-color2",
+              "sm:text-[12px]",
+              "md:text-[14px]",
+              "2xl:text-[16px]"
+            )}
           >
             {t(String(error?.message))}
           </span>

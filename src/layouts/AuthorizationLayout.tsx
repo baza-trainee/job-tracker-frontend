@@ -32,6 +32,8 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
     errors,
     isLoading,
     isCleanInputsForm,
+    watch,
+    trigger,
   } = useAuthForm(type);
 
   const isSignUpPage = type === "signUp";
@@ -43,8 +45,15 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
   const error = !!Object.keys(errors).length;
 
+  const checkPassword = () => {
+    if (watch("password") && watch("confirmPassword")){
+      trigger("confirmPassword")
+    }
+  }
+
+
   return (
-    <div className="grid h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary">
+    <div className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary">
       <header className="flex p-6 pb-[14px]">
         <Logo />
       </header>
@@ -85,7 +94,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                   "3xl:px-8 3xl:py-[34px]"
                 )}
               >
-                <form className="" onSubmit={handleSubmit(onSubmit)}>
+                <form className="" onSubmit={handleSubmit(onSubmit)} onBlur={checkPassword}>
                   {isResetPasswordPage ? <AuthHeader type={type} /> : null}
 
                   <div
@@ -109,6 +118,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         className=""
                         label={t("register.email")}
                         errors={errors}
+                        promptMessage={t("register.promptMessageEmail")}
                       />
                     ) : null}
 
@@ -127,6 +137,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         isResetPasswordPage ? "pt-[122px] xl:pt-[164px]" : ""
                       }
                       errors={errors}
+                      promptMessage={t("register.promptMessagePassword")}
                     />
 
                     {isLogInPage ? (

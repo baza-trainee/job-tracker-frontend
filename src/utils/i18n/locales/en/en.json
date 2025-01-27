@@ -1,5 +1,5 @@
 {
-  "or":"Or",
+  "or": "Or",
   "welcome": "Welcome to React and react-i18next",
   "user": "користувач",
   "navigation": {
@@ -26,7 +26,9 @@
     "privacyPolicy": " the privacy policy",
     "and": " and ",
     "userTerms": "the user terms",
-    "alreadyRegistered": "Already registered?"
+    "alreadyRegistered": "Already registered?",
+    "promptMessageEmail": "Format: xx@xx, 2-254 characters, no .ru/.by, Cyrillic, spaces, two consecutive dots.",
+    "promptMessagePassword": "Format: 8-14 characters, Latin, 1 uppercase, 1 lowercase letter, 1 digit, 1 special character (!@#$%^&*), no spaces."
   },
   "login": {
     "header": "Glad to see you again!",

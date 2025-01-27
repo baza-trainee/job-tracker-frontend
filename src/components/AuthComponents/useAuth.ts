@@ -75,11 +75,12 @@ export function useAuthForm(
     reset,
     watch,
     resetField,
+    trigger,
     formState: { errors },
   } = useForm<z.infer<typeof initsSchema>>({
     defaultValues: initDefaultValues,
     resolver: zodResolver(initsSchema),
-    mode: "all",
+    mode: "onBlur",
   });
 
   const isCleanInputsForm = useCallback(() => {
@@ -178,6 +179,8 @@ export function useAuthForm(
     onSubmit,
     errors,
     isCleanInputsForm,
-    isLoading
+    isLoading,
+    watch,
+    trigger
   };
 }
