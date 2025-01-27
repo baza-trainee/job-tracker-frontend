@@ -112,7 +112,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "focus-within:border-textOther active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:outline-none",
+              "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus-within:border-textOther focus:outline-none",
               "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
               "md:h-11 md:px-6 md:py-3 md:text-[14px]",
               "xl:text-[14px]",
@@ -143,7 +143,12 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
         {errors[name] && (
           <span
             id={`inputError-${name}`}
-            className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
+            className={cn(
+              "inline-block font-nunito font-medium text-color2",
+              "sm:text-[12px]",
+              "md:text-[14px]",
+              "2xl:text-[16px]"
+            )}
           >
             {t(String(errors[name]?.message))}
           </span>

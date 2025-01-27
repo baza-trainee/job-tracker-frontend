@@ -125,7 +125,12 @@ export const Input = ({
         {error && (
           <span
             id={`inputError-${name}`}
-            className="inline-block font-nunito text-base font-medium text-color2"
+            className={cn(
+              "inline-block font-nunito font-medium text-color2",
+              "sm:text-[12px]",
+              "md:text-[14px]",
+              "2xl:text-[16px]"
+            )}
           >
             {t(String(error?.message))}
           </span>
