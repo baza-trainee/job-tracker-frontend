@@ -32,6 +32,8 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
     errors,
     isLoading,
     isCleanInputsForm,
+    watch,
+    trigger,
   } = useAuthForm(type);
 
   const isSignUpPage = type === "signUp";
@@ -42,6 +44,13 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   const { t } = useTranslation();
 
   const error = !!Object.keys(errors).length;
+
+  const checkPassword = () => {
+    if (watch("password") && watch("confirmPassword")){
+      trigger("confirmPassword")
+    }
+  }
+
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto]">
@@ -85,7 +94,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                   "3xl:px-8 3xl:py-[34px]"
                 )}
               >
-                <form className="" onSubmit={handleSubmit(onSubmit)}>
+                <form className="" onSubmit={handleSubmit(onSubmit)} onBlur={checkPassword}>
                   {isResetPasswordPage ? <AuthHeader type={type} /> : null}
 
                   <div

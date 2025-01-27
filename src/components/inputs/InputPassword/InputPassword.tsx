@@ -128,7 +128,6 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             {...(value && { value })}
             {...register(name)}
             aria-describedby={`inputError-${name}`}
-            onBlur={() => (console.log("hello", error))}
           />
 
           <button
