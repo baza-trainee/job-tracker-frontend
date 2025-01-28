@@ -42,7 +42,7 @@ export const Input = ({
         <label
           htmlFor={`input-${name}`}
           className={cn(
-            "mb-3 block font-nunito font-medium leading-[135%] text-textBlack sm:text-[14px] md:text-[18px]",
+            "responsive-design mb-3 block font-nunito font-medium leading-[135%] text-textBlack",
             "sm:mb-[2px] sm:text-[14px]",
             "md:mb-2 md:text-[18px]",
             "xl:mb-2 xl:text-[16px]",
@@ -57,7 +57,7 @@ export const Input = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus-within:border-textOther focus:outline-none",
+              "active:border-accent responsive-input peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus-within:border-textOther focus:outline-none",
               "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
               "md:h-11 md:px-6 md:py-3 md:text-[14px]",
               "xl:text-[14px]",
@@ -128,7 +128,7 @@ export const Input = ({
           <span
             id={`inputError-${name}`}
             className={cn(
-              "inline-block font-nunito font-medium text-color2",
+              "responsive-design inline-block font-nunito font-medium text-color2",
               "sm:text-[12px]",
               "md:text-[14px]",
               "2xl:text-[16px]"

@@ -46,11 +46,10 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   const error = !!Object.keys(errors).length;
 
   const checkPassword = () => {
-    if (watch("password") && watch("confirmPassword")){
-      trigger("confirmPassword")
+    if (watch("password") && watch("confirmPassword")) {
+      trigger("confirmPassword");
     }
-  }
-
+  };
 
   return (
     <div className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary">
@@ -62,7 +61,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <section>
           <div
             className={classNames(
-              "container mb-4 flex justify-center",
+              "responsive-design container mb-4 flex justify-center gap-0",
               "sm:mt-[18px]",
               "md:-mt-12",
               "xl:mt-0 xl:gap-10",
@@ -73,7 +72,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
             <LoginCardImages />
             <div
               className={classNames(
-                "flex w-full flex-col font-nunito",
+                "responsive-design flex w-full flex-col font-nunito",
                 "md:max-w-[444px]",
                 "2xl:max-w-[476px]",
                 "3xl:max-w-[498px]",
@@ -86,7 +85,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
               <div
                 className={classNames(
-                  "relative rounded-[20px] bg-background-form shadow-form_shadow",
+                  "responsive-design relative rounded-[20px] bg-background-form shadow-form_shadow",
                   "sm:px-2 sm:py-4",
                   "md:p-8",
                   "xl:px-14 xl:py-14",
@@ -94,12 +93,16 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                   "3xl:px-8 3xl:py-[34px]"
                 )}
               >
-                <form className="" onSubmit={handleSubmit(onSubmit)} onBlur={checkPassword}>
+                <form
+                  className=""
+                  onSubmit={handleSubmit(onSubmit)}
+                  onBlur={checkPassword}
+                >
                   {isResetPasswordPage ? <AuthHeader type={type} /> : null}
 
                   <div
                     className={classNames(
-                      "flex flex-col",
+                      "responsive-design flex flex-col",
                       "sm:gap-2",
                       "md:gap-4",
                       "xl:gap-6",
@@ -143,7 +146,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     {isLogInPage ? (
                       <p
                         className={classNames(
-                          "cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight hover:text-textOther hover:underline",
+                          "responsive-design cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight hover:text-textOther hover:underline",
                           "sm:mt-0 sm:text-[12px]",
                           "md:text-[16px]",
                           "xl:-mt-3"
@@ -200,7 +203,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
                   <Button
                     type="submit"
-                    className="mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
+                    className="responsive-design mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
                     disabled={isCleanInputsForm() || error || isLoading}
                     variant="accent"
                     size="big"
@@ -227,7 +230,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                       className={classNames(
                         "font-nunito text-[12px] font-medium text-textBlackLight",
                         "md:text-[16px]",
-                        "xl:text-4",
+                        "xl:text-[16px]",
                         "2xl:",
                         "3xl:"
                       )}
@@ -237,7 +240,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         : t("login.noAccount")}
                       <Link
                         className={classNames(
-                          "ml-[6px] font-nunito text-[12px] font-medium leading-[135%] text-textOther hover:underline",
+                          "responsive-design ml-[6px] font-nunito text-[12px] font-medium leading-[135%] text-textOther hover:underline",
                           "md:text-[16px]",
                           "xl:text-4",
                           "2xl:ml-[6px]",

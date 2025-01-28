@@ -120,7 +120,6 @@ body {
 
 /* react-calendar */
 .job-calendar.react-calendar {
-
   border: 1px solid #436b88;
   border-radius: 12px;
   padding: 24px;
@@ -350,3 +349,18 @@ abbr {
 .bar {
   animation: expandWidth 0.5s ease-out forwards;
 }
+
+.responsive-design {
+  transition: all 3s ease-in-out;
+}
+.responsive-input {
+  transition: height 3s ease-in-out;
+  transition: padding 3s ease-in-out;
+  transition: padding-right 3s ease-in-out;
+  transition: font-size 3s ease-in-out;
+}
+/* 
+.bg-modal {
+  backdrop-filter: blur(4px);
+  background: rgba(51, 51, 51, 0.1), rgba(51, 51, 51, 0.1);
+} */

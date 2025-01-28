@@ -15,7 +15,7 @@ const InfoCard = ({
   return (
     <div
       className={classNames(
-        "relative flex flex-col",
+        "responsive-design relative flex max-w-[460px] flex-col",
         "xl:max-w-[460px]",
         "2xl:max-w-[503px]",
         "3xl:max-w-[608px]",
@@ -26,7 +26,7 @@ const InfoCard = ({
     >
       <span
         className={classNames(
-          "absolute top-[-29px] flex h-[30px] w-[130px] rounded-bl-[0] rounded-br-[0] rounded-tl-[12px] rounded-tr-[12px]",
+          "responsive-design absolute top-[-29px] flex h-[30px] w-[130px] rounded-bl-[0] rounded-br-[0] rounded-tl-[12px] rounded-tr-[12px]",
           "3xl:w-[134px]",
           color === "blue" ? "bg-color1" : "bg-color5",
           position === "left"
@@ -36,7 +36,7 @@ const InfoCard = ({
       ></span>
       <div
         className={classNames(
-          "flex items-center justify-center border-[6px] border-[solid]",
+          "responsive-design flex items-center justify-center border-[6px] border-[solid] px-6 py-[15px]",
           "xl:gap-1 xl:px-6 xl:py-[15px]",
           "2xl:gap-2 2xl:p-5",
           "3xl:gap-4 3xl:px-[69px] 3xl:py-5",
@@ -46,7 +46,8 @@ const InfoCard = ({
       >
         <p
           className={classNames(
-            "max-w-[311px] font-nunito text-[20px] font-bold leading-[135%] text-textBlack",
+            "responsive-design max-w-[311px] font-nunito text-[4px] font-bold leading-[135%] text-textBlack",
+            "xl:text-[20px]",
             "2xl:max-w-[335px]"
           )}
         >
@@ -55,7 +56,7 @@ const InfoCard = ({
         <Icon
           id={icon}
           className={classNames(
-            "h-[100px] w-[100px] p-1",
+            "responsive-design h-[100px] w-[100px] p-1",
             "2xl:h-[120px] 2xl:w-[120px]"
           )}
         />

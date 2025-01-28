@@ -5,7 +5,7 @@ export const loginCardsImages = [
     margin: false,
     color: "blue",
     position: "left",
-    border: `rounded-bl-[12px] rounded-br-[12px] rounded-tl-[0] rounded-tr-[12px] border-[6px] border-[solid]`,
+    border: `rounded-bl-[12px] rounded-br-[12px] rounded-tl-[0] rounded-tr-[12px]`,
     // TODO: loginCardsImages.text - src/utils/i18n/locales/uk/uk/json
     text: "infoCards.optimizeJobSearch",
     icon: "man-and-time" as IconId,

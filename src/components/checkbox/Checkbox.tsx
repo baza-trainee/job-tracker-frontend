@@ -37,7 +37,7 @@ export const Checkbox = ({
             checked={checked}
             className={classNames(
               type === "signUp" &&
-                "peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none rounded-[4px] border-[1px] border-solid border-textBlack",
+                "peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none rounded-[4px] border-[1px] border-solid border-textBlack responsive-design",
               "md:h-6 md:w-6 md:border-2"
             )}
           />
@@ -60,7 +60,7 @@ export const Checkbox = ({
           htmlFor={id}
           className={classNames(
             type === "signUp" &&
-              "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px]"
+              "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px] responsive-design"
           )}
         >
           {label}
@@ -70,7 +70,7 @@ export const Checkbox = ({
         <span
           id={`inputError-${name}`}
           className={classNames(
-            "inline-block font-nunito font-medium text-color2",
+            "inline-block font-nunito font-medium text-color2 responsive-design",
             "sm:text-[12px]",
             "md:text-[14px]",
             "2xl:text-[16px]"

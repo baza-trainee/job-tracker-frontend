@@ -12,10 +12,10 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "flex sm:h-[42px] md:h-[50px] items-center justify-center rounded-xl border-[1px] border-textBlack font-nunito text-xl font-medium text-textBlack duration-300",
+        "flex sm:h-[42px] md:h-[50px] items-center justify-center rounded-xl border-[1px] border-textBlack font-nunito text-xl font-medium text-textBlack duration-300 responsive-design",
 
-        size === "small" && "sm:px-[14px] md:px-4 xl:px-8",
-        size === "big" && "sm:px-[30px] md:px-12",
+        size === "small" && "sm:px-[14px] md:px-4 xl:px-8 responsive-design",
+        size === "big" && "sm:px-[30px] md:px-12 responsive-design",
 
         !disabled &&
           variant === "accent" &&

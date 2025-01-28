@@ -9,8 +9,8 @@ const LoginCardImages = () => {
   return (
     <div
       className={classNames(
-        "hidden flex-col pt-[30px]",
-        "xl:flex xl:w-[693px] xl:gap-[37px]",
+        "responsive-design flex w-0 flex-col gap-[37px] overflow-hidden pt-[30px] scale-0",
+        "xl:flex xl:w-[693px] xl:gap-[37px] xl:scale-100",
         "2xl:w-[683px] 2xl:gap-[13px]",
         "3xl:w-[924px] 3xl:gap-[50px]"
       )}
