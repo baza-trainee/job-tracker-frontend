@@ -203,7 +203,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
                   <Button
                     type="submit"
-                    className="responsive-design mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
+                    className="responsive-input mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
                     disabled={isCleanInputsForm() || error || isLoading}
                     variant="accent"
                     size="big"

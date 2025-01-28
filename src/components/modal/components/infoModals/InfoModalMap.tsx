@@ -155,8 +155,8 @@ const InfoModalMap = () => {
         t("infoModal.signUpError.text_2"),
       ],
       button: [
-        createButton(t("infoModal.button.restore"), handleForgotPassword),
         createButton(t("infoModal.button.login"), handleLogIn),
+        createButton(t("infoModal.button.restore"), handleForgotPassword),
       ],
     },
     forgotPasswordSuccess: {
