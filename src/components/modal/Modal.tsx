@@ -48,7 +48,7 @@ const Modal: FC = () => {
 
   return (
     <div
-      className="fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50 font-nunito"
+      className="fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm font-nunito"
       onClick={() => handleCloseModal()}
     >
       <div>

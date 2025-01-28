@@ -7,10 +7,10 @@ import Icon from "../../Icon/Icon";
 
 export const AuthSocialButtons = () => {
   return (
-    <div className="flex justify-center px-2 sm:gap-[22px] md:gap-[35px] xl:gap-[35px] 2xl:gap-8">
+    <div className="flex justify-center px-2 sm:gap-[22px] md:gap-[35px] xl:gap-[35px] 2xl:gap-8 responsive-design">
       <Button
         type="button"
-        className="gap-3 text-[14px] md:gap-1 md:text-[16px] 2xl:text-[20px]"
+        className="gap-3 text-[14px] md:gap-1 md:text-[16px] 2xl:text-[20px] responsive-design"
         variant="ghost"
         size="small"
         onClick={GoogleLogin}
@@ -23,7 +23,7 @@ export const AuthSocialButtons = () => {
 
       <Button
         type="button"
-        className="gap-3 text-[14px] md:gap-1 md:text-[16px] 2xl:text-[20px]"
+        className="gap-3 text-[14px] md:gap-1 md:text-[16px] 2xl:text-[20px] responsive-design"
         variant="ghost"
         size="small"
         onClick={GithubLogin}
