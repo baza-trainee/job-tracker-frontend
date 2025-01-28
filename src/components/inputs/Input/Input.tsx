@@ -27,7 +27,7 @@ export const Input = ({
   const [isIcon, setIsIcon] = useState<boolean>(false);
   const { t } = useTranslation();
 
-  const [isCommunicate, setIsCommunicate] = useState(false);
+  const [isIconVisible, setIsIconVisible] = useState(false);
 
   const handleResetField = (name: string) => {
     resetField(name);
@@ -39,7 +39,7 @@ export const Input = ({
       id={id}
       onFocus={() => setIsIcon(true)}
       onBlur={() => {
-        setIsCommunicate(true);
+        setIsIconVisible(true);
         setIsIcon(false);
       }}
     >
@@ -105,7 +105,7 @@ export const Input = ({
                 />
               </button>
             )}
-            {isCheckButtons && isCommunicate ? (
+            {isCheckButtons && isIconVisible ? (
               error ? (
                 <button
                   onClick={() => handleResetField(name)}
