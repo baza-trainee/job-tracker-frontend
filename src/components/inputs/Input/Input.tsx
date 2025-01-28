@@ -19,7 +19,7 @@ export const Input = ({
   isButtonRemoveInput = false,
   handleClickButtonRemoveInput,
   handleClickButtonCopyInput,
-  isCheckButtons,
+  isCheckButtons = true,
   isRequired,
   promptMessage = "",
 }: InputProps) => {
