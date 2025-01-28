@@ -27,6 +27,8 @@ export const Input = ({
   const [isIcon, setIsIcon] = useState<boolean>(false);
   const { t } = useTranslation();
 
+  const [isCommunicate, setIsCommunicate] = useState(false);
+
   const handleResetField = (name: string) => {
     resetField(name);
   };
@@ -36,7 +38,10 @@ export const Input = ({
       className={cn("relative", className)}
       id={id}
       onFocus={() => setIsIcon(true)}
-      onBlur={() => setIsIcon(false)}
+      onBlur={() => {
+        setIsCommunicate(true);
+        setIsIcon(false);
+      }}
     >
       {label && (
         <label
@@ -100,7 +105,7 @@ export const Input = ({
                 />
               </button>
             )}
-            {isCheckButtons ? (
+            {isCheckButtons && isCommunicate ? (
               error ? (
                 <button
                   onClick={() => handleResetField(name)}
