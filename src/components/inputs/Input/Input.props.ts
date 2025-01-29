@@ -1,4 +1,4 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
 
 export interface InputProps {
   name: string;
@@ -17,5 +17,6 @@ export interface InputProps {
   handleClickButtonCopyInput?: () => void;
   isCheckButtons?: boolean;
   isRequired?: boolean;
-  promptMessage?:string;
+  promptMessage?: string;
+  setValue?: UseFormSetValue<any>;
 }

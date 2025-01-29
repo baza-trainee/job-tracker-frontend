@@ -76,6 +76,7 @@ export function useAuthForm(
     watch,
     resetField,
     trigger,
+    setValue,
     formState: { errors },
   } = useForm<z.infer<typeof initsSchema>>({
     defaultValues: initDefaultValues,
@@ -183,5 +184,6 @@ export function useAuthForm(
     isLoading,
     watch,
     trigger,
+    setValue,
   };
 }
