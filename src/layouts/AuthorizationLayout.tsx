@@ -62,8 +62,8 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <section>
           <div
             className={classNames(
-              // "responsive-design container mb-4 flex justify-center gap-0",
               "responsive-design mx-auto mb-4 flex max-w-[1920px] justify-between px-[160px]"
+              // "responsive-design container mb-4 flex justify-center gap-0",
               // "sm:mt-[18px]",
               // "md:-mt-12",
               // "xl:mt-0 xl:gap-10",
