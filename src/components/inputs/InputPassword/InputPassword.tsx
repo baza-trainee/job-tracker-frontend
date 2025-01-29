@@ -92,6 +92,8 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
 
   const { t } = useTranslation();
 
+  console.log("password--", errors["password"]?.message);
+
   return (
     <div className={cn("relative", [className])} id={id}>
       {label && (
