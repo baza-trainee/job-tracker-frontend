@@ -265,7 +265,7 @@
   "buttonRemoveAccount": "Видалити акаунт",
   "infoModal": {
     "success": "Успіх",
-    "oops": "Упс",
+    "oops": "Упс!",
     "button": {
       "cancel": "Скасувати",
       "logOut": "Вийти",

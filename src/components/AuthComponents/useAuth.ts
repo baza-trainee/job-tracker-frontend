@@ -76,6 +76,7 @@ export function useAuthForm(
     watch,
     resetField,
     trigger,
+    setValue,
     formState: { errors },
   } = useForm<z.infer<typeof initsSchema>>({
     defaultValues: initDefaultValues,
@@ -118,10 +119,11 @@ export function useAuthForm(
           case "logIn":
             if ("email" in data && "password" in data) {
               return type === "signUp"
-                ? await registerUser({
+                ? (await registerUser({
                     email: data.email,
                     password: data.password,
-                  })
+                  }),
+                  navigate("/profile"))
                 : await loginUser({
                     email: data.email,
                     password: data.password,
@@ -181,6 +183,7 @@ export function useAuthForm(
     isCleanInputsForm,
     isLoading,
     watch,
-    trigger
+    trigger,
+    setValue,
   };
 }

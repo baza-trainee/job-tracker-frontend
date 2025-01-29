@@ -34,6 +34,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
     isCleanInputsForm,
     watch,
     trigger,
+    setValue,
   } = useAuthForm(type);
 
   const isSignUpPage = type === "signUp";
@@ -61,12 +62,13 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <section>
           <div
             className={classNames(
-              "responsive-design container mb-4 flex justify-center gap-0",
-              "sm:mt-[18px]",
-              "md:-mt-12",
-              "xl:mt-0 xl:gap-10",
-              "2xl:gap-6",
-              "3xl:gap-[158px]"
+              "responsive-design mx-auto mb-4 flex max-w-[1920px] justify-between px-[160px]"
+              // "responsive-design container mb-4 flex justify-center gap-0",
+              // "sm:mt-[18px]",
+              // "md:-mt-12",
+              // "xl:mt-0 xl:gap-10",
+              // "2xl:gap-6",
+              // "3xl:gap-[158px]"
             )}
           >
             <LoginCardImages />
@@ -122,6 +124,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         label={t("register.email")}
                         errors={errors}
                         promptMessage={t("register.promptMessageEmail")}
+                        setValue={setValue}
                       />
                     ) : null}
 
@@ -144,22 +147,21 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     />
 
                     {isLogInPage ? (
-                      <p
-                        className={classNames(
-                          "responsive-design cursor-pointer text-right font-nunito text-[16px] font-medium leading-[135%] text-textBlackLight hover:text-textOther hover:underline",
-                          "sm:mt-0 sm:text-[12px]",
-                          "md:text-[16px]",
-                          "xl:-mt-3"
-                        )}
-                        onClick={() =>
-                          dispatch(
-                            openModal({
-                              typeModal: "forgotPassword",
-                            })
-                          )
-                        }
-                      >
-                        {t("login.forgotPassword")}
+                      <p className="responsive-design -mt-3 text-right text-[12px] md:text-[16px]">
+                        <span
+                          className={classNames(
+                            "cursor-pointer font-nunito font-medium leading-[135%] text-textBlackLight hover:text-textOther hover:underline"
+                          )}
+                          onClick={() =>
+                            dispatch(
+                              openModal({
+                                typeModal: "forgotPassword",
+                              })
+                            )
+                          }
+                        >
+                          {t("login.forgotPassword")}
+                        </span>
                       </p>
                     ) : null}
 

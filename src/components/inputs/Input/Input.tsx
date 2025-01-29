@@ -22,6 +22,7 @@ export const Input = ({
   isCheckButtons = true,
   isRequired,
   promptMessage = "",
+  setValue,
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -62,15 +63,15 @@ export const Input = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "active:border-accent responsive-input peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus-within:border-textOther focus:outline-none",
+              "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:outline-none",
               "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
               "md:h-11 md:px-6 md:py-3 md:text-[14px]",
               "xl:text-[14px]",
               "2xl:text-[16px]",
               {
-                ["border-color5"]: !error,
-                ["border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"]:
-                  error,
+                "border-color5": !error && value,
+                "border-color2": error,
+                "border-textBlack": !value && !error,
               }
             )}
             placeholder={placeholder}
@@ -79,6 +80,11 @@ export const Input = ({
             {...register(name)}
             aria-describedby={`inputError-${name}`}
             title={promptMessage}
+            onBlur={(event) =>
+              setValue?.(name, event.target.value.trim(), {
+                shouldValidate: true,
+              })
+            }
           />
           <div className="flex gap-2">
             {isButtonCopy && (

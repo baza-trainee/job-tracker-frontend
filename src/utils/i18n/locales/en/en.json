@@ -265,8 +265,8 @@
   },
   "buttonRemoveAccount": "Remove Account",
   "infoModal": {
-    "success": "Success",
-    "oops": "Oops",
+    "success": "Success!",
+    "oops": "Oops!",
     "button": {
       "cancel": "Cancel",
       "logOut": "Log Out",
