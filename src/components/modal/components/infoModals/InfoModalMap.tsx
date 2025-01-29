@@ -128,14 +128,24 @@ const InfoModalMap = () => {
       title: t("infoModal.success"),
       text: [t("infoModal.logInSuccess.text_1")],
       button: [
-        createButton(t("infoModal.button.continue"), handleCancel, "big"),
+        createButton(
+          t("infoModal.button.continue"),
+          handleCancel,
+          "big",
+          "accent"
+        ),
       ],
     },
     logInError: {
       title: t("infoModal.oops"),
       text: [t("infoModal.logInError.text_1")],
       button: [
-        createButton(t("infoModal.button.continue"), handleCancel, "big"),
+        createButton(
+          t("infoModal.button.continue"),
+          handleCancel,
+          "big",
+          "accent"
+        ),
       ],
     },
     signUpSuccess: {
@@ -145,7 +155,12 @@ const InfoModalMap = () => {
         t("infoModal.signUpSuccess.text_2"),
       ],
       button: [
-        createButton(t("infoModal.button.continue"), handleCancel, "big"),
+        createButton(
+          t("infoModal.button.continue"),
+          handleCancel,
+          "big",
+          "accent"
+        ),
       ],
     },
     signUpError: {
@@ -155,7 +170,12 @@ const InfoModalMap = () => {
         t("infoModal.signUpError.text_2"),
       ],
       button: [
-        createButton(t("infoModal.button.login"), handleLogIn),
+        createButton(
+          t("infoModal.button.login"),
+          handleLogIn,
+          "small",
+          "accent"
+        ),
         createButton(t("infoModal.button.restore"), handleForgotPassword),
       ],
     },
@@ -163,7 +183,12 @@ const InfoModalMap = () => {
       title: "",
       text: [t("infoModal.forgotPasswordSuccess.text_1")],
       button: [
-        createButton(t("infoModal.button.continue"), handleCancel, "big"),
+        createButton(
+          t("infoModal.button.continue"),
+          handleCancel,
+          "big",
+          "accent"
+        ),
       ],
     },
     resetPasswordSuccess: {
@@ -173,7 +198,12 @@ const InfoModalMap = () => {
         t("infoModal.resetPasswordSuccess.text_2"),
       ],
       button: [
-        createButton(t("infoModal.button.continue"), handleLogIn, "big"),
+        createButton(
+          t("infoModal.button.continue"),
+          handleLogIn,
+          "big",
+          "accent"
+        ),
       ],
     },
     resetPasswordErrorLink: {
@@ -210,7 +240,7 @@ const InfoModalMap = () => {
           t("infoModal.button.save"),
           handleAddVacancy,
           "big",
-          "ghost",
+          "accent",
           addVacanciesLoading
         ),
       ],
@@ -273,7 +303,7 @@ const InfoModalMap = () => {
           t("infoModal.button.save"),
           handleEditVacancy,
           "big",
-          "ghost",
+          "accent",
           editVacanciesLoading
         ),
       ],
