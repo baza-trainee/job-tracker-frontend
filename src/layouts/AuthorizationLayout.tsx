@@ -147,7 +147,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     />
 
                     {isLogInPage ? (
-                      <p className="responsive-design -mt-3 text-right text-[12px] md:text-[16px]">
+                      <p className="responsive-design -mt-1 text-right text-[12px] md:-mt-3 md:text-[16px]">
                         <span
                           className={classNames(
                             "cursor-pointer font-nunito font-medium leading-[135%] text-textBlackLight hover:text-textOther hover:underline"
