@@ -62,13 +62,13 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <section>
           <div
             className={classNames(
-              "responsive-design mx-auto mb-4 flex max-w-[1920px] justify-between px-[160px]"
-              // "responsive-design container mb-4 flex justify-center gap-0",
-              // "sm:mt-[18px]",
-              // "md:-mt-12",
-              // "xl:mt-0 xl:gap-10",
-              // "2xl:gap-6",
-              // "3xl:gap-[158px]"
+              // "responsive-design mx-auto mb-4 flex max-w-[1920px] justify-between px-[160px]"
+              "responsive-design container mb-4 flex justify-center gap-0",
+              "sm:mt-[18px]",
+              "md:-mt-12",
+              "xl:mt-0 xl:gap-10",
+              "2xl:gap-6",
+              "3xl:gap-[158px]"
             )}
           >
             <LoginCardImages />
@@ -147,7 +147,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                     />
 
                     {isLogInPage ? (
-                      <p className="responsive-design -mt-3 text-right text-[12px] md:text-[16px]">
+                      <p className="responsive-design -mt-1 text-right text-[12px] md:-mt-3 md:text-[16px]">
                         <span
                           className={classNames(
                             "cursor-pointer font-nunito font-medium leading-[135%] text-textBlackLight hover:text-textOther hover:underline"

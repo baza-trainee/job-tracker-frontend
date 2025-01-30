@@ -20,6 +20,7 @@ const ForgotPasswordLayout = ({ type }: ForgotPasswordLayoutProps) => {
     errors,
     isCleanInputsForm,
     isLoading,
+    setValue,
   } = useAuthForm(type);
 
   const { t } = useTranslation();
@@ -29,7 +30,7 @@ const ForgotPasswordLayout = ({ type }: ForgotPasswordLayoutProps) => {
   return (
     <section>
       <div className="px-12 py-[50px] text-left">
-        <form className="" onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <AuthHeader type={type} />
 
           <Input
@@ -42,13 +43,15 @@ const ForgotPasswordLayout = ({ type }: ForgotPasswordLayoutProps) => {
             className=""
             label={t("register.email")}
             errors={errors}
+            promptMessage={t("register.promptMessageEmail")}
+            setValue={setValue}
           />
 
           <Button
             type="submit"
             className="mx-auto mt-8"
             disabled={isCleanInputsForm() || error || isLoading}
-            variant="ghost"
+            variant="accent"
             size="big"
           >
             {t("forgotPassword.button")}
