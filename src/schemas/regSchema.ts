@@ -1,22 +1,12 @@
-export const nameRegex = /^(?!.*[ЁёЫыЭэЪъ])[A-Za-zА-Яа-я’`’\-\s]{2,30}$/;
+export const emailRegex =
+  /^(?!.*\.\.)(?!^\.)(?!^[!#%*+='])[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(\.[a-zA-Z]{2,254})$/;
+
+export const emailRuByRegex = /(?<!\.ru|\.by)$/;
+
+export const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=\S)[A-Za-z\d!@#$%^&*]{8,14}$/;
 
 export const textContactUsRegex =
   /^(?!.*[ЁёЫыЭэЪъ])(?!(?:.*?[<>"'`/\\|]){5,})[\wа-яА-Я\s,.!?;:()\[\]{}@#$%^&*+=~\-]{10,4000}$/;
 
-// TODO:  вимоги проекта, але поки закоментовані для тестів
-// export const emailRegex =
-//   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-// export const passwordRegex =
-//   /^(?=.*[A-Z\u0400-\u04FF])(?=.*\d)[A-Za-z\u0400-\u04FF\d]{8,}$/;
-// export const emailRegex =
-//   /^[a-zA-Z0-9._%+-]{2,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?<!\.ru|\.by)$/;
-
-// alex - 23/01/24
-export const emailRegex =
-  /^(?!.*\.\.)(?!^\.)(?!^[!#%*+='])[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(\.[a-zA-Z]+)+$/;
-
-export const emailRuByRegex = /(?<!\.ru|\.by)$/;
-export const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=\S)[A-Za-z\d!@#$%^&*]+$/;
-
+export const nameRegex = /^(?!.*[ЁёЫыЭэЪъ])[A-Za-zА-Яа-я’`’\-\s]{2,30}$/;

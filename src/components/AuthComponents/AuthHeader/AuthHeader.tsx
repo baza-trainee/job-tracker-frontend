@@ -50,9 +50,9 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
       <p
         className={classNames(
           "responsive-design mx-auto max-w-[380px] text-center font-nunito text-[14px] font-medium leading-[135%] text-textBlackLight 2xl:text-[16px]",
-          "xl:max-w-[424px]",
-          "2xl:max-w-[424px]",
-          "3xl:max-w-[434px]",
+          // "xl:max-w-[424px]",
+          // "2xl:max-w-[424px]",
+          // "3xl:max-w-[434px]",
           type === "forgotPassword" || type === "resetPassword"
             ? "!text-[14px] !text-textBlack"
             : "md:max-w-[424px]",
