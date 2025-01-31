@@ -55,7 +55,7 @@ export const contentMap: ContentMapProps = {
     borderColor: colorButton.border,
   },
   logInSuccess: {
-    content: <InfoModal type="logInSuccess" textColor={colorDefault.text} />,
+    content: <InfoModal type="logInSuccess" textColor={colorSuccess.text} />,
     bgColor: colorSuccess.bg,
     borderColor: colorSuccess.border,
   },
