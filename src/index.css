@@ -361,6 +361,7 @@ abbr {
   transition: paddding-left-right 3s ease-in-out;
 }
 
+<<<<<<< HEAD
 .soon-scroll::-webkit-scrollbar {
   width: 8px;
   border-radius: 4px;
@@ -373,4 +374,10 @@ abbr {
 }
 .soon-scroll::-webkit-scrollbar-thumb:hover {
   background: #8F99AD;
+=======
+/*  */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+>>>>>>> main
 }
