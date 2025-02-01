@@ -21,4 +21,3 @@ const CardSoon: React.FC<CardSoonProps> = ({ day, date, title, time }) => {
 };
 
 export default CardSoon;
-// truncate
