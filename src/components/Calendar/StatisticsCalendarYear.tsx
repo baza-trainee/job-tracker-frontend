@@ -20,11 +20,7 @@ export const StatisticsCalendarYear: React.FC<StatisticsCalendarYearProps> = ({
                 className="statistics-calendar__years"
                 nextLabel={<Icon id={"arrow-right"} className="size-6" />}
                 prevLabel={<Icon id={"arrow-left"} className="size-6" />}
-                // tileContent={({ date, view }) =>
-                //     view === "decade" ? <span>{date.getFullYear()}</span> : null
-                // }
                 tileClassName="w-[80px] h-[80px] font-Nunito text-textBlack bg-backgroundMain box-border" // Стиль клітинок
-                // formatYear={(_, date) => `${date.getFullYear()}`}
             />
         </div>
     );

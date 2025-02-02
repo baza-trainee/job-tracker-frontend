@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { RootState } from "../store/store.ts";
 import { useAppDispatch, useAppSelector } from "../store/hook.ts";
 import StatisticsPanel from "../components/Statistics/componets/statisticsPanel/StatisticsPanel";
@@ -82,7 +81,6 @@ function Statistics() {
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
-                  // setActiveTab={setActiveTab}
                   setActiveTab={(tab) => dispatch(setActiveTab(tab))}
                 />
               </div>
@@ -92,7 +90,6 @@ function Statistics() {
               <div className="col-span-1 row-start-2">{renderCalendar()}</div>
               <div className="col-span-2 row-start-3">
                 {renderChart()}
-                {/* <ChartBarDay /> */}
               </div>
             </div>
             <DoughnutChart vacancies={vacanciesForStat} />
@@ -105,23 +102,3 @@ function Statistics() {
 }
 
 export default Statistics;
-
-
-
-
-
-
-// const [activeTab, setActiveTab] = useState("Day");
-
-// const renderCalendar = () => {
-//   switch (activeTab) {
-//     case "Day":
-//       return <StatisticsCalendarDay />;
-//     case "Month":
-//       return <StatisticsCalendarMonth />;
-//     case "Year":
-//       return <StatisticsCalendarYear />;
-//     default:
-//       return null;
-//   }
-// };

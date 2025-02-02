@@ -6,6 +6,7 @@ import EditVacancy from "./components/editVacancy/EditVacancy";
 import ModalAddProfileProperties from "../Profile/ModalAddProfileProperties";
 import { Color, ContentMapProps } from "./ModalMain.types";
 import ModalRemoveProperties from "../Profile/ModalRemoveProperties";
+import AddEventModal from "../Soon/AddEventModal";
 
 const colorDefault: Color = {
   text: "text-white",
@@ -174,5 +175,11 @@ export const contentMap: ContentMapProps = {
     nameModal: "Видалити резюме?",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
+  },
+  addEvent: {
+    content: <AddEventModal />,
+    nameModal: "addEvent.modalTitle",
+    bgColor: "bg-button",
+    borderColor: "border-button",
   },
 };
