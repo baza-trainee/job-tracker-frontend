@@ -88,7 +88,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 "3xl:max-w-[498px]",
                 type === "resetPassword" &&
                   "mt-20 md:mt-[68px] xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
-                type === "logIn" && "xl:mt-[41px]"
+                type === "logIn" && "sm:mt-8 xl:mt-[41px]"
               )}
             >
               {!isResetPasswordPage ? <AuthHeader type={type} /> : null}
