@@ -32,6 +32,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           "relative top-1 z-30 flex min-h-[32px] w-fit min-w-[134px] max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl px-6 py-3",
           backgroundColorModal || modalData.bgColor
         )}
+        onClick={(e) => e.stopPropagation()}
       >
         {modalData?.nameModal && (
           <span className="text-xl">{t(modalData.nameModal)}</span>

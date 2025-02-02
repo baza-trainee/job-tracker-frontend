@@ -59,6 +59,7 @@ const AddVacancy = () => {
                     label={input.label}
                     errors={errors}
                     isRequired={true}
+                    setValue={setValue}
                   />
                 ))}
               </div>
