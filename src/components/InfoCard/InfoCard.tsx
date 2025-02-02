@@ -37,7 +37,7 @@ const InfoCard = ({
       <div
         className={classNames(
           "responsive-design flex items-center justify-center border-[6px] border-[solid] px-6 py-[15px]",
-          "xl:gap-1 xl:px-6 xl:py-[15px]",
+          "xl:gap-1 xl:px-6 xl:py-[9px]",
           "2xl:gap-2 2xl:p-5",
           "3xl:gap-4 3xl:px-[69px] 3xl:py-5",
           color === "blue" ? "border-color1" : "border-color5",

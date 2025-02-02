@@ -54,7 +54,15 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
   return (
     <div className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary">
-      <header className="flex p-6 pb-[14px]">
+      <header
+        className={classNames(
+          "flex p-5 pb-0",
+          "md:p-6 md:pb-0",
+          "xl:pb-[10px]",
+          "2lx:pb-[14px]",
+          "3xl:p-10 3xl:pb-7"
+        )}
+      >
         <Logo />
       </header>
 
@@ -62,13 +70,11 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <section>
           <div
             className={classNames(
-              // "responsive-design mx-auto mb-4 flex max-w-[1920px] justify-between px-[160px]"
-              "responsive-design container mb-4 flex justify-center gap-0",
-              "sm:mt-[18px]",
-              "md:-mt-12",
-              "xl:mt-0 xl:gap-10",
-              "2xl:gap-6",
-              "3xl:gap-[158px]"
+              "responsive-design container mb-[10px] flex justify-center gap-0",
+              "md:mb-[15px]",
+              "xl:mb-[42px] xl:gap-10",
+              "2xl:mb-[179px] 2xl:gap-6",
+              "3xl:mb-[96px] 3xl:gap-[158px]"
             )}
           >
             <LoginCardImages />
