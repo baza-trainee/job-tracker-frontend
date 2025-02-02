@@ -47,8 +47,8 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({ labels, datasets, selectedI
         // Малюємо підкреслення
         ctx.save();
         ctx.beginPath();
-        ctx.moveTo(x - 20, xAxis.bottom + 5); // Початок лінії
-        ctx.lineTo(x + 20, xAxis.bottom + 5); // Кінець лінії
+        ctx.moveTo(x - 44, xAxis.bottom + 5); // Початок лінії
+        ctx.lineTo(x + 44, xAxis.bottom + 5); // Кінець лінії
         ctx.lineWidth = 1;
         ctx.strokeStyle = isHighlighted ? "#436B88" : "transparent"; // Підкреслення лише для вибраного
         ctx.stroke();
@@ -68,7 +68,7 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({ labels, datasets, selectedI
             return label;
           },
           font: {
-            size: 14,
+            size: 20,
           },
           color: "rgba(51, 51, 51, 1)",
           // color: (ctx) => {
@@ -83,17 +83,34 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({ labels, datasets, selectedI
       },
       y: {
         beginAtZero: true,
+        ticks: {
+          font: {
+            size: 16,
+          }
+        }
       },
     },
     plugins: {
       legend: {
         position: "bottom",
         labels: {
+          font: {
+            size: 20,
+            weight: 500,
+          },
           usePointStyle: false,
           boxWidth: 70,
           boxHeight: 30,
-          padding: 24,
+          padding: 24,          
           color: "rgba(51, 51, 51, 1)",
+          // generateLabels: (chart) => {
+          //   const originalLabels = ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
+          //   return originalLabels.map((label) => ({
+          //     ...label,
+          //     pointStyle: "rectRounded", // робимо закруглені бокси
+          //     radius: 4, // закруглення кутів (немає в доках, але працює)
+          //   }));
+          // },
         },
       },
       tooltip: {
