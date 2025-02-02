@@ -91,8 +91,9 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
   };
 
   const { t } = useTranslation();
-
-  console.log("password--", errors["password"]?.message);
+  const borderColor5 = "border-color5";
+  const borderColor2 = "border-color2";
+  const borderTextBlack = "border-textBlack";
 
   return (
     <div className={cn("relative", [className])} id={id}>
@@ -115,15 +116,15 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:outline-none",
+              "w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
               "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
               "md:h-11 md:px-6 md:py-3 md:text-[14px]",
               "xl:text-[14px]",
               "2xl:text-[16px]",
               {
-                "border-color5": !error && value,
-                "border-color2": error,
-                "border-textBlack": !value && !error,
+                ["border-color5"]: !error,
+                ["border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"]:
+                  error,
               }
             )}
             placeholder={placeholder}
