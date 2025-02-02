@@ -82,11 +82,12 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
               className={classNames(
                 "responsive-design flex w-full flex-col font-nunito",
                 "md:max-w-[444px]",
+                "xl:max-w-[444px]",
                 "2xl:max-w-[476px]",
                 "3xl:max-w-[498px]",
-                type === "resetPassword"
-                  ? "mt-20 xl:max-w-[444px] 3xl:mt-[180px]"
-                  : "xl:max-w-[499px]"
+                type === "resetPassword" &&
+                  "mt-20 xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
+                type === "logIn" && "xl:mt-[41px]"
               )}
             >
               {!isResetPasswordPage ? <AuthHeader type={type} /> : null}
@@ -96,7 +97,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                   "responsive-design relative rounded-[20px] bg-background-form shadow-form_shadow",
                   "sm:px-2 sm:py-4",
                   "md:p-8",
-                  "xl:px-14 xl:py-14",
+                  "xl:-mb-[42px] xl:px-8 xl:py-8",
                   "2xl:px-12 2xl:py-10",
                   "3xl:px-8 3xl:py-[34px]"
                 )}
@@ -113,7 +114,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                       "responsive-design flex flex-col",
                       "sm:gap-2",
                       "md:gap-4",
-                      "xl:gap-6",
+                      "xl:gap-4",
                       "2xl:gap-6",
                       "3xl:"
                     )}

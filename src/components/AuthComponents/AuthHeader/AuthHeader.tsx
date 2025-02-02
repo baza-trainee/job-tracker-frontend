@@ -41,7 +41,7 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
           "responsive-design absolute left-[50%] mt-[10px] w-full translate-x-[-50%] xl:max-w-[380px]",
         type === "forgotPassword"
           ? "mb-[50px]"
-          : "responsive-design mb-1 md:mb-2 xl:mb-8 2xl:mb-10"
+          : "responsive-design mb-1 md:mb-2 xl:mb-4 2xl:mb-10"
       )}
     >
       <h2 className="responsive-design mb-1 text-center font-nunito text-[20px] font-bold leading-[135%] text-textBlack md:mb-2 md:text-[24px] xl:text-[32px] 2xl:mb-3">
