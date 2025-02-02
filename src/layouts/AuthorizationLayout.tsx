@@ -71,7 +71,8 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
           <div
             className={classNames(
               "responsive-design container mb-[10px] flex justify-center gap-0",
-              "md:mb-[15px]",
+              "md:mt-[32px]",
+              type === "signUp" && "md:-mt-[36px]",
               "xl:mb-[42px] xl:gap-10",
               "2xl:mb-[179px] 2xl:gap-6",
               "3xl:mb-[96px] 3xl:gap-[158px]"
@@ -86,7 +87,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 "2xl:max-w-[476px]",
                 "3xl:max-w-[498px]",
                 type === "resetPassword" &&
-                  "mt-20 xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
+                  "mt-20 md:mt-[68px] xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
                 type === "logIn" && "xl:mt-[41px]"
               )}
             >
