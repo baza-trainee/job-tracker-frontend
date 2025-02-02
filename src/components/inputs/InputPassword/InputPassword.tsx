@@ -91,10 +91,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
   };
 
   const { t } = useTranslation();
-  const borderColor5 = "border-color5";
-  const borderColor2 = "border-color2";
-  const borderTextBlack = "border-textBlack";
-
+ 
   return (
     <div className={cn("relative", [className])} id={id}>
       {label && (
