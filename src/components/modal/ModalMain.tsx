@@ -29,7 +29,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
     <div className={className}>
       <div
         className={clsx(
-          "relative top-1 z-30 flex min-h-[32px] w-fit px-6 py-3 min-w-[134px] max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl",
+          "relative top-1 z-30 flex min-h-[32px] w-fit min-w-[134px] max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl px-6 py-3",
           backgroundColorModal || modalData.bgColor
         )}
       >
@@ -47,7 +47,10 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
         <div className="flex min-h-[289px] min-w-[550px] items-center justify-center">
           {modalData.content}
         </div>
-        <button onClick={btnFunc} className="rounded-md hover:bg-color2 -ml-6">
+        <button
+          onClick={btnFunc}
+          className="z-50 -ml-6 rounded-md hover:bg-color2"
+        >
           <Icon id="close-default" className="h-6 w-6 fill-textBlack" />
         </button>
       </div>
