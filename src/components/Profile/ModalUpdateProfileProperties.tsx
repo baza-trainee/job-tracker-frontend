@@ -1,24 +1,28 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../inputs/Input/Input";
 import { Button } from "../buttons/Button/Button";
-import { useCreateCoverLeterMutation } from "@/store/querySlices/coverLettersQuerySlice";
-import { useCreateProjectMutation } from "@/store/querySlices/projectQuerySlice";
-import { useCreateResumeMutation } from "@/store/querySlices/resumesQuerySlices";
+import { useUpdateCoverLetterByIdMutation } from "@/store/querySlices/coverLettersQuerySlice";
+import { useUpdateProjectByIdMutation } from "@/store/querySlices/projectQuerySlice";
+import { useUpdateResumeByIdMutation } from "@/store/querySlices/resumesQuerySlices";
 import { useEffect } from "react";
 import {
   notifyError,
   notifySuccess,
 } from "../Notifications/NotificationService";
 import {
-  useCreateSocialLinkMutation,
   useGetAllUserDataQuery,
+  useUpdateSocialLinkMutation,
 } from "@/store/querySlices/profileQuerySlice";
 import { closeModal } from "@/store/slices/modalSlice/modalSlice";
 import { addProfileData } from "@/schemas/addProfileDataSchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "@/store/hook";
-import { DataItem, PropsModalAddProperties } from "./modalAddProperties.types";
+import {
+  DataItem,
+  DataUpdateItem,
+  PropsModalAddProperties,
+} from "./modalAddProperties.types";
 // import useProfileTexts from "./textProfile/useProfileText";
 
 const data: {
@@ -52,7 +56,9 @@ const data: {
   },
 };
 
-function ModalAddProfileProperties({ cardsType }: PropsModalAddProperties) {
+export default function ModalUpdateProfileProperties({
+  cardsType,
+}: PropsModalAddProperties) {
   const {
     register,
     handleSubmit,
@@ -67,61 +73,64 @@ function ModalAddProfileProperties({ cardsType }: PropsModalAddProperties) {
   // const text = useProfileTexts({ cardsType });
 
   const [
-    createSocialLink,
+    updateSocialLink,
     {
-      isLoading: isLoadingCreateSocialLink,
-      isSuccess: isSuccessCreateSocialLink,
-      isError: isErrorCreateSocialLink,
+      isLoading: isLoadingUpdateSocialLink,
+      isSuccess: isSuccessUpdateSocialLink,
+      isError: isErrorUpdateSocialLink,
     },
-  ] = useCreateSocialLinkMutation();
+  ] = useUpdateSocialLinkMutation();
 
   const [
-    createCoverLetter,
+    updateCoverLetter,
     {
-      isLoading: isLoadingCoverLetter,
-      isSuccess: isSuccessCreateCoverLetter,
-      isError: isErrorCreateCoverLetter,
+      isLoading: isLoadingUpdateCoverLetter,
+      isSuccess: isSuccessUpdateCoverLetter,
+      isError: isErrorUpdateCoverLetter,
     },
-  ] = useCreateCoverLeterMutation();
+  ] = useUpdateCoverLetterByIdMutation();
 
   const [
-    createProject,
+    updateProject,
     {
-      isLoading: isLoadingProject,
-      isSuccess: isSuccessCreateProject,
-      isError: isErrorCreateProject,
+      isLoading: isLoadingUpdateProject,
+      isSuccess: isSuccessUpdateProject,
+      isError: isErrorUpdateProject,
     },
-  ] = useCreateProjectMutation();
+  ] = useUpdateProjectByIdMutation();
 
   const [
-    createResume,
+    updateResume,
     {
-      isLoading: isLoadingResume,
-      isSuccess: isSuccessCreateResume,
-      isError: isErrorCreateResume,
+      isLoading: isLoadingUpdateResume,
+      isSuccess: isSuccessUpdateResume,
+      isError: isErrorUpdateResume,
     },
-  ] = useCreateResumeMutation();
+  ] = useUpdateResumeByIdMutation();
 
   const onSubmit: SubmitHandler<
-    Pick<DataItem, "link" | "name" | "technology">
+    Pick<DataUpdateItem, "id" | "link" | "name" | "technology">
   > = async (data) => {
     switch (cardsType) {
       case "addPersonalProperties":
-        await createSocialLink({
+        await updateSocialLink({
           name: data.name,
           link: data.link,
+          idSocialLink: data.id as string,
         });
         break;
 
       case "addCoverLetters":
-        await createCoverLetter({
+        await updateCoverLetter({
+          id: data.id as string,
           name: data.name,
           text: data.link,
         });
         break;
 
       case "addProjects":
-        await createProject({
+        await updateProject({
+          id: data.id as string,
           name: data.name,
           githubLink: data.technology || "",
           liveProjectLink: data.link,
@@ -129,7 +138,8 @@ function ModalAddProfileProperties({ cardsType }: PropsModalAddProperties) {
         break;
 
       case "addResumes":
-        await createResume({
+        await updateResume({
+          id: data.id as string,
           name: data.name,
           link: data.link,
         });
@@ -141,44 +151,44 @@ function ModalAddProfileProperties({ cardsType }: PropsModalAddProperties) {
   };
 
   const isSubmitDisabled =
-    (cardsType === "addCoverLetters" && isLoadingCoverLetter) ||
-    (cardsType === "addProjects" && isLoadingProject) ||
-    (cardsType === "addResumes" && isLoadingResume) ||
-    (cardsType === "addPersonalProperties" && isLoadingCreateSocialLink) ||
+    (cardsType === "addCoverLetters" && isLoadingUpdateCoverLetter) ||
+    (cardsType === "addProjects" && isLoadingUpdateProject) ||
+    (cardsType === "addResumes" && isLoadingUpdateResume) ||
+    (cardsType === "addPersonalProperties" && isLoadingUpdateSocialLink) ||
     ((errors.link || errors.name || errors.technology) && true);
 
   useEffect(() => {
     if (
-      isSuccessCreateCoverLetter ||
-      isSuccessCreateProject ||
-      isSuccessCreateResume ||
-      isSuccessCreateSocialLink
+      isSuccessUpdateCoverLetter ||
+      isSuccessUpdateProject ||
+      isSuccessUpdateResume ||
+      isSuccessUpdateSocialLink
     ) {
-      notifySuccess("Дані збережено успішно");
+      notifySuccess("Дані оновлено успішно");
       refetchProfile();
       dispatch(closeModal());
     }
   }, [
-    isSuccessCreateCoverLetter,
-    isSuccessCreateProject,
-    isSuccessCreateResume,
-    isSuccessCreateSocialLink,
+    isSuccessUpdateCoverLetter,
+    isSuccessUpdateProject,
+    isSuccessUpdateResume,
+    isSuccessUpdateSocialLink,
   ]);
 
   useEffect(() => {
     if (
-      isErrorCreateCoverLetter ||
-      isErrorCreateProject ||
-      isErrorCreateResume ||
-      isErrorCreateSocialLink
+      isErrorUpdateCoverLetter ||
+      isErrorUpdateProject ||
+      isErrorUpdateResume ||
+      isErrorUpdateSocialLink
     ) {
-      notifyError("Дані не вдалося зберегти");
+      notifyError("Дані не вдалося оновити");
     }
   }, [
-    isErrorCreateCoverLetter,
-    isErrorCreateProject,
-    isErrorCreateResume,
-    isErrorCreateSocialLink,
+    isErrorUpdateCoverLetter,
+    isErrorUpdateProject,
+    isErrorUpdateResume,
+    isErrorUpdateSocialLink,
   ]);
 
   return (
@@ -226,5 +236,3 @@ function ModalAddProfileProperties({ cardsType }: PropsModalAddProperties) {
     </form>
   );
 }
-
-export default ModalAddProfileProperties;

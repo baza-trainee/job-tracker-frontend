@@ -10,3 +10,5 @@ export type DataItem = {
   link: string;
   placeholderLink: string;
 };
+
+export type DataUpdateItem = { id?: string } & DataItem;

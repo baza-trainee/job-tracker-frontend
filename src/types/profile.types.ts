@@ -16,4 +16,8 @@ export type Profile = {
   resumes: Resume[];
   username: string;
   vacancies: Vacancy[];
+  phone: string;
+  socials: { id: string; name: string; link: string }[];
 };
+
+export type ProfileKeys = keyof Profile;
