@@ -74,7 +74,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
               // "md:mt-[32px]",
               type === "signUp" && "md:-mt-[36px] xl:mt-0",
               "xl:mb-[42px] xl:gap-10",
-              "2xl:mb-[179px] 2xl:gap-6",
+              "2xl:mb-[80px] 2xl:gap-6",
               "3xl:mb-[96px] 3xl:gap-[158px]"
             )}
           >
