@@ -38,5 +38,7 @@ export type ContentMapProps = {
     nameModal?: string;
     bgColor: Color["bg"];
     borderColor: Color["border"];
+    paddingGeneral?: string;
+    customClassIcon?: string;
   };
 };

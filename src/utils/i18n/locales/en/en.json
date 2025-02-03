@@ -320,7 +320,11 @@
   },
   "soonSection": {
     "soon": "Soon",
-    "addEvent": "Add event"
+    "addEvent": "Add event",
+    "soonName": "Name",
+    "soonNotes": "Notes",
+    "setTime": "Set time",
+    "save": "Save"
   },
   "calendarTabs": {
     "day": "Day",
