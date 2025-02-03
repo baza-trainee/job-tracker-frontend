@@ -40,7 +40,7 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
         type === "resetPassword" &&
           "responsive-design absolute left-[50%] sm:mt-0 mt-[10px] w-full translate-x-[-50%] xl:max-w-[400px]",
         type === "forgotPassword"
-          ? "mb-[50px]"
+          ? "sm:mb-[24px] 2xl:mb-[40px]"
           : "responsive-design mb-1 md:mb-2 xl:mb-4 2xl:mb-10"
       )}
     >
@@ -54,9 +54,9 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
           // "2xl:max-w-[424px]",
           // "3xl:max-w-[434px]",
           type === "forgotPassword" || type === "resetPassword"
-            ? "!text-[14px] !text-textBlack"
+            ? "sm:!text-[12px]  md:!text-[14px] !text-textBlack"
             : "md:max-w-[424px]",
-          type === "forgotPassword" && "!text-left"
+          type === "forgotPassword" && "sm:!text-center 2xl:!text-left"
         )}
       >
         {authSubTitle()}
