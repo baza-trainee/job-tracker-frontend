@@ -77,10 +77,10 @@ export const contentMap: ContentMapProps = {
   },
   forgotPasswordSuccess: {
     content: (
-      <InfoModal type="forgotPasswordSuccess" textColor={colorSuccess.text} />
+      <InfoModal type="forgotPasswordSuccess" textColor={colorButton.text} />
     ),
-    bgColor: colorSuccess.bg,
-    borderColor: colorSuccess.border,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
   resetPasswordSuccess: {
     content: (
