@@ -130,7 +130,9 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         className=""
                         label={t("register.email")}
                         errors={errors}
-                        promptMessage={t("register.promptMessageEmail")}
+                        promptMessage={t(
+                          `${!isLogInPage ? "register.promptMessageEmail" : ""}`
+                        )}
                         setValue={setValue}
                       />
                     ) : null}
