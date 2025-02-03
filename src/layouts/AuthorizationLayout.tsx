@@ -71,7 +71,6 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
           <div
             className={classNames(
               "responsive-design container mb-[10px] flex justify-center gap-0",
-              // "md:mt-[32px]",
               type === "signUp" && "md:-mt-[36px] xl:mt-0",
               "xl:mb-[42px] xl:gap-10",
               "2xl:mb-[80px] 2xl:gap-6",
@@ -95,7 +94,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
               <div
                 className={classNames(
-                  "responsive-design relative rounded-[20px] bg-background-form shadow-form_shadow",
+                  "responsive-design relative rounded-[20px] bg-backgroundMain shadow-form_shadow",
                   "sm:px-2 sm:py-4",
                   "md:p-8",
                   "xl:-mb-[42px] xl:px-8 xl:py-8",
@@ -148,7 +147,9 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                           : t("register.password")
                       }
                       className={
-                        isResetPasswordPage ? "sm:pt-[75px] md:pt-[94px] xl:pt-[124px]" : ""
+                        isResetPasswordPage
+                          ? "sm:pt-[75px] md:pt-[94px] xl:pt-[124px]"
+                          : ""
                       }
                       errors={errors}
                       promptMessage={t("register.promptMessagePassword")}
