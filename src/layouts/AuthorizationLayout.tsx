@@ -54,7 +54,15 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
   return (
     <div className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary">
-      <header className="flex p-6 pb-[14px]">
+      <header
+        className={classNames(
+          "flex p-5 pb-0",
+          "md:p-6 md:pb-0",
+          "xl:pb-[10px]",
+          "2lx:pb-[14px]",
+          "3xl:p-10 3xl:pb-7"
+        )}
+      >
         <Logo />
       </header>
 
@@ -62,13 +70,11 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <section>
           <div
             className={classNames(
-              // "responsive-design mx-auto mb-4 flex max-w-[1920px] justify-between px-[160px]"
-              "responsive-design container mb-4 flex justify-center gap-0",
-              "sm:mt-[18px]",
-              "md:-mt-12",
-              "xl:mt-0 xl:gap-10",
-              "2xl:gap-6",
-              "3xl:gap-[158px]"
+              "responsive-design container mb-[10px] flex justify-center gap-0",
+              type === "signUp" && "md:-mt-[36px] xl:mt-0",
+              "xl:mb-[42px] xl:gap-10",
+              "2xl:mb-[80px] 2xl:gap-6",
+              "3xl:mb-[96px] 3xl:gap-[158px]"
             )}
           >
             <LoginCardImages />
@@ -76,21 +82,22 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
               className={classNames(
                 "responsive-design flex w-full flex-col font-nunito",
                 "md:max-w-[444px]",
+                "xl:max-w-[444px]",
                 "2xl:max-w-[476px]",
                 "3xl:max-w-[498px]",
-                type === "resetPassword"
-                  ? "mt-20 xl:max-w-[444px] 3xl:mt-[180px]"
-                  : "xl:max-w-[499px]"
+                type === "resetPassword" &&
+                  "mt-[100px] md:mt-[100px] xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
+                type === "logIn" && "sm:mt-8 xl:mt-[41px]"
               )}
             >
               {!isResetPasswordPage ? <AuthHeader type={type} /> : null}
 
               <div
                 className={classNames(
-                  "responsive-design relative rounded-[20px] bg-background-form shadow-form_shadow",
+                  "responsive-design relative rounded-[20px] bg-backgroundMain shadow-form_shadow",
                   "sm:px-2 sm:py-4",
                   "md:p-8",
-                  "xl:px-14 xl:py-14",
+                  "xl:-mb-[42px] xl:px-8 xl:py-8",
                   "2xl:px-12 2xl:py-10",
                   "3xl:px-8 3xl:py-[34px]"
                 )}
@@ -107,7 +114,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                       "responsive-design flex flex-col",
                       "sm:gap-2",
                       "md:gap-4",
-                      "xl:gap-6",
+                      "xl:gap-4",
                       "2xl:gap-6",
                       "3xl:"
                     )}
@@ -123,7 +130,9 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         className=""
                         label={t("register.email")}
                         errors={errors}
-                        promptMessage={t("register.promptMessageEmail")}
+                        promptMessage={t(
+                          `${!isLogInPage ? "register.promptMessageEmail" : ""}`
+                        )}
                         setValue={setValue}
                       />
                     ) : null}
@@ -140,7 +149,9 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                           : t("register.password")
                       }
                       className={
-                        isResetPasswordPage ? "pt-[122px] xl:pt-[164px]" : ""
+                        isResetPasswordPage
+                          ? "sm:pt-[75px] md:pt-[94px] xl:pt-[124px]"
+                          : ""
                       }
                       errors={errors}
                       promptMessage={t("register.promptMessagePassword")}
@@ -205,7 +216,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
                   <Button
                     type="submit"
-                    className="responsive-input mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
+                    className="responsive-input mx-auto mt-4 text-[14px] md:text-[20px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
                     disabled={isCleanInputsForm() || error || isLoading}
                     variant="accent"
                     size="big"

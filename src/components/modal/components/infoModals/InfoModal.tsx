@@ -12,23 +12,26 @@ const InfoModal = ({ type, textColor }: InfoModalProps) => {
   };
 
   return (
-    <div className="w-[449px] text-center text-textBlack">
+    <div className="w-[449px] text-center text-textBlack sm:w-[264px] md:w-[349px] xl:w-[443px]">
       <h4
         className={classNames(
           "mb-3 font-nunito leading-[135%]",
           modalData.title.length < 10
-            ? classNames("text-[32px] font-bold", textColor)
+            ? classNames(
+                "font-bold sm:text-[20px] md:text-[24px] xl:text-[32px]",
+                textColor
+              )
             : "text-[20px] font-medium"
         )}
       >
         {modalData.title}
       </h4>
-      <div className="mb-8 font-nunito text-[20px] font-medium leading-[135%]">
+      <div className="mb-8 font-nunito font-medium leading-[135%] sm:text-[14px] md:text-[14px] xl:text-[20px]">
         {Object.entries(modalData.text).map(([key, value]) => (
           <p key={key}>{value}</p>
         ))}
       </div>
-      <div className="mx-auto flex w-fit justify-center gap-[30px]">
+      <div className="mx-auto flex w-fit justify-center sm:gap-3 md:gap-[30px]">
         {Object.entries(modalData.button).map(([key, value]) => (
           <Button
             key={key}

@@ -4,29 +4,29 @@ import { t } from "i18next";
 export const AddVacancySchema = z.object({
   vacancy: z
     .string()
-    .max(30, t("addVacancySchema.position.max"))
     .min(2, t("addVacancySchema.position.min"))
+    .max(30, t("addVacancySchema.position.max"))
     .trim(),
   link: z
     .string()
     .url(t("addVacancySchema.link.url"))
-    .max(254, t("addVacancySchema.link.max"))
     .min(4, t("addVacancySchema.link.min"))
+    .max(254, t("addVacancySchema.link.max"))
     .trim(),
   communication: z
     .string()
-    .max(4000, t("addVacancySchema.communication.max"))
     .min(10, t("addVacancySchema.communication.min"))
+    .max(4000, t("addVacancySchema.communication.max"))
     .trim(),
   company: z
     .string()
-    .max(40, t("addVacancySchema.company.max"))
     .min(2, t("addVacancySchema.company.min"))
+    .max(40, t("addVacancySchema.company.max"))
     .trim(),
   location: z
     .string()
-    .max(400, t("addVacancySchema.location.max"))
     .min(4, t("addVacancySchema.location.min"))
+    .max(400, t("addVacancySchema.location.max"))
     .trim(),
   work_type: z.enum(["remote", "office", "hybrid"], {
     errorMap: () => ({ message: "addVacancySchema.workType.invalid" }),

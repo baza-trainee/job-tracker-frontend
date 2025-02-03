@@ -18,7 +18,7 @@ import {
 } from "../../store/querySlices/authQuerySlice";
 
 import { useAppDispatch } from "@/store/hook";
-import { closeModal } from "@/store/slices/modalSlice/modalSlice";
+import { openModal } from "@/store/slices/modalSlice/modalSlice";
 
 export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
@@ -117,7 +117,7 @@ export function useAuthForm(
   const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
     async (data) => {
       setIsLoadinfg(true);
-      console.log(type, errors)
+      console.log(type, errors);
       try {
         switch (type) {
           case "signUp":
@@ -140,7 +140,11 @@ export function useAuthForm(
             if ("email" in data) {
               return (
                 await forgotUserPassword({ email: data.email }),
-                dispatch(closeModal())
+                dispatch(
+                  openModal({
+                    typeModal: "forgotPasswordSuccess",
+                  })
+                )
               );
             }
             throw new Error("Missing email for password recovery");

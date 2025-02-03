@@ -31,9 +31,12 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
     <div className={className}>
       <div
         className={clsx(
-          "relative top-1 z-30 flex min-h-[32px] w-fit px-6 py-3 min-w-[134px] max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl",
+          "relative top-1 z-30 flex w-fit max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl px-6 py-3",
+          "sm:top-[1px] sm:min-h-[20px] sm:min-w-[100px]",
+          "md:min-h-[32px] md:min-w-[134px]",
           backgroundColorModal || modalData.bgColor
         )}
+        onClick={(e) => e.stopPropagation()}
       >
         {modalData?.nameModal && (
           <span className="text-xl">{t(modalData.nameModal)}</span>
@@ -42,15 +45,28 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
       <div
         className={clsx(
           "z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white shadow-form_shadow",
-          borderColorModal || modalData.borderColor,
+          "sm:border-[2px] sm:p-2",
+          "md:border-[4px]",
+          borderColorModal || modalData.borderColor
           modalData.paddingGeneral || "p-4"
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex min-h-[289px] min-w-[550px] items-center justify-center">
+        <div
+          className={clsx(
+            "flex items-center justify-center",
+            "sm:min-h-[217px] sm:min-w-[264px]",
+            "md:min-h-[237px] md:min-w-[449px]",
+            "xl:min-h-[292px] xl:min-w-[588px]",
+            "3xl:min-h-[320px]"
+          )}
+        >
           {modalData.content}
         </div>
-        <button onClick={btnFunc} className="rounded-md hover:bg-color2 -ml-6">
+        <button
+          onClick={btnFunc}
+          className={"z-50 -ml-6 rounded-md hover:bg-color2"}
+        >
           <Icon id="close-default" className={clsx("fill-textBlack", modalData.customClassIcon || "h-6 w-6")} />
         </button>
       </div>

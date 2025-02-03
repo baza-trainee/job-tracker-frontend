@@ -9,7 +9,7 @@ function Footer() {
       ? "https://baza-trainee.tech/uk"
       : "https://baza-trainee.tech/en";
   return (
-    <footer className="pb-6">
+    <footer className="pb-4 md:pb-6 xl:pb-[11px] 2xl:pb-6 3xl:pb-4">
       <h2
         className={classNames(
           "text-center font-nunito font-medium leading-[135%] text-textBlack",
