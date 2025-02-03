@@ -24,7 +24,6 @@ export const profileQuerySlice = createApi({
         method: "PATCH",
         body,
       }),
-      invalidatesTags: ["Profile"],
     }),
 
     createSocialLink: build.mutation<

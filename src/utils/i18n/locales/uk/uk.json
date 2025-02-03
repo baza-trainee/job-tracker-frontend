@@ -245,22 +245,22 @@
   "addCoverLetters": {
     "cardTitle": "Супровідні листи",
     "buttonAdd": "Додати лист",
-    "modalAddTitle": "Додати супровідний лист"
+    "modalAddTitle": "Супровідний лист"
   },
   "addProjects": {
     "cardTitle": "Проєкти",
-    "buttonAdd": "Додати посилання на проект",
-    "modalAddTitle": "Додати проект"
+    "buttonAdd": "Додати посилання на проєкт",
+    "modalAddTitle": "Проєкт"
   },
   "addResumes": {
     "cardTitle": "Резюме",
     "buttonAdd": "Додати резюме",
-    "modalAddTitle": "Додати резюме"
+    "modalAddTitle": "Резюме"
   },
   "addPersonalProperties": {
     "cardTitle": "Персональна інформація",
     "buttonAdd": "Додати посилання",
-    "modalAddTitle": "Додати посилання"
+    "modalAddTitle": "Посилання"
   },
   "buttonRemoveAccount": "Видалити акаунт",
   "infoModal": {

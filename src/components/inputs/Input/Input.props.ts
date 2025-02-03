@@ -1,6 +1,7 @@
 import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
 
 export interface InputProps {
+  onFocus?: () => void;
   name: string;
   placeholder: string;
   className?: string;

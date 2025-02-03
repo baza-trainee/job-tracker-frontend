@@ -15,6 +15,7 @@ export const Input = ({
   errors,
   value,
   id,
+  onFocus,
   isButtonCopy = false,
   isButtonRemoveInput = false,
   handleClickButtonRemoveInput,
@@ -33,8 +34,6 @@ export const Input = ({
   const handleResetField = (name: string) => {
     resetField(name);
   };
-
-  
 
   return (
     <div
@@ -63,6 +62,7 @@ export const Input = ({
       <div className="relative">
         <div className={cn("relative flex w-full items-center")}>
           <input
+            onFocus={onFocus}
             id={`input-${name}`}
             className={cn(
               "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:outline-none",

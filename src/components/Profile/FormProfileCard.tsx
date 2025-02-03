@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 const userData: ProfileKeys[] = ["username", "email", "phone"];
 
-const userLinks = ["telegram", "linkedin", "github", "behance"];
+const userLinks = ["Telegram", "Linkedin", "GitHub", "Behance"];
 
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
@@ -44,13 +44,28 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         break;
     }
   };
+  // const typeUpdateConfirmation = () => {
+  //   switch (cardsType) {
+  //     case "addCoverLetters":
+  //       return "updateCoverLetters";
+  //     case "addProjects":
+  //       return "updateProjects";
+  //     case "addResumes":
+  //       return "updateResumes";
+  //     case "addPersonalProperties":
+  //       return "updatePersonalProperties";
+
+  //     default:
+  //       break;
+  //   }
+  // };
 
   useEffect(() => {
     if (!profile) return;
     userData.forEach((item) => setValue(item, profile[item] ?? ""));
-    userLinks.forEach((item) =>
-      setValue(item, (profile.socials?.[0]?.[item] as string) ?? "")
-    );
+    // userLinks.forEach((item) =>
+    //   setValue(item, (profile.socials?.[0]?.[item] as string) ?? "")
+    // );
   }, [profile, setValue]);
 
   const handleClickButtonRemoveInput = (id: string) => {
@@ -58,6 +73,25 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
       openModal({
         dataConfirmation: id,
         typeModal: typeRemoveConfirmation(),
+      })
+    );
+  };
+
+  const handleUpdateInput = (data: any) => {
+    dispatch(
+      openModal({
+        dataConfirmation: data,
+        // typeModal: typeUpdateConfirmation(),
+        typeModal: cardsType,
+      })
+    );
+  };
+
+  const handleUpdateUserData = (data: any) => {
+    dispatch(
+      openModal({
+        dataConfirmation: data,
+        typeModal: "updateUserData",
       })
     );
   };
@@ -71,6 +105,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               return (
                 <li key={index}>
                   <Input
+                    onFocus={() => handleUpdateUserData(profile?.id as string)}
                     label={item}
                     name={item}
                     placeholder={item}
@@ -92,9 +127,22 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
           </ul>
           <ul className="flex flex-col gap-4">
             {userLinks.map((item, index) => {
+              const data = profile?.socials.find(
+                (i) => i.name === item.toLocaleLowerCase()
+              );
+              // console.log(data);
+
               return (
                 <li key={index}>
                   <Input
+                    onFocus={() =>
+                      handleUpdateUserData({
+                        name: item,
+                        id: data?.id,
+                        link: data?.link,
+                        typeModal: "update",
+                      })
+                    }
                     label={item}
                     name={item}
                     placeholder={item}
@@ -104,7 +152,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                     isCheckButtons={false}
                     isButtonCopy={true}
                     handleClickButtonCopyInput={() =>
-                      copyInputValue((watch(item) as string) || "")
+                      copyInputValue(data?.link || "")
                     }
                   />
                 </li>
@@ -114,6 +162,9 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               return (
                 <li key={item.id}>
                   <Input
+                    onFocus={() =>
+                      handleUpdateInput({ ...item, typeModal: "update" })
+                    }
                     label={item.name}
                     name={item.name}
                     placeholder={item.name}
@@ -140,6 +191,9 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         <>
           {profile?.projects.map((item) => (
             <Input
+              onFocus={() =>
+                handleUpdateInput({ ...item, typeModal: "update" })
+              }
               key={item.id}
               value={item.liveProjectLink}
               name={item.name}
@@ -164,6 +218,9 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         <>
           {profile?.resumes.map((item) => (
             <Input
+              onFocus={() =>
+                handleUpdateInput({ ...item, typeModal: "update" })
+              }
               key={item.id}
               value={item.link}
               name={item.name}
@@ -187,6 +244,9 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         <>
           {profile?.coverLetters.map((item) => (
             <Input
+              onFocus={() =>
+                handleUpdateInput({ ...item, typeModal: "update" })
+              }
               key={item.id}
               value={item.name}
               name={item.name}
@@ -206,7 +266,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         </>
       )}
       <Button
-        className="mx-auto h-[48px] w-[226px]"
+        className="mx-auto h-[48px] w-auto"
         type="button"
         variant="accent"
         onClick={() => dispatch(openModal({ typeModal: cardsType }))}

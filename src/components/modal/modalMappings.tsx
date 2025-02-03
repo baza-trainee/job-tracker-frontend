@@ -3,10 +3,11 @@ import ContactUs from "./components/formModals/ContacUs";
 import InfoModal from "./components/infoModals/InfoModal";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import EditVacancy from "./components/editVacancy/EditVacancy";
-import ModalAddProfileProperties from "../Profile/ModalAddProfileProperties";
 import { Color, ContentMapProps } from "./ModalMain.types";
 import ModalRemoveProperties from "../Profile/ModalRemoveProperties";
 import AddEventModal from "../Soon/AddEventModal";
+import ModalUpdateUserData from "../Profile/ModalUpdateUserData";
+import ModalMuttionProfileData from "../Profile/ModalMuttionProfileData";
 
 const colorDefault: Color = {
   text: "text-white",
@@ -129,53 +130,60 @@ export const contentMap: ContentMapProps = {
     borderColor: colorButton.border,
   },
   addPersonalProperties: {
-    content: <ModalAddProfileProperties cardsType="addPersonalProperties" />,
+    content: <ModalMuttionProfileData cardsType="addPersonalProperties" />,
     nameModal: "addPersonalProperties.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   addResumes: {
-    content: <ModalAddProfileProperties cardsType="addResumes" />,
+    content: <ModalMuttionProfileData cardsType="addResumes" />,
     nameModal: "addResumes.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   addProjects: {
-    content: <ModalAddProfileProperties cardsType="addProjects" />,
+    content: <ModalMuttionProfileData cardsType="addProjects" />,
     nameModal: "addProjects.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   addCoverLetters: {
-    content: <ModalAddProfileProperties cardsType="addCoverLetters" />,
+    content: <ModalMuttionProfileData cardsType="addCoverLetters" />,
     nameModal: "addCoverLetters.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   removePersonalProperties: {
     content: <ModalRemoveProperties cardsType="addPersonalProperties" />,
-    nameModal: "Видалити персональні властивості?",
+    nameModal: "Видалити персональні властивості",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   removeProjects: {
     content: <ModalRemoveProperties cardsType="addProjects" />,
-    nameModal: "Видалити проект?",
+    nameModal: "Видалити проект",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   removeCoverLetters: {
     content: <ModalRemoveProperties cardsType="addCoverLetters" />,
-    nameModal: "Видалити супровідний лист?",
+    nameModal: "Видалити супровідний лист",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   removeResumes: {
     content: <ModalRemoveProperties cardsType="addResumes" />,
-    nameModal: "Видалити резюме?",
+    nameModal: "Видалити резюме",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
+  updateUserData: {
+    content: <ModalUpdateUserData />,
+    nameModal: "Оновити дані er",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+
   addEvent: {
     content: <AddEventModal />,
     nameModal: "addEvent.modalTitle",
