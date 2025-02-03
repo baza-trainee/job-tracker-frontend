@@ -99,7 +99,7 @@ const InfoModalMap = () => {
   ) => ({
     label,
     type: "button",
-    className: "",
+    className: "sm:text-[14px] md:text-[16px] xl:text-[20px]",
     variant,
     size,
     funcButton,
@@ -180,7 +180,7 @@ const InfoModalMap = () => {
       ],
     },
     forgotPasswordSuccess: {
-      title: "",
+      title: t("forgotPassword.header"),
       text: [t("infoModal.forgotPasswordSuccess.text_1")],
       button: [
         createButton(

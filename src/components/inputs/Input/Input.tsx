@@ -65,15 +65,15 @@ export const Input = ({
             onFocus={onFocus}
             id={`input-${name}`}
             className={cn(
-              "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:outline-none",
+              "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
               "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
               "md:h-11 md:px-6 md:py-3 md:text-[14px]",
               "xl:text-[14px]",
               "2xl:text-[16px]",
               {
-                "border-color5": !error && value,
+                "border-color5": !error,
                 "border-color2": error,
-                "border-textBlack": !value && !error,
+                "border-textBlack": !isCheckButtons,
               }
             )}
             placeholder={placeholder}
@@ -88,7 +88,7 @@ export const Input = ({
               })
             }
           />
-          <div className="flex gap-2">
+          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] cursor-pointer gap-2">
             {isButtonCopy && (
               <button
                 type="button"
@@ -115,21 +115,12 @@ export const Input = ({
             )}
             {isCheckButtons && isIconVisible ? (
               error ? (
-                <button
-                  onClick={() => handleResetField(name)}
-                  className={
-                    "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
-                  }
-                >
+                <button onClick={() => handleResetField(name)}>
                   <Icon id="cancel-in-round" className="h-6 w-6 fill-color2" />
                 </button>
               ) : (
                 !isIcon && (
-                  <div
-                    className={
-                      "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
-                    }
-                  >
+                  <div>
                     <Icon id="check-box" className="h-6 w-6 fill-color5" />
                   </div>
                 )
@@ -137,7 +128,7 @@ export const Input = ({
             ) : null}
           </div>
         </div>
-        {error && (
+        {error ? (
           <span
             id={`inputError-${name}`}
             className={cn(
@@ -149,7 +140,7 @@ export const Input = ({
           >
             {t(String(error?.message))}
           </span>
-        )}
+        ) : null}
       </div>
     </div>
   );
