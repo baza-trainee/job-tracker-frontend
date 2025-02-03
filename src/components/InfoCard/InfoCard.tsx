@@ -15,7 +15,7 @@ const InfoCard = ({
   return (
     <div
       className={classNames(
-        "responsive-design relative flex max-w-[460px] flex-col",
+        "responsive-design relative flex max-w-[460px] flex-col ",
         "xl:max-w-[460px]",
         "2xl:max-w-[503px]",
         "3xl:max-w-[608px]",
@@ -36,10 +36,10 @@ const InfoCard = ({
       ></span>
       <div
         className={classNames(
-          "responsive-design flex items-center justify-center border-[6px] border-[solid] px-6 py-[15px]",
-          "xl:gap-1 xl:px-6 xl:py-[15px]",
-          "2xl:gap-2 2xl:p-5",
-          "3xl:gap-4 3xl:px-[69px] 3xl:py-5",
+          "responsive-design flex items-center justify-center border-[6px] border-[solid] px-6 py-[15px] bg-backgroundMain",
+          "xl:gap-1 xl:px-6 xl:py-[9px]",
+          "2xl:gap-2 2xl:p-[14px]",
+          "3xl:gap-4 3xl:px-[63px] 3xl:py-[14px]",
           color === "blue" ? "border-color1" : "border-color5",
           `${border}`
         )}
