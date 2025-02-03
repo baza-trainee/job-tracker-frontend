@@ -323,7 +323,8 @@
     "addEvent": "Add event",
     "soonName": "Name",
     "soonNotes": "Notes",
-    "setTime": "Set time"
+    "setTime": "Set time",
+    "save": "Save"
   },
   "calendarTabs": {
     "day": "Day",

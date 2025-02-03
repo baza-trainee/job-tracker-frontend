@@ -322,7 +322,8 @@
     "addEvent": "Додати подію",
     "soonName": "Назва",
     "soonNotes": "Нотатки",
-    "setTime": "Встановити час"
+    "setTime": "Встановити час",
+    "save": "Зберегти"
   },
   "calendarTabs": {
     "day": "День",
