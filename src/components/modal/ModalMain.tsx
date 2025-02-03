@@ -45,10 +45,17 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
       <div
         className={clsx(
           "z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white shadow-form_shadow",
+<<<<<<< HEAD
           "sm:border-[2px]",
           "md:border-[4px]",
           borderColorModal || modalData.borderColor,
           modalData.paddingGeneral || "sm:p-4",
+=======
+          "sm:border-[2px] sm:p-2",
+          "md:border-[4px]",
+          borderColorModal || modalData.borderColor
+          modalData.paddingGeneral || "p-4"
+>>>>>>> df249bbc8af7c9dc1139fb550adbe22f2cf6c095
         )}
         onClick={(e) => e.stopPropagation()}
       >
