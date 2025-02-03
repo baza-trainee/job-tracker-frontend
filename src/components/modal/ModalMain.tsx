@@ -11,6 +11,8 @@ type ModalDataProps = {
   nameModal?: string | undefined;
   bgColor: string;
   borderColor: string;
+  paddingGeneral?: string;
+  customClassIcon?: string;
 };
 
 type ModalMainProps = {
@@ -39,8 +41,9 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
       </div>
       <div
         className={clsx(
-          "z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow",
-          borderColorModal || modalData.borderColor
+          "z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white shadow-form_shadow",
+          borderColorModal || modalData.borderColor,
+          modalData.paddingGeneral || "p-4"
         )}
         onClick={(e) => e.stopPropagation()}
       >
@@ -48,7 +51,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           {modalData.content}
         </div>
         <button onClick={btnFunc} className="rounded-md hover:bg-color2 -ml-6">
-          <Icon id="close-default" className="h-6 w-6 fill-textBlack" />
+          <Icon id="close-default" className={clsx("fill-textBlack", modalData.customClassIcon || "h-6 w-6")} />
         </button>
       </div>
     </div>
