@@ -38,7 +38,7 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
     <div
       className={classNames(
         type === "resetPassword" &&
-          "responsive-design absolute left-[50%] mt-[10px] w-full translate-x-[-50%] xl:max-w-[380px]",
+          "responsive-design absolute left-[50%] sm:mt-0 mt-[10px] w-full translate-x-[-50%] xl:max-w-[380px]",
         type === "forgotPassword"
           ? "mb-[50px]"
           : "responsive-design mb-1 md:mb-2 xl:mb-4 2xl:mb-10"

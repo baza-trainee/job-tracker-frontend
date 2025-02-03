@@ -71,7 +71,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
           <div
             className={classNames(
               "responsive-design container mb-[10px] flex justify-center gap-0",
-              "md:mt-[32px]",
+              // "md:mt-[32px]",
               type === "signUp" && "md:-mt-[36px]",
               "xl:mb-[42px] xl:gap-10",
               "2xl:mb-[179px] 2xl:gap-6",
@@ -87,7 +87,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 "2xl:max-w-[476px]",
                 "3xl:max-w-[498px]",
                 type === "resetPassword" &&
-                  "mt-20 md:mt-[68px] xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
+                  "mt-[100px] md:mt-[100px] xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
                 type === "logIn" && "sm:mt-8 xl:mt-[41px]"
               )}
             >
@@ -148,7 +148,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                           : t("register.password")
                       }
                       className={
-                        isResetPasswordPage ? "pt-[122px] xl:pt-[164px]" : ""
+                        isResetPasswordPage ? "sm:pt-[75px] md:pt-[94px] xl:pt-[164px]" : ""
                       }
                       errors={errors}
                       promptMessage={t("register.promptMessagePassword")}
@@ -213,7 +213,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
                   <Button
                     type="submit"
-                    className="responsive-input mx-auto mt-4 text-[14px] md:text-[16px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
+                    className="responsive-input mx-auto mt-4 text-[14px] md:text-[20px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
                     disabled={isCleanInputsForm() || error || isLoading}
                     variant="accent"
                     size="big"
