@@ -43,6 +43,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
       <div
         className={clsx(
           "z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow",
+          // alex p-2 ---> md:p-5
           "sm:border-[2px] sm:p-2",
           "md:border-[4px]",
           borderColorModal || modalData.borderColor

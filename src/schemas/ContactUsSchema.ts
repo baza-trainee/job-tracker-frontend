@@ -7,20 +7,20 @@ import { textContactUsRegex } from "./regSchema";
 export const ContactUsSchema = z.object({
   name: z
     .string()
-    .max(30, `Максимальна довжина 30`)
-    .regex(nameRegex, `Введіть коректне ім'я`)
     .min(2, `Мінімальна довжина 2`)
+    .regex(nameRegex, `Введіть коректне ім'я`)
+    .max(30, `Максимальна довжина 30`)
     .trim(),
   email: z
     .string()
-    .max(254, `validation.emailMax`)
-    .regex(emailRegex, `validation.emailInvalid`)
     .min(4, `validation.emailMin`)
+    .regex(emailRegex, `validation.emailInvalid`)
+    .max(254, `validation.emailMax`)
     .trim(),
   requestText: z
     .string()
-    .max(4000, `validation.emailMax`)
-    .regex(textContactUsRegex, `Введіть коректний текст`)
     .min(10, `validation.emailMin`)
+    .regex(textContactUsRegex, `Введіть коректний текст`)
+    .max(4000, `validation.emailMax`)
     .trim(),
 });
