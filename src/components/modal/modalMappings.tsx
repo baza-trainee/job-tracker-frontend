@@ -178,8 +178,10 @@ export const contentMap: ContentMapProps = {
   },
   addEvent: {
     content: <AddEventModal />,
-    nameModal: "addEvent.modalTitle",
+    nameModal: "soonSection.addEvent",
     bgColor: "bg-button",
     borderColor: "border-button",
+    paddingGeneral: "pt-6 pr-10 pb-10 pl-10",
+    customClassIcon: "h-8 w-8",
   },
 };

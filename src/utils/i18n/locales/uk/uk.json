@@ -319,7 +319,11 @@
   },
   "soonSection": {
     "soon": "Незабаром",
-    "addEvent": "Додати подію"
+    "addEvent": "Додати подію",
+    "soonName": "Назва",
+    "soonNotes": "Нотатки",
+    "setTime": "Встановити час",
+    "save": "Зберегти"
   },
   "calendarTabs": {
     "day": "День",

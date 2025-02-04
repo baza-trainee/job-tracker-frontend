@@ -1,4 +1,4 @@
-import { Input } from "../../../inputs/Input/Input";
+import { Input } from "@/components/inputs/Input/Input";
 import { Button } from "../../../buttons/Button/Button";
 import { Textarea } from "../../../Textarea/Textarea";
 import { t } from "i18next";

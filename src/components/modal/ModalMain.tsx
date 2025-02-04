@@ -11,6 +11,8 @@ type ModalDataProps = {
   nameModal?: string | undefined;
   bgColor: string;
   borderColor: string;
+  paddingGeneral?: string;
+  customClassIcon?: string;
 };
 
 type ModalMainProps = {
@@ -46,7 +48,8 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           // alex p-2 ---> md:p-5
           "sm:border-[2px] sm:p-2",
           "md:border-[4px]",
-          borderColorModal || modalData.borderColor
+          borderColorModal || modalData.borderColor,
+          modalData.paddingGeneral || "sm:p-4",
         )}
         onClick={(e) => e.stopPropagation()}
       >
@@ -65,7 +68,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           onClick={btnFunc}
           className={"z-50 -ml-6 rounded-md hover:bg-color2"}
         >
-          <Icon id="close-default" className="h-6 w-6 fill-textBlack" />
+          <Icon id="close-default" className={clsx("fill-textBlack", modalData.customClassIcon || "h-6 w-6")} />
         </button>
       </div>
     </div>
