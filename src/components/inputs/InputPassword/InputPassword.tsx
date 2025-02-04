@@ -114,8 +114,8 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             id={`input-${name}`}
             className={cn(
               "w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
-              "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
-              "md:h-11 md:px-6 md:py-3 md:text-[14px]",
+              "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-9 sm:text-[12px]",
+              "md:h-11 md:px-6 md:py-3 md:pr-9 md:text-[14px]",
               "xl:text-[14px]",
               "2xl:text-[16px]",
               {

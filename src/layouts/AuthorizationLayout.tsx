@@ -81,10 +81,11 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
             <div
               className={classNames(
                 "responsive-design flex w-full flex-col font-nunito",
-                "md:max-w-[444px]",
-                "xl:max-w-[444px]",
-                "2xl:max-w-[476px]",
-                "3xl:max-w-[498px]",
+                // alex comment
+                // "md:max-w-[444px]",
+                // "xl:max-w-[444px]",
+                // "2xl:max-w-[476px]",
+                // "3xl:max-w-[498px]",
                 type === "resetPassword" &&
                   "mt-[100px] md:mt-[100px] xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
                 type === "logIn" && "sm:mt-8 xl:mt-[41px]"

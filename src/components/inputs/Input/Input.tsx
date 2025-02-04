@@ -34,6 +34,8 @@ export const Input = ({
     resetField(name);
   };
 
+  const { onBlur } = register(name);
+
   return (
     <div
       className={cn("relative", className)}
@@ -64,7 +66,7 @@ export const Input = ({
             id={`input-${name}`}
             className={cn(
               "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
-              "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
+              "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
               "md:h-11 md:px-6 md:py-3 md:text-[14px]",
               "xl:text-[14px]",
               "2xl:text-[16px]",
@@ -80,13 +82,14 @@ export const Input = ({
             {...register(name)}
             aria-describedby={`inputError-${name}`}
             title={promptMessage}
-            onBlur={(event) =>
+            onBlur={(event) => {
               setValue?.(name, event.target.value.trim(), {
                 shouldValidate: true,
-              })
-            }
+              });
+              onBlur(event);
+            }}
           />
-          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] cursor-pointer gap-2">
+          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] cursor-pointer gap-2 pl-1 bg-backgroundMain">
             {isButtonCopy && (
               <button
                 type="button"
