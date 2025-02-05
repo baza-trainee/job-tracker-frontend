@@ -7,7 +7,7 @@ export interface InputProps {
   label?: string;
   register: UseFormRegister<any>;
   errors: FieldErrors;
-  type?: React.HTMLInputTypeAttribute;
+  type?: React.HTMLInputTypeAttribute | "textarea";
   value?: string;
   id?: string;
   resetField(name: string): void;
@@ -19,4 +19,5 @@ export interface InputProps {
   isRequired?: boolean;
   promptMessage?: string;
   setValue?: UseFormSetValue<any>;
+  rows?: number;
 }

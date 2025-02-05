@@ -181,7 +181,7 @@ export const contentMap: ContentMapProps = {
     nameModal: "soonSection.addEvent",
     bgColor: "bg-button",
     borderColor: "border-button",
-    paddingGeneral: "pt-6 pr-10 pb-10 pl-10",
-    customClassIcon: "h-8 w-8",
+    paddingAddEventModal: "pt-6 pr-10 pb-10 pl-10",
+    iconAddEventModal: "h-8 w-8",
   },
 };
