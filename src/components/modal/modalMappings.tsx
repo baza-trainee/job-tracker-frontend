@@ -179,7 +179,7 @@ export const contentMap: ContentMapProps = {
   },
   updateUserData: {
     content: <ModalUpdateUserData />,
-    nameModal: "Оновити дані er",
+    nameModal: "Оновити дані",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },

@@ -7,23 +7,25 @@ import {
   notifySuccess,
 } from "../Notifications/NotificationService";
 import {
-  useCreateSocialLinkMutation,
   useGetAllUserDataQuery,
-  useUpdateSocialLinkMutation,
+  useUpdateUserProfileMutation,
 } from "@/store/querySlices/profileQuerySlice";
 import { closeModal } from "@/store/slices/modalSlice/modalSlice";
 
 import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { Profile } from "@/types/profile.types";
 
 export default function ModalUpdateUserData() {
-  const updateItem = useAppSelector((state) => state.modal.dataConfirmation);
+  const updateItem: { name: keyof Profile; value: string } = useAppSelector(
+    (state) => state.modal.dataConfirmation
+  );
   const {
     register,
     handleSubmit,
     resetField,
     formState: { errors },
     setValue,
-  } = useForm<{ link: string }>({
+  } = useForm<Profile>({
     // resolver: zodResolver('kkk'),
     mode: "all",
   });
@@ -31,56 +33,36 @@ export default function ModalUpdateUserData() {
   const { refetch: refetchProfile } = useGetAllUserDataQuery();
 
   useEffect(() => {
-    setValue("link", updateItem.link);
+    setValue(updateItem.name, updateItem.value);
   }, [updateItem]);
   console.log(updateItem);
 
   const [
-    updateSocialLink,
+    updateProfile,
     {
       isLoading: isLodingUpdate,
       isSuccess: isSuccessUpdate,
       isError: isErrorUpdate,
     },
-  ] = useUpdateSocialLinkMutation();
+  ] = useUpdateUserProfileMutation();
 
-  const [
-    createSocialLink,
-    {
-      isLoading: isLoadingCreate,
-      isSuccess: isSuccessCreate,
-      isError: isErrorCreate,
-    },
-  ] = useCreateSocialLinkMutation();
-
-  const onSubmit: SubmitHandler<{ link: string }> = async (data) => {
-    if (updateItem.id) {
-      await updateSocialLink({
-        idSocialLink: updateItem.id,
-        name: (updateItem.name as string).toLocaleLowerCase(),
-        link: data.link,
-      });
-    } else {
-      await createSocialLink({
-        name: (updateItem.name as string).toLocaleLowerCase(),
-        link: data.link,
-      });
-    }
+  const onSubmit: SubmitHandler<Profile> = async (data) => {
+    await updateProfile({ [updateItem.name]: data[updateItem.name] });
   };
 
   useEffect(() => {
-    if (isSuccessCreate || isSuccessUpdate) {
-      notifySuccess("Дані оновлено успішно");
-      refetchProfile();
-      dispatch(closeModal());
-    }
-  }, [isSuccessCreate, isSuccessUpdate]);
+    if (!isSuccessUpdate) return;
+
+    notifySuccess("Дані оновлено успішно");
+    refetchProfile();
+    dispatch(closeModal());
+  }, [isSuccessUpdate]);
 
   useEffect(() => {
-    if (isErrorCreate || isErrorUpdate) {
+    if (isErrorUpdate) {
       notifyError("Дані не вдалося оновити");
     }
-  }, [isErrorCreate, isErrorUpdate]);
+  }, [isErrorUpdate]);
 
   return (
     <form
@@ -88,8 +70,9 @@ export default function ModalUpdateUserData() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
+        autoFocus
         label={updateItem.name}
-        name="link"
+        name={updateItem.name}
         placeholder={updateItem.name}
         register={register}
         errors={errors}
@@ -104,7 +87,13 @@ export default function ModalUpdateUserData() {
         <Button
           type="submit"
           variant="accent"
-          disabled={isLoadingCreate || isLodingUpdate}
+          disabled={
+            isLodingUpdate ||
+            updateItem.name === "telegram" ||
+            updateItem.name === "behance" ||
+            updateItem.name === "linkedin" ||
+            updateItem.name === "github"
+          }
         >
           Зберегти
         </Button>

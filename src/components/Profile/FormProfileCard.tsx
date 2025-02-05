@@ -11,12 +11,16 @@ import useProfileTexts from "./textProfile/useProfileText";
 import { Profile, ProfileKeys } from "@/types/profile.types";
 import { useEffect } from "react";
 
-const userData: ProfileKeys[] = ["username", "email", "phone"];
+const userData: ProfileKeys[] = [
+  "username",
+  "email",
+  "phone",
+  "telegram",
+  "linkedin",
+  "behance",
+  "github",
+];
 
-const userLinks = ["Telegram", "Linkedin", "GitHub", "Behance"];
-// function capitalizeFirstLetter(val: string) {
-//   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
-// }
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
   const text = useProfileTexts({ cardsType });
@@ -27,7 +31,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     setValue,
     formState: { errors },
   } = useForm<Partial<Profile>>();
-  console.log(profile);
+  // console.log(profile);
 
   const dispatch = useAppDispatch();
 
@@ -50,12 +54,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   useEffect(() => {
     if (!profile) return;
     userData.forEach((item) => setValue(item, profile[item] ?? ""));
-    // userLinks.forEach((item) =>
-    //   setValue(
-    //     item.toLowerCase(),
-    //     (profile.socials?.[0]?.[item.toLowerCase()] as string) ?? ""
-    //   )
-    // );
   }, [profile, setValue]);
 
   const handleClickButtonRemoveInput = (id: string) => {
@@ -90,11 +88,16 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
       {cardsType === "addPersonalProperties" && (
         <>
           <ul className="flex flex-col gap-4">
-            {userData.map((item, index, array) => {
+            {userData.map((item, index) => {
               return (
                 <li key={index}>
                   <Input
-                    onFocus={() => handleUpdateUserData(profile?.id as string)}
+                    onFocus={() =>
+                      handleUpdateUserData({
+                        name: item,
+                        value: watch(item) || "",
+                      })
+                    }
                     label={item}
                     name={item}
                     placeholder={item}
@@ -107,7 +110,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                       copyInputValue(watch(item) as string)
                     }
                   />
-                  {index === array.length - 1 && (
+                  {index === 2 && (
                     <div className="mt-4 h-px w-full bg-backgroundSecondary" />
                   )}
                 </li>
@@ -115,38 +118,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
             })}
           </ul>
           <ul className="flex flex-col gap-4">
-            {userLinks.map((item, index) => {
-              const data = profile?.socials.find(
-                (i) => i.name === item.toLocaleLowerCase()
-              );
-              console.log(data);
-
-              return (
-                <li key={index}>
-                  <Input
-                    onFocus={() =>
-                      handleUpdateUserData({
-                        name: item.toLowerCase(),
-                        id: data?.id,
-                        link: data?.link,
-                        typeModal: "update",
-                      })
-                    }
-                    label={item}
-                    name={item.toLowerCase()}
-                    placeholder={item}
-                    register={register}
-                    errors={errors}
-                    resetField={resetField}
-                    isCheckButtons={false}
-                    isButtonCopy={true}
-                    handleClickButtonCopyInput={() =>
-                      copyInputValue(data?.link || "")
-                    }
-                  />
-                </li>
-              );
-            })}
             {profile?.socials.map((item) => {
               // if()
               return (

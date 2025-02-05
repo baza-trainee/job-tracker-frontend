@@ -15,6 +15,7 @@ export const Input = ({
   errors,
   value,
   id,
+  autoFocus = false,
   onFocus,
   isButtonCopy = false,
   isButtonRemoveInput = false,
@@ -50,9 +51,10 @@ export const Input = ({
     >
       {label && (
         <label
+          autoFocus={autoFocus}
           htmlFor={`input-${name}`}
           className={cn(
-            "responsive-design mb-3 block font-nunito font-medium leading-[135%] text-textBlack",
+            "mb-3 block font-nunito font-medium leading-[135%] text-textBlack",
             "sm:mb-[2px] sm:text-[14px]",
             "md:mb-2 md:text-[18px]",
             "xl:mb-2 xl:text-[16px]",

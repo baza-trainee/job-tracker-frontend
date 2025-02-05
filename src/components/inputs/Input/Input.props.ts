@@ -21,4 +21,5 @@ export interface InputProps {
   promptMessage?: string;
   setValue?: UseFormSetValue<any>;
   rows?: number;
+  autoFocus?: boolean;
 }

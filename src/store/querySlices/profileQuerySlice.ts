@@ -17,7 +17,18 @@ export const profileQuerySlice = createApi({
 
     updateUserProfile: build.mutation<
       Profile,
-      Partial<Pick<Profile, "email" | "phone" | "username">>
+      Partial<
+        Pick<
+          Profile,
+          | "email"
+          | "phone"
+          | "username"
+          | "telegram"
+          | "behance"
+          | "github"
+          | "linkedin"
+        >
+      >
     >({
       query: (body) => ({
         url: "/user/update",
