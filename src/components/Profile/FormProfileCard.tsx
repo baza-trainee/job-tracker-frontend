@@ -14,7 +14,9 @@ import { useEffect } from "react";
 const userData: ProfileKeys[] = ["username", "email", "phone"];
 
 const userLinks = ["Telegram", "Linkedin", "GitHub", "Behance"];
-
+// function capitalizeFirstLetter(val: string) {
+//   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+// }
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
   const text = useProfileTexts({ cardsType });
@@ -25,7 +27,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     setValue,
     formState: { errors },
   } = useForm<Partial<Profile>>();
-  // console.log(profile);
+  console.log(profile);
 
   const dispatch = useAppDispatch();
 
@@ -44,27 +46,15 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         break;
     }
   };
-  // const typeUpdateConfirmation = () => {
-  //   switch (cardsType) {
-  //     case "addCoverLetters":
-  //       return "updateCoverLetters";
-  //     case "addProjects":
-  //       return "updateProjects";
-  //     case "addResumes":
-  //       return "updateResumes";
-  //     case "addPersonalProperties":
-  //       return "updatePersonalProperties";
-
-  //     default:
-  //       break;
-  //   }
-  // };
 
   useEffect(() => {
     if (!profile) return;
     userData.forEach((item) => setValue(item, profile[item] ?? ""));
     // userLinks.forEach((item) =>
-    //   setValue(item, (profile.socials?.[0]?.[item] as string) ?? "")
+    //   setValue(
+    //     item.toLowerCase(),
+    //     (profile.socials?.[0]?.[item.toLowerCase()] as string) ?? ""
+    //   )
     // );
   }, [profile, setValue]);
 
@@ -81,7 +71,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     dispatch(
       openModal({
         dataConfirmation: data,
-        // typeModal: typeUpdateConfirmation(),
         typeModal: cardsType,
       })
     );
@@ -130,21 +119,21 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               const data = profile?.socials.find(
                 (i) => i.name === item.toLocaleLowerCase()
               );
-              // console.log(data);
+              console.log(data);
 
               return (
                 <li key={index}>
                   <Input
                     onFocus={() =>
                       handleUpdateUserData({
-                        name: item,
+                        name: item.toLowerCase(),
                         id: data?.id,
                         link: data?.link,
                         typeModal: "update",
                       })
                     }
                     label={item}
-                    name={item}
+                    name={item.toLowerCase()}
                     placeholder={item}
                     register={register}
                     errors={errors}
@@ -159,6 +148,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               );
             })}
             {profile?.socials.map((item) => {
+              // if()
               return (
                 <li key={item.id}>
                   <Input
