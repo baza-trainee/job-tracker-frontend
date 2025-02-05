@@ -24,6 +24,7 @@ export const Input = ({
   isRequired,
   promptMessage = "",
   setValue,
+  rows,
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -34,6 +35,8 @@ export const Input = ({
   const handleResetField = (name: string) => {
     resetField(name);
   };
+
+  const { onBlur } = register(name);
 
   return (
     <div
@@ -61,34 +64,53 @@ export const Input = ({
       )}
       <div className="relative">
         <div className={cn("relative flex w-full items-center")}>
-          <input
-            onFocus={onFocus}
-            id={`input-${name}`}
-            className={cn(
-              "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
-              "sm:h-[34px] sm:px-4 sm:py-2 sm:pr-16 sm:text-[12px]",
-              "md:h-11 md:px-6 md:py-3 md:text-[14px]",
-              "xl:text-[14px]",
-              "2xl:text-[16px]",
-              {
-                "border-color5": !error,
-                "border-color2": error,
-                "border-textBlack": !isCheckButtons,
-              }
-            )}
-            placeholder={placeholder}
-            type={type}
-            {...(value && { value })}
-            {...register(name)}
-            aria-describedby={`inputError-${name}`}
-            title={promptMessage}
-            onBlur={(event) =>
-              setValue?.(name, event.target.value.trim(), {
-                shouldValidate: true,
-              })
-            }
-          />
-          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] cursor-pointer gap-2">
+          {type === "textarea" ? (
+            <textarea
+              id={`input-${name}`}
+              className="w-full rounded-xl border p-3 text-base"
+              placeholder={placeholder}
+              rows={rows || 4}
+              {...register(name)}
+              {...(value && { value })}
+              onBlur={(event) => {
+                setValue?.(name, event.target.value.trim(), {
+                  shouldValidate: true,
+                });
+                onBlur(event);
+              }}
+            />
+          ) : (
+            <input
+              onFocus={onFocus}
+              id={`input-${name}`}
+              className={cn(
+                "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
+                "md:h-11 md:px-6 md:py-3 md:text-[14px]",
+                "xl:text-[14px]",
+                "2xl:text-[16px]",
+                {
+                  "border-color5": !error,
+                  "border-color2": error,
+                  "border-textBlack": !isCheckButtons,
+                }
+              )}
+              placeholder={placeholder}
+              type={type}
+              {...(value && { value })}
+              {...register(name)}
+              aria-describedby={`inputError-${name}`}
+              title={promptMessage}
+              onBlur={(event) => {
+                setValue?.(name, event.target.value.trim(), {
+                  shouldValidate: true,
+                });
+                onBlur(event);
+              }}
+            />
+          )}
+
+          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] cursor-pointer gap-2 bg-backgroundMain pl-1">
             {isButtonCopy && (
               <button
                 type="button"

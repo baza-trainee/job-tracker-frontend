@@ -25,7 +25,7 @@ export const Soon = () => {
 
     return (
         <div className="w-[532px] flex flex-col p-4 text-textBlack">
-            <h3 className="w-full font-nunito px-6 text-textBlack text-[28px] font-medium mb-6">
+            <h3 className="w-full font-nunito px-6 text-textBlack text-[28px] leading-[36px] font-medium mb-6">
                 {t("soonSection.soon")}
             </h3>
 
