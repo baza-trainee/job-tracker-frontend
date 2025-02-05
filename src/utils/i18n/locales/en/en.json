@@ -244,26 +244,26 @@
     ]
   },
   "addCoverLetters": {
-    "cardTitle": "Cover Letters",
-    "buttonAdd": "Add Letter",
-    "modalAddTitle": "Add a new cover letter"
+    "cardTitle": "Cover letters",
+    "buttonAdd": "Add cover letter",
+    "modalAddTitle": "Cover letter"
   },
   "addProjects": {
     "cardTitle": "Projects",
-    "buttonAdd": "Add Project Link",
-    "modalAddTitle": "Add a new project link"
+    "buttonAdd": "Add project link",
+    "modalAddTitle": "Project link"
   },
   "addResumes": {
     "cardTitle": "Resumes",
-    "buttonAdd": "Add Resume",
-    "modalAddTitle": "Add a new resume"
+    "buttonAdd": "Add resume",
+    "modalAddTitle": "Resume"
   },
   "addPersonalProperties": {
-    "cardTitle": "Personal Information",
-    "buttonAdd": "Add Link",
-    "modalAddTitle": "Add a new link"
+    "cardTitle": "Personal information",
+    "buttonAdd": "Add link",
+    "modalAddTitle": "Link"
   },
-  "buttonRemoveAccount": "Remove Account",
+  "buttonRemoveAccount": "Remove account",
   "infoModal": {
     "success": "Success!",
     "oops": "Oops!",

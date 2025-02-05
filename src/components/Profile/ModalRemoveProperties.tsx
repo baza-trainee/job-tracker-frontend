@@ -10,7 +10,10 @@ import {
   notifyError,
   notifySuccess,
 } from "../Notifications/NotificationService";
-import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
+import {
+  useDeleteSocialLinkMutation,
+  useGetAllUserDataQuery,
+} from "@/store/querySlices/profileQuerySlice";
 
 function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
   const idRemoveItem = useAppSelector((state) => state.modal.dataConfirmation);
@@ -18,6 +21,15 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
   const dispatch = useAppDispatch();
 
   const { refetch: refetchProfile } = useGetAllUserDataQuery();
+
+  const [
+    removeSociallLink,
+    {
+      isError: isErrorRemoveSocialLink,
+      isSuccess: isSuccessRemoveSocialLink,
+      isLoading: isLoadingRemoveSocialLink,
+    },
+  ] = useDeleteSocialLinkMutation();
 
   const [
     removeCoverLetter,
@@ -50,17 +62,24 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
     if (
       isErrorRemoveCoverLetter ||
       isErrorRemoveProject ||
-      isErrorRemoveResume
+      isErrorRemoveResume ||
+      isErrorRemoveSocialLink
     ) {
       notifyError("Помилка видалення даних");
     }
-  }, [isErrorRemoveCoverLetter, isErrorRemoveProject, isErrorRemoveResume]);
+  }, [
+    isErrorRemoveCoverLetter,
+    isErrorRemoveProject,
+    isErrorRemoveSocialLink,
+    isErrorRemoveResume,
+  ]);
 
   useEffect(() => {
     if (
       isSuccessRemoveCoverLetter ||
       isSuccessRemoveProject ||
-      isSuccessRemoveResume
+      isSuccessRemoveResume ||
+      isSuccessRemoveSocialLink
     ) {
       notifySuccess("Дані видалено успішно");
       refetchProfile();
@@ -70,6 +89,7 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
     isSuccessRemoveCoverLetter,
     isSuccessRemoveProject,
     isSuccessRemoveResume,
+    isSuccessRemoveSocialLink,
   ]);
 
   const handleRemove = async () => {
@@ -79,7 +99,7 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
         break;
 
       case "addPersonalProperties":
-        console.log("remove personal properties", idRemoveItem);
+        await removeSociallLink({ idSocialLink: idRemoveItem });
         break;
 
       case "addProjects":
@@ -98,7 +118,8 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
   const isDisabledButtonRemove =
     isLoadingRemoveCoverLetter ||
     isLoadingRemoveProject ||
-    isLoadingRemoveResume;
+    isLoadingRemoveResume ||
+    isLoadingRemoveSocialLink;
 
   return (
     <div className="flex flex-col items-center justify-center gap-10">

@@ -16,4 +16,12 @@ export type Profile = {
   resumes: Resume[];
   username: string;
   vacancies: Vacancy[];
+  telegram: string;
+  github: string;
+  linkedin: string;
+  behance: string;
+  phone: string;
+  socials: { id: string; name: string; link: string }[];
 };
+
+export type ProfileKeys = keyof Profile;

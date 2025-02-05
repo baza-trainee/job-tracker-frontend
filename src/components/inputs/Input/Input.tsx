@@ -15,6 +15,8 @@ export const Input = ({
   errors,
   value,
   id,
+  autoFocus = false,
+  onFocus,
   isButtonCopy = false,
   isButtonRemoveInput = false,
   handleClickButtonRemoveInput,
@@ -49,9 +51,10 @@ export const Input = ({
     >
       {label && (
         <label
+          autoFocus={autoFocus}
           htmlFor={`input-${name}`}
           className={cn(
-            "responsive-design mb-3 block font-nunito font-medium leading-[135%] text-textBlack",
+            "mb-3 block font-nunito font-medium leading-[135%] text-textBlack",
             "sm:mb-[2px] sm:text-[14px]",
             "md:mb-2 md:text-[18px]",
             "xl:mb-2 xl:text-[16px]",
@@ -66,18 +69,21 @@ export const Input = ({
           {type === "textarea" ? (
             <textarea
               id={`input-${name}`}
-              className="w-full border rounded-xl p-3 text-base"
+              className="w-full rounded-xl border p-3 text-base"
               placeholder={placeholder}
               rows={rows || 4}
               {...register(name)}
               {...(value && { value })}
               onBlur={(event) => {
-                setValue?.(name, event.target.value.trim(), { shouldValidate: true });
+                setValue?.(name, event.target.value.trim(), {
+                  shouldValidate: true,
+                });
                 onBlur(event);
               }}
             />
           ) : (
             <input
+              onFocus={onFocus}
               id={`input-${name}`}
               className={cn(
                 "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
@@ -105,34 +111,8 @@ export const Input = ({
               }}
             />
           )}
-          {/* <input
-            id={`input-${name}`}
-            className={cn(
-              "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
-              "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
-              "md:h-11 md:px-6 md:py-3 md:text-[14px]",
-              "xl:text-[14px]",
-              "2xl:text-[16px]",
-              {
-                "border-color5": !error,
-                "border-color2": error,
-                "border-textBlack": !isCheckButtons,
-              }
-            )}
-            placeholder={placeholder}
-            type={type}
-            {...(value && { value })}
-            {...register(name)}
-            aria-describedby={`inputError-${name}`}
-            title={promptMessage}
-            onBlur={(event) => {
-              setValue?.(name, event.target.value.trim(), {
-                shouldValidate: true,
-              });
-              onBlur(event);
-            }}
-          /> */}
-          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] cursor-pointer gap-2 pl-1 bg-backgroundMain">
+
+          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] cursor-pointer gap-2 bg-backgroundMain pl-1">
             {isButtonCopy && (
               <button
                 type="button"
