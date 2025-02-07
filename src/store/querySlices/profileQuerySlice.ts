@@ -17,24 +17,14 @@ export const profileQuerySlice = createApi({
 
     updateUserProfile: build.mutation<
       Profile,
-      Partial<
-        Pick<
-          Profile,
-          | "email"
-          | "phone"
-          | "username"
-          | "telegram"
-          | "behance"
-          | "github"
-          | "linkedin"
-        >
-      >
+      Partial<Pick<Profile, "email" | "phone" | "username">>
     >({
       query: (body) => ({
         url: "/user/update",
         method: "PATCH",
         body,
       }),
+      invalidatesTags: ["Profile"],
     }),
 
     createSocialLink: build.mutation<
@@ -46,6 +36,7 @@ export const profileQuerySlice = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Profile"],
     }),
 
     updateSocialLink: build.mutation<
@@ -57,6 +48,7 @@ export const profileQuerySlice = createApi({
         method: "PATCH",
         body,
       }),
+      invalidatesTags: ["Profile"],
     }),
 
     deleteSocialLink: build.mutation<void, { idSocialLink: string }>({
@@ -64,6 +56,7 @@ export const profileQuerySlice = createApi({
         url: `/user/socials/${idSocialLink}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Profile"],
     }),
   }),
 });

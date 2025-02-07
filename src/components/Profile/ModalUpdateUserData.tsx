@@ -35,7 +35,6 @@ export default function ModalUpdateUserData() {
   useEffect(() => {
     setValue(updateItem.name, updateItem.value);
   }, [updateItem]);
-  console.log(updateItem);
 
   const [
     updateProfile,

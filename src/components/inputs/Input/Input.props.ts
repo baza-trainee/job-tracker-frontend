@@ -22,4 +22,7 @@ export interface InputProps {
   setValue?: UseFormSetValue<any>;
   rows?: number;
   autoFocus?: boolean;
+  onBlur?: (
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }

@@ -1,6 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "@/store/hook";
-import { useGetAllUserDataQuery } from "../../store/querySlices/profileQuerySlice";
+import {
+  useGetAllUserDataQuery,
+  useUpdateSocialLinkMutation,
+  useUpdateUserProfileMutation,
+} from "../../store/querySlices/profileQuerySlice";
 import { copyInputValue } from "../../utils/copyInputValue";
 
 import { PropsProfileCard } from "./profileCardProps.props";
@@ -9,17 +13,13 @@ import { Button } from "../buttons/Button/Button";
 import { openModal } from "@/store/slices/modalSlice/modalSlice";
 import useProfileTexts from "./textProfile/useProfileText";
 import { Profile, ProfileKeys } from "@/types/profile.types";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import {
+  notifyError,
+  notifySuccess,
+} from "../Notifications/NotificationService";
 
-const userData: ProfileKeys[] = [
-  "username",
-  "email",
-  "phone",
-  "telegram",
-  "linkedin",
-  "behance",
-  "github",
-];
+const userData: ProfileKeys[] = ["username", "email", "phone"];
 
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
@@ -31,9 +31,15 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     setValue,
     formState: { errors },
   } = useForm<Partial<Profile>>();
-  // console.log(profile);
+
+  const [updateSocialLink, { isSuccess: isSuccessSocial }] =
+    useUpdateSocialLinkMutation();
+
+  const [updateUserProfile, { isSuccess: isSuccessProfile }] =
+    useUpdateUserProfileMutation();
 
   const dispatch = useAppDispatch();
+  const initialValues = useRef<Record<string, string>>({});
 
   const typeRemoveConfirmation = () => {
     switch (cardsType) {
@@ -53,8 +59,23 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
 
   useEffect(() => {
     if (!profile) return;
-    userData.forEach((item) => setValue(item, profile[item] ?? ""));
+    userData.forEach((item) => {
+      const value = profile[item] ?? "";
+      setValue(item, value);
+      initialValues.current[item] = value as string;
+    });
+
+    profile.socials.forEach((item) => {
+      setValue(item.name as any, item.link);
+      initialValues.current[item.name] = item.link;
+    });
   }, [profile, setValue]);
+
+  useEffect(() => {
+    if (isSuccessProfile || isSuccessSocial) {
+      notifySuccess("Дані успішно оновлено");
+    }
+  }, [isSuccessProfile, isSuccessSocial]);
 
   const handleClickButtonRemoveInput = (id: string) => {
     dispatch(
@@ -74,13 +95,34 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     );
   };
 
-  const handleUpdateUserData = (data: any) => {
-    dispatch(
-      openModal({
-        dataConfirmation: data,
-        typeModal: "updateUserData",
-      })
-    );
+  const handleUpdateUserData = async (
+    name: string,
+    event: string,
+    type: "profile" | "social",
+    id?: string
+  ) => {
+    if (initialValues.current[name] === event) {
+      return;
+    }
+    try {
+      if (type === "profile") {
+        await updateUserProfile({
+          [name]: event,
+        }).unwrap();
+      }
+      if (type === "social") {
+        await updateSocialLink({
+          idSocialLink: id as string,
+          link: event,
+        }).unwrap();
+      }
+    } catch (error) {
+      notifyError(
+        (error as { data: { message: string[] } }).data.message[0] ||
+          "Помилка оновлення даних"
+      );
+      setValue(name as any, initialValues.current[name]);
+    }
   };
 
   return (
@@ -92,11 +134,12 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               return (
                 <li key={index}>
                   <Input
-                    onFocus={() =>
-                      handleUpdateUserData({
-                        name: item,
-                        value: watch(item) || "",
-                      })
+                    onBlur={(e) =>
+                      handleUpdateUserData(
+                        item,
+                        e.currentTarget.value,
+                        "profile"
+                      )
                     }
                     label={item}
                     name={item}
@@ -119,17 +162,20 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
           </ul>
           <ul className="flex flex-col gap-4">
             {profile?.socials.map((item) => {
-              // if()
               return (
                 <li key={item.id}>
                   <Input
-                    onFocus={() =>
-                      handleUpdateInput({ ...item, typeModal: "update" })
+                    onBlur={(e) =>
+                      handleUpdateUserData(
+                        item.name,
+                        e.currentTarget.value,
+                        "social",
+                        item.id
+                      )
                     }
                     label={item.name}
                     name={item.name}
                     placeholder={item.name}
-                    value={item.link}
                     register={register}
                     errors={errors}
                     resetField={resetField}
