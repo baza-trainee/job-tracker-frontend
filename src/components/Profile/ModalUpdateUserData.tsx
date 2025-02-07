@@ -83,17 +83,7 @@ export default function ModalUpdateUserData() {
         <Button type="reset" onClick={() => dispatch(closeModal())}>
           Скасувати
         </Button>
-        <Button
-          type="submit"
-          variant="accent"
-          disabled={
-            isLodingUpdate ||
-            updateItem.name === "telegram" ||
-            updateItem.name === "behance" ||
-            updateItem.name === "linkedin" ||
-            updateItem.name === "github"
-          }
-        >
+        <Button type="submit" variant="accent" disabled={isLodingUpdate}>
           Зберегти
         </Button>
       </div>
