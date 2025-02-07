@@ -14,6 +14,7 @@ export const Input = ({
   resetField,
   errors,
   value,
+  onBlur,
   id,
   autoFocus = false,
   onFocus,
@@ -37,7 +38,7 @@ export const Input = ({
     resetField(name);
   };
 
-  const { onBlur } = register(name);
+  const { onBlur: hookFormOnBlur } = register(name);
 
   return (
     <div
@@ -51,7 +52,6 @@ export const Input = ({
     >
       {label && (
         <label
-          autoFocus={autoFocus}
           htmlFor={`input-${name}`}
           className={cn(
             "mb-3 block font-nunito font-medium leading-[135%] text-textBlack",
@@ -78,11 +78,13 @@ export const Input = ({
                 setValue?.(name, event.target.value.trim(), {
                   shouldValidate: true,
                 });
-                onBlur(event);
+                hookFormOnBlur(event);
+                onBlur?.(event);
               }}
             />
           ) : (
             <input
+              autoFocus={autoFocus}
               onFocus={onFocus}
               id={`input-${name}`}
               className={cn(
@@ -107,7 +109,8 @@ export const Input = ({
                 setValue?.(name, event.target.value.trim(), {
                   shouldValidate: true,
                 });
-                onBlur(event);
+                hookFormOnBlur(event);
+                onBlur?.(event);
               }}
             />
           )}
