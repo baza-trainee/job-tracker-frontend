@@ -20,7 +20,7 @@ i18n
   .use(LanguageDetector)
   .init({
     resources,
-    fallbackLng: LOCALS.EN,
+    fallbackLng: LOCALS.UA,
     interpolation: {
       escapeValue: false,
     },
