@@ -86,7 +86,10 @@
     "passwordInvalid": "Enter a valid password",
     "passwordMin": "Password must be at least 8 characters",
     "termsRequired": "You have not given consent",
-    "passwordMismatch": "Passwords must match"
+    "passwordMismatch": "Passwords must match",
+    "min2Characters": "Minimum 2 characters required",
+    "invalidUrl": "Enter a valid URL",
+    "invalidPdf": "Enter a valid .pdf URL"
   },
   "vacanciesHeader": {
     "search": "Search",

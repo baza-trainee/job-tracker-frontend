@@ -1,9 +1,11 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+// import { zodI18nMap } from "zod-i18n-map";
 import enLang from "./locales/en/en.json";
 import ukLang from "./locales/uk/uk.json";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { LOCALS } from "./constns";
+// import { z } from "zod";
 const resources = {
   [LOCALS.EN]: {
     translation: enLang,
@@ -18,10 +20,13 @@ i18n
   .use(LanguageDetector)
   .init({
     resources,
-    fallbackLng: LOCALS.EN,
+    fallbackLng: LOCALS.UA,
     interpolation: {
       escapeValue: false,
     },
   });
 
+// z.setErrorMap(zodI18nMap);
+
+// export { z };
 export default i18n;

@@ -85,7 +85,10 @@
     "passwordInvalid": "Введіть коректний пароль",
     "passwordMin": "Пароль повинен бути не менше 8 символів",
     "termsRequired": "Ви не надали згоду",
-    "passwordMismatch": "Паролі мають збігатись"
+    "passwordMismatch": "Паролі мають збігатись",
+    "min2Characters": "Мінімум 2 символи",
+    "invalidUrl": "Введіть коректне посилання",
+    "invalidPdf": "Введіть коректне посилання .pdf"
   },
   "vacanciesHeader": {
     "search": "Пошук",
