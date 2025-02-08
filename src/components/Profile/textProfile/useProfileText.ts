@@ -9,6 +9,8 @@ const useProfileTexts = ({ cardsType }: PropsProfileCard) => {
       cardTitle: t("addCoverLetters.cardTitle"),
       buttonAdd: t("addCoverLetters.buttonAdd"),
       modalAddTitle: t("addCoverLetters.modalAddTitle"),
+      name: t("name"),
+      phone: t("phone"),
     },
     addProjects: {
       cardTitle: t("addProjects.cardTitle"),

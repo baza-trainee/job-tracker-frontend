@@ -2,6 +2,27 @@
   "or": "Or",
   "welcome": "Welcome to React and react-i18next",
   "user": "користувач",
+  "name": "Name",
+  "phone": "Phone number",
+  "modalAddProperties": {
+    "linkName": "Name",
+    "placeHolderSocials": "Enter the name of the link",
+    "linkSocial": "Link to social network",
+    "placeholderlinkSocial": "Insert a link to a social network",
+    "placeholderNameResume": "Enter the name of the resume",
+    "linkResume": "Link to resume",
+    "placeholderLinkResume": "Insert a link to your resume",
+    "placeholderNameCoverLetter": "Enter a name for the letter",
+    "textNameCoverLetter": "Cover letter",
+    "placeholderTextCoverLetter": "You should write your letter here"
+  },
+  "notification": {
+    "updatedSuccess": "Updated successfully",
+    "updatedErrorLink": "Enter a valid link",
+    "updatedPhone": "Enter a valid phone number",
+    "updatedEmail": "Enter a valid email",
+    "updatedUserName": "Enter a valid name"
+  },
   "navigation": {
     "vacancies": "Vacancies",
     "statistics": "Statistics",

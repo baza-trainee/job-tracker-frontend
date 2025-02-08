@@ -115,7 +115,7 @@ export const Input = ({
             />
           )}
 
-          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] cursor-pointer gap-2 bg-backgroundMain pl-1">
+          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] gap-2 bg-backgroundMain pl-1">
             {isButtonCopy && (
               <button
                 type="button"
@@ -124,7 +124,7 @@ export const Input = ({
               >
                 <Icon
                   id="copy"
-                  className="h-6 w-6 fill-black transition-all hover:fill-green-500"
+                  className="h-6 w-6 cursor-pointer fill-black transition-all hover:fill-color5"
                 />
               </button>
             )}
@@ -136,19 +136,25 @@ export const Input = ({
               >
                 <Icon
                   id="close-default"
-                  className="h-6 w-6 fill-black transition-all hover:fill-color2"
+                  className="h-6 w-6 cursor-pointer fill-black transition-all hover:fill-color2"
                 />
               </button>
             )}
             {isCheckButtons && isIconVisible ? (
               error ? (
                 <button onClick={() => handleResetField(name)}>
-                  <Icon id="cancel-in-round" className="h-6 w-6 fill-color2" />
+                  <Icon
+                    id="cancel-in-round"
+                    className="h-6 w-6 cursor-pointer fill-color2"
+                  />
                 </button>
               ) : (
                 !isIcon && (
                   <div>
-                    <Icon id="check-box" className="h-6 w-6 fill-color5" />
+                    <Icon
+                      id="check-box"
+                      className="h-6 w-6 cursor-pointer fill-color5"
+                    />
                   </div>
                 )
               )
