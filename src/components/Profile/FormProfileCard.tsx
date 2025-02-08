@@ -149,13 +149,16 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               return (
                 <li key={index}>
                   <Input
-                    onBlur={(e) =>
+                    onBlur={(e) => {
+                      if (item === "email") return;
+
                       handleUpdateUserData(
                         item,
                         e.currentTarget.value,
                         "profile"
-                      )
-                    }
+                      );
+                    }}
+                    value={item === "email" ? initialValues.current[item] : ""}
                     label={label}
                     name={item}
                     placeholder={item}
@@ -246,7 +249,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               key={item.id}
               value={item.name}
               name={item.name}
-              // label={item.name}
               placeholder={item.name}
               register={register}
               errors={errors}
@@ -279,7 +281,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() => copyInputValue(item.name)}
+              handleClickButtonCopyInput={() => copyInputValue(item.text)}
               handleClickButtonRemoveInput={() => {
                 handleClickButtonRemoveInput(item.id);
               }}

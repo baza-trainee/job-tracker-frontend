@@ -1,4 +1,6 @@
 import { PropsModalAddProperties } from "@/components/Profile/modalAddProperties.types";
+// import { z } from "@/utils/i18n/i18n";
+
 import { z, ZodObject, ZodOptional, ZodString } from "zod";
 
 type Schema = {
@@ -12,19 +14,26 @@ type Schema = {
 
 export const addProfileData: Schema = {
   addResumes: z.object({
-    name: z.string().min(2, { message: "Мінімум 2 символи" }).trim(),
+    name: z
+      .string()
+      .min(2, {
+        message: "validation.min2Characters",
+      })
+      .trim(),
     technology: z.string().optional(),
     link: z
       .string()
-      .url({ message: "Введіть коректне посилання http... " })
-      .regex(/\.pdf$/, { message: "Посилання має закінчуватися на .pdf" })
+      .url({ message: "validation.invalidUrl" })
+      .regex(/\.pdf$/, {
+        message: "validation.invalidPdf",
+      })
       .trim()
       .optional(),
     text: z.string().optional(),
   }),
 
   addProjects: z.object({
-    name: z.string().min(2, { message: "Мінімум 2 символи" }).trim(),
+    name: z.string().min(2, { message: "validation.min2Characters" }).trim(),
     technology: z
       .string()
       .url({ message: "Введіть коректне github progect посилання http..." })
@@ -36,33 +45,41 @@ export const addProfileData: Schema = {
       .optional(),
     link: z
       .string()
-      .url({ message: "Введіть коректне посилання http..." })
-      .regex(/\.com*$/, { message: "закінчується на ...com" })
+      .url({ message: "validation.invalidUrl" })
+      .regex(/\.[a-zA-Z]{2,}$/, { message: "validation.invalidUrl" })
       .trim()
       .optional(),
     text: z.string().optional(),
   }),
   addCoverLetters: z.object({
-    name: z.string().min(2, { message: "Мінімум 2 символи" }).trim(),
+    name: z.string().min(2, { message: "validation.min2Characters" }).trim(),
     technology: z.string().optional(),
     link: z.string().optional(),
-    text: z.string().min(2, { message: "Мінімум 2 символи" }).trim().optional(),
+    text: z
+      .string()
+      .min(2, { message: "validation.min2Characters" })
+      .trim()
+      .optional(),
   }),
   addPersonalProperties: z.object({
-    name: z.string().min(2, { message: "Мінімум 2 символи" }).trim(),
+    name: z.string().min(2, { message: "validation.min2Characters" }).trim(),
     technology: z
       .string()
-      .min(2, { message: "Мінімум 2 символи" })
+      .min(2, { message: "validation.min2Characters" })
       .trim()
       .optional(),
     link: z
       .string()
       .trim()
-      .url({ message: "Введіть коректне посилання" })
+      .url({ message: "validation.invalidUrl" })
       .regex(/\.[a-zA-Z]{2,}$/, {
-        message: "повинно містити дві літери після крапки",
+        message: "validation.invalidUrl",
       })
       .optional(),
-    text: z.string().min(2, { message: "Мінімум 2 символи" }).trim().optional(),
+    text: z
+      .string()
+      .min(2, { message: "validation.min2Characters" })
+      .trim()
+      .optional(),
   }),
 };

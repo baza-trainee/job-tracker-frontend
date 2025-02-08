@@ -218,7 +218,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           id="textCoverLetter"
           type="textarea"
           label={data[cardsType].text}
-          name="textCoverLetter"
+          name="text"
           placeholder={data[cardsType].placeholderLink}
           register={register}
           errors={errors}
