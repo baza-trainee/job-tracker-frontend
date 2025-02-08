@@ -26,10 +26,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import {
-  data,
   DataItem,
   PropsModalAddProperties,
+  useData,
 } from "./modalAddProperties.types";
+import { useTranslation } from "react-i18next";
 
 function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   const {
@@ -43,9 +44,9 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     mode: "all",
   });
   const dispatch = useAppDispatch();
-
+  const { data } = useData();
   const { refetch: refetchProfile } = useGetAllUserDataQuery();
-
+  const { t } = useTranslation();
   const updateItem =
     useAppSelector((state) => state.modal.dataConfirmation) || false;
 
@@ -213,27 +214,24 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         />
       )}
       {data[cardsType].text && (
-        <div className="flex flex-col gap-3">
-          <label
-            htmlFor="textCoverLetter"
-            className="leading-[135%] text-textBlack"
-          >
-            Супровідний лист
-          </label>
-          <textarea
-            className="h-[150px] rounded-lg border-[1px] border-solid border-textBlack px-6 py-3"
-            id="textCoverLetter"
-            placeholder={data[cardsType].placeholderLink}
-            {...register("text")}
-          />
-        </div>
+        <Input
+          id="textCoverLetter"
+          type="textarea"
+          label={data[cardsType].text}
+          name="textCoverLetter"
+          placeholder={data[cardsType].placeholderLink}
+          register={register}
+          errors={errors}
+          resetField={resetField}
+          isCheckButtons={false}
+        />
       )}
       <div className="flex justify-center gap-5">
         <Button type="reset" onClick={() => dispatch(closeModal())}>
-          Скасувати
+          {t("infoModal.button.cancel")}
         </Button>
         <Button type="submit" variant="accent" disabled={isSubmitDisabled}>
-          Зберегти
+          {t("infoModal.button.save")}
         </Button>
       </div>
     </form>

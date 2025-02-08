@@ -2,6 +2,27 @@
   "or": "Або",
   "welcome": "Ласкаво просимо до React і react-i18next",
   "user": "user",
+  "name": "Ім'я",
+  "phone": "Номер телефону",
+  "modalAddProperties": {
+    "linkName": "Назва",
+    "placeHolderSocials": "Вкажіть назву посилання",
+    "linkSocial": "Лінк на соціальну мережу",
+    "placeholderlinkSocial": "Вставте лінк на соціальну мережу",
+    "placeholderNameResume": "Вкажіть назву резюме",
+    "linkResume": "Лінк на резюме",
+    "placeholderLinkResume": "Вставте лінк на резюме",
+    "placeholderNameCoverLetter": "Вкажіть назву для листа",
+    "textNameCoverLetter": "Супровідний лист",
+    "placeholderTextCoverLetter": "Тут треба написати ваш лист"
+  },
+  "notification": {
+    "updatedSuccess": "Успішно оновлено",
+    "updatedErrorLink": "Введіть коректне посилання",
+    "updatedPhone": "Введіть коректний номер телефону",
+    "updatedEmail": "Введіть коректну електронну адресу",
+    "updatedUserName": "Введіть коректне ім'я"
+  },
   "navigation": {
     "vacancies": "Вакансії",
     "statistics": "Статистика",

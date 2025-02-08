@@ -18,11 +18,15 @@ import {
   notifyError,
   notifySuccess,
 } from "../Notifications/NotificationService";
+import { useTranslation } from "react-i18next";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { socialLinksSchema } from "@/schemas/socialLinksSchema";
 
 const userData: ProfileKeys[] = ["username", "email", "phone"];
 
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
+  const { t } = useTranslation();
   const text = useProfileTexts({ cardsType });
   const {
     register,
@@ -30,13 +34,14 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     watch,
     setValue,
     formState: { errors },
-  } = useForm<Partial<Profile>>();
+  } = useForm<Partial<Profile>>({
+    resolver: zodResolver(socialLinksSchema),
+    mode: "all",
+  });
 
-  const [updateSocialLink, { isSuccess: isSuccessSocial }] =
-    useUpdateSocialLinkMutation();
+  const [updateSocialLink] = useUpdateSocialLinkMutation();
 
-  const [updateUserProfile, { isSuccess: isSuccessProfile }] =
-    useUpdateUserProfileMutation();
+  const [updateUserProfile] = useUpdateUserProfileMutation();
 
   const dispatch = useAppDispatch();
   const initialValues = useRef<Record<string, string>>({});
@@ -71,12 +76,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     });
   }, [profile, setValue]);
 
-  useEffect(() => {
-    if (isSuccessProfile || isSuccessSocial) {
-      notifySuccess("Дані успішно оновлено");
-    }
-  }, [isSuccessProfile, isSuccessSocial]);
-
   const handleClickButtonRemoveInput = (id: string) => {
     dispatch(
       openModal({
@@ -108,21 +107,31 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
       if (type === "profile") {
         await updateUserProfile({
           [name]: event,
-        }).unwrap();
+        })
+          .unwrap()
+          .then(() => notifySuccess(t("notification.updatedSuccess")))
+          .catch(() => {
+            if (name === "phone") notifyError(t("notification.updatedPhone"));
+            if (name === "email") notifyError(t("notification.updatedEmail"));
+            if (name === "username")
+              notifyError(t("notification.updatedUserName"));
+            setValue(name as any, initialValues.current[name]);
+          });
       }
+
       if (type === "social") {
         await updateSocialLink({
           idSocialLink: id as string,
           link: event,
-        }).unwrap();
+        })
+          .unwrap()
+          .then(() => notifySuccess(t("notification.updatedSuccess")))
+          .catch(() => {
+            notifyError(t("notification.updatedErrorLink"));
+            setValue(name as any, initialValues.current[name]);
+          });
       }
-    } catch (error) {
-      notifyError(
-        (error as { data: { message: string[] } }).data.message[0] ||
-          "Помилка оновлення даних"
-      );
-      setValue(name as any, initialValues.current[name]);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -131,6 +140,12 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         <>
           <ul className="flex flex-col gap-4">
             {userData.map((item, index) => {
+              const label =
+                item === "email"
+                  ? "Email"
+                  : item === "phone"
+                    ? t("phone")
+                    : t("name");
               return (
                 <li key={index}>
                   <Input
@@ -141,7 +156,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                         "profile"
                       )
                     }
-                    label={item}
+                    label={label}
                     name={item}
                     placeholder={item}
                     register={register}
@@ -153,7 +168,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                       copyInputValue(watch(item) as string)
                     }
                   />
-                  {index === 2 && (
+                  {index === userData.length - 1 && (
                     <div className="mt-4 h-px w-full bg-backgroundSecondary" />
                   )}
                 </li>
@@ -229,9 +244,9 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                 handleUpdateInput({ ...item, typeModal: "update" })
               }
               key={item.id}
-              value={item.link}
+              value={item.name}
               name={item.name}
-              label={item.name}
+              // label={item.name}
               placeholder={item.name}
               register={register}
               errors={errors}
