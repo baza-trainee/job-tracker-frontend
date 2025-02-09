@@ -76,7 +76,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   };
 
   return (
-    <div className="test-watch flex w-full flex-col gap-6">
+    <div className="flex w-full flex-col gap-6">
       {/* Показ скелетону під час завантаження */}
       {isLoading && <VacancySectionSkeleton />}
       {isError && <h2>Error...</h2>}

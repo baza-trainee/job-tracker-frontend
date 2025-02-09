@@ -27,7 +27,10 @@ const VacancySection: FC<VacancySectionProps> = ({
   let row1: ReactNode[] = [];
   let row2: ReactNode[] = [];
 
-  if (validChildren.length <= 6) {
+  if (window.innerWidth >= 1920 && validChildren.length <= 10) {
+    row1 = validChildren.slice(0, 5);
+    row2 = validChildren.slice(5, 10);
+  } else if (validChildren.length <= 6) {
     row1 = validChildren.slice(0, 4);
     row2 = validChildren.slice(4, 6);
   } else {
@@ -82,19 +85,30 @@ const VacancySection: FC<VacancySectionProps> = ({
     };
   }, []);
 
-  const handleScrollLeft = () => {
-    // console.log("Left arrow clicked");
+  const getScrollAmount = () => {
+    if (window.innerWidth >= 1920) return 314 + 20;
+    if (window.innerWidth >= 1440) return 278 + 20;
+    if (window.innerWidth >= 1280) return 241 + 16;
+    return 241 + 16; // Для всіх інших випадків ширини екрану
+  };
+  
+  const handleScrollRight = () => {
+    // console.log("Right arrow clicked");
+    const scrollAmount = getScrollAmount();
     containerRef.current?.scrollBy({
-      left: -298, // Кількість пікселів для скролу
-      behavior: "smooth", // Плавний скрол
+      // left: 298,
+      left: scrollAmount,
+      behavior: "smooth",
     });
   };
 
-  const handleScrollRight = () => {
-    // console.log("Right arrow clicked");
+  const handleScrollLeft = () => {
+    // console.log("Left arrow clicked");
+    const scrollAmount = getScrollAmount();
     containerRef.current?.scrollBy({
-      left: 298,
-      behavior: "smooth",
+      // left: -298, // Кількість пікселів для скролу
+      left: -scrollAmount,
+      behavior: "smooth", // Плавний скрол
     });
   };
 
@@ -115,7 +129,7 @@ const VacancySection: FC<VacancySectionProps> = ({
           colorSectionBorder
         )}
       >
-        <div className="section-contant flex w-full items-center gap-4">
+        <div className="flex w-full items-center gap-4">
           <button
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
@@ -130,18 +144,19 @@ const VacancySection: FC<VacancySectionProps> = ({
           <div
             ref={containerRef}
             className={clsx(
-              "scrollbar flex w-full flex-col gap-5 overflow-x-auto",
-              { "pb-5": hasScroll }
+              "scrollbar flex w-full flex-col overflow-x-auto",
+              { "pb-5": hasScroll },
+              "gap-4 xl:gap-4 2xl:gap-5"
             )}
           >
             {/* Перший ряд, непарні картки */}
-            <div className="flex flex-nowrap gap-5">
+            <div className="flex flex-nowrap gap-4 xl:gap-4 2xl:gap-5">
               {row1.length > 0 ? row1 : <p>Немає вакансій</p>}
             </div>
 
             {/* Другий ряд, парні картки */}
             {row2.length > 0 && (
-              <div className="flex flex-nowrap gap-5">
+              <div className="flex flex-nowrap gap-4 xl:gap-4 2xl:gap-5">
                 {row2.length > 0 ? row2 : null}
               </div>
             )}
