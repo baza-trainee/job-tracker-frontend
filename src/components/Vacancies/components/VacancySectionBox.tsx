@@ -61,11 +61,12 @@ const VacancySectionBox: FC<VacancySectionProps> = ({
                 )}
             >
                 <div ref={contentRef} className={clsx("h-auto max-h-[60vh] overflow-y-auto scrollbar-y", { "pr-4": hasScroll, })}>
-                    <div className="flex w-[1184px] flex-wrap justify-start gap-6 ">
+                    {/* Виправити ширину для адаптивa на менше, ніж 1280!! */}
+                    <div className="flex w-[1024px] xl:w-[1024px] 2xl:w-[1172px] 3xl:w-[1666px] flex-wrap justify-start gap-y-4 gap-x-5 3xl:gap-x-6">
                         {validChildren}
                     </div>
                 </div>
-            </div>
+            </div> 
         </section>
     );
 };
