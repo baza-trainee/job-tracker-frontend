@@ -351,8 +351,8 @@
     "save": "Save",
     "soonModalPlaceholderName": "Enter the event name",
     "soonModalPlaceholderNotes": "Place for notes",
-    "soonModalTimeHours": "Hours",
-    "soonModalTimeMinutes": "Minutes"
+    "soonModalTimeHours": "HH",
+    "soonModalTimeMinutes": "MM"
   },
   "calendarTabs": {
     "day": "Day",

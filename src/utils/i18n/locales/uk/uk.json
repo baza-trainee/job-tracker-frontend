@@ -350,8 +350,8 @@
     "save": "Зберегти",
     "soonModalPlaceholderName": "Вкажіть назву події",
     "soonModalPlaceholderNotes": "Місце для нотаток",
-    "soonModalTimeHours": "години",
-    "soonModalTimeMinutes": "хвилини"
+    "soonModalTimeHours": "ГГ",
+    "soonModalTimeMinutes": "ХВ"
   },
   "calendarTabs": {
     "day": "День",
