@@ -10,5 +10,6 @@ export const LogInSchema = z.object({
     .min(8, `validation.passwordMin`)
     .regex(passwordRegex, `validation.passwordInvalid`)
     .max(14, `validation.passwordMax`)
-    .trim(),
+    .trim()
+    .or(z.literal("")),
 });

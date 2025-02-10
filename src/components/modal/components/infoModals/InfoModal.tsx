@@ -16,12 +16,12 @@ const InfoModal = ({ type, textColor }: InfoModalProps) => {
       <h4
         className={classNames(
           "mb-3 font-nunito leading-[135%]",
-          modalData.title.length < 10
-            ? classNames(
+          modalData.titleSize === "small"
+            ? "text-[20px] font-medium"
+            : classNames(
                 "font-bold sm:text-[20px] md:text-[24px] xl:text-[32px]",
                 textColor
               )
-            : "text-[20px] font-medium"
         )}
       >
         {modalData.title}

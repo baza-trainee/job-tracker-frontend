@@ -111,6 +111,7 @@ const InfoModalMap = () => {
       TypesModal,
       {
         title: string;
+        titleSize?: "small";
         text: string[];
         button: {
           label: string;

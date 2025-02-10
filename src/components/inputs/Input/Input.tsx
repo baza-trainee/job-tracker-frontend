@@ -36,6 +36,7 @@ export const Input = ({
 
   const handleResetField = (name: string) => {
     resetField(name);
+    console.log("handle", name);
   };
 
   const { onBlur: hookFormOnBlur } = register(name);
@@ -54,7 +55,7 @@ export const Input = ({
         <label
           htmlFor={`input-${name}`}
           className={cn(
-            "mb-3 block font-nunito font-medium leading-[135%] text-textBlack",
+            "mb-3 inline-block font-nunito font-medium leading-[135%] text-textBlack",
             "sm:mb-[2px] sm:text-[14px]",
             "md:mb-2 md:text-[18px]",
             "xl:mb-2 xl:text-[16px]",
@@ -94,9 +95,9 @@ export const Input = ({
                 "xl:text-[14px]",
                 "2xl:text-[16px]",
                 {
-                  "border-color5": !error,
+                  "border-color7": !error,
                   "border-color2": error,
-                  "border-textBlack": !isCheckButtons,
+                  // "border-textBlack": !isCheckButtons,
                 }
               )}
               placeholder={placeholder}
@@ -109,13 +110,18 @@ export const Input = ({
                 setValue?.(name, event.target.value.trim(), {
                   shouldValidate: true,
                 });
+                if (event.target.value.length === 0) {
+                  event.stopPropagation()
+                  setIsIconVisible(false);
+                }
                 hookFormOnBlur(event);
                 onBlur?.(event);
               }}
+              // onClick={(event) => event.stopPropagation()}
             />
           )}
 
-          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] gap-2 bg-backgroundMain pl-1">
+          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] gap-2">
             {isButtonCopy && (
               <button
                 type="button"
@@ -153,7 +159,7 @@ export const Input = ({
                   <div>
                     <Icon
                       id="check-box"
-                      className="h-6 w-6 cursor-pointer fill-color5"
+                      className="h-6 w-6 cursor-pointer fill-color7"
                     />
                   </div>
                 )

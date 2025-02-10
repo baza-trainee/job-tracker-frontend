@@ -155,7 +155,9 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                           : ""
                       }
                       errors={errors}
-                      promptMessage={t("register.promptMessagePassword")}
+                      promptMessage={t(
+                        `${!isLogInPage ? "register.promptMessagePassword" : ""}`
+                      )}
                     />
 
                     {isLogInPage ? (
