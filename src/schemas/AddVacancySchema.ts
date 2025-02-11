@@ -5,28 +5,28 @@ export const AddVacancySchema = z.object({
     .string()
     .min(2, `addVacancySchema.position.min`)
     .max(30, `addVacancySchema.position.max`)
-    .trim(),
+    .trim().or(z.literal("")),
   link: z
     .string()
     .url(`addVacancySchema.link.url`)
     .min(4, `addVacancySchema.link.min`)
     .max(254, `addVacancySchema.link.max`)
-    .trim(),
+    .trim().or(z.literal("")),
   communication: z
     .string()
     .min(10, `addVacancySchema.communication.min`)
     .max(4000, `addVacancySchema.communication.max`)
-    .trim(),
+    .trim().or(z.literal("")),
   company: z
     .string()
     .min(2, `addVacancySchema.company.min`)
     .max(40, `addVacancySchema.company.max`)
-    .trim(),
+    .trim().or(z.literal("")),
   location: z
     .string()
     .min(4, `addVacancySchema.location.min`)
     .max(400, `addVacancySchema.location.max`)
-    .trim(),
+    .trim().or(z.literal("")),
   work_type: z.enum(["remote", "office", "hybrid"], {
     errorMap: () => ({ message: "addVacancySchema.workType.invalid" }),
   }),
@@ -35,7 +35,7 @@ export const AddVacancySchema = z.object({
   resumeDropdown: z.string(),
   rejectDropdown: z.string(),
 
-  note: z.string().max(4000, `addVacancySchema.notes.max`).trim(),
+  note: z.string().max(4000, `addVacancySchema.notes.max`).trim().or(z.literal("")),
   isArchived: z.boolean(),
 })
 .refine((data) => !(data.resume && !data.resumeDropdown), {

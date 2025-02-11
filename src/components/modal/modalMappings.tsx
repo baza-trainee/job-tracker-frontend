@@ -78,9 +78,7 @@ export const contentMap: ContentMapProps = {
     borderColor: colorError.border,
   },
   forgotPasswordSuccess: {
-    content: (
-      <InfoModal type="forgotPasswordSuccess" textColor={colorButton.text} />
-    ),
+    content: <InfoModal type="forgotPasswordSuccess" textColor={"textBlack"} />,
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },

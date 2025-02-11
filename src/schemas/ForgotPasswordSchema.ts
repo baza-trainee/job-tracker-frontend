@@ -9,5 +9,6 @@ export const ForgotPasswordSchema = z.object({
     .regex(emailRegex, `validation.emailInvalid`)
     .regex(emailRuByRegex, `validation.emailInvalidRuBy`)
     .max(254, `validation.emailMax`)
-    .trim(),
+    .trim()
+    .or(z.literal("")),
 });

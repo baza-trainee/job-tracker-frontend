@@ -346,7 +346,7 @@
       "text_2": "Try logging in or resetting your password."
     },
     "forgotPasswordSuccess": {
-      "text_1": "A message has been sent to your email."
+      "text_1": "Instructions for changing your password have been sent to your email"
     },
     "resetPasswordSuccess": {
       "text_1": "Password changed successfully.",
@@ -366,8 +366,8 @@
     "save": "Save",
     "soonModalPlaceholderName": "Enter the event name",
     "soonModalPlaceholderNotes": "Place for notes",
-    "soonModalTimeHours": "Hours",
-    "soonModalTimeMinutes": "Minutes"
+    "soonModalTimeHours": "HH",
+    "soonModalTimeMinutes": "MM"
   },
   "calendarTabs": {
     "day": "Day",

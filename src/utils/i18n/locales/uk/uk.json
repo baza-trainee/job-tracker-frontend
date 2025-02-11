@@ -345,7 +345,7 @@
       "text_2": "Спробуйте увійти або відновити пароль."
     },
     "forgotPasswordSuccess": {
-      "text_1": "Вам надіслано повідомлення на електронну пошту"
+      "text_1": "Вам відправлено на пошту інструкцію для зміни пароля"
     },
     "resetPasswordSuccess": {
       "text_1": "Зміна пароля успішна.",
@@ -365,8 +365,8 @@
     "save": "Зберегти",
     "soonModalPlaceholderName": "Вкажіть назву події",
     "soonModalPlaceholderNotes": "Місце для нотаток",
-    "soonModalTimeHours": "години",
-    "soonModalTimeMinutes": "хвилини"
+    "soonModalTimeHours": "ГГ",
+    "soonModalTimeMinutes": "ХВ"
   },
   "calendarTabs": {
     "day": "День",
