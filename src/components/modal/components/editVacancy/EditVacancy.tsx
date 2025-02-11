@@ -59,7 +59,7 @@ const EditVacancy = () => {
   };
 
   return (
-    <div className="">
+    <div className="p-5">
       <form>
         <div className="flex flex-col items-center">
           <div className="flex flex-row gap-3">

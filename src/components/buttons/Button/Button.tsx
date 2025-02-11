@@ -19,11 +19,11 @@ export const Button = ({
 
         !disabled &&
           variant === "accent" &&
-          "bg-button hover:border-iconHover hover:bg-backgroundSecondary active:border-iconHover active:bg-iconHover active:fill-textWhite active:text-textWhite",
+          "bg-button md:hover:border-iconHover md:hover:bg-backgroundSecondary active:border-iconHover active:bg-iconHover active:fill-textWhite active:text-textWhite",
 
         !disabled &&
           variant === "ghost" &&
-          "relative bg-transparent hover:border-iconHover hover:bg-backgroundSecondary active:border-transparent active:bg-transparent active:ring-[2px] active:ring-inset active:ring-iconHover",
+          "relative bg-transparent md:hover:border-iconHover md:hover:bg-backgroundSecondary active:border-transparent active:bg-transparent active:ring-[2px] active:ring-inset active:ring-iconHover",
 
         disabled &&
           variant === "accent" &&

@@ -220,6 +220,7 @@ const InfoModalMap = () => {
     },
     logOut: {
       title: t("infoModal.logOut.title"),
+      titleSize:"small",
       text: [t("infoModal.logOut.text_1")],
       button: [
         createButton(t("infoModal.button.cancel"), handleCancel),
@@ -228,6 +229,7 @@ const InfoModalMap = () => {
     },
     saveAddVacancies: {
       title: t("infoModal.saveAddVacancies.title"),
+      titleSize:"small",
       text: [t("infoModal.saveAddVacancies.text_1")],
       button: [
         createButton(
@@ -248,6 +250,7 @@ const InfoModalMap = () => {
     },
     deleteVacancy: {
       title: t("infoModal.deleteVacancy.title"),
+      titleSize:"small",
       text: [t("infoModal.deleteVacancy.text_1")],
       button: [
         createButton(
@@ -291,6 +294,7 @@ const InfoModalMap = () => {
     },
     saveEditVacancies: {
       title: t("infoModal.saveAddVacancies.title"),
+      titleSize: "small",
       text: [t("infoModal.saveAddVacancies.text_1")],
       button: [
         createButton(

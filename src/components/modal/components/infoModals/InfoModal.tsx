@@ -17,7 +17,7 @@ const InfoModal = ({ type, textColor }: InfoModalProps) => {
         className={classNames(
           "mb-3 font-nunito leading-[135%]",
           modalData.titleSize === "small"
-            ? "text-[20px] font-medium"
+            ? "text-[20px] font-bold"
             : classNames(
                 "font-bold sm:text-[20px] md:text-[24px] xl:text-[32px]",
                 textColor
