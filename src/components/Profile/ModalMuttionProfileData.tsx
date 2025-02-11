@@ -44,7 +44,6 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     mode: "all",
   });
   const dispatch = useAppDispatch();
-
   const { data } = useData();
 
   const { refetch: refetchProfile } = useGetAllUserDataQuery();
@@ -188,6 +187,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
+        autoFocus
         label={data[cardsType].name}
         name="name"
         placeholder={data[cardsType].placeholderName}
@@ -196,6 +196,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         resetField={resetField}
         isCheckButtons={false}
       />
+
       {data[cardsType].technologies && (
         <Input
           label={data[cardsType].technologies}
