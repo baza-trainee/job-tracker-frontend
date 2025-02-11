@@ -11,6 +11,8 @@ export interface InputProps {
   type?: React.HTMLInputTypeAttribute | "textarea";
   value?: string;
   id?: string;
+  defaultValue?: string;
+  disabled?: boolean;
   resetField(name: string): void;
   isButtonCopy?: boolean;
   isButtonRemoveInput?: boolean;

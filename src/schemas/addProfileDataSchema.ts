@@ -6,7 +6,7 @@ import { z, ZodObject, ZodOptional, ZodString } from "zod";
 type Schema = {
   [K in PropsModalAddProperties["cardsType"]]: ZodObject<{
     name: ZodString;
-    technology: ZodOptional<ZodString>;
+    technologies: ZodOptional<ZodString>;
     link: ZodOptional<ZodString>;
     text: ZodOptional<ZodString>;
   }>;
@@ -20,7 +20,7 @@ export const addProfileData: Schema = {
         message: "validation.min2Characters",
       })
       .trim(),
-    technology: z.string().optional(),
+    technologies: z.string().optional(),
     link: z
       .string()
       .url({ message: "validation.invalidUrl" })
@@ -34,15 +34,7 @@ export const addProfileData: Schema = {
 
   addProjects: z.object({
     name: z.string().min(2, { message: "validation.min2Characters" }).trim(),
-    technology: z
-      .string()
-      .url({ message: "Введіть коректне github progect посилання http..." })
-      .regex(/\/github\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/, {
-        message:
-          "Посилання повинно відповідати формату GitHub репозиторію (https://github.com/username..../repository)",
-      })
-      .trim()
-      .optional(),
+    technologies: z.string().trim().optional(),
     link: z
       .string()
       .url({ message: "validation.invalidUrl" })
@@ -53,7 +45,7 @@ export const addProfileData: Schema = {
   }),
   addCoverLetters: z.object({
     name: z.string().min(2, { message: "validation.min2Characters" }).trim(),
-    technology: z.string().optional(),
+    technologies: z.string().optional(),
     link: z.string().optional(),
     text: z
       .string()
@@ -63,7 +55,7 @@ export const addProfileData: Schema = {
   }),
   addPersonalProperties: z.object({
     name: z.string().min(2, { message: "validation.min2Characters" }).trim(),
-    technology: z
+    technologies: z
       .string()
       .min(2, { message: "validation.min2Characters" })
       .trim()
