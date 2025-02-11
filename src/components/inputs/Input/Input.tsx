@@ -14,8 +14,10 @@ export const Input = ({
   resetField,
   errors,
   value,
-  onBlur,defaultValue,
-  id,disabled=false,
+  onBlur,
+  defaultValue,
+  id,
+  disabled = false,
   autoFocus = false,
   onFocus,
   isButtonCopy = false,
@@ -36,7 +38,7 @@ export const Input = ({
 
   const handleResetField = (name: string) => {
     resetField(name);
-    console.log("handle", name);
+    // console.log("handle", name);
   };
 
   const { onBlur: hookFormOnBlur } = register(name);
@@ -85,8 +87,8 @@ export const Input = ({
             />
           ) : (
             <input
-            disabled={disabled}
-              autoFocus={autoFocus}
+              disabled={disabled}
+              {...(autoFocus && { autoFocus })}
               onFocus={onFocus}
               id={`input-${name}`}
               className={cn(
@@ -104,7 +106,7 @@ export const Input = ({
               placeholder={placeholder}
               type={type}
               {...(value && { value })}
-              {...(defaultValue && {defaultValue})}
+              {...(defaultValue && { defaultValue })}
               {...register(name)}
               aria-describedby={`inputError-${name}`}
               title={promptMessage}
@@ -113,7 +115,7 @@ export const Input = ({
                   shouldValidate: true,
                 });
                 if (event.target.value.length === 0) {
-                  event.stopPropagation()
+                  event.stopPropagation();
                   setIsIconVisible(false);
                 }
                 hookFormOnBlur(event);
