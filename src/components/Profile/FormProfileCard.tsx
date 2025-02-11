@@ -40,7 +40,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   });
 
   const [updateSocialLink] = useUpdateSocialLinkMutation();
-
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
   const dispatch = useAppDispatch();

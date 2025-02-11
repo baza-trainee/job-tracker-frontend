@@ -6,7 +6,10 @@ import {
   useCreateCoverLeterMutation,
   useUpdateCoverLetterByIdMutation,
 } from "@/store/querySlices/coverLettersQuerySlice";
-import { useCreateProjectMutation } from "@/store/querySlices/projectQuerySlice";
+import {
+  useCreateProjectMutation,
+  useUpdateProjectByIdMutation,
+} from "@/store/querySlices/projectQuerySlice";
 import {
   useCreateResumeMutation,
   useUpdateResumeByIdMutation,
@@ -92,7 +95,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
       isSuccess: isSuccessProject,
       isError: isErrorProject,
     },
-  ] = useCreateProjectMutation();
+  ] = isUpdating ? useUpdateProjectByIdMutation() : useCreateProjectMutation();
 
   const [
     mutationResume,
@@ -125,6 +128,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
 
       case "addProjects":
         await mutationProject({
+          id: updateItem?.id,
           name: data.name,
           technologies: data.technologies as string,
           link: data.link as string,
