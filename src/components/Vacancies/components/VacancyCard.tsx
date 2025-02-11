@@ -32,20 +32,21 @@ const VacancyCard: FC<VacancyCardProps> = ({
 
     return (
         <div className={clsx(
-            "w-[278px] shrink-0 border border-transparent box-border p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2 overflow-hidden transition-all duration-300 cursor-pointer active:border-iconHover focus:border-iconHover focus-visible:border-iconHover focus:outline-none", 
+            "shrink-0 border border-transparent box-border p-3 rounded-xl font-nunito font-medium flex flex-col justify-between gap-2 overflow-hidden transition-all duration-300 cursor-pointer active:border-iconHover focus:border-iconHover focus-visible:border-iconHover focus:outline-none", 
             colorSectionBG,
-            colorHoverBG
+            colorHoverBG,
+            "w-[241px] xl:w-[241px] 2xl:w-[278px] 3xl:w-[314px]"
             )}
             onClick={onClick}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => e.key === "Enter" && onClick?.()}
         >
-            <div className="w-full text-start">
+            <div className="w-full text-start font-medium">
                 <h3 className="text-base truncate">{titleVacancy}</h3>
                 <p className="text-xs truncate">{company}</p>
             </div>
-            <div className="flex gap-1 items-center">
+            <div className="flex gap-1 items-center font-medium">
                 <Icon id={`location-${workType}`} className="w-6 h-6 shrink-0"/>
                 <span className="text-sm">{locationLabel[workType]}</span>
                 <span className="w-[50%] text-sm truncate">{location}</span>
