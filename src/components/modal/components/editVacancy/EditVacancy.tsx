@@ -43,7 +43,7 @@ const EditVacancy = () => {
 
   const saveVacancy = () => {
     handleSubmit((data) => {
-      console.log("Редагування вакансії", data);
+      // console.log("Редагування вакансії", data);
       dispatch(
         openConfirmation({
           typeConfirmation: "saveEditVacancies",

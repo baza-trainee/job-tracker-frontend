@@ -24,7 +24,7 @@ export type TypesModal =
   | "removeProjects"
   | "removeResumes"
   | "removeCoverLetters"
-  | "updateUserData"
+  | "removeAccount"
   | "addEvent";
 
 export type Color = {

@@ -14,8 +14,8 @@ export const Input = ({
   resetField,
   errors,
   value,
-  onBlur,
-  id,
+  onBlur,defaultValue,
+  id,disabled=false,
   autoFocus = false,
   onFocus,
   isButtonCopy = false,
@@ -85,6 +85,7 @@ export const Input = ({
             />
           ) : (
             <input
+            disabled={disabled}
               autoFocus={autoFocus}
               onFocus={onFocus}
               id={`input-${name}`}
@@ -103,6 +104,7 @@ export const Input = ({
               placeholder={placeholder}
               type={type}
               {...(value && { value })}
+              {...(defaultValue && {defaultValue})}
               {...register(name)}
               aria-describedby={`inputError-${name}`}
               title={promptMessage}
