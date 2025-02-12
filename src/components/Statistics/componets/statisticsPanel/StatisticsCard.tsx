@@ -8,11 +8,11 @@ const StatisticsCard: FC<StatisticsCardProps> = memo(
     return (
       <li
         className={cn(
-          "flex h-[139px] w-[192px] flex-col items-center justify-center gap-1 rounded-2xl bg-color5 px-[35px] py-4 text-center even:bg-color1"
+          "flex h-[77px] w-[134px] flex-col items-center justify-center rounded-2xl bg-color5 px-[29px] py-[6px] text-center even:bg-color1 md:h-[139px] md:w-[192px] md:gap-1 md:px-[35px] md:py-4"
         )}
       >
-        <h3 className="text-xl leading-[135%]">{cardName}</h3>
-        <p className="text-[32px] font-semibold leading-[135%]">
+        <h3 className="text-sm leading-[135%] md:text-xl">{cardName}</h3>
+        <p className="text-xl font-semibold leading-[135%] md:text-[32px]">
           {cardQuantity}
         </p>
       </li>
