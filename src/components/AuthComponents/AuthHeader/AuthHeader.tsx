@@ -38,25 +38,25 @@ export const AuthHeader = ({ type }: AuthHeaderProps) => {
     <div
       className={classNames(
         type === "resetPassword" &&
-          "responsive-design absolute left-[50%] sm:mt-0 mt-[10px] w-full translate-x-[-50%] xl:max-w-[400px]",
+          "absolute left-[50%] mt-[10px] w-full translate-x-[-50%] sm:mt-0 xl:max-w-[400px]",
         type === "forgotPassword"
           ? "sm:mb-[24px] 2xl:mb-[40px]"
-          : "responsive-design mb-1 md:mb-2 xl:mb-4 2xl:mb-10"
+          : "mb-1 md:mb-2 xl:mb-4 2xl:mb-10"
       )}
     >
-      <h2 className="responsive-design mb-1 text-center font-nunito text-[20px] font-bold leading-[135%] text-textBlack md:mb-2 md:text-[24px] xl:text-[32px] 2xl:mb-3">
+      <h2 className="mb-1 text-center font-nunito text-[20px] font-bold leading-[135%] text-textBlack md:mb-2 md:text-[24px] xl:text-[32px] 2xl:mb-3">
         {authTitle()}
       </h2>
       <p
         className={classNames(
-          "responsive-design mx-auto max-w-[380px] text-center font-nunito text-[14px] font-medium leading-[135%] text-textBlackLight 2xl:text-[16px]",
+          "mx-auto max-w-[380px] text-center font-nunito text-[14px] font-medium leading-[135%] text-textBlackLight 2xl:text-[16px]",
           // "xl:max-w-[424px]",
           // "2xl:max-w-[424px]",
           // "3xl:max-w-[434px]",
           type === "forgotPassword" || type === "resetPassword"
-            ? "sm:!text-[12px]  md:!text-[14px] !text-textBlack"
+            ? "!text-textBlack sm:!text-[12px] md:!text-[14px]"
             : "md:max-w-[424px]",
-          type === "forgotPassword" && "sm:!text-center 2xl:!text-left"
+          type === "forgotPassword" && "!text-left"
         )}
       >
         {authSubTitle()}
