@@ -98,7 +98,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
         <label
           htmlFor={`input-${name}`}
           className={cn(
-            "responsive-design mb-3 inline-block font-nunito text-[20px] font-medium leading-[135%] text-textBlack",
+            " mb-3 inline-block font-nunito text-[20px] font-medium leading-[135%] text-textBlack",
             "sm:mb-[2px] sm:text-[14px]",
             "md:mb-2 md:text-[18px]",
             "xl:mb-2 xl:text-[16px]",
@@ -146,7 +146,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <span
             id={`inputError-${name}`}
             className={cn(
-              "responsive-design inline-block font-nunito font-medium text-color2",
+              " inline-block font-nunito font-medium text-color2",
               "sm:text-[12px]",
               "md:text-[14px]",
               "2xl:text-[16px]"

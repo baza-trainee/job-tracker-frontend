@@ -92,7 +92,7 @@ export const Input = ({
               onFocus={onFocus}
               id={`input-${name}`}
               className={cn(
-                "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                " active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
                 "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
                 "md:h-11 md:px-6 md:py-3 md:text-[14px]",
                 "xl:text-[14px]",
@@ -175,7 +175,7 @@ export const Input = ({
           <span
             id={`inputError-${name}`}
             className={cn(
-              "responsive-design inline-block font-nunito font-medium text-color2",
+              "inline-block font-nunito font-medium text-color2",
               "sm:text-[12px]",
               "md:text-[14px]",
               "2xl:text-[16px]"
