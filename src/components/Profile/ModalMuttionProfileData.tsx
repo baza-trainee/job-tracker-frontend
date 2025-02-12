@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../inputs/Input/Input";
 import { Button } from "../buttons/Button/Button";
@@ -5,12 +6,14 @@ import {
   useCreateCoverLeterMutation,
   useUpdateCoverLetterByIdMutation,
 } from "@/store/querySlices/coverLettersQuerySlice";
-import { useCreateProjectMutation } from "@/store/querySlices/projectQuerySlice";
+import {
+  useCreateProjectMutation,
+  useUpdateProjectByIdMutation,
+} from "@/store/querySlices/projectQuerySlice";
 import {
   useCreateResumeMutation,
   useUpdateResumeByIdMutation,
 } from "@/store/querySlices/resumesQuerySlices";
-import { useEffect } from "react";
 import {
   notifyError,
   notifySuccess,
@@ -45,8 +48,11 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   });
   const dispatch = useAppDispatch();
   const { data } = useData();
+
   const { refetch: refetchProfile } = useGetAllUserDataQuery();
+
   const { t } = useTranslation();
+
   const updateItem =
     useAppSelector((state) => state.modal.dataConfirmation) || false;
 
@@ -56,8 +62,8 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     if (!updateItem) return;
     setValue("name", updateItem.name);
     setValue("link", updateItem.link);
-    setValue("technology", updateItem.technology);
-    setValue("text", updateItem.text);
+    setValue("technologies", updateItem.technologies);
+    setValue("text", updateItem.description || updateItem.text);
   }, [updateItem]);
 
   const [
@@ -89,7 +95,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
       isSuccess: isSuccessProject,
       isError: isErrorProject,
     },
-  ] = useCreateProjectMutation();
+  ] = isUpdating ? useUpdateProjectByIdMutation() : useCreateProjectMutation();
 
   const [
     mutationResume,
@@ -101,7 +107,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   ] = isUpdating ? useUpdateResumeByIdMutation() : useCreateResumeMutation();
 
   const onSubmit: SubmitHandler<
-    Pick<DataItem, "text" | "link" | "name" | "technology">
+    Pick<DataItem, "text" | "link" | "name" | "technologies">
   > = async (data) => {
     switch (cardsType) {
       case "addPersonalProperties":
@@ -122,9 +128,11 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
 
       case "addProjects":
         await mutationProject({
+          id: updateItem?.id,
           name: data.name,
-          githubLink: data.technology || "",
-          liveProjectLink: data.link as string,
+          technologies: data.technologies as string,
+          link: data.link as string,
+          description: data.text as string,
         });
         break;
 
@@ -183,6 +191,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
+        autoFocus
         label={data[cardsType].name}
         name="name"
         placeholder={data[cardsType].placeholderName}
@@ -191,10 +200,11 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         resetField={resetField}
         isCheckButtons={false}
       />
-      {data[cardsType].technology && (
+
+      {data[cardsType].technologies && (
         <Input
-          label={data[cardsType].technology}
-          name="technology"
+          label={data[cardsType].technologies}
+          name="technologies"
           placeholder={data[cardsType].placeholderTechnology as string}
           register={register}
           errors={errors}

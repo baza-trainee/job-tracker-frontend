@@ -14,12 +14,13 @@ import {
   useDeleteSocialLinkMutation,
   useGetAllUserDataQuery,
 } from "@/store/querySlices/profileQuerySlice";
+import { useTranslation } from "react-i18next";
 
 function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
   const idRemoveItem = useAppSelector((state) => state.modal.dataConfirmation);
 
   const dispatch = useAppDispatch();
-
+  const { t } = useTranslation();
   const { refetch: refetchProfile } = useGetAllUserDataQuery();
 
   const [
@@ -123,10 +124,12 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
 
   return (
     <div className="flex flex-col items-center justify-center gap-10">
-      <h2>Ви впевнені?</h2>
+      <h2 className="font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]">
+        {t("modalAddProperties.modalRemoveLinkTitle")}
+      </h2>
       <div className="flex gap-4">
         <Button type="button" onClick={() => dispatch(closeModal())}>
-          Скасувати
+          {t("infoModal.button.cancel")}
         </Button>
 
         <Button
@@ -135,7 +138,7 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
           onClick={handleRemove}
           disabled={isDisabledButtonRemove}
         >
-          Видалити
+          {t("infoModal.button.delete")}
         </Button>
       </div>
     </div>

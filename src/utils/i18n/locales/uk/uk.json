@@ -14,7 +14,21 @@
     "placeholderLinkResume": "Вставте лінк на резюме",
     "placeholderNameCoverLetter": "Вкажіть назву для листа",
     "textNameCoverLetter": "Супровідний лист",
-    "placeholderTextCoverLetter": "Тут треба написати ваш лист"
+    "placeholderTextCoverLetter": "Тут треба написати ваш лист",
+    "placeholderNameProject": "Вкажіть назву проєкту",
+    "technology": "Технології",
+    "placeholderTechnology": "Вкажіть технології які використовували",
+    "linkProject": "Лінк на проєкт",
+    "placeholderlinkProject": "Вставте лінк на проєкт",
+    "textProject": "Опис проєкту",
+    "placeholderTextProject": "Можете описати проєкт",
+    "modalRemoveLink": "Видалити посилання",
+    "modalRemoveProject": "Видалити проєкт",
+    "modalRemoveCoverLetter": "Видалити супровідний лист",
+    "modalRemoveResume": "Видалити резюме",
+    "modalRemoveLinkTitle": "Ви впевнені, що хочете видалити?",
+    "removeAccountModalName": "Видалити акаунт",
+    "removeAccountModalText": "Ви впевнені, що хочете видалити акаунт? "
   },
   "notification": {
     "updatedSuccess": "Успішно оновлено",
@@ -301,7 +315,8 @@
       "restore": "Відновити",
       "login": "Увійти",
       "try": "Спробувати",
-      "delete": "Видалити"
+      "delete": "Видалити",
+      "confirm": "Ок"
     },
     "logOut": {
       "title": "Ви впевнені, що хочете вийти?",
@@ -350,8 +365,8 @@
     "save": "Зберегти",
     "soonModalPlaceholderName": "Вкажіть назву події",
     "soonModalPlaceholderNotes": "Місце для нотаток",
-    "soonModalTimeHours": "години",
-    "soonModalTimeMinutes": "хвилини"
+    "soonModalTimeHours": "ГГ",
+    "soonModalTimeMinutes": "ХВ"
   },
   "calendarTabs": {
     "day": "День",

@@ -15,7 +15,9 @@ export const Input = ({
   errors,
   value,
   onBlur,
+  defaultValue,
   id,
+  disabled = false,
   autoFocus = false,
   onFocus,
   isButtonCopy = false,
@@ -36,7 +38,7 @@ export const Input = ({
 
   const handleResetField = (name: string) => {
     resetField(name);
-    console.log("handle", name);
+    // console.log("handle", name);
   };
 
   const { onBlur: hookFormOnBlur } = register(name);
@@ -85,7 +87,8 @@ export const Input = ({
             />
           ) : (
             <input
-              autoFocus={autoFocus}
+              disabled={disabled}
+              {...(autoFocus && { autoFocus })}
               onFocus={onFocus}
               id={`input-${name}`}
               className={cn(
@@ -103,6 +106,7 @@ export const Input = ({
               placeholder={placeholder}
               type={type}
               {...(value && { value })}
+              {...(defaultValue && { defaultValue })}
               {...register(name)}
               aria-describedby={`inputError-${name}`}
               title={promptMessage}
