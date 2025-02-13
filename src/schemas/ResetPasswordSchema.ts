@@ -8,7 +8,8 @@ export const ResetPasswordSchema = z
       .string()
       .min(8, `validation.passwordMin`)
       .regex(passwordRegex, `validation.passwordInvalid`)
-      .max(14, `validation.passwordMax`),
+      .max(14, `validation.passwordMax`)
+      .or(z.literal("")),
 
     confirmPassword: z.string(),
   })

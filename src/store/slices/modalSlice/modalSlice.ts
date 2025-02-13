@@ -2,6 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ModalProps } from "./initialState";
 
 const initialState: ModalProps = {
+  // isModalOpen: true,
+  // typeModal: "resetPasswordSuccess",
+
   isModalOpen: false,
   typeModal: "close",
   isConfirmationOpen: false,

@@ -70,7 +70,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <section>
           <div
             className={classNames(
-              "responsive-design container mb-[10px] flex justify-center gap-0",
+              "container mb-[10px] flex justify-center gap-0",
               type === "signUp" && "md:-mt-[36px] xl:mt-0",
               "xl:mb-[42px] xl:gap-10",
               "2xl:mb-[80px] 2xl:gap-6",
@@ -80,7 +80,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
             <LoginCardImages />
             <div
               className={classNames(
-                "responsive-design flex w-full flex-col font-nunito",
+                "flex w-full flex-col font-nunito",
                 // alex comment
                 // "md:max-w-[444px]",
                 // "xl:max-w-[444px]",
@@ -95,7 +95,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
               <div
                 className={classNames(
-                  "responsive-design relative rounded-[20px] bg-backgroundMain shadow-form_shadow",
+                  "relative rounded-[20px] bg-backgroundMain shadow-form_shadow",
                   "sm:px-2 sm:py-4",
                   "md:p-8",
                   "xl:-mb-[42px] xl:px-8 xl:py-8",
@@ -112,7 +112,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
                   <div
                     className={classNames(
-                      "responsive-design flex flex-col",
+                      "flex flex-col",
                       "sm:gap-2",
                       "md:gap-4",
                       "xl:gap-4",
@@ -155,11 +155,13 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                           : ""
                       }
                       errors={errors}
-                      promptMessage={t("register.promptMessagePassword")}
+                      promptMessage={t(
+                        `${!isLogInPage ? "register.promptMessagePassword" : ""}`
+                      )}
                     />
 
                     {isLogInPage ? (
-                      <p className="responsive-design -mt-1 text-right text-[12px] md:-mt-3 md:text-[16px]">
+                      <p className="-mt-1 text-right text-[12px] md:-mt-3 md:text-[16px]">
                         <span
                           className={classNames(
                             "cursor-pointer font-nunito font-medium leading-[135%] text-textBlackLight hover:text-textOther hover:underline"
@@ -217,7 +219,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
                   <Button
                     type="submit"
-                    className="responsive-input mx-auto mt-4 text-[14px] md:text-[20px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
+                    className="mx-auto mt-4 text-[14px] md:text-[20px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
                     disabled={isCleanInputsForm() || error || isLoading}
                     variant="accent"
                     size="big"
@@ -254,7 +256,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                         : t("login.noAccount")}
                       <Link
                         className={classNames(
-                          "responsive-design ml-[6px] font-nunito text-[12px] font-medium leading-[135%] text-textOther hover:underline",
+                          "ml-[6px] font-nunito text-[12px] font-medium leading-[135%] text-textOther hover:underline",
                           "md:text-[16px]",
                           "xl:text-4",
                           "2xl:ml-[6px]",

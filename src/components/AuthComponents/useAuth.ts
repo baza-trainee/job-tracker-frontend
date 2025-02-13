@@ -18,7 +18,7 @@ import {
 } from "../../store/querySlices/authQuerySlice";
 
 import { useAppDispatch } from "@/store/hook";
-import { openModal } from "@/store/slices/modalSlice/modalSlice";
+import { closeModal, openModal } from "@/store/slices/modalSlice/modalSlice";
 
 export function useAuthForm(
   type: "signUp" | "logIn" | "forgotPassword" | "resetPassword"
@@ -34,7 +34,7 @@ export function useAuthForm(
 
   const [resetUserPassword] = useResetUserPasswordMutation();
 
-  const [isLoading, setIsLoadinfg] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formConfigs = useMemo(() => {
     return {
@@ -116,7 +116,7 @@ export function useAuthForm(
 
   const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
     async (data) => {
-      setIsLoadinfg(true);
+      setIsLoading(true);
       console.log(type, errors);
       try {
         switch (type) {
@@ -159,7 +159,16 @@ export function useAuthForm(
                 password: data.password,
                 token,
               });
-              navigate("/log-in");
+              dispatch(
+                openModal({
+                  typeModal: "resetPasswordSuccess",
+                })
+              );
+              setTimeout(() => {
+                navigate("/log-in");
+                dispatch(closeModal());
+              }, 5000);
+
               return;
             }
             throw new Error("Missing password or token for reset password");
@@ -171,10 +180,12 @@ export function useAuthForm(
         console.error("Submission failed:", error);
       } finally {
         reset();
-        setIsLoadinfg(false);
+        setIsLoading(false);
       }
     },
     [
+      dispatch,
+      errors,
       forgotUserPassword,
       loginUser,
       navigate,

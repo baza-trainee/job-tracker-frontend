@@ -40,7 +40,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   });
 
   const [updateSocialLink] = useUpdateSocialLinkMutation();
-
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
   const dispatch = useAppDispatch();
@@ -158,7 +157,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                         "profile"
                       );
                     }}
-                    value={item === "email" ? initialValues.current[item] : ""}
+                    disabled={item === "email" ? true : false}
                     label={label}
                     name={item}
                     placeholder={item}
@@ -220,7 +219,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                 handleUpdateInput({ ...item, typeModal: "update" })
               }
               key={item.id}
-              value={item.liveProjectLink}
+              value={`${item.name} | ${item.technologies}`}
               name={item.name}
               placeholder={item.name}
               register={register}
@@ -229,9 +228,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() =>
-                copyInputValue(item.liveProjectLink)
-              }
+              handleClickButtonCopyInput={() => copyInputValue(item.link)}
               handleClickButtonRemoveInput={() => {
                 handleClickButtonRemoveInput(item.id);
               }}

@@ -7,7 +7,7 @@ function Logo() {
     <Link to="/">
       <img
         className={classNames(
-          "responsive-design h-[26px] w-[47px]",
+          "h-[26px] w-[47px]",
           "md:h-[52px] md:w-[94px]",
           "xl:h-[42px] xl:w-[84px]",
           "2lx:w-[94px] 2xl:h-[52px]"

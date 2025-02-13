@@ -66,7 +66,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
         </div>
         <button
           onClick={btnFunc}
-          className={"z-50 -ml-6 rounded-md hover:bg-color2"}
+          className={"z-50 -ml-6 rounded-md md:hover:bg-color2"}
         >
           <Icon id="close-default" className={clsx("fill-textBlack", modalData.iconAddEventModal || "h-6 w-6")} />
         </button>

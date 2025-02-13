@@ -12,7 +12,7 @@ export const projectQuerySlice = createApi({
   endpoints: (build) => ({
     createProject: build.mutation<
       Project,
-      Pick<Project, "githubLink" | "liveProjectLink" | "name">
+      Pick<Project, "name" | "link" | "technologies" | "description">
     >({
       query: (project) => ({ url: "/projects", method: "POST", body: project }),
       invalidatesTags: ["projects"],
@@ -30,7 +30,7 @@ export const projectQuerySlice = createApi({
     updateProjectById: build.mutation<
       Project,
       Pick<Project, "id"> &
-        Partial<Pick<Project, "githubLink" | "liveProjectLink" | "name">>
+        Partial<Pick<Project, "name" | "link" | "technologies" | "description">>
     >({
       query: ({ id, ...project }) => ({
         url: `/projects/${id}`,
