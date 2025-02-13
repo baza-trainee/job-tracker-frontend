@@ -66,7 +66,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
         <Logo />
       </header>
 
-      <main className="flex-grow">
+      <main className="w-full flex-grow">
         <section>
           <div
             className={classNames(
