@@ -113,7 +113,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
               location={vacancy.location}
               onClick={() => {
                 // dispatch(openModal({ typeModal: "editVacancy" }));
-                handleVacancyCard(vacancy)
+                handleVacancyCard(vacancy);
               }}
             />
           ))}
