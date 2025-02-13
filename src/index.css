@@ -20,6 +20,11 @@ body {
   @apply bg-backgroundMain;
 }
 
+.container {
+  width: 100%;
+  max-width: 120rem;
+}
+
 .custom-hover {
   transition:
     fill 300ms ease-in-out,
