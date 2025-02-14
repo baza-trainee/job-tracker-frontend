@@ -1,20 +1,22 @@
 import { useAppDispatch, useAppSelector } from "@/store/hook";
-import { PropsModalAddProperties } from "./modalAddProperties.types";
-import { Button } from "../buttons/Button/Button";
+
 import { closeModal } from "@/store/slices/modalSlice/modalSlice";
 import { useDeleteCoverLetterByIdMutation } from "@/store/querySlices/coverLettersQuerySlice";
 import { useDeleteProjectByIdMutation } from "@/store/querySlices/projectQuerySlice";
 import { useDeleteResumeByIdMutation } from "@/store/querySlices/resumesQuerySlices";
 import { useEffect } from "react";
-import {
-  notifyError,
-  notifySuccess,
-} from "../Notifications/NotificationService";
+
 import {
   useDeleteSocialLinkMutation,
   useGetAllUserDataQuery,
 } from "@/store/querySlices/profileQuerySlice";
 import { useTranslation } from "react-i18next";
+import { PropsModalAddProperties } from "../modalAddProperties.types";
+import {
+  notifyError,
+  notifySuccess,
+} from "@/components/Notifications/NotificationService";
+import { Button } from "@/components/buttons/Button/Button";
 
 function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
   const idRemoveItem = useAppSelector((state) => state.modal.dataConfirmation);

@@ -28,7 +28,8 @@
     "modalRemoveResume": "Видалити резюме",
     "modalRemoveLinkTitle": "Ви впевнені, що хочете видалити?",
     "removeAccountModalName": "Видалити акаунт",
-    "removeAccountModalText": "Ви впевнені, що хочете видалити акаунт? "
+    "removeAccountModalText": "Ви впевнені, що хочете видалити акаунт? ",
+    "removeConfirmAccountModalText": "Цю дії не можна бути відмінити. Ви впевнені?"
   },
   "notification": {
     "updatedSuccess": "Успішно оновлено",
