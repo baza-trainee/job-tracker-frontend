@@ -29,6 +29,7 @@ export const Input = ({
   promptMessage = "",
   setValue,
   rows,
+  classNameInputCustom,
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -72,7 +73,21 @@ export const Input = ({
           {type === "textarea" ? (
             <textarea
               id={`input-${name}`}
-              className="w-full rounded-xl border p-3 text-base"
+              // className="w-full rounded-xl border p-3 text-base"
+              className={cn(
+                "w-full rounded-xl border p-3 text-base",
+                "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                "sm:px-4 sm:py-2 sm:text-[12px]",
+                "md:px-6 md:py-3 md:text-[14px]",
+                "xl:text-[14px]",
+                "2xl:text-[16px]",
+                {
+                  "border-color7": !error,
+                  "border-color2": error,
+                  // "border-textBlack": !isCheckButtons,
+                },
+                classNameInputCustom
+              )}
               placeholder={placeholder}
               rows={rows || 4}
               {...register(name)}
@@ -92,7 +107,7 @@ export const Input = ({
               onFocus={onFocus}
               id={`input-${name}`}
               className={cn(
-                " active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
                 "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
                 "md:h-11 md:px-6 md:py-3 md:text-[14px]",
                 "xl:text-[14px]",
@@ -101,7 +116,8 @@ export const Input = ({
                   "border-color7": !error,
                   "border-color2": error,
                   // "border-textBlack": !isCheckButtons,
-                }
+                },
+                classNameInputCustom
               )}
               placeholder={placeholder}
               type={type}

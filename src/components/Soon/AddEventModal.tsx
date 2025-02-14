@@ -7,6 +7,7 @@ import Icon from "../Icon/Icon.tsx";
 import { useAppDispatch } from "../../store/hook.ts";
 import { useCreateEventMutation } from "../../store/querySlices/eventsQuerySlice.ts";
 import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
+import clsx from "clsx";
 
 const AddEventModal = () => {
   const { t } = useTranslation();
@@ -33,14 +34,14 @@ const AddEventModal = () => {
     const newEvent = {
       name: soonEventName,
       text: soonEventNotes || "",
-      date: date || new Date().toISOString().split("T")[0], // Поки що поточна дата (оновити після інтеграції календаря)
+      date: date || new Date().toISOString().split("T")[0],
       time: formattedTime,
     };
 
     try {
       await createEvent(newEvent).unwrap();
       dispatch(closeModal());
-      reset(); // Очищаємо форму після успіху
+      reset();
     } catch (error) {
       console.error("Помилка створення події:", error);
     }
@@ -52,11 +53,13 @@ const AddEventModal = () => {
       className="mt-14 flex flex-col align-middle"
     >
       <div className="flex w-full gap-6">
-        {/* <SoonCalendarModal /> */}
         {/* Додамо пропс для автозаповнення дати, якщо це підтримується */}
         <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
-        <div className="w-[445px] text-2xl font-medium">
-          <label htmlFor="soonEventName">{t("soonSection.soonName")}</label>
+
+        <div className="w-[445px] font-medium">
+          <label htmlFor="soonEventName" className="text-base 3xl:text-2xl">
+            {t("soonSection.soonName")}
+          </label>
           <Input
             name="soonEventName"
             placeholder={t("soonSection.soonModalPlaceholderName")}
@@ -65,8 +68,14 @@ const AddEventModal = () => {
             resetField={resetField}
             setValue={setValue}
             isRequired={true}
+            isCheckButtons={false}
+            classNameInputCustom="rounded-lg"
           />
-          <label htmlFor="soonEventNotes" className="mt-4 block">
+
+          <label
+            htmlFor="soonEventNotes"
+            className="mt-4 block text-base 3xl:text-2xl"
+          >
             {t("soonSection.soonNotes")}
           </label>
           <Input
@@ -79,38 +88,85 @@ const AddEventModal = () => {
             isRequired={false}
             type="textarea"
             rows={4}
+            isCheckButtons={false}
           />
-          <p className="mt-4">{t("soonSection.setTime")}</p>
-          <div className="flex gap-2">
+
+          <p className="mt-4 text-base 3xl:text-2xl">
+            {t("soonSection.setTime")}
+          </p>
+          <div className="time-content grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
             <Input
-              className="border-grey-500 h-[60px] w-20 rounded-lg border-2 bg-backgroundTertiary px-4 py-[9px] focus:border-color1"
               name="hours"
-              placeholder={t("soonSection.soonModalTimeHours")}
+              placeholder="00"
+              type="text"
               register={register}
               errors={errors}
               resetField={resetField}
               setValue={setValue}
               isRequired={true}
+              isCheckButtons={false}
+              className={clsx(
+                "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
+                "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+              )}
+              classNameInputCustom={clsx(
+                "border-0 bg-backgroundTertiary p-0 text-[28px] font-medium",
+                "sm:h-auto sm:p-0 sm:text-[28px]",
+                "md:h-auto md:p-0 md:text-[28px]",
+                "xl:text-[32px] xl:font-normal",
+                "2xl:text-[32px]"
+              )}
+              // onInput={(e) => {
+              //   const input = e.currentTarget;
+              //   const value = input.value.replace(/\D/g, ""); // Видаляємо нецифрові символи
+              //   if (+value > 24) return; // Не даємо ввести більше 24
+              //   setValue("hours", value); // Оновлюємо значення
+              // }}
+              // onKeyDown={(e) => {
+              //   if (
+              //     !/[\d]/.test(e.key) &&
+              //     e.key !== "Backspace" &&
+              //     e.key !== "Tab"
+              //   ) {
+              //     e.preventDefault(); // Забороняємо всі символи, окрім цифр, Backspace і Tab
+              //   }
+              // }}
             />
-            <div className="flex items-center">
+            <div className="flex h-[60px] w-6 items-center justify-center">
               <span className="text-[57px] font-normal">:</span>
             </div>
             <Input
-              className="border-grey-500 h-[60px] w-20 rounded-lg border-2 bg-backgroundTertiary px-4 py-[9px] focus:border-color1"
               name="minutes"
-              placeholder={t("soonSection.soonModalTimeMinutes")}
+              placeholder="00"
               register={register}
               errors={errors}
               resetField={resetField}
               setValue={setValue}
               isRequired={true}
+              isCheckButtons={false}
+              className={clsx(
+                "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
+                "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+              )}
+              classNameInputCustom={clsx(
+                "border-0 bg-backgroundTertiary p-0 text-[28px] font-medium",
+                "sm:h-auto sm:p-0 sm:text-[28px]",
+                "md:h-auto md:p-0 md:text-[28px]",
+                "xl:text-[32px] xl:font-normal",
+                "2xl:text-[32px]"
+              )}
             />
+            <p className="col-span-2 row-start-2 text-sm">
+              {t("soonSection.soonModalTimeHours")}
+            </p>
+            <p className="col-span-1 row-start-2 text-sm">
+              {t("soonSection.soonModalTimeMinutes")}
+            </p>
           </div>
         </div>
       </div>
 
       <Button
-        // type="button"
         type="submit"
         className="mx-auto mt-8 bg-button"
         variant="ghost"
@@ -118,7 +174,6 @@ const AddEventModal = () => {
         // onClick={saveVacancy}
         disabled={isLoading}
       >
-        {/* {t("soonSection.save")} */}
         {isLoading ? t("loading") : t("soonSection.save")}
         <Icon id={"check-box"} className="ml-3 h-6 w-6" />
       </Button>

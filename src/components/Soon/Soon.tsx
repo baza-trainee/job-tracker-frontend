@@ -4,6 +4,7 @@ import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
 import Icon from "../Icon/Icon.tsx";
 import CardSoon from "./CardSoon.tsx";
 import Modal from "../modal/Modal.tsx";
+import { Button } from "../buttons/Button/Button.tsx";
 import { useGetAllEventsQuery } from "../../store/querySlices/eventsQuerySlice.ts";
 
 export const Soon = () => {
@@ -36,10 +37,15 @@ export const Soon = () => {
         <div className="soon-scroll max-h-[456px] w-full overflow-y-scroll pr-2">
           <ul className="w-full">
             {/* {events.map((event, index) => (
-                            <li key={index}>
-                                <CardSoon day={event.day} date={event.date} title={event.title} time={event.time} />
-                            </li>
-                        ))} */}
+              <li key={index}>
+                <CardSoon
+                  day={event.day}
+                  date={event.date}
+                  title={event.title}
+                  time={event.time}
+                />
+              </li>
+            ))} */}
             {events?.map((event) => (
               <li key={event.id}>
                 <CardSoon
@@ -58,13 +64,13 @@ export const Soon = () => {
           </ul>
         </div>
 
-        <button
-          className="flex w-[480px] items-center justify-start gap-4 rounded-xl bg-backgroundTertiary px-6 py-3 text-xl hover:bg-backgroundSecondary"
+        <Button
+          className="flex w-[480px] items-center justify-start gap-2 border-iconHover bg-backgroundTertiary px-3 py-3 md:px-4 xl:gap-4 2xl:px-6"
           onClick={handleOpenModal}
         >
           <Icon id="plus" className="ml-4 mr-[13px] size-6" />
           {t("soonSection.addEvent")}
-        </button>
+        </Button>
       </div>
 
       <Modal />
@@ -73,3 +79,31 @@ export const Soon = () => {
 };
 
 export default Soon;
+
+// {isLoading || <p>Loading...</p>}
+// {!isLoading && (
+//   <ul className="w-full">
+{
+  /* {events.map((event, index) => (
+                  <li key={index}>
+                      <CardSoon day={event.day} date={event.date} title={event.title} time={event.time} />
+                  </li>
+              ))} */
+}
+//     {events?.map((event) => (
+//       <li key={event.id}>
+//         <CardSoon
+//           day={new Date(event.date).toLocaleString("uk-Ua", {
+//             weekday: "short",
+//           })}
+//           date={new Date(event.date).toLocaleString("uk-Ua", {
+//             day: "2-digit",
+//             month: "2-digit",
+//           })}
+//           title={event.name}
+//           time={event.time.slice(0, 5)}
+//         />
+//       </li>
+//     ))}
+//   </ul>
+// )}
