@@ -99,9 +99,11 @@ const VacancySection: FC<VacancySectionProps> = ({
   //   else if (window.innerWidth >= 1440) scrollAmount = 278 + 20;
   //   else if (window.innerWidth >= 1280) scrollAmount = 241 + 16;
   //   else if (window.innerWidth >= 768) scrollAmount = 200 + 12;
-  //   else scrollAmount = 232 + 4;
+  //   else if (window.innerWidth < 768) scrollAmount = 232 + 12;
+  //   else scrollAmount = 232 + 12;
 
   //   console.log("Scroll Amount:", scrollAmount);
+  //   console.log("innerWidth:", window.innerWidth);
   //   return scrollAmount;
   // };
 

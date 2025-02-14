@@ -16,11 +16,18 @@ import StatisticsPanelSkeleton from "../components/Statistics/componets/statisti
 import NoVacancyCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
 import Soon from "../components/Soon/Soon.tsx";
 import RejectDiagram from "../components/Statistics/componets/statisticsDiagram/RejectDiagram.tsx";
-import { setActiveTab, setSelectedDate, setSelectedMonth, setSelectedYear } from "@/store/slices/calendarSlice/calendarSlice.ts";
+import {
+  setActiveTab,
+  setSelectedDate,
+  setSelectedMonth,
+  setSelectedYear,
+} from "@/store/slices/calendarSlice/calendarSlice.ts";
 
 function Statistics() {
   const dispatch = useAppDispatch();
-  const activeTab = useAppSelector((state: RootState) => state.calendar.activeTab);
+  const activeTab = useAppSelector(
+    (state: RootState) => state.calendar.activeTab
+  );
 
   const { data, isLoading, isError } = useGetAllUserDataQuery();
 
@@ -37,15 +44,21 @@ function Statistics() {
     switch (activeTab) {
       case "day":
         return (
-          <StatisticsCalendarDay onDateChange={(date) => dispatch(setSelectedDate(date))} />
+          <StatisticsCalendarDay
+            onDateChange={(date) => dispatch(setSelectedDate(date))}
+          />
         );
       case "month":
         return (
-          <StatisticsCalendarMonth onMonthChange={(month) => dispatch(setSelectedMonth(month))} />
+          <StatisticsCalendarMonth
+            onMonthChange={(month) => dispatch(setSelectedMonth(month))}
+          />
         );
       case "year":
         return (
-          <StatisticsCalendarYear onYearChange={(year) => dispatch(setSelectedYear(year))} />
+          <StatisticsCalendarYear
+            onYearChange={(year) => dispatch(setSelectedYear(year))}
+          />
         );
       default:
         return null;
@@ -77,7 +90,7 @@ function Statistics() {
       {!isLoading && vacanciesForStat.length !== 0 && (
         <>
           <div className="my-10 flex justify-between">
-            <div className="grid-col-2 mt-8 grid w-[1027px] auto-rows-max gap-x-6">
+            <div className="mt-8 grid w-[1027px] auto-rows-max grid-cols-2 gap-x-6">
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
@@ -88,9 +101,7 @@ function Statistics() {
                 <Soon />
               </div>
               <div className="col-span-1 row-start-2">{renderCalendar()}</div>
-              <div className="col-span-2 row-start-3">
-                {renderChart()}
-              </div>
+              <div className="col-span-2 row-start-3">{renderChart()}</div>
             </div>
             <DoughnutChart vacancies={vacanciesForStat} />
           </div>
