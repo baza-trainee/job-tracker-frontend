@@ -11,7 +11,6 @@ function ButtonRemoveAccount() {
       type="button"
       onClick={() => {
         dispatch(openModal({ typeModal: "removeAccount" }));
-        console.log("remove");
       }}
     >
       {t("buttonRemoveAccount")}

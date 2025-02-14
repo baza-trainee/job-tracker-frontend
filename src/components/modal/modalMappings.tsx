@@ -4,11 +4,11 @@ import InfoModal from "./components/infoModals/InfoModal";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import EditVacancy from "./components/editVacancy/EditVacancy";
 import { Color, ContentMapProps } from "./ModalMain.types";
-import ModalRemoveProperties from "../Profile/ModalRemoveProperties";
 import AddEventModal from "../Soon/AddEventModal";
-// import ModalUpdateUserData from "../Profile/ModalUpdateUserData";
-import ModalMuttionProfileData from "../Profile/ModalMuttionProfileData";
-import ModalRemoveAccount from "../Profile/ModalRemoveAccount";
+import ModalRemoveAccount from "../Profile/profileModals/ModalRemoveAccount";
+import ModalConfirmRemoveAccount from "../Profile/profileModals/ModalConfirmRemoveAccount";
+import ModalMuttionProfileData from "../Profile/profileModals/ModalMuttionProfileData";
+import ModalRemoveProperties from "../Profile/profileModals/ModalRemoveProperties";
 
 const colorDefault: Color = {
   text: "text-white",
@@ -178,6 +178,12 @@ export const contentMap: ContentMapProps = {
   },
   removeAccount: {
     content: <ModalRemoveAccount />,
+    nameModal: "modalAddProperties.removeAccountModalName",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  removeAcoountConfirm: {
+    content: <ModalConfirmRemoveAccount />,
     nameModal: "modalAddProperties.removeAccountModalName",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,

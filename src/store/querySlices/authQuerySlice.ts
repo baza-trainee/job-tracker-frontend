@@ -154,6 +154,12 @@ export const authPrivateQuerySlice = createApi({
         body: requestBody,
       }),
     }),
+    removeUser: build.mutation<void, { id: string }>({
+      query: (id) => ({
+        url: `/user/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -165,5 +171,8 @@ export const {
   useResetUserPasswordMutation,
 } = authPublicQuerySlice;
 
-export const { useLogOutUserMutation, useChangePasswordUserMutation } =
-  authPrivateQuerySlice;
+export const {
+  useLogOutUserMutation,
+  useChangePasswordUserMutation,
+  useRemoveUserMutation,
+} = authPrivateQuerySlice;

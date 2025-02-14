@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { Button } from "../buttons/Button/Button";
+import { Button } from "../../buttons/Button/Button";
 import { useAppDispatch } from "@/store/hook";
-import { closeModal } from "@/store/slices/modalSlice/modalSlice";
+import { closeModal, openModal } from "@/store/slices/modalSlice/modalSlice";
 
 function ModalRemoveAccount() {
   const dispatch = useAppDispatch();
@@ -18,7 +18,14 @@ function ModalRemoveAccount() {
       >
         {t("infoModal.button.cancel")}
       </Button>
-      <Button>{t("infoModal.button.confirm")}</Button>
+      <Button
+        onClick={() => {
+          dispatch(closeModal());
+          dispatch(openModal({ typeModal: "removeAcoountConfirm" }));
+        }}
+      >
+        {t("infoModal.button.confirm")}
+      </Button>
     </div>
   );
 }
