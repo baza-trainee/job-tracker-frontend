@@ -28,7 +28,8 @@
     "modalRemoveResume": "Remove resume",
     "modalRemoveLinkTitle": "Are you sure you want to delete?",
     "removeAccountModalName": "Remove account",
-    "removeAccountModalText": "Are you sure you want to delete your account?"
+    "removeAccountModalText": "Are you sure you want to delete your account?",
+    "removeConfirmAccountModalText": "This action cannot be undone. Are you sure?"
   },
   "notification": {
     "updatedSuccess": "Updated successfully",

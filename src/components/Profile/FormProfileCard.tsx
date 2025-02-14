@@ -70,8 +70,8 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     });
 
     profile.socials.forEach((item) => {
-      setValue(item.name as any, item.link);
-      initialValues.current[item.name] = item.link;
+      setValue(item.id as any, item.link);
+      initialValues.current[item.id] = item.link;
     });
   }, [profile, setValue]);
 
@@ -190,8 +190,9 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                         item.id
                       )
                     }
+                    id={item.id}
                     label={item.name}
-                    name={item.name}
+                    name={item.id}
                     placeholder={item.name}
                     register={register}
                     errors={errors}
@@ -218,9 +219,10 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               onFocus={() =>
                 handleUpdateInput({ ...item, typeModal: "update" })
               }
+              id={item.id}
               key={item.id}
               value={`${item.name} | ${item.technologies}`}
-              name={item.name}
+              name={item.id}
               placeholder={item.name}
               register={register}
               errors={errors}
@@ -243,9 +245,10 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               onFocus={() =>
                 handleUpdateInput({ ...item, typeModal: "update" })
               }
+              id={item.id}
               key={item.id}
               value={item.name}
-              name={item.name}
+              name={item.id}
               placeholder={item.name}
               register={register}
               errors={errors}
@@ -268,9 +271,10 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               onFocus={() =>
                 handleUpdateInput({ ...item, typeModal: "update" })
               }
+              id={item.id}
               key={item.id}
               value={item.name}
-              name={item.name}
+              name={item.id}
               placeholder={item.name}
               register={register}
               errors={errors}
