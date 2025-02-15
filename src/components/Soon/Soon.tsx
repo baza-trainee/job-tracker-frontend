@@ -21,8 +21,8 @@ export const Soon = () => {
   //     // { day: "Пт", date: "25.01", title: "Співбесіда в Microsoft", time: "14:45" },
   // ];
 
-  const { data: events } = useGetAllEventsQuery();
-  // , isLoading, error
+  const { data: events, isLoading, error } = useGetAllEventsQuery();
+
   const handleOpenModal = () => {
     dispatch(openModal({ isModalOpen: true, typeModal: "addEvent" }));
   };
@@ -35,8 +35,21 @@ export const Soon = () => {
 
       <div className="w-full">
         <div className="soon-scroll max-h-[456px] w-full overflow-y-scroll pr-2">
-          <ul className="w-full">
-            {/* {events.map((event, index) => (
+          {isLoading && (
+            <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
+              {t("loading.loading")}...
+            </div>
+          )}
+
+          {error && (
+            <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
+              {t("loading.error")}...
+            </div>
+          )}
+
+          {!isLoading && !error && (
+            <ul className="w-full">
+              {/* {events.map((event, index) => (
               <li key={index}>
                 <CardSoon
                   day={event.day}
@@ -46,22 +59,23 @@ export const Soon = () => {
                 />
               </li>
             ))} */}
-            {events?.map((event) => (
-              <li key={event.id}>
-                <CardSoon
-                  day={new Date(event.date).toLocaleString("uk-Ua", {
-                    weekday: "short",
-                  })}
-                  date={new Date(event.date).toLocaleString("uk-Ua", {
-                    day: "2-digit",
-                    month: "2-digit",
-                  })}
-                  title={event.name}
-                  time={event.time.slice(0, 5)}
-                />
-              </li>
-            ))}
-          </ul>
+              {events?.map((event) => (
+                <li key={event.id}>
+                  <CardSoon
+                    day={new Date(event.date).toLocaleString("uk-Ua", {
+                      weekday: "short",
+                    })}
+                    date={new Date(event.date).toLocaleString("uk-Ua", {
+                      day: "2-digit",
+                      month: "2-digit",
+                    })}
+                    title={event.name}
+                    time={event.time.slice(0, 5)}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <Button
@@ -79,31 +93,3 @@ export const Soon = () => {
 };
 
 export default Soon;
-
-// {isLoading || <p>Loading...</p>}
-// {!isLoading && (
-//   <ul className="w-full">
-{
-  /* {events.map((event, index) => (
-                  <li key={index}>
-                      <CardSoon day={event.day} date={event.date} title={event.title} time={event.time} />
-                  </li>
-              ))} */
-}
-//     {events?.map((event) => (
-//       <li key={event.id}>
-//         <CardSoon
-//           day={new Date(event.date).toLocaleString("uk-Ua", {
-//             weekday: "short",
-//           })}
-//           date={new Date(event.date).toLocaleString("uk-Ua", {
-//             day: "2-digit",
-//             month: "2-digit",
-//           })}
-//           title={event.name}
-//           time={event.time.slice(0, 5)}
-//         />
-//       </li>
-//     ))}
-//   </ul>
-// )}

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import Calendar from "react-calendar";
 import Icon from "../Icon/Icon";
 
@@ -10,8 +11,11 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
   onSelectDate,
 }) => {
   const { i18n } = useTranslation();
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const handleDateChange = (selectedDate: Date) => {
+    setSelectedDate(selectedDate);
+
     // const formattedDate = selectedDate.toISOString().split("T")[0]; // Перетворюємо в "YYYY-MM-DD"
     const year = selectedDate.getFullYear();
     const month = String(selectedDate.getMonth() + 1).padStart(2, "0"); // Додаємо +1, бо місяці у JS від 0 до 11
@@ -34,6 +38,7 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
           console.log("Клік на дату (день):", date);
           handleDateChange(date as Date);
         }}
+        value={selectedDate}
         className="statistics-calendar__day"
         nextLabel={<Icon id={"arrow-right"} className="size-6" />}
         prevLabel={<Icon id={"arrow-left"} className="size-6" />}

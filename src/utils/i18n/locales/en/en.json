@@ -378,5 +378,9 @@
   "chartBar": {
     "sent": "Sent resume",
     "responses": "received responses"
+  },
+  "loading": {
+    "loading": "Loading",
+    "error": "Error fetching data"
   }
 }

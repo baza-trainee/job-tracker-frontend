@@ -267,7 +267,8 @@ abbr {
 } */
 
 .react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
+.react-calendar__tile:enabled:focus,
+.react-calendar__tile--active {
   background: #c6e7ff;
   border-radius: 100px;
   color: #333;
