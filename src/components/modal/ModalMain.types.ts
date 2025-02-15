@@ -26,7 +26,8 @@ export type TypesModal =
   | "removeCoverLetters"
   | "removeAccount"
   | "removeAcoountConfirm"
-  | "addEvent";
+  | "addEvent"
+  | "editEvent";
 
 export type Color = {
   text: "text-white" | "text-button" | "text-color2" | "text-color8";

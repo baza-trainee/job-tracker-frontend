@@ -5,6 +5,7 @@ import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import EditVacancy from "./components/editVacancy/EditVacancy";
 import { Color, ContentMapProps } from "./ModalMain.types";
 import AddEventModal from "../Soon/AddEventModal";
+import EditEventModal from "../Soon/EditEventModal";
 import ModalRemoveAccount from "../Profile/profileModals/ModalRemoveAccount";
 import ModalConfirmRemoveAccount from "../Profile/profileModals/ModalConfirmRemoveAccount";
 import ModalMuttionProfileData from "../Profile/profileModals/ModalMuttionProfileData";
@@ -191,6 +192,14 @@ export const contentMap: ContentMapProps = {
   addEvent: {
     content: <AddEventModal />,
     nameModal: "soonSection.addEvent",
+    bgColor: "bg-button",
+    borderColor: "border-button",
+    paddingAddEventModal: "pt-6 pr-10 pb-10 pl-10",
+    iconAddEventModal: "h-8 w-8",
+  },
+  editEvent: {
+    content: <EditEventModal />,
+    nameModal: "soonSection.editEvent",
     bgColor: "bg-button",
     borderColor: "border-button",
     paddingAddEventModal: "pt-6 pr-10 pb-10 pl-10",

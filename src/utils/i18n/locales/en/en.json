@@ -361,10 +361,12 @@
   "soonSection": {
     "soon": "Soon",
     "addEvent": "Add event",
+    "editEvent": "Edit event",
     "soonName": "Name",
     "soonNotes": "Notes",
     "setTime": "Set time",
     "save": "Save",
+    "delete": "Delete",
     "soonModalPlaceholderName": "Enter the event name",
     "soonModalPlaceholderNotes": "Place for notes",
     "soonModalTimeHours": "Hours",

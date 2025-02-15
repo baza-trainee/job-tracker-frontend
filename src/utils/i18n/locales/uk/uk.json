@@ -360,10 +360,12 @@
   "soonSection": {
     "soon": "Незабаром",
     "addEvent": "Додати подію",
+    "editEvent": "Редагувати подію",
     "soonName": "Назва",
     "soonNotes": "Нотатки",
     "setTime": "Встановити час",
     "save": "Зберегти",
+    "delete": "Видалити",
     "soonModalPlaceholderName": "Вкажіть назву події",
     "soonModalPlaceholderNotes": "Місце для нотаток",
     "soonModalTimeHours": "Години",
