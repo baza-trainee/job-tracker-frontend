@@ -10,18 +10,33 @@ interface GroupedData {
 
 const ChartBarDay: React.FC = () => {
   const { t } = useTranslation();
-  const selectedDate = useAppSelector((state: RootState) => state.calendar.selectedDate);
+  const selectedDate = useAppSelector(
+    (state: RootState) => state.calendar.selectedDate
+  );
   const { data: vacancies, isLoading, isError } = useGetAllVacancyQuery();
   // console.log("Обрана дата:", selectedDate);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching vacancies</div>;
+  if (isLoading)
+    return (
+      <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
+        {t("loading.loading")}...
+      </div>
+    );
+
+  if (isError)
+    return (
+      <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
+        {t("loading.error")}...
+      </div>
+    );
 
   // console.log("Всі вакансії: ", vacancies);
-  const notArhivedVacancies = vacancies?.filter((vacancy) => !vacancy.isArchived) || [];
+  const notArhivedVacancies =
+    vacancies?.filter((vacancy) => !vacancy.isArchived) || [];
   // console.log("notArhivedVacancies", notArhivedVacancies);
 
-  const statuses = notArhivedVacancies?.flatMap((vacancy) => vacancy.statuses) || [];
+  const statuses =
+    notArhivedVacancies?.flatMap((vacancy) => vacancy.statuses) || [];
   // console.log("Всі статуси:", statuses);
 
   // Групування статусів за датами
@@ -66,7 +81,7 @@ const ChartBarDay: React.FC = () => {
 
   const getLast7Days = (selectedDate: Date): string[] => {
     const result: string[] = [];
-  
+
     // Три дні до обраного, обраний день, і три дні після
     for (let i = -3; i <= 3; i++) {
       const date = new Date(selectedDate); // Копія обраної дати
@@ -75,7 +90,7 @@ const ChartBarDay: React.FC = () => {
         `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
       ); // Формат yyyy-mm-dd
     }
-  
+
     return result;
   };
 
@@ -84,7 +99,9 @@ const ChartBarDay: React.FC = () => {
   // console.log("Дата для обчислення діапазону:", selectedDate);
 
   // Фільтруємо дані за останні 7 днів
-  const filteredData = last7Days.map((date) => groupedByDate[date] || { sent: 0, responses: 0 });
+  const filteredData = last7Days.map(
+    (date) => groupedByDate[date] || { sent: 0, responses: 0 }
+  );
 
   const datasets = [
     {
@@ -106,18 +123,16 @@ const ChartBarDay: React.FC = () => {
   ];
 
   const labels = last7Days.map((date) =>
-    new Date(date).toLocaleDateString("uk-UA", { day: "2-digit", month: "2-digit" })
+    new Date(date).toLocaleDateString("uk-UA", {
+      day: "2-digit",
+      month: "2-digit",
+    })
   ); // Відформатовані дати для осі X
 
-  return (
-    <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />
-  );
+  return <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />;
 };
 
 export default ChartBarDay;
-
-
-
 
 // console.log("Груповані дані за датами:", groupedByDate);
 
@@ -136,11 +151,10 @@ export default ChartBarDay;
 // const sentData = dates.map((date) => groupedByDate[date].sent); // Дані "Надіслано резюме"
 // const responseData = dates.map((date) => groupedByDate[date].responses); // Дані "Отримано відповідей"
 
-
 // const dates = Object.keys(groupedByDate); // Усі унікальні дати
 // const sortedDates = dates.sort((a, b) => {
 //   const dateA = new Date(a).getTime();
-//   const dateB = new Date(b).getTime();  
+//   const dateB = new Date(b).getTime();
 //   return dateA - dateB;
 // });
 
@@ -153,8 +167,12 @@ export default ChartBarDay;
 // );
 // console.log("сортовані дати:", sortedDates)
 
-{/* <Bar data={data} options={options} /> */ }
-{/* <Bar data={data} /> */ }
+{
+  /* <Bar data={data} options={options} /> */
+}
+{
+  /* <Bar data={data} /> */
+}
 
 // const data = {
 //   // labels: ['January', 'February', 'March', 'April', 'May'],

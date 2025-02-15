@@ -6,10 +6,13 @@ import CardSoon from "./CardSoon.tsx";
 import Modal from "../modal/Modal.tsx";
 import { Button } from "../buttons/Button/Button.tsx";
 import { useGetAllEventsQuery } from "../../store/querySlices/eventsQuerySlice.ts";
+// import { useState } from "react";
 
 export const Soon = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const { data: events, isLoading, error } = useGetAllEventsQuery();
+  // const [selectedEvent, setSelectedEvent] = useState(null);
 
   // const events = [
   //     { day: "Пн", date: "22.01", title: "Співбесіда в Google Співбесіда в Google", time: "12:30" },
@@ -21,10 +24,14 @@ export const Soon = () => {
   //     // { day: "Пт", date: "25.01", title: "Співбесіда в Microsoft", time: "14:45" },
   // ];
 
-  const { data: events } = useGetAllEventsQuery();
-  // , isLoading, error
   const handleOpenModal = () => {
     dispatch(openModal({ isModalOpen: true, typeModal: "addEvent" }));
+  };
+
+  // const handleOpenEditModal = (event) => {
+  const handleOpenEditModal = () => {
+    // setSelectedEvent(event);
+    dispatch(openModal({ isModalOpen: true, typeModal: "editEvent" }));
   };
 
   return (
@@ -35,8 +42,21 @@ export const Soon = () => {
 
       <div className="w-full">
         <div className="soon-scroll max-h-[456px] w-full overflow-y-scroll pr-2">
-          <ul className="w-full">
-            {/* {events.map((event, index) => (
+          {isLoading && (
+            <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
+              {t("loading.loading")}...
+            </div>
+          )}
+
+          {error && (
+            <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
+              {t("loading.error")}...
+            </div>
+          )}
+
+          {!isLoading && !error && (
+            <ul className="w-full">
+              {/* {events.map((event, index) => (
               <li key={index}>
                 <CardSoon
                   day={event.day}
@@ -46,22 +66,25 @@ export const Soon = () => {
                 />
               </li>
             ))} */}
-            {events?.map((event) => (
-              <li key={event.id}>
-                <CardSoon
-                  day={new Date(event.date).toLocaleString("uk-Ua", {
-                    weekday: "short",
-                  })}
-                  date={new Date(event.date).toLocaleString("uk-Ua", {
-                    day: "2-digit",
-                    month: "2-digit",
-                  })}
-                  title={event.name}
-                  time={event.time.slice(0, 5)}
-                />
-              </li>
-            ))}
-          </ul>
+              {events?.map((event) => (
+                <li key={event.id}>
+                  <CardSoon
+                    day={new Date(event.date).toLocaleString("uk-Ua", {
+                      weekday: "short",
+                    })}
+                    date={new Date(event.date).toLocaleString("uk-Ua", {
+                      day: "2-digit",
+                      month: "2-digit",
+                    })}
+                    title={event.name}
+                    time={event.time.slice(0, 5)}
+                    // onClick={() => handleOpenEditModal(event)}
+                    onClick={() => handleOpenEditModal()}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <Button
@@ -73,37 +96,10 @@ export const Soon = () => {
         </Button>
       </div>
 
+      {/* <Modal selectedEvent={selectedEvent} /> */}
       <Modal />
     </div>
   );
 };
 
 export default Soon;
-
-// {isLoading || <p>Loading...</p>}
-// {!isLoading && (
-//   <ul className="w-full">
-{
-  /* {events.map((event, index) => (
-                  <li key={index}>
-                      <CardSoon day={event.day} date={event.date} title={event.title} time={event.time} />
-                  </li>
-              ))} */
-}
-//     {events?.map((event) => (
-//       <li key={event.id}>
-//         <CardSoon
-//           day={new Date(event.date).toLocaleString("uk-Ua", {
-//             weekday: "short",
-//           })}
-//           date={new Date(event.date).toLocaleString("uk-Ua", {
-//             day: "2-digit",
-//             month: "2-digit",
-//           })}
-//           title={event.name}
-//           time={event.time.slice(0, 5)}
-//         />
-//       </li>
-//     ))}
-//   </ul>
-// )}
