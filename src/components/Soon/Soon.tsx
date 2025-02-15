@@ -6,13 +6,13 @@ import CardSoon from "./CardSoon.tsx";
 import Modal from "../modal/Modal.tsx";
 import { Button } from "../buttons/Button/Button.tsx";
 import { useGetAllEventsQuery } from "../../store/querySlices/eventsQuerySlice.ts";
-import { useState } from "react";
+// import { useState } from "react";
 
 export const Soon = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { data: events, isLoading, error } = useGetAllEventsQuery();
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  // const [selectedEvent, setSelectedEvent] = useState(null);
 
   // const events = [
   //     { day: "Пн", date: "22.01", title: "Співбесіда в Google Співбесіда в Google", time: "12:30" },
@@ -28,8 +28,9 @@ export const Soon = () => {
     dispatch(openModal({ isModalOpen: true, typeModal: "addEvent" }));
   };
 
-  const handleOpenEditModal = (event) => {
-    setSelectedEvent(event);
+  // const handleOpenEditModal = (event) => {
+  const handleOpenEditModal = () => {
+    // setSelectedEvent(event);
     dispatch(openModal({ isModalOpen: true, typeModal: "editEvent" }));
   };
 
@@ -77,7 +78,8 @@ export const Soon = () => {
                     })}
                     title={event.name}
                     time={event.time.slice(0, 5)}
-                    onClick={() => handleOpenEditModal(event)}
+                    // onClick={() => handleOpenEditModal(event)}
+                    onClick={() => handleOpenEditModal()}
                   />
                 </li>
               ))}
@@ -94,7 +96,8 @@ export const Soon = () => {
         </Button>
       </div>
 
-      <Modal selectedEvent={selectedEvent} />
+      {/* <Modal selectedEvent={selectedEvent} /> */}
+      <Modal />
     </div>
   );
 };

@@ -1,32 +1,32 @@
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import SoonCalendarModal from "../Calendar/SoonCalendarModal.tsx";
 import { Input } from "../inputs/Input/Input.tsx";
 import { Button } from "../buttons/Button/Button.tsx";
 import Icon from "../Icon/Icon.tsx";
-import { useAppDispatch } from "../../store/hook.ts";
-import {
-  useUpdateEventByIdMutation,
-  useDeleteEventByIdMutation,
-} from "../../store/querySlices/eventsQuerySlice.ts";
-import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
+// import { useAppDispatch } from "../../store/hook.ts";
+import {} from // useUpdateEventByIdMutation,
+// useDeleteEventByIdMutation,
+"../../store/querySlices/eventsQuerySlice.ts";
+// import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
 import clsx from "clsx";
-import { Event } from "../../types/event.types.ts";
+// import { Event } from "../../types/event.types.ts";
 
-type EditEventModalProps = {
-  selectedEvent: Event | null;
-};
+// type EditEventModalProps = {
+//   selectedEvent: Event | null;
+// };
 
-const EditEventModal: React.FC<EditEventModalProps> = ({ selectedEvent }) => {
+// const EditEventModal: React.FC<EditEventModalProps> = ({ selectedEvent }) => {
+const EditEventModal = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const [updateEvent] = useUpdateEventByIdMutation();
-  const [deleteEvent] = useDeleteEventByIdMutation();
+  // const dispatch = useAppDispatch();
+  // const [updateEvent] = useUpdateEventByIdMutation();
+  // const [deleteEvent] = useDeleteEventByIdMutation();
 
   const {
     register,
-    handleSubmit,
+    // handleSubmit,
     setValue,
     resetField,
     formState: { errors },
@@ -38,41 +38,41 @@ const EditEventModal: React.FC<EditEventModalProps> = ({ selectedEvent }) => {
     },
   });
 
-  useEffect(() => {
-    if (selectedEvent) {
-      setValue("soonEventName", selectedEvent.name);
-      setValue("soonEventNotes", selectedEvent.text || "");
-      setValue("time", selectedEvent.time);
-    }
-  }, [selectedEvent, setValue]);
+  // useEffect(() => {
+  //   if (selectedEvent) {
+  //     setValue("soonEventName", selectedEvent.name);
+  //     setValue("soonEventNotes", selectedEvent.text || "");
+  //     setValue("time", selectedEvent.time);
+  //   }
+  // }, [selectedEvent, setValue]);
 
-  const onSubmit = async (data: {
-    soonEventName: string;
-    soonEventNotes: string;
-    time: string;
-  }) => {
-    if (!selectedEvent) return;
+  // const onSubmit = async (data: {
+  //   soonEventName: string;
+  //   soonEventNotes: string;
+  //   time: string;
+  // }) => {
+  // if (!selectedEvent) return;
 
-    await updateEvent({
-      id: selectedEvent.id,
-      name: data.soonEventName,
-      text: data.soonEventNotes,
-      time: data.time,
-    });
+  // await updateEvent({
+  //   id: selectedEvent.id,
+  //   name: data.soonEventName,
+  //   text: data.soonEventNotes,
+  //   time: data.time,
+  // });
 
-    dispatch(closeModal());
-  };
+  //   dispatch(closeModal());
+  // };
 
-  const handleDelete = async () => {
-    if (!selectedEvent) return;
+  // const handleDelete = async () => {
+  //   if (!selectedEvent) return;
 
-    await deleteEvent({ id: selectedEvent.id });
-    dispatch(closeModal());
-  };
+  //   await deleteEvent({ id: selectedEvent.id });
+  //   dispatch(closeModal());
+  // };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      // onSubmit={handleSubmit(onSubmit)}
       className="mt-14 flex flex-col align-middle"
     >
       <div className="flex w-full gap-6">
@@ -181,7 +181,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({ selectedEvent }) => {
           className="mt-4"
           variant="ghost"
           size="big"
-          onClick={handleDelete}
+          // onClick={handleDelete}
           // disabled={isLoading}
         >
           {t("soonSection.delete")}
