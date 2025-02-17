@@ -15,15 +15,15 @@ export default {
     },
     extend: {
       container: {
-        screens: false,
+        // screens: false,
         center: true,
         padding: {
           DEFAULT: "1.25rem",
-          // sm: "1.25rem",
-          // md: "1.25rem",
-          // xl: "1.25rem",
-          // "2xl": "1.25rem",
-          // "3xl": "1.25rem",
+          sm: "1.25rem",
+          md: "1.5rem",
+          xl: "1.5rem",
+          "2xl": "1.5rem",
+          "3xl": "1.5rem",
         },
       },
       boxShadow: {
