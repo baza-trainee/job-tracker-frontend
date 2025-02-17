@@ -3,7 +3,7 @@ import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
 export interface InputProps {
   onFocus?: () => void;
   name: string;
-  placeholder: string;
+  placeholder?: string;
   className?: string;
   label?: string;
   register: UseFormRegister<any>;
@@ -11,6 +11,8 @@ export interface InputProps {
   type?: React.HTMLInputTypeAttribute | "textarea";
   value?: string;
   id?: string;
+  defaultValue?: string;
+  disabled?: boolean;
   resetField(name: string): void;
   isButtonCopy?: boolean;
   isButtonRemoveInput?: boolean;
@@ -21,8 +23,11 @@ export interface InputProps {
   promptMessage?: string;
   setValue?: UseFormSetValue<any>;
   rows?: number;
+  classNameInputCustom?: string;
   autoFocus?: boolean;
   onBlur?: (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  // onInput?: (event: React.FormEvent<HTMLInputElement>) => void;
+  // onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }

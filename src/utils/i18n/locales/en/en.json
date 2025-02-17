@@ -14,7 +14,22 @@
     "placeholderLinkResume": "Insert a link to your resume",
     "placeholderNameCoverLetter": "Enter a name for the letter",
     "textNameCoverLetter": "Cover letter",
-    "placeholderTextCoverLetter": "You should write your letter here"
+    "placeholderTextCoverLetter": "You should write your letter here",
+    "placeholderNameProject": "Enter the name of the project",
+    "technology": "Technologies",
+    "placeholderTechnology": "Specify the technologies used",
+    "linkProject": "Link to the project",
+    "placeholderlinkProject": "Insert a link to the project",
+    "textProject": "Description of the project",
+    "placeholderTextProject": "You can describe the project",
+    "modalRemoveLink": "Remove link",
+    "modalRemoveProject": "Remove project",
+    "modalRemoveCoverLetter": "Remove cover letter",
+    "modalRemoveResume": "Remove resume",
+    "modalRemoveLinkTitle": "Are you sure you want to delete?",
+    "removeAccountModalName": "Remove account",
+    "removeAccountModalText": "Are you sure you want to delete your account?",
+    "removeConfirmAccountModalText": "This action cannot be undone. Are you sure?"
   },
   "notification": {
     "updatedSuccess": "Updated successfully",
@@ -190,7 +205,8 @@
       "archive": "Archive",
       "restore": "Restore",
       "save": "Save",
-      "delete": "Delete"
+      "delete": "Delete",
+      "confirm": "Ok"
     },
     "placeholders": {
       "company": "Enter company name",
@@ -331,7 +347,7 @@
       "text_2": "Try logging in or resetting your password."
     },
     "forgotPasswordSuccess": {
-      "text_1": "A message has been sent to your email."
+      "text_1": "Instructions for changing your password have been sent to your email"
     },
     "resetPasswordSuccess": {
       "text_1": "Password changed successfully.",
@@ -345,10 +361,12 @@
   "soonSection": {
     "soon": "Soon",
     "addEvent": "Add event",
+    "editEvent": "Edit event",
     "soonName": "Name",
     "soonNotes": "Notes",
     "setTime": "Set time",
     "save": "Save",
+    "delete": "Delete",
     "soonModalPlaceholderName": "Enter the event name",
     "soonModalPlaceholderNotes": "Place for notes",
     "soonModalTimeHours": "Hours",
@@ -362,5 +380,9 @@
   "chartBar": {
     "sent": "Sent resume",
     "responses": "received responses"
+  },
+  "loading": {
+    "loading": "Loading",
+    "error": "Error fetching data"
   }
 }

@@ -4,10 +4,12 @@ import InfoModal from "./components/infoModals/InfoModal";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import EditVacancy from "./components/editVacancy/EditVacancy";
 import { Color, ContentMapProps } from "./ModalMain.types";
-import ModalRemoveProperties from "../Profile/ModalRemoveProperties";
 import AddEventModal from "../Soon/AddEventModal";
-import ModalUpdateUserData from "../Profile/ModalUpdateUserData";
-import ModalMuttionProfileData from "../Profile/ModalMuttionProfileData";
+import EditEventModal from "../Soon/EditEventModal";
+import ModalRemoveAccount from "../Profile/profileModals/ModalRemoveAccount";
+import ModalConfirmRemoveAccount from "../Profile/profileModals/ModalConfirmRemoveAccount";
+import ModalMuttionProfileData from "../Profile/profileModals/ModalMuttionProfileData";
+import ModalRemoveProperties from "../Profile/profileModals/ModalRemoveProperties";
 
 const colorDefault: Color = {
   text: "text-white",
@@ -77,9 +79,7 @@ export const contentMap: ContentMapProps = {
     borderColor: colorError.border,
   },
   forgotPasswordSuccess: {
-    content: (
-      <InfoModal type="forgotPasswordSuccess" textColor={colorButton.text} />
-    ),
+    content: <InfoModal type="forgotPasswordSuccess" textColor={"textBlack"} />,
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
@@ -155,38 +155,51 @@ export const contentMap: ContentMapProps = {
   },
   removePersonalProperties: {
     content: <ModalRemoveProperties cardsType="addPersonalProperties" />,
-    nameModal: "Видалити персональні властивості",
+    nameModal: "modalAddProperties.modalRemoveLink",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   removeProjects: {
     content: <ModalRemoveProperties cardsType="addProjects" />,
-    nameModal: "Видалити проект",
+    nameModal: "modalAddProperties.modalRemoveProject",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   removeCoverLetters: {
     content: <ModalRemoveProperties cardsType="addCoverLetters" />,
-    nameModal: "Видалити супровідний лист",
+    nameModal: "modalAddProperties.modalRemoveCoverLetter",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
   removeResumes: {
     content: <ModalRemoveProperties cardsType="addResumes" />,
-    nameModal: "Видалити резюме",
+    nameModal: "modalAddProperties.modalRemoveResume",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-  updateUserData: {
-    content: <ModalUpdateUserData />,
-    nameModal: "Оновити дані",
+  removeAccount: {
+    content: <ModalRemoveAccount />,
+    nameModal: "modalAddProperties.removeAccountModalName",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-
+  removeAcoountConfirm: {
+    content: <ModalConfirmRemoveAccount />,
+    nameModal: "modalAddProperties.removeAccountModalName",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
   addEvent: {
     content: <AddEventModal />,
     nameModal: "soonSection.addEvent",
+    bgColor: "bg-button",
+    borderColor: "border-button",
+    paddingAddEventModal: "pt-6 pr-10 pb-10 pl-10",
+    iconAddEventModal: "h-8 w-8",
+  },
+  editEvent: {
+    content: <EditEventModal />,
+    nameModal: "soonSection.editEvent",
     bgColor: "bg-button",
     borderColor: "border-button",
     paddingAddEventModal: "pt-6 pr-10 pb-10 pl-10",

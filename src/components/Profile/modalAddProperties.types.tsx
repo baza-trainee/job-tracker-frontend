@@ -6,11 +6,12 @@ export type PropsModalAddProperties = Pick<PropsProfileCard, "cardsType">;
 export type DataItem = {
   name: string;
   placeholderName: string;
-  technology?: string;
+  technologies?: string;
   placeholderTechnology?: string;
   link?: string;
-  text?: string;
   placeholderLink: string;
+  text?: string;
+  placeholderText?: string;
 };
 
 export type DataUpdateItem = { id: string } & DataItem;
@@ -28,11 +29,13 @@ export const useData = () => {
     },
     addProjects: {
       name: t("modalAddProperties.linkName"),
-      placeholderName: "Вкажіть назву проєкту",
-      technology: "Технолігії",
-      placeholderTechnology: "Вкажіть технологій які використовували",
-      link: "Лінк на проєкт",
-      placeholderLink: "Вставте лінк на проєкт",
+      placeholderName: t("modalAddProperties.placeholderNameProject"),
+      technologies: t("modalAddProperties.technology"),
+      placeholderTechnology: t("modalAddProperties.placeholderTechnology"),
+      link: t("modalAddProperties.linkProject"),
+      placeholderLink: t("modalAddProperties.placeholderlinkProject"),
+      text: t("modalAddProperties.textProject"),
+      placeholderText: t("modalAddProperties.placeholderTextProject"),
     },
     addResumes: {
       name: t("modalAddProperties.linkName"),

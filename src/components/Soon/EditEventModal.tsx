@@ -1,60 +1,84 @@
 import { useTranslation } from "react-i18next";
+// import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import SoonCalendarModal from "../Calendar/SoonCalendarModal.tsx";
 import { Input } from "../inputs/Input/Input.tsx";
 import { Button } from "../buttons/Button/Button.tsx";
 import Icon from "../Icon/Icon.tsx";
-import { useAppDispatch } from "../../store/hook.ts";
-import { useCreateEventMutation } from "../../store/querySlices/eventsQuerySlice.ts";
-import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
+// import { useAppDispatch } from "../../store/hook.ts";
+import {} from // useUpdateEventByIdMutation,
+// useDeleteEventByIdMutation,
+"../../store/querySlices/eventsQuerySlice.ts";
+// import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
 import clsx from "clsx";
+// import { Event } from "../../types/event.types.ts";
 
-const AddEventModal = () => {
+// type EditEventModalProps = {
+//   selectedEvent: Event | null;
+// };
+
+// const EditEventModal: React.FC<EditEventModalProps> = ({ selectedEvent }) => {
+const EditEventModal = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const [createEvent, { isLoading }] = useCreateEventMutation();
+  // const dispatch = useAppDispatch();
+  // const [updateEvent] = useUpdateEventByIdMutation();
+  // const [deleteEvent] = useDeleteEventByIdMutation();
 
   const {
     register,
-    handleSubmit,
+    // handleSubmit,
     setValue,
     resetField,
-    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      soonEventName: "",
+      soonEventNotes: "",
+      time: "",
+    },
+  });
 
-  const onSubmit = async (data: any) => {
-    console.log("Форма відправлена:", data);
+  // useEffect(() => {
+  //   if (selectedEvent) {
+  //     setValue("soonEventName", selectedEvent.name);
+  //     setValue("soonEventNotes", selectedEvent.text || "");
+  //     setValue("time", selectedEvent.time);
+  //   }
+  // }, [selectedEvent, setValue]);
 
-    const { soonEventName, soonEventNotes, hours, minutes, date } = data;
+  // const onSubmit = async (data: {
+  //   soonEventName: string;
+  //   soonEventNotes: string;
+  //   time: string;
+  // }) => {
+  // if (!selectedEvent) return;
 
-    // Формуємо час у форматі HH:MM
-    const formattedTime = `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`;
+  // await updateEvent({
+  //   id: selectedEvent.id,
+  //   name: data.soonEventName,
+  //   text: data.soonEventNotes,
+  //   time: data.time,
+  // });
 
-    const newEvent = {
-      name: soonEventName,
-      text: soonEventNotes || "",
-      date: date || new Date().toISOString().split("T")[0],
-      time: formattedTime,
-    };
+  //   dispatch(closeModal());
+  // };
 
-    try {
-      await createEvent(newEvent).unwrap();
-      dispatch(closeModal());
-      reset();
-    } catch (error) {
-      console.error("Помилка створення події:", error);
-    }
-  };
+  // const handleDelete = async () => {
+  //   if (!selectedEvent) return;
+
+  //   await deleteEvent({ id: selectedEvent.id });
+  //   dispatch(closeModal());
+  // };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      // onSubmit={handleSubmit(onSubmit)}
       className="mt-14 flex flex-col align-middle"
     >
       <div className="flex w-full gap-6">
-        {/* Додамо пропс для автозаповнення дати, якщо це підтримується */}
-        <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+        {/* Вибір дати (поки що без встановлення у форму) */}
+        {/* <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} /> */}
+        <SoonCalendarModal />
 
         <div className="w-[445px] font-medium">
           <label htmlFor="soonEventName" className="text-base 3xl:text-2xl">
@@ -116,21 +140,6 @@ const AddEventModal = () => {
                 "xl:text-[32px] xl:font-normal",
                 "2xl:text-[32px]"
               )}
-              // onInput={(e) => {
-              //   const input = e.currentTarget;
-              //   const value = input.value.replace(/\D/g, ""); // Видаляємо нецифрові символи
-              //   if (+value > 24) return; // Не даємо ввести більше 24
-              //   setValue("hours", value); // Оновлюємо значення
-              // }}
-              // onKeyDown={(e) => {
-              //   if (
-              //     !/[\d]/.test(e.key) &&
-              //     e.key !== "Backspace" &&
-              //     e.key !== "Tab"
-              //   ) {
-              //     e.preventDefault(); // Забороняємо всі символи, окрім цифр, Backspace і Tab
-              //   }
-              // }}
             />
             <div className="flex h-[60px] w-6 items-center justify-center">
               <span className="text-[57px] font-normal">:</span>
@@ -166,19 +175,35 @@ const AddEventModal = () => {
         </div>
       </div>
 
-      <Button
-        type="submit"
-        className="mx-auto mt-8 bg-button"
-        variant="ghost"
-        size="big"
-        // onClick={saveVacancy}
-        disabled={isLoading}
-      >
-        {isLoading ? t("loading") : t("soonSection.save")}
-        <Icon id={"check-box"} className="ml-3 h-6 w-6" />
-      </Button>
+      <div className="flex justify-center gap-6">
+        <Button
+          type="button"
+          className="mt-4"
+          variant="ghost"
+          size="big"
+          // onClick={handleDelete}
+          // disabled={isLoading}
+        >
+          {t("soonSection.delete")}
+          {/* {isLoading ? t("loading") : t("soonSection.save")} */}
+          <Icon id={"delete"} className="ml-3 h-6 w-6" />
+        </Button>
+
+        <Button
+          type="submit"
+          className="mt-4 bg-button"
+          variant="ghost"
+          size="big"
+          // onClick={saveVacancy}
+          // disabled={isLoading}
+        >
+          {t("soonSection.save")}
+          {/* {isLoading ? t("loading") : t("soonSection.save")} */}
+          <Icon id={"check-box"} className="ml-3 h-6 w-6" />
+        </Button>
+      </div>
     </form>
   );
 };
 
-export default AddEventModal;
+export default EditEventModal;

@@ -24,8 +24,10 @@ export type TypesModal =
   | "removeProjects"
   | "removeResumes"
   | "removeCoverLetters"
-  | "updateUserData"
-  | "addEvent";
+  | "removeAccount"
+  | "removeAcoountConfirm"
+  | "addEvent"
+  | "editEvent";
 
 export type Color = {
   text: "text-white" | "text-button" | "text-color2" | "text-color8";

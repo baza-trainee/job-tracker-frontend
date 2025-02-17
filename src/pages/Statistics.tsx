@@ -79,7 +79,7 @@ function Statistics() {
   };
 
   return (
-    <div className="container pb-8 pt-10">
+    <div className="container pb-5 pt-4 sm:pb-6 sm:pt-4 md:py-6 xl:py-10">
       {(isLoading || isPredictionLoading) && <StatisticsPanelSkeleton />}
       {(isError || isPredictionError) && <h2>Error...</h2>}
 
@@ -90,7 +90,7 @@ function Statistics() {
       {/* {!isLoading && vacanciesForStat.length !== 0 && (
         <>
           <div className="my-10 flex justify-between">
-            <div className="grid-col-2 mt-8 grid w-[1027px] auto-rows-max gap-x-6">
+            <div className="mt-8 grid w-[1027px] auto-rows-max grid-cols-2 gap-x-6">
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
@@ -101,9 +101,7 @@ function Statistics() {
                 <Soon />
               </div>
               <div className="col-span-1 row-start-2">{renderCalendar()}</div>
-              <div className="col-span-2 row-start-3">
-                {renderChart()}
-              </div>
+              <div className="col-span-2 row-start-3">{renderChart()}</div>
             </div>
             <DoughnutChart vacancies={vacanciesForStat} />
           </div>

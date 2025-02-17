@@ -89,9 +89,24 @@ const VacancySection: FC<VacancySectionProps> = ({
     if (window.innerWidth >= 1920) return 314 + 20;
     if (window.innerWidth >= 1440) return 278 + 20;
     if (window.innerWidth >= 1280) return 241 + 16;
-    return 241 + 16; // Для всіх інших випадків ширини екрану
+    if (window.innerWidth >= 768) return 200 + 12;
+    return 232 + 12; // Виправити, коли буде дизайн на малі екрани, перевірити, чи працює взагалі
   };
-  
+
+  // const getScrollAmount = () => {
+  //   let scrollAmount;
+  //   if (window.innerWidth >= 1920) scrollAmount = 314 + 20;
+  //   else if (window.innerWidth >= 1440) scrollAmount = 278 + 20;
+  //   else if (window.innerWidth >= 1280) scrollAmount = 241 + 16;
+  //   else if (window.innerWidth >= 768) scrollAmount = 200 + 12;
+  //   else if (window.innerWidth < 768) scrollAmount = 232 + 12;
+  //   else scrollAmount = 232 + 12;
+
+  //   console.log("Scroll Amount:", scrollAmount);
+  //   console.log("innerWidth:", window.innerWidth);
+  //   return scrollAmount;
+  // };
+
   const handleScrollRight = () => {
     // console.log("Right arrow clicked");
     const scrollAmount = getScrollAmount();
@@ -122,14 +137,15 @@ const VacancySection: FC<VacancySectionProps> = ({
       >
         {titleSection}
       </div>
-
+      {/* виправити, почекати дизайн для екранів менше 768 (px-1 py-6 md:p-6) */}
       <div
         className={clsx(
-          "flex w-full justify-center rounded-[0px_12px_12px_12px] border-4 border-solid p-6",
+          "flex w-full justify-center rounded-[0px_12px_12px_12px] border-4 border-solid px-1 py-6 md:p-6",
           colorSectionBorder
         )}
       >
-        <div className="flex w-full items-center gap-4">
+        {/* виправити, почекати дизайн для екранів менше 768 (gap-1 md:gap-4) */}
+        <div className="flex w-full items-center gap-1 md:gap-4">
           <button
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
@@ -138,7 +154,8 @@ const VacancySection: FC<VacancySectionProps> = ({
               "cursor-not-allowed opacity-50": isScrollLeftDisabled,
             })}
           >
-            <Icon id="arrow-left" className="h-6 w-6" />
+            {/* виправити, почекати дизайн для екранів менше 768 (h-4 w-4 md:h-6 md:w-6) */}
+            <Icon id="arrow-left" className="h-3 w-3 md:h-6 md:w-6" />
           </button>
 
           <div
@@ -150,13 +167,13 @@ const VacancySection: FC<VacancySectionProps> = ({
             )}
           >
             {/* Перший ряд, непарні картки */}
-            <div className="flex flex-nowrap gap-4 xl:gap-4 2xl:gap-5">
+            <div className="flex flex-nowrap gap-3 xl:gap-4 2xl:gap-5">
               {row1.length > 0 ? row1 : <p>Немає вакансій</p>}
             </div>
 
             {/* Другий ряд, парні картки */}
             {row2.length > 0 && (
-              <div className="flex flex-nowrap gap-4 xl:gap-4 2xl:gap-5">
+              <div className="flex flex-nowrap gap-3 xl:gap-4 2xl:gap-5">
                 {row2.length > 0 ? row2 : null}
               </div>
             )}
@@ -170,7 +187,8 @@ const VacancySection: FC<VacancySectionProps> = ({
               "cursor-not-allowed opacity-50": isScrollRightDisabled,
             })}
           >
-            <Icon id="arrow-right" className="h-6 w-6" />
+            {/* виправити, почекати дизайн для екранів менше 768 (h-4 w-4 md:h-6 md:w-6) */}
+            <Icon id="arrow-right" className="h-3 w-3 md:h-6 md:w-6" />
           </button>
         </div>
       </div>

@@ -15,7 +15,9 @@ export const Input = ({
   errors,
   value,
   onBlur,
+  defaultValue,
   id,
+  disabled = false,
   autoFocus = false,
   onFocus,
   isButtonCopy = false,
@@ -27,6 +29,7 @@ export const Input = ({
   promptMessage = "",
   setValue,
   rows,
+  classNameInputCustom,
 }: InputProps) => {
   const error = errors[name];
   const [isIcon, setIsIcon] = useState<boolean>(false);
@@ -36,6 +39,7 @@ export const Input = ({
 
   const handleResetField = (name: string) => {
     resetField(name);
+    // console.log("handle", name);
   };
 
   const { onBlur: hookFormOnBlur } = register(name);
@@ -54,7 +58,7 @@ export const Input = ({
         <label
           htmlFor={`input-${name}`}
           className={cn(
-            "mb-3 block font-nunito font-medium leading-[135%] text-textBlack",
+            "mb-3 inline-block font-nunito font-medium leading-[135%] text-textBlack",
             "sm:mb-[2px] sm:text-[14px]",
             "md:mb-2 md:text-[18px]",
             "xl:mb-2 xl:text-[16px]",
@@ -69,7 +73,21 @@ export const Input = ({
           {type === "textarea" ? (
             <textarea
               id={`input-${name}`}
-              className="w-full rounded-xl border p-3 text-base"
+              // className="w-full rounded-xl border p-3 text-base"
+              className={cn(
+                "w-full rounded-xl border p-3 text-base",
+                "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                "sm:px-4 sm:py-2 sm:text-[12px]",
+                "md:px-6 md:py-3 md:text-[14px]",
+                "xl:text-[14px]",
+                "2xl:text-[16px]",
+                {
+                  "border-color7": !error,
+                  "border-color2": error,
+                  // "border-textBlack": !isCheckButtons,
+                },
+                classNameInputCustom
+              )}
               placeholder={placeholder}
               rows={rows || 4}
               {...register(name)}
@@ -84,24 +102,27 @@ export const Input = ({
             />
           ) : (
             <input
-              autoFocus={autoFocus}
+              disabled={disabled}
+              {...(autoFocus && { autoFocus })}
               onFocus={onFocus}
               id={`input-${name}`}
               className={cn(
-                "responsive-input active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
                 "sm:h-[34px] sm:px-4 sm:py-2 sm:text-[12px]",
                 "md:h-11 md:px-6 md:py-3 md:text-[14px]",
                 "xl:text-[14px]",
                 "2xl:text-[16px]",
                 {
-                  "border-color5": !error,
+                  "border-color7": !error,
                   "border-color2": error,
-                  "border-textBlack": !isCheckButtons,
-                }
+                  // "border-textBlack": !isCheckButtons,
+                },
+                classNameInputCustom
               )}
               placeholder={placeholder}
               type={type}
               {...(value && { value })}
+              {...(defaultValue && { defaultValue })}
               {...register(name)}
               aria-describedby={`inputError-${name}`}
               title={promptMessage}
@@ -109,13 +130,18 @@ export const Input = ({
                 setValue?.(name, event.target.value.trim(), {
                   shouldValidate: true,
                 });
+                if (event.target.value.length === 0) {
+                  event.stopPropagation();
+                  setIsIconVisible(false);
+                }
                 hookFormOnBlur(event);
                 onBlur?.(event);
               }}
+              // onClick={(event) => event.stopPropagation()}
             />
           )}
 
-          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] gap-2 bg-backgroundMain pl-1">
+          <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] gap-2">
             {isButtonCopy && (
               <button
                 type="button"
@@ -153,7 +179,7 @@ export const Input = ({
                   <div>
                     <Icon
                       id="check-box"
-                      className="h-6 w-6 cursor-pointer fill-color5"
+                      className="h-6 w-6 cursor-pointer fill-color7"
                     />
                   </div>
                 )
@@ -165,7 +191,7 @@ export const Input = ({
           <span
             id={`inputError-${name}`}
             className={cn(
-              "responsive-design inline-block font-nunito font-medium text-color2",
+              "inline-block font-nunito font-medium text-color2",
               "sm:text-[12px]",
               "md:text-[14px]",
               "2xl:text-[16px]"

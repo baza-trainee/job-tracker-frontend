@@ -10,13 +10,15 @@ export const SignUpSchema = z
       .regex(emailRegex, `validation.emailInvalid`)
       .regex(emailRuByRegex, `validation.emailInvalidRuBy`)
       .max(254, `validation.emailMax`)
-      .trim(),
+      .trim()
+      .or(z.literal("")),
 
     password: z
       .string()
       .min(8, `validation.passwordMin`)
       .regex(passwordRegex, `validation.passwordInvalid`)
-      .max(14, `validation.passwordMax`),
+      .max(14, `validation.passwordMax`)
+      .or(z.literal("")),
 
     confirmPassword: z.string(),
 

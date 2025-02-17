@@ -40,7 +40,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   });
 
   const [updateSocialLink] = useUpdateSocialLinkMutation();
-
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
   const dispatch = useAppDispatch();
@@ -71,8 +70,8 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     });
 
     profile.socials.forEach((item) => {
-      setValue(item.name as any, item.link);
-      initialValues.current[item.name] = item.link;
+      setValue(item.id as any, item.link);
+      initialValues.current[item.id] = item.link;
     });
   }, [profile, setValue]);
 
@@ -158,7 +157,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                         "profile"
                       );
                     }}
-                    value={item === "email" ? initialValues.current[item] : ""}
+                    disabled={item === "email" ? true : false}
                     label={label}
                     name={item}
                     placeholder={item}
@@ -191,8 +190,9 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                         item.id
                       )
                     }
+                    id={item.id}
                     label={item.name}
-                    name={item.name}
+                    name={item.id}
                     placeholder={item.name}
                     register={register}
                     errors={errors}
@@ -219,9 +219,10 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               onFocus={() =>
                 handleUpdateInput({ ...item, typeModal: "update" })
               }
+              id={item.id}
               key={item.id}
-              value={item.liveProjectLink}
-              name={item.name}
+              value={`${item.name} | ${item.technologies}`}
+              name={item.id}
               placeholder={item.name}
               register={register}
               errors={errors}
@@ -229,9 +230,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() =>
-                copyInputValue(item.liveProjectLink)
-              }
+              handleClickButtonCopyInput={() => copyInputValue(item.link)}
               handleClickButtonRemoveInput={() => {
                 handleClickButtonRemoveInput(item.id);
               }}
@@ -246,9 +245,10 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               onFocus={() =>
                 handleUpdateInput({ ...item, typeModal: "update" })
               }
+              id={item.id}
               key={item.id}
               value={item.name}
-              name={item.name}
+              name={item.id}
               placeholder={item.name}
               register={register}
               errors={errors}
@@ -271,9 +271,10 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               onFocus={() =>
                 handleUpdateInput({ ...item, typeModal: "update" })
               }
+              id={item.id}
               key={item.id}
               value={item.name}
-              name={item.name}
+              name={item.id}
               placeholder={item.name}
               register={register}
               errors={errors}

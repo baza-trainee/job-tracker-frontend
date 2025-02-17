@@ -8,10 +8,7 @@
   font-family: "nunito";
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
-  font-weight:
-    200,
-    500,
-    700;
+  font-weight: 200, 500, 700;
   font-style: normal;
 }
 
@@ -21,6 +18,10 @@ html {
 
 body {
   @apply bg-backgroundMain;
+}
+
+.container {
+  max-width: 120rem;
 }
 
 .custom-hover {
@@ -266,7 +267,8 @@ abbr {
 } */
 
 .react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
+.react-calendar__tile:enabled:focus,
+.react-calendar__tile--active {
   background: #c6e7ff;
   border-radius: 100px;
   color: #333;
@@ -350,17 +352,6 @@ abbr {
   animation: expandWidth 0.5s ease-out forwards;
 }
 
-.responsive-design {
-  transition: all 3s ease-in-out;
-}
-.responsive-input {
-  transition: height 3s ease-in-out;
-  transition: padding 3s ease-in-out;
-  transition: padding-right 3s ease-in-out;
-  transition: font-size 3s ease-in-out;
-  transition: padding-left-right 3s ease-in-out;
-}
-
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
   display: none;
@@ -369,13 +360,13 @@ input[type="password"]::-ms-clear {
 .soon-scroll::-webkit-scrollbar {
   width: 8px;
   border-radius: 4px;
-  background: #FAF7F7; /* Колір фону під треком */
+  background: #faf7f7; /* Колір фону під треком */
 }
 .soon-scroll::-webkit-scrollbar-thumb {
   width: 8px;
   border-radius: 4px;
-  background: #A6AEBF;
+  background: #a6aebf;
 }
 .soon-scroll::-webkit-scrollbar-thumb:hover {
-  background: #8F99AD;
+  background: #8f99ad;
 }

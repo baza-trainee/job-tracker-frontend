@@ -14,7 +14,22 @@
     "placeholderLinkResume": "Вставте лінк на резюме",
     "placeholderNameCoverLetter": "Вкажіть назву для листа",
     "textNameCoverLetter": "Супровідний лист",
-    "placeholderTextCoverLetter": "Тут треба написати ваш лист"
+    "placeholderTextCoverLetter": "Тут треба написати ваш лист",
+    "placeholderNameProject": "Вкажіть назву проєкту",
+    "technology": "Технології",
+    "placeholderTechnology": "Вкажіть технології які використовували",
+    "linkProject": "Лінк на проєкт",
+    "placeholderlinkProject": "Вставте лінк на проєкт",
+    "textProject": "Опис проєкту",
+    "placeholderTextProject": "Можете описати проєкт",
+    "modalRemoveLink": "Видалити посилання",
+    "modalRemoveProject": "Видалити проєкт",
+    "modalRemoveCoverLetter": "Видалити супровідний лист",
+    "modalRemoveResume": "Видалити резюме",
+    "modalRemoveLinkTitle": "Ви впевнені, що хочете видалити?",
+    "removeAccountModalName": "Видалити акаунт",
+    "removeAccountModalText": "Ви впевнені, що хочете видалити акаунт? ",
+    "removeConfirmAccountModalText": "Цю дії не можна бути відмінити. Ви впевнені?"
   },
   "notification": {
     "updatedSuccess": "Успішно оновлено",
@@ -301,7 +316,8 @@
       "restore": "Відновити",
       "login": "Увійти",
       "try": "Спробувати",
-      "delete": "Видалити"
+      "delete": "Видалити",
+      "confirm": "Ок"
     },
     "logOut": {
       "title": "Ви впевнені, що хочете вийти?",
@@ -330,7 +346,7 @@
       "text_2": "Спробуйте увійти або відновити пароль."
     },
     "forgotPasswordSuccess": {
-      "text_1": "Вам надіслано повідомлення на електронну пошту"
+      "text_1": "Вам відправлено на пошту інструкцію для зміни пароля"
     },
     "resetPasswordSuccess": {
       "text_1": "Зміна пароля успішна.",
@@ -344,14 +360,16 @@
   "soonSection": {
     "soon": "Незабаром",
     "addEvent": "Додати подію",
+    "editEvent": "Редагувати подію",
     "soonName": "Назва",
     "soonNotes": "Нотатки",
     "setTime": "Встановити час",
     "save": "Зберегти",
+    "delete": "Видалити",
     "soonModalPlaceholderName": "Вкажіть назву події",
     "soonModalPlaceholderNotes": "Місце для нотаток",
-    "soonModalTimeHours": "години",
-    "soonModalTimeMinutes": "хвилини"
+    "soonModalTimeHours": "Години",
+    "soonModalTimeMinutes": "Хвилини"
   },
   "calendarTabs": {
     "day": "День",
@@ -361,5 +379,9 @@
   "chartBar": {
     "sent": "Надіслано резюме",
     "responses": "Отримано відповідей"
+  },
+  "loading": {
+    "loading": "Завантажуємо",
+    "error": "Помилка отримання даних"
   }
 }
