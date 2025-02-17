@@ -19,11 +19,11 @@ export default {
         center: true,
         padding: {
           DEFAULT: "1.25rem",
-          sm: "1rem 1.25rem 1.5rem",
+          sm: "1.25rem",
           md: "1.5rem",
-          xl: "2.5rem 1.5rem 2rem",
-          "2xl": "2.5rem 1.5rem 2rem",
-          "3xl": "2.5rem 1.5rem 2rem",
+          xl: "1.5rem",
+          "2xl": "1.5rem",
+          "3xl": "1.5rem",
         },
       },
       boxShadow: {
