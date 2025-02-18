@@ -14,6 +14,7 @@ const initialState: ModalProps = {
   borderColorModal: null,
   backgroundColorModal: null,
   vacancyData: null,
+  eventData: null,
 };
 
 const modalSlice = createSlice({
@@ -27,6 +28,7 @@ const modalSlice = createSlice({
       state.borderColorModal = action.payload.borderColorModal;
       state.backgroundColorModal = action.payload.backgroundColorModal;
       state.vacancyData = action.payload.vacancyData;
+      state.eventData = action.payload.eventData || null;
       state.dataConfirmation = action.payload.dataConfirmation;
     },
     closeModal: (state) => {

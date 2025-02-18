@@ -140,12 +140,12 @@ const VacancySection: FC<VacancySectionProps> = ({
       {/* виправити, почекати дизайн для екранів менше 768 (px-1 py-6 md:p-6) */}
       <div
         className={clsx(
-          "flex w-full justify-center rounded-[0px_12px_12px_12px] border-4 border-solid px-1 py-6 md:p-6",
+          "box-border flex w-full justify-center rounded-[0px_12px_12px_12px] border-2 border-solid px-1 py-6 md:border-2 md:px-4 xl:border-4 xl:p-6",
           colorSectionBorder
         )}
       >
         {/* виправити, почекати дизайн для екранів менше 768 (gap-1 md:gap-4) */}
-        <div className="flex w-full items-center gap-1 md:gap-4">
+        <div className="box-border flex w-full items-center gap-1 md:gap-2 xl:gap-4">
           <button
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
@@ -161,19 +161,20 @@ const VacancySection: FC<VacancySectionProps> = ({
           <div
             ref={containerRef}
             className={clsx(
-              "scrollbar flex w-full flex-col overflow-x-auto",
+              "рішення scrollbar box-border flex w-full flex-col overflow-x-auto",
+              "mdOnly:max-w-[624px]", // виправити, необхідність цього стилю під питанням
               { "pb-5": hasScroll },
-              "gap-4 xl:gap-4 2xl:gap-5"
+              "gap-4 md:gap-3 xl:gap-4 2xl:gap-5"
             )}
           >
             {/* Перший ряд, непарні картки */}
-            <div className="flex flex-nowrap gap-3 xl:gap-4 2xl:gap-5">
+            <div className="box-border flex flex-nowrap gap-3 md:gap-3 xl:gap-4 2xl:gap-5">
               {row1.length > 0 ? row1 : <p>Немає вакансій</p>}
             </div>
 
             {/* Другий ряд, парні картки */}
             {row2.length > 0 && (
-              <div className="flex flex-nowrap gap-3 xl:gap-4 2xl:gap-5">
+              <div className="box-border flex flex-nowrap gap-3 md:gap-3 xl:gap-4 2xl:gap-5">
                 {row2.length > 0 ? row2 : null}
               </div>
             )}
