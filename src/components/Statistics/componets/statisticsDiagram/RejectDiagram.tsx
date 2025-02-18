@@ -182,7 +182,10 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
           visible={tooltip.visible}
         />
       )}
-      <CustomLegend data={chartData} />
+      <CustomLegend
+        data={chartData}
+        className="mx-auto h-[180px] gap-3 md:h-[162px] md:w-[594px] md:gap-5 md:py-4 xl:h-[108px] xl:w-[937px] xl:flex-row xl:justify-center xl:gap-x-7 xl:gap-y-4 2xl:h-fit 2xl:w-full 2xl:justify-between 3xl:w-[1406px] 3xl:p-8"
+      />
     </div>
   );
 };

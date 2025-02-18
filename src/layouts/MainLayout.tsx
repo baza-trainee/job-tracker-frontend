@@ -6,7 +6,7 @@ function MainLayout() {
   return (
     <div className="MAIN flex h-dvh w-full flex-col">
       <Sidebar />
-      <main className="flex h-full flex-col justify-between xl:ml-[92px]">
+      <main className="flex h-full w-full flex-col justify-between xl:pl-[92px]">
         <Outlet />
         <Footer />
       </main>

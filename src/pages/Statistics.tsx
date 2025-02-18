@@ -89,8 +89,8 @@ function Statistics() {
       {!isLoading && vacanciesForStat.length === 0 && <NoVacancyCard />}
       {!isLoading && vacanciesForStat.length !== 0 && (
         <>
-          <div className="my-10 flex justify-between">
-            {/* <div className="mt-8 grid w-[1027px] auto-rows-max grid-cols-2 gap-x-6">
+          <div className="my-4 flex flex-col items-center gap-4 md:my-6 md:gap-6 xl:my-8 xl:flex-row xl:justify-between 2xl:my-10">
+            <div className="mt-8 grid w-[1027px] auto-rows-max grid-cols-2 gap-x-6">
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
@@ -102,8 +102,8 @@ function Statistics() {
               </div>
               <div className="col-span-1 row-start-2">{renderCalendar()}</div>
               <div className="col-span-2 row-start-3">{renderChart()}</div>
-            </div> */}
-            {/* <DoughnutChart vacancies={vacanciesForStat} /> */}
+            </div>
+            <DoughnutChart vacancies={vacanciesForStat} />
           </div>
           <RejectDiagram vacancies={vacanciesForStat} />
         </>
