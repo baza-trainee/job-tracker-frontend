@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import Icon from "../Icon/Icon";
+import { useAppSelector } from "../../store/hook.ts";
+import { selectEventData } from "../../store/slices/modalSlice/selectors.ts";
 
 type SoonCalendarModalProps = {
   onSelectDate?: (date: string) => void;
@@ -11,7 +13,15 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
   onSelectDate,
 }) => {
   const { i18n } = useTranslation();
+  const eventData = useAppSelector(selectEventData);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    if (eventData?.date) {
+      const parsedDate = new Date(eventData.date);
+      setSelectedDate(parsedDate);
+    }
+  }, [eventData]);
 
   const handleDateChange = (selectedDate: Date) => {
     setSelectedDate(selectedDate);
