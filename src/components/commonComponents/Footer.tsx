@@ -13,7 +13,7 @@ function Footer() {
       <h2
         className={classNames(
           "text-center font-nunito font-medium leading-[135%] text-textBlack",
-          "sm:text-[10px]",
+          "text-[10px]",
           "md:text-[16px]"
         )}
       >

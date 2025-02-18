@@ -88,15 +88,14 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 // "3xl:max-w-[498px]",
                 type === "resetPassword" &&
                   "mt-[100px] md:mt-[100px] xl:mt-[106px] 2xl:mt-[96px] 3xl:mt-[184px]",
-                type === "logIn" && "sm:mt-8 xl:mt-[41px]"
+                type === "logIn" && "mt-8 xl:mt-[41px]"
               )}
             >
               {!isResetPasswordPage ? <AuthHeader type={type} /> : null}
 
               <div
                 className={classNames(
-                  "relative rounded-[20px] bg-backgroundMain shadow-form_shadow",
-                  "sm:px-2 sm:py-4",
+                  "relative rounded-[20px] bg-backgroundMain px-2 py-4 shadow-form_shadow",
                   "md:p-8",
                   "xl:-mb-[42px] xl:px-8 xl:py-8",
                   "2xl:px-12 2xl:py-10",
@@ -112,8 +111,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
                   <div
                     className={classNames(
-                      "flex flex-col",
-                      "sm:gap-2",
+                      "flex flex-col gap-2",
                       "md:gap-4",
                       "xl:gap-4",
                       "2xl:gap-6",
@@ -151,7 +149,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                       }
                       className={
                         isResetPasswordPage
-                          ? "sm:pt-[75px] md:pt-[94px] xl:pt-[124px]"
+                          ? "pt-[75px] md:pt-[94px] xl:pt-[124px]"
                           : ""
                       }
                       errors={errors}
@@ -235,8 +233,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
                 {!isResetPasswordPage ? (
                   <div
                     className={classNames(
-                      "flex justify-center",
-                      "sm:mt-2",
+                      "mt-2 flex justify-center",
                       "md:mt-4",
                       "xl:mt-6",
                       "2xl:mt-5"
