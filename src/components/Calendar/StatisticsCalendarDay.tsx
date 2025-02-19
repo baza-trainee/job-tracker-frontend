@@ -1,18 +1,38 @@
 import { useTranslation } from "react-i18next";
 import Calendar from "react-calendar";
 import Icon from "../Icon/Icon";
+import { useGetAllEventsQuery } from "../../store/querySlices/eventsQuerySlice.ts";
 
 type StatisticsCalendarDayProps = {
   onDateChange: (date: Date) => void;
+};
+
+// Функція для форматування дати у "YYYY-MM-DD"
+const formatDate = (date: Date | string) => {
+  return new Date(date)
+    .toLocaleDateString("uk-UA", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+    .split(".") // Розділяємо dd.mm.yyyy
+    .reverse() // Перевертаємо до yyyy-mm-dd
+    .join("-"); // Формуємо назад yyyy-mm-dd
 };
 
 export const StatisticsCalendarDay: React.FC<StatisticsCalendarDayProps> = ({
   onDateChange,
 }) => {
   const { i18n } = useTranslation();
+  const { data: events } = useGetAllEventsQuery();
+
+  // Формуємо Set із датами подій
+  const eventDates = new Set(
+    events?.map((event) => formatDate(event.date)) || []
+  );
 
   return (
-    <div className="statistics-calendar w-[468px] h-[514px] box-border bg-backgroundTertiary px-6 py-4 rounded-[20px]">
+    <div className="statistics-calendar box-border h-[514px] w-[468px] rounded-[20px] bg-backgroundTertiary px-6 py-4">
       <Calendar
         view="month"
         locale={i18n.language}
@@ -26,20 +46,18 @@ export const StatisticsCalendarDay: React.FC<StatisticsCalendarDayProps> = ({
         formatMonthYear={(locale, date) =>
           `${date.toLocaleDateString(locale, { month: "long" })} ${date.getFullYear()}`
         }
+        tileClassName={({ date, view }) => {
+          if (view === "month") {
+            const formattedDate = formatDate(date);
+            return eventDates.has(formattedDate)
+              ? "react-calendar__tile--active"
+              : "";
+          }
+          return "";
+        }}
       />
     </div>
   );
 };
 
 export default StatisticsCalendarDay;
-
-
-
-// // Функція для перевірки, чи належить день до активного місяця, щоб приховати зайві дні
-// const isSameMonth = (date: Date, activeMonth: Date) => {
-//     return date.getMonth() === activeMonth.getMonth() && date.getFullYear() === activeMonth.getFullYear();
-// };
-
-// tileClassName={({ date, view }) =>
-//     view === "month" && !isSameMonth(date, new Date()) ? "calendar-hidden-cell" : ""
-// } // Додаємо клас для прихованих клітинок для зайвих днів з попереднього і наступного місяцівЧи варто стан виносити в редакс? Бо зараз дата по замовчуванню сьогодні, але при кліку на будь-яку іншу дату на календарі, діаграмма повинна переналаштовуватися відповідно нового діапазона.

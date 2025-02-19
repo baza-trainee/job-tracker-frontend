@@ -37,6 +37,7 @@ const EditEventModal = () => {
       soonEventNotes: "",
       hours: "",
       minutes: "",
+      date: "",
     },
   });
 
@@ -58,8 +59,8 @@ const EditEventModal = () => {
   const handleDelete = async () => {
     if (!eventData) return;
     try {
-      await deleteEvent({ id: eventData.id }).unwrap();
-      console.log("Подію видалено", eventData.id);
+      await deleteEvent(eventData.id).unwrap();
+      // console.log("Подію видалено", eventData.id);
       dispatch(closeModal());
       refetch();
     } catch (error) {
@@ -71,13 +72,24 @@ const EditEventModal = () => {
     if (!eventData) return;
     try {
       const updateTime = `${data.hours}:${data.minutes}:00`;
+
+      // console.log("Дані перед оновленням:", {
+      //   id: eventData.id,
+      //   name: data.soonEventName,
+      //   text: data.soonEventNotes,
+      //   time: updateTime,
+      //   date: data.date,
+      // });
+
       await updateEvent({
         id: eventData.id,
         name: data.soonEventName,
         text: data.soonEventNotes,
         time: updateTime,
+        date: data.date,
       }).unwrap();
-      console.log("Подію оновлено", eventData.id);
+
+      // console.log("Подію оновлено", eventData.id);
       dispatch(closeModal());
       refetch();
     } catch (error) {
@@ -92,8 +104,8 @@ const EditEventModal = () => {
     >
       <div className="flex w-full gap-6">
         {/* Вибір дати (поки що без встановлення у форму) */}
-        {/* <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} /> */}
-        <SoonCalendarModal />
+        <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+        {/* <SoonCalendarModal /> */}
 
         <div className="w-[445px] font-medium">
           <label htmlFor="soonEventName" className="text-base 3xl:text-2xl">
