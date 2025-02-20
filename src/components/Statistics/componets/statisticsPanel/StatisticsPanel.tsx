@@ -39,8 +39,12 @@ const StatisticsPanel: FC<StatisticsPanelProps> = ({
   return (
     <>
       <div className="flex w-full flex-col items-center">
-        <div className="flex w-full justify-between">
-          <ul className={cn("flex gap-5 self-start")}>
+        <div className="flex w-full flex-wrap gap-y-2 md:justify-between">
+          <ul
+            className={cn(
+              "flex flex-wrap gap-x-3 gap-y-2 md:gap-2 xl:gap-3 2xl:gap-5 2xl:self-start 3xl:gap-8 mdOnly:w-1/2"
+            )}
+          >
             {panelList.map((item, index) => {
               return (
                 <StatisticsCard

@@ -17,19 +17,21 @@ const CustomLegend: React.FC<{ data: ChartData; className?: string }> = ({
   return (
     <div
       className={cn(
-        "flex w-full justify-between gap-6 rounded-2xl bg-backgroundTertiary px-6 py-4",
+        "flex w-full flex-col flex-wrap rounded-xl bg-backgroundTertiary p-3 md:rounded-2xl md:px-6 2xl:py-4",
         className
       )}
     >
       {data.labels.map((label, index) => (
-        <div key={index} className="flex items-center">
+        <div key={index} className="flex h-fit items-center">
           <div
             style={{
               backgroundColor: data.datasets[0].backgroundColor[index],
             }}
-            className="mr-2 h-[30px] w-[70px] rounded"
+            className="mr-1 h-[30px] w-[30px] rounded md:mr-2 md:w-[70px]"
           ></div>
-          <span>{label}</span>
+          <span className="max-w-24 text-sm leading-none md:max-w-full md:text-base 3xl:text-xl">
+            {label}
+          </span>
         </div>
       ))}
     </div>
