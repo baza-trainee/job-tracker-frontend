@@ -1,84 +1,111 @@
 import { useTranslation } from "react-i18next";
-// import { useEffect } from "react";
+import { Event as EventData } from "@/types/event.types.ts";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import SoonCalendarModal from "../Calendar/SoonCalendarModal.tsx";
 import { Input } from "../inputs/Input/Input.tsx";
 import { Button } from "../buttons/Button/Button.tsx";
 import Icon from "../Icon/Icon.tsx";
-// import { useAppDispatch } from "../../store/hook.ts";
-import {} from // useUpdateEventByIdMutation,
-// useDeleteEventByIdMutation,
-"../../store/querySlices/eventsQuerySlice.ts";
-// import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
+import { useAppSelector, useAppDispatch } from "../../store/hook.ts";
+import { selectEventData } from "../../store/slices/modalSlice/selectors.ts";
+import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
+import {
+  useDeleteEventByIdMutation,
+  useUpdateEventByIdMutation,
+  useGetAllEventsQuery,
+} from "../../store/querySlices/eventsQuerySlice.ts";
 import clsx from "clsx";
-// import { Event } from "../../types/event.types.ts";
 
-// type EditEventModalProps = {
-//   selectedEvent: Event | null;
-// };
-
-// const EditEventModal: React.FC<EditEventModalProps> = ({ selectedEvent }) => {
 const EditEventModal = () => {
   const { t } = useTranslation();
-  // const dispatch = useAppDispatch();
-  // const [updateEvent] = useUpdateEventByIdMutation();
-  // const [deleteEvent] = useDeleteEventByIdMutation();
+  const dispatch = useAppDispatch();
+  const eventData: EventData | null = useAppSelector(selectEventData) ?? null;
+  const [deleteEvent] = useDeleteEventByIdMutation();
+  const [updateEvent] = useUpdateEventByIdMutation();
+  const { refetch } = useGetAllEventsQuery();
 
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     setValue,
     resetField,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
       soonEventName: "",
       soonEventNotes: "",
-      time: "",
+      hours: "",
+      minutes: "",
+      date: "",
     },
   });
 
-  // useEffect(() => {
-  //   if (selectedEvent) {
-  //     setValue("soonEventName", selectedEvent.name);
-  //     setValue("soonEventNotes", selectedEvent.text || "");
-  //     setValue("time", selectedEvent.time);
-  //   }
-  // }, [selectedEvent, setValue]);
+  useEffect(() => {
+    if (!eventData) return;
+    // console.log("Завантажені дані події:", eventData);
+    const [hours, minutes] = eventData.time.split(":");
 
-  // const onSubmit = async (data: {
-  //   soonEventName: string;
-  //   soonEventNotes: string;
-  //   time: string;
-  // }) => {
-  // if (!selectedEvent) return;
+    if (eventData) {
+      reset({
+        soonEventName: eventData.name || "",
+        soonEventNotes: eventData.text || "",
+        hours: hours || "",
+        minutes: minutes || "",
+      });
+    }
+  }, [eventData, reset]);
 
-  // await updateEvent({
-  //   id: selectedEvent.id,
-  //   name: data.soonEventName,
-  //   text: data.soonEventNotes,
-  //   time: data.time,
-  // });
+  const handleDelete = async () => {
+    if (!eventData) return;
+    try {
+      await deleteEvent(eventData.id).unwrap();
+      // console.log("Подію видалено", eventData.id);
+      dispatch(closeModal());
+      refetch();
+    } catch (error) {
+      console.error("Помилка видалення", error);
+    }
+  };
 
-  //   dispatch(closeModal());
-  // };
+  const handleUpdate = async (data: any) => {
+    if (!eventData) return;
+    try {
+      const updateTime = `${data.hours}:${data.minutes}:00`;
 
-  // const handleDelete = async () => {
-  //   if (!selectedEvent) return;
+      // console.log("Дані перед оновленням:", {
+      //   id: eventData.id,
+      //   name: data.soonEventName,
+      //   text: data.soonEventNotes,
+      //   time: updateTime,
+      //   date: data.date,
+      // });
 
-  //   await deleteEvent({ id: selectedEvent.id });
-  //   dispatch(closeModal());
-  // };
+      await updateEvent({
+        id: eventData.id,
+        name: data.soonEventName,
+        text: data.soonEventNotes,
+        time: updateTime,
+        date: data.date,
+      }).unwrap();
+
+      // console.log("Подію оновлено", eventData.id);
+      dispatch(closeModal());
+      refetch();
+    } catch (error) {
+      console.error("Помилка оновлення", error);
+    }
+  };
 
   return (
     <form
-      // onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handleUpdate)}
       className="mt-14 flex flex-col align-middle"
     >
       <div className="flex w-full gap-6">
         {/* Вибір дати (поки що без встановлення у форму) */}
-        {/* <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} /> */}
-        <SoonCalendarModal />
+        <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+        {/* <SoonCalendarModal /> */}
 
         <div className="w-[445px] font-medium">
           <label htmlFor="soonEventName" className="text-base 3xl:text-2xl">
@@ -181,7 +208,7 @@ const EditEventModal = () => {
           className="mt-4"
           variant="ghost"
           size="big"
-          // onClick={handleDelete}
+          onClick={handleDelete}
           // disabled={isLoading}
         >
           {t("soonSection.delete")}
@@ -194,7 +221,6 @@ const EditEventModal = () => {
           className="mt-4 bg-button"
           variant="ghost"
           size="big"
-          // onClick={saveVacancy}
           // disabled={isLoading}
         >
           {t("soonSection.save")}
