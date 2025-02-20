@@ -143,10 +143,14 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
   return (
     <div
       ref={containerRef}
-      className="relative mb-3 flex w-full flex-col gap-6"
+      className="relative mb-3 flex w-full flex-col gap-2 md:gap-4 xl:gap-6"
     >
       <DiagramTitle title={t(`statisticsRejectDiagram.title`)} />
-      <ul className={cn("flex h-20 w-full overflow-hidden rounded-xl")}>
+      <ul
+        className={cn(
+          "flex h-[29px] w-full overflow-hidden rounded-md md:h-[59px] md:rounded-xl xl:h-20"
+        )}
+      >
         {rejectList.map((item, index) => {
           if (item.width === "0%") {
             return null;
@@ -164,7 +168,7 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
               className={cn(
                 `bg-${item.color}`,
                 `border-${item.color}`,
-                `bar group relative border-2 transition-colors first:rounded-s-xl last:rounded-e-xl hover:border-iconHover hover:brightness-90 hover:saturate-200`
+                `bar group relative border-2 transition-colors first:rounded-s-md last:rounded-e-md hover:border-iconHover hover:brightness-90 hover:saturate-200 md:first:rounded-s-xl md:last:rounded-e-xl`
               )}
             ></li>
           );
@@ -178,7 +182,10 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
           visible={tooltip.visible}
         />
       )}
-      <CustomLegend data={chartData} />
+      <CustomLegend
+        data={chartData}
+        className="mx-auto h-[180px] gap-3 md:h-[162px] md:w-[594px] md:gap-5 md:py-4 xl:h-[108px] xl:w-[937px] xl:flex-row xl:justify-center xl:gap-x-7 xl:gap-y-4 2xl:h-fit 2xl:w-full 2xl:justify-between 3xl:w-[1406px] 3xl:p-8"
+      />
     </div>
   );
 };
