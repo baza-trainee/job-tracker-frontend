@@ -53,7 +53,6 @@ const AddEventModal = () => {
       className="mt-14 flex flex-col align-middle"
     >
       <div className="flex w-full gap-6">
-        {/* Додамо пропс для автозаповнення дати, якщо це підтримується */}
         <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
 
         <div className="w-[445px] font-medium">
@@ -171,7 +170,6 @@ const AddEventModal = () => {
         className="mx-auto mt-8 bg-button"
         variant="ghost"
         size="big"
-        // onClick={saveVacancy}
         disabled={isLoading}
       >
         {isLoading ? t("loading") : t("soonSection.save")}

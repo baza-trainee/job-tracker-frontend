@@ -36,7 +36,7 @@ export const Soon = () => {
   };
 
   const handleOpenEditModal = (event: EventData) => {
-    console.log("Передаємо в openModal:", event);
+    // console.log("Передаємо в openModal:", event);
     dispatch(
       openModal({ isModalOpen: true, typeModal: "editEvent", eventData: event })
     );

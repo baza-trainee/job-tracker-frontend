@@ -44,8 +44,11 @@ export const eventQuerySlice = createApi({
       invalidatesTags: ["events"],
     }),
 
-    deleteEventById: build.mutation<void, Pick<Event, "id">>({
-      query: ({ id }) => `/events/${id}`,
+    deleteEventById: build.mutation<void, string>({
+      query: (id) => ({
+        url: `/events/${id}`,
+        method: "DELETE",
+      }),
       invalidatesTags: ["events"],
     }),
   }),
