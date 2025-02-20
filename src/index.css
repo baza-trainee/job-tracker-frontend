@@ -147,8 +147,31 @@ body {
 }
 
 .statistics-calendar .react-calendar__navigation {
-  font-size: 28px;
-  gap: 16px;
+  font-size: 16px;
+  gap: 8px;
+}
+@media screen and (min-width: 768px) {
+  .statistics-calendar .react-calendar__navigation {
+    font-size: 20px;
+    gap: 16px;
+  }
+}
+/* @media screen and (min-width: 1280px) {
+  .statistics-calendar .react-calendar__navigation {
+    font-size: 20px;
+    gap: 16px;
+  }
+} */
+/* @media screen and (min-width: 1440px) {
+  .statistics-calendar .react-calendar__navigation {
+    font-size: 20px;
+    gap: 16px;
+  }
+} */
+@media screen and (min-width: 1920px) {
+  .statistics-calendar .react-calendar__navigation {
+    font-size: 28px;
+  }
 }
 
 .react-calendar__navigation button {
@@ -162,12 +185,25 @@ body {
 }
 
 .statistics-calendar__months .react-calendar__navigation,
-.statistics-calendar__years .react-calendar__navigation {
-  margin-bottom: 24px;
-}
-
+.statistics-calendar__years .react-calendar__navigation,
 .statistics-calendar__day .react-calendar__navigation {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+}
+@media screen and (min-width: 768px) {
+  .statistics-calendar__months .react-calendar__navigation,
+  .statistics-calendar__years .react-calendar__navigation {
+    margin-bottom: 24px;
+  }
+  .statistics-calendar__day .react-calendar__navigation {
+    margin-bottom: 0;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .statistics-calendar__months .react-calendar__navigation,
+  .statistics-calendar__years .react-calendar__navigation,
+  .statistics-calendar__day .react-calendar__navigation {
+    margin-bottom: 16px;
+  }
 }
 
 button.react-calendar__navigation__label {
@@ -196,10 +232,26 @@ button.react-calendar__navigation__label {
   padding-bottom: 12px;
 }
 
-.statistics-calendar__day .react-calendar__month-view__weekdays {
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 500;
+.statistics-calendar__day .react-calendar__month-view__weekdays abbr,
+.statistics-calendar__day abbr {
+  font-size: 14px;
+  line-height: 18.9px;
+  font-weight: 400;
+}
+@media screen and (min-width: 768px) {
+  .statistics-calendar__day .react-calendar__month-view__weekdays abbr,
+  .statistics-calendar__day abbr {
+    font-size: 16px;
+    line-height: 21.6px;
+    font-weight: 500;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .statistics-calendar__day .react-calendar__month-view__weekdays abbr,
+  .statistics-calendar__day abbr {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 /* .job-calendar .react-calendar__month-view__weekdays {
@@ -207,7 +259,6 @@ button.react-calendar__navigation__label {
 } */
 
 abbr[title] {
-  font-weight: 500;
   text-decoration: none;
 }
 abbr {
@@ -222,11 +273,6 @@ abbr {
   line-height: 133%;
 }
 
-.statistics-calendar__day abbr {
-  font-weight: 500;
-  font-size: 24px;
-}
-
 .react-calendar__month-view__days__day--weekend,
 .react-calendar__month-view__weekdays > div:nth-child(6),
 .react-calendar__month-view__weekdays > div:nth-child(7) {
@@ -239,8 +285,20 @@ abbr {
 }
 
 .statistics-calendar__day .react-calendar__month-view__days > button {
-  width: 60px;
-  height: 60px;
+  width: 36px;
+  height: 36px;
+}
+@media screen and (min-width: 768px) {
+  .statistics-calendar__day .react-calendar__month-view__days > button {
+    width: 48px;
+    height: 48px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .statistics-calendar__day .react-calendar__month-view__days > button {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 .react-calendar__tile--now {

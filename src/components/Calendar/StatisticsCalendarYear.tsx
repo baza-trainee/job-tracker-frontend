@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import Icon from "../Icon/Icon";
+import clsx from "clsx";
 
 type StatisticsCalendarYearProps = {
   onYearChange: (year: number) => void;
@@ -12,7 +13,15 @@ export const StatisticsCalendarYear: React.FC<StatisticsCalendarYearProps> = ({
   const [selectedYear, setSelectedYear] = useState<Date | null>(null);
 
   return (
-    <div className="statistics-calendar box-border h-[514px] w-[468px] rounded-[20px] bg-backgroundTertiary px-6 py-8">
+    // <div className="statistics-calendar box-border h-[514px] w-[468px] rounded-[20px] bg-backgroundTertiary px-6 py-8">
+    <div
+      className={clsx(
+        "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary",
+        "w-[276px] md:w-[352px] xl:w-[356px] 3xl:w-[468px]",
+        "h-[318px] md:h-[385px] 3xl:h-[514px]",
+        "p-3 md:p-2 3xl:px-6 3xl:py-4"
+      )}
+    >
       <Calendar
         view="decade" // Відображає період з 12 років, показую тільки роки
         onClickYear={(date) => {

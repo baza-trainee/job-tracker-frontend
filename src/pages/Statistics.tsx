@@ -90,19 +90,18 @@ function Statistics() {
       {!isLoading && vacanciesForStat.length !== 0 && (
         <>
           <div className="my-4 flex flex-col items-center gap-4 md:my-6 md:gap-6 xl:my-8 xl:flex-row xl:items-start xl:justify-between 2xl:my-10">
-            <div className="mt-8 grid w-[1027px] auto-rows-max grid-cols-2 gap-x-6">
-              <div className="col-span-1 row-span-1">
+            <div className="mt-8 grid w-full auto-rows-max grid-cols-1 md:grid-cols-2 md:gap-x-5 xl:w-[729px] xl:gap-x-2 3xl:w-[1027px] 3xl:gap-x-6">
+              <div className="col-start-1 row-start-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
                   setActiveTab={(tab) => dispatch(setActiveTab(tab))}
                 />
               </div>
-              {/* <div className="col-span-1 row-span-2">
-                <Soon />
-              </div> */}
-              <div className="col-span-1 row-start-2">{renderCalendar()}</div>
-              <div className="col-span-2 row-start-3">{renderChart()}</div>
-              <div className="col-span-1 row-span-2">
+              <div className="col-start-1 row-start-2">{renderCalendar()}</div>
+              <div className="col-start-1 row-start-3 md:col-span-2">
+                {renderChart()}
+              </div>
+              <div className="col-start-1 row-start-4 md:col-start-2 md:row-span-2 md:row-start-1">
                 <Soon />
               </div>
             </div>
