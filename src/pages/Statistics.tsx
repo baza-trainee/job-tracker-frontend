@@ -90,18 +90,21 @@ function Statistics() {
       {!isLoading && vacanciesForStat.length !== 0 && (
         <>
           <div className="my-10 flex justify-between">
-            <div className="mt-8 grid w-[1027px] auto-rows-max grid-cols-2 gap-x-6">
+            <div className="mt-8 grid w-full auto-rows-max grid-cols-2 gap-x-6 xl:w-[729px] 3xl:w-[1027px]">
               <div className="col-span-1 row-span-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
                   setActiveTab={(tab) => dispatch(setActiveTab(tab))}
                 />
               </div>
+              {/* <div className="col-span-1 row-span-2">
+                <Soon />
+              </div> */}
+              <div className="col-span-1 row-start-2">{renderCalendar()}</div>
+              <div className="col-span-2 row-start-3">{renderChart()}</div>
               <div className="col-span-1 row-span-2">
                 <Soon />
               </div>
-              <div className="col-span-1 row-start-2">{renderCalendar()}</div>
-              <div className="col-span-2 row-start-3">{renderChart()}</div>
             </div>
             <DoughnutChart vacancies={vacanciesForStat} />
           </div>
