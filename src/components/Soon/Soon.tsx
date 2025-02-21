@@ -43,13 +43,13 @@ export const Soon = () => {
   };
 
   return (
-    <div className="flex w-[532px] flex-col p-4 text-textBlack">
-      <h3 className="mb-6 w-full px-6 font-nunito text-[28px] font-medium leading-[36px] text-textBlack">
+    <div className="flex w-[532px] flex-col px-4 text-textBlack">
+      <h3 className="mb-4 w-full px-4 font-nunito text-[28px] font-medium leading-[38px] text-textBlack">
         {t("soonSection.soon")}
       </h3>
 
       <div className="w-full">
-        <div className="soon-scroll max-h-[456px] w-full overflow-y-scroll pr-2">
+        <div className="soon-scroll max-h-[456px] w-full overflow-y-scroll pr-6">
           {isLoading && (
             <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
               {t("loading.loading")}...
