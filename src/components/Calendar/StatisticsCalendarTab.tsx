@@ -23,7 +23,7 @@ export const StatisticsCalendarTab: React.FC<StatisticsCalendarTabProps> = ({
       className={clsx(
         "mb-4 box-border flex justify-center gap-4 font-medium text-textBlack",
         "w-[276px] md:w-[352px] xl:w-[356px] 3xl:w-[468px]",
-        "text-[28px]"
+        "text-base md:text-xl 3xl:text-[28px] 3xl:leading-[38px]"
       )}
     >
       {tabs.map((tab) => (
