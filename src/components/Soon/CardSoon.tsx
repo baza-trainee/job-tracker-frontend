@@ -15,7 +15,7 @@ const CardSoon: React.FC<CardSoonProps> = ({
 }) => {
   return (
     <button
-      className="mb-2 grid w-[480px] grid-cols-[1fr_3fr] gap-4 rounded-2xl bg-backgroundTertiary px-6 py-3"
+      className="mb-2 grid w-[480px] grid-cols-[1fr_3fr] gap-4 rounded-2xl bg-backgroundTertiary px-6 py-3 hover:bg-backgroundSecondary"
       onClick={onClick}
     >
       <div className="flex w-[53px] flex-col items-center text-center">

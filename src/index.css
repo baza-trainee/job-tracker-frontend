@@ -192,7 +192,7 @@ body {
 @media screen and (min-width: 768px) {
   .statistics-calendar__months .react-calendar__navigation,
   .statistics-calendar__years .react-calendar__navigation {
-    margin-bottom: 24px;
+    margin-bottom: 16px; /* підігнати на дизайні */
   }
   .statistics-calendar__day .react-calendar__navigation {
     margin-bottom: 0;
@@ -353,8 +353,24 @@ abbr {
 .react-calendar__year-view__months,
 .react-calendar__decade-view__years {
   gap: 24px;
-  padding-left: 66px;
-  padding-right: 66px;
+  padding-left: 58px;
+  padding-right: 58px;
+}
+@media screen and (min-width: 768px) {
+  .react-calendar__year-view__months,
+  .react-calendar__decade-view__years {
+    gap: 16px;
+    padding-left: 47px;
+    padding-right: 47px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .react-calendar__year-view__months,
+  .react-calendar__decade-view__years {
+    gap: 24px;
+    padding-left: 58px;
+    padding-right: 58px;
+  }
 }
 
 .react-calendar__year-view__months > button,
@@ -363,8 +379,15 @@ abbr {
   overflow: visible !important;
   margin-inline-end: unset !important;
   border-radius: 16px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
+}
+@media screen and (min-width: 1920px) {
+  .react-calendar__year-view__months > button,
+  .react-calendar__decade-view__years > button {
+    font-size: 24px;
+    font-weight: 500;
+  }
 }
 
 .react-calendar__year-view__months .react-calendar__tile--now,

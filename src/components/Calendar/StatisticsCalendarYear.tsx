@@ -18,8 +18,10 @@ export const StatisticsCalendarYear: React.FC<StatisticsCalendarYearProps> = ({
       className={clsx(
         "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary",
         "w-[276px] md:w-[352px] xl:w-[356px] 3xl:w-[468px]",
-        "h-[318px] md:h-[385px] 3xl:h-[514px]",
-        "p-3 md:p-2 3xl:px-6 3xl:py-4"
+        // "h-[318px] md:h-[385px] 3xl:h-[514px]", підігнати на дизайні (висота, відступи)
+        "h-[318px] md:h-[398px] 3xl:h-[514px]",
+        // "p-4 md:px-4 md:py-6 3xl:px-8 3xl:py-6"
+        "p-4 md:px-4 md:pb-6 md:pt-4 3xl:px-8 3xl:py-6"
       )}
     >
       <Calendar
@@ -43,7 +45,7 @@ export const StatisticsCalendarYear: React.FC<StatisticsCalendarYearProps> = ({
             selectedYear?.getFullYear() === date.getFullYear()
               ? "react-calendar__tile--active"
               : ""
-          } w-[80px] h-[80px] font-Nunito text-textBlack bg-backgroundMain box-border`
+          } w-[54px] h-[54px] md:w-[66px] md:h-[66px] 3xl:w-[80px] 3xl:h-[80px] font-Nunito text-textBlack bg-backgroundMain box-border`
         }
       />
     </div>
