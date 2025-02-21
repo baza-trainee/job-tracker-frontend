@@ -11,13 +11,14 @@ const CloseSidebarBtn: React.FC<SidebarBtnProps> = ({
     <div
       onClick={handleOpenSidebar}
       className={cn(
-        "custom-hover cursor-pointer p-[10px]",
+        "cursor-pointer p-[10px]",
+        "custom-transition",
         !isOpenSidebar ? "sr-only m-0 opacity-0" : "visible opacity-100"
       )}
     >
       <Icon
         id={ICON.ARROW_LEFT}
-        className="h-6 w-6 fill-black hover:fill-iconHover dark:fill-slate-300 dark:hover:fill-iconHover"
+        className="h-6 w-6 rotate-180 fill-black hover:fill-iconHover dark:fill-slate-300 dark:hover:fill-iconHover md:rotate-0"
       />
     </div>
   );
