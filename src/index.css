@@ -439,14 +439,24 @@ input[type="password"]::-ms-clear {
 }
 
 .soon-scroll::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
   border-radius: 4px;
   background: #faf7f7; /* Колір фону під треком */
 }
+@media screen and (min-width: 768px) {
+  .soon-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+}
 .soon-scroll::-webkit-scrollbar-thumb {
-  width: 8px;
+  width: 6px;
   border-radius: 4px;
   background: #a6aebf;
+}
+@media screen and (min-width: 768px) {
+  .soon-scroll::-webkit-scrollbar-thumb {
+    width: 8px;
+  }
 }
 .soon-scroll::-webkit-scrollbar-thumb:hover {
   background: #8f99ad;
