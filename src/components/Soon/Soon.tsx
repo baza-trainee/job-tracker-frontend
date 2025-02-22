@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../store/hook.ts";
 import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
@@ -7,6 +8,7 @@ import Modal from "../modal/Modal.tsx";
 import { Button } from "../buttons/Button/Button.tsx";
 import { useGetAllEventsQuery } from "../../store/querySlices/eventsQuerySlice.ts";
 import { Event as EventData } from "@/types/event.types";
+import clsx from "clsx";
 
 // export interface EventData {
 //   id: string;
@@ -20,6 +22,29 @@ export const Soon = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { data: events, isLoading, error } = useGetAllEventsQuery();
+  const [hasScroll, setHasScroll] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkScroll = () => {
+      if (scrollContainerRef.current) {
+        const scrollHeight = scrollContainerRef.current.scrollHeight;
+        const clientHeight = scrollContainerRef.current.clientHeight;
+        const isScrollable = scrollHeight > clientHeight;
+
+        // console.log("scrollHeight:", scrollHeight);
+        // console.log("clientHeight:", clientHeight);
+        // console.log("hasScroll (before set):", isScrollable);
+
+        setHasScroll(isScrollable);
+      }
+    };
+
+    checkScroll();
+
+    window.addEventListener("resize", checkScroll);
+    return () => window.removeEventListener("resize", checkScroll);
+  }, [events]);
 
   // const events = [
   //     { day: "Пн", date: "22.01", title: "Співбесіда в Google Співбесіда в Google", time: "12:30" },
@@ -43,13 +68,27 @@ export const Soon = () => {
   };
 
   return (
-    <div className="flex w-[532px] flex-col p-4 text-textBlack">
-      <h3 className="mb-6 w-full px-6 font-nunito text-[28px] font-medium leading-[36px] text-textBlack">
+    <div className="flex h-full flex-col justify-between px-4 pt-2 text-textBlack 3xl:w-[535px]">
+      <h3
+        className={clsx(
+          "w-full px-4 font-nunito font-medium leading-[135%] text-textBlack",
+          "text-[16px] md:text-[20px] 2xl:text-[24px] 3xl:text-[28px]",
+          "mb-3 xl:mb-2 3xl:mb-6"
+        )}
+      >
         {t("soonSection.soon")}
       </h3>
 
-      <div className="w-full">
-        <div className="soon-scroll max-h-[456px] w-full overflow-y-scroll pr-2">
+      <div
+        className={clsx(
+          "flex h-full w-full flex-col",
+          hasScroll ? "justify-between" : "justify-start"
+        )}
+      >
+        <div
+          ref={scrollContainerRef}
+          className="soon-scroll max-h-[456px] w-full overflow-y-scroll pr-[10px] md:pr-[18px] 3xl:pr-6"
+        >
           {isLoading && (
             <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
               {t("loading.loading")}...
@@ -95,10 +134,19 @@ export const Soon = () => {
         </div>
 
         <Button
-          className="flex w-[480px] items-center justify-start gap-2 border-iconHover bg-backgroundTertiary px-3 py-3 md:px-4 xl:gap-4 2xl:px-6"
+          className={clsx(
+            "flex items-center justify-start border-iconHover bg-backgroundTertiary",
+            "w-full max-w-[calc(100%-24px)]",
+            "p-3 md:px-4 2xl:px-6",
+            "gap-2 xl:gap-4",
+            "text-[14px] font-normal leading-[135%] md:text-[20px] md:font-medium"
+          )}
           onClick={handleOpenModal}
         >
-          <Icon id="plus" className="ml-4 mr-[13px] size-6" />
+          <Icon
+            id="plus"
+            className="mx-[13px] size-6 md:mx-[14.5px] 3xl:ml-4 3xl:mr-[13px]"
+          />
           {t("soonSection.addEvent")}
         </Button>
       </div>

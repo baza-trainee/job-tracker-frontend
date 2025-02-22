@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Calendar from "react-calendar";
 import Icon from "../Icon/Icon";
+import clsx from "clsx";
 
 type StatisticsCalendarMonthProps = {
   onMonthChange: (month: Date) => void;
@@ -18,7 +19,17 @@ export const StatisticsCalendarMonth: React.FC<
   const [selectedMonth, setSelectedMonth] = useState<Date | null>(null);
 
   return (
-    <div className="statistics-calendar box-border h-[514px] w-[468px] rounded-[20px] bg-backgroundTertiary px-6 py-8">
+    // <div className="statistics-calendar box-border h-[514px] w-[468px] rounded-[20px] bg-backgroundTertiary px-6 py-8">
+    <div
+      className={clsx(
+        "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary",
+        "w-[276px] md:w-[352px] xl:w-[356px] 3xl:w-[468px]",
+        // "h-[318px] md:h-[385px] 3xl:h-[514px]", підігнати на дизайні (висота, відступи)
+        "h-[318px] md:h-[398px] 3xl:h-[514px]",
+        // "p-4 md:px-4 md:py-6 3xl:px-8 3xl:py-6"
+        "p-4 md:px-4 md:pb-6 md:pt-4 3xl:px-8 3xl:py-6"
+      )}
+    >
       <Calendar
         view="year" // Відображає 1 рік, в ньому місяців
         locale={i18n.language}
@@ -52,7 +63,7 @@ export const StatisticsCalendarMonth: React.FC<
               selectedMonth?.getMonth() === date.getMonth()
                 ? "react-calendar__tile--active"
                 : ""
-            } w-[80px] h-[80px] font-Nunito text-textBlack bg-backgroundMain box-border` //стиль клітинок
+            } w-[54px] h-[54px] md:w-[66px] md:h-[66px] 3xl:w-[80px] 3xl:h-[80px] font-Nunito text-textBlack bg-backgroundMain box-border` //стиль клітинок
         }
       />
     </div>
