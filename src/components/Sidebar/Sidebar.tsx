@@ -17,9 +17,28 @@ import {
 } from "../../store/slices/sibebarSlice/sidebarSlice.ts";
 
 import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import debounce from "lodash.debounce";
+import { ICON } from "../Icon/icons.ts";
 
 function Sidebar() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
+
+  useEffect(() => {
+    // Функція для оновлення стану при зміні розміру
+    const handleResize = debounce(() => {
+      setIsMobile(window.innerWidth < 1280);
+    }, 200);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleLogOut = (): void => {
     dispatch(
@@ -42,23 +61,35 @@ function Sidebar() {
   const handleOpenSidebar = () => {
     dispatch(openSidebar());
   };
+
   const handleCloseSidebar = () => {
     dispatch(closeSidebar());
   };
 
   const { t } = useTranslation();
+  const isArchiveBtnRender =
+    isMobile && location.pathname.includes("vacancies");
+
+  let navListForRender = isArchiveBtnRender
+    ? NavList()
+    : NavList().slice(0, -1);
 
   return (
     <aside
       className={cn(
-        "fixed top-0 z-20 hidden h-dvh w-[256px] flex-col justify-between rounded-r-[20px] bg-backgroundSecondary p-6 font-nunito text-xl font-medium dark:bg-slate-800 xl:flex",
-        "custom-size",
-        !isOpenSidebar && "w-[92px] items-center pl-3 pr-3"
+        "fixed right-0 top-0 z-20 box-border flex h-dvh w-full flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-xl font-medium dark:bg-slate-800 md:w-[256px] md:rounded-l-[20px] md:p-6 xl:left-0 xl:rounded-l-none xl:rounded-r-[20px]",
+
+        !isOpenSidebar &&
+          "w-[40px] items-center px-3 md:w-[92px] md:px-3 smOnly:translate-x-[80px] mdOnly:translate-x-[92px]",
+        "custom-size"
       )}
     >
       <div className={cn("flex flex-col")}>
         <div className={cn("flex items-center justify-between")}>
-          <OpenSidebarBtn handleOpenSidebar={handleOpenSidebar} />
+          <OpenSidebarBtn
+            handleOpenSidebar={handleOpenSidebar}
+            icon={ICON.LOGO}
+          />
           <CloseSidebarBtn
             handleOpenSidebar={handleCloseSidebar}
             isOpenSidebar={isOpenSidebar}
@@ -71,7 +102,7 @@ function Sidebar() {
             !isOpenSidebar && "items-center"
           )}
         >
-          {NavList().map((item, index) => {
+          {navListForRender.map((item, index) => {
             return (
               <SidebarNavItem
                 key={index}
