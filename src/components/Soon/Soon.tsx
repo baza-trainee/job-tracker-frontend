@@ -94,7 +94,8 @@ export const Soon = () => {
         <div
           ref={scrollContainerRef}
           className={clsx(
-            "soon-scroll max-h-[456px] w-full overflow-y-scroll", // ПЕРЕРАХУВАТИ максимальну висоту під скролл
+            "soon-scroll w-full overflow-y-scroll",
+            "max-h-[202.8px] md:max-h-[362.6px] xl:max-h-[366.6px] 2xl:max-h-[353.2px] 3xl:max-h-[465.8px]", // ПЕРЕРАХУВАТИ максимальну висоту під скролл
             "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
           )}
         >
@@ -148,7 +149,8 @@ export const Soon = () => {
             "w-full max-w-[calc(100%-10px)] md:max-w-[calc(100%-18px)] 2xl:max-w-[calc(100%-20px)] 3xl:max-w-[calc(100%-24px)]",
             "p-3 md:px-4 xl:px-4 3xl:px-6",
             "gap-2 3xl:gap-4",
-            "text-[14px] font-normal leading-[135%] md:text-[20px] md:font-medium"
+            "text-[14px] font-normal leading-[135%] md:text-[20px] md:font-medium",
+            "h-[48px] md:h-[50px]"
           )}
           onClick={handleOpenModal}
         >

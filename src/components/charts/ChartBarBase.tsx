@@ -8,28 +8,39 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
+} from "chart.js";
 
 // Реєстрація компонентів Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 interface ChartBarBaseProps {
   labels: string[];
   datasets: Array<{
     label: string;
-    data: number[],
+    data: number[];
     backgroundColor: string;
     borderColor: string;
     borderWidth: number;
   }>;
   selectedIndex: number; // пропс для підкреслення обраного елемента по осі x
-};
+}
 
 interface ExtendedChartOptions extends ChartOptions<"bar"> {
   selectedLabel?: string;
 }
 
-const ChartBarBase: React.FC<ChartBarBaseProps> = ({ labels, datasets, selectedIndex }) => {
+const ChartBarBase: React.FC<ChartBarBaseProps> = ({
+  labels,
+  datasets,
+  selectedIndex,
+}) => {
   const selectedLabel = labels[selectedIndex]; // Визначаємо обране значення по осі x
   const chartData = { labels, datasets };
 
@@ -64,7 +75,8 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({ labels, datasets, selectedI
       x: {
         ticks: {
           callback: function (value: string | number) {
-            const label = typeof value === "number" ? this.getLabelForValue(value) : value;
+            const label =
+              typeof value === "number" ? this.getLabelForValue(value) : value;
             return label;
           },
           font: {
@@ -86,8 +98,8 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({ labels, datasets, selectedI
         ticks: {
           font: {
             size: 16,
-          }
-        }
+          },
+        },
       },
     },
     plugins: {
@@ -101,7 +113,7 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({ labels, datasets, selectedI
           usePointStyle: false,
           boxWidth: 70,
           boxHeight: 30,
-          padding: 24,          
+          padding: 24,
           color: "rgba(51, 51, 51, 1)",
           // generateLabels: (chart) => {
           //   const originalLabels = ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
@@ -118,14 +130,15 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({ labels, datasets, selectedI
         intersect: false,
       },
     },
-    selectedLabel, // Додаємо обране значення на осі x    
+    selectedLabel, // Додаємо обране значення на осі x
   };
 
   return (
-    <div className={"w-full h-auto min-h-[406px] mt-4"}>
-      <Bar data={chartData} options={chartOptions} plugins={[customPlugin]}/>
+    <div className={"mt-4 min-h-[406px] w-full"}>
+      <Bar data={chartData} options={chartOptions} plugins={[customPlugin]} />
     </div>
   );
 };
 
 export default ChartBarBase;
+// max-h-[304px] min-h-[190px] h-auto 3xl:
