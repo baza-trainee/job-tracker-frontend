@@ -24,6 +24,11 @@ const NavList = () => {
       link: "/notes",
       title: t("navigation.notes"),
     },
+    {
+      icon: ICON.ARCHIVE,
+      link: "/archive",
+      title: t("navigation.archive"),
+    },
   ];
 };
 
