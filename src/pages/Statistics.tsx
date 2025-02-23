@@ -22,6 +22,7 @@ import {
   setSelectedMonth,
   setSelectedYear,
 } from "@/store/slices/calendarSlice/calendarSlice.ts";
+import clsx from "clsx";
 
 function Statistics() {
   const dispatch = useAppDispatch();
@@ -89,19 +90,33 @@ function Statistics() {
       {!isLoading && vacanciesForStat.length === 0 && <NoVacancyCard />}
       {!isLoading && vacanciesForStat.length !== 0 && (
         <>
-          <div className="my-4 flex flex-col items-center gap-4 md:my-6 md:gap-6 xl:my-8 xl:flex-row xl:items-start xl:justify-between 2xl:my-10">
-            <div className="mt-8 grid w-[1027px] auto-rows-max grid-cols-2 gap-x-6">
-              <div className="col-span-1 row-span-1">
+          <div
+            className={clsx(
+              "flex flex-col items-center xl:flex-row xl:items-start xl:justify-between",
+              "my-4 md:my-6 xl:my-8 2xl:my-10",
+              "gap-4 md:gap-6"
+            )}
+          >
+            <div
+              className={clsx(
+                "mt-8 grid auto-rows-max grid-cols-1 md:grid-cols-[auto,1fr]",
+                "w-full xl:w-[729px] 3xl:w-[1027px]",
+                "md:gap-x-5 xl:gap-x-2 3xl:gap-x-6"
+              )}
+            >
+              <div className="col-start-1 row-start-1">
                 <StatisticsCalendarTab
                   activeTab={activeTab}
                   setActiveTab={(tab) => dispatch(setActiveTab(tab))}
                 />
               </div>
-              <div className="col-span-1 row-span-2">
+              <div className="col-start-1 row-start-2">{renderCalendar()}</div>
+              <div className="col-start-1 row-start-3 md:col-span-2">
+                {renderChart()}
+              </div>
+              <div className="col-start-1 row-start-4 md:col-start-2 md:row-span-2 md:row-start-1">
                 <Soon />
               </div>
-              <div className="col-span-1 row-start-2">{renderCalendar()}</div>
-              <div className="col-span-2 row-start-3">{renderChart()}</div>
             </div>
             <DoughnutChart vacancies={vacanciesForStat} />
           </div>

@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import Calendar from "react-calendar";
 import Icon from "../Icon/Icon";
 import { useGetAllEventsQuery } from "../../store/querySlices/eventsQuerySlice.ts";
+import clsx from "clsx";
 
 type StatisticsCalendarDayProps = {
   onDateChange: (date: Date) => void;
@@ -32,7 +33,15 @@ export const StatisticsCalendarDay: React.FC<StatisticsCalendarDayProps> = ({
   );
 
   return (
-    <div className="statistics-calendar box-border h-[514px] w-[468px] rounded-[20px] bg-backgroundTertiary px-6 py-4">
+    <div
+      className={clsx(
+        "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary",
+        "w-[276px] md:w-[352px] xl:w-[356px] 3xl:w-[468px]",
+        // "h-[318px] md:h-[385px] 3xl:h-[514px]", підігнати на дизайні (висота, відступи)
+        "h-[318px] md:h-[398px] 3xl:h-[514px]",
+        "p-3 md:p-2 3xl:px-6 3xl:py-4"
+      )}
+    >
       <Calendar
         view="month"
         locale={i18n.language}
