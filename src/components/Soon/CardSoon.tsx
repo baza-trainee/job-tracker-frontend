@@ -18,26 +18,27 @@ const CardSoon: React.FC<CardSoonProps> = ({
   return (
     <button
       className={clsx(
-        "grid w-full grid-cols-[17%_3fr] rounded-2xl bg-backgroundTertiary hover:bg-backgroundSecondary",
+        "grid w-full rounded-2xl bg-backgroundTertiary hover:bg-backgroundSecondary",
+        "grid-cols-[auto_3fr]",
         "px-2 py-3 xl:px-4 xl:py-2 3xl:px-6",
-        "gap-2 3xl:gap-4",
-        "mb-2 xl:mb-3"
+        "gap-2 2xl:gap-4",
+        "mb-2 xl:mb-3 2xl:mb-2"
       )}
       onClick={onClick}
     >
-      <div className="flex flex-col items-center text-center">
-        <p className="text-[14px] font-normal leading-[135%] xl:text-[16px] xl:font-medium">
+      <div className="flex w-[53px] flex-col items-center text-center">
+        <p className="text-[14px] font-normal leading-none xl:text-[16px] xl:font-medium">
           {day}
         </p>
-        <p className="text-[16px] font-medium leading-[135%] xl:text-[20px] 3xl:text-xl">
+        <p className="text-[16px] font-medium leading-[135%] xl:text-[20px]">
           {date}
         </p>
       </div>
 
       <div
         className={clsx(
-          "flex flex-col items-center text-center",
-          "max-w-[203px] md:max-w-[249px] 3xl:max-w-[339px]"
+          "flex flex-1 flex-col items-center overflow-hidden text-center",
+          "md:max-w-[241px] xl:max-w-[221px] 3xl:max-w-[354px]"
         )}
       >
         <p className="w-full truncate text-[14px] font-normal leading-[135%] md:text-[16px] md:font-medium 3xl:text-[20px]">
