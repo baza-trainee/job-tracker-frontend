@@ -26,6 +26,11 @@ export interface ToggleProps {
 
 export interface SidebarBtnProps {
   handleOpenSidebar: () => void;
+  isOpenSidebar: boolean;
+}
+
+export interface SidebarOpenBtnProps {
+  handleOpenSidebar: () => void;
   isOpenSidebar?: boolean;
-  icon?: IconId;
+  icon: IconId;
 }

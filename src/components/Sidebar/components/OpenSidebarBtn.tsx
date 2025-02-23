@@ -1,8 +1,8 @@
 import Icon from "../../Icon/Icon";
-// import { ICON } from "../../Icon/icons";
-import { SidebarBtnProps } from "./Sidebar.props";
 
-const OpenSidebarBtn: React.FC<SidebarBtnProps> = ({
+import { SidebarOpenBtnProps } from "./Sidebar.props";
+
+const OpenSidebarBtn: React.FC<SidebarOpenBtnProps> = ({
   handleOpenSidebar,
   icon,
 }) => {
