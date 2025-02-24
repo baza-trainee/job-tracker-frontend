@@ -228,8 +228,14 @@ button.react-calendar__navigation__label {
 .react-calendar__month-view__weekdays {
   border-bottom: 1px solid #f5f5f5;
   text-align: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+@media screen and (min-width: 768px) {
+  .react-calendar__month-view__weekdays {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .statistics-calendar__day .react-calendar__month-view__weekdays abbr,
@@ -352,9 +358,9 @@ abbr {
 
 .react-calendar__year-view__months,
 .react-calendar__decade-view__years {
-  gap: 24px;
-  padding-left: 58px;
-  padding-right: 58px;
+  gap: 16px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 @media screen and (min-width: 768px) {
   .react-calendar__year-view__months,
