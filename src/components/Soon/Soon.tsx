@@ -95,7 +95,7 @@ export const Soon = () => {
           ref={scrollContainerRef}
           className={clsx(
             "soon-scroll w-full overflow-y-scroll",
-            "max-h-[202.8px] md:max-h-[362.6px] xl:max-h-[366.6px] 2xl:max-h-[353.2px] 3xl:max-h-[465.8px]", // ПЕРЕРАХУВАТИ максимальну висоту під скролл
+            "max-h-[202.8px] md:max-h-[362.6px] xl:max-h-[366.6px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
             "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
           )}
         >

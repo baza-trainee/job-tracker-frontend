@@ -79,8 +79,16 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
               typeof value === "number" ? this.getLabelForValue(value) : value;
             return label;
           },
-          font: {
-            size: 20,
+          // font: {
+          //   size: 20,
+          // },
+          font: (context) => {
+            const width = context.chart.width;
+            // console.log("Chart width:", width);
+            return {
+              size: width < 1027 ? 14 : 20,
+              weight: width >= 1027 ? 500 : 400,
+            };
           },
           color: "rgba(51, 51, 51, 1)",
           // color: (ctx) => {
@@ -96,9 +104,17 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
       y: {
         beginAtZero: true,
         ticks: {
-          font: {
-            size: 16,
+          // font: {
+          //   size: 16,
+          // },
+          font: (context) => {
+            const width = context.chart.width;
+            return {
+              size: width < 1027 ? 14 : 20,
+              weight: width >= 1027 ? 500 : 400,
+            };
           },
+          color: "rgba(51, 51, 51, 1)",
         },
       },
     },
@@ -106,9 +122,16 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
       legend: {
         position: "bottom",
         labels: {
-          font: {
-            size: 20,
-            weight: 500,
+          // font: {
+          //   size: 20,
+          //   weight: 500,
+          // },
+          font: (context) => {
+            const width = context.chart.width;
+            return {
+              size: width < 720 ? 14 : width < 1027 ? 16 : 20,
+              weight: width >= 720 ? 500 : 400,
+            };
           },
           usePointStyle: false,
           boxWidth: 70,
@@ -128,6 +151,12 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
       tooltip: {
         mode: "index",
         intersect: false,
+        titleFont: {
+          size: 14,
+        },
+        bodyFont: {
+          size: 14,
+        },
       },
     },
     selectedLabel, // Додаємо обране значення на осі x
@@ -141,4 +170,3 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
 };
 
 export default ChartBarBase;
-// max-h-[304px] min-h-[190px] h-auto 3xl:
