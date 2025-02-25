@@ -21,7 +21,7 @@ function MobHeader() {
         "flex items-center justify-between px-5 pt-4 md:px-6 md:pt-6 xl:hidden"
       )}
     >
-      <Logo />
+      <Logo className="h-[44px] w-[54px]" />
       <OpenSidebarBtn
         handleOpenSidebar={handleOpenSidebar}
         isOpenSidebar={isOpenSidebar}
