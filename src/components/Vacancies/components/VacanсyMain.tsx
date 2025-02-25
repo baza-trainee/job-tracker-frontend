@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   useAppDispatch,
@@ -57,6 +57,23 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   useEffect(() => {
     dispatch(setFilteredVacancies(renderedVacancies));
   }, [searchQuery, sortType, dispatch]);
+
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia("(max-width: 767px)").matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    const handleResize = () => setIsMobile(mediaQuery.matches);
+
+    mediaQuery.addEventListener("change", handleResize);
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
+  useEffect(() => {
+    console.log("isMobile changed:", isMobile);
+  }, [isMobile]);
 
   //alex
   const handleVacancyCard = (
@@ -133,7 +150,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
           (section) =>
             getVacanciesByStatus(renderedVacancies, section.sectionName)
               .length > 0 &&
-            (!isSorting ? (
+            (!isSorting && !isMobile ? (
               <VacancySection
                 key={section.sectionName}
                 titleSection={section.title}
@@ -162,6 +179,8 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                 titleSection={section.title}
                 colorSectionBorder={section.borderColor}
                 colorSectionBG={section.backgroundColor}
+                isSorted={isSorting}
+                isArchived={isArchive}
               >
                 {getVacanciesByStatus(
                   renderedVacancies,

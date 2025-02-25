@@ -33,29 +33,34 @@ const VacancyCard: FC<VacancyCardProps> = ({
   return (
     <div
       className={clsx(
-        "box-border flex shrink-0 cursor-pointer flex-col justify-between gap-2 overflow-hidden rounded-xl border border-transparent font-nunito font-medium",
-        "px-2 py-3 xl:px-3",
+        "VacancyCard box-border flex shrink-0 cursor-pointer flex-col justify-between gap-2 rounded-xl",
+        "overflow-hidden p-3 font-nunito font-medium",
         "transition-all duration-300 focus:border-iconHover focus:outline-none focus-visible:border-iconHover active:border-iconHover",
         colorSectionBG,
         colorHoverBG,
-        "w-[232px] md:w-[200px] xl:w-[241px] 2xl:w-[278px] 3xl:w-[314px]"
+        "w-[238px] md:w-[200px] xl:w-[241px] 2xl:w-[278px] 3xl:w-[314px]"
       )}
       onClick={onClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" && onClick?.()}
     >
-      <div className="w-full text-start font-medium">
-        <h3 className="truncate text-base">{titleVacancy}</h3>
-        <p className="truncate text-xs">{company}</p>
+      <div className="box-border w-full text-start font-medium">
+        <h3 className="truncate text-[16px] leading-[135%]">{titleVacancy}</h3>
+        <p className="truncate text-[12px] leading-[135%]">{company}</p>
       </div>
-      <div className="flex items-center gap-1 font-medium">
+      <div className="box-border flex items-center gap-1 font-medium">
         <Icon id={`location-${workType}`} className="h-6 w-6 shrink-0" />
-        <span className="text-sm">{locationLabel[workType]}</span>
-        <span className="w-[50%] truncate text-sm">{location}</span>
+        <span className="text-[14px] leading-[135%]">
+          {locationLabel[workType]}
+        </span>
+        <span className="w-[50%] truncate text-[14px] leading-[135%]">
+          {location}
+        </span>
       </div>
     </div>
   );
 };
 
 export default VacancyCard;
+// border border-transparent

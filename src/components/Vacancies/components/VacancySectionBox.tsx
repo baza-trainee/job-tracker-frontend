@@ -2,11 +2,18 @@ import { FC, useState, useRef, useEffect } from "react";
 import clsx from "clsx";
 import { VacancySectionProps } from "./VacancySection.tsx";
 
-const VacancySectionBox: FC<VacancySectionProps> = ({
+interface VacancySectionBoxProps extends VacancySectionProps {
+  isSorted?: boolean;
+  isArchived?: boolean;
+}
+
+const VacancySectionBox: FC<VacancySectionBoxProps> = ({
   titleSection,
   colorSectionBorder,
   colorSectionBG,
   children = [],
+  isSorted = false,
+  isArchived = false,
 }) => {
   const validChildren = Array.isArray(children) ? children : [children];
   const contentRef = useRef<HTMLDivElement>(null);
@@ -41,6 +48,12 @@ const VacancySectionBox: FC<VacancySectionProps> = ({
     }
   }, []);
 
+  const maxHeightClass =
+    isSorted || isArchived ? "max-h-[60vh]" : "max-h-[305px]";
+  console.log("isArchived", isArchived);
+  console.log("isSorted", isSorted);
+  console.log("status", maxHeightClass);
+
   return (
     <section className="VacancySectionBox flex flex-col text-textBlack">
       {/* Заголовок секції */}
@@ -56,20 +69,23 @@ const VacancySectionBox: FC<VacancySectionProps> = ({
       {/* Контейнер карток */}
       <div
         className={clsx(
-          "box-border flex w-full justify-center rounded-[0px_12px_12px_12px] border-4 border-solid px-3 py-6",
+          "box-border flex w-full justify-center rounded-[0px_12px_12px_12px]",
+          "border-2 border-solid p-3 md:border-4 md:px-3 md:py-6",
           colorSectionBorder
         )}
       >
         <div
           ref={contentRef}
-          className={clsx("scrollbar-y h-auto max-h-[60vh] overflow-y-auto", {
-            "pr-2 md:pr-4": hasScroll,
-          })}
+          className={clsx(
+            "scrollbar-y-sectionbox h-auto overflow-y-auto",
+            { "pr-[4px] md:pr-4": hasScroll },
+            maxHeightClass
+          )}
         >
           <div
             className={clsx(
               "flex flex-wrap justify-start",
-              "box-border w-[232px] md:w-[624px] xl:w-[1024px] 2xl:w-[1172px] 3xl:w-[1666px]",
+              "box-border w-[238px] md:w-[624px] xl:w-[1024px] 2xl:w-[1172px] 3xl:w-[1666px]",
               "gap-x-3 gap-y-2 xl:gap-x-5 xl:gap-y-4 2xl:gap-y-6 3xl:gap-x-6"
             )}
           >
