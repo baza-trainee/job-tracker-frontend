@@ -77,11 +77,12 @@ function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed right-0 top-0 z-20 box-border flex h-dvh w-full flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-xl font-medium dark:bg-slate-800 md:w-[256px] md:rounded-l-[20px] md:p-6 xl:left-0 xl:rounded-l-none xl:rounded-r-[20px]",
+        "fixed right-0 top-0 z-20 box-border flex h-[686px] flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-xl font-medium dark:bg-slate-800 md:h-[780px] md:w-[256px] md:rounded-l-[20px] md:p-6 xl:left-0 xl:h-dvh xl:rounded-l-none xl:rounded-r-[20px] smOnly:max-w-full",
+        "custom-size",
 
-        !isOpenSidebar &&
-          "w-[40px] items-center px-3 md:w-[92px] md:px-3 smOnly:translate-x-[92px] mdOnly:translate-x-[92px]",
-        "custom-size"
+        !isOpenSidebar
+          ? "w-[40px] items-center px-3 md:w-[92px] md:px-3 smOnly:translate-x-[92px] mdOnly:translate-x-[92px]"
+          : "smOnly:w-full"
       )}
     >
       <div className={cn("flex flex-col")}>
