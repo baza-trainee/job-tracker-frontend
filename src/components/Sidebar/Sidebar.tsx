@@ -10,11 +10,11 @@ import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
 import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
 
 import { useAppDispatch, useAppSelector } from "../../store/hook.ts";
-import { selectSidebar } from "../../store/slices/sibebarSlice/sidebarSelector.ts";
+import { selectSidebar } from "../../store/slices/sidebarSlice/sidebarSelector.ts";
 import {
   closeSidebar,
   openSidebar,
-} from "../../store/slices/sibebarSlice/sidebarSlice.ts";
+} from "../../store/slices/sidebarSlice/sidebarSlice.ts";
 
 import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
 import { useLocation } from "react-router-dom";
@@ -25,7 +25,14 @@ import { ICON } from "../Icon/icons.ts";
 function Sidebar() {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const isOpenSidebar = useAppSelector(selectSidebar);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
+
+  useEffect(() => {
+    if (isMobile && isOpenSidebar) {
+      dispatch(closeSidebar());
+    }
+  }, [isMobile, dispatch]);
 
   useEffect(() => {
     // Функція для оновлення стану при зміні розміру
@@ -55,8 +62,6 @@ function Sidebar() {
       })
     );
   };
-
-  const isOpenSidebar = useAppSelector(selectSidebar);
 
   const handleOpenSidebar = () => {
     dispatch(openSidebar());
