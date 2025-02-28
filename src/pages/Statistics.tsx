@@ -99,8 +99,7 @@ function Statistics() {
           >
             <div
               className={clsx(
-                "mt-8 grid auto-rows-max grid-cols-1 md:grid-cols-[auto,1fr]",
-                "w-full xl:w-[729px] 3xl:w-[1027px]",
+                "md:grid-cols-[auto, auto] mt-8 grid auto-rows-max grid-cols-1 justify-items-center",
                 "md:gap-x-5 xl:gap-x-2 3xl:gap-x-6"
               )}
             >
@@ -111,10 +110,15 @@ function Statistics() {
                 />
               </div>
               <div className="col-start-1 row-start-2">{renderCalendar()}</div>
-              <div className="col-start-1 row-start-3 md:col-span-2">
+              <div
+                className={clsx(
+                  "col-start-1 row-start-3 md:col-span-2",
+                  "w-full md:w-[720px] xl:w-[729px] 2xl:w-[746px] 3xl:w-[1027px]"
+                )}
+              >
                 {renderChart()}
               </div>
-              <div className="col-start-1 row-start-4 md:col-start-2 md:row-span-2 md:row-start-1">
+              <div className="col-start-1 row-start-4 w-full md:col-start-2 md:row-span-2 md:row-start-1">
                 <Soon />
               </div>
             </div>
