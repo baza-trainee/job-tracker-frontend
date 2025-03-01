@@ -4,6 +4,7 @@ import Calendar from "react-calendar";
 import Icon from "../Icon/Icon";
 import { useAppSelector } from "../../store/hook.ts";
 import { selectEventData } from "../../store/slices/modalSlice/selectors.ts";
+import clsx from "clsx";
 
 type SoonCalendarModalProps = {
   onSelectDate?: (date: string) => void;
@@ -40,7 +41,12 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
   };
 
   return (
-    <div className="statistics-calendar box-border h-[514px] w-[468px] rounded-[20px] bg-backgroundTertiary px-6 py-4">
+    <div
+      className={clsx(
+        "statistics-calendar soon-calendar-modal",
+        "box-border h-[385px] w-[356px] rounded-[20px] bg-backgroundTertiary p-2 3xl:h-[514px] 3xl:w-[468px] 3xl:px-6 3xl:py-4"
+      )}
+    >
       <Calendar
         view="month"
         locale={i18n.language}

@@ -56,16 +56,7 @@ const VacancySection: FC<VacancySectionProps> = ({
     }
   }
 
-  // Викликаємо оновлення макету при зміні розміру екрану
-  useEffect(() => {
-    updateLayout();
-    window.addEventListener("resize", updateLayout);
-
-    return () => {
-      window.removeEventListener("resize", updateLayout);
-    };
-  }, [children]);
-
+  // Функція для відслідковування активності/задізейбленності стрілочок
   const checkScrollPosition = () => {
     const container = containerRef.current;
     if (container) {
@@ -76,6 +67,22 @@ const VacancySection: FC<VacancySectionProps> = ({
       );
     }
   };
+
+  // Викликаємо оновлення макету при зміні розміру екрану
+  useEffect(() => {
+    const handleResize = () => {
+      updateLayout();
+      checkScrollPosition();
+    };
+
+    updateLayout(); // виклик один раз при першому рендері після завантаження
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [children]);
 
   useEffect(() => {
     const container = containerRef.current;

@@ -50,13 +50,13 @@ const AddEventModal = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-14 flex flex-col align-middle"
+      className="mt-10 flex flex-col align-middle 3xl:mt-14"
     >
       <div className="flex w-full gap-6">
         <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
 
         <div className="w-[445px] font-medium">
-          <label htmlFor="soonEventName" className="text-base 3xl:text-2xl">
+          <label htmlFor="soonEventName" className="text-xl 3xl:text-2xl">
             {t("soonSection.soonName")}
           </label>
           <Input
@@ -73,7 +73,7 @@ const AddEventModal = () => {
 
           <label
             htmlFor="soonEventNotes"
-            className="mt-4 block text-base 3xl:text-2xl"
+            className="mt-4 block text-xl 3xl:text-2xl"
           >
             {t("soonSection.soonNotes")}
           </label>
@@ -90,7 +90,7 @@ const AddEventModal = () => {
             isCheckButtons={false}
           />
 
-          <p className="mt-4 text-base 3xl:text-2xl">
+          <p className="mt-4 text-xl 3xl:text-2xl">
             {t("soonSection.setTime")}
           </p>
           <div className="time-content grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
@@ -105,11 +105,11 @@ const AddEventModal = () => {
               isRequired={true}
               isCheckButtons={false}
               className={clsx(
-                "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
+                "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
                 "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
               )}
               classNameInputCustom={clsx(
-                "border-0 bg-backgroundTertiary p-0 text-[28px] font-medium",
+                "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
                 "sm:h-auto sm:p-0 sm:text-[28px]",
                 "md:h-auto md:p-0 md:text-[28px]",
                 "xl:text-[32px] xl:font-normal",
@@ -144,21 +144,21 @@ const AddEventModal = () => {
               isRequired={true}
               isCheckButtons={false}
               className={clsx(
-                "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
+                "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
                 "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
               )}
               classNameInputCustom={clsx(
-                "border-0 bg-backgroundTertiary p-0 text-[28px] font-medium",
+                "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
                 "sm:h-auto sm:p-0 sm:text-[28px]",
                 "md:h-auto md:p-0 md:text-[28px]",
                 "xl:text-[32px] xl:font-normal",
                 "2xl:text-[32px]"
               )}
             />
-            <p className="col-span-2 row-start-2 text-sm">
+            <p className="col-span-2 row-start-2 text-base 3xl:text-xl">
               {t("soonSection.soonModalTimeHours")}
             </p>
-            <p className="col-span-1 row-start-2 text-sm">
+            <p className="col-span-1 row-start-2 text-base 3xl:text-xl">
               {t("soonSection.soonModalTimeMinutes")}
             </p>
           </div>
@@ -167,7 +167,7 @@ const AddEventModal = () => {
 
       <Button
         type="submit"
-        className="mx-auto mt-8 bg-button"
+        className="mx-auto mt-4 bg-button 3xl:mt-8"
         variant="ghost"
         size="big"
         disabled={isLoading}
