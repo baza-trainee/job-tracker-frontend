@@ -37,6 +37,7 @@ import {
   PropsModalAddProperties,
   useData,
 } from "./modalAddProperties.types";
+import Icon from "@/components/Icon/Icon";
 
 function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   const {
@@ -243,8 +244,14 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         <Button type="reset" onClick={() => dispatch(closeModal())}>
           {t("infoModal.button.cancel")}
         </Button>
-        <Button type="submit" variant="accent" disabled={isSubmitDisabled}>
+        <Button
+          type="submit"
+          className="gap-3"
+          variant="accent"
+          disabled={isSubmitDisabled}
+        >
           {t("infoModal.button.save")}
+          <Icon id="check-box" className="h-6 w-6" />
         </Button>
       </div>
     </form>
