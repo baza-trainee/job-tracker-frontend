@@ -11,7 +11,7 @@ import {
   useGetAllUserDataQuery,
 } from "@/store/querySlices/profileQuerySlice";
 import { useTranslation } from "react-i18next";
-import { PropsModalAddProperties } from "../modalAddProperties.types";
+import { PropsModalAddProperties } from "./modalAddProperties.types";
 import {
   notifyError,
   notifySuccess,

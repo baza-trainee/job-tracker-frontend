@@ -25,17 +25,18 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { useTranslation } from "react-i18next";
-import {
-  DataItem,
-  PropsModalAddProperties,
-  useData,
-} from "../modalAddProperties.types";
+
 import {
   notifyError,
   notifySuccess,
 } from "@/components/Notifications/NotificationService";
 import { Input } from "@/components/inputs/Input/Input";
 import { Button } from "@/components/buttons/Button/Button";
+import {
+  DataItem,
+  PropsModalAddProperties,
+  useData,
+} from "./modalAddProperties.types";
 
 function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   const {
@@ -62,9 +63,9 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
 
   useEffect(() => {
     if (!updateItem) return;
-    setValue("name", updateItem.name);
-    setValue("link", updateItem.link);
-    setValue("technologies", updateItem.technologies);
+    setValue("name", updateItem.name || "");
+    setValue("link", updateItem.link || "");
+    setValue("technologies", updateItem.technologies || "");
     setValue("text", updateItem.description || updateItem.text);
   }, [updateItem]);
 
