@@ -91,7 +91,7 @@ const useVacancy = () => {
         const responseArhive = await archiveVacancyById({
           id: idVacancy,
         }).unwrap();
-        // console.log("responseArhive", responseArhive);
+        console.log("responseArhive", responseArhive);
       }
 
       // 4 - зберігаємо статуси
@@ -105,7 +105,7 @@ const useVacancy = () => {
             resumeId: elem.resumeId,
             rejectReason: elem.rejectReason as RejectReason,
           }).unwrap();
-          // console.log("statusResponse", statusResponse);
+          console.log("statusResponse", statusResponse);
         }
       }
       refetch();
