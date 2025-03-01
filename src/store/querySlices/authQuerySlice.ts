@@ -154,10 +154,12 @@ export const authPrivateQuerySlice = createApi({
         body: requestBody,
       }),
     }),
-    removeUser: build.mutation<void, { id: string }>({
-      query: (id) => ({
-        url: `/user/${id}`,
+
+    removeUser: build.mutation<void, { userId: string }>({
+      query: (body) => ({
+        url: "/user",
         method: "DELETE",
+        body,
       }),
     }),
   }),
