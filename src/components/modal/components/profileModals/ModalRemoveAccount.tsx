@@ -41,15 +41,12 @@ function ModalRemoveAccount() {
 
   return (
     <div className="grid grid-cols-2 gap-4">
-      {!isConfirmModal ? (
-        <h2 className="col-span-2">
-          {t("modalAddProperties.removeAccountModalText")}
-        </h2>
-      ) : (
-        <h2 className="col-span-2">
-          {t("modalAddProperties.removeConfirmAccountModalText")}
-        </h2>
-      )}
+      <h2 className="col-span-2 font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]">
+        {!isConfirmModal
+          ? t("modalAddProperties.removeAccountModalText")
+          : t("modalAddProperties.removeConfirmAccountModalText")}
+      </h2>
+
       <Button
         onClick={() => {
           dispatch(closeModal());
@@ -63,7 +60,9 @@ function ModalRemoveAccount() {
           !isConfirmModal ? setIsConfirmModal(true) : removeUserById();
         }}
       >
-        {!isConfirmModal ? t("infoModal.button.confirm") : "remove"}
+        {!isConfirmModal
+          ? t("infoModal.button.confirm")
+          : t("infoModal.button.delete")}
       </Button>
     </div>
   );

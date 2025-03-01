@@ -17,6 +17,7 @@ import {
   notifySuccess,
 } from "@/components/Notifications/NotificationService";
 import { Button } from "@/components/buttons/Button/Button";
+import Icon from "@/components/Icon/Icon";
 
 function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
   const idRemoveItem = useAppSelector((state) => state.modal.dataConfirmation);
@@ -136,11 +137,13 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
 
         <Button
           type="button"
-          variant="ghost"
+          variant="accent"
           onClick={handleRemove}
           disabled={isDisabledButtonRemove}
+          className="gap-3"
         >
           {t("infoModal.button.delete")}
+          <Icon id="delete" className="h-6 w-6" />
         </Button>
       </div>
     </div>
