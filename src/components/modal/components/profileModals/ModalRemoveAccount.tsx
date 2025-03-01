@@ -1,23 +1,23 @@
-import { useAppDispatch } from "@/store/hook";
-import { Button } from "../../buttons/Button/Button";
-import { closeModal } from "@/store/slices/modalSlice/modalSlice";
 import { useTranslation } from "react-i18next";
-
+import { Button } from "../../../buttons/Button/Button";
+import { useAppDispatch } from "@/store/hook";
+import { closeModal } from "@/store/slices/modalSlice/modalSlice";
+import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
 import { useRemoveUserMutation } from "@/store/querySlices/authQuerySlice";
-
 import {
   notifyError,
   notifySuccess,
-} from "../../Notifications/NotificationService";
-import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
+} from "@/components/Notifications/NotificationService";
 import { clearTokens } from "@/store/slices/authSlice/authSlice";
+import { useState } from "react";
 
-function ModalConfirmRemoveAccount() {
+function ModalRemoveAccount() {
+  const [isConfirmModal, setIsConfirmModal] = useState(false);
   const dispatch = useAppDispatch();
-
   const { t } = useTranslation();
+
   const { data } = useGetAllUserDataQuery();
-  const [removeUser] = useRemoveUserMutation();
+  const [removeUser, { isLoading }] = useRemoveUserMutation();
   const userId = data?.id as string;
 
   const removeUserById = async () => {
@@ -42,10 +42,15 @@ function ModalConfirmRemoveAccount() {
 
   return (
     <div className="grid grid-cols-2 gap-4">
-      <h2 className="col-span-2">
-        {t("modalAddProperties.removeConfirmAccountModalText")}
-      </h2>
-
+      {!isConfirmModal ? (
+        <h2 className="col-span-2">
+          {t("modalAddProperties.removeAccountModalText")}
+        </h2>
+      ) : (
+        <h2 className="col-span-2">
+          {t("modalAddProperties.removeConfirmAccountModalText")}
+        </h2>
+      )}
       <Button
         onClick={() => {
           dispatch(closeModal());
@@ -53,11 +58,16 @@ function ModalConfirmRemoveAccount() {
       >
         {t("infoModal.button.cancel")}
       </Button>
-      <Button type="button" onClick={removeUserById}>
-        {t("infoModal.button.confirm")}
+      <Button
+        disabled={isLoading}
+        onClick={() => {
+          !isConfirmModal ? setIsConfirmModal(true) : removeUserById();
+        }}
+      >
+        {!isConfirmModal ? t("infoModal.button.confirm") : "remove"}
       </Button>
     </div>
   );
 }
 
-export default ModalConfirmRemoveAccount;
+export default ModalRemoveAccount;

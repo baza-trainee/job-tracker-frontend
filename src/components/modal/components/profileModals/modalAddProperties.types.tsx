@@ -1,5 +1,5 @@
+import { PropsProfileCard } from "@/components/Profile/profileCardProps.props";
 import { useTranslation } from "react-i18next";
-import { PropsProfileCard } from "./profileCardProps.props";
 
 export type PropsModalAddProperties = Pick<PropsProfileCard, "cardsType">;
 
