@@ -107,7 +107,7 @@ const useEditVacancy = () => {
       reset();
       notifySuccess("Вакансію успішно видалено. Дякую");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       notifyError("Виникла помилка. Вакансію не видалено");
     }
     setIsLoading(false);

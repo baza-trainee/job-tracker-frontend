@@ -135,7 +135,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   };
 
   return (
-    <form className="flex flex-col gap-2 rounded-[0_12px_12px_12px] border-[4px] border-solid border-backgroundSecondary bg-slate-50 p-6">
+    <div className="flex flex-col gap-2 rounded-[0_12px_12px_12px] border-[4px] border-solid border-backgroundSecondary bg-slate-50 px-2 py-4 md:px-6 md:py-6">
       {cardsType === "addPersonalProperties" && (
         <>
           <ul className="flex flex-col gap-4">
@@ -303,7 +303,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
       >
         {text.buttonAdd} +
       </Button>
-    </form>
+    </div>
   );
 }
 
