@@ -19,24 +19,86 @@ const VacancySection: FC<VacancySectionProps> = ({
 
   const [isScrollLeftDisabled, setIsScrollLeftDisabled] = useState(true);
   const [isScrollRightDisabled, setIsScrollRightDisabled] = useState(true);
-  const [, setIsTwoRows] = useState(false);
+  // const [, setIsTwoRows] = useState(false);
   const [hasScroll, setHasScroll] = useState(false);
+  const [row1, setRow1] = useState<ReactNode[]>([]);
+  const [row2, setRow2] = useState<ReactNode[]>([]);
 
   const validChildren = Array.isArray(children) ? children : [children];
 
-  let row1: ReactNode[] = [];
-  let row2: ReactNode[] = [];
+  // let row1: ReactNode[] = [];
+  // let row2: ReactNode[] = [];
 
-  if (window.innerWidth >= 1920 && validChildren.length <= 10) {
-    row1 = validChildren.slice(0, 5);
-    row2 = validChildren.slice(5, 10);
-  } else if (validChildren.length <= 6) {
-    row1 = validChildren.slice(0, 4);
-    row2 = validChildren.slice(4, 6);
-  } else {
-    row1 = validChildren.filter((_, index) => index % 2 === 0);
-    row2 = validChildren.filter((_, index) => index % 2 !== 0);
+  const layoutConfig = [
+    { min: 1920, max: Infinity, maxLength: 10, rowSize: 5 },
+    { min: 1280, max: 1920, maxLength: 8, rowSize: 4 },
+    { min: 768, max: 1280, maxLength: 6, rowSize: 3 },
+  ];
+
+  function updateLayout() {
+    const width = window.innerWidth;
+    const length = validChildren.length;
+
+    const config = layoutConfig.find(
+      ({ min, max }) => width >= min && width < max
+    );
+
+    if (config) {
+      if (length <= config.maxLength) {
+        // 📌 Стандартний flex-розподіл, коли картки вміщаються
+        setRow1(validChildren.slice(0, config.rowSize));
+        setRow2(validChildren.slice(config.rowSize, config.maxLength));
+      } else {
+        // 📌 Альтернативний режим (парні/непарні), коли карток багато
+        setRow1(validChildren.filter((_, index) => index % 2 === 0));
+        setRow2(validChildren.filter((_, index) => index % 2 !== 0));
+      }
+    } else {
+      // 📌 Для мобільних (менше 768) та нестандартних випадків – парні/непарні
+      setRow1(validChildren.filter((_, index) => index % 2 === 0));
+      setRow2(validChildren.filter((_, index) => index % 2 !== 0));
+    }
   }
+
+  // Викликаємо оновлення макету при зміні розміру екрану
+  useEffect(() => {
+    updateLayout();
+    window.addEventListener("resize", updateLayout);
+
+    return () => {
+      window.removeEventListener("resize", updateLayout);
+    };
+  }, [children]);
+
+  //одноразово викличемо функцію, щоб встановити початкове розташування карток
+  // updateLayout();
+
+  //слухач за зміною розміру екрану
+  // window
+  //   .matchMedia("(min-width: 0px)")
+  //   .addEventListener("change", updateLayout);
+
+  // if (window.innerWidth >= 1920 && validChildren.length <= 10) {
+  //   row1 = validChildren.slice(0, 5);
+  //   row2 = validChildren.slice(5, 10);
+  // } else if (
+  //   window.innerWidth >= 1280 &&
+  //   window.innerWidth < 1920 &&
+  //   validChildren.length <= 8
+  // ) {
+  //   row1 = validChildren.slice(0, 4);
+  //   row2 = validChildren.slice(4, 8);
+  // } else if (
+  //   window.innerWidth >= 768 &&
+  //   window.innerWidth < 1280 &&
+  //   validChildren.length <= 6
+  // ) {
+  //   row1 = validChildren.slice(0, 3);
+  //   row2 = validChildren.slice(3, 6);
+  // } else {
+  //   row1 = validChildren.filter((_, index) => index % 2 === 0);
+  //   row2 = validChildren.filter((_, index) => index % 2 !== 0);
+  // }
 
   const checkScrollPosition = () => {
     const container = containerRef.current;
@@ -49,40 +111,56 @@ const VacancySection: FC<VacancySectionProps> = ({
     }
   };
 
-  const checkRowLayout = () => {
-    const container = containerRef.current;
+  // const checkRowLayout = () => {
+  //   const container = containerRef.current;
 
-    if (container) {
-      const contentWidth = container.scrollWidth; // увесь вміст секції
-      const containerWidth = container.clientWidth; // видимий вміст секції
+  //   if (container) {
+  //     const contentWidth = container.scrollWidth; // увесь вміст секції
+  //     const containerWidth = container.clientWidth; // видимий вміст секції
 
-      setIsTwoRows(contentWidth > containerWidth);
-    }
-  };
+  //     setIsTwoRows(contentWidth > containerWidth);
+  //   }
+  // };
 
   useEffect(() => {
     const container = containerRef.current;
 
-    // відстеження змін розмірів екрану з запуском перевірки скролу
-    const resizeObserver = new ResizeObserver(() => {
-      checkScrollPosition();
-      checkRowLayout();
-    });
-
     if (container) {
+      const resizeObserver = new ResizeObserver(() => {
+        checkScrollPosition();
+      });
+
       resizeObserver.observe(container);
       container.addEventListener("scroll", checkScrollPosition);
-    }
 
-    checkScrollPosition();
-    checkRowLayout();
+      checkScrollPosition();
 
-    return () => {
-      if (container) {
+      return () => {
         resizeObserver.unobserve(container);
         container.removeEventListener("scroll", checkScrollPosition);
-      }
-    };
+      };
+    }
+
+    // // відстеження змін розмірів екрану з запуском перевірки скролу
+    // const resizeObserver = new ResizeObserver(() => {
+    //   checkScrollPosition();
+    //   checkRowLayout();
+    // });
+
+    // if (container) {
+    //   resizeObserver.observe(container);
+    //   container.addEventListener("scroll", checkScrollPosition);
+    // }
+
+    // checkScrollPosition();
+    // checkRowLayout();
+
+    // return () => {
+    //   if (container) {
+    //     resizeObserver.unobserve(container);
+    //     container.removeEventListener("scroll", checkScrollPosition);
+    //   }
+    // };
   }, []);
 
   const getScrollAmount = () => {
@@ -121,9 +199,9 @@ const VacancySection: FC<VacancySectionProps> = ({
     // console.log("Left arrow clicked");
     const scrollAmount = getScrollAmount();
     containerRef.current?.scrollBy({
-      // left: -298, // Кількість пікселів для скролу
+      // left: -298, // Кількість пікселів для скроллу
       left: -scrollAmount,
-      behavior: "smooth", // Плавний скрол
+      behavior: "smooth", // Плавний скролл
     });
   };
 
@@ -161,8 +239,8 @@ const VacancySection: FC<VacancySectionProps> = ({
           <div
             ref={containerRef}
             className={clsx(
-              "рішення scrollbar box-border flex w-full flex-col overflow-x-auto",
-              "mdOnly:max-w-[624px]", // виправити, необхідність цього стилю під питанням
+              "scrollbar box-border flex w-full flex-col overflow-x-auto",
+              // "mdOnly:max-w-[624px]", // виправити, необхідність цього стилю під питанням
               { "pb-5": hasScroll },
               "gap-4 md:gap-3 xl:gap-4 2xl:gap-5"
             )}
