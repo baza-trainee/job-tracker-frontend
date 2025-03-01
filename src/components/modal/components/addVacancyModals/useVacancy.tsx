@@ -28,7 +28,7 @@ const useVacancy = () => {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.statusVacancy.newStatuses);
 
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -70,7 +70,7 @@ const useVacancy = () => {
         work_type,
         isArchived,
       } = data;
-      setIsLoading(true)
+      setIsLoading(true);
 
       // 1 - запит на збереження вакансії
       const response = await createVacancy({
@@ -91,13 +91,13 @@ const useVacancy = () => {
         const responseArhive = await archiveVacancyById({
           id: idVacancy,
         }).unwrap();
-        console.log("responseArhive", responseArhive);
+        // console.log("responseArhive", responseArhive);
       }
 
       // 4 - зберігаємо статуси
       for (const elem of status) {
         if (elem.date !== "1970-01-01T00:00:00.000Z") {
-          console.log("status", elem);
+          // console.log("status", elem);
           const statusResponse = await createStatusVacancyById({
             vacancyId: idVacancy,
             name: elem.name as StatusName,
@@ -105,7 +105,7 @@ const useVacancy = () => {
             resumeId: elem.resumeId,
             rejectReason: elem.rejectReason as RejectReason,
           }).unwrap();
-          console.log("statusResponse", statusResponse);
+          // console.log("statusResponse", statusResponse);
         }
       }
       refetch();
@@ -113,9 +113,9 @@ const useVacancy = () => {
       notifySuccess("Дані успішно збережено. Дякую");
     } catch (error) {
       notifyError("Помилка збереження даних");
-      console.log(error);
+      console.error(error);
     }
-    setIsLoading(false)
+    setIsLoading(false);
     dispatch(closeConfirmation());
     dispatch(closeModal());
   };
@@ -129,7 +129,7 @@ const useVacancy = () => {
     setValue,
     errors,
     onSubmit,
-    isLoading
+    isLoading,
   };
 };
 

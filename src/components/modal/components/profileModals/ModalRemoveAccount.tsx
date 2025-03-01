@@ -25,15 +25,14 @@ function ModalRemoveAccount() {
       notifyError("Error removing account. Cannot find user id");
       return;
     }
-    console.log(userId);
+
     try {
-      const response = await removeUser({
+      await removeUser({
         userId,
       }).unwrap();
       notifySuccess("Account removed successfully");
       dispatch(closeModal());
       dispatch(clearTokens());
-      console.log(response);
     } catch (error) {
       notifyError("Error removing account");
       console.error(error);

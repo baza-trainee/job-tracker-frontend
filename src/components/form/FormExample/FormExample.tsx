@@ -35,10 +35,9 @@ export const FormExample = () => {
   ) => {
     try {
       setIsSending(true);
-      console.log("data", data);
+
       setIsSending(false);
     } catch (error) {
-      console.log("error", error);
       setIsSending(false);
     } finally {
       setIsSending(false);
