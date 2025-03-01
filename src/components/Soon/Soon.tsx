@@ -68,12 +68,18 @@ export const Soon = () => {
   };
 
   return (
-    <div className="flex h-full flex-col justify-between px-4 pt-2 text-textBlack 3xl:w-[535px]">
+    <div
+      className={clsx(
+        "flex h-full flex-col justify-between text-textBlack",
+        "pt-2 xl:px-2 2xl:px-4",
+        "w-full md:w-[344px] xl:w-[365px] 2xl:w-[382px] 3xl:w-[535px]"
+      )}
+    >
       <h3
         className={clsx(
           "w-full px-4 font-nunito font-medium leading-[135%] text-textBlack",
           "text-[16px] md:text-[20px] 2xl:text-[24px] 3xl:text-[28px]",
-          "mb-3 xl:mb-2 3xl:mb-6"
+          "mb-3 xl:mb-2 2xl:mb-4 3xl:mb-6"
         )}
       >
         {t("soonSection.soon")}
@@ -87,7 +93,11 @@ export const Soon = () => {
       >
         <div
           ref={scrollContainerRef}
-          className="soon-scroll max-h-[456px] w-full overflow-y-scroll pr-[10px] md:pr-[18px] 3xl:pr-6"
+          className={clsx(
+            "soon-scroll w-full overflow-y-scroll",
+            "max-h-[202.8px] md:max-h-[362.6px] xl:max-h-[366.6px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
+            "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
+          )}
         >
           {isLoading && (
             <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
@@ -136,10 +146,11 @@ export const Soon = () => {
         <Button
           className={clsx(
             "flex items-center justify-start border-iconHover bg-backgroundTertiary",
-            "w-full max-w-[calc(100%-24px)]",
-            "p-3 md:px-4 2xl:px-6",
-            "gap-2 xl:gap-4",
-            "text-[14px] font-normal leading-[135%] md:text-[20px] md:font-medium"
+            "w-full max-w-[calc(100%-10px)] md:max-w-[calc(100%-18px)] 2xl:max-w-[calc(100%-20px)] 3xl:max-w-[calc(100%-24px)]",
+            "p-3 md:px-4 xl:px-4 3xl:px-6",
+            "gap-2 3xl:gap-4",
+            "text-[14px] font-normal leading-[135%] md:text-[20px] md:font-medium",
+            "h-[48px] md:h-[50px]"
           )}
           onClick={handleOpenModal}
         >

@@ -10,11 +10,11 @@ import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
 import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
 
 import { useAppDispatch, useAppSelector } from "../../store/hook.ts";
-import { selectSidebar } from "../../store/slices/sibebarSlice/sidebarSelector.ts";
+import { selectSidebar } from "../../store/slices/sidebarSlice/sidebarSelector.ts";
 import {
   closeSidebar,
   openSidebar,
-} from "../../store/slices/sibebarSlice/sidebarSlice.ts";
+} from "../../store/slices/sidebarSlice/sidebarSlice.ts";
 
 import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
 import { useLocation } from "react-router-dom";
@@ -25,7 +25,14 @@ import { ICON } from "../Icon/icons.ts";
 function Sidebar() {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const isOpenSidebar = useAppSelector(selectSidebar);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
+
+  useEffect(() => {
+    if (isMobile && isOpenSidebar) {
+      dispatch(closeSidebar());
+    }
+  }, [isMobile, dispatch]);
 
   useEffect(() => {
     // Функція для оновлення стану при зміні розміру
@@ -56,8 +63,6 @@ function Sidebar() {
     );
   };
 
-  const isOpenSidebar = useAppSelector(selectSidebar);
-
   const handleOpenSidebar = () => {
     dispatch(openSidebar());
   };
@@ -77,11 +82,12 @@ function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed right-0 top-0 z-20 box-border flex h-dvh w-full flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-xl font-medium dark:bg-slate-800 md:w-[256px] md:rounded-l-[20px] md:p-6 xl:left-0 xl:rounded-l-none xl:rounded-r-[20px]",
+        "fixed right-0 top-0 z-20 box-border flex h-[686px] flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-xl font-medium dark:bg-slate-800 md:h-[780px] md:w-[256px] md:rounded-l-[20px] md:p-6 xl:left-0 xl:h-dvh xl:rounded-l-none xl:rounded-r-[20px] smOnly:max-w-full",
+        "custom-size",
 
-        !isOpenSidebar &&
-          "w-[92px] items-center px-3 md:w-[92px] md:px-3 smOnly:translate-x-[92px] mdOnly:translate-x-[92px]",
-        "custom-size"
+        !isOpenSidebar
+          ? "w-[40px] items-center px-3 md:w-[92px] md:px-3 smOnly:translate-x-[92px] mdOnly:translate-x-[92px]"
+          : "smOnly:w-full"
       )}
     >
       <div className={cn("flex flex-col")}>
