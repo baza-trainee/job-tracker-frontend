@@ -15,7 +15,7 @@ const AddVacancyButton = () => {
     <Button
       variant="accent"
       size="big"
-      className="w-[280px] gap-3 md:w-auto"
+      className="w-[280px] gap-[10px] md:w-auto"
       onClick={() => {
         dispatch(createNewStatuses(vacancyStatusesInfo));
         dispatch(
@@ -25,7 +25,7 @@ const AddVacancyButton = () => {
         );
       }}
     >
-      <span className="text-sm leading-[135%] md:text-xl">
+      <span className="w-[125px] text-nowrap text-sm leading-[135%] md:text-base">
         {t("vacanciesHeader.addVacancy")}
       </span>
       <Icon id={"plus"} className="size-6" />

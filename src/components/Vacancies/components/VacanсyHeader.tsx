@@ -25,10 +25,10 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   };
 
   return (
-    <div className="flex w-full items-start justify-between pb-6">
+    <div className="hidden w-full items-start pb-6 md:flex xl:justify-between">
       <SearchForm />
-      <div className="relative flex gap-8">
-        <div className="relative w-[216px]">
+      <div className="relative flex xl:gap-8 mdOnly:gap-5">
+        <div className="relative md:w-[206px] xl:w-[216px]">
           <Dropdown
             options={DropdownInfo()}
             setValue={handleSetType}
@@ -38,8 +38,8 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
         </div>
         {!isArchive && (
           <LinkButton variant="ghost" size="small" href="/archive">
-            <div className="flex items-center gap-3">
-              <span className="w-[125px] text-base leading-[135%]">
+            <div className="flex items-center gap-[10px]">
+              <span className="w-[124px] text-base leading-[135%] xl:w-[125px]">
                 {t("vacanciesHeader.archive")}
               </span>
               <Icon id={"archive-outline"} className="h-6 w-6" />
