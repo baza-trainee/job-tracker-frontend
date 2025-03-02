@@ -44,7 +44,8 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
     <div
       className={clsx(
         "statistics-calendar soon-calendar-modal",
-        "box-border h-[385px] w-[356px] rounded-[20px] bg-backgroundTertiary p-2 3xl:h-[514px] 3xl:w-[468px] 3xl:px-6 3xl:py-4"
+        "box-border rounded-[20px] bg-backgroundTertiary p-2 3xl:px-6 3xl:py-4",
+        "h-auto w-full md:h-[270px] md:w-[264px] xl:h-[385px] xl:w-[356px] 3xl:h-[514px] 3xl:w-[468px]"
       )}
     >
       <Calendar

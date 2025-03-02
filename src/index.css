@@ -189,6 +189,13 @@ body {
 .statistics-calendar.soon-calendar-modal .react-calendar__navigation {
   padding-top: 2px;
   padding-bottom: 2px;
+  font-size: 16px;
+  gap: 16px;
+}
+@media screen and (min-width: 1280px) {
+  .statistics-calendar.soon-calendar-modal .react-calendar__navigation {
+    font-size: 20px;
+  }
 }
 
 .statistics-calendar__months .react-calendar__navigation,
@@ -245,6 +252,17 @@ button.react-calendar__navigation__label {
   }
 }
 
+.soon-calendar-modal .react-calendar__month-view__weekdays {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+@media screen and (min-width: 1280px) {
+  .soon-calendar-modal .react-calendar__month-view__weekdays {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
 .statistics-calendar__day .react-calendar__month-view__weekdays abbr,
 .statistics-calendar__day abbr {
   font-size: 14px;
@@ -262,6 +280,28 @@ button.react-calendar__navigation__label {
 @media screen and (min-width: 1920px) {
   .statistics-calendar__day .react-calendar__month-view__weekdays abbr,
   .statistics-calendar__day abbr {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+.soon-calendar-modal .react-calendar__month-view__weekdays abbr,
+.soon-calendar-modal abbr {
+  font-size: 14px;
+  line-height: 18.9px;
+  font-weight: 400;
+}
+@media screen and (min-width: 1280px) {
+  .soon-calendar-modal .react-calendar__month-view__weekdays abbr,
+  .soon-calendar-modal abbr {
+    font-size: 16px;
+    line-height: 21.6px;
+    font-weight: 500;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .soon-calendar-modal .react-calendar__month-view__weekdays abbr,
+  .soon-calendar-modal abbr {
     font-size: 24px;
     line-height: 32px;
   }
@@ -309,6 +349,29 @@ abbr {
 }
 @media screen and (min-width: 1920px) {
   .statistics-calendar__day .react-calendar__month-view__days > button {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.soon-calendar-modal .react-calendar__month-view__days > button {
+  width: 36px;
+  height: 36px;
+}
+@media screen and (min-width: 768px) {
+  .soon-calendar-modal .react-calendar__month-view__days > button {
+    width: 32px;
+    height: 32px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .soon-calendar-modal .react-calendar__month-view__days > button {
+    width: 48px;
+    height: 48px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .soon-calendar-modal .react-calendar__month-view__days > button {
     width: 60px;
     height: 60px;
   }

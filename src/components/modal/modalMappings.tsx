@@ -189,8 +189,8 @@ export const contentMap: ContentMapProps = {
     bgColor: "bg-button",
     borderColor: "border-button",
     paddingAddEventModal:
-      "pt-4 pr-6 pb-8 pl-6 xl:pt-6 xl:pr-10 xl:pb-10 xl:pl-10",
-    iconAddEventModal: "w-6 h-6 3xl:h-8 3xl:w-8",
+      "pt-2 pr-2 pb-4 pl-2 md:pt-4 md:pr-4 md:pb-4 md:pl-4 xl:pt-4 xl:pr-6 xl:pb-8 xl:pl-6 3xl:pt-6 3xl:pr-10 3xl:pb-10 3xl:pl-10",
+    iconCloseEventModal: "h-8 w-8 md:w-6 md:h-6 3xl:h-8 3xl:w-8",
   },
   editEvent: {
     content: <EditEventModal />,
@@ -198,7 +198,7 @@ export const contentMap: ContentMapProps = {
     bgColor: "bg-button",
     borderColor: "border-button",
     paddingAddEventModal:
-      "pt-4 pr-6 pb-8 pl-6 3xl:pt-6 3xl:pr-10 3xl:pb-10 3xl:pl-10",
-    iconAddEventModal: "w-6 h-6 3xl:h-8 3xl:w-8",
+      "pt-2 pr-2 pb-4 pl-2 md:pt-4 md:pr-4 md:pb-4 md:pl-4 xl:pt-4 xl:pr-6 xl:pb-8 xl:pl-6 3xl:pt-6 3xl:pr-10 3xl:pb-10 3xl:pl-10",
+    iconCloseEventModal: "h-8 w-8 md:w-6 md:h-6 3xl:h-8 3xl:w-8",
   },
 };
