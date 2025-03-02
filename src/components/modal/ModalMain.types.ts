@@ -25,7 +25,6 @@ export type TypesModal =
   | "removeResumes"
   | "removeCoverLetters"
   | "removeAccount"
-  | "removeAcoountConfirm"
   | "addEvent"
   | "editEvent";
 
