@@ -10,6 +10,10 @@ import { SearchForm } from "./SearchForm";
 import Dropdown from "./dropdown/Dropdown";
 import { DropdownInfo } from "./dropdown/DropdownInfo";
 import AddVacancyButton from "../../buttons/AddVacancyButton/AddVacancyButton";
+import { useMediaQuery } from "react-responsive";
+import { ICON } from "@/components/Icon/icons";
+import { IconButton } from "@/components/buttons/IconButton/IconButton";
+// import { IconButton } from "@/components/buttons/IconButton/IconButton";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -17,6 +21,7 @@ export type VacancyProps = {
 
 const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   const { t } = useTranslation();
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const dispatch = useAppDispatch();
 
@@ -25,10 +30,10 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   };
 
   return (
-    <div className="hidden w-full items-start pb-6 md:flex xl:justify-between">
+    <div className="w-full items-start pb-6 md:flex xl:justify-between">
       <SearchForm />
-      <div className="relative flex xl:gap-8 mdOnly:gap-5">
-        <div className="relative md:w-[206px] xl:w-[216px]">
+      <div className="relative flex xl:gap-8 smOnly:justify-between mdOnly:gap-5">
+        <div className="relative hidden md:block md:w-[206px] xl:w-[216px]">
           <Dropdown
             options={DropdownInfo()}
             setValue={handleSetType}
@@ -36,9 +41,19 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             name=""
           />
         </div>
-        {!isArchive && (
+        {isMobile && (
+          <IconButton
+            label="Search button"
+            variant="default"
+            onClick={() => console.log("hello")}
+            className="p-0 pr-8"
+          >
+            <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-black" />
+          </IconButton>
+        )}
+        {!isArchive && !isMobile && (
           <LinkButton variant="ghost" size="small" href="/archive">
-            <div className="flex items-center gap-[10px]">
+            <div className="items-center gap-[10px] md:flex">
               <span className="w-[124px] text-base leading-[135%] xl:w-[125px]">
                 {t("vacanciesHeader.archive")}
               </span>
@@ -46,7 +61,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             </div>
           </LinkButton>
         )}
-        <AddVacancyButton />
+        <AddVacancyButton className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6" />
       </div>
     </div>
   );
