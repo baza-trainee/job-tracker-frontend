@@ -6,7 +6,7 @@ import filteredVacanciesReducer from "./slices/filteredVacanciesSlice/filteredVa
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
-import sidebarReducer from "./slices/sibebarSlice/sidebarSlice.ts";
+import sidebarReducer from "./slices/sidebarSlice/sidebarSlice.ts";
 import statusVacancyReducer from "./slices/statusVacancy/vacancyStatusSlice.ts";
 import calendarReducer from "./slices/calendarSlice/calendarSlice.ts";
 

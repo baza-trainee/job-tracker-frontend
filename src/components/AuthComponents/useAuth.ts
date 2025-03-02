@@ -117,7 +117,7 @@ export function useAuthForm(
   const onSubmit: SubmitHandler<z.infer<typeof initsSchema>> = useCallback(
     async (data) => {
       setIsLoading(true);
-      console.log(type, errors);
+      // console.log(type, errors);
       try {
         switch (type) {
           case "signUp":

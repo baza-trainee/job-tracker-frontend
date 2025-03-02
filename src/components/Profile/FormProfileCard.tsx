@@ -38,6 +38,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     resolver: zodResolver(socialLinksSchema),
     mode: "all",
   });
+  console.log(profile);
 
   const [updateSocialLink] = useUpdateSocialLinkMutation();
   const [updateUserProfile] = useUpdateUserProfileMutation();
@@ -68,7 +69,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
       setValue(item, value);
       initialValues.current[item] = value as string;
     });
-
+    if (!profile.socials) return;
     profile.socials.forEach((item) => {
       setValue(item.id as any, item.link);
       initialValues.current[item.id] = item.link;
@@ -134,7 +135,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   };
 
   return (
-    <form className="flex flex-col gap-2 rounded-[0_12px_12px_12px] border-[4px] border-solid border-backgroundSecondary bg-slate-50 p-6">
+    <div className="flex flex-col gap-2 rounded-[0_12px_12px_12px] border-[4px] border-solid border-backgroundSecondary bg-slate-50 px-2 py-4 md:px-6 md:py-6">
       {cardsType === "addPersonalProperties" && (
         <>
           <ul className="flex flex-col gap-4">
@@ -178,36 +179,40 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
             })}
           </ul>
           <ul className="flex flex-col gap-4">
-            {profile?.socials.map((item) => {
-              return (
-                <li key={item.id}>
-                  <Input
-                    onBlur={(e) =>
-                      handleUpdateUserData(
-                        item.name,
-                        e.currentTarget.value,
-                        "social",
-                        item.id
-                      )
-                    }
-                    id={item.id}
-                    label={item.name}
-                    name={item.id}
-                    placeholder={item.name}
-                    register={register}
-                    errors={errors}
-                    resetField={resetField}
-                    isCheckButtons={false}
-                    isButtonCopy={true}
-                    isButtonRemoveInput={true}
-                    handleClickButtonRemoveInput={() =>
-                      handleClickButtonRemoveInput(item.id)
-                    }
-                    handleClickButtonCopyInput={() => copyInputValue(item.link)}
-                  />
-                </li>
-              );
-            })}
+            {profile?.socials
+              ? profile?.socials.map((item) => {
+                  return (
+                    <li key={item.id}>
+                      <Input
+                        onBlur={(e) =>
+                          handleUpdateUserData(
+                            item.name,
+                            e.currentTarget.value,
+                            "social",
+                            item.id
+                          )
+                        }
+                        id={item.id}
+                        label={item.name}
+                        name={item.id}
+                        placeholder={item.name}
+                        register={register}
+                        errors={errors}
+                        resetField={resetField}
+                        isCheckButtons={false}
+                        isButtonCopy={true}
+                        isButtonRemoveInput={true}
+                        handleClickButtonRemoveInput={() =>
+                          handleClickButtonRemoveInput(item.id)
+                        }
+                        handleClickButtonCopyInput={() =>
+                          copyInputValue(item.link)
+                        }
+                      />
+                    </li>
+                  );
+                })
+              : null}
           </ul>
         </>
       )}
@@ -298,7 +303,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
       >
         {text.buttonAdd} +
       </Button>
-    </form>
+    </div>
   );
 }
 

@@ -2,8 +2,8 @@ import { cn } from "@/utils/utils";
 import Logo from "../Logo/JobTrackerLogo";
 
 import { useAppDispatch, useAppSelector } from "@/store/hook";
-import { selectSidebar } from "@/store/slices/sibebarSlice/sidebarSelector";
-import { openSidebar } from "@/store/slices/sibebarSlice/sidebarSlice";
+import { selectSidebar } from "@/store/slices/sidebarSlice/sidebarSelector";
+import { openSidebar } from "@/store/slices/sidebarSlice/sidebarSlice";
 import OpenSidebarBtn from "../Sidebar/components/OpenSidebarBtn";
 import { ICON } from "../Icon/icons";
 
@@ -21,7 +21,7 @@ function MobHeader() {
         "flex items-center justify-between px-5 pt-4 md:px-6 md:pt-6 xl:hidden"
       )}
     >
-      <Logo />
+      <Logo className="h-[44px] w-[54px]" />
       <OpenSidebarBtn
         handleOpenSidebar={handleOpenSidebar}
         isOpenSidebar={isOpenSidebar}

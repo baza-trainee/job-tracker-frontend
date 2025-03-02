@@ -6,10 +6,9 @@ import EditVacancy from "./components/editVacancy/EditVacancy";
 import { Color, ContentMapProps } from "./ModalMain.types";
 import AddEventModal from "../Soon/AddEventModal";
 import EditEventModal from "../Soon/EditEventModal";
-import ModalRemoveAccount from "../Profile/profileModals/ModalRemoveAccount";
-import ModalConfirmRemoveAccount from "../Profile/profileModals/ModalConfirmRemoveAccount";
-import ModalMuttionProfileData from "../Profile/profileModals/ModalMuttionProfileData";
-import ModalRemoveProperties from "../Profile/profileModals/ModalRemoveProperties";
+import ModalRemoveAccount from "./components/profileModals/ModalRemoveAccount";
+import ModalMuttionProfileData from "./components/profileModals/ModalMuttionProfileData";
+import ModalRemoveProperties from "./components/profileModals/ModalRemoveProperties";
 
 const colorDefault: Color = {
   text: "text-white",
@@ -183,12 +182,7 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-  removeAcoountConfirm: {
-    content: <ModalConfirmRemoveAccount />,
-    nameModal: "modalAddProperties.removeAccountModalName",
-    bgColor: colorButton.bg,
-    borderColor: colorButton.border,
-  },
+
   addEvent: {
     content: <AddEventModal />,
     nameModal: "soonSection.addEvent",

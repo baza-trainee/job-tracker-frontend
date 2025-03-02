@@ -31,21 +31,20 @@ export const FormExample = () => {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof SignUpSchema>> = async (
-    data
-  ) => {
-    try {
-      setIsSending(true);
-      console.log("data", data);
-      setIsSending(false);
-    } catch (error) {
-      console.log("error", error);
-      setIsSending(false);
-    } finally {
-      setIsSending(false);
-      reset();
-    }
-  };
+  const onSubmit: SubmitHandler<z.infer<typeof SignUpSchema>> = async () =>
+    // data
+    {
+      try {
+        setIsSending(true);
+
+        setIsSending(false);
+      } catch (error) {
+        setIsSending(false);
+      } finally {
+        setIsSending(false);
+        reset();
+      }
+    };
 
   return (
     <>

@@ -63,7 +63,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
           "3xl:p-10 3xl:pb-7"
         )}
       >
-        <Logo />
+        <Logo className="h-[26px] w-[47px] md:h-[52px] md:w-[94px] xl:h-[42px] xl:w-[84px] 2xl:h-[52px] 2xl:w-[94px]" />
       </header>
 
       <main className="w-full flex-grow">
