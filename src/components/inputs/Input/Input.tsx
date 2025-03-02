@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/utils/utils";
 import { InputProps } from "./Input.props";
@@ -32,14 +32,14 @@ export const Input = ({
   classNameInputCustom,
 }: InputProps) => {
   const error = errors[name];
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isIcon, setIsIcon] = useState<boolean>(false);
   const { t } = useTranslation();
 
-  const [isIconVisible, setIsIconVisible] = useState(false);
+  const isIconVisible: boolean = Boolean(inputRef.current?.value);
 
   const handleResetField = (name: string) => {
     resetField(name);
-    // console.log("handle", name);
   };
 
   const { onBlur: hookFormOnBlur } = register(name);
@@ -50,7 +50,6 @@ export const Input = ({
       id={id}
       onFocus={() => setIsIcon(true)}
       onBlur={() => {
-        setIsIconVisible(true);
         setIsIcon(false);
       }}
     >
@@ -115,7 +114,6 @@ export const Input = ({
                 {
                   "border-color7": !error,
                   "border-color2": error,
-                  // "border-textBlack": !isCheckButtons,
                 },
                 classNameInputCustom
               )}
@@ -130,13 +128,10 @@ export const Input = ({
                 setValue?.(name, event.target.value.trim(), {
                   shouldValidate: true,
                 });
-                if (event.target.value.length === 0) {
-                  event.stopPropagation();
-                  setIsIconVisible(false);
-                }
                 hookFormOnBlur(event);
                 onBlur?.(event);
               }}
+              ref={inputRef}
               // onClick={(event) => event.stopPropagation()}
             />
           )}
