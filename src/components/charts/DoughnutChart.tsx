@@ -5,12 +5,12 @@ import {
   TooltipItem,
   Legend,
 } from "chart.js";
-import ChartDataLabels from "chartjs-plugin-datalabels"; // Підключаємо плагін
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useMediaQuery } from "react-responsive";
-
 import { Doughnut } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
 import { Vacancy } from "../../types/vacancies.types";
+
 import DiagramTitle from "../Statistics/componets/statisticsDiagram/DiagramTitle";
 import CustomLegend from "./CustomLegend";
 
@@ -123,31 +123,27 @@ export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
           },
         },
       },
-      datalabels: isMobile
-        ? {
-            color: "#333",
-            font: {
-              size: 14,
-              family: "Nunito",
-              weight: "bold",
-              lineHeight: 1.3,
-            } as const,
-            formatter: (
-              value: number,
-              context: { dataset: { data: any[] } }
-            ) => {
-              const total = context.dataset.data.reduce(
-                (acc: any, val: any) => acc + val,
-                0
-              );
-              const percentage = Math.round((value / total) * 100);
+      datalabels: {
+        display: isMobile,
+        color: "#333",
+        font: {
+          size: 14,
+          family: "Nunito",
+          weight: "bold",
+          lineHeight: 1.3,
+        } as const,
+        formatter: (value: number, context: { dataset: { data: any[] } }) => {
+          const total = context.dataset.data.reduce(
+            (acc: any, val: any) => acc + val,
+            0
+          );
+          const percentage = Math.round((value / total) * 100);
 
-              return percentage === 0 ? "" : `${percentage}%`;
-            },
-            anchor: "center",
-            align: "center",
-          }
-        : false, // Вимикаємо datalabels на десктопі
+          return percentage === 0 ? "" : `${percentage}%`;
+        },
+        anchor: "center" as const,
+        align: "center" as const,
+      },
     },
   };
 
