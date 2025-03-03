@@ -6,10 +6,9 @@ import EditVacancy from "./components/editVacancy/EditVacancy";
 import { Color, ContentMapProps } from "./ModalMain.types";
 import AddEventModal from "../Soon/AddEventModal";
 import EditEventModal from "../Soon/EditEventModal";
-import ModalRemoveAccount from "../Profile/profileModals/ModalRemoveAccount";
-import ModalConfirmRemoveAccount from "../Profile/profileModals/ModalConfirmRemoveAccount";
-import ModalMuttionProfileData from "../Profile/profileModals/ModalMuttionProfileData";
-import ModalRemoveProperties from "../Profile/profileModals/ModalRemoveProperties";
+import ModalRemoveAccount from "./components/profileModals/ModalRemoveAccount";
+import ModalMuttionProfileData from "./components/profileModals/ModalMuttionProfileData";
+import ModalRemoveProperties from "./components/profileModals/ModalRemoveProperties";
 
 const colorDefault: Color = {
   text: "text-white",
@@ -183,26 +182,23 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-  removeAcoountConfirm: {
-    content: <ModalConfirmRemoveAccount />,
-    nameModal: "modalAddProperties.removeAccountModalName",
-    bgColor: colorButton.bg,
-    borderColor: colorButton.border,
-  },
+
   addEvent: {
     content: <AddEventModal />,
     nameModal: "soonSection.addEvent",
     bgColor: "bg-button",
     borderColor: "border-button",
-    paddingAddEventModal: "pt-6 pr-10 pb-10 pl-10",
-    iconAddEventModal: "h-8 w-8",
+    paddingAddEventModal:
+      "pt-2 pr-2 pb-4 pl-2 md:pt-4 md:pr-4 md:pb-4 md:pl-4 xl:pt-4 xl:pr-6 xl:pb-8 xl:pl-6 3xl:pt-6 3xl:pr-10 3xl:pb-10 3xl:pl-10",
+    iconCloseEventModal: "h-8 w-8 md:w-6 md:h-6 3xl:h-8 3xl:w-8",
   },
   editEvent: {
     content: <EditEventModal />,
     nameModal: "soonSection.editEvent",
     bgColor: "bg-button",
     borderColor: "border-button",
-    paddingAddEventModal: "pt-6 pr-10 pb-10 pl-10",
-    iconAddEventModal: "h-8 w-8",
+    paddingAddEventModal:
+      "pt-2 pr-2 pb-4 pl-2 md:pt-4 md:pr-4 md:pb-4 md:pl-4 xl:pt-4 xl:pr-6 xl:pb-8 xl:pl-6 3xl:pt-6 3xl:pr-10 3xl:pb-10 3xl:pl-10",
+    iconCloseEventModal: "h-8 w-8 md:w-6 md:h-6 3xl:h-8 3xl:w-8",
   },
 };
