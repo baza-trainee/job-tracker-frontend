@@ -82,9 +82,9 @@ export const SearchForm: FC = () => {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <form
-        className="relative hidden items-center font-nunito text-xl leading-[135%] text-textBlack hover:fill-iconHover active:fill-textBlack xl:flex"
+        className="relative flex w-full items-center font-nunito text-xl leading-[135%] text-textBlack hover:fill-iconHover active:fill-textBlack"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* <Input
@@ -96,12 +96,12 @@ export const SearchForm: FC = () => {
           className="flex-grow"
           errors={errors}
         /> */}
-        <div className="relative">
-          <div className="relative flex items-center xl:w-[355px] 3xl:w-[516px]">
+        <div className="relative w-full">
+          <div className="relative flex items-center sm:w-full md:w-[355px] 3xl:w-[516px]">
             <input
               id={`input-query`}
               className={cn(
-                "h-[51px] w-full rounded-xl border border-textBlack py-[10px] pl-[58px] pr-2 font-nunito text-xl font-medium text-textBlack transition placeholder:font-nunito placeholder:text-base placeholder:text-textBlackLight placeholder-shown:border-textBlack hover:border-iconHover hover:placeholder:text-iconHover focus:outline-none focus:placeholder:text-iconHover active:border-textBlack",
+                "h-[41px] w-full rounded-lg border border-textBlack py-[10px] pl-[58px] pr-2 font-nunito text-xl font-medium text-textBlack transition placeholder:font-nunito placeholder:text-base placeholder:text-textBlackLight placeholder-shown:border-textBlack hover:border-iconHover hover:placeholder:text-iconHover focus:outline-none focus:placeholder:text-iconHover active:border-textBlack xl:h-[51px] xl:rounded-xl",
 
                 // !error && "border-color5",
                 error &&

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { useMediaQuery } from "react-responsive";
 
 import { useAppDispatch } from "../../../store/hook";
 import { setSortType } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
@@ -10,10 +11,8 @@ import { SearchForm } from "./SearchForm";
 import Dropdown from "./dropdown/Dropdown";
 import { DropdownInfo } from "./dropdown/DropdownInfo";
 import AddVacancyButton from "../../buttons/AddVacancyButton/AddVacancyButton";
-import { useMediaQuery } from "react-responsive";
 import { ICON } from "@/components/Icon/icons";
 import { IconButton } from "@/components/buttons/IconButton/IconButton";
-// import { IconButton } from "@/components/buttons/IconButton/IconButton";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -22,6 +21,7 @@ export type VacancyProps = {
 const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isDesctop = useMediaQuery({ minWidth: 1280 });
 
   const dispatch = useAppDispatch();
 
@@ -31,7 +31,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
 
   return (
     <div className="w-full items-start pb-6 md:flex xl:justify-between">
-      <SearchForm />
+      {isDesctop && <SearchForm />}
       <div className="relative flex xl:gap-8 smOnly:justify-between mdOnly:gap-5">
         <div className="relative hidden md:block md:w-[206px] xl:w-[216px]">
           <Dropdown
@@ -43,7 +43,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
         </div>
         {isMobile && (
           <IconButton
-            label="Search button"
+            label="Sort button"
             variant="default"
             onClick={() => console.log("hello")}
             className="p-0 pr-8"
