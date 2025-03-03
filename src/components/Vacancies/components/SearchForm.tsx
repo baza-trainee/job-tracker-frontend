@@ -84,7 +84,7 @@ export const SearchForm: FC = () => {
   return (
     <div>
       <form
-        className="relative flex items-center font-nunito text-xl leading-[135%] text-textBlack hover:fill-iconHover active:fill-textBlack"
+        className="relative hidden items-center font-nunito text-xl leading-[135%] text-textBlack hover:fill-iconHover active:fill-textBlack xl:flex"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* <Input
@@ -97,7 +97,7 @@ export const SearchForm: FC = () => {
           errors={errors}
         /> */}
         <div className="relative">
-          <div className={"relative flex w-full items-center"}>
+          <div className="relative flex items-center xl:w-[355px] 3xl:w-[516px]">
             <input
               id={`input-query`}
               className={cn(
