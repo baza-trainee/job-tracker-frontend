@@ -19,7 +19,7 @@ export const InputRadio = ({
   return (
     <div
       className={classNames(
-        className === "addVacancy" && "flex items-center px-[9.5px]"
+        className === "addVacancy" && "flex items-center xl:px-[9.5px]"
       )}
     >
       <div className="flex items-center justify-center">
@@ -33,7 +33,7 @@ export const InputRadio = ({
           {...props}
           className={classNames(
             className === "addVacancy" &&
-              "peer relative h-5 w-5 shrink-0 appearance-none rounded-[4px] border-[1px] border-solid border-textBlack cursor-pointer",
+              "peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none rounded-[4px] border-[1px] border-solid border-textBlack",
             "md:h-6 md:w-6 md:border-2"
           )}
         />
@@ -56,7 +56,8 @@ export const InputRadio = ({
         htmlFor={id}
         className={classNames(
           className === "addVacancy" &&
-            "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px] cursor-pointer"
+            // "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px] cursor-pointer"
+            "ml-3 cursor-pointer font-nunito text-[14px] font-medium leading-[135%] text-textBlack md:text-[16px]"
         )}
       >
         {label}

@@ -469,3 +469,12 @@ input[type="password"]::-ms-clear {
 .soon-scroll::-webkit-scrollbar-thumb:hover {
   background: #8f99ad;
 }
+/* @layer utilities {
+  .scrollbar-transparent::-webkit-scrollbar {
+    background: transparent;
+  }
+} */
+
+.scrollbar-transparent::-webkit-scrollbar {
+  background: transparent;
+}

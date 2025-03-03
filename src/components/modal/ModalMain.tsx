@@ -32,14 +32,14 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
       <div
         className={clsx(
           "relative top-1 z-30 flex w-fit max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl px-6 py-3",
-          "sm:top-[1px] sm:min-h-[20px] sm:min-w-[100px]",
-          "md:min-h-[32px] md:min-w-[134px]",
+          "sm:top-[1px] sm:min-h-[20px] sm:min-w-[100px] sm:px-4 sm:py-2",
+          "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
           backgroundColorModal || modalData.bgColor
         )}
         onClick={(e) => e.stopPropagation()}
       >
         {modalData?.nameModal && (
-          <span className="text-xl">{t(modalData.nameModal)}</span>
+          <span className="text-[16px] md:text-[20px]">{t(modalData.nameModal)}</span>
         )}
       </div>
       <div
