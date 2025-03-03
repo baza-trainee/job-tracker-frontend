@@ -5,8 +5,9 @@ import { openModal } from "../../../store/slices/modalSlice/modalSlice";
 import Icon from "../../Icon/Icon";
 import { createNewStatuses } from "../../../store/slices/statusVacancy/vacancyStatusSlice";
 import { vacancyStatusesInfo } from "@/store/slices/statusVacancy/vacancyStatusOperation";
+import { cn } from "@/utils/utils";
 
-const AddVacancyButton = () => {
+const AddVacancyButton = ({ className }: { className?: string }) => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ const AddVacancyButton = () => {
     <Button
       variant="accent"
       size="big"
-      className="w-[280px] gap-3 md:w-auto"
+      className={cn("w-[280px] gap-[10px] md:w-auto", className)}
       onClick={() => {
         dispatch(createNewStatuses(vacancyStatusesInfo));
         dispatch(
@@ -25,7 +26,7 @@ const AddVacancyButton = () => {
         );
       }}
     >
-      <span className="text-sm leading-[135%] md:text-xl">
+      <span className="w-[125px] text-nowrap text-sm leading-[135%] md:text-base">
         {t("vacanciesHeader.addVacancy")}
       </span>
       <Icon id={"plus"} className="size-6" />
