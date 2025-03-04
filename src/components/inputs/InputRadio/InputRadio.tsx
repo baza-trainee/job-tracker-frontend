@@ -19,7 +19,7 @@ export const InputRadio = ({
   return (
     <div
       className={classNames(
-        className === "addVacancy" && "flex items-center xl:px-[9.5px]"
+        className === "addVacancy" && "flex items-center 2xl:px-[9.5px]"
       )}
     >
       <div className="flex items-center justify-center">

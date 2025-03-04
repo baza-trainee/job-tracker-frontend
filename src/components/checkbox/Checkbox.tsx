@@ -21,7 +21,7 @@ export const Checkbox = ({
     <div>
       <div
         className={classNames(
-          type === "signUp" && "relative flex items-center xl:px-[9.5px]"
+          type === "signUp" && "relative flex items-center 3xl:px-[9.5px]"
         )}
         // id={id}
       >

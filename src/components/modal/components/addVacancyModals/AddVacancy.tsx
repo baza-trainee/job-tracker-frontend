@@ -43,15 +43,15 @@ const AddVacancy = () => {
 
   return (
     // <div className="p-5">
-    <div className="w-full bg-red-300 sm:pt-[50px]">
+    <div className="g-red-300 w-full sm:pt-[50px] xl:pt-[44px]">
       <form>
         <div className="flex flex-col items-center gap-3">
           {/* <div className="flex flex-row gap-3"> */}
-          <div className="flex w-full flex-col md:gap-4">
+          <div className="flex w-full flex-col gap-4 xl:flex-row">
             {/* <div className="flex w-[445px] flex-col justify-start gap-3"> */}
-            <div className="flex max-w-[445px] flex-col justify-start gap-3">
+            <div className="flex flex-col justify-start gap-3">
               {/* TODO: Компаня, Позиція, Лінк на вакансію, Канал зв'яку, Локація*/}
-              <div className="flex flex-col gap-3">
+              <div className="flex xl:w-[393px] flex-col gap-3">
                 {vacancyFields.map((input: VacancyInputProps) => (
                   <Input
                     register={register}
@@ -100,52 +100,51 @@ const AddVacancy = () => {
 
             {/* TODO:Cтатус: Відправлене резюме, Тестове завдання ... Оффер*/}
             {/* <div className="flex w-[445px] flex-col justify-between gap-4"> */}
-            <div className="flex flex-col justify-between gap-4">
-              <div className="relative flex flex-col gap-3 md:gap-4 xl:pt-2">
-                <label>Статус</label>
-                <div className="flex flex-col gap-3 md:gap-4">
-                  {statusVacancy.map((checkboxCalendar: VacancyInputProps) => (
-                    <CheckboxWithCalendar
-                      key={checkboxCalendar.id}
-                      name={checkboxCalendar.name}
-                      id={checkboxCalendar.id}
-                      label={`addVacancy.form.${checkboxCalendar.name}`}
-                      register={register}
-                      errors={errors}
-                      date={checkboxCalendar.date}
-                      getValues={getValues}
-                      setValue={setValue}
-                    />
-                  ))}
-                </div>
-                <AddVacancyStage
-                  register={register}
-                  getValues={getValues}
-                  setValue={setValue}
-                />
 
-                {/* TODO:Формат: Нотатки*/}
+            <div className="relative flex flex-col gap-3 md:gap-4 2xl:pt-2">
+              <label>Статус</label>
+              <div className="flex flex-col gap-3 md:gap-4 xl:w-[274px]">
+                {statusVacancy.map((checkboxCalendar: VacancyInputProps) => (
+                  <CheckboxWithCalendar
+                    key={checkboxCalendar.id}
+                    name={checkboxCalendar.name}
+                    id={checkboxCalendar.id}
+                    label={`addVacancy.form.${checkboxCalendar.name}`}
+                    register={register}
+                    errors={errors}
+                    date={checkboxCalendar.date}
+                    getValues={getValues}
+                    setValue={setValue}
+                  />
+                ))}
               </div>
-              <div className="">
-                <Textarea
-                  register={register}
-                  resetField={resetField}
-                  key="note"
-                  name="note"
-                  placeholder={t("addVacancy.placeholders.notes")}
-                  className=""
-                  label={t("addVacancy.form.notes")}
-                  errors={errors}
-                />
-              </div>
+              <AddVacancyStage
+                register={register}
+                getValues={getValues}
+                setValue={setValue}
+              />
+            </div>
+
+            {/* TODO:Формат: Нотатки*/}
+            <div className="xl:w-[390px]">
+              <Textarea
+                register={register}
+                resetField={resetField}
+                key="note"
+                name="note"
+                placeholder={t("addVacancy.placeholders.notes")}
+                className=""
+                label={t("addVacancy.form.notes")}
+                errors={errors}
+              />
             </div>
           </div>
 
           {/* <div className="flex justify-center gap-3"> */}
-          <div className="flex w-full flex-col gap-3 md:flex-row">
+          <div className="flex w-full flex-col justify-center xl:mt-6 gap-3 md:flex-row">
             <Button
               type="button"
-              className="w-full md:mx-auto xl:mt-8"
+              className="w-full md:mx-auto xl:mx-0 xl:w-auto"
               variant="ghost"
               size="small"
               onClick={handleSubmitArchive}
@@ -155,7 +154,7 @@ const AddVacancy = () => {
             </Button>
             <Button
               type="button"
-              className="w-full bg-button md:mx-auto xl:mt-8"
+              className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
               variant="ghost"
               size="big"
               onClick={saveVacancy}
