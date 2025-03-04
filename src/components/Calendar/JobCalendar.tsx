@@ -11,7 +11,7 @@ export const JobCalendar = ({ changeDate, dateState }: JobCalendarProps) => {
     <Calendar
       locale={i18n.language}
       className={classNames(
-        "custom-size z-10 w-full bg-backgroundMain statistics-calendar__day border-[1px] border-[solid] border-[#436b88] rounded-[12px] py-3"
+        "custom-size z-10 w-full bg-backgroundMain statistics-calendar__day border-[1px] border-[solid] border-[#436b88] rounded-[12px] py-3 job-cal"
       )}
       nextLabel={<Icon id={"arrow-right"} className="h-6 w-6" />}
       prevLabel={<Icon id={"arrow-left"} className="h-6 w-6" />}

@@ -42,16 +42,13 @@ const AddVacancy = () => {
   };
 
   return (
-    // <div className="p-5">
-    <div className="g-red-300 w-full sm:pt-[50px] xl:pt-[44px]">
+    <div className="w-full sm:pt-[50px] xl:pt-[44px]">
       <form>
         <div className="flex flex-col items-center gap-3">
-          {/* <div className="flex flex-row gap-3"> */}
-          <div className="flex w-full flex-col gap-4 xl:flex-row">
-            {/* <div className="flex w-[445px] flex-col justify-start gap-3"> */}
+          <div className="flex w-full flex-col gap-4 xl:flex-row xl:gap-6">
             <div className="flex flex-col justify-start gap-3">
               {/* TODO: Компаня, Позиція, Лінк на вакансію, Канал зв'яку, Локація*/}
-              <div className="flex xl:w-[393px] flex-col gap-3">
+              <div className="flex flex-col gap-3 xl:w-[393px] 2xl:w-[445px]">
                 {vacancyFields.map((input: VacancyInputProps) => (
                   <Input
                     register={register}
@@ -62,12 +59,12 @@ const AddVacancy = () => {
                     label={input.label}
                     errors={errors}
                     isRequired={true}
+                    type="vacancy"
                   />
                 ))}
               </div>
 
               {/* TODO:Формат: Дистанційно - Офіс - Змішаний*/}
-              {/* <div className="flex justify-between"> */}
               <div className="flex flex-col justify-between gap-3 md:flex-row">
                 {workTypeOptions.map((inputRadio: VacancyInputProps) => (
                   <InputRadio
@@ -82,28 +79,12 @@ const AddVacancy = () => {
                   />
                 ))}
               </div>
-
-              {/* TODO:Формат: Нотатки*/}
-              <div className="hidden">
-                <Textarea
-                  register={register}
-                  resetField={resetField}
-                  key="note"
-                  name="note"
-                  placeholder={t("addVacancy.placeholders.notes")}
-                  className=""
-                  label={t("addVacancy.form.notes")}
-                  errors={errors}
-                />
-              </div>
             </div>
 
             {/* TODO:Cтатус: Відправлене резюме, Тестове завдання ... Оффер*/}
-            {/* <div className="flex w-[445px] flex-col justify-between gap-4"> */}
-
             <div className="relative flex flex-col gap-3 md:gap-4 2xl:pt-2">
               <label>Статус</label>
-              <div className="flex flex-col gap-3 md:gap-4 xl:w-[274px]">
+              <div className="flex flex-col gap-3 md:gap-4 xl:w-[274px] 2xl:w-[342px]">
                 {statusVacancy.map((checkboxCalendar: VacancyInputProps) => (
                   <CheckboxWithCalendar
                     key={checkboxCalendar.id}
@@ -126,7 +107,7 @@ const AddVacancy = () => {
             </div>
 
             {/* TODO:Формат: Нотатки*/}
-            <div className="xl:w-[390px]">
+            <div className="xl:w-[390px] 2xl:w-[418px]">
               <Textarea
                 register={register}
                 resetField={resetField}
@@ -140,8 +121,7 @@ const AddVacancy = () => {
             </div>
           </div>
 
-          {/* <div className="flex justify-center gap-3"> */}
-          <div className="flex w-full flex-col justify-center xl:mt-6 gap-3 md:flex-row">
+          <div className="flex w-full flex-col justify-center gap-3 md:flex-row xl:mt-6">
             <Button
               type="button"
               className="w-full md:mx-auto xl:mx-0 xl:w-auto"

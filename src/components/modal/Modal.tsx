@@ -50,17 +50,15 @@ const Modal: FC = () => {
   return (
     <div
       className={classNames(
-        "fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50 font-nunito backdrop-blur-sm",
-        "sm:overflow-auto"
+        "fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center overflow-auto bg-black bg-opacity-50 font-nunito backdrop-blur-sm"
       )}
       onClick={() => handleCloseModal()}
     >
       <div className="">
         <ModalMain
-          // className="absolute bottom-0 left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4"
           className={classNames("", {
-            "scrollbar-transparent absolute bottom-0 left-2/4 top-11 -translate-x-2/4 ":
-              typeModal === "addVacancy",
+            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-24":
+              typeModal === "addVacancy" || typeModal === "editVacancy",
           })}
           modalData={modalData}
           btnFunc={() => dispatch(closeModal())}

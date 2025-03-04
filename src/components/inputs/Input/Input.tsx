@@ -59,10 +59,10 @@ export const Input = ({
           className={cn(
             "mb-3 inline-block font-nunito font-medium leading-[135%] text-textBlack",
             "mb-[2px] text-[14px]",
-            // "md:mb-2 md:text-[18px]",
             "md:mb-2 md:text-[16px]",
             "xl:mb-2 xl:text-[16px]",
-            "2xl:mb-3 2xl:text-[20px]"
+            "2xl:mb-3 2xl:text-[20px]",
+            {"2xl:mb-1 2xl:text-[16px]":type === "vacancy"}
           )}
         >
           {label} {isRequired && <span className={cn("text-color2")}>*</span>}
@@ -73,7 +73,6 @@ export const Input = ({
           {type === "textarea" ? (
             <textarea
               id={`input-${name}`}
-              // className="w-full rounded-xl border p-3 text-base"
               className={cn(
                 "w-full rounded-xl border p-3 text-base",
                 "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
@@ -84,7 +83,6 @@ export const Input = ({
                 {
                   "border-color7": !error,
                   "border-color2": error,
-                  // "border-textBlack": !isCheckButtons,
                 },
                 classNameInputCustom
               )}

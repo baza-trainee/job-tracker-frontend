@@ -59,7 +59,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
             "flex items-center justify-center",
             "sm:min-h-[217px] sm:min-w-[260px]",
             "md:min-h-[237px] md:min-w-[449px]",
-            "xl:min-h-[292px] xl:min-w-[588px]",
+            "xl:min-h-[292px] xl:min-w-[588px] xl:px-3",
             "3xl:min-h-[320px]"
           )}
         >
