@@ -4,13 +4,16 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
+import { useMediaQuery } from "react-responsive";
 import { cn } from "../../../utils/utils";
 import { selectSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 import { setSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
-import { selectVacanciesQuantity } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+//import { selectVacanciesQuantity } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 
 import Icon from "../../Icon/Icon";
-import { IconButton } from "../../buttons/IconButton/IconButton";
+import { SearchResults } from "./SearchResults";
+import { closeSearch } from "@/store/slices/searchSlice/searchSlice";
+// import { IconButton } from "../../buttons/IconButton/IconButton";
 
 const SearchSchema = z.object({
   query: z.string().min(1, "Search query cannot be empty"),
@@ -21,11 +24,12 @@ type SearchFormData = z.infer<typeof SearchSchema>;
 export const SearchForm: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isDesctop = useMediaQuery({ minWidth: 1280 });
 
   const [isSearching, setIsSearching] = useState(false);
 
   const queryFromRedux = useSelector(selectSearchQuery);
-  const vacanciesQuantity = useSelector(selectVacanciesQuantity);
+  // const vacanciesQuantity = useSelector(selectVacanciesQuantity);
 
   const {
     register,
@@ -65,21 +69,24 @@ export const SearchForm: FC = () => {
       handleSearch("");
     }
     resetField("query");
+    if (!isDesctop) {
+      dispatch(closeSearch());
+    }
   };
   const error = errors["query"];
 
-  const getSearchResultsText = (count: number): string => {
-    if (count === 1 || (count > 20 && count % 10 === 1)) {
-      return `${count} ${t("vacanciesHeader.searchResult")}`;
-    } else if (
-      [2, 3, 4].includes(count) ||
-      (count > 20 && [2, 3, 4].includes(count % 10))
-    ) {
-      return `${count} ${t("vacanciesHeader.searchResult234")}`;
-    } else {
-      return `${count} ${t("vacanciesHeader.searchResults")}`;
-    }
-  };
+  // const getSearchResultsText = (count: number): string => {
+  //   if (count === 1 || (count > 20 && count % 10 === 1)) {
+  //     return `${count} ${t("vacanciesHeader.searchResult")}`;
+  //   } else if (
+  //     [2, 3, 4].includes(count) ||
+  //     (count > 20 && [2, 3, 4].includes(count % 10))
+  //   ) {
+  //     return `${count} ${t("vacanciesHeader.searchResult234")}`;
+  //   } else {
+  //     return `${count} ${t("vacanciesHeader.searchResults")}`;
+  //   }
+  // };
 
   return (
     <div className="w-full">
@@ -117,7 +124,7 @@ export const SearchForm: FC = () => {
                 onClick={() => handleClear()}
                 type="button"
                 className={
-                  "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
+                  "absolute right-2 top-[50%] z-30 mt-auto h-6 translate-y-[-50%] cursor-pointer"
                 }
               >
                 <svg
@@ -158,8 +165,9 @@ export const SearchForm: FC = () => {
           <Icon id={"search"} className="h-6 w-6" />
         </button>
       </form>
+      {isDesctop && <SearchResults onClear={() => resetField("query")} />}
 
-      {queryFromRedux && (
+      {/* {queryFromRedux && (
         <div className="mt-6 flex items-center font-nunito text-xl leading-[135%] text-textBlack">
           <p>
             {getSearchResultsText(vacanciesQuantity)}
@@ -173,7 +181,7 @@ export const SearchForm: FC = () => {
             <Icon id={"close-default"} className="h-6 w-6" />
           </IconButton>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

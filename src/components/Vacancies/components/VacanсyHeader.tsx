@@ -13,6 +13,7 @@ import { DropdownInfo } from "./dropdown/DropdownInfo";
 import AddVacancyButton from "../../buttons/AddVacancyButton/AddVacancyButton";
 import { ICON } from "@/components/Icon/icons";
 import { IconButton } from "@/components/buttons/IconButton/IconButton";
+import { SearchResults } from "./SearchResults";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -30,7 +31,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   };
 
   return (
-    <div className="w-full items-start pb-6 md:flex xl:justify-between">
+    <div className="w-full items-start pb-6 xl:flex xl:justify-between">
       {isDesctop && <SearchForm />}
       <div className="relative flex xl:gap-8 smOnly:justify-between mdOnly:gap-5">
         <div className="relative hidden md:block md:w-[206px] xl:w-[216px]">
@@ -63,6 +64,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
         )}
         <AddVacancyButton className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6" />
       </div>
+      {!isDesctop && <SearchResults />}
     </div>
   );
 };
