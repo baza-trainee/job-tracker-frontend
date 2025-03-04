@@ -31,7 +31,7 @@ export const Textarea = ({
       {label && (
         <label
           htmlFor={`input-${name}`}
-          className="mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-textBlack"
+          className="block font-nunito text-[20px] font-medium leading-[135%] text-textBlack sm:text-[16px] xl:mb-3"
         >
           {label}
         </label>
@@ -41,7 +41,9 @@ export const Textarea = ({
           <textarea
             id={`textarea-${name}`}
             className={cn(
-              "peer h-32 w-full resize-none rounded-xl border px-6 py-2 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+              "peer h-32 w-full resize-none rounded-xl border px-2 py-3 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+              "md:px-6 md:py-3",
+              "2xl:px-6 2xl:py-2"
 
               // !error && "border-color5",
               // error &&
@@ -52,6 +54,7 @@ export const Textarea = ({
             {...register(name)}
             aria-describedby={`textareaError-${name}`}
           ></textarea>
+          {/* alex */}
           {/* {error ? (
             <button
               onClick={() => handleResetField(name)}
@@ -106,7 +109,7 @@ export const Textarea = ({
         {error && (
           <span
             id={`inputError-${name}`}
-            className="absolute left-0 -bottom-6 inline-block font-nunito text-base font-medium text-color2"
+            className="absolute -bottom-6 left-0 inline-block font-nunito text-base font-medium text-color2"
           >
             {t(String(error?.message))}
           </span>
