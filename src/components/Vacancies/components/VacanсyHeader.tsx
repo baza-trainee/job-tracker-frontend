@@ -58,7 +58,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
               <span className="w-[124px] text-base leading-[135%] xl:w-[125px]">
                 {t("vacanciesHeader.archive")}
               </span>
-              <Icon id={"archive-outline"} className="h-6 w-6" />
+              <Icon id={"archive-outline"} className="size-6" />
             </div>
           </LinkButton>
         )}

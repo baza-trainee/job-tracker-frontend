@@ -31,7 +31,7 @@ export const SearchResults: FC<{ onClear?: () => void }> = ({ onClear }) => {
   const handleClear = () => {
     dispatch(setSearchQuery(""));
     dispatch(closeSearch());
-    if (onClear) onClear(); // Викликаємо додатковий хендлер, якщо він переданий
+    if (onClear) onClear();
   };
 
   if (!query) return null;

@@ -1,21 +1,18 @@
-import { cn } from "@/utils/utils";
-import Logo from "../Logo/JobTrackerLogo";
-
-import { useAppDispatch } from "@/store/hook";
-// import { selectSidebar } from "@/store/slices/sidebarSlice/sidebarSelector";
-import { openSidebar } from "@/store/slices/sidebarSlice/sidebarSlice";
-// import OpenSidebarBtn from "../Sidebar/components/OpenSidebarBtn";
-import { ICON } from "../Icon/icons";
-import Icon from "../Icon/Icon.tsx";
-import { IconButton } from "../buttons/IconButton/IconButton";
-// import { useState } from "react";
-import { SearchForm } from "../Vacancies/components/SearchForm.tsx";
 import { useSelector } from "react-redux";
+
+import { cn } from "@/utils/utils";
+import { useAppDispatch } from "@/store/hook";
+import { openSidebar } from "@/store/slices/sidebarSlice/sidebarSlice";
 import { selectSearchOpen } from "@/store/slices/searchSlice/searchSelector.ts";
 import { openSearch } from "@/store/slices/searchSlice/searchSlice.ts";
 
+import { ICON } from "../Icon/icons";
+import Icon from "../Icon/Icon.tsx";
+import { IconButton } from "../buttons/IconButton/IconButton";
+import Logo from "../Logo/JobTrackerLogo";
+import { SearchForm } from "../Vacancies/components/SearchForm.tsx";
+
 function MobHeader() {
-  // const [isSearchOpen, setIsSearchOpen] = useState(false);
   const dispatch = useAppDispatch();
   const isSearchOpen = useSelector(selectSearchOpen);
 
@@ -36,19 +33,19 @@ function MobHeader() {
       <Logo className="h-[44px] w-[54px]" />
 
       {isSearchOpen && (
-        <div className="absolute right-5 top-4 z-20 md:right-6 md:top-6 smOnly:left-5">
+        <div className="absolute right-5 top-4 z-20 md:right-[88px] md:top-6 smOnly:left-5">
           <SearchForm />
         </div>
       )}
 
-      <div className="flex gap-4">
+      <div className="flex gap-6">
         <IconButton
           label="Search button"
           variant="default"
           onClick={toggleSearch}
           className="p-0"
         >
-          <Icon id={ICON.SEARCH} className="size-8" />
+          <Icon id={ICON.SEARCH} className="size-10" />
         </IconButton>
 
         <IconButton

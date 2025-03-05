@@ -104,7 +104,7 @@ export const SearchForm: FC = () => {
           errors={errors}
         /> */}
         <div className="relative w-full">
-          <div className="relative flex items-center sm:w-full md:w-[355px] 3xl:w-[516px]">
+          <div className="relative flex items-center sm:w-full md:w-[280px] xl:w-[355px] 2xl:w-[380px] 3xl:w-[516px]">
             <input
               id={`input-query`}
               className={cn(
@@ -151,7 +151,7 @@ export const SearchForm: FC = () => {
           {error && (
             <span
               id={`inputError-query`}
-              className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
+              className="absolute left-0 top-[38px] inline-block font-nunito text-base font-medium text-color2 md:top-10 xl:top-[46px]"
             >
               {t(String(error?.message))}
             </span>
