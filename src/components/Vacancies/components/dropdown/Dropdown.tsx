@@ -1,10 +1,15 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { selectSortType } from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+import { useAppDispatch } from "@/store/hook";
+
+import { selectSortType } from "@/store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 
 import { DropdowmMarkup } from "./DropdownMarkup";
 import { SortDropdownProps } from "./Dropdown.props";
+import { hideDropdown } from "@/store/slices/searchSlice/searchSlice";
+import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
+// import { useMediaQuery } from "react-responsive";
 
 const Dropdown: FC<SortDropdownProps> = ({
   options,
@@ -14,10 +19,21 @@ const Dropdown: FC<SortDropdownProps> = ({
   register,
   getValues,
 }) => {
+  const isDropdownShown = useSelector(selectDropdownShown);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [focusedOption, setFocusedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isDropdownShown && !isInModal) {
+      setDropdownOpen(true);
+    }
+  }, [isDropdownShown]);
+
+  console.log("isDropdownOpen", isDropdownOpen);
+
+  const dispatch = useAppDispatch();
 
   const mainOptions = options.mainOptions;
   const buttonOptions = options.buttonOption;
@@ -27,6 +43,7 @@ const Dropdown: FC<SortDropdownProps> = ({
     : useSelector(selectSortType);
 
   const toggleDropdown = () => {
+    console.log("hello");
     setDropdownOpen((prev) => {
       if (!prev) {
         if (selectedSortType) {
@@ -56,6 +73,7 @@ const Dropdown: FC<SortDropdownProps> = ({
     setDropdownOpen(false);
     setOpenSubMenu(null);
     setFocusedOption(null);
+    dispatch(hideDropdown());
   };
 
   const handleSubMenuToggle = (menuId: string) => {
@@ -69,6 +87,7 @@ const Dropdown: FC<SortDropdownProps> = ({
     ) {
       setDropdownOpen(false);
       setOpenSubMenu(null);
+      dispatch(hideDropdown());
     }
   };
 

@@ -4,6 +4,7 @@ import { useMediaQuery } from "react-responsive";
 
 import { useAppDispatch } from "../../../store/hook";
 import { setSortType } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
+import { showDropdown } from "@/store/slices/searchSlice/searchSlice.ts";
 
 import Icon from "../../Icon/Icon";
 import { LinkButton } from "../../buttons/LinkButton/LinkButton";
@@ -14,6 +15,9 @@ import AddVacancyButton from "../../buttons/AddVacancyButton/AddVacancyButton";
 import { ICON } from "@/components/Icon/icons";
 import { IconButton } from "@/components/buttons/IconButton/IconButton";
 import { SearchResults } from "./SearchResults";
+import { useSelector } from "react-redux";
+import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
+import { cn } from "@/utils/utils";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -23,20 +27,32 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isDesctop = useMediaQuery({ minWidth: 1280 });
-
+  const isDropdownShown = useSelector(selectDropdownShown);
+  console.log("isDropdownShown", isDropdownShown);
   const dispatch = useAppDispatch();
 
   const handleSetType = (option: string): void => {
     dispatch(setSortType(option));
   };
 
+  const handleShowDropdown = () => {
+    dispatch(showDropdown());
+  };
+
+  const dropdownInfo = DropdownInfo();
+
   return (
     <div className="w-full items-start pb-6 xl:flex xl:justify-between">
       {isDesctop && <SearchForm />}
       <div className="relative flex xl:gap-8 smOnly:justify-between mdOnly:gap-5">
-        <div className="relative hidden md:block md:w-[206px] xl:w-[216px]">
+        <div
+          className={cn(
+            "md:relative md:block md:w-[206px] xl:w-[216px]",
+            !isDropdownShown && "hidden"
+          )}
+        >
           <Dropdown
-            options={DropdownInfo()}
+            options={dropdownInfo}
             setValue={handleSetType}
             isInModal={false}
             name=""
@@ -46,12 +62,13 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
           <IconButton
             label="Sort button"
             variant="default"
-            onClick={() => console.log("hello")}
-            className="p-0 pr-8"
+            onClick={handleShowDropdown}
+            className="p-0 pr-[30px]"
           >
             <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-black" />
           </IconButton>
         )}
+
         {!isArchive && !isMobile && (
           <LinkButton variant="ghost" size="small" href="/archive">
             <div className="items-center gap-[10px] md:flex">

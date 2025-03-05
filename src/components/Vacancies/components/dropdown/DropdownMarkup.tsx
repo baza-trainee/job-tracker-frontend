@@ -29,10 +29,11 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           isDropdownOpen
             ? isInModal
               ? "z-[20] h-fit"
-              : "h-[205px]"
+              : "h-[203px] sm:box-content smOnly:h-fit"
             : isInModal
               ? "h-[44px] hover:border-iconHover hover:bg-backgroundMain"
-              : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary"
+              : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary",
+          !isInModal && openSubMenu && "smOnly:rounded-b-none"
         )}
       >
         {/* Головна кнопка */}
@@ -47,7 +48,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
             "flex w-full items-center justify-between rounded-t-xl py-2 pl-8 pr-[22px] pt-3 text-textBlack outline-none",
             isDropdownOpen && "hover:bg-button",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button",
-            isInModal && "px-6 py-[11px] text-textBlackLight",
+            isInModal ? "px-6 py-[11px] text-textBlackLight" : "smOnly:hidden",
             !isTypeSelected && isInModal && "text-textBlack"
           )}
         >
@@ -68,21 +69,28 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
         <div
           className={cn(
             "custom-size left-0 z-20 w-full rounded-b-xl bg-backgroundMain",
-            isInModal && "z-[50] rounded-b-xl",
+            isInModal ? "z-[50] rounded-b-xl" : "smOnly:rounded-xl",
             isDropdownOpen
               ? isInModal
                 ? "visible h-fit opacity-100"
-                : "visible h-[158px] opacity-100"
+                : "visible h-[158px] opacity-100 smOnly:h-fit"
               : "sr-only m-0 h-0 opacity-0"
           )}
         >
-          <ul className={cn("rounded-b-xl", isInModal && "rounded-b-xl")}>
+          <ul
+            className={cn(
+              "rounded-b-xl smOnly:rounded-xl",
+              isInModal && "rounded-b-xl smOnly:rounded-b-xl"
+            )}
+          >
             {mainOptions.map((option) => (
               <li
                 key={option.id}
                 className={cn(
                   "relative cursor-pointer py-2 pl-8 pr-[22px] last:rounded-b-xl last:pb-3",
-                  isInModal && "pl-6 last:rounded-b-xl",
+                  isInModal
+                    ? "pl-6 last:rounded-b-xl"
+                    : "smOnly:pl-4 smOnly:first:rounded-t-xl smOnly:last:pb-2",
                   option.subOptions && "flex justify-between",
                   focusedOption === option.id && "bg-button"
                 )}
@@ -100,20 +108,20 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                     className={cn(
                       "h-6 w-6 rotate-[270deg]",
                       openSubMenu === option.id
-                        ? "rotate-90 duration-500"
-                        : "rotate-[270deg] duration-500"
+                        ? "rotate-90 duration-500 sm:rotate-180"
+                        : "rotate-[270deg] duration-500 smOnly:rotate-0"
                     )}
                   />
                 )}
 
                 {/***  Підсписок ***/}
                 {option.subOptions && openSubMenu === option.id && (
-                  <ul className="absolute left-full top-0 z-20 mt-0 w-48 rounded-xl border border-textBlack bg-backgroundMain">
+                  <ul className="absolute left-full top-0 z-20 mt-0 w-48 rounded-xl border border-textBlack bg-backgroundMain smOnly:left-[-1px] smOnly:top-full smOnly:box-content smOnly:w-full smOnly:rounded-t-none smOnly:border-t-0">
                     {option.subOptions.map((subOption) => (
                       <li
                         key={subOption.id}
                         className={cn(
-                          "cursor-pointer px-5 py-2 first:rounded-t-xl last:rounded-b-xl",
+                          "cursor-pointer px-5 py-2 first:rounded-t-xl last:rounded-b-xl smOnly:pl-8 smOnly:first:rounded-t-none",
                           focusedOption === subOption.id && "bg-button"
                         )}
                         onClick={() => handleOptionSelect(subOption.id)}

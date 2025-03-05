@@ -8,8 +8,10 @@ import { setSearchQuery } from "../../../store/slices/filteredVacanciesSlice/fil
 import Icon from "../../Icon/Icon";
 import { IconButton } from "../../buttons/IconButton/IconButton";
 import { closeSearch } from "@/store/slices/searchSlice/searchSlice";
+import { useTranslation } from "react-i18next";
 
 export const SearchResults: FC<{ onClear?: () => void }> = ({ onClear }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const query = useSelector(selectSearchQuery);
 
@@ -17,14 +19,14 @@ export const SearchResults: FC<{ onClear?: () => void }> = ({ onClear }) => {
 
   const getSearchResultsText = (count: number): string => {
     if (count === 1 || (count > 20 && count % 10 === 1)) {
-      return `${count} вакансія`;
+      return `${count} ${t("vacanciesHeader.searchResult")}`;
     } else if (
       [2, 3, 4].includes(count) ||
       (count > 20 && [2, 3, 4].includes(count % 10))
     ) {
-      return `${count} вакансії`;
+      return `${count} ${t("vacanciesHeader.searchResult234")}`;
     } else {
-      return `${count} вакансій`;
+      return `${count} ${t("vacanciesHeader.searchResults")}`;
     }
   };
 

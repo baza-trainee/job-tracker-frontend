@@ -2,18 +2,17 @@ import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "react-responsive";
-import { cn } from "../../../utils/utils";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import { selectSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 import { setSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
-//import { selectVacanciesQuantity } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+import { closeSearch } from "@/store/slices/searchSlice/searchSlice";
+import { cn } from "../../../utils/utils";
 
 import Icon from "../../Icon/Icon";
 import { SearchResults } from "./SearchResults";
-import { closeSearch } from "@/store/slices/searchSlice/searchSlice";
-// import { IconButton } from "../../buttons/IconButton/IconButton";
 
 const SearchSchema = z.object({
   query: z.string().min(1, "Search query cannot be empty"),
@@ -29,7 +28,6 @@ export const SearchForm: FC = () => {
   const [isSearching, setIsSearching] = useState(false);
 
   const queryFromRedux = useSelector(selectSearchQuery);
-  // const vacanciesQuantity = useSelector(selectVacanciesQuantity);
 
   const {
     register,
@@ -74,19 +72,6 @@ export const SearchForm: FC = () => {
     }
   };
   const error = errors["query"];
-
-  // const getSearchResultsText = (count: number): string => {
-  //   if (count === 1 || (count > 20 && count % 10 === 1)) {
-  //     return `${count} ${t("vacanciesHeader.searchResult")}`;
-  //   } else if (
-  //     [2, 3, 4].includes(count) ||
-  //     (count > 20 && [2, 3, 4].includes(count % 10))
-  //   ) {
-  //     return `${count} ${t("vacanciesHeader.searchResult234")}`;
-  //   } else {
-  //     return `${count} ${t("vacanciesHeader.searchResults")}`;
-  //   }
-  // };
 
   return (
     <div className="w-full">
@@ -166,22 +151,6 @@ export const SearchForm: FC = () => {
         </button>
       </form>
       {isDesctop && <SearchResults onClear={() => resetField("query")} />}
-
-      {/* {queryFromRedux && (
-        <div className="mt-6 flex items-center font-nunito text-xl leading-[135%] text-textBlack">
-          <p>
-            {getSearchResultsText(vacanciesQuantity)}
-            <span className="pl-4 text-textOther">{queryFromRedux}</span>
-          </p>
-          <IconButton
-            label="Close button"
-            variant="default"
-            onClick={handleClear}
-          >
-            <Icon id={"close-default"} className="h-6 w-6" />
-          </IconButton>
-        </div>
-      )} */}
     </div>
   );
 };
