@@ -28,7 +28,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isDesctop = useMediaQuery({ minWidth: 1280 });
   const isDropdownShown = useSelector(selectDropdownShown);
-  console.log("isDropdownShown", isDropdownShown);
+  // console.log("isDropdownShown", isDropdownShown);
   const dispatch = useAppDispatch();
 
   const handleSetType = (option: string): void => {
@@ -71,7 +71,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
 
         {!isArchive && !isMobile && (
           <LinkButton variant="ghost" size="small" href="/archive">
-            <div className="items-center gap-[10px] md:flex">
+            <div className="flex items-center gap-[10px]">
               <span className="w-[124px] text-base leading-[135%] xl:w-[125px]">
                 {t("vacanciesHeader.archive")}
               </span>

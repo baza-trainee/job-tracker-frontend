@@ -25,14 +25,6 @@ const Dropdown: FC<SortDropdownProps> = ({
   const [focusedOption, setFocusedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (isDropdownShown && !isInModal) {
-      setDropdownOpen(true);
-    }
-  }, [isDropdownShown]);
-
-  console.log("isDropdownOpen", isDropdownOpen);
-
   const dispatch = useAppDispatch();
 
   const mainOptions = options.mainOptions;
@@ -43,7 +35,6 @@ const Dropdown: FC<SortDropdownProps> = ({
     : useSelector(selectSortType);
 
   const toggleDropdown = () => {
-    console.log("hello");
     setDropdownOpen((prev) => {
       if (!prev) {
         if (selectedSortType) {
@@ -65,6 +56,12 @@ const Dropdown: FC<SortDropdownProps> = ({
       return !prev;
     });
   };
+  useEffect(() => {
+    if (isDropdownShown && !isInModal) {
+      // setDropdownOpen(true);
+      toggleDropdown();
+    }
+  }, [isDropdownShown]);
 
   const handleOptionSelect = (option: string) => {
     if (setValue) {

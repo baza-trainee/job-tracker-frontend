@@ -20,11 +20,12 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
     },
     ref
   ) => {
+    console.log("focusedOption", focusedOption);
     return (
       <div
         ref={ref}
         className={cn(
-          "absolute z-[2] inline-block w-full rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300",
+          "absolute z-[2] inline-block w-full rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300 smOnly:text-sm",
           isInModal && "w-full",
           isDropdownOpen
             ? isInModal
@@ -33,7 +34,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
             : isInModal
               ? "h-[44px] hover:border-iconHover hover:bg-backgroundMain"
               : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary",
-          !isInModal && openSubMenu && "smOnly:rounded-b-none"
+          !isInModal && openSubMenu && "smOnly:h-[145px]"
         )}
       >
         {/* Головна кнопка */}
@@ -90,9 +91,10 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                   "relative cursor-pointer py-2 pl-8 pr-[22px] last:rounded-b-xl last:pb-3",
                   isInModal
                     ? "pl-6 last:rounded-b-xl"
-                    : "smOnly:pl-4 smOnly:first:rounded-t-xl smOnly:last:pb-2",
-                  option.subOptions && "flex justify-between",
-                  focusedOption === option.id && "bg-button"
+                    : "smOnly:py-[7px] smOnly:pl-4 smOnly:first:rounded-t-xl smOnly:last:pb-[5px]",
+                  option.subOptions && "flex justify-between smOnly:py-[5px]",
+                  focusedOption === option.id && "bg-button",
+                  openSubMenu === option.id && "last:rounded-b-none"
                 )}
                 onClick={() =>
                   option.subOptions
