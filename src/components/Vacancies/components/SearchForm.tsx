@@ -147,7 +147,7 @@ export const SearchForm: FC = () => {
           className="absolute left-6"
           disabled={isSearching}
         >
-          <Icon id={"search"} className="h-6 w-6" />
+          <Icon id={"search"} className="size-6" />
         </button>
       </form>
       {isDesctop && <SearchResults onClear={() => resetField("query")} />}

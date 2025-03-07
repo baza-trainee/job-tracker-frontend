@@ -63,7 +63,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             label="Sort button"
             variant="default"
             onClick={handleShowDropdown}
-            className="p-0 pr-[30px]"
+            className="p-0 pr-[30px] outline-none"
           >
             <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-black" />
           </IconButton>
