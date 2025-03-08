@@ -46,7 +46,7 @@ const AddVacancyStage = ({
   return (
     <div>
       <button
-        className="flex w-fit items-center justify-start gap-2 2xl:mx-[9.5px]"
+        className="mx-[9.5px] flex w-fit items-center justify-start gap-2"
         onClick={handleStage}
         type="button"
       >
@@ -58,7 +58,7 @@ const AddVacancyStage = ({
         onClick={(e) => e.stopPropagation()}
         className={classNames(
           isDropdownOpen
-            ? "visible relative z-50 mt-3 h-[44px] opacity-100 2xl:pl-[9.5px]"
+            ? "visible relative z-50 mt-3 h-[44px] pl-[9.5px] opacity-100"
             : "sr-only h-0 opacity-0"
         )}
       >

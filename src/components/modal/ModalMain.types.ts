@@ -41,6 +41,6 @@ export type ContentMapProps = {
     bgColor: Color["bg"];
     borderColor: Color["border"];
     paddingAddEventModal?: string;
-    iconCloseEventModal?: string;
+    iconAddEventModal?: string;
   };
 };

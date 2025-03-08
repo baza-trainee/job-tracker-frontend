@@ -25,16 +25,6 @@ export const Soon = () => {
   const [hasScroll, setHasScroll] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const actualEvents = events?.filter((event) => {
-    const dateToday = new Date();
-    dateToday.setHours(0, 0, 0, 0); // Очищаємо час, щоб порівнювати тільки дати
-
-    const eventDate = new Date(event.date);
-    eventDate.setHours(0, 0, 0, 0);
-
-    return eventDate >= dateToday;
-  });
-
   useEffect(() => {
     const checkScroll = () => {
       if (scrollContainerRef.current) {
@@ -133,7 +123,7 @@ export const Soon = () => {
                 />
               </li>
             ))} */}
-              {actualEvents?.map((event) => (
+              {events?.map((event) => (
                 <li key={event.id}>
                   <CardSoon
                     day={new Date(event.date).toLocaleString("uk-Ua", {

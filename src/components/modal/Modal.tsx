@@ -9,7 +9,6 @@ import {
 import { contentMap } from "./modalMappings";
 
 import ModalMain from "./ModalMain.tsx";
-import classNames from "classnames";
 
 const Modal: FC = () => {
   const dispatch = useAppDispatch();
@@ -49,17 +48,12 @@ const Modal: FC = () => {
 
   return (
     <div
-      className={classNames(
-        "fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center overflow-auto bg-black bg-opacity-50 font-nunito backdrop-blur-sm"
-      )}
+      className="fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm font-nunito"
       onClick={() => handleCloseModal()}
     >
-      <div className="">
+      <div>
         <ModalMain
-          className={classNames("", {
-            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-24":
-              typeModal === "addVacancy" || typeModal === "editVacancy",
-          })}
+          className=""
           modalData={modalData}
           btnFunc={() => dispatch(closeModal())}
         />
