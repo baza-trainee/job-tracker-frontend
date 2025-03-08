@@ -39,7 +39,6 @@ export const Input = ({
 
   const handleResetField = (name: string) => {
     resetField(name);
-    // console.log("handle", name);
   };
 
   const { onBlur: hookFormOnBlur } = register(name);
