@@ -233,17 +233,20 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           type="textarea"
           label={data[cardsType].text}
           name="text"
-          placeholder={data[cardsType].placeholderLink}
+          placeholder={data[cardsType].placeholderText}
           register={register}
           errors={errors}
           resetField={resetField}
           isCheckButtons={false}
         />
       )}
-      <div className="flex justify-center gap-5">
-        <Button type="reset" onClick={() => dispatch(closeModal())}>
-          {t("infoModal.button.cancel")}
-        </Button>
+      <div className="flex flex-col-reverse justify-center gap-5 md:flex-row">
+        {cardsType === "addProjects" && isUpdating && (
+          <Button type="reset" onClick={() => dispatch(closeModal())}>
+            {t("infoModal.button.delete")}
+            <Icon id="delete" className="h-6 w-6" />
+          </Button>
+        )}
         <Button
           type="submit"
           className="gap-3"
