@@ -12,6 +12,7 @@ export type VacancyInputProps = {
   className?: string;
   value?: string;
   date?: string;
+  type?: React.HTMLInputTypeAttribute | "vacancy";
 };
 
 export type AddVacancyStageProps = {
