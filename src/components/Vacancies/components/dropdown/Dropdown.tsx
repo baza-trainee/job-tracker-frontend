@@ -1,7 +1,11 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
-import { selectSortType } from "../../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+import { useAppDispatch } from "@/store/hook";
+import { selectSortType } from "@/store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+import { hideDropdown } from "@/store/slices/searchSlice/searchSlice";
+import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 
 import { DropdowmMarkup } from "./DropdownMarkup";
 import { SortDropdownProps } from "./Dropdown.props";
@@ -14,10 +18,14 @@ const Dropdown: FC<SortDropdownProps> = ({
   register,
   getValues,
 }) => {
+  const isDropdownShown = useSelector(selectDropdownShown);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [focusedOption, setFocusedOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  const dispatch = useAppDispatch();
 
   const mainOptions = options.mainOptions;
   const buttonOptions = options.buttonOption;
@@ -26,11 +34,13 @@ const Dropdown: FC<SortDropdownProps> = ({
     ? getValues(name)
     : useSelector(selectSortType);
 
+  console.log("selectedSortType", selectedSortType);
+
   const toggleDropdown = () => {
     setDropdownOpen((prev) => {
       if (!prev) {
         if (selectedSortType) {
-          setFocusedOption(selectedSortType);
+          // setFocusedOption(selectedSortType);
 
           const parentOption = mainOptions.find((option) =>
             option.subOptions?.some((sub) => sub.id === selectedSortType)
@@ -49,13 +59,25 @@ const Dropdown: FC<SortDropdownProps> = ({
     });
   };
 
+  useEffect(() => {
+    if (isDropdownShown && !isInModal) {
+      toggleDropdown();
+    }
+  }, [isDropdownShown]);
+
   const handleOptionSelect = (option: string) => {
-    if (setValue) {
-      name !== "" ? setValue(name, option) : setValue(option);
+    if (!isInModal && isMobile) {
+      if (setValue) {
+        option === selectedSortType ? setValue("") : setValue(option);
+      }
+    } else {
+      if (setValue) {
+        name !== "" ? setValue(name, option) : setValue(option);
+      }
     }
     setDropdownOpen(false);
-    setOpenSubMenu(null);
     setFocusedOption(null);
+    dispatch(hideDropdown());
   };
 
   const handleSubMenuToggle = (menuId: string) => {
@@ -69,6 +91,7 @@ const Dropdown: FC<SortDropdownProps> = ({
     ) {
       setDropdownOpen(false);
       setOpenSubMenu(null);
+      dispatch(hideDropdown());
     }
   };
 
@@ -180,6 +203,7 @@ const Dropdown: FC<SortDropdownProps> = ({
         isInModal={isInModal}
         buttonLabel={buttonLabel}
         isTypeSelected={isTypeSelected}
+        selectedSortType={selectedSortType}
       />
     </>
   );

@@ -38,4 +38,5 @@ export type DropdownMarkupProps = {
   buttonLabel: string;
   isTypeSelected: boolean;
   id?: string;
+  selectedSortType: string;
 };
