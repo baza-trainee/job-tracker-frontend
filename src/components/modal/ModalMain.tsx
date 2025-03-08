@@ -12,7 +12,7 @@ type ModalDataProps = {
   bgColor: string;
   borderColor: string;
   paddingAddEventModal?: string;
-  iconAddEventModal?: string;
+  iconCloseEventModal?: string;
 };
 
 type ModalMainProps = {
@@ -32,33 +32,34 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
       <div
         className={clsx(
           "relative top-1 z-30 flex w-fit max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl px-6 py-3",
-          "sm:top-[1px] sm:min-h-[20px] sm:min-w-[100px]",
-          "md:min-h-[32px] md:min-w-[134px]",
+          "sm:top-[1px] sm:min-h-[20px] sm:min-w-[100px] sm:px-4 sm:py-2",
+          "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
           backgroundColorModal || modalData.bgColor
         )}
         onClick={(e) => e.stopPropagation()}
       >
         {modalData?.nameModal && (
-          <span className="text-xl">{t(modalData.nameModal)}</span>
+          <span className="text-[16px] md:text-[20px]">{t(modalData.nameModal)}</span>
         )}
       </div>
       <div
         className={clsx(
-          "z-40 flex h-auto w-auto flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow",
+          "z-40 flex h-auto w-[280px] md:w-auto",
+          "flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow",
           // alex p-2 ---> md:p-5
           "sm:border-[2px]",
           "md:border-[4px]",
           borderColorModal || modalData.borderColor,
-          modalData.paddingAddEventModal || "sm:p-2",
+          modalData.paddingAddEventModal || "sm:p-2"
         )}
         onClick={(e) => e.stopPropagation()}
       >
         <div
           className={clsx(
             "flex items-center justify-center",
-            "sm:min-h-[217px] sm:min-w-[264px]",
+            "sm:min-h-[217px] sm:min-w-[260px]",
             "md:min-h-[237px] md:min-w-[449px]",
-            "xl:min-h-[292px] xl:min-w-[588px]",
+            "xl:min-h-[292px] xl:min-w-[588px] xl:px-3",
             "3xl:min-h-[320px]"
           )}
         >
@@ -68,7 +69,13 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           onClick={btnFunc}
           className={"z-50 -ml-6 rounded-md md:hover:bg-color2"}
         >
-          <Icon id="close-default" className={clsx("fill-textBlack", modalData.iconAddEventModal || "h-6 w-6")} />
+          <Icon
+            id="close-default"
+            className={clsx(
+              "fill-textBlack",
+              modalData.iconCloseEventModal || "h-6 w-6"
+            )}
+          />
         </button>
       </div>
     </div>
