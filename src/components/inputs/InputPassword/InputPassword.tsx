@@ -142,7 +142,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             {showPassword ? <EyeClosed_icon /> : <EyeOpen_icon />}
           </button>
         </div>
-        {errors[name] && (
+        {errors[name] && error !=undefined && (
           <span
             id={`inputError-${name}`}
             className={cn(

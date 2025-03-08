@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/utils/utils";
 import { InputProps } from "./Input.props";
@@ -32,10 +32,11 @@ export const Input = ({
   classNameInputCustom,
 }: InputProps) => {
   const error = errors[name];
+  const inputRef = useRef<HTMLInputElement>(null);
   const [isIcon, setIsIcon] = useState<boolean>(false);
   const { t } = useTranslation();
 
-  const [isIconVisible, setIsIconVisible] = useState(false);
+  const isIconVisible: boolean = Boolean(inputRef.current?.value);
 
   const handleResetField = (name: string) => {
     resetField(name);
@@ -49,7 +50,6 @@ export const Input = ({
       id={id}
       onFocus={() => setIsIcon(true)}
       onBlur={() => {
-        setIsIconVisible(true);
         setIsIcon(false);
       }}
     >
@@ -59,9 +59,10 @@ export const Input = ({
           className={cn(
             "mb-3 inline-block font-nunito font-medium leading-[135%] text-textBlack",
             "mb-[2px] text-[14px]",
-            "md:mb-2 md:text-[18px]",
+            "md:mb-2 md:text-[16px]",
             "xl:mb-2 xl:text-[16px]",
-            "2xl:mb-3 2xl:text-[20px]"
+            "2xl:mb-3 2xl:text-[20px]",
+            {"2xl:mb-1 2xl:text-[16px]":type === "vacancy"}
           )}
         >
           {label} {isRequired && <span className={cn("text-color2")}>*</span>}
@@ -72,7 +73,6 @@ export const Input = ({
           {type === "textarea" ? (
             <textarea
               id={`input-${name}`}
-              // className="w-full rounded-xl border p-3 text-base"
               className={cn(
                 "w-full rounded-xl border p-3 text-base",
                 "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
@@ -83,7 +83,6 @@ export const Input = ({
                 {
                   "border-color7": !error,
                   "border-color2": error,
-                  // "border-textBlack": !isCheckButtons,
                 },
                 classNameInputCustom
               )}
@@ -106,7 +105,7 @@ export const Input = ({
               onFocus={onFocus}
               id={`input-${name}`}
               className={cn(
-                "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                "active:border-accent peer w-full rounded-lg border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
                 "h-[34px] px-4 py-2 text-[12px]",
                 "md:h-11 md:px-6 md:py-3 md:text-[14px]",
                 "xl:text-[14px]",
@@ -114,7 +113,6 @@ export const Input = ({
                 {
                   "border-color7": !error,
                   "border-color2": error,
-                  // "border-textBlack": !isCheckButtons,
                 },
                 classNameInputCustom
               )}
@@ -129,13 +127,10 @@ export const Input = ({
                 setValue?.(name, event.target.value.trim(), {
                   shouldValidate: true,
                 });
-                if (event.target.value.length === 0) {
-                  event.stopPropagation();
-                  setIsIconVisible(false);
-                }
                 hookFormOnBlur(event);
                 onBlur?.(event);
               }}
+              ref={inputRef}
               // onClick={(event) => event.stopPropagation()}
             />
           )}

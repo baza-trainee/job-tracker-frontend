@@ -137,7 +137,7 @@ export const CheckboxWithCalendar = ({
             onClick={handleCheckbox}
           />
           <span
-            className="cursor-pointer"
+            className="cursor-pointer underline text-[14px] 2xl:text-[16px]"
             onClick={() => setIsOpenCalendar(true)}
           >
             {isChecked && valueCalendar}
@@ -163,7 +163,7 @@ export const CheckboxWithCalendar = ({
           onClick={(e) => e.stopPropagation()}
           className={classNames(
             isChecked
-              ? "visible relative z-50 mt-3 h-[44px] pl-[9.5px] opacity-100"
+              ? "visible relative z-50 mt-3 h-[44px] opacity-100 3xl:pl-[9.5px]"
               : "sr-only h-0 opacity-0"
           )}
         >
