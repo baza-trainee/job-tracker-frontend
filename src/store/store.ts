@@ -22,6 +22,7 @@ import {
   authPrivateQuerySlice,
   authPublicQuerySlice,
 } from "./querySlices/authQuerySlice.ts";
+import searchReducer from "./slices/searchSlice/searchSlice.ts";
 
 const authPersistConfig = {
   key: "auth",
@@ -62,6 +63,7 @@ export const store = configureStore({
     auth: authPersistedReducer,
     theme: themePersistedReducer,
     sidebar: sidebarPersistedReducer,
+    search: searchReducer,
     statusVacancy: statusVacancyReducer,
     calendar: calendarReducer,
   },

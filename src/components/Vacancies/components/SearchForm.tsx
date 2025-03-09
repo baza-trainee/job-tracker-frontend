@@ -2,15 +2,17 @@ import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
-import { cn } from "../../../utils/utils";
+import { useMediaQuery } from "react-responsive";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import { selectSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 import { setSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
-import { selectVacanciesQuantity } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+import { closeSearch } from "@/store/slices/searchSlice/searchSlice";
+import { cn } from "../../../utils/utils";
 
 import Icon from "../../Icon/Icon";
-import { IconButton } from "../../buttons/IconButton/IconButton";
+import { SearchResults } from "./SearchResults";
 
 const SearchSchema = z.object({
   query: z.string().min(1, "Search query cannot be empty"),
@@ -21,11 +23,11 @@ type SearchFormData = z.infer<typeof SearchSchema>;
 export const SearchForm: FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const isDesctop = useMediaQuery({ minWidth: 1280 });
 
   const [isSearching, setIsSearching] = useState(false);
 
   const queryFromRedux = useSelector(selectSearchQuery);
-  const vacanciesQuantity = useSelector(selectVacanciesQuantity);
 
   const {
     register,
@@ -65,26 +67,16 @@ export const SearchForm: FC = () => {
       handleSearch("");
     }
     resetField("query");
+    if (!isDesctop) {
+      dispatch(closeSearch());
+    }
   };
   const error = errors["query"];
 
-  const getSearchResultsText = (count: number): string => {
-    if (count === 1 || (count > 20 && count % 10 === 1)) {
-      return `${count} ${t("vacanciesHeader.searchResult")}`;
-    } else if (
-      [2, 3, 4].includes(count) ||
-      (count > 20 && [2, 3, 4].includes(count % 10))
-    ) {
-      return `${count} ${t("vacanciesHeader.searchResult234")}`;
-    } else {
-      return `${count} ${t("vacanciesHeader.searchResults")}`;
-    }
-  };
-
   return (
-    <div>
+    <div className="w-full">
       <form
-        className="relative hidden items-center font-nunito text-xl leading-[135%] text-textBlack hover:fill-iconHover active:fill-textBlack xl:flex"
+        className="relative flex w-full items-center font-nunito text-xl leading-[135%] text-textBlack hover:fill-iconHover active:fill-textBlack"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* <Input
@@ -96,12 +88,12 @@ export const SearchForm: FC = () => {
           className="flex-grow"
           errors={errors}
         /> */}
-        <div className="relative">
-          <div className="relative flex items-center xl:w-[355px] 3xl:w-[516px]">
+        <div className="relative w-full">
+          <div className="relative flex items-center sm:w-full md:w-[280px] xl:w-[355px] 2xl:w-[380px] 3xl:w-[516px]">
             <input
               id={`input-query`}
               className={cn(
-                "h-[51px] w-full rounded-xl border border-textBlack py-[10px] pl-[58px] pr-2 font-nunito text-xl font-medium text-textBlack transition placeholder:font-nunito placeholder:text-base placeholder:text-textBlackLight placeholder-shown:border-textBlack hover:border-iconHover hover:placeholder:text-iconHover focus:outline-none focus:placeholder:text-iconHover active:border-textBlack",
+                "h-[41px] w-full rounded-lg border border-textBlack py-[10px] pl-[58px] pr-2 font-nunito text-xl font-medium text-textBlack transition placeholder:font-nunito placeholder:text-base placeholder:text-textBlackLight placeholder-shown:border-textBlack hover:border-iconHover hover:placeholder:text-iconHover focus:outline-none focus:placeholder:text-iconHover active:border-textBlack xl:h-[51px] xl:rounded-xl",
 
                 // !error && "border-color5",
                 error &&
@@ -117,7 +109,7 @@ export const SearchForm: FC = () => {
                 onClick={() => handleClear()}
                 type="button"
                 className={
-                  "absolute right-2 top-[50%] mt-auto h-6 translate-y-[-50%] cursor-pointer"
+                  "absolute right-2 top-[50%] z-30 mt-auto h-6 translate-y-[-50%] cursor-pointer"
                 }
               >
                 <svg
@@ -144,7 +136,7 @@ export const SearchForm: FC = () => {
           {error && (
             <span
               id={`inputError-query`}
-              className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
+              className="absolute left-0 top-[38px] inline-block font-nunito text-base font-medium text-color2 md:top-10 xl:top-[46px]"
             >
               {t(String(error?.message))}
             </span>
@@ -155,25 +147,10 @@ export const SearchForm: FC = () => {
           className="absolute left-6"
           disabled={isSearching}
         >
-          <Icon id={"search"} className="h-6 w-6" />
+          <Icon id={"search"} className="size-6" />
         </button>
       </form>
-
-      {queryFromRedux && (
-        <div className="mt-6 flex items-center font-nunito text-xl leading-[135%] text-textBlack">
-          <p>
-            {getSearchResultsText(vacanciesQuantity)}
-            <span className="pl-4 text-textOther">{queryFromRedux}</span>
-          </p>
-          <IconButton
-            label="Close button"
-            variant="default"
-            onClick={handleClear}
-          >
-            <Icon id={"close-default"} className="h-6 w-6" />
-          </IconButton>
-        </div>
-      )}
+      {isDesctop && <SearchResults onClear={() => resetField("query")} />}
     </div>
   );
 };

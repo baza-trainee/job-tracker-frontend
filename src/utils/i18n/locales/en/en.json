@@ -36,7 +36,15 @@
     "updatedErrorLink": "Enter a valid link",
     "updatedPhone": "Enter a valid phone number",
     "updatedEmail": "Enter a valid email",
-    "updatedUserName": "Enter a valid name"
+    "updatedUserName": "Enter a valid name",
+    "updatedPhoneSuccess": "Phone number successfully updated",
+    "updatedUserNameSuccess": "Name successfully updated",
+    "userNameCopied": "Name copied",
+    "phoneCopied": "Phone number copied",
+    "emailCopied": "Email copied",
+    "linkCopied": "Link copied",
+    "textCopied": "Text copied",
+    "empty": "Empty field"
   },
   "navigation": {
     "vacancies": "Vacancies",
@@ -292,7 +300,7 @@
   "addProjects": {
     "cardTitle": "Projects",
     "buttonAdd": "Add project link",
-    "modalAddTitle": "Project link"
+    "modalAddTitle": "Project"
   },
   "addResumes": {
     "cardTitle": "Resumes",

@@ -38,7 +38,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     resolver: zodResolver(socialLinksSchema),
     mode: "all",
   });
-  console.log(profile);
 
   const [updateSocialLink] = useUpdateSocialLinkMutation();
   const [updateUserProfile] = useUpdateUserProfileMutation();
@@ -109,10 +108,14 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
           [name]: event,
         })
           .unwrap()
-          .then(() => notifySuccess(t("notification.updatedSuccess")))
+          .then(() => {
+            if (name === "phone")
+              notifySuccess(t("notification.updatedPhoneSuccess"));
+            if (name === "username")
+              notifySuccess(t("notification.updatedUserNameSuccess"));
+          })
           .catch(() => {
             if (name === "phone") notifyError(t("notification.updatedPhone"));
-            if (name === "email") notifyError(t("notification.updatedEmail"));
             if (name === "username")
               notifyError(t("notification.updatedUserName"));
             setValue(name as any, initialValues.current[name]);
@@ -161,14 +164,28 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                     disabled={item === "email" ? true : false}
                     label={label}
                     name={item}
-                    placeholder={item}
+                    placeholder={
+                      item === "username"
+                        ? "User123"
+                        : item === "phone"
+                          ? "+380123456789"
+                          : ""
+                    }
                     register={register}
                     errors={errors}
                     resetField={resetField}
                     isCheckButtons={false}
                     isButtonCopy={true}
                     handleClickButtonCopyInput={() =>
-                      copyInputValue(watch(item) as string)
+                      copyInputValue({
+                        valueToCopy: watch(item) as string,
+                        text:
+                          item === "username"
+                            ? t("notification.userNameCopied")
+                            : item === "email"
+                              ? t("notification.emailCopied")
+                              : t("notification.phoneCopied"),
+                      })
                     }
                   />
                   {index === userData.length - 1 && (
@@ -206,7 +223,10 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                           handleClickButtonRemoveInput(item.id)
                         }
                         handleClickButtonCopyInput={() =>
-                          copyInputValue(item.link)
+                          copyInputValue({
+                            valueToCopy: item.link,
+                            text: t("notification.linkCopied"),
+                          })
                         }
                       />
                     </li>
@@ -235,7 +255,12 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() => copyInputValue(item.link)}
+              handleClickButtonCopyInput={() =>
+                copyInputValue({
+                  valueToCopy: item.link,
+                  text: t("notification.linkCopied"),
+                })
+              }
               handleClickButtonRemoveInput={() => {
                 handleClickButtonRemoveInput(item.id);
               }}
@@ -261,7 +286,12 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() => copyInputValue(item.link)}
+              handleClickButtonCopyInput={() =>
+                copyInputValue({
+                  valueToCopy: item.link,
+                  text: t("notification.linkCopied"),
+                })
+              }
               handleClickButtonRemoveInput={() => {
                 handleClickButtonRemoveInput(item.id);
               }}
@@ -287,7 +317,12 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               isCheckButtons={false}
               isButtonCopy={true}
               isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() => copyInputValue(item.text)}
+              handleClickButtonCopyInput={() =>
+                copyInputValue({
+                  valueToCopy: item.text,
+                  text: t("notification.textCopied"),
+                })
+              }
               handleClickButtonRemoveInput={() => {
                 handleClickButtonRemoveInput(item.id);
               }}
@@ -298,7 +333,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
       <Button
         className="mx-auto h-[48px] w-auto"
         type="button"
-        variant="accent"
+        variant="ghost"
         onClick={() => dispatch(openModal({ typeModal: cardsType }))}
       >
         {text.buttonAdd} +

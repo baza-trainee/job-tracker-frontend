@@ -72,7 +72,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   }, []);
 
   useEffect(() => {
-    console.log("isMobile changed:", isMobile);
+    // console.log("isMobile changed:", isMobile);
   }, [isMobile]);
 
   //alex
