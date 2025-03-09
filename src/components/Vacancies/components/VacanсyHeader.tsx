@@ -44,7 +44,12 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   return (
     <div className="w-full items-start pb-6 xl:flex xl:justify-between">
       {isDesctop && <SearchForm />}
-      <div className="relative flex xl:gap-8 smOnly:justify-between mdOnly:gap-5">
+      <div
+        className={cn(
+          "relative flex xl:gap-6 smOnly:justify-between mdOnly:justify-end mdOnly:gap-5",
+          isArchive && "mdOnly:justify-end"
+        )}
+      >
         <div
           className={cn(
             "md:relative md:block md:w-[206px] xl:w-[216px]",

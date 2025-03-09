@@ -34,7 +34,7 @@ const Dropdown: FC<SortDropdownProps> = ({
     ? getValues(name)
     : useSelector(selectSortType);
 
-  console.log("selectedSortType", selectedSortType);
+  // console.log("selectedSortType", selectedSortType);
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => {

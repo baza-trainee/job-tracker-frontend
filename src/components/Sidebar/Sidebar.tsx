@@ -18,34 +18,37 @@ import {
 
 import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import debounce from "lodash.debounce";
+import { useEffect } from "react";
+// import debounce from "lodash.debounce";
 import { ICON } from "../Icon/icons.ts";
+import { useMediaQuery } from "react-responsive";
 
 function Sidebar() {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const isOpenSidebar = useAppSelector(selectSidebar);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
+  // const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
+  const isDesktop = useMediaQuery({ minWidth: 1280 });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   useEffect(() => {
-    if (isMobile && isOpenSidebar) {
+    if (!isDesktop && isOpenSidebar) {
       dispatch(closeSidebar());
     }
   }, [isMobile, dispatch]);
 
-  useEffect(() => {
-    // Функція для оновлення стану при зміні розміру
-    const handleResize = debounce(() => {
-      setIsMobile(window.innerWidth < 1280);
-    }, 200);
+  // useEffect(() => {
+  //   // Функція для оновлення стану при зміні розміру
+  //   const handleResize = debounce(() => {
+  //     setIsMobile(window.innerWidth < 1280);
+  //   }, 200);
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   const handleLogOut = (): void => {
     dispatch(
