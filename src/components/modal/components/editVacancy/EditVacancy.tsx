@@ -43,7 +43,6 @@ const EditVacancy = () => {
 
   const saveVacancy = () => {
     handleSubmit((data) => {
-      // console.log("Редагування вакансії", data);
       dispatch(
         openConfirmation({
           typeConfirmation: "saveEditVacancies",
@@ -138,8 +137,8 @@ const EditVacancy = () => {
             </div>
           </div>
 
-          <div className="flex w-full flex-col justify-center gap-3 xl:flex-row xl:mt-6">
-            <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex w-full flex-col justify-center gap-3 xl:mt-6 xl:flex-row">
+            <div className="flex flex-col gap-3 md:flex-row">
               <Button
                 type="button"
                 className="w-full md:mx-auto xl:mx-0 xl:w-auto"

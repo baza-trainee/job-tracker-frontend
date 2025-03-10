@@ -270,10 +270,10 @@ const InfoModalMap = () => {
       ],
     },
     arhiveVacancy: {
-      // title: "Перенести вакансію в архів?",
-      title: "Архів ЧЕРЕЗ САБМИТ",
+      title: "Перенести вакансію в архів?",
+      titleSize:"small",
       text: [
-        // "Ви завжди зможете знайти його за допомогою кнопки в верхньому правому куті",
+        "Ви завжди зможете знайти його за допомогою кнопки в верхньому правому куті",
       ],
       button: [
         createButton(
@@ -284,11 +284,13 @@ const InfoModalMap = () => {
           addVacanciesLoading
         ),
         createButton(
-          t("infoModal.button.toArchive"),
-          handleDeleteVacancy,
+          // t("infoModal.button.toArchive"),
+          t("arhiveeeeeeeeeeee"),
+          //alex
+          handleEditVacancy,
           "big",
           "ghost",
-          addVacanciesLoading
+          editVacanciesLoading
         ),
       ],
     },

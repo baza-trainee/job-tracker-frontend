@@ -60,7 +60,7 @@ export const CheckboxWithCalendar = ({
   const createUpdatedDate = (date: string): void => {
     const newDate = moment(date)
       .set({
-        hour: moment().hour(),
+        hour: moment().hour() + 1,
         minute: moment().minute(),
         second: moment().second(),
         millisecond: moment().millisecond(),
@@ -137,7 +137,7 @@ export const CheckboxWithCalendar = ({
             onClick={handleCheckbox}
           />
           <span
-            className="cursor-pointer underline text-[14px] 2xl:text-[16px]"
+            className="cursor-pointer text-[14px] underline 2xl:text-[16px]"
             onClick={() => setIsOpenCalendar(true)}
           >
             {isChecked && valueCalendar}
@@ -163,7 +163,7 @@ export const CheckboxWithCalendar = ({
           onClick={(e) => e.stopPropagation()}
           className={classNames(
             isChecked
-              ? "visible relative z-50 mt-3 h-[44px] opacity-100 text-[10px]"
+              ? "visible relative z-50 mt-3 h-[44px] text-[10px] opacity-100"
               : "sr-only h-0 opacity-0"
           )}
         >
