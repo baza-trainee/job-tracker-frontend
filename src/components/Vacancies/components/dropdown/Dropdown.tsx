@@ -34,14 +34,10 @@ const Dropdown: FC<SortDropdownProps> = ({
     ? getValues(name)
     : useSelector(selectSortType);
 
-  // console.log("selectedSortType", selectedSortType);
-
   const toggleDropdown = () => {
     setDropdownOpen((prev) => {
       if (!prev) {
         if (selectedSortType) {
-          // setFocusedOption(selectedSortType);
-
           const parentOption = mainOptions.find((option) =>
             option.subOptions?.some((sub) => sub.id === selectedSortType)
           );
