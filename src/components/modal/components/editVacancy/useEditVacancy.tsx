@@ -134,6 +134,9 @@ const useEditVacancy = () => {
       setIsLoading(true);
       console.log("Редагування вакансії", data);
 
+      console.log("old Data", vacancyData?.isArchived);
+      console.log("new Data", data.isArchived);
+
       // 1 - запит на збереження вакансії - пропускаємо
 
       // 2 - id вакансії для подальших запитів
@@ -153,7 +156,7 @@ const useEditVacancy = () => {
       console.log("Збереження редагованої вакансії", response);
 
       // 3 - архівуємо
-      if (isArchived) {
+      if (vacancyData?.isArchived !== isArchived) {
         const responseArhive = await archiveVacancyById({
           id: idVacancy,
         }).unwrap();

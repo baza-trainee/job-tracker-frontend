@@ -17,11 +17,11 @@ import useEditVacancy from "./useEditVacancy";
 
 const EditVacancy = () => {
   const dispatch = useAppDispatch();
-
-  const { vacancyFields, workTypeOptions } = AddVacancyInfo();
   const statusVacancy = useAppSelector(
     (state) => state.statusVacancy.newStatuses
   );
+  const { vacancyFields, workTypeOptions } = AddVacancyInfo();
+
   const {
     register,
     resetField,
@@ -32,14 +32,18 @@ const EditVacancy = () => {
     vacancyData,
   } = useEditVacancy();
 
-  const deleteVacancy = () => {
-    dispatch(
-      openConfirmation({
-        typeConfirmation: "deleteVacancy",
-      })
-    );
-  };
   const isArchived = vacancyData?.isArchived || "";
+
+  const deleteVacancy = () => {
+    handleSubmit((data) => {
+      dispatch(
+        openConfirmation({
+          typeConfirmation: "deleteVacancy",
+          dataConfirmation: data,
+        })
+      );
+    })();
+  };
 
   const saveVacancy = () => {
     handleSubmit((data) => {
@@ -53,8 +57,14 @@ const EditVacancy = () => {
   };
 
   const handleSubmitArchive = () => {
-    setValue("isArchived", true);
-    saveVacancy();
+    handleSubmit((data) => {
+      dispatch(
+        openConfirmation({
+          typeConfirmation: isArchived ? "restoreVacancy" : "arhiveVacancy",
+          dataConfirmation: data,
+        })
+      );
+    })();
   };
 
   return (
