@@ -16,7 +16,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "relative flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
+        "relative flex h-9 rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD] md:h-[39px]",
         "custom-transition",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
@@ -25,7 +25,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={!darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
+          "overflow-hidden fill-textBlack px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack md:py-[6px]",
           {
             "visible absolute left-0 z-[2] w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
               !darkMode, // Відкрита тема
@@ -47,7 +47,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "flex justify-end overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
+          "flex items-center justify-end overflow-hidden fill-textBlack px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack md:py-[6px]",
 
           {
             "visible absolute right-0 w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":

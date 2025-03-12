@@ -27,7 +27,7 @@ function Sidebar() {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const isOpenSidebar = useAppSelector(selectSidebar);
-  // const [isMobile, setIsMobile] = useState(window.innerWidth < 1280);
+
   const isDesktop = useMediaQuery({ minWidth: 1280 });
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
@@ -36,19 +36,6 @@ function Sidebar() {
       dispatch(closeSidebar());
     }
   }, [isMobile, dispatch]);
-
-  // useEffect(() => {
-  //   // Функція для оновлення стану при зміні розміру
-  //   const handleResize = debounce(() => {
-  //     setIsMobile(window.innerWidth < 1280);
-  //   }, 200);
-
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
 
   const handleLogOut = (): void => {
     dispatch(
@@ -85,12 +72,18 @@ function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed right-0 top-0 z-20 box-border flex h-fit max-h-dvh flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-xl font-medium dark:bg-slate-800 md:h-[780px] md:w-[256px] md:rounded-l-[20px] md:p-6 xl:left-0 xl:h-dvh xl:rounded-l-none xl:rounded-r-[20px] smOnly:w-full smOnly:max-w-full smOnly:overflow-y-scroll",
-        "custom-size",
-        !isOpenSidebar
-          ? "items-center px-3 md:w-[92px] md:px-3 smOnly:w-0 smOnly:translate-x-[92px] mdOnly:translate-x-[92px]"
-          : ""
+        "custom-size fixed right-0 top-0 z-20 flex h-fit max-h-dvh flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-base font-medium leading-[135%] dark:bg-slate-800 md:h-[780px] md:p-6 md:text-xl xl:left-0 xl:h-dvh xl:rounded-r-[20px] 3xl:py-8 smOnly:overflow-y-scroll mdOnly:rounded-l-[20px]",
+        isOpenSidebar
+          ? "w-full md:w-[256px]"
+          : "w-[92px] translate-x-[92px] xl:transform-none xl:px-3 3xl:px-3"
       )}
+      // className={cn(
+      //   "fixed right-0 top-0 z-20 box-border flex h-fit max-h-dvh flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito font-medium dark:bg-slate-800 md:h-[780px] md:w-[256px] md:p-6 md:text-xl xl:left-0 xl:h-dvh xl:rounded-r-[20px] smOnly:overflow-y-scroll mdOnly:rounded-l-[20px]",
+      //   "custom-size",
+      //   !isOpenSidebar
+      //     ? "items-center px-3 md:w-[92px] md:px-3 smOnly:w-0 smOnly:px-0 mdOnly:translate-x-[92px]"
+      //     : "smOnly:w-full smOnly:px-5"
+      // )}
     >
       <div className={cn("flex flex-col")}>
         <div className={cn("flex items-center justify-between")}>
