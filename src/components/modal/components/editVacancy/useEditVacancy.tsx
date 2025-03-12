@@ -23,6 +23,7 @@ import { StatusName, RejectReason } from "@/types/vacancies.types";
 import { useState, useEffect } from "react";
 //alex
 import { useDeleteVacancyByIdMutation } from "@/store/querySlices/vacanciesQuerySlice";
+import { useNavigate } from "react-router-dom";
 
 const useEditVacancy = () => {
   const { refetch } = useGetAllUserDataQuery();
@@ -116,6 +117,7 @@ const useEditVacancy = () => {
   };
 
   //-----------------------------------------------------
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<z.infer<typeof AddVacancySchema>> = async (
     data
@@ -160,6 +162,7 @@ const useEditVacancy = () => {
         const responseArhive = await archiveVacancyById({
           id: idVacancy,
         }).unwrap();
+        navigate(isArchived ? "/archive" : "/vacancies");
         console.log("Архів", responseArhive);
       }
 

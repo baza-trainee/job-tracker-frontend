@@ -12,6 +12,7 @@ import AddVacancyStage from "../addVacancyModals/AddStage";
 import AddVacancyInfo from "../addVacancyModals/AddVacancyInfo";
 // props
 import { VacancyInputProps } from "../addVacancyModals/AddVacancy.props";
+import { TypesModal } from "../../ModalMain.types";
 // hook
 import useEditVacancy from "./useEditVacancy";
 
@@ -34,38 +35,21 @@ const EditVacancy = () => {
 
   const isArchived = vacancyData?.isArchived || "";
 
-  const deleteVacancy = () => {
+  const handleConfirmation = (typeConfirmation: TypesModal) => {
     handleSubmit((data) => {
       dispatch(
         openConfirmation({
-          typeConfirmation: "deleteVacancy",
+          typeConfirmation,
           dataConfirmation: data,
         })
       );
     })();
   };
 
-  const saveVacancy = () => {
-    handleSubmit((data) => {
-      dispatch(
-        openConfirmation({
-          typeConfirmation: "saveEditVacancies",
-          dataConfirmation: data,
-        })
-      );
-    })();
-  };
-
-  const handleSubmitArchive = () => {
-    handleSubmit((data) => {
-      dispatch(
-        openConfirmation({
-          typeConfirmation: isArchived ? "restoreVacancy" : "arhiveVacancy",
-          dataConfirmation: data,
-        })
-      );
-    })();
-  };
+  const deleteVacancy = () => handleConfirmation("deleteVacancy");
+  const saveVacancy = () => handleConfirmation("saveEditVacancies");
+  const handleSubmitArchive = () =>
+    handleConfirmation(isArchived ? "restoreVacancy" : "arhiveVacancy");
 
   return (
     <div className="w-full sm:pt-[50px] xl:pt-[44px]">
