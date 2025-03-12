@@ -142,7 +142,7 @@
     "tech": "Технічна співбесіда",
     "techShort": "Тех. співбесіда",
     "reject": "Відмова",
-    "offer": "Оффер"
+    "offer": "Офер"
   },
   "statisticsHeader": {
     "vacancies": "Всього вакансій",
@@ -152,7 +152,7 @@
     "firstMessage": "Збережіть хоча б одну вакансію для того, щоб бачити статистику!",
     "predictions": "Передбачення на сьогодні"
   },
-  "statisticsDoughnatDiagram": "Статистика всіх статусів",
+  "statisticsDoughnatDiagram": "Статистика активних статусів",
   "statisticsRejectDiagram": {
     "title": "Причини відмов",
     "OTHER": "Інше",

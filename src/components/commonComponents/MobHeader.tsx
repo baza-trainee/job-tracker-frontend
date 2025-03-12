@@ -27,7 +27,7 @@ function MobHeader() {
   return (
     <header
       className={cn(
-        "relative flex w-full items-center justify-between px-5 pt-4 md:px-6 md:pt-6 xl:hidden"
+        "fixed top-0 z-10 flex w-full items-center justify-between bg-backgroundMain px-5 pt-4 md:px-6 md:pt-6 xl:hidden"
       )}
     >
       <Logo className="h-[44px] w-[54px]" />

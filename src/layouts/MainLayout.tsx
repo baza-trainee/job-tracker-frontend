@@ -8,7 +8,7 @@ function MainLayout() {
     <div className="MAIN flex h-dvh w-full flex-col">
       <Sidebar />
       <MobHeader />
-      <main className="flex h-full w-full flex-col justify-between xl:pl-[92px]">
+      <main className="flex h-full w-full flex-col justify-between pt-[60px] xl:pl-[92px] xl:pt-0">
         <Outlet />
         <Footer />
       </main>

@@ -154,7 +154,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
               ? "z-[20] h-fit"
               : "h-[203px] sm:box-content smOnly:h-fit"
             : isInModal
-              ? "h-[44px] hover:border-iconHover hover:bg-backgroundMain"
+              ? "h-[36px] hover:border-iconHover hover:bg-backgroundMain md:h-[44px] smOnly:rounded-lg"
               : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary",
           !isInModal && openSubMenu && "smOnly:h-[145px]"
         )}
@@ -171,7 +171,9 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
             "flex w-full items-center justify-between rounded-t-xl py-2 pl-8 pr-[22px] pt-3 text-textBlack outline-none",
             isDropdownOpen && "hover:bg-button",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button",
-            isInModal ? "px-6 py-[11px] text-textBlackLight" : "smOnly:hidden",
+            isInModal
+              ? "px-2 py-[5px] text-textBlackLight md:py-[10px] smOnly:text-xs"
+              : "smOnly:hidden",
             !isTypeSelected && isInModal && "text-textBlack"
           )}
         >
