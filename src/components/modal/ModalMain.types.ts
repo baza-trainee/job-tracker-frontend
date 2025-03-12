@@ -14,6 +14,7 @@ export type TypesModal =
   | "saveAddVacancies"
   | "deleteVacancy"
   | "arhiveVacancy"
+  | "restoreVacancy"
   | "saveEditVacancies"
   | "close"
   | "addPersonalProperties"

@@ -23,6 +23,7 @@ import { StatusName, RejectReason } from "@/types/vacancies.types";
 import { useState, useEffect } from "react";
 //alex
 import { useDeleteVacancyByIdMutation } from "@/store/querySlices/vacanciesQuerySlice";
+import { useNavigate } from "react-router-dom";
 
 const useEditVacancy = () => {
   const { refetch } = useGetAllUserDataQuery();
@@ -116,6 +117,7 @@ const useEditVacancy = () => {
   };
 
   //-----------------------------------------------------
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<z.infer<typeof AddVacancySchema>> = async (
     data
@@ -133,6 +135,9 @@ const useEditVacancy = () => {
       } = data;
       setIsLoading(true);
       console.log("Редагування вакансії", data);
+
+      console.log("old Data", vacancyData?.isArchived);
+      console.log("new Data", data.isArchived);
 
       // 1 - запит на збереження вакансії - пропускаємо
 
@@ -153,10 +158,11 @@ const useEditVacancy = () => {
       console.log("Збереження редагованої вакансії", response);
 
       // 3 - архівуємо
-      if (isArchived) {
+      if (vacancyData?.isArchived !== isArchived) {
         const responseArhive = await archiveVacancyById({
           id: idVacancy,
         }).unwrap();
+        navigate(isArchived ? "/archive" : "/vacancies");
         console.log("Архів", responseArhive);
       }
 
