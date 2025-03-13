@@ -86,7 +86,12 @@ function Sidebar() {
       // )}
     >
       <div className={cn("flex flex-col")}>
-        <div className={cn("flex items-center justify-between")}>
+        <div
+          className={cn(
+            "custom-size flex items-center justify-between",
+            !isOpenSidebar ? "pl-[7px]" : "pl-0"
+          )}
+        >
           <OpenSidebarBtn
             handleOpenSidebar={handleOpenSidebar}
             icon={ICON.LOGO}
@@ -140,15 +145,15 @@ function Sidebar() {
             icon="donate"
             title={t("donate")}
             isOpen={isOpenSidebar}
-            className="border-textBlack bg-button px-3"
             donateIcon={true}
+            className="border-textBlack bg-button px-3 hover:border-iconHover hover:bg-backgroundSecondary hover:fill-textBlack hover:text-textBlack active:border-iconHover active:bg-iconHover active:fill-textWhite active:text-textWhite"
           />
           <SidebarActionItem
             icon="log-out"
             title={t("navigation.logOut")}
             isOpen={isOpenSidebar}
-            className="border-transparent dark:fill-slate-300 dark:text-slate-300"
             donateIcon={false}
+            className="border-transparent dark:fill-slate-300 dark:text-slate-300"
             action={handleLogOut}
           />
         </div>
