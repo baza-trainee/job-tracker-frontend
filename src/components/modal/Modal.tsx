@@ -54,11 +54,11 @@ const Modal: FC = () => {
       )}
       onClick={() => handleCloseModal()}
     >
-      <div className="">
+      <div className="flex">
         <ModalMain
           className={classNames("", {
             "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-24":
-              typeModal === "addVacancy" || typeModal === "editVacancy",
+              typeModal === "addVacancy" || typeModal === "editVacancy" || typeModal === "forgotPassword",
           })}
           modalData={modalData}
           btnFunc={() => dispatch(closeModal())}

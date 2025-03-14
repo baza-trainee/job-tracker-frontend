@@ -12,16 +12,17 @@ import AddVacancyStage from "../addVacancyModals/AddStage";
 import AddVacancyInfo from "../addVacancyModals/AddVacancyInfo";
 // props
 import { VacancyInputProps } from "../addVacancyModals/AddVacancy.props";
+import { TypesModal } from "../../ModalMain.types";
 // hook
 import useEditVacancy from "./useEditVacancy";
 
 const EditVacancy = () => {
   const dispatch = useAppDispatch();
-
-  const { vacancyFields, workTypeOptions } = AddVacancyInfo();
   const statusVacancy = useAppSelector(
     (state) => state.statusVacancy.newStatuses
   );
+  const { vacancyFields, workTypeOptions } = AddVacancyInfo();
+
   const {
     register,
     resetField,
@@ -32,31 +33,23 @@ const EditVacancy = () => {
     vacancyData,
   } = useEditVacancy();
 
-  const deleteVacancy = () => {
-    dispatch(
-      openConfirmation({
-        typeConfirmation: "deleteVacancy",
-      })
-    );
-  };
   const isArchived = vacancyData?.isArchived || "";
 
-  const saveVacancy = () => {
+  const handleConfirmation = (typeConfirmation: TypesModal) => {
     handleSubmit((data) => {
-      // console.log("Редагування вакансії", data);
       dispatch(
         openConfirmation({
-          typeConfirmation: "saveEditVacancies",
+          typeConfirmation,
           dataConfirmation: data,
         })
       );
     })();
   };
 
-  const handleSubmitArchive = () => {
-    setValue("isArchived", true);
-    saveVacancy();
-  };
+  const deleteVacancy = () => handleConfirmation("deleteVacancy");
+  const saveVacancy = () => handleConfirmation("saveEditVacancies");
+  const handleSubmitArchive = () =>
+    handleConfirmation(isArchived ? "restoreVacancy" : "arhiveVacancy");
 
   return (
     <div className="w-full sm:pt-[50px] xl:pt-[44px]">
@@ -138,8 +131,8 @@ const EditVacancy = () => {
             </div>
           </div>
 
-          <div className="flex w-full flex-col justify-center gap-3 xl:flex-row xl:mt-6">
-            <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex w-full flex-col justify-center gap-3 xl:mt-6 xl:flex-row">
+            <div className="flex flex-col gap-3 md:flex-row">
               <Button
                 type="button"
                 className="w-full md:mx-auto xl:mx-0 xl:w-auto"

@@ -74,20 +74,27 @@ const InfoModalMap = () => {
     deleteVacancy();
   }, [deleteVacancy]);
 
-  // Архівувати вакансію
-  const handleArhiveVacancy = useCallback((): void => {
-    console.log("handleArhiveVacancy - подумати ЩЕ ЩЕ ЩЕ ЩЕ");
-    dispatch(
-      openConfirmation({
-        typeConfirmation: "arhiveVacancy",
-      })
-    );
-  }, [dispatch]);
-
   // Збереження редагованої вакансії
   const handleEditVacancy = useCallback((): void => {
     editVacanciesSubmit(dataAddEditVacancy);
   }, [editVacanciesSubmit, dataAddEditVacancy]);
+
+  // Архівувати вакансію
+  const handleArhiveVacancy = useCallback((): void => {
+    dispatch(
+      openConfirmation({
+        typeConfirmation: "arhiveVacancy",
+        dataConfirmation: dataAddEditVacancy,
+      })
+    );
+  }, [dispatch, dataAddEditVacancy]);
+
+  const handleButonArhiveVacancy = useCallback((): void => {
+    editVacanciesSubmit({
+      ...dataAddEditVacancy,
+      isArchived: !dataAddEditVacancy.isArchived,
+    });
+  }, [dataAddEditVacancy, editVacanciesSubmit]);
 
   // Функція створення кнопок
   const createButton = (
@@ -220,7 +227,7 @@ const InfoModalMap = () => {
     },
     logOut: {
       title: t("infoModal.logOut.title"),
-      titleSize:"small",
+      titleSize: "small",
       text: [t("infoModal.logOut.text_1")],
       button: [
         createButton(t("infoModal.button.cancel"), handleCancel),
@@ -229,7 +236,7 @@ const InfoModalMap = () => {
     },
     saveAddVacancies: {
       title: t("infoModal.saveAddVacancies.title"),
-      titleSize:"small",
+      titleSize: "small",
       text: [t("infoModal.saveAddVacancies.text_1")],
       button: [
         createButton(
@@ -250,12 +257,18 @@ const InfoModalMap = () => {
     },
     deleteVacancy: {
       title: t("infoModal.deleteVacancy.title"),
-      titleSize:"small",
-      text: [t("infoModal.deleteVacancy.text_1")],
+      titleSize: "small",
+      text: dataAddEditVacancy?.isArchived
+        ? [t("")]
+        : [t("infoModal.deleteVacancy.text_1")],
       button: [
         createButton(
-          t("infoModal.button.archive"),
-          handleArhiveVacancy,
+          dataAddEditVacancy?.isArchived
+            ? t("infoModal.button.cancel")
+            : t("infoModal.button.archive"),
+          dataAddEditVacancy?.isArchived
+            ? handleCloseConfirmation
+            : handleArhiveVacancy,
           "small",
           "ghost",
           addVacanciesLoading
@@ -270,10 +283,10 @@ const InfoModalMap = () => {
       ],
     },
     arhiveVacancy: {
-      // title: "Перенести вакансію в архів?",
-      title: "Архів ЧЕРЕЗ САБМИТ",
+      title: "Перенести вакансію в архів?",
+      titleSize: "small",
       text: [
-        // "Ви завжди зможете знайти його за допомогою кнопки в верхньому правому куті",
+        "Ви завжди зможете знайти його за допомогою кнопки в верхньому правому куті",
       ],
       button: [
         createButton(
@@ -281,14 +294,35 @@ const InfoModalMap = () => {
           handleCloseConfirmation,
           "small",
           "ghost",
-          addVacanciesLoading
+          editVacanciesLoading
         ),
         createButton(
           t("infoModal.button.toArchive"),
-          handleDeleteVacancy,
+          handleButonArhiveVacancy,
           "big",
           "ghost",
-          addVacanciesLoading
+          editVacanciesLoading
+        ),
+      ],
+    },
+    restoreVacancy: {
+      title: "Відновити вакансію з архіву?",
+      titleSize: "small",
+      text: ["Вакансію буде перенесено до основного списку"],
+      button: [
+        createButton(
+          t("infoModal.button.undo"),
+          handleCloseConfirmation,
+          "small",
+          "ghost",
+          editVacanciesLoading
+        ),
+        createButton(
+          t("addVacancy.form.restore"),
+          handleButonArhiveVacancy,
+          "big",
+          "ghost",
+          editVacanciesLoading
         ),
       ],
     },
