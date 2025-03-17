@@ -28,7 +28,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isDesctop = useMediaQuery({ minWidth: 1280 });
   const isDropdownShown = useSelector(selectDropdownShown);
-  // console.log("isDropdownShown", isDropdownShown);
+
   const dispatch = useAppDispatch();
 
   const handleSetType = (option: string): void => {

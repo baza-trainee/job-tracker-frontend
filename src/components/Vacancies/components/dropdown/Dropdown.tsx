@@ -46,6 +46,7 @@ const Dropdown: FC<SortDropdownProps> = ({
           }
         } else {
           setFocusedOption("sortButton");
+          setOpenSubMenu(null);
         }
       } else {
         setFocusedOption(null);

@@ -154,7 +154,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
               ? "z-[20] h-fit"
               : "h-[203px] sm:box-content smOnly:h-fit"
             : isInModal
-              ? "h-[36px] hover:border-iconHover hover:bg-backgroundMain md:h-[44px] smOnly:rounded-lg"
+              ? "h-[36px] rounded-lg hover:border-iconHover hover:bg-backgroundMain md:h-[44px]"
               : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary",
           !isInModal && openSubMenu && "smOnly:h-[145px]"
         )}
@@ -214,7 +214,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                 className={cn(
                   "relative cursor-pointer py-2 pl-8 pr-[22px] last:rounded-b-xl last:pb-3",
                   isInModal
-                    ? "pl-6 last:rounded-b-xl"
+                    ? "pl-2 last:rounded-b-xl smOnly:text-xs mdOnly:py-[11px]"
                     : "smOnly:relative smOnly:py-[7px] smOnly:pl-8 smOnly:first:rounded-t-xl smOnly:last:pb-[5px]",
                   option.subOptions && "flex justify-between smOnly:py-[5px]",
                   focusedOption === option.id && "bg-button",

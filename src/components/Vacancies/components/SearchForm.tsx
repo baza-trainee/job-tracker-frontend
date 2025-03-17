@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "react-responsive";
+import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { selectSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";

@@ -1,13 +1,8 @@
 import { useTranslation } from "react-i18next";
 import cn from "clsx";
-
-import SidebarNavItem from "./components/SidebarNavItem.tsx";
-import LanguageToggle from "./components/LanguageToggle.tsx";
-import ThemeToggle from "./components/ThemeToggle.tsx";
-import SidebarActionItem from "./components/SidebarActionItem.tsx";
-import NavList from "./components/NavList.tsx";
-import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
-import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
+import { useMediaQuery } from "react-responsive";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../store/hook.ts";
 import { selectSidebar } from "../../store/slices/sidebarSlice/sidebarSelector.ts";
@@ -15,13 +10,16 @@ import {
   closeSidebar,
   openSidebar,
 } from "../../store/slices/sidebarSlice/sidebarSlice.ts";
-
 import { openModal } from "../../store/slices/modalSlice/modalSlice.ts";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 import { ICON } from "../Icon/icons.ts";
-import { useMediaQuery } from "react-responsive";
+import SidebarNavItem from "./components/SidebarNavItem.tsx";
+import LanguageToggle from "./components/LanguageToggle.tsx";
+import ThemeToggle from "./components/ThemeToggle.tsx";
+import SidebarActionItem from "./components/SidebarActionItem.tsx";
+import NavList from "./components/NavList.tsx";
+import OpenSidebarBtn from "./components/OpenSidebarBtn.tsx";
+import CloseSidebarBtn from "./components/CloseSidebarBtn.tsx";
 
 function Sidebar() {
   const dispatch = useAppDispatch();
