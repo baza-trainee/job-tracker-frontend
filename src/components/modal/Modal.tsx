@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../store/hook";
 import {
   closeConfirmation,
   closeModal,
-  openConfirmation,
 } from "../../store/slices/modalSlice/modalSlice";
 
 import { contentMap } from "./modalMappings";
@@ -19,7 +18,6 @@ const Modal: FC = () => {
     typeModal,
     isConfirmationOpen,
     typeConfirmation,
-    dataConfirmation,
   } = useAppSelector((state) => state.modal);
 
   const modalData = contentMap[typeModal || "close"];
