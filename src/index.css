@@ -27,7 +27,9 @@ body {
 .custom-hover {
   transition:
     fill 300ms ease-in-out,
-    color 300ms ease-in-out;
+    color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    background-color 300ms ease-in-out;
 }
 
 .custom-size {
@@ -47,7 +49,9 @@ body {
     opacity 500ms ease-in-out,
     transform 500ms ease-in-out,
     fill 300ms ease-in-out,
-    color 300ms ease-in-out;
+    color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    background-color 300ms ease-in-out;
 }
 
 /* Firefox cтилі для горизонтального скролу - не коректно працюють */
@@ -142,8 +146,8 @@ body {
     font-size: 16px !important;
   }
   .job-cal .react-calendar__month-view__days > button {
-    width: 40px!important;
-    height: 40px!important;
+    width: 40px !important;
+    height: 40px !important;
   }
 }
 
