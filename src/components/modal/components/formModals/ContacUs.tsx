@@ -45,9 +45,9 @@ const ContactUs = () => {
   const error = !!Object.keys(errors).length;
 
   return (
-    <div className="my-12 w-[449px] text-left">
+    <div className="my-2 xl:my-12 w-[449px] text-left">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 md:gap-4">
           <Input
             register={register}
             resetField={resetField}
@@ -81,10 +81,10 @@ const ContactUs = () => {
             errors={errors}
           />
 
-          <div className="-mt-4 flex">
+          <div className="flex flex-col justify-center md:flex-row xl:mt-4 gap-2">
             <Button
               type="button"
-              className="mx-auto mt-8"
+              className=""
               // disabled={isCleanInputsForm() || errors || loading}
               variant="ghost"
               size="small"
@@ -94,7 +94,7 @@ const ContactUs = () => {
             </Button>
             <Button
               type="submit"
-              className="mx-auto mt-8"
+              className=""
               disabled={error}
               variant="ghost"
               size="big"
