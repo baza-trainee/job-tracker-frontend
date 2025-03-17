@@ -100,13 +100,14 @@ const InfoModalMap = () => {
   const createButton = (
     label: string,
     funcButton: () => void,
+    className = "sm:text-[14px] md:text-[16px] xl:text-[20px]",
     size = "small",
     variant = "ghost",
     disabled = false
   ) => ({
     label,
     type: "button",
-    className: "sm:text-[14px] md:text-[16px] xl:text-[20px]",
+    className,
     variant,
     size,
     funcButton,
@@ -123,7 +124,7 @@ const InfoModalMap = () => {
         button: {
           label: string;
           type: string;
-          className: string;
+          className?: string;
           variant: string;
           size: string;
           funcButton: () => void;
@@ -139,6 +140,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.continue"),
           handleCancel,
+          "",
           "big",
           "accent"
         ),
@@ -151,6 +153,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.continue"),
           handleCancel,
+          "",
           "big",
           "accent"
         ),
@@ -166,6 +169,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.continue"),
           handleCancel,
+          "",
           "big",
           "accent"
         ),
@@ -181,6 +185,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.login"),
           handleLogIn,
+          "",
           "small",
           "accent"
         ),
@@ -194,6 +199,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.continue"),
           handleCancel,
+          "",
           "big",
           "accent"
         ),
@@ -209,6 +215,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.continue"),
           handleLogIn,
+          "",
           "big",
           "accent"
         ),
@@ -230,8 +237,8 @@ const InfoModalMap = () => {
       titleSize: "small",
       text: [t("infoModal.logOut.text_1")],
       button: [
-        createButton(t("infoModal.button.cancel"), handleCancel),
-        createButton(t("infoModal.button.logOut"), handleLogOut),
+        createButton(t("infoModal.button.cancel"), handleCancel, "text-[20px]"),
+        createButton(t("infoModal.button.logOut"), handleLogOut, "text-[20px]"),
       ],
     },
     saveAddVacancies: {
@@ -242,6 +249,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.logOut"),
           handleCloseConfirmation,
+          "",
           "small",
           "ghost",
           addVacanciesLoading
@@ -249,6 +257,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.save"),
           handleAddVacancy,
+          "",
           "big",
           "accent",
           addVacanciesLoading
@@ -269,6 +278,7 @@ const InfoModalMap = () => {
           dataAddEditVacancy?.isArchived
             ? handleCloseConfirmation
             : handleArhiveVacancy,
+          "",
           "small",
           "ghost",
           addVacanciesLoading
@@ -276,6 +286,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.delete"),
           handleDeleteVacancy,
+          "",
           "big",
           "ghost",
           addVacanciesLoading
@@ -292,6 +303,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.undo"),
           handleCloseConfirmation,
+          "text-[20px]",
           "small",
           "ghost",
           editVacanciesLoading
@@ -299,6 +311,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.toArchive"),
           handleButonArhiveVacancy,
+          "text-[20px]",
           "big",
           "ghost",
           editVacanciesLoading
@@ -313,6 +326,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.undo"),
           handleCloseConfirmation,
+          "text-[20px]",
           "small",
           "ghost",
           editVacanciesLoading
@@ -320,6 +334,7 @@ const InfoModalMap = () => {
         createButton(
           t("addVacancy.form.restore"),
           handleButonArhiveVacancy,
+          "text-[20px]",
           "big",
           "ghost",
           editVacanciesLoading
@@ -334,6 +349,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.logOut"),
           handleCloseConfirmation,
+          "",
           "small",
           "ghost",
           editVacanciesLoading
@@ -341,6 +357,7 @@ const InfoModalMap = () => {
         createButton(
           t("infoModal.button.save"),
           handleEditVacancy,
+          "",
           "big",
           "accent",
           editVacanciesLoading

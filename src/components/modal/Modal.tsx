@@ -13,8 +13,12 @@ import classNames from "classnames";
 
 const Modal: FC = () => {
   const dispatch = useAppDispatch();
-  const { isModalOpen, typeModal, isConfirmationOpen, typeConfirmation } =
-    useAppSelector((state) => state.modal);
+  const {
+    isModalOpen,
+    typeModal,
+    isConfirmationOpen,
+    typeConfirmation,
+  } = useAppSelector((state) => state.modal);
 
   const modalData = contentMap[typeModal || "close"];
   const confirmationData = contentMap[typeConfirmation || "close"];
@@ -57,17 +61,30 @@ const Modal: FC = () => {
       <div className="flex">
         <ModalMain
           className={classNames("", {
-            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-24":
-              typeModal === "addVacancy" || typeModal === "editVacancy" || typeModal === "forgotPassword",
+            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-2/4 xl:-translate-y-2/4":
+              typeModal === "addVacancy" ||
+              typeModal === "editVacancy" ||
+              typeModal === "forgotPassword",
           })}
           modalData={modalData}
-          btnFunc={() => dispatch(closeModal())}
+          btnFunc={() => {
+            // alex
+            // if (typeModal === "addVacancy" || typeModal === "editVacancy") {
+            //   return dispatch(
+            //     openConfirmation({
+            //       typeConfirmation: "saveEditVacancies",
+            //       dataConfirmation: dataConfirmation,
+            //     })
+            //   );
+            // }
+            return dispatch(closeModal());
+          }}
         />
       </div>
       {isConfirmationOpen ? (
-        <div className="absolute right-0 top-0 z-50 flex h-full w-full items-center justify-center">
+        <div className="fixed right-0 top-0 z-50 h-[1300px] xl:h-full flex w-full items-center justify-center  bg-[#C2C2C2] bg-opacity-50">
           <ModalMain
-            className="fixed top-[25%] z-50"
+            className="sticky mt-auto mb-[210px] md:mb-[145px] xl:mb-auto"
             modalData={confirmationData}
             btnFunc={() => dispatch(closeConfirmation())}
           />
