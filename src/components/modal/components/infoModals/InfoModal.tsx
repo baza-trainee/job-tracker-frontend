@@ -12,7 +12,7 @@ const InfoModal = ({ type, textColor }: InfoModalProps) => {
   };
 
   return (
-    <div className="w-[449px] text-center text-textBlack sm:w-[264px] md:w-[349px] xl:w-[443px]">
+    <div className="mt-5 w-[449px] text-center text-textBlack sm:w-[264px] md:w-[349px] xl:w-[443px]">
       <h4
         className={classNames(
           "mb-3 font-nunito leading-[135%]",
@@ -31,7 +31,12 @@ const InfoModal = ({ type, textColor }: InfoModalProps) => {
           <p key={key}>{value}</p>
         ))}
       </div>
-      <div className="mx-auto flex w-fit justify-center sm:gap-3 md:gap-[30px]">
+      <div
+        className={classNames(
+          "mx-auto flex flex-col justify-center sm:gap-3 md:flex-row md:gap-[22px]",
+          modalData.button.length <= 1 ? "w-fit" : ""
+        )}
+      >
         {Object.entries(modalData.button).map(([key, value]) => (
           <Button
             key={key}
