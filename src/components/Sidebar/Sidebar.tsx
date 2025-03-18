@@ -144,7 +144,7 @@ function Sidebar() {
             title={t("donate")}
             isOpen={isOpenSidebar}
             donateIcon={true}
-            className="border-textBlack bg-button px-3 hover:border-iconHover hover:bg-backgroundSecondary hover:fill-textBlack hover:text-textBlack active:border-iconHover active:bg-iconHover active:fill-textWhite active:text-textWhite"
+            className="border-textBlack bg-button px-3 active:border-iconHover active:bg-iconHover active:fill-textWhite active:text-textWhite xl:hover:border-iconHover xl:hover:bg-backgroundSecondary xl:hover:fill-textBlack xl:hover:text-textBlack"
           />
           <SidebarActionItem
             icon="log-out"
