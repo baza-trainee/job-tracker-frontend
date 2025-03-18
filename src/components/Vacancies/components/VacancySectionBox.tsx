@@ -49,7 +49,7 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
   }, []);
 
   const maxHeightClass =
-    isSorted || isArchived ? "max-h-[60vh]" : "max-h-[305px]";
+    isSorted || isArchived ? "max-h-[60vh]" : "max-h-[399.2px]";
   // console.log("isArchived", isArchived);
   // console.log("isSorted", isSorted);
   // console.log("status", maxHeightClass);

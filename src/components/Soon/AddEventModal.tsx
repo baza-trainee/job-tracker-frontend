@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import SoonCalendarModal from "../Calendar/SoonCalendarModal.tsx";
 import { Input } from "../inputs/Input/Input.tsx";
 import { Button } from "../buttons/Button/Button.tsx";
@@ -8,6 +9,8 @@ import { useAppDispatch } from "../../store/hook.ts";
 import { useCreateEventMutation } from "../../store/querySlices/eventsQuerySlice.ts";
 import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
 import clsx from "clsx";
+import { eventSchema } from "../../schemas/addEventModalSchema.ts";
+import { z } from "zod";
 
 const AddEventModal = () => {
   const { t } = useTranslation();
@@ -21,7 +24,9 @@ const AddEventModal = () => {
     resetField,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<z.infer<typeof eventSchema>>({
+    resolver: zodResolver(eventSchema),
+  });
 
   const onSubmit = async (data: any) => {
     console.log("Форма відправлена:", data);
@@ -116,21 +121,11 @@ const AddEventModal = () => {
                   "xl:text-[32px] xl:font-normal",
                   "2xl:text-[32px]"
                 )}
-                // onInput={(e) => {
-                //   const input = e.currentTarget;
-                //   const value = input.value.replace(/\D/g, ""); // Видаляємо нецифрові символи
-                //   if (+value > 24) return; // Не даємо ввести більше 24
-                //   setValue("hours", value); // Оновлюємо значення
-                // }}
-                // onKeyDown={(e) => {
-                //   if (
-                //     !/[\d]/.test(e.key) &&
-                //     e.key !== "Backspace" &&
-                //     e.key !== "Tab"
-                //   ) {
-                //     e.preventDefault(); // Забороняємо всі символи, окрім цифр, Backspace і Tab
-                //   }
-                // }}
+                onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                  const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+                  if (+value > 24) return; // Максимум 24 години (Перевірка діапазону годин)
+                  setValue("hours", Number(value)); // Оновлюємо значення, передаємо число
+                }}
               />
               <div className="flex h-[60px] w-6 items-center justify-center">
                 <span className="text-[44px] font-normal md:text-[57px]">
@@ -157,6 +152,11 @@ const AddEventModal = () => {
                   "xl:text-[32px] xl:font-normal",
                   "2xl:text-[32px]"
                 )}
+                onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                  const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+                  if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
+                  setValue("minutes", Number(value)); // Оновлюємо значення, передаємо число
+                }}
               />
               <p className="col-span-2 row-start-2 text-base 3xl:text-xl">
                 {t("soonSection.soonModalTimeHours")}
