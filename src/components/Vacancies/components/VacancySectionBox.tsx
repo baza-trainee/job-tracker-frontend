@@ -50,9 +50,9 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
 
   const maxHeightClass =
     isSorted || isArchived ? "max-h-[60vh]" : "max-h-[305px]";
-  console.log("isArchived", isArchived);
-  console.log("isSorted", isSorted);
-  console.log("status", maxHeightClass);
+  // console.log("isArchived", isArchived);
+  // console.log("isSorted", isSorted);
+  // console.log("status", maxHeightClass);
 
   return (
     <section className="VacancySectionBox flex flex-col text-textBlack">

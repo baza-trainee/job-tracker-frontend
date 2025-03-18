@@ -13,7 +13,13 @@ export const ResetPasswordSchema = z
 
     confirmPassword: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: `validation.passwordMismatch`,
-  });
+  .refine(
+    (data) => {
+      if (data.confirmPassword.length === 0) return true;
+      return data.password === data.confirmPassword;
+    },
+    {
+      path: ["confirmPassword"],
+      message: `validation.passwordMismatch`,
+    }
+  );

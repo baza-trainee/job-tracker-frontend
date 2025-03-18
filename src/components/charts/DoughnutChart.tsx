@@ -127,10 +127,10 @@ export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
         display: isMobile,
         color: "#333",
         font: {
-          size: 14,
+          size: 10,
           family: "Nunito",
-          weight: "bold",
-          lineHeight: 1.3,
+          weight: "normal",
+          lineHeight: 1.35,
         } as const,
         formatter: (value: number, context: { dataset: { data: any[] } }) => {
           const total = context.dataset.data.reduce(

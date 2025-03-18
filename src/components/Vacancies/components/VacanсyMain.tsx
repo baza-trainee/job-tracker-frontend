@@ -72,7 +72,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   }, []);
 
   useEffect(() => {
-    console.log("isMobile changed:", isMobile);
+    // console.log("isMobile changed:", isMobile);
   }, [isMobile]);
 
   //alex
@@ -83,7 +83,6 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
     dispatch(
       openModal({
         typeModal: "editVacancy",
-        idCardVacancy: vacancy.id, // delete
         borderColorModal: section?.borderColor,
         backgroundColorModal: section?.backgroundColor,
         vacancyData: vacancy,
@@ -129,7 +128,6 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
               workType={vacancy.work_type}
               location={vacancy.location}
               onClick={() => {
-                // dispatch(openModal({ typeModal: "editVacancy" }));
                 handleVacancyCard(vacancy);
               }}
             />
@@ -194,9 +192,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
                     company={vacancy.company}
                     workType={vacancy.work_type}
                     location={vacancy.location}
-                    onClick={() => {
-                      dispatch(openModal({ typeModal: "editVacancy" }));
-                    }}
+                    onClick={() => handleVacancyCard(vacancy, section)}
                   />
                 ))}
               </VacancySectionBox>

@@ -116,6 +116,11 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
+  restoreVacancy: {
+    content: <InfoModal type="restoreVacancy" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
   saveEditVacancies: {
     content: (
       <InfoModal type="saveEditVacancies" textColor={colorButton.text} />

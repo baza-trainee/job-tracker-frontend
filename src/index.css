@@ -27,7 +27,9 @@ body {
 .custom-hover {
   transition:
     fill 300ms ease-in-out,
-    color 300ms ease-in-out;
+    color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    background-color 300ms ease-in-out;
 }
 
 .custom-size {
@@ -47,7 +49,9 @@ body {
     opacity 500ms ease-in-out,
     transform 500ms ease-in-out,
     fill 300ms ease-in-out,
-    color 300ms ease-in-out;
+    color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    background-color 300ms ease-in-out;
 }
 
 /* Firefox cтилі для горизонтального скролу - не коректно працюють */
@@ -122,7 +126,7 @@ body {
 }
 
 /* react-calendar */
-.job-calendar.react-calendar {
+/* .job-calendar.react-calendar {
   border: 1px solid #436b88;
   border-radius: 12px;
   padding: 24px;
@@ -133,6 +137,18 @@ body {
   font-family: "Nunito";
   text-align: center;
   color: #0a0a0a;
+} */
+
+/* alex */
+@media screen and (min-width: 1920px) {
+  .job-cal .react-calendar__month-view__weekdays abbr,
+  .job-cal abbr {
+    font-size: 16px !important;
+  }
+  .job-cal .react-calendar__month-view__days > button {
+    width: 40px !important;
+    height: 40px !important;
+  }
 }
 
 .react-calendar__navigation {
@@ -536,4 +552,13 @@ input[type="password"]::-ms-clear {
 }
 .soon-scroll::-webkit-scrollbar-thumb:hover {
   background: #8f99ad;
+}
+/* @layer utilities {
+  .scrollbar-transparent::-webkit-scrollbar {
+    background: transparent;
+  }
+} */
+
+.scrollbar-transparent::-webkit-scrollbar {
+  background: transparent;
 }

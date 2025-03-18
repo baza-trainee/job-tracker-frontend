@@ -36,7 +36,15 @@
     "updatedErrorLink": "Введіть коректне посилання",
     "updatedPhone": "Введіть коректний номер телефону",
     "updatedEmail": "Введіть коректну електронну адресу",
-    "updatedUserName": "Введіть коректне ім'я"
+    "updatedUserName": "Введіть коректне ім'я",
+    "updatedPhoneSuccess": "Номер телефону успішно оновлено",
+    "updatedUserNameSuccess": "Ім'я користувача успішно оновлено",
+    "userNameCopied": "Ім'я користувача скопійовано",
+    "phoneCopied": "Номер телефону скопійовано",
+    "emailCopied": "Електронну адресу скопійовано",
+    "linkCopied": "Посилання скопійовано",
+    "textCopied": "Текст скопійовано",
+    "empty": "Відсутні дані для копіювання"
   },
   "navigation": {
     "vacancies": "Вакансії",
@@ -134,7 +142,7 @@
     "tech": "Технічна співбесіда",
     "techShort": "Тех. співбесіда",
     "reject": "Відмова",
-    "offer": "Оффер"
+    "offer": "Офер"
   },
   "statisticsHeader": {
     "vacancies": "Всього вакансій",
@@ -144,7 +152,7 @@
     "firstMessage": "Збережіть хоча б одну вакансію для того, щоб бачити статистику!",
     "predictions": "Передбачення на сьогодні"
   },
-  "statisticsDoughnatDiagram": "Статистика всіх статусів",
+  "statisticsDoughnatDiagram": "Статистика активних статусів",
   "statisticsRejectDiagram": {
     "title": "Причини відмов",
     "OTHER": "Інше",
