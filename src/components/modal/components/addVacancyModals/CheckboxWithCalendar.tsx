@@ -46,10 +46,13 @@ export const CheckboxWithCalendar = ({
         id: id || "",
         name: name,
         date: !isChecked
-          ? moment().add(1, "hours").toISOString()
+          ? moment.utc().add(1, "hour").format()
           : "1970-01-01T00:00:00.000Z",
       })
     );
+    console.log("time   ", moment().add(1, "hours").toISOString());
+    console.log("timeUTC", moment.utc().add(1, "hours").toISOString());
+    console.log("timForm", moment.utc().add(1, "hour").format());
     setIsOpenCalendar(false);
     // відстеження помилок
     if (name === "resume" || name === "reject") {

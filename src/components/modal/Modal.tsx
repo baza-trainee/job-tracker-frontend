@@ -13,12 +13,8 @@ import classNames from "classnames";
 
 const Modal: FC = () => {
   const dispatch = useAppDispatch();
-  const {
-    isModalOpen,
-    typeModal,
-    isConfirmationOpen,
-    typeConfirmation,
-  } = useAppSelector((state) => state.modal);
+  const { isModalOpen, typeModal, isConfirmationOpen, typeConfirmation } =
+    useAppSelector((state) => state.modal);
 
   const modalData = contentMap[typeModal || "close"];
   const confirmationData = contentMap[typeConfirmation || "close"];
@@ -61,7 +57,7 @@ const Modal: FC = () => {
       <div className="flex">
         <ModalMain
           className={classNames("", {
-            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-2/4 xl:-translate-y-2/4":
+            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]":
               typeModal === "addVacancy" ||
               typeModal === "editVacancy" ||
               typeModal === "forgotPassword",
@@ -82,9 +78,9 @@ const Modal: FC = () => {
         />
       </div>
       {isConfirmationOpen ? (
-        <div className="fixed right-0 top-0 z-50 h-[1300px] xl:h-full flex w-full items-center justify-center  bg-[#C2C2C2] bg-opacity-50">
+        <div className="fixed right-0 top-0 z-50 flex h-[1300px] w-full items-center justify-center bg-[#C2C2C2] bg-opacity-50 xl:h-full">
           <ModalMain
-            className="sticky mt-auto mb-[210px] md:mb-[145px] xl:mb-auto"
+            className="sticky mb-[210px] mt-auto md:mb-[145px] xl:mb-auto"
             modalData={confirmationData}
             btnFunc={() => dispatch(closeConfirmation())}
           />
