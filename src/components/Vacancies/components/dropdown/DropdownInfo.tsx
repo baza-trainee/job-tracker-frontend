@@ -13,7 +13,7 @@ export const DropdownInfo = () => {
       subOptions: [
         { id: "office", label: t("sortDropdown.office") },
         { id: "remote", label: t("sortDropdown.remote") },
-        { id: "hybrid", label: t("sortDropdown.mixed") },
+        { id: "hybrid", label: t("sortDropdown.hybrid") },
       ],
     },
     {

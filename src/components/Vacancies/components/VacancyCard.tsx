@@ -27,7 +27,7 @@ const VacancyCard: FC<VacancyCardProps> = ({
   const locationLabel = {
     office: t("sortDropdown.office"),
     remote: t("sortDropdown.remote"),
-    hybrid: t("sortDropdown.mixed"),
+    hybrid: t("sortDropdown.hybrid"),
   };
 
   return (

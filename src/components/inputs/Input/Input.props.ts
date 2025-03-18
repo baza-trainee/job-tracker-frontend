@@ -28,6 +28,6 @@ export interface InputProps {
   onBlur?: (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  // onInput?: (event: React.FormEvent<HTMLInputElement>) => void;
+  onInput?: (event: React.FormEvent<HTMLInputElement>) => void;
   // onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
