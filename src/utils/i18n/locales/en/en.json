@@ -379,7 +379,11 @@
     "soonModalPlaceholderName": "Enter the event name",
     "soonModalPlaceholderNotes": "Place for notes",
     "soonModalTimeHours": "Hours",
-    "soonModalTimeMinutes": "Minutes"
+    "soonModalTimeMinutes": "Minutes",
+    "soonModalErrorsRequired": "This field is required",
+    "invalidTimeContents": "Must contain 1-2 digits",
+    "invalidHours": "Hours must be between 0 and 24",
+    "invalidMinutes": "Minutes must be between 0 and 59"
   },
   "calendarTabs": {
     "day": "Day",

@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Event as EventData } from "@/types/event.types.ts";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import SoonCalendarModal from "../Calendar/SoonCalendarModal.tsx";
 import { Input } from "../inputs/Input/Input.tsx";
 import { Button } from "../buttons/Button/Button.tsx";
@@ -15,6 +16,7 @@ import {
   useGetAllEventsQuery,
 } from "../../store/querySlices/eventsQuerySlice.ts";
 import clsx from "clsx";
+import { getEventSchema } from "../../schemas/eventModalSchema.ts";
 
 const EditEventModal = () => {
   const { t } = useTranslation();
@@ -32,6 +34,7 @@ const EditEventModal = () => {
     reset,
     formState: { errors },
   } = useForm({
+    resolver: zodResolver(getEventSchema()),
     defaultValues: {
       soonEventName: "",
       soonEventNotes: "",
@@ -169,6 +172,11 @@ const EditEventModal = () => {
                   "xl:text-[32px] xl:font-normal",
                   "2xl:text-[32px]"
                 )}
+                onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                  const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+                  if (+value > 24) return; // Максимум 24 години (Перевірка діапазону годин)
+                  setValue("hours", value); // Оновлюємо значення, передаємо число
+                }}
               />
               <div className="flex h-[60px] w-6 items-center justify-center">
                 <span className="text-[44px] font-normal md:text-[57px]">
@@ -195,6 +203,11 @@ const EditEventModal = () => {
                   "xl:text-[32px] xl:font-normal",
                   "2xl:text-[32px]"
                 )}
+                onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                  const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+                  if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
+                  setValue("minutes", value); // Оновлюємо значення, передаємо число
+                }}
               />
               <p className="col-span-2 row-start-2 text-sm xl:text-base 3xl:text-xl">
                 {t("soonSection.soonModalTimeHours")}
