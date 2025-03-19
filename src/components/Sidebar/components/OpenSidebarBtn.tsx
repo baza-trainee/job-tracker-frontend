@@ -13,7 +13,7 @@ const OpenSidebarBtn: React.FC<SidebarOpenBtnProps> = ({
     >
       <Icon
         id={icon}
-        className="h-[30px] w-[54px] fill-black transition-colors duration-500 ease-in-out hover:fill-iconHover dark:fill-slate-300 dark:hover:fill-iconHover"
+        className="h-[30px] w-[54px] fill-black transition-colors duration-500 ease-in-out active:fill-iconHover dark:fill-slate-300 xl:hover:fill-iconHover dark:xl:hover:fill-iconHover"
       />
     </div>
   );
