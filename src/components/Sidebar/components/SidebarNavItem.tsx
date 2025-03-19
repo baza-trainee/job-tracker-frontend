@@ -20,7 +20,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           isOpen ? "w-[206px]" : "w-[68px]",
           isPending && "bg-red-500",
           !isActive &&
-            "motion-safe:hover:fill-iconHover motion-safe:hover:text-iconHover dark:motion-safe:hover:fill-iconHover dark:motion-safe:hover:text-iconHover",
+            "active:fill-iconHover active:text-iconHover xl:hover:fill-iconHover xl:hover:text-iconHover dark:xl:hover:fill-iconHover dark:xl:hover:text-iconHover",
           isActive &&
             "!border-[#DBDCDD] bg-backgroundMain fill-textBlack text-textBlack dark:fill-textBlack dark:text-textBlack"
         )
