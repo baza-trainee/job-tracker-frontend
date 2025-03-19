@@ -192,7 +192,9 @@ export const Input = ({
               "inline-block font-nunito font-medium text-color2",
               "text-[12px]",
               "md:text-[14px]",
-              "2xl:text-[16px]"
+              "2xl:text-[16px]",
+              (name === "hours" || name === "minutes") &&
+                "absolute left-0 top-[80%] rounded-md border border-color2 bg-white p-2 text-color2"
             )}
           >
             {t(String(error?.message))}

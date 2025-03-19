@@ -375,10 +375,14 @@
     "setTime": "Встановити час",
     "save": "Зберегти",
     "delete": "Видалити",
-    "soonModalPlaceholderName": "Вкажіть назву події",
+    "soonModalPlaceholderName": "Введіть назву події",
     "soonModalPlaceholderNotes": "Місце для нотаток",
     "soonModalTimeHours": "Години",
-    "soonModalTimeMinutes": "Хвилини"
+    "soonModalTimeMinutes": "Хвилини",
+    "soonModalErrorsRequired": "Це поле є обов'язковим",
+    "invalidTimeContents": "Мають містити 1-2 цифри",
+    "invalidHours": "Години мають бути від 0 до 24",
+    "invalidMinutes": "Хвилини мають бути від 0 до 59"
   },
   "calendarTabs": {
     "day": "День",
