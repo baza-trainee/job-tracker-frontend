@@ -9,8 +9,7 @@ import { useAppDispatch } from "../../store/hook.ts";
 import { useCreateEventMutation } from "../../store/querySlices/eventsQuerySlice.ts";
 import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
 import clsx from "clsx";
-import { getEventSchema } from "../../schemas/addEventModalSchema.ts";
-// import { z } from "zod";
+import { getEventSchema } from "../../schemas/eventModalSchema.ts";
 
 const AddEventModal = () => {
   const { t } = useTranslation();
