@@ -117,7 +117,7 @@ const EditEventModal = () => {
           </label>
           <Input
             name="soonEventName"
-            placeholder={t("soonSection.soonModalPlaceholderName")}
+            placeholder={t("soonSection.soonModalNamePlaceholder")}
             register={register}
             errors={errors}
             resetField={resetField}
@@ -135,7 +135,7 @@ const EditEventModal = () => {
           </label>
           <Input
             name="soonEventNotes"
-            placeholder={t("soonSection.soonModalPlaceholderNotes")}
+            placeholder={t("soonSection.soonModalNotesPlaceholder")}
             register={register}
             errors={errors}
             resetField={resetField}

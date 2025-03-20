@@ -80,7 +80,7 @@ export const Soon = () => {
   return (
     <div
       className={clsx(
-        "flex h-full flex-col justify-between text-textBlack",
+        "TEST flex h-full flex-col justify-between text-textBlack",
         "pt-2 xl:px-2 2xl:px-4",
         "w-full md:w-[344px] xl:w-[365px] 2xl:w-[382px] 3xl:w-[535px]"
       )}
