@@ -365,6 +365,18 @@
     "resetPasswordErrorLink": {
       "text_1": "The password reset link is invalid.",
       "text_2": "Try again."
+    },
+    "saveAddEvent": {
+      "title": "Add an event?",
+      "text_1": "If you do not save the data, it will be lost."
+    },
+    "saveEditEvent": {
+      "title": "Save changes?",
+      "text_1": "If you do not save the data, it will be lost."
+    },
+    "deleteEvent": {
+      "title": "Delete event?",
+      "text_1": "This action is irreversible!"
     }
   },
   "soonSection": {
