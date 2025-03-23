@@ -365,6 +365,18 @@
     "resetPasswordErrorLink": {
       "text_1": "The password reset link is invalid.",
       "text_2": "Try again."
+    },
+    "saveAddEvent": {
+      "title": "Add an event?",
+      "text_1": "If you do not save the data, it will be lost."
+    },
+    "saveEditEvent": {
+      "title": "Save changes?",
+      "text_1": "If you do not save the data, it will be lost."
+    },
+    "deleteEvent": {
+      "title": "Delete event?",
+      "text_1": "This action is irreversible!"
     }
   },
   "soonSection": {
@@ -376,8 +388,10 @@
     "setTime": "Set time",
     "save": "Save",
     "delete": "Delete",
-    "soonModalPlaceholderName": "Enter the event name",
-    "soonModalPlaceholderNotes": "Place for notes",
+    "soonModalNamePlaceholder": "Enter the event name",
+    "soonModalNameLength": "Event name must be between 1 and 30 char.",
+    "soonModalNotesPlaceholder": "Place for notes",
+    "soonModalNotes": "Notes must be no more than 200 char.",
     "soonModalTimeHours": "Hours",
     "soonModalTimeMinutes": "Minutes",
     "soonModalErrorsRequired": "This field is required",

@@ -7,14 +7,15 @@ import { Button } from "../buttons/Button/Button.tsx";
 import Icon from "../Icon/Icon.tsx";
 import { useAppDispatch } from "../../store/hook.ts";
 import { useCreateEventMutation } from "../../store/querySlices/eventsQuerySlice.ts";
-import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
+// import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
+import { openConfirmation } from "../../store/slices/modalSlice/modalSlice.ts";
 import clsx from "clsx";
 import { getEventSchema } from "../../schemas/eventModalSchema.ts";
 
 const AddEventModal = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const [createEvent, { isLoading }] = useCreateEventMutation();
+  const [_, { isLoading }] = useCreateEventMutation();
 
   const {
     register,
@@ -27,33 +28,52 @@ const AddEventModal = () => {
     resolver: zodResolver(getEventSchema()),
   });
 
-  const onSubmit = async (data: any) => {
-    console.log("Форма відправлена:", data);
+  // const onSubmit = async (data: any) => {
+  //   console.log("Форма відправлена:", data);
 
-    const { soonEventName, soonEventNotes, hours, minutes, date } = data;
+  //   const { soonEventName, soonEventNotes, hours, minutes, date } = data;
 
-    // Формуємо час у форматі HH:MM
-    const formattedTime = `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`;
+  //   // Формуємо час у форматі HH:MM
+  //   const formattedTime = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 
-    const newEvent = {
-      name: soonEventName,
-      text: soonEventNotes || "",
-      date: date || new Date().toISOString().split("T")[0],
-      time: formattedTime,
-    };
+  //   const newEvent = {
+  //     name: soonEventName,
+  //     text: soonEventNotes || "",
+  //     date: date || new Date().toISOString().split("T")[0],
+  //     time: formattedTime,
+  //   };
 
-    try {
-      await createEvent(newEvent).unwrap();
-      dispatch(closeModal());
-      reset();
-    } catch (error) {
-      console.error("Помилка створення події:", error);
-    }
+  //   try {
+  //     await createEvent(newEvent).unwrap();
+  //     dispatch(closeModal());
+  //     reset();
+  //   } catch (error) {
+  //     console.error("Помилка створення події:", error);
+  //   }
+  // };
+
+  const confirmAddSave = (data: any) => {
+    console.log(
+      "Відкриваємо модальне вікно для підтвердження створення події:",
+      data
+    );
+
+    dispatch(
+      openConfirmation({
+        typeConfirmation: "saveAddEvent",
+        dataConfirmation: {
+          ...data,
+          time: `${String(data.hours).padStart(2, "0")}:${String(data.minutes).padStart(2, "0")}`, //Форматуємо час
+        },
+        resetForm: reset,
+      })
+    );
   };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      // onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(confirmAddSave)}
       className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6"
     >
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
@@ -65,7 +85,7 @@ const AddEventModal = () => {
           </label>
           <Input
             name="soonEventName"
-            placeholder={t("soonSection.soonModalPlaceholderName")}
+            placeholder={t("soonSection.soonModalNamePlaceholder")}
             register={register}
             errors={errors}
             resetField={resetField}
@@ -83,7 +103,7 @@ const AddEventModal = () => {
           </label>
           <Input
             name="soonEventNotes"
-            placeholder={t("soonSection.soonModalPlaceholderNotes")}
+            placeholder={t("soonSection.soonModalNotesPlaceholder")}
             register={register}
             errors={errors}
             resetField={resetField}
@@ -122,7 +142,7 @@ const AddEventModal = () => {
                 )}
                 onInput={(e: React.FormEvent<HTMLInputElement>) => {
                   const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
-                  if (+value > 24) return; // Максимум 24 години (Перевірка діапазону годин)
+                  if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
                   setValue("hours", Number(value)); // Оновлюємо значення, передаємо число
                 }}
               />

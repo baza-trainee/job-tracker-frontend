@@ -1,5 +1,5 @@
 import { ForgotPassword } from "./components/formModals/ForgotPassword";
-import ContactUs from "./components/formModals/ContacUs";
+import ContactUs from "./components/formModals/ContactUs";
 import InfoModal from "./components/infoModals/InfoModal";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import EditVacancy from "./components/editVacancy/EditVacancy";
@@ -205,5 +205,20 @@ export const contentMap: ContentMapProps = {
     paddingAddEventModal:
       "pt-2 pr-2 pb-4 pl-2 md:pt-4 md:pr-4 md:pb-4 md:pl-4 xl:pt-4 xl:pr-6 xl:pb-8 xl:pl-6 3xl:pt-6 3xl:pr-10 3xl:pb-10 3xl:pl-10",
     iconCloseEventModal: "h-8 w-8 md:w-6 md:h-6 3xl:h-8 3xl:w-8",
+  },
+  saveAddEvent: {
+    content: <InfoModal type="saveAddEvent" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  saveEditEvent: {
+    content: <InfoModal type="saveEditEvent" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  deleteEvent: {
+    content: <InfoModal type="deleteEvent" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
 };

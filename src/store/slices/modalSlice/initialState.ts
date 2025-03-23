@@ -13,4 +13,5 @@ export interface ModalProps {
   dataConfirmation?: any | null; // alex
   borderColorModal?: string | null;
   backgroundColorModal?: string | null;
+  resetForm?: () => void;
 }

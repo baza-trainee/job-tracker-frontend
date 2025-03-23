@@ -119,6 +119,9 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
       },
     },
     plugins: {
+      datalabels: {
+        display: false, // Вимикає підписи на стовпчиках
+      },
       legend: {
         position: "bottom",
         labels: {

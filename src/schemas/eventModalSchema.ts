@@ -5,8 +5,14 @@ export const getEventSchema = () => {
   const { t } = useTranslation();
 
   return z.object({
-    soonEventName: z.string().min(1, t("soonSection.soonModalPlaceholderName")),
-    soonEventNotes: z.string().optional(),
+    soonEventName: z
+      .string()
+      .min(1, t("soonSection.soonModalNameLength"))
+      .max(30, t("soonSection.soonModalNameLength")),
+    soonEventNotes: z
+      .string()
+      .max(200, t("soonSection.soonModalNotes"))
+      .optional(),
     date: z.string().optional(),
     hours: z
       .string()

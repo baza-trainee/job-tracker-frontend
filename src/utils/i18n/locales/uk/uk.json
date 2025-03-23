@@ -338,7 +338,7 @@
     },
     "deleteVacancy": {
       "title": "Видалити вакансію?",
-      "text_1": "Ця дія буде безповортньою. Натомість, ви можете перенести цю вакансію в архів"
+      "text_1": "Ця дія буде незворотною. Натомість, ви можете перенести цю вакансію в архів"
     },
     "logInSuccess": {
       "text_1": "Авторизація пройшла успішно."
@@ -364,6 +364,18 @@
     "resetPasswordErrorLink": {
       "text_1": "Посилання на відновлення паролю не дійсне.",
       "text_2": "Спробуйте ще раз"
+    },
+    "saveAddEvent": {
+      "title": "Додати подію?",
+      "text_1": "Якщо ви не збережете данні, вони будуть втрачені."
+    },
+    "saveEditEvent": {
+      "title": "Зберегти зміни?",
+      "text_1": "Якщо ви не збережете данні, вони будуть втрачені."
+    },
+    "deleteEvent": {
+      "title": "Видалити подію?",
+      "text_1": "Ця дія буде незворотною!"
     }
   },
   "soonSection": {
@@ -375,8 +387,10 @@
     "setTime": "Встановити час",
     "save": "Зберегти",
     "delete": "Видалити",
-    "soonModalPlaceholderName": "Введіть назву події",
-    "soonModalPlaceholderNotes": "Місце для нотаток",
+    "soonModalNamePlaceholder": "Введіть назву події",
+    "soonModalNameLength": "Назва події має бути від 2 до 30 симв.",
+    "soonModalNotesPlaceholder": "Місце для нотаток",
+    "soonModalNotesLength": "Нотатки мають бути не більше 200 симв.",
     "soonModalTimeHours": "Години",
     "soonModalTimeMinutes": "Хвилини",
     "soonModalErrorsRequired": "Це поле є обов'язковим",

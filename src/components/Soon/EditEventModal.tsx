@@ -9,12 +9,7 @@ import { Button } from "../buttons/Button/Button.tsx";
 import Icon from "../Icon/Icon.tsx";
 import { useAppSelector, useAppDispatch } from "../../store/hook.ts";
 import { selectEventData } from "../../store/slices/modalSlice/selectors.ts";
-import { closeModal } from "../../store/slices/modalSlice/modalSlice.ts";
-import {
-  useDeleteEventByIdMutation,
-  useUpdateEventByIdMutation,
-  useGetAllEventsQuery,
-} from "../../store/querySlices/eventsQuerySlice.ts";
+import { openConfirmation } from "../../store/slices/modalSlice/modalSlice.ts";
 import clsx from "clsx";
 import { getEventSchema } from "../../schemas/eventModalSchema.ts";
 
@@ -22,9 +17,6 @@ const EditEventModal = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const eventData: EventData | null = useAppSelector(selectEventData) ?? null;
-  const [deleteEvent] = useDeleteEventByIdMutation();
-  const [updateEvent] = useUpdateEventByIdMutation();
-  const { refetch } = useGetAllEventsQuery();
 
   const {
     register,
@@ -59,52 +51,32 @@ const EditEventModal = () => {
     }
   }, [eventData, reset]);
 
-  const handleDelete = async () => {
+  const confirmDelete = () => {
+    console.log("Викликаємо openConfirmation з deleteEvent:", eventData);
     if (!eventData) return;
-    try {
-      await deleteEvent(eventData.id).unwrap();
-      // console.log("Подію видалено", eventData.id);
-      dispatch(closeModal());
-      refetch();
-    } catch (error) {
-      console.error("Помилка видалення", error);
-    }
+    dispatch(
+      openConfirmation({
+        typeConfirmation: "deleteEvent",
+        dataConfirmation: eventData,
+      })
+    );
   };
 
-  const handleUpdate = async (data: any) => {
-    if (!eventData) return;
-    try {
-      const updateTime = `${data.hours}:${data.minutes}:00`;
-
-      // console.log("Дані перед оновленням:", {
-      //   id: eventData.id,
-      //   name: data.soonEventName,
-      //   text: data.soonEventNotes,
-      //   time: updateTime,
-      //   date: data.date,
-      // });
-
-      await updateEvent({
-        id: eventData.id,
-        name: data.soonEventName,
-        text: data.soonEventNotes,
-        time: updateTime,
-        date: data.date,
-      }).unwrap();
-
-      // console.log("Подію оновлено", eventData.id);
-      dispatch(closeModal());
-      refetch();
-    } catch (error) {
-      console.error("Помилка оновлення", error);
-    }
+  const confirmSave = (data: any) => {
+    console.log("Викликаємо openConfirmation з saveEditEvent:", data);
+    dispatch(
+      openConfirmation({
+        typeConfirmation: "saveEditEvent",
+        dataConfirmation: {
+          ...data,
+          id: eventData?.id, // додаємо ID події
+        },
+      })
+    );
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(handleUpdate)}
-      className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6"
-    >
+    <form className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6">
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
         <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
 
@@ -117,7 +89,7 @@ const EditEventModal = () => {
           </label>
           <Input
             name="soonEventName"
-            placeholder={t("soonSection.soonModalPlaceholderName")}
+            placeholder={t("soonSection.soonModalNamePlaceholder")}
             register={register}
             errors={errors}
             resetField={resetField}
@@ -135,7 +107,7 @@ const EditEventModal = () => {
           </label>
           <Input
             name="soonEventNotes"
-            placeholder={t("soonSection.soonModalPlaceholderNotes")}
+            placeholder={t("soonSection.soonModalNotesPlaceholder")}
             register={register}
             errors={errors}
             resetField={resetField}
@@ -174,7 +146,7 @@ const EditEventModal = () => {
                 )}
                 onInput={(e: React.FormEvent<HTMLInputElement>) => {
                   const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
-                  if (+value > 24) return; // Максимум 24 години (Перевірка діапазону годин)
+                  if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
                   setValue("hours", value); // Оновлюємо значення, передаємо число
                 }}
               />
@@ -226,11 +198,9 @@ const EditEventModal = () => {
           className="md:px-8"
           variant="ghost"
           size="big"
-          onClick={handleDelete}
-          // disabled={isLoading}
+          onClick={confirmDelete}
         >
           {t("soonSection.delete")}
-          {/* {isLoading ? t("loading") : t("soonSection.save")} */}
           <Icon id={"delete"} className="ml-3 h-6 w-6" />
         </Button>
 
@@ -239,10 +209,9 @@ const EditEventModal = () => {
           className="bg-button"
           variant="ghost"
           size="big"
-          // disabled={isLoading}
+          onClick={handleSubmit(confirmSave)}
         >
           {t("soonSection.save")}
-          {/* {isLoading ? t("loading") : t("soonSection.save")} */}
           <Icon id={"check-box"} className="ml-3 h-6 w-6" />
         </Button>
       </div>

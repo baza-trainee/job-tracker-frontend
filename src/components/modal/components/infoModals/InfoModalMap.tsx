@@ -9,7 +9,11 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { notifyInfo } from "../../../Notifications/NotificationService";
+import {
+  notifyInfo,
+  notifyError,
+  notifySuccess,
+} from "../../../Notifications/NotificationService";
 
 import {
   setSearchQuery,
@@ -19,6 +23,12 @@ import {
 import { useLogOutUserMutation } from "../../../../store/querySlices/authQuerySlice";
 import useVacancy from "../addVacancyModals/useVacancy";
 import useEditVacancy from "../editVacancy/useEditVacancy";
+import {
+  useCreateEventMutation,
+  useDeleteEventByIdMutation,
+  useUpdateEventByIdMutation,
+  useGetAllEventsQuery,
+} from "../../../../store/querySlices/eventsQuerySlice";
 import { TypesModal } from "../../ModalMain.types";
 
 const InfoModalMap = () => {
@@ -26,9 +36,10 @@ const InfoModalMap = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [logOut] = useLogOutUserMutation();
-  const dataAddEditVacancy = useAppSelector(
+  const dataModalForConfirm = useAppSelector(
     (state) => state.modal.dataConfirmation
   );
+  console.log("dataModalForConfirm", dataModalForConfirm);
   const { onSubmit: addVacanciesSubmit, isLoading: addVacanciesLoading } =
     useVacancy();
   const {
@@ -36,6 +47,10 @@ const InfoModalMap = () => {
     isLoading: editVacanciesLoading,
     deleteVacancy,
   } = useEditVacancy();
+  const [addCreateEvent] = useCreateEventMutation();
+  const [deleteEventById] = useDeleteEventByIdMutation();
+  const [updateEventById] = useUpdateEventByIdMutation();
+  const { refetch } = useGetAllEventsQuery();
 
   const handleCancel = useCallback((): void => {
     dispatch(closeModal());
@@ -59,9 +74,9 @@ const InfoModalMap = () => {
 
   // Збереження вакансії
   const handleAddVacancy = useCallback((): void => {
-    console.log("handleAddVacancy", dataAddEditVacancy);
-    addVacanciesSubmit(dataAddEditVacancy);
-  }, [addVacanciesSubmit, dataAddEditVacancy]);
+    console.log("handleAddVacancy", dataModalForConfirm);
+    addVacanciesSubmit(dataModalForConfirm);
+  }, [addVacanciesSubmit, dataModalForConfirm]);
 
   const handleCloseConfirmation = useCallback((): void => {
     notifyInfo("Інформацію не збережно"); // test
@@ -76,25 +91,87 @@ const InfoModalMap = () => {
 
   // Збереження редагованої вакансії
   const handleEditVacancy = useCallback((): void => {
-    editVacanciesSubmit(dataAddEditVacancy);
-  }, [editVacanciesSubmit, dataAddEditVacancy]);
+    editVacanciesSubmit(dataModalForConfirm);
+  }, [editVacanciesSubmit, dataModalForConfirm]);
 
   // Архівувати вакансію
   const handleArhiveVacancy = useCallback((): void => {
     dispatch(
       openConfirmation({
         typeConfirmation: "arhiveVacancy",
-        dataConfirmation: dataAddEditVacancy,
+        dataConfirmation: dataModalForConfirm,
       })
     );
-  }, [dispatch, dataAddEditVacancy]);
+  }, [dispatch, dataModalForConfirm]);
 
   const handleButonArhiveVacancy = useCallback((): void => {
     editVacanciesSubmit({
-      ...dataAddEditVacancy,
-      isArchived: !dataAddEditVacancy.isArchived,
+      ...dataModalForConfirm,
+      isArchived: !dataModalForConfirm.isArchived,
     });
-  }, [dataAddEditVacancy, editVacanciesSubmit]);
+  }, [dataModalForConfirm, editVacanciesSubmit]);
+
+  // Додавання (створення) події
+  const handleAddEvent = useCallback(async () => {
+    if (!dataModalForConfirm) return;
+    try {
+      await addCreateEvent({
+        name: dataModalForConfirm.soonEventName,
+        text: dataModalForConfirm.soonEventNotes || "",
+        date:
+          dataModalForConfirm.date || new Date().toISOString().split("T")[0],
+        time: `${String(dataModalForConfirm.hours).padStart(2, "0")}:${String(dataModalForConfirm.minutes).padStart(2, "0")}`,
+      }).unwrap();
+
+      dispatch(closeConfirmation());
+      dispatch(closeModal());
+      refetch();
+      notifySuccess("Подію успішно додано!");
+
+      if (dataModalForConfirm.resetForm) {
+        dataModalForConfirm.resetForm();
+      }
+    } catch (error) {
+      console.error("Помилка додавання події:", error);
+      notifyError("Не вдалося додати подію.");
+    }
+  }, [dataModalForConfirm, addCreateEvent, dispatch, refetch]);
+
+  // Видалення події
+  const handleDeleteEvent = useCallback(async () => {
+    if (!dataModalForConfirm) return;
+    try {
+      await deleteEventById(dataModalForConfirm.id).unwrap();
+      dispatch(closeConfirmation());
+      dispatch(closeModal());
+      refetch();
+      notifySuccess("Подію успішно видалено!");
+    } catch (error) {
+      console.error("Помилка видалення події:", error);
+      notifyError("Не вдалося видалити подію.");
+    }
+  }, [dataModalForConfirm, deleteEventById, dispatch, refetch]);
+
+  // Збереження редагування події
+  const handleEditEvent = useCallback(async () => {
+    if (!dataModalForConfirm) return;
+    try {
+      await updateEventById({
+        id: dataModalForConfirm.id,
+        name: dataModalForConfirm.soonEventName,
+        text: dataModalForConfirm.soonEventNotes,
+        time: `${dataModalForConfirm.hours}:${dataModalForConfirm.minutes}:00`,
+        date: dataModalForConfirm.date,
+      }).unwrap();
+      dispatch(closeConfirmation());
+      dispatch(closeModal());
+      refetch();
+      notifySuccess("Зміни в події успішно збережено!");
+    } catch (error) {
+      console.error("Помилка оновлення події:", error);
+      notifyError("Не вдалося зберегти зміни.");
+    }
+  }, [dataModalForConfirm, updateEventById, dispatch, refetch]);
 
   // Функція створення кнопок
   const createButton = (
@@ -267,15 +344,15 @@ const InfoModalMap = () => {
     deleteVacancy: {
       title: t("infoModal.deleteVacancy.title"),
       titleSize: "small",
-      text: dataAddEditVacancy?.isArchived
+      text: dataModalForConfirm?.isArchived
         ? [t("")]
         : [t("infoModal.deleteVacancy.text_1")],
       button: [
         createButton(
-          dataAddEditVacancy?.isArchived
+          dataModalForConfirm?.isArchived
             ? t("infoModal.button.cancel")
             : t("infoModal.button.archive"),
-          dataAddEditVacancy?.isArchived
+          dataModalForConfirm?.isArchived
             ? handleCloseConfirmation
             : handleArhiveVacancy,
           "",
@@ -361,6 +438,69 @@ const InfoModalMap = () => {
           "big",
           "accent",
           editVacanciesLoading
+        ),
+      ],
+    },
+    saveAddEvent: {
+      title: t("infoModal.saveAddEvent.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveAddEvent.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.logOut"),
+          handleCloseConfirmation,
+          "",
+          "small",
+          "ghost"
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleAddEvent,
+          "",
+          "big",
+          "accent"
+        ),
+      ],
+    },
+    saveEditEvent: {
+      title: t("infoModal.saveEditEvent.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveEditEvent.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.logOut"),
+          handleCloseConfirmation,
+          "",
+          "small",
+          "ghost"
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleEditEvent,
+          "",
+          "big",
+          "accent"
+        ),
+      ],
+    },
+    deleteEvent: {
+      title: t("infoModal.deleteEvent.title"),
+      titleSize: "small",
+      text: [t("infoModal.deleteEvent.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.logOut"),
+          handleCloseConfirmation,
+          "",
+          "small",
+          "ghost"
+        ),
+        createButton(
+          t("infoModal.button.delete"),
+          handleDeleteEvent,
+          "",
+          "big",
+          "accent"
         ),
       ],
     },

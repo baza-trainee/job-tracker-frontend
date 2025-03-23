@@ -34,24 +34,26 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           "relative top-1 z-0 flex w-fit max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl px-6 py-3",
           "sm:top-[1px] sm:min-h-[20px] sm:min-w-[100px] sm:px-4 sm:py-2",
           "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
-          backgroundColorModal || modalData.bgColor
+          backgroundColorModal || modalData?.bgColor || "bg-white" // Тимчасово, пошукати далі
         )}
         onClick={(e) => e.stopPropagation()}
       >
         {modalData?.nameModal && (
-          <span className="text-[16px] md:text-[20px]">{t(modalData.nameModal)}</span>
+          <span className="text-[16px] md:text-[20px]">
+            {t(modalData.nameModal)}
+          </span>
         )}
       </div>
       <div
         className={clsx(
           //alex mb-11
-          "z-0 flex h-auto w-[280px] md:w-auto mb-11",
+          "z-0 mb-11 flex h-auto w-[280px] md:w-auto",
           "flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow",
           // alex p-2 ---> md:p-5
           "sm:border-[2px]",
           "md:border-[4px]",
-          borderColorModal || modalData.borderColor,
-          modalData.paddingAddEventModal || "sm:p-2"
+          borderColorModal || modalData?.borderColor || "bg-white", // Тимчасово, пошукати далі
+          modalData?.paddingAddEventModal || "sm:p-2" // Тимчасово, пошукати далі
         )}
         onClick={(e) => e.stopPropagation()}
       >
@@ -64,7 +66,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
             "3xl:min-h-[320px]"
           )}
         >
-          {modalData.content}
+          {modalData?.content}
         </div>
         <button
           onClick={btnFunc}
@@ -74,7 +76,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
             id="close-default"
             className={clsx(
               "fill-textBlack",
-              modalData.iconCloseEventModal || "h-6 w-6"
+              modalData?.iconCloseEventModal || "h-6 w-6"
             )}
           />
         </button>
