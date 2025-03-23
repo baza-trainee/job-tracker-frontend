@@ -24,9 +24,9 @@ export const addProfileData: Schema = {
     link: z
       .string()
       .url({ message: "validation.invalidUrl" })
-      .regex(/\.pdf$/, {
-        message: "validation.invalidPdf",
-      })
+      // .regex(/\.pdf$/, {
+      //   message: "validation.invalidPdf",
+      // })
       .trim()
       .optional(),
     text: z.string().optional(),
