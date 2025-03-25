@@ -78,7 +78,12 @@ const EditEventModal = () => {
   return (
     <form className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6">
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
-        <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+        <div>
+          <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+          {errors.date?.message && (
+            <p className="text-color2">{String(errors.date.message)}</p>
+          )}
+        </div>
 
         <div className="flex w-full flex-col font-medium md:w-[350px] xl:w-[445px]">
           <label

@@ -240,6 +240,8 @@ button.react-calendar__navigation__label {
   min-width: 24px;
   flex-grow: 0 !important;
   text-align: center;
+  pointer-events: none;
+  cursor: default;
 }
 
 .react-calendar__navigation__prev2-button,

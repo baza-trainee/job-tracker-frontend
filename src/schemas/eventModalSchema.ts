@@ -8,12 +8,25 @@ export const getEventSchema = () => {
     soonEventName: z
       .string()
       .min(1, t("soonSection.soonModalNameLength"))
-      .max(30, t("soonSection.soonModalNameLength")),
+      .max(50, t("soonSection.soonModalNameLength")),
     soonEventNotes: z
       .string()
-      .max(200, t("soonSection.soonModalNotes"))
+      .max(1000, t("soonSection.soonModalNotes"))
       .optional(),
-    date: z.string().optional(),
+    date: z
+      .string()
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          return selectedDate >= today;
+        },
+        {
+          message: t("soonSection.invalidPastDate"),
+        }
+      )
+      .optional(),
     hours: z
       .string()
       .regex(/^\d{1,2}$/, t("soonSection.invalidTimeContents")) // Дозволяємо 1-2 цифри
@@ -27,6 +40,7 @@ export const getEventSchema = () => {
       .transform((val) => Number(val))
       .refine((val) => val >= 0 && val <= 59, {
         message: t("soonSection.invalidMinutes"),
-      }),
+      })
+      .optional(),
   });
 };

@@ -52,7 +52,7 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
         view="month"
         locale={i18n.language}
         onChange={(date) => {
-          // console.log("Клік на дату (день):", date);
+          console.log("Клік на дату (день):", date);
           handleDateChange(date as Date);
         }}
         value={selectedDate}
@@ -62,6 +62,7 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
         formatMonthYear={(locale, date) =>
           `${date.toLocaleDateString(locale, { month: "long" })} ${date.getFullYear()}`
         }
+        // minDate={new Date()} // Заборона вибору минулих дат, будуть взагалі не клікабельні
       />
     </div>
   );

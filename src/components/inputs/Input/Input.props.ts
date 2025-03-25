@@ -25,9 +25,11 @@ export interface InputProps {
   rows?: number;
   classNameInputCustom?: string;
   autoFocus?: boolean;
+  maxLength?: number;
   onBlur?: (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onInput?: (event: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
   // onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }

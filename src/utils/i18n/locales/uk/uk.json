@@ -44,7 +44,8 @@
     "emailCopied": "Електронну адресу скопійовано",
     "linkCopied": "Посилання скопійовано",
     "textCopied": "Текст скопійовано",
-    "empty": "Відсутні дані для копіювання"
+    "empty": "Відсутні дані для копіювання",
+    "notSaveInfo": "Інформацію не збережно"
   },
   "navigation": {
     "vacancies": "Вакансії",
@@ -367,15 +368,21 @@
     },
     "saveAddEvent": {
       "title": "Додати подію?",
-      "text_1": "Якщо ви не збережете данні, вони будуть втрачені."
+      "text_1": "Якщо ви не збережете данні, вони будуть втрачені.",
+      "notifyAddEventSuccess": "Подію успішно додано!",
+      "notifyAddEventError": "Не вдалося додати подію."
     },
     "saveEditEvent": {
       "title": "Зберегти зміни?",
-      "text_1": "Якщо ви не збережете данні, вони будуть втрачені."
+      "text_1": "Якщо ви не збережете данні, вони будуть втрачені.",
+      "notifyEditEventSuccess": "Зміни в події успішно збережено!",
+      "notifyEditEventError": "Не вдалося зберегти зміни."
     },
     "deleteEvent": {
       "title": "Видалити подію?",
-      "text_1": "Ця дія буде незворотною!"
+      "text_1": "Ця дія буде незворотною!",
+      "notifyDeleteEventSuccess": "Подію успішно видалено!",
+      "notifyDeleteEventError": "Не вдалося видалити подію."
     }
   },
   "soonSection": {
@@ -388,15 +395,16 @@
     "save": "Зберегти",
     "delete": "Видалити",
     "soonModalNamePlaceholder": "Введіть назву події",
-    "soonModalNameLength": "Назва події має бути від 2 до 30 симв.",
+    "soonModalNameLength": "Назва події має бути від 1 до 50 символів",
     "soonModalNotesPlaceholder": "Місце для нотаток",
-    "soonModalNotesLength": "Нотатки мають бути не більше 200 симв.",
+    "soonModalNotesLength": "Нотатки мають бути не більше 1000 символів",
     "soonModalTimeHours": "Години",
     "soonModalTimeMinutes": "Хвилини",
     "soonModalErrorsRequired": "Це поле є обов'язковим",
     "invalidTimeContents": "Мають містити 1-2 цифри",
     "invalidHours": "Години мають бути від 0 до 24",
-    "invalidMinutes": "Хвилини мають бути від 0 до 59"
+    "invalidMinutes": "Хвилини мають бути від 0 до 59",
+    "invalidPastDate": "Оберіть актуальну дату"
   },
   "calendarTabs": {
     "day": "День",

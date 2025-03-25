@@ -27,9 +27,19 @@ export const StatisticsCalendarDay: React.FC<StatisticsCalendarDayProps> = ({
   const { i18n } = useTranslation();
   const { data: events } = useGetAllEventsQuery();
 
+  const actualEvents = events?.filter((event) => {
+    const dateToday = new Date();
+    dateToday.setHours(0, 0, 0, 0); // Очищаємо час, щоб порівнювати тільки дати
+
+    const eventDate = new Date(event.date);
+    eventDate.setHours(0, 0, 0, 0);
+
+    return eventDate >= dateToday;
+  });
+
   // Формуємо Set із датами подій
   const eventDates = new Set(
-    events?.map((event) => formatDate(event.date)) || []
+    actualEvents?.map((event) => formatDate(event.date)) || []
   );
 
   return (
