@@ -23,9 +23,14 @@ const AddEventModal = () => {
     setValue,
     resetField,
     reset,
+    // watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(getEventSchema()),
+    // defaultValues: {
+    //   hours: "", // Початкове значення для годин
+    //   minutes: "", // Початкове значення для хвилин
+    // },
   });
 
   // const onSubmit = async (data: any) => {
@@ -77,7 +82,12 @@ const AddEventModal = () => {
       className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6"
     >
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
-        <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+        <div>
+          <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+          {errors.date?.message && (
+            <p className="text-color2">{String(errors.date.message)}</p>
+          )}
+        </div>
 
         <div className="flex w-full flex-col font-medium md:w-[350px] xl:w-[445px]">
           <label htmlFor="soonEventName" className="text-xl 3xl:text-2xl">
@@ -129,6 +139,8 @@ const AddEventModal = () => {
                 setValue={setValue}
                 isRequired={true}
                 isCheckButtons={false}
+                maxLength={2}
+                // value={watch("hours") ?? "00"} // Прив'язуємо значення до стану форми, гарантовано не буде undefined
                 className={clsx(
                   "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
                   "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
@@ -140,10 +152,11 @@ const AddEventModal = () => {
                   "xl:text-[32px] xl:font-normal",
                   "2xl:text-[32px]"
                 )}
-                onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                  const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+                onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                  let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+                  if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
                   if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
-                  setValue("hours", Number(value)); // Оновлюємо значення, передаємо число
+                  setValue("hours", Number(value), { shouldValidate: true }); // Оновлюємо значення, передаємо число + тригеримо валідацію одразу при заповнені
                 }}
               />
               <div className="flex h-[60px] w-6 items-center justify-center">

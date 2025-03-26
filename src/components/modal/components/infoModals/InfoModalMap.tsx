@@ -79,7 +79,7 @@ const InfoModalMap = () => {
   }, [addVacanciesSubmit, dataModalForConfirm]);
 
   const handleCloseConfirmation = useCallback((): void => {
-    notifyInfo("Інформацію не збережно"); // test
+    notifyInfo(t("notification.notSaveInfo")); // test
     dispatch(closeConfirmation());
   }, [dispatch]);
 
@@ -126,14 +126,13 @@ const InfoModalMap = () => {
       dispatch(closeConfirmation());
       dispatch(closeModal());
       refetch();
-      notifySuccess("Подію успішно додано!");
+      notifySuccess(t("infoModal.saveAddEvent.notifyAddEventSuccess"));
 
       if (dataModalForConfirm.resetForm) {
         dataModalForConfirm.resetForm();
       }
     } catch (error) {
-      console.error("Помилка додавання події:", error);
-      notifyError("Не вдалося додати подію.");
+      notifyError(t("infoModal.saveAddEvent.notifyAddEventError"));
     }
   }, [dataModalForConfirm, addCreateEvent, dispatch, refetch]);
 
@@ -145,10 +144,9 @@ const InfoModalMap = () => {
       dispatch(closeConfirmation());
       dispatch(closeModal());
       refetch();
-      notifySuccess("Подію успішно видалено!");
+      notifySuccess(t("infoModal.deleteEvent.notifyDeleteEventSuccess"));
     } catch (error) {
-      console.error("Помилка видалення події:", error);
-      notifyError("Не вдалося видалити подію.");
+      notifyError(t("infoModal.deleteEvent.notifyDeleteEventError"));
     }
   }, [dataModalForConfirm, deleteEventById, dispatch, refetch]);
 
@@ -166,10 +164,9 @@ const InfoModalMap = () => {
       dispatch(closeConfirmation());
       dispatch(closeModal());
       refetch();
-      notifySuccess("Зміни в події успішно збережено!");
+      notifySuccess(t("infoModal.saveEditEvent.notifyEditEventSuccess"));
     } catch (error) {
-      console.error("Помилка оновлення події:", error);
-      notifyError("Не вдалося зберегти зміни.");
+      notifyError(t("infoModal.saveEditEvent.notifyEditEventError"));
     }
   }, [dataModalForConfirm, updateEventById, dispatch, refetch]);
 

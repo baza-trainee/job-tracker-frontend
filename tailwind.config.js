@@ -5,6 +5,7 @@ export default {
   theme: {
     screens: {
       sm: "320px",
+      smPlus: "576px", // Нова точка зламу
       md: "768px",
       xl: "1280px",
       "2xl": "1440px",
@@ -17,14 +18,14 @@ export default {
       container: {
         screens: true,
         center: true,
-        padding: {
-          DEFAULT: "1.25rem",
-          sm: "1.25rem",
-          md: "1.5rem",
-          xl: "1.5rem",
-          "2xl": "1.5rem",
-          "3xl": "1.5rem",
-        },
+        // padding: {
+        //   DEFAULT: "1.25rem",
+        //   sm: "1.25rem",
+        //   md: "1.5rem",
+        //   xl: "1.5rem",
+        //   "2xl": "1.5rem",
+        //   "3xl": "1.5rem",
+        // }, // Перенесла в головний index.css, бо тут не коректно відпрацьовує
       },
       boxShadow: {
         button_hover: "0px 0px 6px 0px rgba(198, 231, 255, 0.5)",

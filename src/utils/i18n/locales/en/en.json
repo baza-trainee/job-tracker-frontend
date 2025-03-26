@@ -44,7 +44,8 @@
     "emailCopied": "Email copied",
     "linkCopied": "Link copied",
     "textCopied": "Text copied",
-    "empty": "Empty field"
+    "empty": "Empty field",
+    "notSaveInfo": "Information not saved"
   },
   "navigation": {
     "vacancies": "Vacancies",
@@ -368,15 +369,21 @@
     },
     "saveAddEvent": {
       "title": "Add an event?",
-      "text_1": "If you do not save the data, it will be lost."
+      "text_1": "If you do not save the data, it will be lost.",
+      "notifyAddEventSuccess": "Event added successfully!",
+      "notifyAddEventError": "Failed to add event."
     },
     "saveEditEvent": {
       "title": "Save changes?",
-      "text_1": "If you do not save the data, it will be lost."
+      "text_1": "If you do not save the data, it will be lost.",
+      "notifyEditEventSuccess": "Event changes saved successfully!",
+      "notifyEditEventError": "Could not save changes."
     },
     "deleteEvent": {
       "title": "Delete event?",
-      "text_1": "This action is irreversible!"
+      "text_1": "This action is irreversible!",
+      "notifyDeleteEventSuccess": "Event successfully deleted!",
+      "notifyDeleteEventError": "Failed to delete event."
     }
   },
   "soonSection": {
@@ -389,15 +396,16 @@
     "save": "Save",
     "delete": "Delete",
     "soonModalNamePlaceholder": "Enter the event name",
-    "soonModalNameLength": "Event name must be between 1 and 30 char.",
+    "soonModalNameLength": "Event name must be between 1 and 50 char.",
     "soonModalNotesPlaceholder": "Place for notes",
-    "soonModalNotes": "Notes must be no more than 200 char.",
+    "soonModalNotes": "Notes must be no more than 1000 char.",
     "soonModalTimeHours": "Hours",
     "soonModalTimeMinutes": "Minutes",
     "soonModalErrorsRequired": "This field is required",
     "invalidTimeContents": "Must contain 1-2 digits",
     "invalidHours": "Hours must be between 0 and 24",
-    "invalidMinutes": "Minutes must be between 0 and 59"
+    "invalidMinutes": "Minutes must be between 0 and 59",
+    "invalidPastDate": "Select the current date"
   },
   "calendarTabs": {
     "day": "Day",
