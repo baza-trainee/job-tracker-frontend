@@ -22,7 +22,16 @@ body {
 
 .container {
   max-width: 120rem;
+  /* padding-left: 20px;
+  padding-right: 20px; */
+  @apply px-5 md:px-6;
 }
+/* @media screen and (min-width: 768px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+} */
 
 .custom-hover {
   transition:

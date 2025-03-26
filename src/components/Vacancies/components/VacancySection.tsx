@@ -29,6 +29,7 @@ const VacancySection: FC<VacancySectionProps> = ({
     { min: 1920, max: Infinity, maxLength: 10, rowSize: 5 },
     { min: 1280, max: 1920, maxLength: 8, rowSize: 4 },
     { min: 768, max: 1280, maxLength: 6, rowSize: 3 },
+    { min: 600, max: 768, maxLength: 4, rowSize: 2 }, // TEST Виправити мінімальну ширину!
   ];
 
   function updateLayout() {
@@ -104,12 +105,13 @@ const VacancySection: FC<VacancySectionProps> = ({
     }
   }, []);
 
-  // Кількість пікселів для горизонтального скроллу (ширина картки + відступ)
+  // Кількість пікселів для кроків по горизонтального скроллу (ширина картки + відступ)
   const getScrollAmount = () => {
-    if (window.innerWidth >= 1920) return 314 + 20;
-    if (window.innerWidth >= 1440) return 278 + 20;
-    if (window.innerWidth >= 1280) return 241 + 16;
-    if (window.innerWidth >= 768) return 200 + 12;
+    if (window.innerWidth >= 1920) return 312.8 + 20;
+    if (window.innerWidth >= 1440) return 276 + 20;
+    if (window.innerWidth >= 1280) return 239 + 16;
+    if (window.innerWidth >= 768) return 198.67 + 12;
+    if (window.innerWidth >= 576) return 212 + 12;
     return 232 + 12;
   };
 
@@ -143,11 +145,14 @@ const VacancySection: FC<VacancySectionProps> = ({
       </div>
       <div
         className={clsx(
-          "box-border flex w-full justify-center rounded-[0px_12px_12px_12px] border-2 border-solid px-1 py-6 md:border-2 md:px-4 xl:border-4 xl:p-6",
+          "box-border flex w-full justify-center rounded-[0px_12px_12px_12px] border-2 border-solid md:border-2 xl:border-4",
+          "smPlus:px-4 px-1 py-6 xl:p-6",
           colorSectionBorder
         )}
       >
-        <div className="box-border flex w-full items-center gap-1 md:gap-2 xl:gap-4">
+        {/* <div className="box-border flex w-full items-center gap-1 md:gap-2 xl:gap-4"> */}
+        <div className="smPlus:w-[500px] smPlus:gap-2 box-border flex w-full items-center gap-1 md:w-full xl:gap-4">
+          {/* TEST Виправити мінімальну ширину!*/}
           <button
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
@@ -156,7 +161,12 @@ const VacancySection: FC<VacancySectionProps> = ({
               "cursor-not-allowed opacity-50": isScrollLeftDisabled,
             })}
           >
-            <Icon id="arrow-left" className="h-3 w-3 md:h-6 md:w-6" />
+            {/* <Icon id="arrow-left" className="h-3 w-3 md:h-6 md:w-6" /> */}
+            <Icon
+              id="arrow-left"
+              className="smPlus:h-6 smPlus:w-6 h-3 w-3"
+            />{" "}
+            {/* TEST Виправити мінімальну ширину!*/}
           </button>
 
           <div
@@ -188,7 +198,12 @@ const VacancySection: FC<VacancySectionProps> = ({
               "cursor-not-allowed opacity-50": isScrollRightDisabled,
             })}
           >
-            <Icon id="arrow-right" className="h-3 w-3 md:h-6 md:w-6" />
+            {/* <Icon id="arrow-right" className="h-3 w-3 md:h-6 md:w-6" /> */}
+            <Icon
+              id="arrow-right"
+              className="smPlus:h-6 smPlus:w-6 h-3 w-3"
+            />{" "}
+            {/* TEST Виправити мінімальну ширину!*/}
           </button>
         </div>
       </div>

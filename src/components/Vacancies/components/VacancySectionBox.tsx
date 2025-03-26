@@ -85,7 +85,7 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
           <div
             className={clsx(
               "flex flex-wrap justify-start",
-              "box-border w-[238px] md:w-[624px] xl:w-[1024px] 2xl:w-[1172px] 3xl:w-[1666px]",
+              "smPlus:w-[436px] box-border w-[238px] md:w-[620px] xl:w-[1016px] 2xl:w-[1164px] 3xl:w-[1660px]",
               "gap-x-3 gap-y-2 xl:gap-x-5 xl:gap-y-4 2xl:gap-y-6 3xl:gap-x-6"
             )}
           >

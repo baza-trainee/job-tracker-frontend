@@ -59,11 +59,13 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   }, [searchQuery, sortType, dispatch]);
 
   const [isMobile, setIsMobile] = useState(
-    window.matchMedia("(max-width: 767px)").matches
+    // window.matchMedia("(max-width: 767.9px)").matches
+    window.matchMedia("(max-width: 575.9px)").matches // TEST Виправити мінімальну ширину!
   );
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    // const mediaQuery = window.matchMedia("(max-width: 767.9px)");
+    const mediaQuery = window.matchMedia("(max-width: 575.9px)"); // TEST Виправити мінімальну ширину!
 
     const handleResize = () => setIsMobile(mediaQuery.matches);
 
