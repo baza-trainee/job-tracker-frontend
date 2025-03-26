@@ -18,6 +18,8 @@ import { SearchResults } from "./SearchResults";
 import { useSelector } from "react-redux";
 import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 import { cn } from "@/utils/utils";
+import { vacancyStatusesInfo } from "@/store/slices/statusVacancy/vacancyStatusOperation";
+import { createNewStatuses } from "@/store/slices/statusVacancy/vacancyStatusSlice";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -73,7 +75,6 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-black" />
           </IconButton>
         )}
-
         {!isArchive && !isMobile && (
           <LinkButton variant="ghost" size="small" href="/archive">
             <div className="flex items-center gap-[10px]">
@@ -84,7 +85,16 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             </div>
           </LinkButton>
         )}
-        <AddVacancyButton className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6" />
+        {/* <AddVacancyButton className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6" />
+      </div> */}
+        <AddVacancyButton
+          className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6"
+          buttonText={t("vacanciesHeader.addVacancy")}
+          modalType="addVacancy"
+          onClick={() => {
+            dispatch(createNewStatuses(vacancyStatusesInfo));
+          }}
+        />
       </div>
       {!isDesctop && <SearchResults />}
     </div>
