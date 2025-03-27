@@ -9,13 +9,41 @@ import Icon from "../../Icon/Icon";
 import { IconButton } from "../../buttons/IconButton/IconButton";
 import { closeSearch } from "@/store/slices/searchSlice/searchSlice";
 import { useTranslation } from "react-i18next";
+import {
+  selectNotesQuantity,
+  selectNotesSearchQuery,
+} from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
+import { useLocation } from "react-router-dom";
+import { setNotesSearchQuery } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
 
 export const SearchResults: FC<{ onClear?: () => void }> = ({ onClear }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const query = useSelector(selectSearchQuery);
 
-  const vacanciesQuantity = useSelector(selectVacanciesQuantity);
+  const location = useLocation();
+
+  const variant = location.pathname.replace(/^\/+/, "");
+
+  let query;
+  let vacanciesQuantity = 0;
+  let clearQuery: () => void;
+
+  switch (variant) {
+    case "vacancies":
+      query = useSelector(selectSearchQuery);
+      vacanciesQuantity = useSelector(selectVacanciesQuantity);
+      clearQuery = () => dispatch(setSearchQuery(""));
+
+      break;
+    case "notes":
+      query = useSelector(selectNotesSearchQuery);
+      vacanciesQuantity = useSelector(selectNotesQuantity);
+      clearQuery = () => dispatch(setNotesSearchQuery(""));
+      break;
+
+    default:
+      console.log("default");
+  }
 
   const getSearchResultsText = (count: number): string => {
     if (count === 1 || (count > 20 && count % 10 === 1)) {
@@ -31,7 +59,7 @@ export const SearchResults: FC<{ onClear?: () => void }> = ({ onClear }) => {
   };
 
   const handleClear = () => {
-    dispatch(setSearchQuery(""));
+    clearQuery();
     dispatch(closeSearch());
     if (onClear) onClear();
   };
