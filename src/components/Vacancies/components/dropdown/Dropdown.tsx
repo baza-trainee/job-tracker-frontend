@@ -9,12 +9,14 @@ import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 
 import { DropdowmMarkup } from "./DropdownMarkup";
 import { SortDropdownProps } from "./Dropdown.props";
+import { selectNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
 
 const Dropdown: FC<SortDropdownProps> = ({
   options,
   setValue,
   isInModal,
   name,
+  selector,
   register,
   getValues,
 }) => {
@@ -32,7 +34,7 @@ const Dropdown: FC<SortDropdownProps> = ({
 
   const selectedSortType = getValues
     ? getValues(name)
-    : useSelector(selectSortType);
+    : selector && useSelector(selector);
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => {

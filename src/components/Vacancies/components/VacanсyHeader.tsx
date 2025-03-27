@@ -1,26 +1,27 @@
 import { FC } from "react";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "react-responsive";
 
+import { cn } from "@/utils/utils";
 import { useAppDispatch } from "../../../store/hook";
 import { setSortType } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 import { showDropdown } from "@/store/slices/searchSlice/searchSlice.ts";
+import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 
 import Icon from "../../Icon/Icon";
 import { LinkButton } from "../../buttons/LinkButton/LinkButton";
 import { SearchForm } from "./SearchForm";
 import Dropdown from "./dropdown/Dropdown";
-import { DropdownInfo } from "./dropdown/DropdownInfo";
-
+// import { DropdownVacancyInfo } from "./dropdown/DropdownVacancyInfo";
 import { ICON } from "@/components/Icon/icons";
 import { IconButton } from "@/components/buttons/IconButton/IconButton";
 import { SearchResults } from "./SearchResults";
-import { useSelector } from "react-redux";
-import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
-import { cn } from "@/utils/utils";
 import AddButton from "../../buttons/AddButton/AddButton";
-// import { vacancyStatusesInfo } from "@/store/slices/statusVacancy/vacancyStatusOperation";
-// import { createNewStatuses } from "@/store/slices/statusVacancy/vacancyStatusSlice";
+import { DropdownNotesInfo } from "./dropdown/DropdownNotesInfo";
+import { DropdownVacancyInfo } from "./dropdown/DropdownVacancyInfo";
+import { setNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
+import { selectNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -34,15 +35,21 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
 
   const dispatch = useAppDispatch();
 
+  // const handleSetType = (option: string): void => {
+  //   dispatch(setSortType(option));
+  // };
+
   const handleSetType = (option: string): void => {
-    dispatch(setSortType(option));
+    dispatch(setNotesSortType(option));
   };
 
   const handleShowDropdown = () => {
     dispatch(showDropdown());
   };
 
-  const dropdownInfo = DropdownInfo();
+  // const dropdownInfo = DropdownVacancyInfo();
+
+  const dropdownInfo = DropdownNotesInfo();
 
   return (
     <div className="w-full items-start pb-6 xl:flex xl:justify-between">
@@ -63,6 +70,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             options={dropdownInfo}
             setValue={handleSetType}
             isInModal={false}
+            selector={selectNotesSortType}
             name=""
           />
         </div>
@@ -86,16 +94,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             </div>
           </LinkButton>
         )}
-        {/* <AddVacancyButton className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6" />
-      </div> */}
-        {/* <AddVacancyButton
-          className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6"
-          buttonText={t("vacanciesHeader.addVacancy")}
-          modalType="addVacancy"
-          onClick={() => {
-            dispatch(createNewStatuses(vacancyStatusesInfo));
-          }}
-        /> */}
+
         <AddButton variant="vacancy" />
       </div>
       {!isDesctop && <SearchResults />}

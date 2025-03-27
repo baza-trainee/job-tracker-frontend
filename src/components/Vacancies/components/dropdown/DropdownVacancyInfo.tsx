@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { SortOption } from "./Dropdown.props";
 
-export const DropdownInfo = () => {
+export const DropdownVacancyInfo = () => {
   const { t } = useTranslation();
 
   const mainOptions: SortOption[] = [
