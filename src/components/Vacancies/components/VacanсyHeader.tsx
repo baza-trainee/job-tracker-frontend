@@ -11,15 +11,16 @@ import { LinkButton } from "../../buttons/LinkButton/LinkButton";
 import { SearchForm } from "./SearchForm";
 import Dropdown from "./dropdown/Dropdown";
 import { DropdownInfo } from "./dropdown/DropdownInfo";
-import AddVacancyButton from "../../buttons/AddVacancyButton/AddVacancyButton";
+
 import { ICON } from "@/components/Icon/icons";
 import { IconButton } from "@/components/buttons/IconButton/IconButton";
 import { SearchResults } from "./SearchResults";
 import { useSelector } from "react-redux";
 import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 import { cn } from "@/utils/utils";
-import { vacancyStatusesInfo } from "@/store/slices/statusVacancy/vacancyStatusOperation";
-import { createNewStatuses } from "@/store/slices/statusVacancy/vacancyStatusSlice";
+import AddButton from "../../buttons/AddButton/AddButton";
+// import { vacancyStatusesInfo } from "@/store/slices/statusVacancy/vacancyStatusOperation";
+// import { createNewStatuses } from "@/store/slices/statusVacancy/vacancyStatusSlice";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -87,14 +88,15 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
         )}
         {/* <AddVacancyButton className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6" />
       </div> */}
-        <AddVacancyButton
+        {/* <AddVacancyButton
           className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6"
           buttonText={t("vacanciesHeader.addVacancy")}
           modalType="addVacancy"
           onClick={() => {
             dispatch(createNewStatuses(vacancyStatusesInfo));
           }}
-        />
+        /> */}
+        <AddButton variant="vacancy" />
       </div>
       {!isDesctop && <SearchResults />}
     </div>

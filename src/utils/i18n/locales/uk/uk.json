@@ -163,6 +163,22 @@
     "ENGLISH": "Англійська",
     "EXPERIENCE": "Досвід"
   },
+  "notesHeader": {
+    "search": "Пошук",
+    "sortBy": "Сортувати",
+    "addVacancy": "Додати нотатку",
+    "searchResult": "результат з пошуку",
+    "searchResult234": "результати з пошуку",
+    "searchResults": "результатів з пошуку",
+    "cardFirst": "Великі ідеї починаються з першої нотатки. Запишіть щось важливе!",
+    "cardFirstButton": "Створити першу нотатку"
+  },
+  "notesSortDropdown": {
+    "sortBy": "Сортувати",
+    "newFirst": "Спочатку нові",
+    "oldFirst": "Спочатку старі",
+    "byABC": "За абеткою"
+  },
   "footer": {
     "development": "Розробка Baza Trainee Ukraine ",
     "rights": " © Усі права захищені"
