@@ -165,8 +165,8 @@
   },
   "notesHeader": {
     "search": "Пошук",
-    "sortBy": "Сортувати",
-    "addVacancy": "Додати нотатку",
+
+    "addNote": "Додати нотатку",
     "searchResult": "результат з пошуку",
     "searchResult234": "результати з пошуку",
     "searchResults": "результатів з пошуку",
@@ -177,7 +177,7 @@
     "sortBy": "Сортувати",
     "newFirst": "Спочатку нові",
     "oldFirst": "Спочатку старі",
-    "byABC": "За абеткою"
+    "alphabetically": "За абеткою"
   },
   "footer": {
     "development": "Розробка Baza Trainee Ukraine ",
