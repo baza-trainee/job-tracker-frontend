@@ -3,13 +3,12 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 import { useAppDispatch } from "@/store/hook";
-import { selectSortType } from "@/store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+
 import { hideDropdown } from "@/store/slices/searchSlice/searchSlice";
 import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 
 import { DropdowmMarkup } from "./DropdownMarkup";
 import { SortDropdownProps } from "./Dropdown.props";
-import { selectNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
 
 const Dropdown: FC<SortDropdownProps> = ({
   options,
