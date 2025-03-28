@@ -59,13 +59,11 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   }, [searchQuery, sortType, dispatch]);
 
   const [isMobile, setIsMobile] = useState(
-    // window.matchMedia("(max-width: 767.9px)").matches
-    window.matchMedia("(max-width: 575.9px)").matches // TEST Виправити мінімальну ширину!
+    window.matchMedia("(max-width: 575.9px)").matches
   );
 
   useEffect(() => {
-    // const mediaQuery = window.matchMedia("(max-width: 767.9px)");
-    const mediaQuery = window.matchMedia("(max-width: 575.9px)"); // TEST Виправити мінімальну ширину!
+    const mediaQuery = window.matchMedia("(max-width: 575.9px)");
 
     const handleResize = () => setIsMobile(mediaQuery.matches);
 
@@ -205,14 +203,3 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
 };
 
 export default VacancyMain;
-
-//  <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-//  <VacancyCard colorSectionBG="bg-color2-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-//  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="Kyiv" />
-//  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior FrontEnd" company="Ajax Systems" workType="office" location="kharkiv" />
-//  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Lviv" />
-//  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Kyiv" />
-//  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="QA Engineer" company="Ajax Systems" workType="hybrid" location="Kyiv" />
-//  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Poland" />
-//  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="DUDECODE" workType="remote" location="Germany" />
-//  <VacancyCard colorSectionBG="bg-color7-transparent" titleVacancy="Junior UX/Ui designer" company="SENSE" workType="remote" location="Kyiv" />
