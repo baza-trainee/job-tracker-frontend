@@ -48,10 +48,18 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   const variant = location.pathname.replace(/^\/+/, "") as
     | "notes"
     | "vacancies"
-    | "noNote";
+    | "noNote"
+    | "archive";
 
   switch (variant) {
     case "vacancies":
+      dropdownInfo = DropdownVacancyInfo();
+      handleSetType = (option: string): void => {
+        dispatch(setSortType(option));
+      };
+
+      break;
+    case "archive":
       dropdownInfo = DropdownVacancyInfo();
       handleSetType = (option: string): void => {
         dispatch(setSortType(option));

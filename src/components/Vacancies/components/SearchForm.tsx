@@ -44,6 +44,11 @@ export const SearchForm: React.FC = () => {
       action = (query: string) => setSearchQuery(query);
 
       break;
+    case "archive":
+      selector = selectSearchQuery;
+      action = (query: string) => setSearchQuery(query);
+
+      break;
     case "notes":
       selector = selectNotesSearchQuery;
       action = (query: string) => setNotesSearchQuery(query);

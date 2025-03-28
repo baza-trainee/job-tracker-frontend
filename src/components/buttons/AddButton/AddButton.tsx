@@ -10,7 +10,7 @@ import { vacancyStatusesInfo } from "@/store/slices/statusVacancy/vacancyStatusO
 
 export interface AddButtonProps {
   className?: string;
-  variant: "vacancies" | "notes" | "noNote";
+  variant: "vacancies" | "notes" | "noNote" | "archive";
 }
 
 const AddButton: React.FC<AddButtonProps> = ({ className, variant }) => {
@@ -26,7 +26,11 @@ const AddButton: React.FC<AddButtonProps> = ({ className, variant }) => {
       modalType = "addVacancy";
       buttonText = t("vacanciesHeader.addVacancy");
       onClick = () => dispatch(createNewStatuses(vacancyStatusesInfo));
-
+      break;
+    case "archive":
+      modalType = "addVacancy";
+      buttonText = t("vacanciesHeader.addVacancy");
+      onClick = () => dispatch(createNewStatuses(vacancyStatusesInfo));
       break;
     case "notes":
       modalType = "addVacancy";

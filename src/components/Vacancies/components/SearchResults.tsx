@@ -35,6 +35,12 @@ export const SearchResults: FC<{ onClear?: () => void }> = ({ onClear }) => {
       clearQuery = () => dispatch(setSearchQuery(""));
 
       break;
+    case "archive":
+      query = useSelector(selectSearchQuery);
+      vacanciesQuantity = useSelector(selectVacanciesQuantity);
+      clearQuery = () => dispatch(setSearchQuery(""));
+
+      break;
     case "notes":
       query = useSelector(selectNotesSearchQuery);
       vacanciesQuantity = useSelector(selectNotesQuantity);
