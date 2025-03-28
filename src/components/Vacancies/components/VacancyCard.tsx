@@ -38,11 +38,7 @@ const VacancyCard: FC<VacancyCardProps> = ({
         "transition-all duration-300 focus:border-iconHover focus:outline-none focus-visible:border-iconHover active:border-iconHover",
         colorSectionBG,
         colorHoverBG,
-        // "w-[238px] md:w-[200px] xl:w-[241px] 2xl:w-[278px] 3xl:w-[314px]"
-        "smPlus:w-[212px] w-[238px] md:w-[198.67px] xl:w-[239px] 2xl:w-[276px] 3xl:w-[312.8px]",
-        {
-          /* TEST Виправити мінімальну ширину!*/
-        }
+        "w-[238px] smPlus:w-[212px] md:w-[198.67px] xl:w-[239px] 2xl:w-[276px] 3xl:w-[312.8px]"
       )}
       onClick={onClick}
       role="button"
@@ -67,4 +63,3 @@ const VacancyCard: FC<VacancyCardProps> = ({
 };
 
 export default VacancyCard;
-// border border-transparent

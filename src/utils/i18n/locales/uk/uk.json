@@ -401,6 +401,7 @@
     "soonModalTimeHours": "Години",
     "soonModalTimeMinutes": "Хвилини",
     "soonModalErrorsRequired": "Це поле є обов'язковим",
+    "requiredHours": "Введіть час події",
     "invalidTimeContents": "Мають містити 1-2 цифри",
     "invalidHours": "Години мають бути від 0 до 24",
     "invalidMinutes": "Хвилини мають бути від 0 до 59",
@@ -418,5 +419,14 @@
   "loading": {
     "loading": "Завантажуємо",
     "error": "Помилка отримання даних"
+  },
+  "dayOfWeek": {
+    "Mon": "Пн",
+    "Tue": "Вт",
+    "Wed": "Ср",
+    "Thu": "Чт",
+    "Fri": "Пт",
+    "Sat": "Сб",
+    "Sun": "Нд"
   }
 }

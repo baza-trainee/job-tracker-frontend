@@ -402,6 +402,7 @@
     "soonModalTimeHours": "Hours",
     "soonModalTimeMinutes": "Minutes",
     "soonModalErrorsRequired": "This field is required",
+    "requiredHours": "Enter event time",
     "invalidTimeContents": "Must contain 1-2 digits",
     "invalidHours": "Hours must be between 0 and 24",
     "invalidMinutes": "Minutes must be between 0 and 59",
@@ -419,5 +420,14 @@
   "loading": {
     "loading": "Loading",
     "error": "Error fetching data"
+  },
+  "dayOfWeek": {
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun"
   }
 }
