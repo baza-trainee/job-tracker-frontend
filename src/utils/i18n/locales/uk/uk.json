@@ -33,6 +33,9 @@
   },
   "notification": {
     "updatedSuccess": "Успішно оновлено",
+    "updatedError": "Не вдалося оновити",
+    "deletedError": "Не вдалося видалити",
+    "addedError": "Не вдалося додати",
     "updatedErrorLink": "Введіть коректне посилання",
     "updatedPhone": "Введіть коректний номер телефону",
     "updatedEmail": "Введіть коректну електронну адресу",
@@ -45,7 +48,15 @@
     "linkCopied": "Посилання скопійовано",
     "textCopied": "Текст скопійовано",
     "empty": "Відсутні дані для копіювання",
-    "notSaveInfo": "Інформацію не збережно"
+    "notSaveInfo": "Інформацію не збережно",
+    "fieldDeleted": "Поле видалено",
+    "resumeDeleted": "Резюме видалено",
+    "projectDeleted": "Проєкт видалено",
+    "letterDeleted": "Лист видалено",
+    "fieldAdded": "Поле додано",
+    "resumeAdded": "Резюме додано",
+    "projectAdded": "Проєкт додано",
+    "letterAdded": "Лист додано"
   },
   "navigation": {
     "vacancies": "Вакансії",

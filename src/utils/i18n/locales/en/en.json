@@ -33,6 +33,9 @@
   },
   "notification": {
     "updatedSuccess": "Updated successfully",
+    "updatedError": "Failed to update",
+    "deletedError": "Failed to delete",
+    "addedError": "Failed to add",
     "updatedErrorLink": "Enter a valid link",
     "updatedPhone": "Enter a valid phone number",
     "updatedEmail": "Enter a valid email",
@@ -45,7 +48,15 @@
     "linkCopied": "Link copied",
     "textCopied": "Text copied",
     "empty": "Empty field",
-    "notSaveInfo": "Information not saved"
+    "notSaveInfo": "Information not saved",
+    "fieldDeleted": "Field deleted",
+    "resumeDeleted": "Resume deleted",
+    "projectDeleted": "Project deleted",
+    "letterDeleted": "Letter deleted",
+    "fieldAdded": "Field added",
+    "resumeAdded": "Resume added",
+    "projectAdded": "Project added",
+    "letterAdded": "Letter added"
   },
   "navigation": {
     "vacancies": "Vacancies",
