@@ -152,7 +152,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           isDropdownOpen
             ? isInModal
               ? "z-[20] h-fit"
-              : "h-[203px] sm:box-content smOnly:h-fit"
+              : "h-fit sm:box-content smOnly:h-fit"
             : isInModal
               ? "h-[36px] rounded-lg hover:border-iconHover hover:bg-backgroundMain md:h-[44px]"
               : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary",
@@ -198,7 +198,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
             isDropdownOpen
               ? isInModal
                 ? "visible h-fit opacity-100"
-                : "visible h-[158px] opacity-100 smOnly:h-fit"
+                : "visible h-fit opacity-100 smOnly:h-fit"
               : "sr-only m-0 h-0 opacity-0"
           )}
         >

@@ -1,36 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Vacancy } from "../../../types/vacancies.types";
 
-// interface Status {
-//   id: string;
-//   name: "saved" | "resume" | "hr" | "test" | "tech" | "reject" | "offer";
-//   date: string;
-//   rejectReason: string | null;
-//   resumeId: string | null;
-// }
-
-// vacancyId?: string;
-// vacancy: Vacancy;
-// name: StatusName;
-// date: string;
-// rejectReason?: RejectReason;
-// resumeId?: string;
-
-// export interface Vacancy {
-//   id: string;
-//   vacancy: string;
-//   link: string;
-//   communication: string;
-//   company: string;
-//   location: string;
-//   work_type: "office" | "remote" | "hybrid";
-//   note: string;
-//   isArchived: boolean;
-//   createdAt: string;
-//   updatedAt: string;
-//   statuses: VacancyStatus[];
-// }
-
 interface FilteredVacanciesState {
   filteredVacancies: Vacancy[];
   searchQuery: string;

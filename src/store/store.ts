@@ -3,6 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query/react";
 import { profileQuerySlice } from "./querySlices/profileQuerySlice.ts";
 import { vacanciesQuerySlice } from "./querySlices/vacanciesQuerySlice.ts";
 import filteredVacanciesReducer from "./slices/filteredVacanciesSlice/filteredVacanciesSlice.ts";
+import filteredNotesReducer from "./slices/filteredNotesSlice/filteredNotesSlice.ts";
 import modalReduser from "./slices/modalSlice/modalSlice.ts";
 import authReduser from "./slices/authSlice/authSlice.ts";
 import themeReducer from "./slices/themeSlice/themeSlice.ts";
@@ -59,6 +60,7 @@ export const store = configureStore({
     [authPrivateQuerySlice.reducerPath]: authPrivateQuerySlice.reducer,
     [authPublicQuerySlice.reducerPath]: authPublicQuerySlice.reducer,
     filteredVacancies: filteredVacanciesReducer,
+    filteredNotes: filteredNotesReducer,
     modal: modalReduser,
     auth: authPersistedReducer,
     theme: themePersistedReducer,
