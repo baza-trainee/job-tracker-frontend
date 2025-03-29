@@ -50,9 +50,15 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
     afterDraw: (chart: any) => {
       const xAxis = chart.scales.x; // Отримуємо шкалу X
       const ctx = chart.ctx;
+      if (!xAxis) return;
+
+      // console.log("Selected Index:", selectedIndex);
+      // console.log("Chart Labels:", chart.data.labels);
 
       xAxis.ticks.forEach((_: any, index: number) => {
         const x = xAxis.getPixelForTick(index); // Позиція мітки
+        if (isNaN(x) || x < xAxis.left || x > xAxis.right) return; // Уникаємо помилок рендеру
+
         const isHighlighted = index === selectedIndex;
 
         // Малюємо підкреслення
@@ -61,16 +67,60 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
         ctx.moveTo(x - 44, xAxis.bottom + 5); // Початок лінії
         ctx.lineTo(x + 44, xAxis.bottom + 5); // Кінець лінії
         ctx.lineWidth = 1;
-        ctx.strokeStyle = isHighlighted ? "#436B88" : "transparent"; // Підкреслення лише для вибраного
+        ctx.strokeStyle = isHighlighted ? "#436B88" : "rgba(0,0,0,0)"; // Підкреслення лише для вибраного
         ctx.stroke();
         ctx.restore();
       });
     },
   };
 
+  // Кастомний плагін для фону під легендою
+  const customLegendPlugin = {
+    id: "customLegendBackground",
+    beforeDraw: (chart: any) => {
+      const { ctx, legend } = chart;
+      // if (!legend) return;
+      if (!legend || !legend.legendItems || !legend.legendHitBoxes) return; // Перевіряємо, чи є легенда
+
+      ctx.save();
+
+      // Отримуємо межі легенди
+      let minLeft = Infinity;
+      let maxRight = -Infinity;
+      let minTop = Infinity;
+      let maxBottom = -Infinity;
+
+      legend.legendHitBoxes.forEach((hitBox: any) => {
+        minLeft = Math.min(minLeft, hitBox.left);
+        maxRight = Math.max(maxRight, hitBox.left + hitBox.width);
+        minTop = Math.min(minTop, hitBox.top);
+        maxBottom = Math.max(maxBottom, hitBox.top + hitBox.height);
+      });
+
+      const padding = 24;
+      const borderRadius = 12; // Радіус закруглення
+
+      const bgLeft = minLeft - padding;
+      const bgTop = minTop - padding + 10;
+      const bgWidth = maxRight - minLeft + padding * 2;
+      const bgHeight = maxBottom - minTop + padding * 2 - 20;
+
+      ctx.fillStyle = "rgba(247, 248, 251, 1)";
+      ctx.beginPath();
+      ctx.roundRect(bgLeft, bgTop, bgWidth, bgHeight, borderRadius);
+      ctx.fill();
+      ctx.restore();
+    },
+  };
+
   const chartOptions: ExtendedChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        bottom: 40,
+      },
+    },
     scales: {
       x: {
         ticks: {
@@ -79,9 +129,6 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
               typeof value === "number" ? this.getLabelForValue(value) : value;
             return label;
           },
-          // font: {
-          //   size: 20,
-          // },
           font: (context) => {
             const width = context.chart.width;
             // console.log("Chart width:", width);
@@ -91,22 +138,14 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
             };
           },
           color: "rgba(51, 51, 51, 1)",
-          // color: (ctx) => {
-          //   const label = ctx.tick.label;
-          //   const selected = (ctx.chart.config.options as any).selectedLabel; // Доступ до обраного
-          //   return label === selected ? "#4CAF50" : "rgba(0, 0, 0, 0.7)"; // Колір для обраного
         },
         border: {
           display: false, // Прибираємо рамку осі X
         },
-        // },
       },
       y: {
         beginAtZero: true,
         ticks: {
-          // font: {
-          //   size: 16,
-          // },
           font: (context) => {
             const width = context.chart.width;
             return {
@@ -123,12 +162,9 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
         display: false, // Вимикає підписи на стовпчиках
       },
       legend: {
+        // display: false, // Вимикаємо стандартну легенду
         position: "bottom",
         labels: {
-          // font: {
-          //   size: 20,
-          //   weight: 500,
-          // },
           font: (context) => {
             const width = context.chart.width;
             return {
@@ -141,14 +177,6 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
           boxHeight: 30,
           padding: 24,
           color: "rgba(51, 51, 51, 1)",
-          // generateLabels: (chart) => {
-          //   const originalLabels = ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
-          //   return originalLabels.map((label) => ({
-          //     ...label,
-          //     pointStyle: "rectRounded", // робимо закруглені бокси
-          //     radius: 4, // закруглення кутів (немає в доках, але працює)
-          //   }));
-          // },
         },
       },
       tooltip: {
@@ -166,8 +194,12 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
   };
 
   return (
-    <div className={"mt-4 min-h-[406px] w-full"}>
-      <Bar data={chartData} options={chartOptions} plugins={[customPlugin]} />
+    <div className={"mt-4 min-h-[406px] w-full overflow-visible"}>
+      <Bar
+        data={chartData}
+        options={chartOptions}
+        plugins={[customPlugin, customLegendPlugin]}
+      />
     </div>
   );
 };
