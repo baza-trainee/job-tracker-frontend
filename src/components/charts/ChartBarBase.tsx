@@ -44,16 +44,13 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
   const selectedLabel = labels[selectedIndex]; // Визначаємо обране значення по осі x
   const chartData = { labels, datasets };
 
-  // Кастомний плагін для підкреслення
+  // Кастомний плагін для підкреслення обраної дати на осі x
   const customPlugin = {
     id: "highlightTick",
     afterDraw: (chart: any) => {
       const xAxis = chart.scales.x; // Отримуємо шкалу X
       const ctx = chart.ctx;
       if (!xAxis) return;
-
-      // console.log("Selected Index:", selectedIndex);
-      // console.log("Chart Labels:", chart.data.labels);
 
       xAxis.ticks.forEach((_: any, index: number) => {
         const x = xAxis.getPixelForTick(index); // Позиція мітки
@@ -74,51 +71,12 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
     },
   };
 
-  // Кастомний плагін для фону під легендою
-  const customLegendPlugin = {
-    id: "customLegendBackground",
-    beforeDraw: (chart: any) => {
-      const { ctx, legend } = chart;
-      // if (!legend) return;
-      if (!legend || !legend.legendItems || !legend.legendHitBoxes) return; // Перевіряємо, чи є легенда
-
-      ctx.save();
-
-      // Отримуємо межі легенди
-      let minLeft = Infinity;
-      let maxRight = -Infinity;
-      let minTop = Infinity;
-      let maxBottom = -Infinity;
-
-      legend.legendHitBoxes.forEach((hitBox: any) => {
-        minLeft = Math.min(minLeft, hitBox.left);
-        maxRight = Math.max(maxRight, hitBox.left + hitBox.width);
-        minTop = Math.min(minTop, hitBox.top);
-        maxBottom = Math.max(maxBottom, hitBox.top + hitBox.height);
-      });
-
-      const padding = 24;
-      const borderRadius = 12; // Радіус закруглення
-
-      const bgLeft = minLeft - padding;
-      const bgTop = minTop - padding + 10;
-      const bgWidth = maxRight - minLeft + padding * 2;
-      const bgHeight = maxBottom - minTop + padding * 2 - 20;
-
-      ctx.fillStyle = "rgba(247, 248, 251, 1)";
-      ctx.beginPath();
-      ctx.roundRect(bgLeft, bgTop, bgWidth, bgHeight, borderRadius);
-      ctx.fill();
-      ctx.restore();
-    },
-  };
-
   const chartOptions: ExtendedChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
       padding: {
-        bottom: 40,
+        bottom: 8,
       },
     },
     scales: {
@@ -162,22 +120,22 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
         display: false, // Вимикає підписи на стовпчиках
       },
       legend: {
-        // display: false, // Вимикаємо стандартну легенду
-        position: "bottom",
-        labels: {
-          font: (context) => {
-            const width = context.chart.width;
-            return {
-              size: width < 720 ? 14 : width < 1027 ? 16 : 20,
-              weight: width >= 720 ? 500 : 400,
-            };
-          },
-          usePointStyle: false,
-          boxWidth: 70,
-          boxHeight: 30,
-          padding: 24,
-          color: "rgba(51, 51, 51, 1)",
-        },
+        display: false, // Вимикаємо стандартну легенду
+        // position: "bottom",
+        // labels: {
+        //   font: (context) => {
+        //     const width = context.chart.width;
+        //     return {
+        //       size: width < 720 ? 14 : width < 1027 ? 16 : 20,
+        //       weight: width >= 720 ? 500 : 400,
+        //     };
+        //   },
+        //   usePointStyle: false,
+        //   boxWidth: 70,
+        //   boxHeight: 30,
+        //   padding: 24,
+        //   color: "rgba(51, 51, 51, 1)",
+        // },
       },
       tooltip: {
         mode: "index",
@@ -195,11 +153,7 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
 
   return (
     <div className={"mt-4 min-h-[406px] w-full overflow-visible"}>
-      <Bar
-        data={chartData}
-        options={chartOptions}
-        plugins={[customPlugin, customLegendPlugin]}
-      />
+      <Bar data={chartData} options={chartOptions} plugins={[customPlugin]} />
     </div>
   );
 };
