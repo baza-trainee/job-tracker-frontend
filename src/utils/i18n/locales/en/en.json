@@ -173,7 +173,13 @@
     "searchResult234": "search results",
     "searchResults": "search results",
     "cardFirst": "Great ideas start with the first note. Write down something important!",
-    "cardFirstButton": "Create your first note"
+    "cardFirstButton": "Create your first note",
+
+    "newNote": "New note",
+    "noteName": "Name file",
+    "noteText": "Text",
+    "editNote": "Edit note",
+    "createNote": "Create"
   },
   "notesSortDropdown": {
     "sortBy": "Sort by",

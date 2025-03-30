@@ -31,8 +31,8 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
     <div className={className}>
       <div
         className={clsx(
-          "relative top-1 z-0 flex w-fit max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl px-6 py-3",
-          "sm:top-[1px] sm:min-h-[20px] sm:min-w-[100px] sm:px-4 sm:py-2",
+          "relative z-0 flex w-fit max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl",
+          "top-[1px] sm:min-h-[20px] sm:min-w-[100px] px-4 py-2",
           "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
           backgroundColorModal || modalData?.bgColor || "bg-white" // Тимчасово, пошукати далі
         )}
@@ -48,9 +48,9 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
         className={clsx(
           //alex mb-11
           "z-0 mb-11 flex h-auto w-[280px] md:w-auto",
-          "flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-4 shadow-form_shadow",
+          "flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-2 shadow-form_shadow md:p-4",
           // alex p-2 ---> md:p-5
-          "sm:border-[2px]",
+          "border-[2px]",
           "md:border-[4px]",
           borderColorModal || modalData?.borderColor || "bg-white", // Тимчасово, пошукати далі
           modalData?.paddingAddEventModal || "sm:p-2" // Тимчасово, пошукати далі
@@ -60,7 +60,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
         <div
           className={clsx(
             "flex items-center justify-center",
-            "sm:min-h-[217px] sm:min-w-[260px]",
+            "min-h-[217px] w-full max-w-[260px]",
             "md:min-h-[237px] md:min-w-[449px]",
             "xl:min-h-[292px] xl:min-w-[588px] xl:px-3",
             "3xl:min-h-[320px]"

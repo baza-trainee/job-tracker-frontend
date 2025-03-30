@@ -222,10 +222,15 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-  addNotes: {
-    content: <NotesModal type="addNotes"/>,
-    nameModal: "addVacancy.nameModal.name",
+  addNote: {
+    content: <NotesModal type="addNote" />,
+    nameModal: "notesHeader.newNote",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
-  }
+  },
+  saveNote: {
+    content: <InfoModal type="saveNote" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
 };

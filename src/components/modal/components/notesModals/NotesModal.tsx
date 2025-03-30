@@ -1,56 +1,32 @@
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "@/components/inputs/Input/Input";
 import { Textarea } from "@/components/Textarea/Textarea";
 import { Button } from "@/components/buttons/Button/Button";
 import Icon from "@/components/Icon/Icon";
+import useNotes from "./useNotes";
+import { useAppDispatch } from "@/store/hook";
+import { openConfirmation } from "@/store/slices/modalSlice/modalSlice";
+import { useTranslation } from "react-i18next";
 
 type NotesProps = {
-  type: "addNotes" | "refreshNotes";
+  type: "addNote" | "updateNote";
 };
 
-export const NotesSchema = z.object({
-  notesName: z.string().min(1, "Має містити більше одного символа"),
-  notesText: z.string().min(1, "Має містити більше одного символа"),
-});
-
 const NotesModal = ({ type }: NotesProps) => {
-  const isAddNotes = type === "addNotes";
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const isAddNote = type === "addNote";
 
-  const {
-    register,
-    resetField,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<z.infer<typeof NotesSchema>>({
-    defaultValues: {
-      notesName: "",
-      notesText: "",
-    },
-    resolver: zodResolver(NotesSchema),
-    mode: "onSubmit",
-  });
+  const { register, resetField, handleSubmit, errors } = useNotes(type);
 
-  const onSubmit: SubmitHandler<z.infer<typeof NotesSchema>> = async (data) => {
-    console.log("note Submit", data);
-    try {
-      //   setIsSearching(true);
-      //   const trimmedQuery = data.query.trim();
-      //   if (trimmedQuery && trimmedQuery !== queryFromRedux) {
-      //     handleSearch(trimmedQuery);
-      //   }
-      //   setIsSearching(false);
-    } catch (error) {
-      //   console.error("Search error:", error);
-      //   setIsSearching(false);
-      //   setFocus("query", { shouldSelect: false });
-    }
-  };
-
-  const handleButton = () => {
-    console.log("1");
-    handleSubmit(onSubmit)();
+  const handleButton = (typeConfirmation: "saveNote" | "deleteNote") => {
+    handleSubmit((data) => {
+      dispatch(
+        openConfirmation({
+          typeConfirmation,
+          dataConfirmation: data,
+        })
+      );
+    })();
   };
   return (
     <div className="mb-4 mt-10 w-full text-left xl:my-12 xl:mb-4 xl:mt-10">
@@ -59,9 +35,9 @@ const NotesModal = ({ type }: NotesProps) => {
           <Input
             register={register}
             resetField={resetField}
-            key="notesName"
-            name="notesName"
-            placeholder={"Назва файлу"}
+            key="noteName"
+            name="noteName"
+            placeholder={t("notesHeader.noteName")}
             type="text"
             className=""
             errors={errors}
@@ -69,24 +45,49 @@ const NotesModal = ({ type }: NotesProps) => {
           <Textarea
             register={register}
             resetField={resetField}
-            key="notesText"
-            name="notesText"
-            placeholder="Tекст"
+            key="noteText"
+            name="noteText"
+            placeholder={t("notesHeader.noteText")}
             className=""
             errors={errors}
           />
 
           <div className="flex flex-col justify-center gap-2 md:flex-row xl:mt-4">
-            <Button
-              type="button"
-              className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
-              variant="ghost"
-              size="big"
-              onClick={() => handleButton()}
-            >
-              {"Створити"}
-              <Icon id={"plus"} className="ml-3 h-6 w-6" />
-            </Button>
+            {isAddNote ? (
+              <Button
+                type="button"
+                className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
+                variant="ghost"
+                size="big"
+                onClick={() => handleButton("saveNote")}
+              >
+                {t("notesHeader.createNote")}
+                <Icon id={"plus"} className="ml-3 h-6 w-6" />
+              </Button>
+            ) : (
+              <>
+                <Button
+                  type="button"
+                  className="w-full md:mx-auto xl:mx-0 xl:w-auto"
+                  variant="ghost"
+                  size="small"
+                  onClick={() => handleButton("deleteNote")}
+                >
+                  {t("addVacancy.form.delete")}
+                  <Icon id={"delete"} className="ml-3 h-6 w-6" />
+                </Button>
+                <Button
+                  type="button"
+                  className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
+                  variant="ghost"
+                  size="big"
+                  onClick={() => handleButton("saveNote")}
+                >
+                  {t("addVacancy.form.save")}
+                  <Icon id={"check-box"} className="ml-3 h-6 w-6" />
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </form>
@@ -95,12 +96,3 @@ const NotesModal = ({ type }: NotesProps) => {
 };
 
 export default NotesModal;
-
-// const dispatch = useAppDispatch();
-// const addNotes = () => {
-//   dispatch(
-//     openModal({
-//       typeModal: "addNotes",
-//     })
-//   );
-// };
