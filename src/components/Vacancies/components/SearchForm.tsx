@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -14,20 +14,51 @@ import { cn } from "../../../utils/utils";
 import Icon from "../../Icon/Icon";
 import { SearchResults } from "./SearchResults";
 
+import { selectNotesSearchQuery } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
+import { setNotesSearchQuery } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
+import { useLocation } from "react-router-dom";
+
 const SearchSchema = z.object({
   query: z.string().min(1, "Search query cannot be empty"),
 });
 
 type SearchFormData = z.infer<typeof SearchSchema>;
 
-export const SearchForm: FC = () => {
+export const SearchForm: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isDesctop = useMediaQuery({ minWidth: 1280 });
 
   const [isSearching, setIsSearching] = useState(false);
 
-  const queryFromRedux = useSelector(selectSearchQuery);
+  let action: (arg0: string) => any;
+  let selector = selectSearchQuery;
+
+  const location = useLocation();
+
+  const variant = location.pathname.replace(/^\/+/, "");
+
+  switch (variant) {
+    case "vacancies":
+      selector = selectSearchQuery;
+      action = (query: string) => setSearchQuery(query);
+
+      break;
+    case "archive":
+      selector = selectSearchQuery;
+      action = (query: string) => setSearchQuery(query);
+
+      break;
+    case "notes":
+      selector = selectNotesSearchQuery;
+      action = (query: string) => setNotesSearchQuery(query);
+      break;
+
+    default:
+      console.log("default");
+  }
+
+  const queryFromRedux = useSelector(selector);
 
   const {
     register,
@@ -44,7 +75,7 @@ export const SearchForm: FC = () => {
   });
 
   const handleSearch = (query: string) => {
-    dispatch(setSearchQuery(query));
+    dispatch(action(query));
   };
 
   const onSubmit: SubmitHandler<SearchFormData> = async (data) => {

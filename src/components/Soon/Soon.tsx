@@ -10,14 +10,6 @@ import { useGetAllEventsQuery } from "../../store/querySlices/eventsQuerySlice.t
 import { Event as EventData } from "@/types/event.types";
 import clsx from "clsx";
 
-// export interface EventData {
-//   id: string;
-//   name: string;
-//   text?: string;
-//   date: string;
-//   time: string;
-// }
-
 export const Soon = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -55,16 +47,6 @@ export const Soon = () => {
     window.addEventListener("resize", checkScroll);
     return () => window.removeEventListener("resize", checkScroll);
   }, [events]);
-
-  // const events = [
-  //     { day: "Пн", date: "22.01", title: "Співбесіда в Google Співбесіда в Google", time: "12:30" },
-  //     { day: "Ср", date: "23.01", title: "Співбесіда в Amazon Співбесіда ", time: "10:00" },
-  //     { day: "Пт", date: "25.01", title: "Співбесіда в Microsoft", time: "14:45" },
-  //     // { day: "Пн", date: "22.01", title: "Співбесіда в Google", time: "12:30" },
-  //     // { day: "Ср", date: "23.01", title: "Співбесіда в Amazon", time: "10:00" },
-  //     // { day: "Пт", date: "25.01", title: "Співбесіда в Microsoft", time: "14:45" },
-  //     // { day: "Пт", date: "25.01", title: "Співбесіда в Microsoft", time: "14:45" },
-  // ];
 
   const handleOpenModal = () => {
     dispatch(openModal({ isModalOpen: true, typeModal: "addEvent" }));
@@ -123,32 +105,27 @@ export const Soon = () => {
 
           {!isLoading && !error && (
             <ul className="w-full">
-              {/* {events.map((event, index) => (
-              <li key={index}>
-                <CardSoon
-                  day={event.day}
-                  date={event.date}
-                  title={event.title}
-                  time={event.time}
-                />
-              </li>
-            ))} */}
-              {actualEvents?.map((event) => (
-                <li key={event.id}>
-                  <CardSoon
-                    day={new Date(event.date).toLocaleString("uk-Ua", {
-                      weekday: "short",
-                    })}
-                    date={new Date(event.date).toLocaleString("uk-Ua", {
-                      day: "2-digit",
-                      month: "2-digit",
-                    })}
-                    title={event.name}
-                    time={event.time.slice(0, 5)}
-                    onClick={() => handleOpenEditModal(event)}
-                  />
-                </li>
-              ))}
+              {/* Локалізацію day потрібно зробити нижче */}
+              {actualEvents?.map((event) => {
+                const dayKey = new Date(event.date)
+                  .toLocaleString("en-US", { weekday: "short" }) // Отримуємо англійську назву дня в якості ключа локалізації
+                  .replace(".", ""); // у деяких локалях є зайва крапка "Thu." замість "Thu"
+
+                return (
+                  <li key={event.id}>
+                    <CardSoon
+                      day={t(`dayOfWeek.${dayKey}`)}
+                      date={new Date(event.date).toLocaleString("uk-Ua", {
+                        day: "2-digit",
+                        month: "2-digit",
+                      })}
+                      title={event.name}
+                      time={event.time.slice(0, 5)}
+                      onClick={() => handleOpenEditModal(event)}
+                    />
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>

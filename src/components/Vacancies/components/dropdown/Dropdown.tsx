@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 import { useAppDispatch } from "@/store/hook";
-import { selectSortType } from "@/store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
+
 import { hideDropdown } from "@/store/slices/searchSlice/searchSlice";
 import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 
@@ -15,6 +15,7 @@ const Dropdown: FC<SortDropdownProps> = ({
   setValue,
   isInModal,
   name,
+  selector,
   register,
   getValues,
 }) => {
@@ -32,7 +33,7 @@ const Dropdown: FC<SortDropdownProps> = ({
 
   const selectedSortType = getValues
     ? getValues(name)
-    : useSelector(selectSortType);
+    : selector && useSelector(selector);
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => {

@@ -23,7 +23,7 @@ const VacancyCardFirst: FC<VacancyCardFirstProps> = ({
         "px-2 py-3 xl:px-3",
         colorSectionBG,
         colorHoverBG,
-        "w-[232px] md:w-[200px] xl:w-[241px] 2xl:w-[278px] 3xl:w-[314px]"
+        "w-[238px] smPlus:w-[212px] md:w-[198.67px] xl:w-[239px] 2xl:w-[276px] 3xl:w-[312.8px]"
       )}
       onClick={onClick}
     >

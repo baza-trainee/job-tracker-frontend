@@ -165,6 +165,22 @@
     "ENGLISH": "English",
     "EXPERIENCE": "Experience"
   },
+  "notesHeader": {
+    "search": "Search",
+
+    "addNote": "Add a note",
+    "searchResult": "search result",
+    "searchResult234": "search results",
+    "searchResults": "search results",
+    "cardFirst": "Great ideas start with the first note. Write down something important!",
+    "cardFirstButton": "Create your first note"
+  },
+  "notesSortDropdown": {
+    "sortBy": "Sort by",
+    "newFirst": "New first",
+    "oldFirst": "Old first",
+    "alphabetically": "Alphabetically"
+  },
   "footer": {
     "development": "Development of Baza Trainee Ukraine ",
     "rights": " © All rights have been reserved"
@@ -402,6 +418,7 @@
     "soonModalTimeHours": "Hours",
     "soonModalTimeMinutes": "Minutes",
     "soonModalErrorsRequired": "This field is required",
+    "requiredHours": "Enter event time",
     "invalidTimeContents": "Must contain 1-2 digits",
     "invalidHours": "Hours must be between 0 and 24",
     "invalidMinutes": "Minutes must be between 0 and 59",
@@ -414,10 +431,19 @@
   },
   "chartBar": {
     "sent": "Sent resume",
-    "responses": "received responses"
+    "responses": "Received responses"
   },
   "loading": {
     "loading": "Loading",
     "error": "Error fetching data"
+  },
+  "dayOfWeek": {
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun"
   }
 }

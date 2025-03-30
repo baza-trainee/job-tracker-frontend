@@ -1,23 +1,29 @@
 import { FC } from "react";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "react-responsive";
 
+import { cn } from "@/utils/utils";
 import { useAppDispatch } from "../../../store/hook";
 import { setSortType } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 import { showDropdown } from "@/store/slices/searchSlice/searchSlice.ts";
+import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 
 import Icon from "../../Icon/Icon";
 import { LinkButton } from "../../buttons/LinkButton/LinkButton";
 import { SearchForm } from "./SearchForm";
 import Dropdown from "./dropdown/Dropdown";
-import { DropdownInfo } from "./dropdown/DropdownInfo";
-import AddVacancyButton from "../../buttons/AddVacancyButton/AddVacancyButton";
+
 import { ICON } from "@/components/Icon/icons";
 import { IconButton } from "@/components/buttons/IconButton/IconButton";
 import { SearchResults } from "./SearchResults";
-import { useSelector } from "react-redux";
-import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
-import { cn } from "@/utils/utils";
+import AddButton from "../../buttons/AddButton/AddButton";
+import { DropdownNotesInfo } from "./dropdown/DropdownNotesInfo";
+import { DropdownVacancyInfo } from "./dropdown/DropdownVacancyInfo";
+import { setNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
+import { selectNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
+import { useLocation } from "react-router-dom";
+import { Options } from "./dropdown/Dropdown.props";
 
 export type VacancyProps = {
   isArchive: boolean;
@@ -31,15 +37,49 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
 
   const dispatch = useAppDispatch();
 
-  const handleSetType = (option: string): void => {
-    dispatch(setSortType(option));
+  let handleSetType: (option: string) => void = () => {};
+  let dropdownInfo: Options = {
+    mainOptions: [],
+    buttonOption: { id: "", label: "" },
   };
+
+  const location = useLocation();
+
+  const variant = location.pathname.replace(/^\/+/, "") as
+    | "notes"
+    | "vacancies"
+    | "noNote"
+    | "archive";
+
+  switch (variant) {
+    case "vacancies":
+      dropdownInfo = DropdownVacancyInfo();
+      handleSetType = (option: string): void => {
+        dispatch(setSortType(option));
+      };
+
+      break;
+    case "archive":
+      dropdownInfo = DropdownVacancyInfo();
+      handleSetType = (option: string): void => {
+        dispatch(setSortType(option));
+      };
+
+      break;
+    case "notes":
+      dropdownInfo = DropdownNotesInfo();
+      handleSetType = (option: string): void => {
+        dispatch(setNotesSortType(option));
+      };
+      break;
+
+    default:
+      console.log("default");
+  }
 
   const handleShowDropdown = () => {
     dispatch(showDropdown());
   };
-
-  const dropdownInfo = DropdownInfo();
 
   return (
     <div className="w-full items-start pb-6 xl:flex xl:justify-between">
@@ -60,6 +100,7 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             options={dropdownInfo}
             setValue={handleSetType}
             isInModal={false}
+            selector={selectNotesSortType}
             name=""
           />
         </div>
@@ -73,7 +114,6 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-black" />
           </IconButton>
         )}
-
         {!isArchive && !isMobile && (
           <LinkButton variant="ghost" size="small" href="/archive">
             <div className="flex items-center gap-[10px]">
@@ -84,7 +124,8 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             </div>
           </LinkButton>
         )}
-        <AddVacancyButton className="smOnly:w-[210px] smOnly:justify-items-end smOnly:px-6" />
+
+        <AddButton variant={variant} />
       </div>
       {!isDesctop && <SearchResults />}
     </div>
