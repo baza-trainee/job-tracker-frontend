@@ -43,7 +43,10 @@ export const Textarea = ({
             className={cn(
               "peer h-32 w-full resize-none rounded-xl border px-2 py-3 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
               "md:px-6 md:py-3",
-              "2xl:px-6 2xl:py-2"
+              "2xl:px-6 2xl:py-2",
+              {
+                ["h-[230px]"]: name === "notesText",
+              }
 
               // !error && "border-color5",
               // error &&
