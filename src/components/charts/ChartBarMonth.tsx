@@ -3,6 +3,7 @@ import { useAppSelector } from "../../store/hook.ts";
 import { RootState } from "../../store/store.ts";
 import { useGetAllVacancyQuery } from "../../store/querySlices/vacanciesQuerySlice.ts";
 import ChartBarBase from "./ChartBarBase.tsx";
+import CustomLegendChart from "./CustomLegendChart.tsx";
 
 const ChartBarMonth: React.FC = () => {
   const { t } = useTranslation();
@@ -88,7 +89,12 @@ const ChartBarMonth: React.FC = () => {
     },
   ];
 
-  return <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />;
+  return (
+    <div className="flex flex-col items-center">
+      <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />
+      <CustomLegendChart datasets={datasets} />
+    </div>
+  );
 };
 
 export default ChartBarMonth;
