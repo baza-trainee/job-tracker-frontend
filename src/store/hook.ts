@@ -2,6 +2,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "./store";
 import { useMemo } from "react";
 import { Vacancy } from "../types/vacancies.types";
+import { Note } from "@/types/notes.types";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
@@ -60,4 +61,48 @@ export const useFilteredVacancies = (
 
     return result;
   }, [vacancies, searchQuery, sortType]);
+};
+
+export const useFilteredNotes = (
+  notes: Note[],
+  searchNotesQuery: string,
+  sortNotesType: string
+) => {
+  return useMemo(() => {
+    let result = [...notes];
+    if (searchNotesQuery) {
+      result = result.filter(
+        (n) =>
+          n.name.toLowerCase().includes(searchNotesQuery.toLowerCase()) ||
+          n.text.toLowerCase().includes(searchNotesQuery.toLowerCase())
+      );
+    }
+
+    switch (sortNotesType) {
+      case "newFirst":
+        result = result.sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+        break;
+
+      case "oldFirst":
+        result = result.sort(
+          (a, b) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
+        break;
+
+      case "alphabetically":
+        result = result.sort((a, b) =>
+          a.name.replace(/\s+/g, "").localeCompare(b.name.replace(/\s+/g, ""))
+        );
+        break;
+
+      default:
+        break;
+    }
+
+    return result;
+  }, [notes, searchNotesQuery, sortNotesType]);
 };

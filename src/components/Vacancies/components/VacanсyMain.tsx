@@ -55,6 +55,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const renderedVacancies = isArchive
     ? filteredVacancies.filter((v) => v.isArchived === true)
     : filteredVacancies.filter((v) => v.isArchived === false);
+
   useEffect(() => {
     dispatch(setFilteredVacancies(renderedVacancies));
   }, [searchQuery, sortType, dispatch]);
