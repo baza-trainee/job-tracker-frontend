@@ -565,3 +565,23 @@ input[type="password"]::-ms-clear {
 .scrollbar-transparent::-webkit-scrollbar {
   background: transparent;
 }
+
+.select__event-modal .react-select__control {
+  border-color: transparent;
+  border-radius: 0;
+  background-color: #f7f8fb;
+  text-align: center;
+  @apply text-2xl md:text-[28px] md:leading-[34px] xl:text-[30px] xl:leading-[36px];
+}
+.select__event-modal .react-select__control:hover {
+  border-color: transparent;
+}
+.select__event-modal .react-select__control--is-focused.css-t3ipsp-control {
+  box-shadow: none;
+}
+.select__event-modal .react-select__value-container {
+  padding: 0 0;
+}
+.select__event-modal .react-select__menu {
+  @apply text-xl md:text-2xl xl:text-[28px];
+}
