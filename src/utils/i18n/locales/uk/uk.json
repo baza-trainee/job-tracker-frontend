@@ -172,7 +172,13 @@
     "searchResult234": "результати з пошуку",
     "searchResults": "результатів з пошуку",
     "cardFirst": "Великі ідеї починаються з першої нотатки. Запишіть щось важливе!",
-    "cardFirstButton": "Створити першу нотатку"
+    "cardFirstButton": "Створити першу нотатку",
+
+    "newNote": "Нова нотатка",
+    "noteName": "Назва файлу",
+    "noteText": "Текст",
+    "editNote": "Редагувати нотатку",
+    "createNote": "Створити"
   },
   "notesSortDropdown": {
     "sortBy": "Сортувати",

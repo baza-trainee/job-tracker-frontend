@@ -94,7 +94,7 @@ const ContactUs = () => {
             </Button>
             <Button
               type="submit"
-              className=""
+              className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
               disabled={error}
               variant="ghost"
               size="big"
