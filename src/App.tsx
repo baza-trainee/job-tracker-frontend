@@ -4,7 +4,7 @@ import Vacancies from "./pages/Vacancies";
 import Archive from "./pages/Archive";
 import Statistics from "./pages/Statistics";
 import Profile from "./pages/Profile";
-import Notes from "./pages/Notes";
+import NotesModal from "./pages/Notes";
 import { SignUp } from "./pages/SignUp";
 import { LogIn } from "./pages/LogIn";
 import { ResetPassword } from "./pages/ResetPassword";
@@ -38,7 +38,7 @@ function App() {
           <Route path="vacancies" element={<Vacancies />} />
           <Route path="statistics" element={<Statistics />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="notes" element={<Notes />} />
+          <Route path="notes" element={<NotesModal />} />
           <Route path="archive" element={<Archive />} />
           <Route path="*" element={<Navigate to="/vacancies" />} />
         </Route>

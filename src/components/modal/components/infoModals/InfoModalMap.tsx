@@ -23,6 +23,7 @@ import {
 import { useLogOutUserMutation } from "../../../../store/querySlices/authQuerySlice";
 import useVacancy from "../addVacancyModals/useVacancy";
 import useEditVacancy from "../editVacancy/useEditVacancy";
+import useNotes from "../notesModals/useNotes";
 import {
   useCreateEventMutation,
   useDeleteEventByIdMutation,
@@ -39,7 +40,7 @@ const InfoModalMap = () => {
   const dataModalForConfirm = useAppSelector(
     (state) => state.modal.dataConfirmation
   );
-  console.log("dataModalForConfirm", dataModalForConfirm);
+  console.log("dataModalForConfirm -", dataModalForConfirm);
   const { onSubmit: addVacanciesSubmit, isLoading: addVacanciesLoading } =
     useVacancy();
   const {
@@ -47,6 +48,10 @@ const InfoModalMap = () => {
     isLoading: editVacanciesLoading,
     deleteVacancy,
   } = useEditVacancy();
+
+  const { onSubmit: notesSubmit, isLoading: notesLoading } =
+    useNotes(dataModalForConfirm?.noteType);
+
   const [addCreateEvent] = useCreateEventMutation();
   const [deleteEventById] = useDeleteEventByIdMutation();
   const [updateEventById] = useUpdateEventByIdMutation();
@@ -169,6 +174,12 @@ const InfoModalMap = () => {
       notifyError(t("infoModal.saveEditEvent.notifyEditEventError"));
     }
   }, [dataModalForConfirm, updateEventById, dispatch, refetch]);
+
+  // Збереження нотатки
+  const handleaddNotes = useCallback((): void => {
+    console.log("handleaddNotes", dataModalForConfirm);
+    notesSubmit(dataModalForConfirm);
+  }, [notesSubmit, dataModalForConfirm]);
 
   // Функція створення кнопок
   const createButton = (
@@ -312,7 +323,11 @@ const InfoModalMap = () => {
       text: [t("infoModal.logOut.text_1")],
       button: [
         createButton(t("infoModal.button.cancel"), handleCancel, "text-[20px]"),
-        createButton(t("infoModal.button.logOut"), handleLogOut, "text-[20px]"),
+        createButton(
+          t("infoModal.button.logOut"),
+          handleLogOut,
+          "text-[20px] w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
+        ),
       ],
     },
     saveAddVacancies: {
@@ -498,6 +513,29 @@ const InfoModalMap = () => {
           "",
           "big",
           "accent"
+        ),
+      ],
+    },
+    saveNote: {
+      title: t("infoModal.saveAddVacancies.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveAddVacancies.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.logOut"),
+          handleCloseConfirmation,
+          "",
+          "small",
+          "ghost",
+          notesLoading
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleaddNotes,
+          "",
+          "big",
+          "accent",
+          notesLoading
         ),
       ],
     },
