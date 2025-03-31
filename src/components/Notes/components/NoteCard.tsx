@@ -6,9 +6,9 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 const NoteCard: FC<Note> = (note) => {
+  const { i18n } = useTranslation();
   const { id, name, text, updatedAt } = note;
 
-  const { i18n } = useTranslation();
   const locale = i18n.language === "en" ? "en-US" : "uk-UA";
 
   const formattedDate = new Intl.DateTimeFormat(locale, {
@@ -18,14 +18,15 @@ const NoteCard: FC<Note> = (note) => {
   }).format(new Date(updatedAt));
 
   return (
-    <div className="" id={id}>
-      <div className="w-[118px] rounded-t-xl bg-backgroundSecondary px-3 py-[6px]">
+    <div className="w-full font-nunito text-base leading-[135%]" id={id}>
+      <div className="w-[118px] truncate rounded-t-xl bg-backgroundSecondary px-3 py-[6px] font-medium">
         {name}
       </div>
-      <div className="flex flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
-        <p>{text}</p>
+      <div className="flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
+        <p className="mb-6 line-clamp-[7]">{text}</p>
+
         <div className="flex items-end justify-between">
-          <div>{formattedDate}</div>
+          <div className="text-sm font-medium">{formattedDate}</div>
           <div className="flex gap-3">
             <IconButton
               label="Delete note button"

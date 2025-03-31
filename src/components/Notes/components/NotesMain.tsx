@@ -13,7 +13,6 @@ const NotesMain = () => {
     useAppSelector(selectfilteredNotes);
 
   const notes = data?.notes || [];
-  console.log("notes", notes);
 
   const filteredNotes = useFilteredNotes(
     notes,
@@ -27,12 +26,13 @@ const NotesMain = () => {
 
   return (
     <div className="flex w-full flex-col gap-6">
+      {isLoading && <h2>Please wait...</h2>}
       {isError && <h2>Error...</h2>}
 
       {!isLoading && notes.length === 0 && <NoVacancyCard />}
-      {filteredNotes.map((note) => (
-        <NoteCard key={note.id} {...note} />
-      ))}
+      {!isLoading &&
+        !isError &&
+        filteredNotes.map((note) => <NoteCard key={note.id} {...note} />)}
     </div>
   );
 };
