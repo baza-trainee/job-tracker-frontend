@@ -26,6 +26,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
     ref
   ) => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
+    const variant = location.pathname.replace(/^\/+/, "");
     return (
       // <div
       //   ref={ref}
@@ -152,7 +153,9 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           isDropdownOpen
             ? isInModal
               ? "z-[20] h-fit"
-              : "h-fit sm:box-content smOnly:h-fit"
+              : variant === "notes"
+                ? "h-[162px] sm:box-content smOnly:h-fit"
+                : "h-[203px] sm:box-content smOnly:h-fit"
             : isInModal
               ? "h-[36px] rounded-lg hover:border-iconHover hover:bg-backgroundMain md:h-[44px]"
               : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary",
@@ -243,7 +246,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                     className={cn(
                       "h-6 w-6 rotate-[270deg]",
                       openSubMenu === option.id
-                        ? "rotate-90 duration-500 sm:rotate-180"
+                        ? "rotate-90 duration-500 smOnly:rotate-180"
                         : "rotate-[270deg] duration-500 smOnly:rotate-0"
                     )}
                   />

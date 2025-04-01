@@ -93,7 +93,7 @@ function Statistics() {
           <div
             className={clsx(
               "flex flex-col items-center xl:flex-row xl:items-start xl:justify-between",
-              "my-4 md:my-6 xl:my-8 2xl:my-10",
+              // "my-4 md:my-6 xl:my-8 2xl:my-10",
               "gap-4 md:gap-6"
             )}
           >
