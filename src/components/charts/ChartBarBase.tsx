@@ -52,6 +52,12 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
       const ctx = chart.ctx;
       if (!xAxis) return;
 
+      const chartWidth = chart.width; // Отримуємо ширину графіка
+      // console.log("chartWidth", chartWidth);
+      if (chartWidth < 480) return; // Якщо екран малий, не малюємо риску
+
+      const lineLength = chart.width < 650 && chart.width >= 350 ? 26 : 44; // довжина риски на різну ширину діаграми
+
       xAxis.ticks.forEach((_: any, index: number) => {
         const x = xAxis.getPixelForTick(index); // Позиція мітки
         if (isNaN(x) || x < xAxis.left || x > xAxis.right) return; // Уникаємо помилок рендеру
@@ -61,8 +67,8 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
         // Малюємо підкреслення
         ctx.save();
         ctx.beginPath();
-        ctx.moveTo(x - 44, xAxis.bottom + 5); // Початок лінії
-        ctx.lineTo(x + 44, xAxis.bottom + 5); // Кінець лінії
+        ctx.moveTo(x - lineLength, xAxis.bottom + 5); // Початок лінії
+        ctx.lineTo(x + lineLength, xAxis.bottom + 5); // Кінець лінії
         ctx.lineWidth = 1;
         ctx.strokeStyle = isHighlighted ? "#436B88" : "rgba(0,0,0,0)"; // Підкреслення лише для вибраного
         ctx.stroke();
@@ -89,13 +95,18 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
           },
           font: (context) => {
             const width = context.chart.width;
+            const index = context.index;
             // console.log("Chart width:", width);
             return {
               size: width < 1027 ? 14 : 20,
-              weight: width >= 1027 ? 500 : 400,
+              weight: width >= 1027 ? 500 : index === selectedIndex ? 700 : 400,
             };
           },
-          color: "rgba(51, 51, 51, 1)",
+          color: (context) => {
+            const index = context.index;
+            // console.log("selected index", index, "tickValue:", context.tick.value, "labels:", labels);
+            return index === selectedIndex ? "#436B88" : "rgba(51, 51, 51, 1)";
+          },
         },
         border: {
           display: false, // Прибираємо рамку осі X
