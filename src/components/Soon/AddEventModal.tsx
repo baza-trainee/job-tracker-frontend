@@ -10,7 +10,7 @@ import Icon from "../Icon/Icon.tsx";
 import { useAppDispatch } from "../../store/hook.ts";
 import { useCreateEventMutation } from "../../store/querySlices/eventsQuerySlice.ts";
 import { openConfirmation } from "../../store/slices/modalSlice/modalSlice.ts";
-// import clsx from "clsx";
+import clsx from "clsx";
 import { getEventSchema } from "../../schemas/eventModalSchema.ts";
 
 const AddEventModal = () => {
@@ -96,7 +96,7 @@ const AddEventModal = () => {
             resetField={resetField}
             setValue={setValue}
             isRequired={true}
-            isCheckButtons={false}
+            isCheckButtons={true}
             classNameInputCustom="rounded-lg"
           />
 
@@ -124,36 +124,6 @@ const AddEventModal = () => {
               {t("soonSection.setTime")}
             </p>
             <div className="time-content relative grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
-              {/* <Input
-                name="hours"
-                placeholder="00"
-                type="text"
-                register={register}
-                errors={errors}
-                resetField={resetField}
-                setValue={setValue}
-                isRequired={true}
-                isCheckButtons={false}
-                maxLength={2}
-                // value={watch("hours") ?? "00"} // Прив'язуємо значення до стану форми, гарантовано не буде undefined
-                className={clsx(
-                  "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
-                  "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
-                )}
-                classNameInputCustom={clsx(
-                  "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                  "sm:h-auto sm:p-0 sm:text-[28px]",
-                  "md:h-auto md:p-0 md:text-[28px]",
-                  "xl:text-[32px] xl:font-normal",
-                  "2xl:text-[32px]"
-                )}
-                onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                  let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
-                  if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
-                  if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
-                  setValue("hours", Number(value), { shouldValidate: true }); // Оновлюємо значення, передаємо число + тригеримо валідацію одразу при заповнені
-                }}
-              /> */}
               <Select
                 options={hourOptions}
                 onChange={(selectedOption) => {
@@ -163,20 +133,30 @@ const AddEventModal = () => {
                   trigger("hours"); // Примусово перевіряємо поле
                 }}
                 placeholder="00"
-                className="w-20"
+                className={clsx(
+                  "select__event-modal",
+                  "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-3 py-[9px]",
+                  "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+                )}
                 classNamePrefix="react-select"
                 isSearchable={false}
+                components={{
+                  DropdownIndicator: () => null,
+                  IndicatorSeparator: () => null,
+                }}
               />
               {errors.hours && (
-                <p className="absolute left-0 top-[50%] border border-gray-900 text-red-500">
+                <p className="absolute left-0 top-[50%] text-red-500">
                   {String(errors.hours.message)}
                 </p>
               )}
+
               <div className="flex h-[60px] w-6 items-center justify-center">
-                <span className="text-[44px] font-normal md:text-[57px]">
+                <span className="box-border text-[44px] font-normal leading-[44px] md:pb-[3px] md:text-[57px] md:leading-[57px]">
                   :
                 </span>
               </div>
+
               <Select
                 options={minuteOptions}
                 onChange={(selectedOption) =>
@@ -185,36 +165,19 @@ const AddEventModal = () => {
                   })
                 }
                 placeholder="00"
-                className="w-20"
-                classNamePrefix="react-select"
-                isSearchable={false}
-              />
-              {/* <Input
-                name="minutes"
-                placeholder="00"
-                register={register}
-                errors={errors}
-                resetField={resetField}
-                setValue={setValue}
-                isRequired={true}
-                isCheckButtons={false}
                 className={clsx(
-                  "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
+                  "select__event-modal",
+                  "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
                   "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                 )}
-                classNameInputCustom={clsx(
-                  "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                  "sm:h-auto sm:p-0 sm:text-[28px]",
-                  "md:h-auto md:p-0 md:text-[28px]",
-                  "xl:text-[32px] xl:font-normal",
-                  "2xl:text-[32px]"
-                )}
-                onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                  const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
-                  if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
-                  setValue("minutes", Number(value)); // Оновлюємо значення, передаємо число
+                classNamePrefix="react-select"
+                isSearchable={false}
+                components={{
+                  DropdownIndicator: () => null,
+                  IndicatorSeparator: () => null,
                 }}
-              /> */}
+              />
+
               <p className="col-span-2 row-start-2 text-base 3xl:text-xl">
                 {t("soonSection.soonModalTimeHours")}
               </p>
@@ -241,6 +204,68 @@ const AddEventModal = () => {
 };
 
 export default AddEventModal;
+
+{
+  /* <Input
+  name="hours"
+  placeholder="00"
+  type="text"
+  register={register}
+  errors={errors}
+  resetField={resetField}
+  setValue={setValue}
+  isRequired={true}
+  isCheckButtons={false}
+  maxLength={2}
+  // value={watch("hours") ?? "00"} // Прив'язуємо значення до стану форми, гарантовано не буде undefined
+  className={clsx(
+    "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
+    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+  )}
+  classNameInputCustom={clsx(
+    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
+    "sm:h-auto sm:p-0 sm:text-[28px]",
+    "md:h-auto md:p-0 md:text-[28px]",
+    "xl:text-[32px] xl:font-normal",
+    "2xl:text-[32px]"
+  )}
+  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+    let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+    if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
+    if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
+    setValue("hours", Number(value), { shouldValidate: true }); // Оновлюємо значення, передаємо число + тригеримо валідацію одразу при заповнені
+  }}
+/>; */
+}
+
+{
+  /* <Input
+  name="minutes"
+  placeholder="00"
+  register={register}
+  errors={errors}
+  resetField={resetField}
+  setValue={setValue}
+  isRequired={true}
+  isCheckButtons={false}
+  className={clsx(
+    "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
+    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+  )}
+  classNameInputCustom={clsx(
+    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
+    "sm:h-auto sm:p-0 sm:text-[28px]",
+    "md:h-auto md:p-0 md:text-[28px]",
+    "xl:text-[32px] xl:font-normal",
+    "2xl:text-[32px]"
+  )}
+  onInput={(e: React.FormEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+    if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
+    setValue("minutes", Number(value)); // Оновлюємо значення, передаємо число
+  }}
+/>; */
+}
 
 // watch,
 // defaultValues: {

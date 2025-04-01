@@ -33,12 +33,12 @@ const AddButton: React.FC<AddButtonProps> = ({ className, variant }) => {
       onClick = () => dispatch(createNewStatuses(vacancyStatusesInfo));
       break;
     case "notes":
-      modalType = "addVacancy";
+      modalType = "addNote";
       buttonText = t("notesHeader.addNote");
       onClick = () => dispatch(createNewStatuses(vacancyStatusesInfo));
       break;
     case "noNote":
-      modalType = "addVacancy";
+      modalType = "addNote";
       buttonText = t("notesHeader.cardFirstButton");
       onClick = () => dispatch(createNewStatuses(vacancyStatusesInfo));
       break;

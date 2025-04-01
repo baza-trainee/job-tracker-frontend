@@ -30,7 +30,10 @@ export type TypesModal =
   | "editEvent"
   | "saveAddEvent"
   | "saveEditEvent"
-  | "deleteEvent";
+  | "deleteEvent"
+  | "addNote"
+  | "saveNote"
+  | "deleteNote";
 
 export type Color = {
   text: "text-white" | "text-button" | "text-color2" | "text-color8";

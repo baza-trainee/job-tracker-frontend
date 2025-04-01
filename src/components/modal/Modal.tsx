@@ -78,7 +78,14 @@ const Modal: FC = () => {
         />
       </div>
       {isConfirmationOpen ? (
-        <div className="fixed right-0 top-0 z-50 flex h-[1300px] w-full items-center justify-center bg-[#C2C2C2] bg-opacity-50 xl:h-full">
+        <div
+          className={classNames(
+            "fixed right-0 top-0 z-50 flex w-full items-center justify-center bg-[#C2C2C2] bg-opacity-50 xl:h-full",
+            typeModal === "addVacancy" || typeModal === "editVacancy"
+              ? "h-[1300px]"
+              : "h-full"
+          )}
+        >
           <ModalMain
             className="sticky mb-[210px] mt-auto md:mb-[145px] xl:mb-auto"
             modalData={confirmationData}

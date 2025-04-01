@@ -3,6 +3,7 @@ import ContactUs from "./components/formModals/ContactUs";
 import InfoModal from "./components/infoModals/InfoModal";
 import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import EditVacancy from "./components/editVacancy/EditVacancy";
+import NotesModal from "./components/notesModals/NotesModal";
 import { Color, ContentMapProps } from "./ModalMain.types";
 import AddEventModal from "../Soon/AddEventModal";
 import EditEventModal from "../Soon/EditEventModal";
@@ -218,6 +219,22 @@ export const contentMap: ContentMapProps = {
   },
   deleteEvent: {
     content: <InfoModal type="deleteEvent" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  addNote: {
+    content: <NotesModal type="addNote" />,
+    nameModal: "notesHeader.newNote",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  saveNote: {
+    content: <InfoModal type="saveNote" textColor={colorButton.text} />,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  deleteNote: {
+    content: <InfoModal type="deleteNote" textColor={colorButton.text} />,
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
