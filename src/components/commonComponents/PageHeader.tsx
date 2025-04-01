@@ -21,6 +21,7 @@ import AddButton from "../buttons/AddButton/AddButton";
 import { DropdownNotesInfo } from "../Vacancies/components/dropdown/DropdownNotesInfo";
 import { DropdownVacancyInfo } from "../Vacancies/components/dropdown/DropdownVacancyInfo";
 import { setNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
+import { selectSortType } from "@/store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 import { selectNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
 import { useLocation } from "react-router-dom";
 import { Options } from "../Vacancies/components/dropdown/Dropdown.props";
@@ -53,18 +54,11 @@ const PageHeader: FC<VacancyProps> = ({ isArchive }) => {
 
   switch (variant) {
     case "vacancies":
-      dropdownInfo = DropdownVacancyInfo();
-      handleSetType = (option: string): void => {
-        dispatch(setSortType(option));
-      };
-
-      break;
     case "archive":
       dropdownInfo = DropdownVacancyInfo();
       handleSetType = (option: string): void => {
         dispatch(setSortType(option));
       };
-
       break;
     case "notes":
       dropdownInfo = DropdownNotesInfo();
@@ -100,7 +94,9 @@ const PageHeader: FC<VacancyProps> = ({ isArchive }) => {
             options={dropdownInfo}
             setValue={handleSetType}
             isInModal={false}
-            selector={selectNotesSortType}
+            selector={
+              variant === "notes" ? selectNotesSortType : selectSortType
+            }
             name=""
           />
         </div>
