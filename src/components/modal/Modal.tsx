@@ -27,6 +27,9 @@ const Modal: FC = () => {
         }
         dispatch(closeModal());
       }
+      if (event.key === "Enter") {
+        alert("hello")
+      }
     };
 
     if (isModalOpen) {
