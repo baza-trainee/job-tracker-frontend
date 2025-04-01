@@ -32,7 +32,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
       <div
         className={clsx(
           "relative z-0 flex w-fit max-w-[260px] items-center justify-center rounded-tl-xl rounded-tr-xl",
-          "top-[1px] sm:min-h-[20px] sm:min-w-[100px] px-4 py-2",
+          "top-[1px] min-h-[20px] min-w-[100px] px-4 py-2",
           "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
           backgroundColorModal || modalData?.bgColor || "bg-white" // Тимчасово, пошукати далі
         )}
@@ -60,7 +60,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
         <div
           className={clsx(
             "flex items-center justify-center",
-            "min-h-[217px] w-full max-w-[260px]",
+            "min-h-[217px] w-full min-w-[260px]",
             "md:min-h-[237px] md:min-w-[449px]",
             "xl:min-h-[292px] xl:min-w-[588px] xl:px-3",
             "3xl:min-h-[320px]"
