@@ -115,10 +115,7 @@ export default {
       // },
     },
   },
-  plugins: [
-    require("@tailwindcss/line-clamp"),
-    // ...
-  ],
+
   // plugins: [
   //   require("tailwind-scrollbar"),
   // ],

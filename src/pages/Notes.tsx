@@ -1,11 +1,11 @@
 import NotesMain from "@/components/Notes/components/NotesMain";
 
-import VacancyHeader from "@/components/Vacancies/components/VacanсyHeader";
+import PageHeader from "@/components/commonComponents/PageHeader";
 
 function Notes() {
   return (
     <div className="container pb-5 pt-4 sm:pb-6 sm:pt-4 md:py-6 xl:py-10">
-      <VacancyHeader isArchive={true} />
+      <PageHeader isArchive={true} />
       <NotesMain />
     </div>
   );

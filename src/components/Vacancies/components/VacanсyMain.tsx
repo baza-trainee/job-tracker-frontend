@@ -15,7 +15,7 @@ import VacancyCard from "./VacancyCard.tsx";
 import VacancyCardFirst from "./VacancyCardFirst.tsx";
 import VacancySectionSkeleton from "./VacancySectionSceleton";
 
-import { VacancyProps } from "./VacanсyHeader.tsx";
+import { VacancyProps } from "../../commonComponents/PageHeader.tsx";
 import {
   getLocalizedSectionConfig,
   getVacanciesByStatus,
