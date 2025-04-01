@@ -25,7 +25,7 @@ const NotesMain = () => {
   }, [sortNotesType, searchNotesQuery, dispatch]);
 
   return (
-    <div className="flex w-full flex-col gap-6">
+    <div className="grid w-full gap-6 md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
       {isLoading && <h2>Please wait...</h2>}
       {isError && <h2>Error...</h2>}
 

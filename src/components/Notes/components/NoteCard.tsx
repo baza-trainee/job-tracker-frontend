@@ -19,30 +19,30 @@ const NoteCard: FC<Note> = (note) => {
 
   return (
     <div className="w-full font-nunito text-base leading-[135%]" id={id}>
-      <div className="w-[118px] truncate rounded-t-xl bg-backgroundSecondary px-3 py-[6px] font-medium">
+      <div className="w-[118px] truncate rounded-t-xl bg-backgroundSecondary px-3 py-[6px] font-medium md:w-[141px] md:text-xl xl:w-[149px] xl:px-4">
         {name}
       </div>
       <div className="flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
-        <p className="mb-6 line-clamp-[7]">{text}</p>
+        <p className="line-clamp-[7] mb-6">{text}</p>
 
         <div className="flex items-end justify-between">
           <div className="text-sm font-medium">{formattedDate}</div>
           <div className="flex gap-3">
             <IconButton
-              label="Delete note button"
+              label="Delete_note_button"
               variant="default"
               onClick={() => console.log("first")}
-              className="p-0"
+              className="custom-hover p-0 hover:fill-iconHover active:fill-iconHover"
             >
-              <Icon id={ICON.DELETE} className="size-10" />
+              <Icon id={ICON.DELETE} className="size-10 md:size-6" />
             </IconButton>
             <IconButton
-              label="Edit note button"
+              label="Edit_note_ button"
               variant="default"
-              onClick={() => console.log("first")}
-              className="p-0"
+              onClick={() => console.log("second")}
+              className="custom-hover p-0 hover:fill-iconHover active:fill-iconHover"
             >
-              <Icon id={ICON.EDIT} className="size-10" />
+              <Icon id={ICON.EDIT} className="size-10 md:size-6" />
             </IconButton>
           </div>
         </div>
