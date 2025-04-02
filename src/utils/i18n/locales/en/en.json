@@ -179,7 +179,12 @@
     "noteName": "Name file",
     "noteText": "Text",
     "editNote": "Edit note",
-    "createNote": "Create"
+    "createNote": "Create",
+    "deleteNote": {
+      "title": "Delete note?",
+      "text_1": "This action is irreversible.",
+      "button": "Delete"
+    }
   },
   "notesSortDropdown": {
     "sortBy": "Sort by",

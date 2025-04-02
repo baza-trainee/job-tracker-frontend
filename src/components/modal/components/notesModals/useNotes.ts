@@ -2,7 +2,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { useAppDispatch } from "@/store/hook";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 import {
   closeConfirmation,
   closeModal,
@@ -12,7 +12,10 @@ import {
   notifySuccess,
 } from "@/components/Notifications/NotificationService";
 
-import { useCreateNoteMutation } from "@/store/querySlices/notesQuerySlice";
+import {
+  useCreateNoteMutation,
+  useDeleteNoteByIdMutation,
+} from "@/store/querySlices/notesQuerySlice";
 import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
 
 export const NotesSchema = z.object({
@@ -26,8 +29,12 @@ function useNotes(type: "addNote" | "updateNote") {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const [createNotes] = useCreateNoteMutation();
+  const [createNote] = useCreateNoteMutation();
+
   const { refetch: refetchNote } = useGetAllUserDataQuery();
+
+  const { noteData } = useAppSelector((state) => state.modal);
+  console.log("noteConfirmation", noteData);
 
   const {
     register,
@@ -44,13 +51,32 @@ function useNotes(type: "addNote" | "updateNote") {
     mode: "onSubmit",
   });
 
+  // Видалити нотатку
+  const [deleteNoteById] = useDeleteNoteByIdMutation();
+
+  const deleteNote = async () => {
+    try {
+      setIsLoading(true);
+      await deleteNoteById({ id: noteData?.id as string }).unwrap();
+      refetchNote();
+      //alex
+      notifySuccess("Нотатку успішно видалено. Дякую");
+    } catch (err) {
+      console.log(err);
+      notifyError("Виникла помилка. Вакансію не видалено");
+    }
+    setIsLoading(false);
+    dispatch(closeConfirmation());
+    dispatch(closeModal());
+  };
+
   const onSubmit: SubmitHandler<z.infer<typeof NotesSchema>> = async (data) => {
     try {
       console.log("4");
       const { noteName, noteText, noteType } = data;
       // 1 - запит на збереження нової нотатки
       if (noteType === "addNote") {
-        const response = await createNotes({
+        const response = await createNote({
           name: noteName,
           text: noteText,
         }).unwrap();
@@ -58,13 +84,13 @@ function useNotes(type: "addNote" | "updateNote") {
       }
       // 2 - запит на редагування нотатки
       if (noteType === "updateNote") {
-        const response = await createNotes({
+        const response = await createNote({
           name: noteName,
           text: noteText,
         }).unwrap();
         console.log("resposnse", response);
       }
-      refetchNote()
+      refetchNote();
       notifySuccess("Дані успішно збережено. Дякую");
       setIsLoading(true);
     } catch (error) {
@@ -76,7 +102,15 @@ function useNotes(type: "addNote" | "updateNote") {
     dispatch(closeModal());
   };
 
-  return { register, resetField, handleSubmit, errors, onSubmit, isLoading };
+  return {
+    register,
+    resetField,
+    handleSubmit,
+    errors,
+    onSubmit,
+    isLoading,
+    deleteNote,
+  };
 }
 
 export default useNotes;

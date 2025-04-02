@@ -45,7 +45,7 @@ export const notesQuerySlice = createApi({
 
     deleteNoteById: build.mutation<void, Pick<Note, "id">>({
       query: ({ id }) => ({
-        url: `/note/${id}`,
+        url: `/notes/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["notes"],

@@ -5,6 +5,10 @@ import { Note } from "@/types/notes.types";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
+//alex
+import { useAppDispatch } from "@/store/hook";
+import { openModal } from "@/store/slices/modalSlice/modalSlice";
+
 const NoteCard: FC<Note> = (note) => {
   const { i18n } = useTranslation();
   const { id, name, text, updatedAt } = note;
@@ -16,6 +20,8 @@ const NoteCard: FC<Note> = (note) => {
     month: "2-digit",
     year: "numeric",
   }).format(new Date(updatedAt));
+
+  const dispatch = useAppDispatch()
 
   return (
     <div className="w-full font-nunito text-base leading-[135%]" id={id}>
@@ -31,7 +37,12 @@ const NoteCard: FC<Note> = (note) => {
             <IconButton
               label="Delete_note_button"
               variant="default"
-              onClick={() => console.log("first")}
+              onClick={() => dispatch(
+                openModal({
+                  typeModal:"deleteNote",
+                  noteData: note,
+                })
+              )}
               className="custom-hover p-0 hover:fill-iconHover active:fill-iconHover"
             >
               <Icon id={ICON.DELETE} className="size-10 md:size-6" />
