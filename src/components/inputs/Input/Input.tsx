@@ -30,6 +30,7 @@ export const Input = ({
   setValue,
   rows,
   classNameInputCustom,
+  onKeyDown,
 }: InputProps) => {
   const error = errors[name];
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -135,6 +136,8 @@ export const Input = ({
                 refInput(el);
                 if (el) inputRef.current = el;
               }}
+              // alex
+              onKeyDown={onKeyDown}
               // onClick={(event) => event.stopPropagation()}
             />
           )}

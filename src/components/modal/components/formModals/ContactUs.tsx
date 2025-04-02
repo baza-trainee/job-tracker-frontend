@@ -7,7 +7,10 @@ import { z } from "zod";
 import { ContactUsSchema } from "../../../../schemas/ContactUsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../../store/hook";
-import { closeModal, openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
+import {
+  closeModal,
+  openConfirmation,
+} from "../../../../store/slices/modalSlice/modalSlice";
 
 const ContactUs = () => {
   const { t } = useTranslation();
@@ -39,13 +42,13 @@ const ContactUs = () => {
     dispatch(closeModal());
   };
   const handleGood = (): void => {
-    dispatch(openConfirmation({typeConfirmation:"logInSuccess"}));
+    dispatch(openConfirmation({ typeConfirmation: "logInSuccess" }));
   };
 
   const error = !!Object.keys(errors).length;
 
   return (
-    <div className="my-2 xl:my-12 w-[449px] text-left">
+    <div className="my-2 w-[449px] text-left xl:my-12">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-3 md:gap-4">
           <Input
@@ -58,6 +61,7 @@ const ContactUs = () => {
             className=""
             label="Ім’я"
             errors={errors}
+            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
           <Input
             register={register}
@@ -69,6 +73,7 @@ const ContactUs = () => {
             className=""
             label={t("register.email")}
             errors={errors}
+            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
           <Textarea
             register={register}
@@ -81,7 +86,7 @@ const ContactUs = () => {
             errors={errors}
           />
 
-          <div className="flex flex-col justify-center md:flex-row xl:mt-4 gap-2">
+          <div className="flex flex-col justify-center gap-2 md:flex-row xl:mt-4">
             <Button
               type="button"
               className=""
