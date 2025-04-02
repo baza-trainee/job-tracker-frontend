@@ -15,7 +15,7 @@ import VacancyCard from "./VacancyCard.tsx";
 import VacancyCardFirst from "./VacancyCardFirst.tsx";
 import VacancySectionSkeleton from "./VacancySectionSceleton";
 
-import { VacancyProps } from "./VacanсyHeader.tsx";
+import { VacancyProps } from "../../commonComponents/PageHeader.tsx";
 import {
   getLocalizedSectionConfig,
   getVacanciesByStatus,
@@ -32,6 +32,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const localizedSections = getLocalizedSectionConfig();
 
   const { data, isLoading, isError } = useGetAllUserDataQuery();
+  console.log("data", data);
 
   const vacancies = data?.vacancies || [];
   const filteredVacancies = useFilteredVacancies(
@@ -54,6 +55,7 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
   const renderedVacancies = isArchive
     ? filteredVacancies.filter((v) => v.isArchived === true)
     : filteredVacancies.filter((v) => v.isArchived === false);
+
   useEffect(() => {
     dispatch(setFilteredVacancies(renderedVacancies));
   }, [searchQuery, sortType, dispatch]);

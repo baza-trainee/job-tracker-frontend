@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Event as EventData } from "@/types/event.types.ts";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
+import Select from "react-select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SoonCalendarModal from "../Calendar/SoonCalendarModal.tsx";
 import { Input } from "../inputs/Input/Input.tsx";
@@ -12,6 +13,14 @@ import { selectEventData } from "../../store/slices/modalSlice/selectors.ts";
 import { openConfirmation } from "../../store/slices/modalSlice/modalSlice.ts";
 import clsx from "clsx";
 import { getEventSchema } from "../../schemas/eventModalSchema.ts";
+
+type FormValues = {
+  soonEventName: string;
+  soonEventNotes: string;
+  hours: number | null;
+  minutes: number | null;
+  date: string;
+};
 
 const EditEventModal = () => {
   const { t } = useTranslation();
@@ -24,31 +33,35 @@ const EditEventModal = () => {
     setValue,
     resetField,
     reset,
+    trigger,
+    control,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: zodResolver(getEventSchema()),
     defaultValues: {
       soonEventName: "",
       soonEventNotes: "",
-      hours: "",
-      minutes: "",
+      hours: null,
+      minutes: null,
       date: "",
     },
   });
 
+  const selectedHour = useWatch({ control, name: "hours" });
+  const selectedMinute = useWatch({ control, name: "minutes" });
+
   useEffect(() => {
     if (!eventData) return;
     // console.log("Завантажені дані події:", eventData);
-    const [hours, minutes] = eventData.time.split(":");
+    const [hours, minutes] = eventData.time.split(":").map(Number);
 
-    if (eventData) {
-      reset({
-        soonEventName: eventData.name || "",
-        soonEventNotes: eventData.text || "",
-        hours: hours || "",
-        minutes: minutes || "",
-      });
-    }
+    reset({
+      soonEventName: eventData.name || "",
+      soonEventNotes: eventData.text || "",
+      hours: isNaN(hours) ? null : hours,
+      minutes: isNaN(minutes) ? null : minutes,
+      date: eventData.date || "",
+    });
   }, [eventData, reset]);
 
   const confirmDelete = () => {
@@ -75,6 +88,29 @@ const EditEventModal = () => {
     );
   };
 
+  // const hourOptions = [
+  //   { value: null, label: "--" },
+  //   ...Array.from({ length: 24 }, (_, i) => ({
+  //     value: i,
+  //     label: i.toString().padStart(2, "0"),
+  //   })),
+  // ];
+
+  const hourOptions = Array.from({ length: 24 }, (_, i) => ({
+    value: i,
+    label: i.toString().padStart(2, "0"),
+  }));
+
+  const minuteOptions = Array.from({ length: 60 }, (_, i) => ({
+    value: i,
+    label: i.toString().padStart(2, "0"),
+  }));
+
+  useEffect(() => {
+    register("hours", { required: true });
+    register("minutes", { required: true });
+  }, [register]);
+
   return (
     <form className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6">
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
@@ -100,7 +136,7 @@ const EditEventModal = () => {
             resetField={resetField}
             setValue={setValue}
             isRequired={true}
-            isCheckButtons={false}
+            isCheckButtons={true}
             classNameInputCustom="rounded-lg"
           />
 
@@ -128,63 +164,62 @@ const EditEventModal = () => {
               {t("soonSection.setTime")}
             </p>
             <div className="time-content grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
-              <Input
-                name="hours"
+              <Select
+                options={hourOptions}
+                value={hourOptions.find(
+                  (option) => option.value === selectedHour
+                )}
+                onChange={(selectedOption) => {
+                  setValue(
+                    "hours",
+                    selectedOption ? selectedOption.value : null,
+                    { shouldValidate: true }
+                  );
+                  trigger("hours"); // Примусово перевіряємо поле
+                }}
                 placeholder="00"
-                type="text"
-                register={register}
-                errors={errors}
-                resetField={resetField}
-                setValue={setValue}
-                isRequired={true}
-                isCheckButtons={false}
                 className={clsx(
-                  "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
+                  "select__event-modal",
+                  "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-3 py-[9px]",
                   "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                 )}
-                classNameInputCustom={clsx(
-                  "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                  "sm:h-auto sm:p-0 sm:text-[28px]",
-                  "md:h-auto md:p-0 md:text-[28px]",
-                  "xl:text-[32px] xl:font-normal",
-                  "2xl:text-[32px]"
-                )}
-                onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                  const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
-                  if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
-                  setValue("hours", value); // Оновлюємо значення, передаємо число
-                }}
+                classNamePrefix="react-select"
+                isSearchable={false}
+                components={{
+                  DropdownIndicator: () => null,
+                  IndicatorSeparator: () => null,
+                }} // Прибираємо стрілочку та роздільник
               />
               <div className="flex h-[60px] w-6 items-center justify-center">
-                <span className="text-[44px] font-normal md:text-[57px]">
+                <span className="box-border text-[44px] font-normal leading-[44px] md:pb-[3px] md:text-[57px] md:leading-[57px]">
                   :
                 </span>
               </div>
-              <Input
-                name="minutes"
+
+              <Select
+                options={minuteOptions}
+                value={minuteOptions.find(
+                  (option) => option.value === selectedMinute
+                )}
+                onChange={(selectedOption) =>
+                  setValue(
+                    "minutes",
+                    selectedOption ? selectedOption.value : null,
+                    { shouldValidate: true }
+                  )
+                }
                 placeholder="00"
-                register={register}
-                errors={errors}
-                resetField={resetField}
-                setValue={setValue}
-                isRequired={true}
-                isCheckButtons={false}
                 className={clsx(
+                  "select__event-modal",
                   "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
                   "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                 )}
-                classNameInputCustom={clsx(
-                  "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                  "sm:h-auto sm:p-0 sm:text-[28px]",
-                  "md:h-auto md:p-0 md:text-[28px]",
-                  "xl:text-[32px] xl:font-normal",
-                  "2xl:text-[32px]"
-                )}
-                onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                  const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
-                  if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
-                  setValue("minutes", value); // Оновлюємо значення, передаємо число
-                }}
+                classNamePrefix="react-select"
+                isSearchable={false}
+                components={{
+                  DropdownIndicator: () => null,
+                  IndicatorSeparator: () => null,
+                }} // Прибираємо стрілочку та роздільник
               />
               <p className="col-span-2 row-start-2 text-sm xl:text-base 3xl:text-xl">
                 {t("soonSection.soonModalTimeHours")}
@@ -225,3 +260,61 @@ const EditEventModal = () => {
 };
 
 export default EditEventModal;
+
+{
+  /* <Input
+  name="hours"
+  placeholder="00"
+  type="text"
+  register={register}
+  errors={errors}
+  resetField={resetField}
+  setValue={setValue}
+  isRequired={true}
+  isCheckButtons={false}
+  className={clsx(
+    "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
+    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+  )}
+  classNameInputCustom={clsx(
+    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
+    "sm:h-auto sm:p-0 sm:text-[28px]",
+    "md:h-auto md:p-0 md:text-[28px]",
+    "xl:text-[32px] xl:font-normal",
+    "2xl:text-[32px]"
+  )}
+  onInput={(e: React.FormEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+    if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
+    setValue("hours", value); // Оновлюємо значення, передаємо число
+  }}
+/>; */
+}
+{
+  /* <Input
+  name="minutes"
+  placeholder="00"
+  register={register}
+  errors={errors}
+  resetField={resetField}
+  setValue={setValue}
+  isRequired={true}
+  isCheckButtons={false}
+  className={clsx(
+    "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
+    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+  )}
+  classNameInputCustom={clsx(
+    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
+    "sm:h-auto sm:p-0 sm:text-[28px]",
+    "md:h-auto md:p-0 md:text-[28px]",
+    "xl:text-[32px] xl:font-normal",
+    "2xl:text-[32px]"
+  )}
+  onInput={(e: React.FormEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+    if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
+    setValue("minutes", value); // Оновлюємо значення, передаємо число
+  }}
+/>; */
+}

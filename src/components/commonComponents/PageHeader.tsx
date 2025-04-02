@@ -4,32 +4,33 @@ import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "react-responsive";
 
 import { cn } from "@/utils/utils";
-import { useAppDispatch } from "../../../store/hook";
-import { setSortType } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
+import { useAppDispatch } from "../../store/hook";
+import { setSortType } from "../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 import { showDropdown } from "@/store/slices/searchSlice/searchSlice.ts";
 import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 
-import Icon from "../../Icon/Icon";
-import { LinkButton } from "../../buttons/LinkButton/LinkButton";
-import { SearchForm } from "./SearchForm";
-import Dropdown from "./dropdown/Dropdown";
+import Icon from "../Icon/Icon";
+import { LinkButton } from "../buttons/LinkButton/LinkButton";
+import { SearchForm } from "../Vacancies/components/SearchForm";
+import Dropdown from "../Vacancies/components/dropdown/Dropdown";
 
 import { ICON } from "@/components/Icon/icons";
 import { IconButton } from "@/components/buttons/IconButton/IconButton";
-import { SearchResults } from "./SearchResults";
-import AddButton from "../../buttons/AddButton/AddButton";
-import { DropdownNotesInfo } from "./dropdown/DropdownNotesInfo";
-import { DropdownVacancyInfo } from "./dropdown/DropdownVacancyInfo";
+import { SearchResults } from "../Vacancies/components/SearchResults";
+import AddButton from "../buttons/AddButton/AddButton";
+import { DropdownNotesInfo } from "../Vacancies/components/dropdown/DropdownNotesInfo";
+import { DropdownVacancyInfo } from "../Vacancies/components/dropdown/DropdownVacancyInfo";
 import { setNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
+import { selectSortType } from "@/store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 import { selectNotesSortType } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
 import { useLocation } from "react-router-dom";
-import { Options } from "./dropdown/Dropdown.props";
+import { Options } from "../Vacancies/components/dropdown/Dropdown.props";
 
 export type VacancyProps = {
   isArchive: boolean;
 };
 
-const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
+const PageHeader: FC<VacancyProps> = ({ isArchive }) => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const isDesctop = useMediaQuery({ minWidth: 1280 });
@@ -53,18 +54,11 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
 
   switch (variant) {
     case "vacancies":
-      dropdownInfo = DropdownVacancyInfo();
-      handleSetType = (option: string): void => {
-        dispatch(setSortType(option));
-      };
-
-      break;
     case "archive":
       dropdownInfo = DropdownVacancyInfo();
       handleSetType = (option: string): void => {
         dispatch(setSortType(option));
       };
-
       break;
     case "notes":
       dropdownInfo = DropdownNotesInfo();
@@ -100,7 +94,9 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
             options={dropdownInfo}
             setValue={handleSetType}
             isInModal={false}
-            selector={selectNotesSortType}
+            selector={
+              variant === "notes" ? selectNotesSortType : selectSortType
+            }
             name=""
           />
         </div>
@@ -132,4 +128,4 @@ const VacancyHeader: FC<VacancyProps> = ({ isArchive }) => {
   );
 };
 
-export default VacancyHeader;
+export default PageHeader;
