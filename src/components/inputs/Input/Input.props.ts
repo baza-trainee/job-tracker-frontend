@@ -31,5 +31,5 @@ export interface InputProps {
   ) => void;
   onInput?: (event: React.FormEvent<HTMLInputElement>) => void;
   onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
-  // onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }

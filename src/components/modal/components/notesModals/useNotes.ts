@@ -13,6 +13,7 @@ import {
 } from "@/components/Notifications/NotificationService";
 
 import { useCreateNoteMutation } from "@/store/querySlices/notesQuerySlice";
+import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
 
 export const NotesSchema = z.object({
   noteName: z.string().min(1, "Має містити більше одного символа"),
@@ -26,6 +27,7 @@ function useNotes(type: "addNote" | "updateNote") {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const [createNotes] = useCreateNoteMutation();
+  const { refetch: refetchNote } = useGetAllUserDataQuery();
 
   const {
     register,
@@ -62,6 +64,7 @@ function useNotes(type: "addNote" | "updateNote") {
         }).unwrap();
         console.log("resposnse", response);
       }
+      refetchNote()
       notifySuccess("Дані успішно збережено. Дякую");
       setIsLoading(true);
     } catch (error) {
