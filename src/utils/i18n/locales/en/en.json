@@ -184,7 +184,8 @@
       "title": "Delete note?",
       "text_1": "This action is irreversible.",
       "button": "Delete"
-    }
+    },
+    "update":"Edit note"
   },
   "notesSortDropdown": {
     "sortBy": "Sort by",

@@ -552,7 +552,7 @@ const InfoModalMap = () => {
       button: [
         createButton(
           t("infoModal.button.logOut"),
-          handleCloseConfirmation,
+          handleCancel,
           "",
           "small",
           "ghost",

@@ -36,7 +36,7 @@ export const notesQuerySlice = createApi({
       Pick<Note, "id" | "name"> & Partial<Pick<Note, "text">>
     >({
       query: ({ id, ...updatedNote }) => ({
-        url: `/note/${id}`,
+        url: `/notes/${id}`,
         method: "PATCH",
         body: updatedNote,
       }),

@@ -1,11 +1,14 @@
+import { useTranslation } from "react-i18next";
+
 import { Input } from "@/components/inputs/Input/Input";
 import { Textarea } from "@/components/Textarea/Textarea";
 import { Button } from "@/components/buttons/Button/Button";
 import Icon from "@/components/Icon/Icon";
-import useNotes from "./useNotes";
+
 import { useAppDispatch } from "@/store/hook";
 import { openConfirmation } from "@/store/slices/modalSlice/modalSlice";
-import { useTranslation } from "react-i18next";
+
+import useNotes from "./useNotes";
 
 type NotesProps = {
   type: "addNote" | "updateNote";

@@ -5,7 +5,6 @@ import { Note } from "@/types/notes.types";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-//alex
 import { useAppDispatch } from "@/store/hook";
 import { openModal } from "@/store/slices/modalSlice/modalSlice";
 
@@ -21,7 +20,16 @@ const NoteCard: FC<Note> = (note) => {
     year: "numeric",
   }).format(new Date(updatedAt));
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+  const handleNoteCard = (typeModal: "updateNote" | "deleteNote") => {
+    dispatch(
+      openModal({
+        typeModal,
+        noteData: note,
+      })
+    );
+  };
+
 
   return (
     <div className="w-full font-nunito text-base leading-[135%]" id={id}>
@@ -29,7 +37,7 @@ const NoteCard: FC<Note> = (note) => {
         {name}
       </div>
       <div className="flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
-        <p className="line-clamp-[7] mb-6">{text}</p>
+        <p className="mb-6 line-clamp-[7]">{text}</p>
 
         <div className="flex items-end justify-between">
           <div className="text-sm font-medium">{formattedDate}</div>
@@ -37,12 +45,7 @@ const NoteCard: FC<Note> = (note) => {
             <IconButton
               label="Delete_note_button"
               variant="default"
-              onClick={() => dispatch(
-                openModal({
-                  typeModal:"deleteNote",
-                  noteData: note,
-                })
-              )}
+              onClick={() => handleNoteCard("deleteNote")}
               className="custom-hover p-0 hover:fill-iconHover active:fill-iconHover"
             >
               <Icon id={ICON.DELETE} className="size-10 md:size-6" />
@@ -50,7 +53,7 @@ const NoteCard: FC<Note> = (note) => {
             <IconButton
               label="Edit_note_ button"
               variant="default"
-              onClick={() => console.log("second")}
+              onClick={() => handleNoteCard("updateNote")}
               className="custom-hover p-0 hover:fill-iconHover active:fill-iconHover"
             >
               <Icon id={ICON.EDIT} className="size-10 md:size-6" />
