@@ -11,10 +11,17 @@ import Icon from "../Icon/Icon.tsx";
 import { IconButton } from "../buttons/IconButton/IconButton";
 import Logo from "../Logo/JobTrackerLogo";
 import { SearchForm } from "../Vacancies/components/SearchForm.tsx";
+import { useLocation } from "react-router-dom";
 
 function MobHeader() {
   const dispatch = useAppDispatch();
   const isSearchOpen = useSelector(selectSearchOpen);
+  const location = useLocation();
+
+  const isSearchShown =
+    location.pathname.replace(/^\/+/, "") === "vacancies" ||
+    location.pathname.replace(/^\/+/, "") === "notes" ||
+    location.pathname.replace(/^\/+/, "") === "archive";
 
   const handleOpenSidebar = () => {
     dispatch(openSidebar());
@@ -39,14 +46,16 @@ function MobHeader() {
       )}
 
       <div className="flex gap-6">
-        <IconButton
-          label="Search button"
-          variant="default"
-          onClick={toggleSearch}
-          className="p-0"
-        >
-          <Icon id={ICON.SEARCH} className="size-10" />
-        </IconButton>
+        {isSearchShown && (
+          <IconButton
+            label="Search button"
+            variant="default"
+            onClick={toggleSearch}
+            className="p-0"
+          >
+            <Icon id={ICON.SEARCH} className="size-10" />
+          </IconButton>
+        )}
 
         <IconButton
           label="Open sidebar button"
