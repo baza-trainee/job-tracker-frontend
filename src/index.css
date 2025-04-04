@@ -567,10 +567,13 @@ input[type="password"]::-ms-clear {
 }
 
 .select__event-modal .react-select__control {
+  width: 100%;
+  height: 100%;
   border-color: transparent;
-  border-radius: 0;
+  border-radius: 8px;
   background-color: #f7f8fb;
   text-align: center;
+  cursor: pointer;
   @apply text-2xl md:text-[28px] md:leading-[34px] xl:text-[30px] xl:leading-[36px];
 }
 .select__event-modal .react-select__control:hover {

@@ -49,8 +49,11 @@ const InfoModalMap = () => {
     deleteVacancy,
   } = useEditVacancy();
 
-  const { onSubmit: notesSubmit, isLoading: notesLoading, deleteNote } =
-    useNotes(dataModalForConfirm?.noteType);
+  const {
+    onSubmit: notesSubmit,
+    isLoading: notesLoading,
+    deleteNote,
+  } = useNotes(dataModalForConfirm?.noteType);
 
   const [addCreateEvent] = useCreateEventMutation();
   const [deleteEventById] = useDeleteEventByIdMutation();
@@ -342,7 +345,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.saveAddVacancies.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
@@ -442,7 +445,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.saveAddVacancies.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
@@ -465,7 +468,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.saveAddEvent.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
@@ -486,7 +489,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.saveEditEvent.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
@@ -507,7 +510,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.deleteEvent.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
@@ -528,7 +531,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.saveAddVacancies.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
@@ -551,7 +554,7 @@ const InfoModalMap = () => {
       text: [t("notesHeader.deleteNote.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCancel,
           "",
           "small",

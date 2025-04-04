@@ -184,7 +184,7 @@
       "text_1": "Ця дія буде незворотною.",
       "button": "Видалити"
     },
-    "update":"Редагувати нотатку"
+    "update": "Редагувати нотатку"
   },
   "notesSortDropdown": {
     "sortBy": "Сортувати",
@@ -431,7 +431,7 @@
     "soonModalErrorsRequired": "Це поле є обов'язковим",
     "requiredHours": "Введіть час події",
     "invalidTimeContents": "Мають містити 1-2 цифри",
-    "invalidHours": "Години мають бути від 0 до 24",
+    "invalidHours": "Години мають бути від 0 до 23",
     "invalidMinutes": "Хвилини мають бути від 0 до 59",
     "invalidPastDate": "Оберіть актуальну дату"
   },

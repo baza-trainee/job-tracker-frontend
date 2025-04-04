@@ -185,7 +185,7 @@
       "text_1": "This action is irreversible.",
       "button": "Delete"
     },
-    "update":"Edit note"
+    "update": "Edit note"
   },
   "notesSortDropdown": {
     "sortBy": "Sort by",
@@ -432,7 +432,7 @@
     "soonModalErrorsRequired": "This field is required",
     "requiredHours": "Enter event time",
     "invalidTimeContents": "Must contain 1-2 digits",
-    "invalidHours": "Hours must be between 0 and 24",
+    "invalidHours": "Hours must be between 0 and 23",
     "invalidMinutes": "Minutes must be between 0 and 59",
     "invalidPastDate": "Select the current date"
   },
