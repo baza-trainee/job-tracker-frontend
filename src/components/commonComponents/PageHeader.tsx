@@ -25,10 +25,6 @@ import { DropdownNotesInfo } from "../Vacancies/components/dropdown/DropdownNote
 import { DropdownVacancyInfo } from "../Vacancies/components/dropdown/DropdownVacancyInfo";
 import { Options } from "../Vacancies/components/dropdown/Dropdown.props";
 
-export type VacancyProps = {
-  isArchive: boolean;
-};
-
 const PageHeader: FC = () => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -69,7 +65,7 @@ const PageHeader: FC = () => {
       break;
 
     default:
-      console.log("default");
+      break;
   }
 
   const handleShowDropdown = () => {
