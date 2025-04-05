@@ -99,10 +99,10 @@ const PageHeader: FC = () => {
         </div>
         {isMobile && (
           <IconButton
-            label="Sort button"
+            label="Sort_button"
             variant="default"
             onClick={handleShowDropdown}
-            className="p-0 pr-[30px] outline-none"
+            className="mr-[30px] p-0 outline-none"
           >
             <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-black" />
           </IconButton>
