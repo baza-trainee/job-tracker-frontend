@@ -44,6 +44,8 @@ const Dropdown: FC<SortDropdownProps> = ({
           );
           if (parentOption) {
             setOpenSubMenu(parentOption.id);
+          } else {
+            setOpenSubMenu(null);
           }
         } else {
           setFocusedOption("sortButton");

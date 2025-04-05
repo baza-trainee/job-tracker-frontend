@@ -44,24 +44,33 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
   const selectedLabel = labels[selectedIndex]; // Визначаємо обране значення по осі x
   const chartData = { labels, datasets };
 
-  // Кастомний плагін для підкреслення
+  // Кастомний плагін для підкреслення обраної дати на осі x
   const customPlugin = {
     id: "highlightTick",
     afterDraw: (chart: any) => {
       const xAxis = chart.scales.x; // Отримуємо шкалу X
       const ctx = chart.ctx;
+      if (!xAxis) return;
+
+      const chartWidth = chart.width; // Отримуємо ширину графіка
+      // console.log("chartWidth", chartWidth);
+      if (chartWidth < 480) return; // Якщо екран малий, не малюємо риску
+
+      const lineLength = chart.width < 650 && chart.width >= 350 ? 26 : 44; // довжина риски на різну ширину діаграми
 
       xAxis.ticks.forEach((_: any, index: number) => {
         const x = xAxis.getPixelForTick(index); // Позиція мітки
+        if (isNaN(x) || x < xAxis.left || x > xAxis.right) return; // Уникаємо помилок рендеру
+
         const isHighlighted = index === selectedIndex;
 
         // Малюємо підкреслення
         ctx.save();
         ctx.beginPath();
-        ctx.moveTo(x - 44, xAxis.bottom + 5); // Початок лінії
-        ctx.lineTo(x + 44, xAxis.bottom + 5); // Кінець лінії
+        ctx.moveTo(x - lineLength, xAxis.bottom + 5); // Початок лінії
+        ctx.lineTo(x + lineLength, xAxis.bottom + 5); // Кінець лінії
         ctx.lineWidth = 1;
-        ctx.strokeStyle = isHighlighted ? "#436B88" : "transparent"; // Підкреслення лише для вибраного
+        ctx.strokeStyle = isHighlighted ? "#436B88" : "rgba(0,0,0,0)"; // Підкреслення лише для вибраного
         ctx.stroke();
         ctx.restore();
       });
@@ -71,6 +80,11 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
   const chartOptions: ExtendedChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        bottom: 8,
+      },
+    },
     scales: {
       x: {
         ticks: {
@@ -79,34 +93,28 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
               typeof value === "number" ? this.getLabelForValue(value) : value;
             return label;
           },
-          // font: {
-          //   size: 20,
-          // },
           font: (context) => {
             const width = context.chart.width;
+            const index = context.index;
             // console.log("Chart width:", width);
             return {
               size: width < 1027 ? 14 : 20,
-              weight: width >= 1027 ? 500 : 400,
+              weight: width >= 1027 ? 500 : index === selectedIndex ? 700 : 400,
             };
           },
-          color: "rgba(51, 51, 51, 1)",
-          // color: (ctx) => {
-          //   const label = ctx.tick.label;
-          //   const selected = (ctx.chart.config.options as any).selectedLabel; // Доступ до обраного
-          //   return label === selected ? "#4CAF50" : "rgba(0, 0, 0, 0.7)"; // Колір для обраного
+          color: (context) => {
+            const index = context.index;
+            // console.log("selected index", index, "tickValue:", context.tick.value, "labels:", labels);
+            return index === selectedIndex ? "#436B88" : "rgba(51, 51, 51, 1)";
+          },
         },
         border: {
           display: false, // Прибираємо рамку осі X
         },
-        // },
       },
       y: {
         beginAtZero: true,
         ticks: {
-          // font: {
-          //   size: 16,
-          // },
           font: (context) => {
             const width = context.chart.width;
             return {
@@ -123,33 +131,22 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
         display: false, // Вимикає підписи на стовпчиках
       },
       legend: {
-        position: "bottom",
-        labels: {
-          // font: {
-          //   size: 20,
-          //   weight: 500,
-          // },
-          font: (context) => {
-            const width = context.chart.width;
-            return {
-              size: width < 720 ? 14 : width < 1027 ? 16 : 20,
-              weight: width >= 720 ? 500 : 400,
-            };
-          },
-          usePointStyle: false,
-          boxWidth: 70,
-          boxHeight: 30,
-          padding: 24,
-          color: "rgba(51, 51, 51, 1)",
-          // generateLabels: (chart) => {
-          //   const originalLabels = ChartJS.defaults.plugins.legend.labels.generateLabels(chart);
-          //   return originalLabels.map((label) => ({
-          //     ...label,
-          //     pointStyle: "rectRounded", // робимо закруглені бокси
-          //     radius: 4, // закруглення кутів (немає в доках, але працює)
-          //   }));
-          // },
-        },
+        display: false, // Вимикаємо стандартну легенду
+        // position: "bottom",
+        // labels: {
+        //   font: (context) => {
+        //     const width = context.chart.width;
+        //     return {
+        //       size: width < 720 ? 14 : width < 1027 ? 16 : 20,
+        //       weight: width >= 720 ? 500 : 400,
+        //     };
+        //   },
+        //   usePointStyle: false,
+        //   boxWidth: 70,
+        //   boxHeight: 30,
+        //   padding: 24,
+        //   color: "rgba(51, 51, 51, 1)",
+        // },
       },
       tooltip: {
         mode: "index",
@@ -166,7 +163,7 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
   };
 
   return (
-    <div className={"mt-4 min-h-[406px] w-full"}>
+    <div className={"mt-4 min-h-[406px] w-full overflow-visible"}>
       <Bar data={chartData} options={chartOptions} plugins={[customPlugin]} />
     </div>
   );

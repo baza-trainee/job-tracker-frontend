@@ -3,6 +3,7 @@ import { useAppSelector } from "../../store/hook.ts";
 import { RootState } from "../../store/store.ts";
 import { useGetAllVacancyQuery } from "../../store/querySlices/vacanciesQuerySlice.ts";
 import ChartBarBase from "./ChartBarBase.tsx";
+import CustomLegendChart from "./CustomLegendChart.tsx";
 
 interface GroupedData {
   [date: string]: { sent: number; responses: number };
@@ -65,20 +66,6 @@ const ChartBarDay: React.FC = () => {
     return acc;
   }, {});
 
-  // const getLast7Days = (endDate: Date): string[] => {
-  //   const result: string[] = [];
-
-  //   for (let i = 6; i >= 0; i--) {
-  //     const date = new Date(endDate); // Копія обраної дати для опрацювання
-  //     date.setDate(endDate.getDate() - i); // Відлік назад
-  //     result.push(
-  //       `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
-  //     ); // Формат yyyy-mm-dd
-  //   }
-
-  //   return result;
-  // };
-
   const getLast7Days = (selectedDate: Date): string[] => {
     const result: string[] = [];
 
@@ -129,7 +116,12 @@ const ChartBarDay: React.FC = () => {
     })
   ); // Відформатовані дати для осі X
 
-  return <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />;
+  return (
+    <div className="flex flex-col items-center">
+      <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />
+      <CustomLegendChart datasets={datasets} />
+    </div>
+  );
 };
 
 export default ChartBarDay;

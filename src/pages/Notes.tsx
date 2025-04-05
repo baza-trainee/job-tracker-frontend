@@ -1,11 +1,12 @@
-import NoVacancyCard from "@/components/Statistics/componets/statisticsPanel/NoVacancyCard";
-import VacancyHeader from "@/components/Vacancies/components/VacanсyHeader";
+import NotesMain from "@/components/Notes/components/NotesMain";
+
+import PageHeader from "@/components/commonComponents/PageHeader";
 
 function Notes() {
   return (
-    <div className="container w-full pb-5 pt-4 sm:pb-6 sm:pt-4 md:py-6 xl:py-10">
-      <VacancyHeader isArchive={true} />
-      <NoVacancyCard />
+    <div className="container pb-5 pt-4 sm:pb-6 sm:pt-4 md:py-6 xl:py-10">
+      <PageHeader isArchive={true} />
+      <NotesMain />
     </div>
   );
 }
