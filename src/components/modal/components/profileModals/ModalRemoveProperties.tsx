@@ -1,129 +1,23 @@
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 
 import { closeModal } from "@/store/slices/modalSlice/modalSlice";
-import { useDeleteCoverLetterByIdMutation } from "@/store/querySlices/coverLettersQuerySlice";
-import { useDeleteProjectByIdMutation } from "@/store/querySlices/projectQuerySlice";
-import { useDeleteResumeByIdMutation } from "@/store/querySlices/resumesQuerySlices";
-import { useEffect } from "react";
 
-import {
-  useDeleteSocialLinkMutation,
-  useGetAllUserDataQuery,
-} from "@/store/querySlices/profileQuerySlice";
 import { useTranslation } from "react-i18next";
 import { PropsModalAddProperties } from "./modalAddProperties.types";
-import {
-  notifyError,
-  notifySuccess,
-} from "@/components/Notifications/NotificationService";
+
 import { Button } from "@/components/buttons/Button/Button";
 import Icon from "@/components/Icon/Icon";
+import useRemoveProfileData from "@/components/Profile/hooks/useRemoveProfileData";
 
 function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
   const idRemoveItem = useAppSelector((state) => state.modal.dataConfirmation);
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const { refetch: refetchProfile } = useGetAllUserDataQuery();
-
-  const [
-    removeSociallLink,
-    {
-      isError: isErrorRemoveSocialLink,
-      isSuccess: isSuccessRemoveSocialLink,
-      isLoading: isLoadingRemoveSocialLink,
-    },
-  ] = useDeleteSocialLinkMutation();
-
-  const [
-    removeCoverLetter,
-    {
-      isError: isErrorRemoveCoverLetter,
-      isSuccess: isSuccessRemoveCoverLetter,
-      isLoading: isLoadingRemoveCoverLetter,
-    },
-  ] = useDeleteCoverLetterByIdMutation();
-
-  const [
-    removeProject,
-    {
-      isError: isErrorRemoveProject,
-      isSuccess: isSuccessRemoveProject,
-      isLoading: isLoadingRemoveProject,
-    },
-  ] = useDeleteProjectByIdMutation();
-
-  const [
-    removeResume,
-    {
-      isError: isErrorRemoveResume,
-      isSuccess: isSuccessRemoveResume,
-      isLoading: isLoadingRemoveResume,
-    },
-  ] = useDeleteResumeByIdMutation();
-
-  useEffect(() => {
-    if (
-      isErrorRemoveCoverLetter ||
-      isErrorRemoveProject ||
-      isErrorRemoveResume ||
-      isErrorRemoveSocialLink
-    ) {
-      notifyError("Помилка видалення даних");
-    }
-  }, [
-    isErrorRemoveCoverLetter,
-    isErrorRemoveProject,
-    isErrorRemoveSocialLink,
-    isErrorRemoveResume,
-  ]);
-
-  useEffect(() => {
-    if (
-      isSuccessRemoveCoverLetter ||
-      isSuccessRemoveProject ||
-      isSuccessRemoveResume ||
-      isSuccessRemoveSocialLink
-    ) {
-      notifySuccess("Дані видалено успішно");
-      refetchProfile();
-      dispatch(closeModal());
-    }
-  }, [
-    isSuccessRemoveCoverLetter,
-    isSuccessRemoveProject,
-    isSuccessRemoveResume,
-    isSuccessRemoveSocialLink,
-  ]);
-
-  const handleRemove = async () => {
-    switch (cardsType) {
-      case "addCoverLetters":
-        await removeCoverLetter({ id: idRemoveItem });
-        break;
-
-      case "addPersonalProperties":
-        await removeSociallLink({ idSocialLink: idRemoveItem });
-        break;
-
-      case "addProjects":
-        await removeProject({ id: idRemoveItem });
-        break;
-
-      case "addResumes":
-        await removeResume({ id: idRemoveItem });
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  const isDisabledButtonRemove =
-    isLoadingRemoveCoverLetter ||
-    isLoadingRemoveProject ||
-    isLoadingRemoveResume ||
-    isLoadingRemoveSocialLink;
+  const { handleRemove, isDisabledButtonRemove } = useRemoveProfileData({
+    cardsType,
+    idRemoveItem,
+  });
 
   return (
     <div className="flex flex-col items-center justify-center gap-10">
