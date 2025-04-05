@@ -196,7 +196,7 @@
       "text_1": "This action is irreversible.",
       "button": "Delete"
     },
-    "update":"Edit note"
+    "update": "Edit note"
   },
   "notesSortDropdown": {
     "sortBy": "Sort by",
@@ -335,22 +335,26 @@
   "addCoverLetters": {
     "cardTitle": "Cover letters",
     "buttonAdd": "Add cover letter",
-    "modalAddTitle": "Cover letter"
+    "modalAddTitle": "Add cover letter",
+    "modalEditTitle": "Edit cover letter"
   },
   "addProjects": {
     "cardTitle": "Projects",
     "buttonAdd": "Add project link",
-    "modalAddTitle": "Project"
+    "modalAddTitle": "Add project",
+    "modalEditTitle": "Edit project"
   },
   "addResumes": {
     "cardTitle": "Resumes",
     "buttonAdd": "Add resume",
-    "modalAddTitle": "Resume"
+    "modalAddTitle": "Add resume",
+    "modalEditTitle": "Edit resume"
   },
   "addPersonalProperties": {
     "cardTitle": "Personal information",
     "buttonAdd": "Add link",
-    "modalAddTitle": "Link"
+    "modalAddTitle": "Add link",
+    "modalEditTitle": "Edit link"
   },
   "buttonRemoveAccount": "Remove account",
   "infoModal": {

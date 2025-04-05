@@ -195,7 +195,7 @@
       "text_1": "Ця дія буде незворотною.",
       "button": "Видалити"
     },
-    "update":"Редагувати нотатку"
+    "update": "Редагувати нотатку"
   },
   "notesSortDropdown": {
     "sortBy": "Сортувати",
@@ -333,22 +333,26 @@
   "addCoverLetters": {
     "cardTitle": "Супровідні листи",
     "buttonAdd": "Додати лист",
-    "modalAddTitle": "Супровідний лист"
+    "modalAddTitle": "Додати супровідний лист",
+    "modalEditTitle": "Редагувати супровідний лист"
   },
   "addProjects": {
     "cardTitle": "Проєкти",
     "buttonAdd": "Додати посилання на проєкт",
-    "modalAddTitle": "Проєкт"
+    "modalAddTitle": "Додати проєкт",
+    "modalEditTitle": "Редагувати проєкт"
   },
   "addResumes": {
     "cardTitle": "Резюме",
     "buttonAdd": "Додати резюме",
-    "modalAddTitle": "Резюме"
+    "modalAddTitle": "Додати резюме",
+    "modalEditTitle": "Редагувати резюме"
   },
   "addPersonalProperties": {
     "cardTitle": "Персональна інформація",
     "buttonAdd": "Додати посилання",
-    "modalAddTitle": "Посилання"
+    "modalAddTitle": "Додати посилання",
+    "modalEditTitle": "Редагувати посилання"
   },
   "buttonRemoveAccount": "Видалити акаунт",
   "infoModal": {
