@@ -4,7 +4,10 @@ import { cn } from "@/utils/utils";
 import { useAppDispatch } from "@/store/hook";
 import { openSidebar } from "@/store/slices/sidebarSlice/sidebarSlice";
 import { selectSearchOpen } from "@/store/slices/searchSlice/searchSelector.ts";
-import { openSearch } from "@/store/slices/searchSlice/searchSlice.ts";
+import {
+  closeSearch,
+  openSearch,
+} from "@/store/slices/searchSlice/searchSlice.ts";
 
 import { ICON } from "../Icon/icons";
 import Icon from "../Icon/Icon.tsx";
@@ -12,11 +15,33 @@ import { IconButton } from "../buttons/IconButton/IconButton";
 import Logo from "../Logo/JobTrackerLogo";
 import { SearchForm } from "../Vacancies/components/SearchForm.tsx";
 import { useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { selectSearchQuery } from "@/store/slices/filteredVacanciesSlice/filteredVacanciesSelector.ts";
 
 function MobHeader() {
   const dispatch = useAppDispatch();
   const isSearchOpen = useSelector(selectSearchOpen);
   const location = useLocation();
+  const searchRef = useRef<HTMLDivElement>(null);
+  const emptySearch = useSelector(selectSearchQuery) === "";
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      searchRef.current &&
+      !searchRef.current.contains(event.target as Node) &&
+      emptySearch
+    ) {
+      dispatch(closeSearch());
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [emptySearch, isSearchOpen]);
 
   const isSearchShown =
     location.pathname.replace(/^\/+/, "") === "vacancies" ||
@@ -40,7 +65,10 @@ function MobHeader() {
       <Logo className="h-[44px] w-[54px]" />
 
       {isSearchOpen && (
-        <div className="absolute right-5 top-4 z-20 md:right-[88px] md:top-6 smOnly:left-5">
+        <div
+          ref={searchRef}
+          className="absolute right-5 top-4 z-20 md:right-[88px] md:top-6 smOnly:left-5"
+        >
           <SearchForm />
         </div>
       )}
