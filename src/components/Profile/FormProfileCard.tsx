@@ -60,6 +60,21 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
         break;
     }
   };
+  const modalTypeUpdate = () => {
+    switch (cardsType) {
+      case "addCoverLetters":
+        return "editCoverLetters";
+      case "addProjects":
+        return "editProjects";
+      case "addResumes":
+        return "editResumes";
+      case "addPersonalProperties":
+        return "editPersonalProperties";
+
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
     if (!profile) return;
@@ -88,7 +103,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     dispatch(
       openModal({
         dataConfirmation: data,
-        typeModal: cardsType,
+        typeModal: modalTypeUpdate(),
       })
     );
   };
