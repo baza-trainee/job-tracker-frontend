@@ -11,10 +11,13 @@ import {
   closeModal,
   openConfirmation,
 } from "../../../../store/slices/modalSlice/modalSlice";
+import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
+import { useEffect } from "react";
 
 const ContactUs = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const { data: dataUser } = useGetAllUserDataQuery();
   // пізніше написати хук для перевірки та відправки форм
   const {
     register,
@@ -31,6 +34,13 @@ const ContactUs = () => {
     resolver: zodResolver(ContactUsSchema),
     mode: "onBlur",
   });
+  useEffect(() => {
+    reset({
+      name: dataUser?.username || "",
+      email: dataUser?.email || "",
+      requestText: "",
+    });
+  }, [dataUser, reset]);
 
   const onSubmit: SubmitHandler<z.infer<typeof ContactUsSchema>> = (data) => {
     reset();
