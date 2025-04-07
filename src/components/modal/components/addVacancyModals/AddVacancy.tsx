@@ -42,7 +42,7 @@ const AddVacancy = () => {
   };
 
   return (
-    <div className="w-full sm:pt-[50px] xl:pt-[44px]">
+    <div className="w-full pt-[50px] xl:pt-[44px]">
       <form>
         <div className="flex flex-col items-center gap-3">
           <div className="flex w-full flex-col gap-4 xl:flex-row xl:gap-6">

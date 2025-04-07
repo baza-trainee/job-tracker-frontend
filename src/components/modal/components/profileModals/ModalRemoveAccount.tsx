@@ -55,6 +55,7 @@ function ModalRemoveAccount() {
         {t("infoModal.button.cancel")}
       </Button>
       <Button
+        variant="accent"
         disabled={isLoading}
         onClick={() => {
           !isConfirmModal ? setIsConfirmModal(true) : removeUserById();

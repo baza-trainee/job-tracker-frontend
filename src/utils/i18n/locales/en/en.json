@@ -33,6 +33,9 @@
   },
   "notification": {
     "updatedSuccess": "Updated successfully",
+    "updatedError": "Failed to update",
+    "deletedError": "Failed to delete",
+    "addedError": "Failed to add",
     "updatedErrorLink": "Enter a valid link",
     "updatedPhone": "Enter a valid phone number",
     "updatedEmail": "Enter a valid email",
@@ -45,7 +48,15 @@
     "linkCopied": "Link copied",
     "textCopied": "Text copied",
     "empty": "Empty field",
-    "notSaveInfo": "Information not saved"
+    "notSaveInfo": "Information not saved",
+    "fieldDeleted": "Field deleted",
+    "resumeDeleted": "Resume deleted",
+    "projectDeleted": "Project deleted",
+    "letterDeleted": "Letter deleted",
+    "fieldAdded": "Field added",
+    "resumeAdded": "Resume added",
+    "projectAdded": "Project added",
+    "letterAdded": "Letter added"
   },
   "navigation": {
     "vacancies": "Vacancies",
@@ -179,7 +190,13 @@
     "noteName": "Name file",
     "noteText": "Text",
     "editNote": "Edit note",
-    "createNote": "Create"
+    "createNote": "Create",
+    "deleteNote": {
+      "title": "Delete note?",
+      "text_1": "This action is irreversible.",
+      "button": "Delete"
+    },
+    "update": "Edit note"
   },
   "notesSortDropdown": {
     "sortBy": "Sort by",
@@ -318,22 +335,26 @@
   "addCoverLetters": {
     "cardTitle": "Cover letters",
     "buttonAdd": "Add cover letter",
-    "modalAddTitle": "Cover letter"
+    "modalAddTitle": "Add cover letter",
+    "modalEditTitle": "Edit cover letter"
   },
   "addProjects": {
     "cardTitle": "Projects",
     "buttonAdd": "Add project link",
-    "modalAddTitle": "Project"
+    "modalAddTitle": "Add project",
+    "modalEditTitle": "Edit project"
   },
   "addResumes": {
     "cardTitle": "Resumes",
     "buttonAdd": "Add resume",
-    "modalAddTitle": "Resume"
+    "modalAddTitle": "Add resume",
+    "modalEditTitle": "Edit resume"
   },
   "addPersonalProperties": {
     "cardTitle": "Personal information",
     "buttonAdd": "Add link",
-    "modalAddTitle": "Link"
+    "modalAddTitle": "Add link",
+    "modalEditTitle": "Edit link"
   },
   "buttonRemoveAccount": "Remove account",
   "infoModal": {
@@ -426,7 +447,7 @@
     "soonModalErrorsRequired": "This field is required",
     "requiredHours": "Enter event time",
     "invalidTimeContents": "Must contain 1-2 digits",
-    "invalidHours": "Hours must be between 0 and 24",
+    "invalidHours": "Hours must be between 0 and 23",
     "invalidMinutes": "Minutes must be between 0 and 59",
     "invalidPastDate": "Select the current date"
   },

@@ -33,6 +33,9 @@
   },
   "notification": {
     "updatedSuccess": "Успішно оновлено",
+    "updatedError": "Не вдалося оновити",
+    "deletedError": "Не вдалося видалити",
+    "addedError": "Не вдалося додати",
     "updatedErrorLink": "Введіть коректне посилання",
     "updatedPhone": "Введіть коректний номер телефону",
     "updatedEmail": "Введіть коректну електронну адресу",
@@ -45,7 +48,15 @@
     "linkCopied": "Посилання скопійовано",
     "textCopied": "Текст скопійовано",
     "empty": "Відсутні дані для копіювання",
-    "notSaveInfo": "Інформацію не збережно"
+    "notSaveInfo": "Інформацію не збережно",
+    "fieldDeleted": "Поле видалено",
+    "resumeDeleted": "Резюме видалено",
+    "projectDeleted": "Проєкт видалено",
+    "letterDeleted": "Лист видалено",
+    "fieldAdded": "Поле додано",
+    "resumeAdded": "Резюме додано",
+    "projectAdded": "Проєкт додано",
+    "letterAdded": "Лист додано"
   },
   "navigation": {
     "vacancies": "Вакансії",
@@ -178,7 +189,13 @@
     "noteName": "Назва файлу",
     "noteText": "Текст",
     "editNote": "Редагувати нотатку",
-    "createNote": "Створити"
+    "createNote": "Створити",
+    "deleteNote": {
+      "title": "Видалити нотатку?",
+      "text_1": "Ця дія буде незворотною.",
+      "button": "Видалити"
+    },
+    "update": "Редагувати нотатку"
   },
   "notesSortDropdown": {
     "sortBy": "Сортувати",
@@ -316,22 +333,26 @@
   "addCoverLetters": {
     "cardTitle": "Супровідні листи",
     "buttonAdd": "Додати лист",
-    "modalAddTitle": "Супровідний лист"
+    "modalAddTitle": "Додати супровідний лист",
+    "modalEditTitle": "Редагувати супровідний лист"
   },
   "addProjects": {
     "cardTitle": "Проєкти",
     "buttonAdd": "Додати посилання на проєкт",
-    "modalAddTitle": "Проєкт"
+    "modalAddTitle": "Додати проєкт",
+    "modalEditTitle": "Редагувати проєкт"
   },
   "addResumes": {
     "cardTitle": "Резюме",
     "buttonAdd": "Додати резюме",
-    "modalAddTitle": "Резюме"
+    "modalAddTitle": "Додати резюме",
+    "modalEditTitle": "Редагувати резюме"
   },
   "addPersonalProperties": {
     "cardTitle": "Персональна інформація",
     "buttonAdd": "Додати посилання",
-    "modalAddTitle": "Посилання"
+    "modalAddTitle": "Додати посилання",
+    "modalEditTitle": "Редагувати посилання"
   },
   "buttonRemoveAccount": "Видалити акаунт",
   "infoModal": {
@@ -425,7 +446,7 @@
     "soonModalErrorsRequired": "Це поле є обов'язковим",
     "requiredHours": "Введіть час події",
     "invalidTimeContents": "Мають містити 1-2 цифри",
-    "invalidHours": "Години мають бути від 0 до 24",
+    "invalidHours": "Години мають бути від 0 до 23",
     "invalidMinutes": "Хвилини мають бути від 0 до 59",
     "invalidPastDate": "Оберіть актуальну дату"
   },

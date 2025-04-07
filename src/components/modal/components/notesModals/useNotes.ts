@@ -1,54 +1,77 @@
+import { useEffect, useState } from "react";
+
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
-import { useAppDispatch } from "@/store/hook";
-import {
-  closeConfirmation,
-  closeModal,
-} from "@/store/slices/modalSlice/modalSlice";
-import {
-  notifyError,
-  notifySuccess,
-} from "@/components/Notifications/NotificationService";
+import { NoteSchema } from "@/schemas/noteSchema";
 
-import { useCreateNoteMutation } from "@/store/querySlices/notesQuerySlice";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { closeConfirmation, closeModal, } from "@/store/slices/modalSlice/modalSlice";
+import { useCreateNoteMutation, useDeleteNoteByIdMutation, useUpdateNoteByIdMutation, } from "@/store/querySlices/notesQuerySlice";
+import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
 
-export const NotesSchema = z.object({
-  noteName: z.string().min(1, "Має містити більше одного символа"),
-  noteText: z.string().min(1, "Має містити більше одного символа"),
-  noteType: z.enum(["addNote", "updateNote"]),
-});
+import { notifyError, notifySuccess, } from "@/components/Notifications/NotificationService";
 
 function useNotes(type: "addNote" | "updateNote") {
-  console.log("useNotes", type);
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const [createNotes] = useCreateNoteMutation();
+  const [createNote] = useCreateNoteMutation();
+  const [updateNoteById] = useUpdateNoteByIdMutation();
+
+  const { refetch: refetchNote } = useGetAllUserDataQuery();
+
+  const { noteData } = useAppSelector((state) => state.modal);
 
   const {
     register,
     resetField,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<z.infer<typeof NotesSchema>>({
+  } = useForm<z.infer<typeof NoteSchema>>({
     defaultValues: {
       noteName: "",
       noteText: "",
       noteType: type,
     },
-    resolver: zodResolver(NotesSchema),
+    resolver: zodResolver(NoteSchema),
     mode: "onSubmit",
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof NotesSchema>> = async (data) => {
+  useEffect(() => {
+    if (type === "updateNote") {
+      reset({
+        noteName: noteData?.name,
+        noteText: noteData?.text,
+        noteType: type,
+      });
+    }
+  }, []);
+
+  // Видалити нотатку
+  const [deleteNoteById] = useDeleteNoteByIdMutation();
+
+  const deleteNote = async () => {
     try {
-      console.log("4");
+      setIsLoading(true);
+      await deleteNoteById({ id: noteData?.id as string }).unwrap();
+      refetchNote();
+      notifySuccess("Нотатку успішно видалено. Дякую");
+    } catch (err) {
+      console.log(err);
+      notifyError("Виникла помилка. Вакансію не видалено");
+    }
+    setIsLoading(false);
+    dispatch(closeConfirmation());
+    dispatch(closeModal());
+  };
+
+  const onSubmit: SubmitHandler<z.infer<typeof NoteSchema>> = async (data) => {
+    try {
       const { noteName, noteText, noteType } = data;
       // 1 - запит на збереження нової нотатки
       if (noteType === "addNote") {
-        const response = await createNotes({
+        const response = await createNote({
           name: noteName,
           text: noteText,
         }).unwrap();
@@ -56,12 +79,14 @@ function useNotes(type: "addNote" | "updateNote") {
       }
       // 2 - запит на редагування нотатки
       if (noteType === "updateNote") {
-        const response = await createNotes({
+        const response = await updateNoteById({
+          id: noteData?.id || "",
           name: noteName,
           text: noteText,
         }).unwrap();
         console.log("resposnse", response);
       }
+      refetchNote();
       notifySuccess("Дані успішно збережено. Дякую");
       setIsLoading(true);
     } catch (error) {
@@ -73,7 +98,15 @@ function useNotes(type: "addNote" | "updateNote") {
     dispatch(closeModal());
   };
 
-  return { register, resetField, handleSubmit, errors, onSubmit, isLoading };
+  return {
+    register,
+    resetField,
+    handleSubmit,
+    errors,
+    onSubmit,
+    isLoading,
+    deleteNote,
+  };
 }
 
 export default useNotes;

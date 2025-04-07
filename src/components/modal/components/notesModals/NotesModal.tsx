@@ -1,11 +1,14 @@
+import { useTranslation } from "react-i18next";
+
 import { Input } from "@/components/inputs/Input/Input";
 import { Textarea } from "@/components/Textarea/Textarea";
 import { Button } from "@/components/buttons/Button/Button";
 import Icon from "@/components/Icon/Icon";
-import useNotes from "./useNotes";
+
 import { useAppDispatch } from "@/store/hook";
 import { openConfirmation } from "@/store/slices/modalSlice/modalSlice";
-import { useTranslation } from "react-i18next";
+
+import useNotes from "./useNotes";
 
 type NotesProps = {
   type: "addNote" | "updateNote";
@@ -41,6 +44,20 @@ const NotesModal = ({ type }: NotesProps) => {
             type="text"
             className=""
             errors={errors}
+            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+            // alex
+            // onKeyDown={(e) => {
+            //   if (e.key === "Enter") {
+            //     e.preventDefault();
+            //     const formElements = Array.from(
+            //       e.currentTarget.form?.elements || []
+            //     ) as HTMLInputElement[];
+            //     const index = formElements.indexOf(e.currentTarget);
+            //     if (index !== -1 && index < formElements.length - 1) {
+            //       formElements[index + 1].focus();
+            //     }
+            //   }
+            // }}
           />
           <Textarea
             register={register}

@@ -567,11 +567,19 @@ input[type="password"]::-ms-clear {
 }
 
 .select__event-modal .react-select__control {
+  width: 100%;
+  height: 100%;
   border-color: transparent;
-  border-radius: 0;
+  border-radius: 8px;
   background-color: #f7f8fb;
   text-align: center;
+  cursor: pointer;
   @apply text-2xl md:text-[28px] md:leading-[34px] xl:text-[30px] xl:leading-[36px];
+
+  /* ховаємо UI селекта */
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 .select__event-modal .react-select__control:hover {
   border-color: transparent;
@@ -585,3 +593,17 @@ input[type="password"]::-ms-clear {
 .select__event-modal .react-select__menu {
   @apply text-xl md:text-2xl xl:text-[28px];
 }
+.select__event-modal.css-b62m3t-container {
+  position: absolute;
+}
+
+/* ховаємо UI селекта */
+/* .select__event-modal .react-select__single-value {
+  color: transparent;
+}
+.select__event-modal .react-select__placeholder {
+  color: transparent; 
+}
+.select__event-modal .react-select__indicator {
+  display: none; 
+} */

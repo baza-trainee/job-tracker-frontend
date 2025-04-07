@@ -158,6 +158,30 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
+  editPersonalProperties: {
+    content: <ModalMuttionProfileData cardsType="addPersonalProperties" />,
+    nameModal: "addPersonalProperties.modalEditTitle",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  editResumes: {
+    content: <ModalMuttionProfileData cardsType="addResumes" />,
+    nameModal: "addResumes.modalEditTitle",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  editProjects: {
+    content: <ModalMuttionProfileData cardsType="addProjects" />,
+    nameModal: "addProjects.modalEditTitle",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  editCoverLetters: {
+    content: <ModalMuttionProfileData cardsType="addCoverLetters" />,
+    nameModal: "addCoverLetters.modalEditTitle",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
   removePersonalProperties: {
     content: <ModalRemoveProperties cardsType="addPersonalProperties" />,
     nameModal: "modalAddProperties.modalRemoveLink",
@@ -225,6 +249,12 @@ export const contentMap: ContentMapProps = {
   addNote: {
     content: <NotesModal type="addNote" />,
     nameModal: "notesHeader.newNote",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  updateNote: {
+    content: <NotesModal type="updateNote" />,
+    nameModal: "notesHeader.update",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },

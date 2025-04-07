@@ -62,8 +62,8 @@ export const Soon = () => {
   return (
     <div
       className={clsx(
-        "TEST flex h-full flex-col justify-between text-textBlack",
-        "pt-2 xl:px-2 2xl:px-4",
+        "box-border flex h-full flex-col justify-between text-textBlack",
+        "pt-4 xl:px-2 2xl:px-4 2xl:pt-2",
         "w-full md:w-[344px] xl:w-[365px] 2xl:w-[382px] 3xl:w-[535px]"
       )}
     >
@@ -87,9 +87,10 @@ export const Soon = () => {
           ref={scrollContainerRef}
           className={clsx(
             "soon-scroll w-full overflow-y-scroll",
-            "max-h-[202.8px] md:max-h-[362.6px] xl:max-h-[366.6px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
+            "max-h-[202.8px] md:max-h-[346px] xl:max-h-[345px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
             "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
           )}
+          // md:max-h-[362.6px] xl:max-h-[366.6px]
         >
           {isLoading && (
             <div className="flex justify-start py-4 text-lg font-medium text-textBlack">

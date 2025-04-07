@@ -36,7 +36,7 @@ export const notesQuerySlice = createApi({
       Pick<Note, "id" | "name"> & Partial<Pick<Note, "text">>
     >({
       query: ({ id, ...updatedNote }) => ({
-        url: `/note/${id}`,
+        url: `/notes/${id}`,
         method: "PATCH",
         body: updatedNote,
       }),
@@ -45,7 +45,7 @@ export const notesQuerySlice = createApi({
 
     deleteNoteById: build.mutation<void, Pick<Note, "id">>({
       query: ({ id }) => ({
-        url: `/note/${id}`,
+        url: `/notes/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["notes"],

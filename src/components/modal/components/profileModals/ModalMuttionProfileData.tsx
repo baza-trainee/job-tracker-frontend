@@ -1,43 +1,18 @@
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import {
-  useCreateCoverLeterMutation,
-  useUpdateCoverLetterByIdMutation,
-} from "@/store/querySlices/coverLettersQuerySlice";
-import {
-  useCreateProjectMutation,
-  useUpdateProjectByIdMutation,
-} from "@/store/querySlices/projectQuerySlice";
-import {
-  useCreateResumeMutation,
-  useUpdateResumeByIdMutation,
-} from "@/store/querySlices/resumesQuerySlices";
-
-import {
-  useCreateSocialLinkMutation,
-  useGetAllUserDataQuery,
-  useUpdateSocialLinkMutation,
-} from "@/store/querySlices/profileQuerySlice";
-import { closeModal } from "@/store/slices/modalSlice/modalSlice";
 import { addProfileData } from "@/schemas/addProfileDataSchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { useAppSelector } from "@/store/hook";
 import { useTranslation } from "react-i18next";
 
-import {
-  notifyError,
-  notifySuccess,
-} from "@/components/Notifications/NotificationService";
 import { Input } from "@/components/inputs/Input/Input";
 import { Button } from "@/components/buttons/Button/Button";
-import {
-  DataItem,
-  PropsModalAddProperties,
-  useData,
-} from "./modalAddProperties.types";
+import { PropsModalAddProperties, useData } from "./modalAddProperties.types";
 import Icon from "@/components/Icon/Icon";
+import useMutationProfileData from "@/components/Profile/hooks/useMutationProfileData";
+import useRemoveProfileData from "@/components/Profile/hooks/useRemoveProfileData";
 
 function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   const {
@@ -50,18 +25,24 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     resolver: zodResolver(addProfileData[cardsType]),
     mode: "all",
   });
-  const dispatch = useAppDispatch();
   const { data } = useData();
-
-  const { refetch: refetchProfile } = useGetAllUserDataQuery();
-
   const { t } = useTranslation();
 
   const updateItem =
     useAppSelector((state) => state.modal.dataConfirmation) || false;
 
   const isUpdating = Boolean(updateItem?.typeModal);
-
+  const { onSubmit, isSubmitDisabled } = useMutationProfileData({
+    isUpdating,
+    cardsType,
+    updateItem,
+    errors,
+  });
+  const { handleRemove, isDisabledButtonRemove } = useRemoveProfileData({
+    cardsType,
+    idRemoveItem: updateItem.id,
+    shoudCloseModal: true,
+  });
   useEffect(() => {
     if (!updateItem) return;
     setValue("name", updateItem.name || "");
@@ -69,125 +50,6 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     setValue("technologies", updateItem.technologies || "");
     setValue("text", updateItem.description || updateItem.text);
   }, [updateItem]);
-
-  const [
-    mutationSocialLink,
-    {
-      isLoading: isLoadingSocialLink,
-      isSuccess: isSuccessSocialLink,
-      isError: isErrorSocialLink,
-    },
-  ] = isUpdating
-    ? useUpdateSocialLinkMutation()
-    : useCreateSocialLinkMutation();
-
-  const [
-    mutationCoverLetter,
-    {
-      isLoading: isLoadingCoverLetter,
-      isSuccess: isSuccessCoverLetter,
-      isError: isErrorCoverLetter,
-    },
-  ] = isUpdating
-    ? useUpdateCoverLetterByIdMutation()
-    : useCreateCoverLeterMutation();
-
-  const [
-    mutationProject,
-    {
-      isLoading: isLoadingProject,
-      isSuccess: isSuccessProject,
-      isError: isErrorProject,
-    },
-  ] = isUpdating ? useUpdateProjectByIdMutation() : useCreateProjectMutation();
-
-  const [
-    mutationResume,
-    {
-      isLoading: isLoadingResume,
-      isSuccess: isSuccessResume,
-      isError: isErrorResume,
-    },
-  ] = isUpdating ? useUpdateResumeByIdMutation() : useCreateResumeMutation();
-
-  const onSubmit: SubmitHandler<
-    Pick<DataItem, "text" | "link" | "name" | "technologies">
-  > = async (data) => {
-    switch (cardsType) {
-      case "addPersonalProperties":
-        await mutationSocialLink({
-          name: data.name,
-          link: data.link as string,
-          idSocialLink: updateItem?.id,
-        });
-        break;
-
-      case "addCoverLetters":
-        await mutationCoverLetter({
-          name: data.name,
-          text: data.text as string,
-          id: updateItem?.id,
-        });
-        break;
-
-      case "addProjects":
-        await mutationProject({
-          id: updateItem?.id,
-          name: data.name,
-          technologies: data.technologies as string,
-          link: data.link as string,
-          description: data.text as string,
-        });
-        break;
-
-      case "addResumes":
-        await mutationResume({
-          name: data.name,
-          link: data.link as string,
-          id: updateItem?.id,
-        });
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  const isSubmitDisabled =
-    isLoadingCoverLetter ||
-    isLoadingProject ||
-    isLoadingResume ||
-    isLoadingSocialLink ||
-    Object.keys(errors).length > 0;
-
-  useEffect(() => {
-    if (
-      isSuccessCoverLetter ||
-      isSuccessProject ||
-      isSuccessResume ||
-      isSuccessSocialLink
-    ) {
-      notifySuccess("Дані збережено успішно");
-      refetchProfile();
-      dispatch(closeModal());
-    }
-  }, [
-    isSuccessCoverLetter,
-    isSuccessProject,
-    isSuccessResume,
-    isSuccessSocialLink,
-  ]);
-
-  useEffect(() => {
-    if (
-      isErrorCoverLetter ||
-      isErrorProject ||
-      isErrorResume ||
-      isErrorSocialLink
-    ) {
-      notifyError("Дані не вдалося зберегти");
-    }
-  }, [isErrorCoverLetter, isErrorProject, isErrorResume, isErrorSocialLink]);
 
   return (
     <form
@@ -241,8 +103,12 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         />
       )}
       <div className="flex flex-col-reverse justify-center gap-5 md:flex-row">
-        {cardsType === "addProjects" && isUpdating && (
-          <Button type="reset" onClick={() => dispatch(closeModal())}>
+        {cardsType !== "addPersonalProperties" && isUpdating && (
+          <Button
+            type="reset"
+            onClick={handleRemove}
+            disabled={isDisabledButtonRemove}
+          >
             {t("infoModal.button.delete")}
             <Icon id="delete" className="h-6 w-6" />
           </Button>

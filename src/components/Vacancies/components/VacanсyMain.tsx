@@ -103,18 +103,31 @@ const VacancyMain: FC = () => {
       {isError && <h2>Error...</h2>}
 
       {/* Заглушка "картка Створіть вашу першу вакансію", якщо взагалі вакансій немає, секція "Збережені" */}
-      {!isLoading && vacancies.length === 0 && (
-        <VacancySection
-          titleSection={t("sortDropdown.saved")}
-          colorSectionBorder="border-color5"
-          colorSectionBG="bg-color5"
-        >
-          <VacancyCardFirst
-            colorSectionBG="bg-color5-transparent"
-            colorHoverBG="hover:bg-color5"
-          />
-        </VacancySection>
-      )}
+      {!isLoading &&
+        vacancies.length === 0 &&
+        (!isMobile ? (
+          <VacancySection
+            titleSection={t("sortDropdown.saved")}
+            colorSectionBorder="border-color5"
+            colorSectionBG="bg-color5"
+          >
+            <VacancyCardFirst
+              colorSectionBG="bg-color5-transparent"
+              colorHoverBG="hover:bg-color5"
+            />
+          </VacancySection>
+        ) : (
+          <VacancySectionBox
+            titleSection={t("sortDropdown.saved")}
+            colorSectionBG="bg-color5"
+            colorSectionBorder="border-color5"
+          >
+            <VacancyCardFirst
+              colorSectionBG="bg-color5-transparent"
+              colorHoverBG="hover:bg-color5"
+            />
+          </VacancySectionBox>
+        ))}
 
       {/* Архівні вакансії */}
       {isArchive && renderedVacancies.length > 0 && (

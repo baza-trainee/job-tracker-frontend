@@ -30,6 +30,7 @@ const modalSlice = createSlice({
       state.vacancyData = action.payload.vacancyData;
       state.eventData = action.payload.eventData || null;
       state.dataConfirmation = action.payload.dataConfirmation;
+      state.noteData = action.payload.noteData;
     },
     closeModal: (state) => {
       state.isModalOpen = false;
@@ -39,6 +40,7 @@ const modalSlice = createSlice({
       state.backgroundColorModal = "";
       state.vacancyData = null;
       state.dataConfirmation = null;
+      state.noteData = null;
     },
     openConfirmation: (state, action: PayloadAction<ModalProps>) => {
       state.isConfirmationOpen = true;

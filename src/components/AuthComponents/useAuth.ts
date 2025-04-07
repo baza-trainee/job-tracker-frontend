@@ -185,7 +185,6 @@ export function useAuthForm(
     },
     [
       dispatch,
-      errors,
       forgotUserPassword,
       loginUser,
       navigate,
