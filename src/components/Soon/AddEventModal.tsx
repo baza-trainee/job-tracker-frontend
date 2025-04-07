@@ -95,17 +95,6 @@ const AddEventModal = () => {
         setMenu(true);
       }
     }
-
-    // if (selectRef.current) {
-    //   if (menuOpen) {
-    //     selectRef.current?.blur(); // Закриває меню
-    //     selectRef.current?.closeMenu?.(); // Пробуємо безпечне закриття
-    //     setMenuOpen(false);
-    //   } else {
-    //     selectRef.current?.openMenu?.();
-    //     setMenuOpen(true);
-    //   }
-    // }
   };
 
   return (
@@ -158,6 +147,7 @@ const AddEventModal = () => {
             type="textarea"
             rows={4}
             isCheckButtons={false}
+            classNameInputCustom="resize-none"
           />
 
           <div className="flex w-full flex-col items-center md:items-start">
@@ -288,8 +278,6 @@ const AddEventModal = () => {
 
                 <Select<OptionType>
                   ref={(ref) => {
-                    // Зберігаємо доступ до внутрішнього методу select
-                    // console.log("Select ref встановлюється:", ref);
                     if (ref) {
                       selectMinutesRef.current = ref;
                     }
@@ -298,13 +286,13 @@ const AddEventModal = () => {
                   value={minuteOptions.find(
                     (option) =>
                       option.value === Number(watch("minutes")) || null
-                  )} // Прив’язуємо селект до стану
+                  )}
                   onChange={(selectedOption: SingleValue<OptionType>, _) => {
                     setMenuOpenMinutes(false);
                     setValue("minutes", selectedOption?.value ?? "", {
                       shouldValidate: true,
                     });
-                    trigger("minutes"); // Примусово перевіряємо поле
+                    trigger("minutes");
                   }}
                   placeholder="00"
                   className={clsx(
@@ -312,7 +300,6 @@ const AddEventModal = () => {
                     "z-1 left-0 top-0 cursor-pointer",
                     "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
-                    // " px-3 py-[9px] absolute opacity-[0.01]"
                   )}
                   classNamePrefix="react-select"
                   isSearchable={false}
@@ -321,7 +308,7 @@ const AddEventModal = () => {
                     DropdownIndicator: () => null,
                     IndicatorSeparator: () => null,
                   }}
-                  menuIsOpen={menuOpenMinutes} // контролюємо вручну відкриття селекта
+                  menuIsOpen={menuOpenMinutes}
                   onMenuOpen={() => setMenuOpenMinutes(true)}
                   onMenuClose={() => setMenuOpenMinutes(false)}
                 />
@@ -353,6 +340,17 @@ const AddEventModal = () => {
 };
 
 export default AddEventModal;
+
+// if (selectRef.current) {
+//   if (menuOpen) {
+//     selectRef.current?.blur(); // Закриває меню
+//     selectRef.current?.closeMenu?.(); // Пробуємо безпечне закриття
+//     setMenuOpen(false);
+//   } else {
+//     selectRef.current?.openMenu?.();
+//     setMenuOpen(true);
+//   }
+// }
 
 // onMenuOpen={() => {
 //   setTimeout(() => inputRef.current?.focus(), 0); // Фокусуємо input
