@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
@@ -37,7 +37,10 @@ const AddEventModal = () => {
     resolver: zodResolver(getEventSchema()),
   });
 
-  const selectRef = useRef<any>(null);
+  const [menuOpenHours, setMenuOpenHours] = useState(false);
+  const [menuOpenMinutes, setMenuOpenMinutes] = useState(false);
+  const selectHoursRef = useRef<any>(null);
+  const selectMinutesRef = useRef<any>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -46,7 +49,7 @@ const AddEventModal = () => {
   }, [setValue]);
 
   const confirmAddSave = (data: any) => {
-    console.log("confirmAddSave викликається!", data);
+    // console.log("confirmAddSave викликається!", data);
 
     dispatch(
       openConfirmation({
@@ -65,16 +68,51 @@ const AddEventModal = () => {
     label: i.toString().padStart(2, "0"),
   }));
 
+  const minuteOptions = Array.from({ length: 60 }, (_, i) => ({
+    value: i,
+    label: i.toString().padStart(2, "0"),
+  }));
+
   useEffect(() => {
     register("hours", { required: true });
     register("minutes", { required: true });
   }, [register]);
 
+  const handleInputClick = (type: "hours" | "minutes") => {
+    // console.log("handleInputClick викликано");
+    const isHours = type === "hours";
+    const ref = isHours ? selectHoursRef.current : selectMinutesRef.current;
+    const isOpen = isHours ? menuOpenHours : menuOpenMinutes;
+    const setMenu = isHours ? setMenuOpenHours : setMenuOpenMinutes;
+
+    if (ref) {
+      if (isOpen) {
+        ref?.blur?.();
+        ref?.closeMenu?.();
+        setMenu(false);
+      } else {
+        ref?.openMenu?.();
+        setMenu(true);
+      }
+    }
+
+    // if (selectRef.current) {
+    //   if (menuOpen) {
+    //     selectRef.current?.blur(); // Закриває меню
+    //     selectRef.current?.closeMenu?.(); // Пробуємо безпечне закриття
+    //     setMenuOpen(false);
+    //   } else {
+    //     selectRef.current?.openMenu?.();
+    //     setMenuOpen(true);
+    //   }
+    // }
+  };
+
   return (
     <form
       onSubmit={handleSubmit((data) => {
-        console.log("onSubmit відбувся", data);
-        console.log("Помилки у формі:", errors);
+        // console.log("onSubmit відбувся", data);
+        // console.log("Помилки у формі:", errors);
         confirmAddSave(data);
       })}
       className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6"
@@ -126,73 +164,175 @@ const AddEventModal = () => {
             <p className="mt-4 text-xl 3xl:text-2xl">
               {t("soonSection.setTime")}
             </p>
-            <div className="time-content relative grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
-              <Input
-                name="hours"
-                placeholder="00"
-                type="text"
-                register={register}
-                errors={errors}
-                resetField={resetField}
-                setValue={setValue}
-                isRequired={true}
-                isCheckButtons={false}
-                maxLength={2}
-                // value={watch("hours") ?? ""} // Прив'язуємо значення до стану форми, гарантовано не буде undefined
-                className={clsx(
-                  "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
-                  "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
-                )}
-                classNameInputCustom={clsx(
-                  "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                  "sm:h-auto sm:p-0 sm:text-[28px]",
-                  "md:h-auto md:p-0 md:text-[28px]",
-                  "xl:text-[32px] xl:font-normal",
-                  "2xl:text-[32px]"
-                )}
-                onChange={(e: React.FormEvent<HTMLInputElement>) => {
-                  let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
-                  if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
-                  if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
-                  setValue("hours", Number(value), { shouldValidate: true }); // Оновлюємо значення, передаємо число + тригеримо валідацію одразу при заповнені
-                }}
-              />
+            <div className="time-content grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
+              <div className="container-hours relative flex h-[60px] w-20">
+                <Input
+                  name="hours"
+                  placeholder="00"
+                  type="text"
+                  register={register}
+                  errors={errors}
+                  resetField={resetField}
+                  setValue={setValue}
+                  isRequired={true}
+                  isCheckButtons={false}
+                  autoComplete="off"
+                  maxLength={2}
+                  // value={watch("hours") ?? ""} // Прив'язуємо значення до стану форми, гарантовано не буде undefined
+                  className={clsx(
+                    "pointer-events-auto z-10",
+                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
+                    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+                  )}
+                  classNameInputCustom={clsx(
+                    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
+                    "sm:h-auto sm:p-0 sm:text-[28px]",
+                    "md:h-auto md:p-0 md:text-[28px]",
+                    "xl:text-[32px] xl:font-normal",
+                    "2xl:text-[32px]"
+                  )}
+                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                    let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+                    if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
+                    if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
+                    setValue("hours", Number(value), { shouldValidate: true }); // Оновлюємо значення, передаємо число + тригеримо валідацію одразу при заповнені
+                  }}
+                  onClick={() => handleInputClick("hours")}
+                  ref={inputRef}
+                  onInput={() => setMenuOpenHours(false)}
+                />
 
-              <Select<OptionType>
-                ref={selectRef as any}
-                options={hourOptions}
-                value={hourOptions.find(
-                  (option) => option.value === Number(watch("hours")) || null
-                )} // Прив’язуємо селект до стану
-                onChange={(selectedOption: SingleValue<OptionType>, _) => {
-                  setValue("hours", selectedOption?.value ?? "", {
-                    shouldValidate: true,
-                  });
-                  trigger("hours"); // Примусово перевіряємо поле
-                }}
-                placeholder="00"
-                className={clsx(
-                  "select__event-modal",
-                  "h-[60px] w-20 rounded-lg border-2 border-transparent bg-backgroundTertiary",
-                  "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
-                  // " px-3 py-[9px]"
-                )}
-                classNamePrefix="react-select"
-                isSearchable={false}
-                onMenuOpen={() => {
-                  setTimeout(() => inputRef.current?.focus(), 0); // Фокусуємо input
-                }} // setTimeout для того, щоб фокус спрацював після відкриття меню
-                components={{
-                  DropdownIndicator: () => null,
-                  IndicatorSeparator: () => null,
-                }}
-              />
+                <Select<OptionType>
+                  ref={(ref) => {
+                    // Зберігаємо доступ до внутрішнього методу select
+                    // console.log("Select ref встановлюється:", ref);
+                    if (ref) {
+                      selectHoursRef.current = ref;
+                    }
+                  }}
+                  options={hourOptions}
+                  value={hourOptions.find(
+                    (option) => option.value === Number(watch("hours")) || null
+                  )} // Прив’язуємо селект до стану
+                  onChange={(selectedOption: SingleValue<OptionType>, _) => {
+                    setMenuOpenHours(false);
+                    setValue("hours", selectedOption?.value ?? "", {
+                      shouldValidate: true,
+                    });
+                    trigger("hours"); // Примусово перевіряємо поле
+                  }}
+                  placeholder="00"
+                  className={clsx(
+                    "select__event-modal",
+                    "z-1 left-0 top-0 cursor-pointer",
+                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary",
+                    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+                    // " px-3 py-[9px] absolute opacity-[0.01]"
+                  )}
+                  classNamePrefix="react-select"
+                  isSearchable={false}
+                  tabIndex={-1}
+                  components={{
+                    DropdownIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                  }}
+                  menuIsOpen={menuOpenHours} // контролюємо вручну відкриття селекта
+                  onMenuOpen={() => setMenuOpenHours(true)}
+                  onMenuClose={() => setMenuOpenHours(false)}
+                />
+              </div>
 
-              {errors.hours && (
-                <p className="absolute left-0 top-[50%] text-red-500">
-                  {String(errors.hours.message)}
-                </p>
-              )}
+              <div className="flex h-[60px] w-6 items-center justify-center">
+                <span className="box-border text-[44px] font-normal leading-[44px] md:pb-[3px] md:text-[57px] md:leading-[57px]">
+                  :
+                </span>
+              </div>
+
+              <div className="container-minutes relative flex h-[60px] w-20">
+                <Input
+                  name="minutes"
+                  placeholder="00"
+                  type="text"
+                  register={register}
+                  errors={errors}
+                  resetField={resetField}
+                  setValue={setValue}
+                  isRequired={false}
+                  isCheckButtons={false}
+                  autoComplete="off"
+                  maxLength={2}
+                  className={clsx(
+                    "pointer-events-auto z-10",
+                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
+                    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+                  )}
+                  classNameInputCustom={clsx(
+                    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
+                    "sm:h-auto sm:p-0 sm:text-[28px]",
+                    "md:h-auto md:p-0 md:text-[28px]",
+                    "xl:text-[32px] xl:font-normal",
+                    "2xl:text-[32px]"
+                  )}
+                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                    let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
+                    if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
+                    if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
+                    setValue("minutes", Number(value), {
+                      shouldValidate: true,
+                    }); // Оновлюємо значення, передаємо число + тригеримо валідацію одразу при заповнені
+                  }}
+                  onClick={() => handleInputClick("minutes")}
+                  ref={inputRef}
+                  onInput={() => setMenuOpenMinutes(false)}
+                />
+
+                <Select<OptionType>
+                  ref={(ref) => {
+                    // Зберігаємо доступ до внутрішнього методу select
+                    // console.log("Select ref встановлюється:", ref);
+                    if (ref) {
+                      selectMinutesRef.current = ref;
+                    }
+                  }}
+                  options={minuteOptions}
+                  value={minuteOptions.find(
+                    (option) =>
+                      option.value === Number(watch("minutes")) || null
+                  )} // Прив’язуємо селект до стану
+                  onChange={(selectedOption: SingleValue<OptionType>, _) => {
+                    setMenuOpenMinutes(false);
+                    setValue("minutes", selectedOption?.value ?? "", {
+                      shouldValidate: true,
+                    });
+                    trigger("minutes"); // Примусово перевіряємо поле
+                  }}
+                  placeholder="00"
+                  className={clsx(
+                    "select__event-modal",
+                    "z-1 left-0 top-0 cursor-pointer",
+                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary",
+                    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+                    // " px-3 py-[9px] absolute opacity-[0.01]"
+                  )}
+                  classNamePrefix="react-select"
+                  isSearchable={false}
+                  tabIndex={-1}
+                  components={{
+                    DropdownIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                  }}
+                  menuIsOpen={menuOpenMinutes} // контролюємо вручну відкриття селекта
+                  onMenuOpen={() => setMenuOpenMinutes(true)}
+                  onMenuClose={() => setMenuOpenMinutes(false)}
+                />
+              </div>
+
+              <p className="col-span-2 row-start-2 text-base 3xl:text-xl">
+                {t("soonSection.soonModalTimeHours")}
+              </p>
+              <p className="col-span-1 row-start-2 text-base 3xl:text-xl">
+                {t("soonSection.soonModalTimeMinutes")}
+              </p>
             </div>
           </div>
         </div>
@@ -214,10 +354,41 @@ const AddEventModal = () => {
 
 export default AddEventModal;
 
-// const minuteOptions = Array.from({ length: 60 }, (_, i) => ({
-//   value: i,
-//   label: i.toString().padStart(2, "0"),
-// }));
+// onMenuOpen={() => {
+//   setTimeout(() => inputRef.current?.focus(), 0); // Фокусуємо input
+// }} // setTimeout для того, щоб фокус спрацював після відкриття меню
+
+{
+  /* {errors.hours && (
+    <p className="absolute left-0 top-[50%] text-red-500">
+        {String(errors.hours.message)}
+    </p>
+  )} */
+}
+
+// readOnly
+// onFocus={() => {
+//   setMenuOpen((prev) => {
+//     // Якщо вже відкрите — закриємо
+//     if (prev) {
+//       return false;
+//     } else {
+//       selectRef.current?.openMenu?.();
+//       return true;
+//     }
+//   });
+// }}
+
+// if (selectRef.current) {
+//   console.log("selectRef.current знайдено", selectRef.current);
+//   // selectRef.current.focus(); // Фокусує select
+//   // selectRef.current.openMenu(); // Відкриває меню
+//   // selectRef.current.focus?.(); // безпечно перевіримо наявність методу
+//   selectRef.current.openMenu?.(); // те саме тут
+//   setMenuOpen(true);
+// } else {
+//   console.log("selectRef.current НЕ знайдено");
+// }
 
 {
   /* <div className="flex h-[60px] w-6 items-center justify-center">

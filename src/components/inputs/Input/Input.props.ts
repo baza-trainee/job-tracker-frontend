@@ -1,8 +1,8 @@
 import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
-import { ForwardedRef } from "react";
+// import { ForwardedRef } from "react";
 
 export interface InputProps {
-  ref?: ForwardedRef<HTMLInputElement>;
+  // ref?: ForwardedRef<HTMLInputElement>;
   onFocus?: () => void;
   name: string;
   placeholder?: string;
@@ -34,4 +34,6 @@ export interface InputProps {
   onInput?: (event: React.FormEvent<HTMLInputElement>) => void;
   onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
+  autoComplete?: string;
 }
