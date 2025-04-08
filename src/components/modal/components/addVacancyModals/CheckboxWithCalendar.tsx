@@ -38,6 +38,8 @@ export const CheckboxWithCalendar = ({
 
   const dispatch = useAppDispatch();
 
+  const validTime: number = moment().utcOffset() / 60;
+
   const handleCheckbox = () => {
     setIsChecked((prev: boolean) => !prev);
     setValueCalendar(moment(new Date()).format("D.MM.YY"));
@@ -46,13 +48,11 @@ export const CheckboxWithCalendar = ({
         id: id || "",
         name: name,
         date: !isChecked
-          ? moment.utc().add(1, "hour").format()
+          ? moment.utc().add(validTime, "hour").format()
           : "1970-01-01T00:00:00.000Z",
       })
     );
-    console.log("time   ", moment().add(1, "hours").toISOString());
-    console.log("timeUTC", moment.utc().add(1, "hours").toISOString());
-    console.log("timForm", moment.utc().add(1, "hour").format());
+
     setIsOpenCalendar(false);
     // відстеження помилок
     if (name === "resume" || name === "reject") {
@@ -63,7 +63,7 @@ export const CheckboxWithCalendar = ({
   const createUpdatedDate = (date: string): void => {
     const newDate = moment(date)
       .set({
-        hour: moment().hour() + 1,
+        hour: moment().hour() + validTime,
         minute: moment().minute(),
         second: moment().second(),
         millisecond: moment().millisecond(),

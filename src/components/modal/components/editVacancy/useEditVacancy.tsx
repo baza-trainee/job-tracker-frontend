@@ -72,8 +72,9 @@ const useEditVacancy = () => {
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
   });
-
   //alex
+  console.log("vac", vacancyData)
+
   useEffect(() => {
     if (vacancyData) {
       const findStatusId = (
