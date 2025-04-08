@@ -147,7 +147,8 @@ const AddEventModal = () => {
             type="textarea"
             rows={4}
             isCheckButtons={false}
-            classNameInputCustom="resize-none"
+            className="textarea-event"
+            classNameInputCustom="resize-none textarea-event-lg textarea-event"
           />
 
           <div className="flex w-full flex-col items-center md:items-start">
@@ -221,7 +222,7 @@ const AddEventModal = () => {
                   )}
                   classNamePrefix="react-select"
                   isSearchable={false}
-                  tabIndex={-1}
+                  // tabIndex={-1}
                   components={{
                     DropdownIndicator: () => null,
                     IndicatorSeparator: () => null,
@@ -303,7 +304,7 @@ const AddEventModal = () => {
                   )}
                   classNamePrefix="react-select"
                   isSearchable={false}
-                  tabIndex={-1}
+                  // tabIndex={-1}
                   components={{
                     DropdownIndicator: () => null,
                     IndicatorSeparator: () => null,
