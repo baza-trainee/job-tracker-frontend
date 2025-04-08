@@ -99,7 +99,7 @@ const ContactUs = () => {
           <div className="flex flex-col justify-center gap-2 md:flex-row xl:mt-4">
             <Button
               type="button"
-              className=""
+              className="md:mx-0 md:w-auto"
               // disabled={isCleanInputsForm() || errors || loading}
               variant="ghost"
               size="small"
@@ -109,9 +109,9 @@ const ContactUs = () => {
             </Button>
             <Button
               type="submit"
-              className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
+              className="w-full md:mx-0 md:w-auto"
               disabled={error}
-              variant="ghost"
+              variant="accent"
               size="big"
               onClick={() => handleGood()}
             >

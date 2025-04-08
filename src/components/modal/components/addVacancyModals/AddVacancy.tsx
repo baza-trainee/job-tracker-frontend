@@ -134,8 +134,8 @@ const AddVacancy = () => {
             </Button>
             <Button
               type="button"
-              className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
-              variant="ghost"
+              className="w-full md:mx-auto xl:mx-0 xl:w-auto"
+              variant="accent"
               size="big"
               onClick={saveVacancy}
             >

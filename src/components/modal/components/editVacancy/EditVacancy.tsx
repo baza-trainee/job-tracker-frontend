@@ -31,6 +31,7 @@ const EditVacancy = () => {
     getValues,
     setValue,
     vacancyData,
+    isDirty,
   } = useEditVacancy();
 
   const isArchived = vacancyData?.isArchived || "";
@@ -159,8 +160,9 @@ const EditVacancy = () => {
             </div>
             <Button
               type="button"
-              className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
-              variant="ghost"
+              disabled={!isDirty}
+              className="w-full md:mx-auto xl:mx-0 xl:w-auto"
+              variant="accent"
               size="big"
               onClick={saveVacancy}
             >

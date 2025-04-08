@@ -56,7 +56,14 @@
     "fieldAdded": "Field added",
     "resumeAdded": "Resume added",
     "projectAdded": "Project added",
-    "letterAdded": "Letter added"
+    "letterAdded": "Letter added",
+    "vacancyAdded": "The data has been successfully saved. Thank you.",
+    "vacancyError": "An error occurred while saving the data. Please try again.",
+    "vacancyEdit": "The data has been successfully updated. Thank you.",
+    "vacancyDelete": "The vacancy has been successfully deleted. Thank you.",
+    "vacancyDeleteError": "An error occurred. The vacancy could not be deleted.",
+    "noteDelete": "The note has been successfully deleted. Thank you.",
+    "noteDeleteError": "An error occurred. The note was not deleted."
   },
   "navigation": {
     "vacancies": "Vacancies",
@@ -427,6 +434,14 @@
       "text_1": "This action is irreversible!",
       "notifyDeleteEventSuccess": "Event successfully deleted!",
       "notifyDeleteEventError": "Failed to delete event."
+    },
+    "arhiveVacancy": {
+      "title": "Move a vacancy to the archive?",
+      "text_1": "You can always find it using the button in the upper right corner"
+    },
+    "restoreVacancy": {
+      "title": "Restore a vacancy from the archive?",
+      "text_1": "The vacancy will be moved to the main list"
     }
   },
   "soonSection": {

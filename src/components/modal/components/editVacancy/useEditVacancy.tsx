@@ -21,11 +21,12 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { StatusName, RejectReason } from "@/types/vacancies.types";
 import { useState, useEffect } from "react";
-//alex
+import { useTranslation } from "react-i18next";
 import { useDeleteVacancyByIdMutation } from "@/store/querySlices/vacanciesQuerySlice";
 import { useNavigate } from "react-router-dom";
 
 const useEditVacancy = () => {
+  const { t } = useTranslation();
   const { refetch } = useGetAllUserDataQuery();
   const [updateVacancyById] = useUpdateVacancyByIdMutation();
 
@@ -51,7 +52,7 @@ const useEditVacancy = () => {
     handleSubmit,
     getValues,
     setValue,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<z.infer<typeof AddVacancySchema>>({
     defaultValues: {
       company: "",
@@ -106,10 +107,10 @@ const useEditVacancy = () => {
       await deleteVacancyById({ id: vacancyData?.id as string }).unwrap();
       refetch();
       reset();
-      notifySuccess("Вакансію успішно видалено. Дякую");
+      notifySuccess(t("notification.vacancyDelete"));
     } catch (err) {
-      // console.log(err);
-      notifyError("Виникла помилка. Вакансію не видалено");
+      console.log(err);
+      notifyError(t("notification.vacancyDeleteError"));
     }
     setIsLoading(false);
     dispatch(closeConfirmation());
@@ -134,10 +135,10 @@ const useEditVacancy = () => {
         isArchived,
       } = data;
       setIsLoading(true);
-      console.log("Редагування вакансії", data);
-
-      console.log("old Data", vacancyData?.isArchived);
-      console.log("new Data", data.isArchived);
+      // alex
+      // console.log("Редагування вакансії", data);
+      // console.log("old Data", vacancyData?.isArchived);
+      // console.log("new Data", data.isArchived);
 
       // 1 - запит на збереження вакансії - пропускаємо
 
@@ -167,8 +168,9 @@ const useEditVacancy = () => {
       }
 
       // 4 - зберігаємо статуси
-      console.log("prev Status", previousStatuses);
-      console.log("new Status", newStatuses);
+      // alex
+      // console.log("prev Status", previousStatuses);
+      // console.log("new Status", newStatuses);
 
       for (let i: number = 0; i <= newStatuses.length; i++) {
         const prevDate = previousStatuses[i]?.date || "";
@@ -232,9 +234,9 @@ const useEditVacancy = () => {
 
       refetch();
       reset();
-      notifySuccess("Дані успішно збережено. Дякую");
+      notifySuccess(t("notification.vacancyEdit"));
     } catch (error) {
-      notifyError("Дані не збережено. Спробуйте ще раз");
+      notifyError(t("notification.vacancyError"));
       console.error(error);
     }
     setIsLoading(false);
@@ -254,6 +256,7 @@ const useEditVacancy = () => {
     isLoading,
     vacancyData,
     deleteVacancy,
+    isDirty,
   };
 };
 

@@ -38,13 +38,14 @@ export const useFilteredVacancies = (
       );
 
     switch (sortType) {
-      case "newFirst":
-        result = result.sort(
-          (a, b) =>
-            new Date(b.statuses[0].date).getTime() -
-            new Date(a.statuses[0].date).getTime()
-        );
-        break;
+      // alex
+      // case "newFirst":
+      //   result = result.sort(
+      //     (a, b) =>
+      //       new Date(b.statuses[0].date).getTime() -
+      //       new Date(a.statuses[0].date).getTime()
+      //   );
+      //   break;
 
       case "oldFirst":
         result = result.sort(

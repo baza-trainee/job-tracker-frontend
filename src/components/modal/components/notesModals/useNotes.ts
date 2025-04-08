@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,13 +7,24 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { NoteSchema } from "@/schemas/noteSchema";
 
 import { useAppDispatch, useAppSelector } from "@/store/hook";
-import { closeConfirmation, closeModal, } from "@/store/slices/modalSlice/modalSlice";
-import { useCreateNoteMutation, useDeleteNoteByIdMutation, useUpdateNoteByIdMutation, } from "@/store/querySlices/notesQuerySlice";
+import {
+  closeConfirmation,
+  closeModal,
+} from "@/store/slices/modalSlice/modalSlice";
+import {
+  useCreateNoteMutation,
+  useDeleteNoteByIdMutation,
+  useUpdateNoteByIdMutation,
+} from "@/store/querySlices/notesQuerySlice";
 import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
 
-import { notifyError, notifySuccess, } from "@/components/Notifications/NotificationService";
+import {
+  notifyError,
+  notifySuccess,
+} from "@/components/Notifications/NotificationService";
 
 function useNotes(type: "addNote" | "updateNote") {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const [createNote] = useCreateNoteMutation();
@@ -56,10 +68,10 @@ function useNotes(type: "addNote" | "updateNote") {
       setIsLoading(true);
       await deleteNoteById({ id: noteData?.id as string }).unwrap();
       refetchNote();
-      notifySuccess("Нотатку успішно видалено. Дякую");
+      notifySuccess(t("notification.noteDelete"));
     } catch (err) {
       console.log(err);
-      notifyError("Виникла помилка. Вакансію не видалено");
+      notifyError(t("notification.noteDeleteError"));
     }
     setIsLoading(false);
     dispatch(closeConfirmation());
@@ -87,10 +99,10 @@ function useNotes(type: "addNote" | "updateNote") {
         console.log("resposnse", response);
       }
       refetchNote();
-      notifySuccess("Дані успішно збережено. Дякую");
+      notifySuccess(t("notification.vacancyAdded"));
       setIsLoading(true);
     } catch (error) {
-      notifyError("Помилка збереження даних");
+      notifyError(t("notification.vacancyError"));
       console.error(error);
     }
     setIsLoading(false);
