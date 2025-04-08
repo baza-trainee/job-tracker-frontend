@@ -607,3 +607,9 @@ input[type="password"]::-ms-clear {
 .select__event-modal .react-select__indicator {
   display: none; 
 } */
+
+@media (min-width: 1920px) {
+  .textarea-event-lg {
+    min-height: calc(1.5em * 8 + 2rem);
+  }
+}

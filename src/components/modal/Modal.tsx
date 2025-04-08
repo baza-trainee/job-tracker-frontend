@@ -60,7 +60,9 @@ const Modal: FC = () => {
             "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]":
               typeModal === "addVacancy" ||
               typeModal === "editVacancy" ||
-              typeModal === "forgotPassword",
+              typeModal === "forgotPassword" ||
+              typeModal === "addEvent" ||
+              typeModal === "editEvent",
           })}
           modalData={modalData}
           btnFunc={() => {
