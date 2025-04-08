@@ -154,8 +154,8 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
             ? isInModal
               ? "z-[20] h-fit"
               : variant === "notes"
-                ? "h-[162px] sm:box-content smOnly:h-fit"
-                : "h-[203px] sm:box-content smOnly:h-fit"
+                ? "h-[166px] sm:box-content smOnly:h-fit"
+                : "h-[208px] sm:box-content smOnly:h-fit"
             : isInModal
               ? "h-[36px] rounded-lg hover:border-iconHover hover:bg-backgroundMain md:h-[44px]"
               : "h-[51px] hover:border-iconHover hover:bg-backgroundSecondary",
@@ -171,8 +171,9 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           }
           onMouseEnter={() => setFocusedOption("sortButton")}
           className={cn(
-            "flex w-full items-center justify-between rounded-t-xl py-2 pl-8 pr-[22px] pt-3 text-textBlack outline-none",
+            "flex w-full items-center justify-between rounded-t-xl pb-[13px] pl-8 pr-[22px] pt-3 text-textBlack",
             isDropdownOpen && "hover:bg-button",
+            !isDropdownOpen && !isInModal && "rounded-xl",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button",
             isInModal
               ? "px-2 py-[5px] text-textBlackLight md:py-[10px] smOnly:text-xs"
