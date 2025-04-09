@@ -23,10 +23,6 @@ const AddButton: React.FC<AddButtonProps> = ({ className, variant }) => {
 
   switch (variant) {
     case "vacancies":
-      modalType = "addVacancy";
-      buttonText = t("vacanciesHeader.addVacancy");
-      onClick = () => dispatch(createNewStatuses(vacancyStatusesInfo));
-      break;
     case "archive":
       modalType = "addVacancy";
       buttonText = t("vacanciesHeader.addVacancy");

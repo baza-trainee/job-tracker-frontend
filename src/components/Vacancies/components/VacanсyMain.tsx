@@ -15,7 +15,6 @@ import VacancyCard from "./VacancyCard.tsx";
 import VacancyCardFirst from "./VacancyCardFirst.tsx";
 import VacancySectionSkeleton from "./VacancySectionSceleton";
 
-import { VacancyProps } from "../../commonComponents/PageHeader.tsx";
 import {
   getLocalizedSectionConfig,
   getVacanciesByStatus,
@@ -24,15 +23,16 @@ import {
 import { openModal } from "../../../store/slices/modalSlice/modalSlice.ts";
 import { fetchUpdatedStatuses } from "@/store/slices/statusVacancy/vacancyStatusOperation.ts";
 import { Vacancy } from "@/types/vacancies.types.ts";
+import { useLocation } from "react-router-dom";
 
-const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
+const VacancyMain: FC = () => {
   const { sortType, searchQuery } = useAppSelector(selectfilteredVacancies);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const location = useLocation();
   const localizedSections = getLocalizedSectionConfig();
 
   const { data, isLoading, isError } = useGetAllUserDataQuery();
-  console.log("data", data);
 
   const vacancies = data?.vacancies || [];
   const filteredVacancies = useFilteredVacancies(
@@ -50,6 +50,9 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
     "reject",
     "offer",
   ].includes(sortType);
+
+  const isArchive = location.pathname.replace(/^\/+/, "") === "archive";
+
   const isSorting = isStatus || isArchive;
 
   const renderedVacancies = isArchive
@@ -99,18 +102,31 @@ const VacancyMain: FC<VacancyProps> = ({ isArchive }) => {
       {isError && <h2>Error...</h2>}
 
       {/* Заглушка "картка Створіть вашу першу вакансію", якщо взагалі вакансій немає, секція "Збережені" */}
-      {!isLoading && vacancies.length === 0 && (
-        <VacancySection
-          titleSection={t("sortDropdown.saved")}
-          colorSectionBorder="border-color5"
-          colorSectionBG="bg-color5"
-        >
-          <VacancyCardFirst
-            colorSectionBG="bg-color5-transparent"
-            colorHoverBG="hover:bg-color5"
-          />
-        </VacancySection>
-      )}
+      {!isLoading &&
+        vacancies.length === 0 &&
+        (!isMobile ? (
+          <VacancySection
+            titleSection={t("sortDropdown.saved")}
+            colorSectionBorder="border-color5"
+            colorSectionBG="bg-color5"
+          >
+            <VacancyCardFirst
+              colorSectionBG="bg-color5-transparent"
+              colorHoverBG="hover:bg-color5"
+            />
+          </VacancySection>
+        ) : (
+          <VacancySectionBox
+            titleSection={t("sortDropdown.saved")}
+            colorSectionBG="bg-color5"
+            colorSectionBorder="border-color5"
+          >
+            <VacancyCardFirst
+              colorSectionBG="bg-color5-transparent"
+              colorHoverBG="hover:bg-color5"
+            />
+          </VacancySectionBox>
+        ))}
 
       {/* Архівні вакансії */}
       {isArchive && renderedVacancies.length > 0 && (

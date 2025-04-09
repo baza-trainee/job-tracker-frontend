@@ -466,7 +466,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.saveAddEvent.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
@@ -487,7 +487,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.saveEditEvent.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
@@ -508,7 +508,7 @@ const InfoModalMap = () => {
       text: [t("infoModal.deleteEvent.text_1")],
       button: [
         createButton(
-          t("infoModal.button.logOut"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "",
           "small",
