@@ -260,7 +260,8 @@
       "archive": "В архів",
       "restore": "Відновити",
       "save": "Зберегти",
-      "delete": "Видалити"
+      "delete": "Видалити",
+      "addStage": "Додати етап"
     },
     "placeholders": {
       "company": "Вкажіть назву компанії",
@@ -274,7 +275,8 @@
       "name": "Додати нову вакансію"
     },
     "titleResumeList": "Оберіть відправлене резюме",
-    "titleRejectList": "Оберіть причину відмови"
+    "titleRejectList": "Оберіть причину відмови",
+    "titleAddStage": "Оберіть додатковий етап"
   },
   "addVacancySchema": {
     "company": {

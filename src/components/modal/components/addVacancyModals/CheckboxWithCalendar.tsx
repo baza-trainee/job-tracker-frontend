@@ -38,7 +38,7 @@ export const CheckboxWithCalendar = ({
 
   const dispatch = useAppDispatch();
 
-  const validTime: number = moment().utcOffset() / 60;
+  const validTime: number = moment().utcOffset();
 
   const handleCheckbox = () => {
     setIsChecked((prev: boolean) => !prev);
@@ -48,7 +48,7 @@ export const CheckboxWithCalendar = ({
         id: id || "",
         name: name,
         date: !isChecked
-          ? moment.utc().add(validTime, "hour").format()
+          ? moment.utc().add(validTime, "minutes").format()
           : "1970-01-01T00:00:00.000Z",
       })
     );
@@ -63,8 +63,8 @@ export const CheckboxWithCalendar = ({
   const createUpdatedDate = (date: string): void => {
     const newDate = moment(date)
       .set({
-        hour: moment().hour() + validTime,
-        minute: moment().minute(),
+        hour: moment().hour(),
+        minute: moment().minute() + validTime,
         second: moment().second(),
         millisecond: moment().millisecond(),
       })

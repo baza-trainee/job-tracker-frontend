@@ -70,7 +70,7 @@ const AddVacancyInfo = () => {
       label: t(`addVacancy.form.${stage}`),
     })) || [];
 
-  const buttonStagesOption = { id: "", label: "Оберіть додатковий етап" };
+  const buttonStagesOption = { id: "", label: t("addVacancy.titleAddStage") };
 
   return {
     vacancyFields,

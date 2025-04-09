@@ -94,7 +94,7 @@ const EditVacancy = () => {
 
             {/* TODO:Cтатус: Відправлене резюме, Тестове завдання ... Оффер*/}
             <div className="relative flex flex-col gap-3 md:gap-4 2xl:pt-2">
-              <label>Статус</label>
+              <label>{t("addVacancy.form.status")}</label>
               <div className="flex flex-col gap-3 md:gap-4 xl:w-[274px] 2xl:w-[342px]">
                 {statusVacancy.map((checkboxCalendar: VacancyInputProps) => (
                   <CheckboxWithCalendar

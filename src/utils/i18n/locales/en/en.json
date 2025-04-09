@@ -262,7 +262,8 @@
       "restore": "Restore",
       "save": "Save",
       "delete": "Delete",
-      "confirm": "Ok"
+      "confirm": "Ok",
+      "addStage": "Add stage"
     },
     "placeholders": {
       "company": "Enter company name",
@@ -276,7 +277,8 @@
       "name": "Add a new vacancy"
     },
     "titleResumeList": "Select the sent CV",
-    "titleRejectList": "Select the reason for rejection"
+    "titleRejectList": "Select the reason for rejection",
+    "titleAddStage": "Select an additional stage"
   },
   "addVacancySchema": {
     "company": {
