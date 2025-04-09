@@ -20,7 +20,7 @@ import {
 } from "@/store/slices/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { StatusName, RejectReason } from "@/types/vacancies.types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDeleteVacancyByIdMutation } from "@/store/querySlices/vacanciesQuerySlice";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +52,8 @@ const useEditVacancy = () => {
     handleSubmit,
     getValues,
     setValue,
-    formState: { errors, isDirty },
+    watch,
+    formState: { errors},
   } = useForm<z.infer<typeof AddVacancySchema>>({
     defaultValues: {
       company: "",
@@ -73,7 +74,7 @@ const useEditVacancy = () => {
     mode: "onBlur",
   });
   //alex
-  console.log("vac", vacancyData)
+  console.log("vac", vacancyData);
 
   useEffect(() => {
     if (vacancyData) {
@@ -99,6 +100,21 @@ const useEditVacancy = () => {
     }
   }, [vacancyData, reset, dispatch]);
 
+  // change Vacancy
+  const watchedValues = watch();
+  const isFormChanged = useMemo(() => {
+    if (!vacancyData) return false;
+    return (
+      watchedValues.company !== vacancyData.company ||
+      watchedValues.vacancy !== vacancyData.vacancy ||
+      watchedValues.link !== vacancyData.link ||
+      watchedValues.communication !== vacancyData.communication ||
+      watchedValues.location !== vacancyData.location ||
+      watchedValues.note !== vacancyData.note ||
+      watchedValues.work_type !== vacancyData.work_type || JSON.stringify(previousStatuses) !== JSON.stringify(newStatuses)
+    );
+  }, [watchedValues, vacancyData, previousStatuses, newStatuses]);
+ 
   // deleteVacancy
   const [deleteVacancyById] = useDeleteVacancyByIdMutation();
 
@@ -257,7 +273,7 @@ const useEditVacancy = () => {
     isLoading,
     vacancyData,
     deleteVacancy,
-    isDirty,
+    isFormChanged
   };
 };
 

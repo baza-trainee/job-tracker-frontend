@@ -31,7 +31,7 @@ const EditVacancy = () => {
     getValues,
     setValue,
     vacancyData,
-    isDirty,
+    isFormChanged,
   } = useEditVacancy();
 
   const isArchived = vacancyData?.isArchived || "";
@@ -160,7 +160,7 @@ const EditVacancy = () => {
             </div>
             <Button
               type="button"
-              disabled={!isDirty}
+              disabled={!isFormChanged}
               className="w-full md:mx-auto xl:mx-0 xl:w-auto"
               variant="accent"
               size="big"
