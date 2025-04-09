@@ -489,5 +489,20 @@
     "Fri": "Fri",
     "Sat": "Sat",
     "Sun": "Sun"
+  },
+  "contactUs": {
+    "send": "Send",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "text": "Message text",
+    "textPlaceholder": "Enter your message",
+    "nameValidation": {
+      "min": "Minimum length is 2 characters",
+      "max": "Maximum length is 30 characters"
+    },
+    "textValidation": {
+      "min": "Minimum length is 10 characters",
+      "max": "Maximum length is 4000 characters"
+    }
   }
 }

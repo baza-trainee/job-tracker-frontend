@@ -18,12 +18,13 @@ const ContactUs = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { data: dataUser } = useGetAllUserDataQuery();
-  // пізніше написати хук для перевірки та відправки форм
+
   const {
     register,
     handleSubmit,
     reset,
     resetField,
+    watch,
     formState: { errors },
   } = useForm<z.infer<typeof ContactUsSchema>>({
     defaultValues: {
@@ -32,7 +33,7 @@ const ContactUs = () => {
       requestText: "",
     },
     resolver: zodResolver(ContactUsSchema),
-    mode: "onBlur",
+    mode: "all",
   });
   useEffect(() => {
     reset({
@@ -48,14 +49,11 @@ const ContactUs = () => {
   };
   // -------------------------------------------------------------
   const handleCancel = (): void => {
-    reset();
     dispatch(closeModal());
   };
-  const handleGood = (): void => {
-    dispatch(openConfirmation({ typeConfirmation: "logInSuccess" }));
-  };
-
   const error = !!Object.keys(errors).length;
+  const isCleanInputsForm =
+    error || !watch("name") || !watch("email") || !watch("requestText");
 
   return (
     <div className="my-2 w-[449px] text-left xl:my-12">
@@ -66,10 +64,10 @@ const ContactUs = () => {
             resetField={resetField}
             key="name"
             name="name"
-            placeholder={"Вкажіть ваше ім’я"}
+            placeholder={t("contactUs.namePlaceholder")}
             type="text"
             className=""
-            label="Ім’я"
+            label={t("contactUs.name")}
             errors={errors}
             onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
@@ -90,9 +88,9 @@ const ContactUs = () => {
             resetField={resetField}
             key="requestText"
             name="requestText"
-            placeholder="Введіть текст звернення"
+            placeholder={t("contactUs.textPlaceholder")}
             className=""
-            label="Текст звернення"
+            label={t("contactUs.text")}
             errors={errors}
           />
 
@@ -100,22 +98,21 @@ const ContactUs = () => {
             <Button
               type="button"
               className="md:mx-0 md:w-auto"
-              // disabled={isCleanInputsForm() || errors || loading}
+              disabled={isCleanInputsForm}
               variant="ghost"
               size="small"
               onClick={() => handleCancel()}
             >
-              Скасувати
+              {t("infoModal.button.cancel")}
             </Button>
             <Button
               type="submit"
               className="w-full md:mx-0 md:w-auto"
-              disabled={error}
+              disabled={isCleanInputsForm}
               variant="accent"
               size="big"
-              onClick={() => handleGood()}
             >
-              Надіслати
+              {t("contactUs.send")}
             </Button>
           </div>
         </div>
