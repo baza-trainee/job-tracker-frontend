@@ -1,7 +1,4 @@
-import Icon from "@/components/Icon/Icon";
-import { ICON } from "@/components/Icon/icons";
 import Skeleton from "@/components/Sceleton/Sceleton";
-import { IconButton } from "@/components/buttons/IconButton/IconButton";
 
 import { FC } from "react";
 
