@@ -74,7 +74,7 @@ const useEditVacancy = () => {
     mode: "onBlur",
   });
   //alex
-  console.log("vac", vacancyData);
+  // console.log("vac", vacancyData);
 
   useEffect(() => {
     if (vacancyData) {
