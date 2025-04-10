@@ -7,20 +7,21 @@ import { z } from "zod";
 import { ContactUsSchema } from "../../../../schemas/ContactUsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../../store/hook";
-import {
-  closeModal,
-  openConfirmation,
-} from "../../../../store/slices/modalSlice/modalSlice";
+import { closeModal } from "../../../../store/slices/modalSlice/modalSlice";
+import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
+import { useEffect } from "react";
 
 const ContactUs = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  // пізніше написати хук для перевірки та відправки форм
+  const { data: dataUser } = useGetAllUserDataQuery();
+
   const {
     register,
     handleSubmit,
     reset,
     resetField,
+    watch,
     formState: { errors },
   } = useForm<z.infer<typeof ContactUsSchema>>({
     defaultValues: {
@@ -29,8 +30,15 @@ const ContactUs = () => {
       requestText: "",
     },
     resolver: zodResolver(ContactUsSchema),
-    mode: "onBlur",
+    mode: "all",
   });
+  useEffect(() => {
+    reset({
+      name: dataUser?.username || "",
+      email: dataUser?.email || "",
+      requestText: "",
+    });
+  }, [dataUser, reset]);
 
   const onSubmit: SubmitHandler<z.infer<typeof ContactUsSchema>> = (data) => {
     reset();
@@ -38,14 +46,11 @@ const ContactUs = () => {
   };
   // -------------------------------------------------------------
   const handleCancel = (): void => {
-    reset();
     dispatch(closeModal());
   };
-  const handleGood = (): void => {
-    dispatch(openConfirmation({ typeConfirmation: "logInSuccess" }));
-  };
-
   const error = !!Object.keys(errors).length;
+  const isCleanInputsForm =
+    error || !watch("name") || !watch("email") || !watch("requestText");
 
   return (
     <div className="my-2 w-[449px] text-left xl:my-12">
@@ -56,10 +61,10 @@ const ContactUs = () => {
             resetField={resetField}
             key="name"
             name="name"
-            placeholder={"Вкажіть ваше ім’я"}
+            placeholder={t("contactUs.namePlaceholder")}
             type="text"
             className=""
-            label="Ім’я"
+            label={t("contactUs.name")}
             errors={errors}
             onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
@@ -80,32 +85,31 @@ const ContactUs = () => {
             resetField={resetField}
             key="requestText"
             name="requestText"
-            placeholder="Введіть текст звернення"
+            placeholder={t("contactUs.textPlaceholder")}
             className=""
-            label="Текст звернення"
+            label={t("contactUs.text")}
             errors={errors}
           />
 
           <div className="flex flex-col justify-center gap-2 md:flex-row xl:mt-4">
             <Button
               type="button"
-              className=""
-              // disabled={isCleanInputsForm() || errors || loading}
+              className="md:mx-0 md:w-auto"
+              disabled={isCleanInputsForm}
               variant="ghost"
               size="small"
               onClick={() => handleCancel()}
             >
-              Скасувати
+              {t("infoModal.button.cancel")}
             </Button>
             <Button
               type="submit"
-              className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
-              disabled={error}
-              variant="ghost"
+              className="w-full md:mx-0 md:w-auto"
+              disabled={isCleanInputsForm}
+              variant="accent"
               size="big"
-              onClick={() => handleGood()}
             >
-              Надіслати
+              {t("contactUs.send")}
             </Button>
           </div>
         </div>

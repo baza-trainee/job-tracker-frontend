@@ -19,8 +19,10 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { StatusName, RejectReason } from "../../../../types/vacancies.types";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const useVacancy = () => {
+  const { t } = useTranslation();
   const { refetch } = useGetAllUserDataQuery();
   const [createVacancy] = useCreateVacancyMutation();
   const [archiveVacancyById] = useArchiveVacancyByIdMutation();
@@ -110,9 +112,9 @@ const useVacancy = () => {
       }
       refetch();
       reset();
-      notifySuccess("Дані успішно збережено. Дякую");
+      notifySuccess(t("notification.vacancyAdded"));
     } catch (error) {
-      notifyError("Помилка збереження даних");
+      notifyError(t("notification.vacancyError"));
       console.error(error);
     }
     setIsLoading(false);

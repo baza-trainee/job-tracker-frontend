@@ -83,7 +83,7 @@ const AddVacancy = () => {
 
             {/* TODO:Cтатус: Відправлене резюме, Тестове завдання ... Оффер*/}
             <div className="relative flex flex-col gap-3 md:gap-4 2xl:pt-2">
-              <label>Статус</label>
+              <label>{t("addVacancy.form.status")}</label>
               <div className="flex flex-col gap-3 md:gap-4 xl:w-[274px] 2xl:w-[342px]">
                 {statusVacancy.map((checkboxCalendar: VacancyInputProps) => (
                   <CheckboxWithCalendar
@@ -134,8 +134,8 @@ const AddVacancy = () => {
             </Button>
             <Button
               type="button"
-              className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
-              variant="ghost"
+              className="w-full md:mx-auto xl:mx-0 xl:w-auto"
+              variant="accent"
               size="big"
               onClick={saveVacancy}
             >

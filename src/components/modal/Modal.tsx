@@ -66,15 +66,6 @@ const Modal: FC = () => {
           })}
           modalData={modalData}
           btnFunc={() => {
-            // alex
-            // if (typeModal === "addVacancy" || typeModal === "editVacancy") {
-            //   return dispatch(
-            //     openConfirmation({
-            //       typeConfirmation: "saveEditVacancies",
-            //       dataConfirmation: dataConfirmation,
-            //     })
-            //   );
-            // }
             return dispatch(closeModal());
           }}
         />

@@ -73,7 +73,7 @@ const NotesModal = ({ type }: NotesProps) => {
             {isAddNote ? (
               <Button
                 type="button"
-                className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
+                className="w-full bg-button md:mx-0 md:w-auto"
                 variant="ghost"
                 size="big"
                 onClick={() => handleButton("saveNote")}
@@ -85,7 +85,7 @@ const NotesModal = ({ type }: NotesProps) => {
               <>
                 <Button
                   type="button"
-                  className="w-full md:mx-auto xl:mx-0 xl:w-auto"
+                  className="w-full md:mx-0 md:w-auto"
                   variant="ghost"
                   size="small"
                   onClick={() => handleButton("deleteNote")}
@@ -95,7 +95,9 @@ const NotesModal = ({ type }: NotesProps) => {
                 </Button>
                 <Button
                   type="button"
-                  className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
+                  // alex
+                  // className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
+                  className="w-full bg-button md:mx-0 md:w-auto"
                   variant="ghost"
                   size="big"
                   onClick={() => handleButton("saveNote")}

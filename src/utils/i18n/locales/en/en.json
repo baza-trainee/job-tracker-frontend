@@ -56,7 +56,14 @@
     "fieldAdded": "Field added",
     "resumeAdded": "Resume added",
     "projectAdded": "Project added",
-    "letterAdded": "Letter added"
+    "letterAdded": "Letter added",
+    "vacancyAdded": "The data has been successfully saved. Thank you.",
+    "vacancyError": "An error occurred while saving the data. Please try again.",
+    "vacancyEdit": "The data has been successfully updated. Thank you.",
+    "vacancyDelete": "The vacancy has been successfully deleted. Thank you.",
+    "vacancyDeleteError": "An error occurred. The vacancy could not be deleted.",
+    "noteDelete": "The note has been successfully deleted. Thank you.",
+    "noteDeleteError": "An error occurred. The note was not deleted."
   },
   "navigation": {
     "vacancies": "Vacancies",
@@ -255,7 +262,8 @@
       "restore": "Restore",
       "save": "Save",
       "delete": "Delete",
-      "confirm": "Ok"
+      "confirm": "Ok",
+      "addStage": "Add stage"
     },
     "placeholders": {
       "company": "Enter company name",
@@ -269,7 +277,8 @@
       "name": "Add a new vacancy"
     },
     "titleResumeList": "Select the sent CV",
-    "titleRejectList": "Select the reason for rejection"
+    "titleRejectList": "Select the reason for rejection",
+    "titleAddStage": "Select an additional stage"
   },
   "addVacancySchema": {
     "company": {
@@ -427,6 +436,14 @@
       "text_1": "This action is irreversible!",
       "notifyDeleteEventSuccess": "Event successfully deleted!",
       "notifyDeleteEventError": "Failed to delete event."
+    },
+    "arhiveVacancy": {
+      "title": "Move a vacancy to the archive?",
+      "text_1": "You can always find it using the button in the upper right corner"
+    },
+    "restoreVacancy": {
+      "title": "Restore a vacancy from the archive?",
+      "text_1": "The vacancy will be moved to the main list"
     }
   },
   "soonSection": {
@@ -472,5 +489,20 @@
     "Fri": "Fri",
     "Sat": "Sat",
     "Sun": "Sun"
+  },
+  "contactUs": {
+    "send": "Send",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "text": "Message text",
+    "textPlaceholder": "Enter your message",
+    "nameValidation": {
+      "min": "Minimum length is 2 characters",
+      "max": "Maximum length is 30 characters"
+    },
+    "textValidation": {
+      "min": "Minimum length is 10 characters",
+      "max": "Maximum length is 4000 characters"
+    }
   }
 }

@@ -3,6 +3,7 @@ import type { RootState, AppDispatch } from "./store";
 import { useMemo } from "react";
 import { Vacancy } from "../types/vacancies.types";
 import { Note } from "@/types/notes.types";
+import { cleanStatuses } from "@/components/Vacancies/components/VacanсyMainConfig";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
@@ -24,18 +25,33 @@ export const useFilteredVacancies = (
       );
     }
 
+    // alex
+    result = result
+      .map((v) => ({
+        ...v,
+        statuses: cleanStatuses(v.statuses),
+      }))
+      .sort(
+        (a, b) =>
+          new Date(b.statuses[0].date).getTime() -
+          new Date(a.statuses[0].date).getTime()
+      );
+
     switch (sortType) {
-      case "newFirst":
-        result = result.sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-        break;
+      // alex
+      // case "newFirst":
+      //   result = result.sort(
+      //     (a, b) =>
+      //       new Date(b.statuses[0].date).getTime() -
+      //       new Date(a.statuses[0].date).getTime()
+      //   );
+      //   break;
 
       case "oldFirst":
         result = result.sort(
           (a, b) =>
-            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            new Date(a.statuses[0].date).getTime() -
+            new Date(b.statuses[0].date).getTime()
         );
         break;
 

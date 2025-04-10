@@ -21,7 +21,7 @@ export const Textarea = ({
       {label && (
         <label
           htmlFor={`input-${name}`}
-          className="block font-nunito text-[20px] font-medium leading-[135%] text-textBlack sm:text-[16px] xl:mb-3"
+          className="mb-[2px] block font-nunito text-[14px] font-medium leading-[135%] text-textBlack md:mb-2 md:text-[16px] xl:mb-3 2xl:mb-3 2xl:text-[20px]"
         >
           {label}
         </label>

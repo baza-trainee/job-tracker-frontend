@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import classNames from "classnames";
 import moment from "moment";
@@ -17,6 +18,8 @@ const AddVacancyStage = ({
   setValue,
 }: AddVacancyStageProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const validTime: number = moment().utcOffset();
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
@@ -35,7 +38,7 @@ const AddVacancyStage = ({
         saveStatus({
           id: statusKey.id,
           name: statusKey.name || "",
-          date: moment().add(1, "hours").toISOString(),
+          date: moment.utc().add(validTime, "minutes").format(),
         })
       );
     }
@@ -51,7 +54,7 @@ const AddVacancyStage = ({
         type="button"
       >
         <Icon id="plus" className="size-6" />
-        Додати етап
+        {t("addVacancy.form.addStage")}
       </button>
 
       <div

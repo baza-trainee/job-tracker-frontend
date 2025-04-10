@@ -386,20 +386,18 @@ const InfoModalMap = () => {
           handleDeleteVacancy,
           "",
           "big",
-          "ghost",
+          "accent",
           addVacanciesLoading
         ),
       ],
     },
     arhiveVacancy: {
-      title: "Перенести вакансію в архів?",
+      title: t("infoModal.arhiveVacancy.title"),
       titleSize: "small",
-      text: [
-        "Ви завжди зможете знайти його за допомогою кнопки в верхньому правому куті",
-      ],
+      text: [t("infoModal.arhiveVacancy.text_1")],
       button: [
         createButton(
-          t("infoModal.button.undo"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "text-[20px]",
           "small",
@@ -411,18 +409,18 @@ const InfoModalMap = () => {
           handleButonArhiveVacancy,
           "text-[20px]",
           "big",
-          "ghost",
+          "accent",
           editVacanciesLoading
         ),
       ],
     },
     restoreVacancy: {
-      title: "Відновити вакансію з архіву?",
+      title: t("infoModal.restoreVacancy.title"),
       titleSize: "small",
-      text: ["Вакансію буде перенесено до основного списку"],
+      text: [t("infoModal.restoreVacancy.text_1")],
       button: [
         createButton(
-          t("infoModal.button.undo"),
+          t("infoModal.button.cancel"),
           handleCloseConfirmation,
           "text-[20px]",
           "small",
@@ -434,7 +432,7 @@ const InfoModalMap = () => {
           handleButonArhiveVacancy,
           "text-[20px]",
           "big",
-          "ghost",
+          "accent",
           editVacanciesLoading
         ),
       ],

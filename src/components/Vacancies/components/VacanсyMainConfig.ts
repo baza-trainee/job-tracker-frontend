@@ -1,5 +1,5 @@
 import i18n from "i18next";
-import { Vacancy } from "../../../types/vacancies.types";
+import { Vacancy, VacancyStatus } from "../../../types/vacancies.types";
 
 export type SectionConfig = {
   sectionName: string;
@@ -10,11 +10,16 @@ export type SectionConfig = {
   hoverColor: string;
 };
 
+export const cleanStatuses = (statuses: VacancyStatus[]): VacancyStatus[] =>
+  statuses.length > 1 ? statuses.filter((s) => s.name !== "saved") : statuses;
+
 export const getVacanciesByStatus = (
   vacancies: Vacancy[],
   statusName: string
 ): Vacancy[] => {
-  return vacancies.filter((v) => v.statuses[0].name === statusName);
+  return vacancies
+    .map((v) => ({ ...v, statuses: cleanStatuses(v.statuses) }))
+    .filter((v) => v.statuses[0].name === statusName);
 };
 
 export const sectionsConfig: SectionConfig[] = [
