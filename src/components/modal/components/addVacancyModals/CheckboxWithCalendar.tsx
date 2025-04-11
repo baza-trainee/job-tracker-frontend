@@ -166,7 +166,7 @@ export const CheckboxWithCalendar = ({
           onClick={(e) => e.stopPropagation()}
           className={classNames(
             isChecked
-              ? "visible relative z-50 mt-3 h-[44px] text-[10px] opacity-100"
+              ? "visible relative z-10 mt-3 h-[44px] text-[10px] opacity-100"
               : "sr-only h-0 opacity-0"
           )}
         >
