@@ -37,9 +37,8 @@ export const fetchUpdatedStatuses = createAsyncThunk(
       ...prioritizedStatuses,
       ...otherStatuses,
     ].flat();
-
-    console.log("rez", allVacancyStatuses);
-
+    // alex
+    // console.log("rez", allVacancyStatuses);
     dispatch(createNewStatuses(allVacancyStatuses));
   }
 );

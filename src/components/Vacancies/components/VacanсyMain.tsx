@@ -80,7 +80,6 @@ const VacancyMain: FC = () => {
     // console.log("isMobile changed:", isMobile);
   }, [isMobile]);
 
-  //alex
   const handleVacancyCard = (
     vacancy: Vacancy,
     section?: SectionConfig
