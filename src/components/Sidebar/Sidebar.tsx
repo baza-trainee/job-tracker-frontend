@@ -114,6 +114,7 @@ function Sidebar() {
                 link={item.link}
                 title={item.title}
                 isOpen={isOpenSidebar}
+                onClick={handleCloseSidebar}
               />
             );
           })}

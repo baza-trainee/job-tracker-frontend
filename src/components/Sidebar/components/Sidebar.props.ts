@@ -18,6 +18,7 @@ export interface SidebarItemProps {
   isOpen: boolean;
   useStroke?: boolean;
   funcLogOut?: () => void;
+  onClick?: () => void;
 }
 
 export interface ToggleProps {
