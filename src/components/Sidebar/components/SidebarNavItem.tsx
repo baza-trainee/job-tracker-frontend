@@ -3,16 +3,20 @@ import cn from "clsx";
 
 import Icon from "../../Icon/Icon.tsx";
 import { SidebarItemProps } from "./Sidebar.props.ts";
+import { useMediaQuery } from "react-responsive";
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
   icon,
   link,
   title,
   isOpen,
+  onClick,
 }) => {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   return (
     <NavLink
       to={link}
+      onClick={isMobile ? onClick : undefined}
       className={({ isActive, isPending }) =>
         cn(
           "flex items-center rounded-[20px] border-2 border-transparent fill-textBlack py-[2px] text-textBlack dark:fill-slate-300 dark:text-slate-300",
