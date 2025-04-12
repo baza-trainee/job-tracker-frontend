@@ -8,10 +8,12 @@ import clsx from "clsx";
 
 type SoonCalendarModalProps = {
   onSelectDate?: (date: string) => void;
+  onChange?: () => void;
 };
 
 export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
   onSelectDate,
+  onChange,
 }) => {
   const { i18n } = useTranslation();
   const eventData = useAppSelector(selectEventData);
@@ -54,6 +56,7 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
         onChange={(date) => {
           console.log("Клік на дату (день):", date);
           handleDateChange(date as Date);
+          onChange?.();
         }}
         value={selectedDate}
         className="statistics-calendar__day"

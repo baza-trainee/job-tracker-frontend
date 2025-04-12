@@ -32,7 +32,9 @@ export interface InputProps {
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onInput?: (event: React.FormEvent<HTMLInputElement>) => void;
-  onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onClick?: () => void;
   autoComplete?: string;

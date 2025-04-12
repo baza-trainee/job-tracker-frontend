@@ -17,6 +17,7 @@ export const ICON = {
   CHAT_ERROR_OUTLINE: "chat-error-outline",
   CHECK_BOX: "check-box",
   CHECK_BOX_GREEN: "check-box-green",
+  CHECK_BOX_GRAY: "check-box-gray",
   CHECK_SMALL: "check-small",
   CHECK_BIG: "check-big",
   CLOSE_DEFAULT: "close-default",
