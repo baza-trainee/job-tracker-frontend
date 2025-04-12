@@ -39,6 +39,7 @@ const AddEventModal = () => {
 
   const [menuOpenHours, setMenuOpenHours] = useState(false);
   const [menuOpenMinutes, setMenuOpenMinutes] = useState(false);
+  const [inputChanged, setInputChanged] = useState(false);
   const selectHoursRef = useRef<any>(null);
   const selectMinutesRef = useRef<any>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -97,6 +98,10 @@ const AddEventModal = () => {
     }
   };
 
+  const handleInputChanged = () => {
+    setInputChanged(true);
+  };
+
   return (
     <form
       onSubmit={handleSubmit((data) => {
@@ -108,7 +113,10 @@ const AddEventModal = () => {
     >
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
         <div>
-          <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+          <SoonCalendarModal
+            onSelectDate={(date) => setValue("date", date)}
+            onChange={handleInputChanged}
+          />
           {errors.date?.message && (
             <p className="text-color2">{String(errors.date.message)}</p>
           )}
@@ -128,6 +136,7 @@ const AddEventModal = () => {
             isRequired={true}
             isCheckButtons={true}
             classNameInputCustom="rounded-lg"
+            onChange={handleInputChanged}
           />
 
           <label
@@ -149,6 +158,7 @@ const AddEventModal = () => {
             isCheckButtons={false}
             className="textarea-event"
             classNameInputCustom="resize-none textarea-event-lg textarea-event"
+            onChange={handleInputChanged}
           />
 
           <div className="flex w-full flex-col items-center md:items-start">
@@ -182,7 +192,10 @@ const AddEventModal = () => {
                     "xl:text-[32px] xl:font-normal",
                     "2xl:text-[32px]"
                   )}
-                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+                  ) => {
+                    handleInputChanged();
                     let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
                     if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
                     if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
@@ -206,6 +219,7 @@ const AddEventModal = () => {
                     (option) => option.value === Number(watch("hours")) || null
                   )} // Прив’язуємо селект до стану
                   onChange={(selectedOption: SingleValue<OptionType>, _) => {
+                    handleInputChanged();
                     setMenuOpenHours(false);
                     setValue("hours", selectedOption?.value ?? "", {
                       shouldValidate: true,
@@ -264,7 +278,10 @@ const AddEventModal = () => {
                     "xl:text-[32px] xl:font-normal",
                     "2xl:text-[32px]"
                   )}
-                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+                  ) => {
+                    handleInputChanged();
                     let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
                     if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
                     if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
@@ -289,6 +306,7 @@ const AddEventModal = () => {
                       option.value === Number(watch("minutes")) || null
                   )}
                   onChange={(selectedOption: SingleValue<OptionType>, _) => {
+                    handleInputChanged();
                     setMenuOpenMinutes(false);
                     setValue("minutes", selectedOption?.value ?? "", {
                       shouldValidate: true,
@@ -331,7 +349,8 @@ const AddEventModal = () => {
         className="mx-auto bg-button"
         variant="ghost"
         size="big"
-        disabled={isLoading}
+        // disabled={isLoading}
+        disabled={inputChanged === false}
       >
         {isLoading ? t("loading") : t("soonSection.save")}
         <Icon id={"check-box"} className="ml-3 h-6 w-6" />

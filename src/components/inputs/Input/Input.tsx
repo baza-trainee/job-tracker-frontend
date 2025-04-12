@@ -110,6 +110,7 @@ export const Input = forwardRef<
                   hookFormOnBlur(event);
                   onBlur?.(event);
                 }}
+                onChange={onChange}
               />
             ) : (
               <input
@@ -223,7 +224,11 @@ export const Input = forwardRef<
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-color2 bg-white p-2 text-color2"
+                  "absolute top-[120%] z-10 w-[66vw] rounded-md bg-white py-1 text-xs text-color2 md:top-[110%] md:w-[250px] md:text-sm xl:w-[280px] 2xl:text-base",
+                name === "hours" &&
+                  "left-[-100%] text-start md:left-[-310%] 2xl:left-[-350%]",
+                name === "minutes" &&
+                  "left-[-286%] text-end md:left-[-100%] md:text-center 2xl:left-[-40%]"
               )}
             >
               {t(String(error?.message))}
