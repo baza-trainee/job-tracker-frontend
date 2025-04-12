@@ -38,7 +38,8 @@ export type TypesModal =
   | "addNote"
   | "saveNote"
   | "deleteNote"
-  | "updateNote";
+  | "updateNote"
+  | "confirmToRemove";
 
 export type Color = {
   text: "text-white" | "text-button" | "text-color2" | "text-color8";
