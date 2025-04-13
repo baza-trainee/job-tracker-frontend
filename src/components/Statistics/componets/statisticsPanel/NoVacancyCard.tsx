@@ -45,7 +45,10 @@ const NoVacancyCard = () => {
           "mt-[60px] gap-6 md:mt-[60px] md:gap-8 xl:gap-8 2xl:gap-8 3xl:mt-[100px]"
       )}
     >
-      <FirstVacancyMessage text={text} />
+      <FirstVacancyMessage
+        text={text}
+        className={isNote ? "xl:w-[521px] 3xl:w-[640px] smOnly:px-14" : ""}
+      />
       <AddButton variant={buttonText} />
       <Icon
         id={icon}
