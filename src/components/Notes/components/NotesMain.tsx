@@ -6,6 +6,7 @@ import { selectfilteredNotes } from "@/store/slices/filteredNotesSlice/filteredN
 import { setFilteredNotes } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
 import { useEffect } from "react";
 import NoteCardSceleton from "./NoteCardSceleton";
+import { useMediaQuery } from "react-responsive";
 
 const NotesMain = () => {
   const dispatch = useAppDispatch();
@@ -25,10 +26,19 @@ const NotesMain = () => {
     dispatch(setFilteredNotes(filteredNotes));
   }, [sortNotesType, searchNotesQuery, dispatch]);
 
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
+  const isDesktop = useMediaQuery({ minWidth: 1024, maxWidth: 1919 });
+  const isLargeDesktop = useMediaQuery({ minWidth: 1920 });
+
+  let skeletonCount = 1;
+  if (isTablet) skeletonCount = 2;
+  else if (isDesktop) skeletonCount = 3;
+  else if (isLargeDesktop) skeletonCount = 4;
+
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full justify-center gap-6">
       {isLoading &&
-        Array.from({ length: 3 }).map((_, index) => (
+        Array.from({ length: skeletonCount }).map((_, index) => (
           <NoteCardSceleton key={index} />
         ))}
       {isError && <h2>Error...</h2>}
