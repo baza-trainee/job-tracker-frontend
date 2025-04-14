@@ -109,7 +109,7 @@ const AddEventModal = () => {
         // console.log("Помилки у формі:", errors);
         confirmAddSave(data);
       })}
-      className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6"
+      className="mt-4 flex w-full flex-col gap-3 align-middle md:gap-4 xl:mt-10 3xl:mt-14 3xl:gap-6"
     >
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
         <div>
@@ -123,7 +123,10 @@ const AddEventModal = () => {
         </div>
 
         <div className="flex w-full flex-col font-medium md:w-[350px] xl:w-[445px]">
-          <label htmlFor="soonEventName" className="text-xl 3xl:text-2xl">
+          <label
+            htmlFor="soonEventName"
+            className="text-base xl:text-xl 3xl:text-2xl"
+          >
             {t("soonSection.soonName")}
           </label>
           <Input
@@ -141,7 +144,7 @@ const AddEventModal = () => {
 
           <label
             htmlFor="soonEventNotes"
-            className="mt-4 block text-xl 3xl:text-2xl"
+            className="mt-3 block text-base xl:mt-4 xl:text-xl 3xl:text-2xl"
           >
             {t("soonSection.soonNotes")}
           </label>
@@ -162,11 +165,11 @@ const AddEventModal = () => {
           />
 
           <div className="flex w-full flex-col items-center md:items-start">
-            <p className="mt-4 text-xl 3xl:text-2xl">
+            <p className="mt-2 text-base xl:mt-4 xl:text-xl 3xl:text-2xl">
               {t("soonSection.setTime")}
             </p>
             <div className="time-content grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
-              <div className="container-hours relative flex h-[60px] w-20">
+              <div className="container-hours relative flex h-[54px] w-20 xl:h-[60px]">
                 <Input
                   name="hours"
                   placeholder="00"
@@ -182,13 +185,13 @@ const AddEventModal = () => {
                   // value={watch("hours") ?? ""} // Прив'язуємо значення до стану форми, гарантовано не буде undefined
                   className={clsx(
                     "pointer-events-auto z-10",
-                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
+                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-2 text-center xl:py-[9px]",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
                   classNameInputCustom={clsx(
                     "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                    "sm:h-auto sm:p-0 sm:text-[28px]",
-                    "md:h-auto md:p-0 md:text-[28px]",
+                    "sm:h-auto sm:p-0 sm:text-[24px]",
+                    "md:h-auto md:p-0 md:text-[24px]",
                     "xl:text-[32px] xl:font-normal",
                     "2xl:text-[32px]"
                   )}
@@ -232,11 +235,9 @@ const AddEventModal = () => {
                     "z-1 left-0 top-0 cursor-pointer",
                     "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
-                    // " px-3 py-[9px] absolute opacity-[0.01]"
                   )}
                   classNamePrefix="react-select"
                   isSearchable={false}
-                  // tabIndex={-1}
                   components={{
                     DropdownIndicator: () => null,
                     IndicatorSeparator: () => null,
@@ -253,7 +254,7 @@ const AddEventModal = () => {
                 </span>
               </div>
 
-              <div className="container-minutes relative flex h-[60px] w-20">
+              <div className="container-minutes relative flex h-[54px] w-20 xl:h-[60px]">
                 <Input
                   name="minutes"
                   placeholder="00"
@@ -273,8 +274,8 @@ const AddEventModal = () => {
                   )}
                   classNameInputCustom={clsx(
                     "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                    "sm:h-auto sm:p-0 sm:text-[28px]",
-                    "md:h-auto md:p-0 md:text-[28px]",
+                    "sm:h-auto sm:p-0 sm:text-[24px]",
+                    "md:h-auto md:p-0 md:text-[24px]",
                     "xl:text-[32px] xl:font-normal",
                     "2xl:text-[32px]"
                   )}
@@ -317,12 +318,11 @@ const AddEventModal = () => {
                   className={clsx(
                     "select__event-modal",
                     "z-1 left-0 top-0 cursor-pointer",
-                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary",
+                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
                   classNamePrefix="react-select"
                   isSearchable={false}
-                  // tabIndex={-1}
                   components={{
                     DropdownIndicator: () => null,
                     IndicatorSeparator: () => null,
