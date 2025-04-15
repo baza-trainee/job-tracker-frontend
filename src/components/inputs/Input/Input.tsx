@@ -41,6 +41,7 @@ export const Input = forwardRef<
       onInput,
       autoComplete,
       maxLength,
+      // watch,
     },
     forwardedRef
   ) => {
@@ -49,7 +50,11 @@ export const Input = forwardRef<
     const [isIcon, setIsIcon] = useState<boolean>(false);
     const { t } = useTranslation();
 
+    // const watchedValue = watch ? watch(name) : "";
+    // const watchedValue = watch?.(name) ?? "";
+
     const isIconVisible: boolean = Boolean(inputRef.current?.value);
+    // const isIconVisible = Boolean(watchedValue);
 
     const handleResetField = (name: string) => {
       resetField(name);
@@ -88,7 +93,8 @@ export const Input = forwardRef<
                 id={`input-${name}`}
                 className={cn(
                   "w-full rounded-xl border p-3 text-base",
-                  "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                  "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther",
+                  //  placeholder-shown:border-textBlack
                   "sm:px-4 sm:py-2 sm:text-[12px]",
                   "md:px-6 md:py-3 md:text-[14px]",
                   "xl:text-[14px]",
@@ -119,7 +125,8 @@ export const Input = forwardRef<
                 onFocus={onFocus}
                 id={`input-${name}`}
                 className={cn(
-                  "active:border-accent peer w-full rounded-lg border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                  "active:border-accent peer w-full rounded-lg border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther",
+                  //  placeholder-shown:border-textBlack
                   "h-[34px] px-4 py-2 pr-8 text-[12px]",
                   "md:h-11 md:px-6 md:py-3 md:pr-8 md:text-[14px]",
                   "xl:text-[14px]",
@@ -194,7 +201,7 @@ export const Input = forwardRef<
                   />
                 </button>
               )}
-              {isCheckButtons && isIconVisible ? (
+              {/* {isCheckButtons && isIconVisible ? (
                 error ? (
                   <button onClick={() => handleResetField(name)}>
                     <Icon
@@ -203,6 +210,27 @@ export const Input = forwardRef<
                     />
                   </button>
                 ) : (
+                  !isIcon && (
+                    <div>
+                      <Icon
+                        id="check-box"
+                        className="h-6 w-6 cursor-pointer fill-color7"
+                      />
+                    </div>
+                  )
+                )
+              ) : null} */}
+              {/* Оля */}
+              {isCheckButtons ? (
+                error ? (
+                  <button onClick={() => handleResetField(name)}>
+                    <Icon
+                      id="cancel-in-round"
+                      className="h-6 w-6 cursor-pointer fill-color2"
+                    />
+                  </button>
+                ) : (
+                  isIconVisible &&
                   !isIcon && (
                     <div>
                       <Icon
@@ -224,12 +252,10 @@ export const Input = forwardRef<
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "absolute top-[120%] z-10 w-[66vw] rounded-md bg-white py-1 text-xs text-color2 md:top-[110%] md:w-[250px] md:text-sm xl:w-[280px] 2xl:text-base",
-                name === "hours" &&
-                  "left-[-100%] text-start md:left-[-310%] 2xl:left-[-350%]",
-                name === "minutes" &&
-                  "left-[-286%] text-end md:left-[-100%] md:text-center 2xl:left-[-40%]"
-              )}
+                  "absolute top-[130%] z-10 w-[66vw] rounded-md bg-white pb-2 pl-4 pt-1 text-start text-xs text-color2 md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
+                name === "hours" && "left-[-90%] md:left-[-80%]",
+                name === "minutes" && "left-[-286%] md:left-[-80%]"
+              )} //md:text-center text-end
             >
               {t(String(error?.message))}
             </span>

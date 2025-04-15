@@ -181,6 +181,7 @@ const EditEventModal = () => {
             isCheckButtons={true}
             classNameInputCustom="rounded-lg"
             onChange={handleInputChanged}
+            autoComplete="off"
           />
 
           <label
@@ -202,6 +203,7 @@ const EditEventModal = () => {
             isCheckButtons={false}
             classNameInputCustom="resize-none textarea-event-lg textarea-event"
             onChange={handleInputChanged}
+            autoComplete="off"
           />
 
           <div className="flex w-full flex-col items-center md:items-start">

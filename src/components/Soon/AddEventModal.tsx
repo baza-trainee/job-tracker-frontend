@@ -105,7 +105,7 @@ const AddEventModal = () => {
   return (
     <form
       onSubmit={handleSubmit((data) => {
-        // console.log("onSubmit відбувся", data);
+        // console.log("🧾 Форма до відправки:", data);
         // console.log("Помилки у формі:", errors);
         confirmAddSave(data);
       })}
@@ -140,6 +140,7 @@ const AddEventModal = () => {
             isCheckButtons={true}
             classNameInputCustom="rounded-lg"
             onChange={handleInputChanged}
+            autoComplete="off"
           />
 
           <label
@@ -162,6 +163,7 @@ const AddEventModal = () => {
             className="textarea-event"
             classNameInputCustom="resize-none textarea-event-lg textarea-event"
             onChange={handleInputChanged}
+            autoComplete="off"
           />
 
           <div className="flex w-full flex-col items-center md:items-start">
@@ -201,6 +203,11 @@ const AddEventModal = () => {
                     handleInputChanged();
                     let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
                     if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
+                    // if (value === "") {
+                    //   setValue("hours", undefined, { shouldValidate: true });
+                    //   console.log("hours === ''", value);
+                    //   return;
+                    // }
                     if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
                     setValue("hours", Number(value), { shouldValidate: true }); // Оновлюємо значення, передаємо число + тригеримо валідацію одразу при заповнені
                   }}
@@ -218,16 +225,31 @@ const AddEventModal = () => {
                     }
                   }}
                   options={hourOptions}
-                  value={hourOptions.find(
-                    (option) => option.value === Number(watch("hours")) || null
-                  )} // Прив’язуємо селект до стану
+                  // value={hourOptions.find(
+                  //   (option) => option.value === Number(watch("hours")) || null
+                  // )} // Прив’язуємо селект до стану
+                  value={
+                    typeof watch("hours") === "number"
+                      ? hourOptions.find(
+                          (option) => option.value === watch("hours")
+                        )
+                      : null
+                  }
                   onChange={(selectedOption: SingleValue<OptionType>, _) => {
+                    // console.log("⏱ onChange fired:", selectedOption);
                     handleInputChanged();
                     setMenuOpenHours(false);
-                    setValue("hours", selectedOption?.value ?? "", {
-                      shouldValidate: true,
-                    });
-                    trigger("hours"); // Примусово перевіряємо поле
+                    // setValue("hours", selectedOption?.value ?? "", {
+                    //   shouldValidate: true,
+                    // });
+                    if (selectedOption) {
+                      // console.log("✅ setValue(hours):", selectedOption.value);
+                      setValue("hours", selectedOption.value, {
+                        shouldValidate: true,
+                      });
+                      trigger("hours");
+                    }
+                    // trigger("hours"); // Примусово перевіряємо поле
                   }}
                   placeholder="00"
                   className={clsx(

@@ -1,4 +1,9 @@
-import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import {
+  FieldErrors,
+  UseFormRegister,
+  UseFormSetValue,
+  // UseFormWatch,
+} from "react-hook-form";
 // import { ForwardedRef } from "react";
 
 export interface InputProps {
@@ -28,6 +33,7 @@ export interface InputProps {
   classNameInputCustom?: string;
   autoFocus?: boolean;
   maxLength?: number;
+  // watch?: UseFormWatch<any>;
   onBlur?: (
     event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
