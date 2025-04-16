@@ -41,8 +41,7 @@ const NoVacancyCard = () => {
     <div
       className={cn(
         "mt-4 flex flex-col items-center gap-3 md:mt-8 md:gap-4 xl:mt-[60px] xl:gap-6 2xl:mt-10 2xl:gap-4 3xl:mt-[60px] 3xl:gap-8",
-        isNote &&
-          "mt-[60px] gap-6 md:mt-[60px] md:gap-8 xl:gap-8 2xl:gap-8 3xl:mt-[60px]"
+        isNote && "gap-6 md:mt-[60px] md:gap-8 xl:gap-8 2xl:gap-8 3xl:mt-[60px]"
       )}
     >
       <FirstVacancyMessage
