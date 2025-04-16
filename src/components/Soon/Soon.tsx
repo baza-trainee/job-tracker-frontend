@@ -15,7 +15,6 @@ export const Soon = () => {
   const dispatch = useAppDispatch();
   const { data: events, isLoading, error } = useGetAllEventsQuery();
   const [hasScroll, setHasScroll] = useState(false);
-  const [scrollThumbHeight, setScrollThumbHeight] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const actualEvents = events?.filter((event) => {
@@ -47,18 +46,6 @@ export const Soon = () => {
 
     window.addEventListener("resize", checkScroll);
     return () => window.removeEventListener("resize", checkScroll);
-  }, [events]);
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      const visibleRatio = container.clientHeight / container.scrollHeight;
-      const thumbHeight =
-        visibleRatio >= 1
-          ? container.clientHeight
-          : container.clientHeight * visibleRatio;
-      setScrollThumbHeight(thumbHeight);
-    }
   }, [events]);
 
   const handleOpenModal = () => {
@@ -99,8 +86,9 @@ export const Soon = () => {
         <div
           ref={scrollContainerRef}
           className={clsx(
-            hasScroll ? "soon-scroll" : "",
-            "relative w-full overflow-y-scroll",
+            // hasScroll ? "soon-scroll relative w-full overflow-y-scroll" : "",
+            !hasScroll ? "soon-scroll__not-full" : "",
+            "soon-scroll relative w-full overflow-y-scroll",
             "max-h-[202.8px] md:max-h-[346px] xl:max-h-[345px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
             "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
           )}
@@ -141,18 +129,6 @@ export const Soon = () => {
                 );
               })}
             </ul>
-          )}
-
-          {/* Кастомна імітація скроллбара, з нерухомим thumb на всю довжину, поки контейнер НЕпереповнений */}
-          {!hasScroll && (
-            <div className="absolute right-0 top-0 h-full w-[6px] bg-[#faf7f7] md:w-[8px]">
-              <div
-                className="rounded-full bg-color6"
-                style={{
-                  height: hasScroll ? `${scrollThumbHeight}px` : "100%",
-                }}
-              />
-            </div>
           )}
         </div>
 
