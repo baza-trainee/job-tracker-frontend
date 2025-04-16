@@ -86,11 +86,12 @@ export const Soon = () => {
         <div
           ref={scrollContainerRef}
           className={clsx(
-            "soon-scroll w-full overflow-y-scroll",
+            // hasScroll ? "soon-scroll relative w-full overflow-y-scroll" : "",
+            !hasScroll ? "soon-scroll__not-full" : "",
+            "soon-scroll relative w-full overflow-y-scroll",
             "max-h-[202.8px] md:max-h-[346px] xl:max-h-[345px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
             "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
           )}
-          // md:max-h-[362.6px] xl:max-h-[366.6px]
         >
           {isLoading && (
             <div className="flex justify-start py-4 text-lg font-medium text-textBlack">

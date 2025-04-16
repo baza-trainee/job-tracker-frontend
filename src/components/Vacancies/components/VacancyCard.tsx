@@ -35,7 +35,10 @@ const VacancyCard: FC<VacancyCardProps> = ({
       className={clsx(
         "VacancyCard box-border flex shrink-0 cursor-pointer flex-col justify-between gap-2 rounded-xl",
         "overflow-hidden p-3 font-nunito font-medium",
-        "transition-all duration-300 focus:border-iconHover focus:outline-none focus-visible:border-iconHover active:border-iconHover",
+        "transition-all duration-300",
+        // "focus:outline-none focus-visible:border-iconHover",
+        // "focus:outline focus:outline-2 focus:outline-iconHover",
+        "border border-transparent focus:border-iconHover active:border-iconHover",
         colorSectionBG,
         colorHoverBG,
         "w-[238px] smPlus:w-[212px] md:w-[198.67px] xl:w-[239px] 2xl:w-[276px] 3xl:w-[312.8px]"
