@@ -93,14 +93,15 @@ export const Input = forwardRef<
                 id={`input-${name}`}
                 className={cn(
                   "w-full rounded-xl border p-3 text-base",
-                  "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther",
-                  //  placeholder-shown:border-textBlack
+                  "peer w-full font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight",
+                  "rounded-xl border border-color7 focus:border-textOther focus:outline-none active:border-textOther",
+                  "placeholder-shown:border-textBlack",
                   "sm:px-4 sm:py-2 sm:text-[12px]",
                   "md:px-6 md:py-3 md:text-[14px]",
                   "xl:text-[14px]",
                   "2xl:text-[16px]",
                   {
-                    "border-color7": !error,
+                    // "border-color7": !error,
                     "border-color2": error,
                   },
                   classNameInputCustom
@@ -125,14 +126,16 @@ export const Input = forwardRef<
                 onFocus={onFocus}
                 id={`input-${name}`}
                 className={cn(
-                  "active:border-accent peer w-full rounded-lg border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther",
-                  //  placeholder-shown:border-textBlack
+                  "peer w-full font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight",
+                  "rounded-lg border border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                  // "placeholder-shown:border-textBlack",
                   "h-[34px] px-4 py-2 pr-8 text-[12px]",
                   "md:h-11 md:px-6 md:py-3 md:pr-8 md:text-[14px]",
                   "xl:text-[14px]",
                   "2xl:text-[16px]",
                   {
-                    "border-color7": !error,
+                    // "border-color7": !error,
+                    "border-color7": !error && isIconVisible,
                     "border-color2": error,
                     "pr-16 md:pr-16": isButtonRemoveInput,
                   },
