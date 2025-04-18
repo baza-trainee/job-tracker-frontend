@@ -26,17 +26,17 @@ const NotesMain = () => {
     dispatch(setFilteredNotes(filteredNotes));
   }, [sortNotesType, searchNotesQuery, dispatch]);
 
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
+  // const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
   const isDesktop = useMediaQuery({ minWidth: 1024, maxWidth: 1919 });
   const isLargeDesktop = useMediaQuery({ minWidth: 1920 });
 
-  let skeletonCount = 1;
-  if (isTablet) skeletonCount = 2;
-  else if (isDesktop) skeletonCount = 3;
+  let skeletonCount = 2;
+  // if (isTablet) skeletonCount = 2;
+  if (isDesktop) skeletonCount = 3;
   else if (isLargeDesktop) skeletonCount = 4;
 
   return (
-    <div className="flex w-full justify-center gap-6">
+    <div className="flex w-full flex-col justify-center gap-6 md:flex-row">
       {isLoading &&
         Array.from({ length: skeletonCount }).map((_, index) => (
           <NoteCardSceleton key={index} />
