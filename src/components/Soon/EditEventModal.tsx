@@ -61,6 +61,7 @@ const EditEventModal = () => {
   // const selectedMinute = useWatch({ control, name: "minutes" });
   const [menuOpenHours, setMenuOpenHours] = useState(false);
   const [menuOpenMinutes, setMenuOpenMinutes] = useState(false);
+  const [inputChanged, setInputChanged] = useState(false);
   const selectHoursRef = useRef<any>(null);
   const selectMinutesRef = useRef<any>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -145,11 +146,18 @@ const EditEventModal = () => {
     }
   };
 
+  const handleInputChanged = () => {
+    setInputChanged(true);
+  };
+
   return (
-    <form className="mt-10 flex w-full flex-col gap-3 align-middle md:gap-4 3xl:mt-14 3xl:gap-6">
+    <form className="mt-4 flex w-full flex-col gap-3 align-middle md:gap-4 xl:mt-10 3xl:mt-14 3xl:gap-6">
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
         <div>
-          <SoonCalendarModal onSelectDate={(date) => setValue("date", date)} />
+          <SoonCalendarModal
+            onSelectDate={(date) => setValue("date", date)}
+            onChange={handleInputChanged}
+          />
           {errors.date?.message && (
             <p className="text-color2">{String(errors.date.message)}</p>
           )}
@@ -172,11 +180,13 @@ const EditEventModal = () => {
             isRequired={true}
             isCheckButtons={true}
             classNameInputCustom="rounded-lg"
+            onChange={handleInputChanged}
+            autoComplete="off"
           />
 
           <label
             htmlFor="soonEventNotes"
-            className="mt-4 block text-base xl:text-xl 3xl:text-2xl"
+            className="mt-3 block text-base xl:mt-4 xl:text-xl 3xl:text-2xl"
           >
             {t("soonSection.soonNotes")}
           </label>
@@ -191,15 +201,17 @@ const EditEventModal = () => {
             type="textarea"
             rows={4}
             isCheckButtons={false}
-            classNameInputCustom="resize-none textarea-event-lg"
+            classNameInputCustom="resize-none textarea-event-lg textarea-event"
+            onChange={handleInputChanged}
+            autoComplete="off"
           />
 
           <div className="flex w-full flex-col items-center md:items-start">
-            <p className="mt-4 text-base xl:text-xl 3xl:text-2xl">
+            <p className="mt-3 text-base xl:mt-4 xl:text-xl 3xl:text-2xl">
               {t("soonSection.setTime")}
             </p>
             <div className="time-content grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
-              <div className="container-hours relative flex h-[60px] w-20">
+              <div className="container-hours relative flex h-[54px] w-20 xl:h-[60px]">
                 <Input
                   name="hours"
                   placeholder="00"
@@ -218,17 +230,20 @@ const EditEventModal = () => {
                   // value={watch("hours") ?? ""} // Прив'язуємо значення до стану форми, гарантовано не буде undefined
                   className={clsx(
                     "pointer-events-auto z-10",
-                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
+                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-2 text-center xl:py-[9px]",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
                   classNameInputCustom={clsx(
                     "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                    "sm:h-auto sm:p-0 sm:text-[28px]",
-                    "md:h-auto md:p-0 md:text-[28px]",
+                    "sm:h-auto sm:p-0 sm:text-[24px]",
+                    "md:h-auto md:p-0 md:text-[24px]",
                     "xl:text-[32px] xl:font-normal",
                     "2xl:text-[32px]"
                   )}
-                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+                  ) => {
+                    handleInputChanged();
                     let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
                     if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
                     if (+value > 23) return; // Максимум 24 години (Перевірка діапазону годин)
@@ -252,6 +267,7 @@ const EditEventModal = () => {
                     (option) => option.value === Number(watch("hours")) || null
                   )}
                   onChange={(selectedOption: SingleValue<OptionType>, _) => {
+                    handleInputChanged();
                     setMenuOpenHours(false);
                     setValue(
                       "hours",
@@ -265,7 +281,6 @@ const EditEventModal = () => {
                   className={clsx(
                     "select__event-modal",
                     "z-1 left-0 top-0 cursor-pointer",
-                    // "h-[60px] w-20",
                     "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-3 py-[9px]",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
@@ -287,7 +302,7 @@ const EditEventModal = () => {
                 </span>
               </div>
 
-              <div className="container-minutes relative flex h-[60px] w-20">
+              <div className="container-minutes relative flex h-[54px] w-20 xl:h-[60px]">
                 <Input
                   name="minutes"
                   placeholder="00"
@@ -307,12 +322,15 @@ const EditEventModal = () => {
                   )}
                   classNameInputCustom={clsx(
                     "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
-                    "sm:h-auto sm:p-0 sm:text-[28px]",
-                    "md:h-auto md:p-0 md:text-[28px]",
+                    "sm:h-auto sm:p-0 sm:text-[24px]",
+                    "md:h-auto md:p-0 md:text-[24px]",
                     "xl:text-[32px] xl:font-normal",
                     "2xl:text-[32px]"
                   )}
-                  onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+                  ) => {
+                    handleInputChanged();
                     let value = e.currentTarget.value.replace(/\D/g, ""); // Видаляємо всі нечислові символи
                     if (value.length > 2) value = value.slice(0, 2); // Максимум 2 символи
                     if (+value > 59) return; // Максимум 59 хвилин (Перевірка діапазону хвилин)
@@ -333,11 +351,11 @@ const EditEventModal = () => {
                   }}
                   options={minuteOptions}
                   value={minuteOptions.find(
-                    // option.value === selectedMinute
                     (option) =>
                       option.value === Number(watch("minutes")) || null
                   )}
                   onChange={(selectedOption: SingleValue<OptionType>, _) => {
+                    handleInputChanged();
                     setMenuOpenMinutes(false);
                     setValue(
                       "minutes",
@@ -348,6 +366,7 @@ const EditEventModal = () => {
                   placeholder="00"
                   className={clsx(
                     "select__event-modal",
+                    "z-1 left-0 top-0 cursor-pointer",
                     "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
@@ -392,6 +411,7 @@ const EditEventModal = () => {
           variant="ghost"
           size="big"
           onClick={handleSubmit(confirmSave)}
+          disabled={inputChanged === false}
         >
           {t("soonSection.save")}
           <Icon id={"check-box"} className="ml-3 h-6 w-6" />

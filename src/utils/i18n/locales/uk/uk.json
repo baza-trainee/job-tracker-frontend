@@ -457,7 +457,7 @@
     "soonModalNamePlaceholder": "Введіть назву події",
     "soonModalNameLength": "Назва події має бути від 1 до 50 символів",
     "soonModalNotesPlaceholder": "Місце для нотаток",
-    "soonModalNotesLength": "Нотатки мають бути не більше 1000 символів",
+    "soonModalNotes": "Нотатки мають бути не більше 1000 символів",
     "soonModalTimeHours": "Години",
     "soonModalTimeMinutes": "Хвилини",
     "soonModalErrorsRequired": "Це поле є обов'язковим",

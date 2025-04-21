@@ -56,7 +56,7 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
       // console.log("chartWidth", chartWidth);
       if (chartWidth < 480) return; // Якщо екран малий, не малюємо риску
 
-      const lineLength = chart.width < 650 && chart.width >= 350 ? 26 : 44; // довжина риски на різну ширину діаграми
+      const lineLength = chart.width < 650 && chart.width >= 320 ? 26 : 44; // довжина риски на різну ширину діаграми
 
       xAxis.ticks.forEach((_: any, index: number) => {
         const x = xAxis.getPixelForTick(index); // Позиція мітки

@@ -103,7 +103,8 @@ const VacancyMain: FC = () => {
 
       {/* Заглушка "картка Створіть вашу першу вакансію", якщо взагалі вакансій немає, секція "Збережені" */}
       {!isLoading &&
-        vacancies.length === 0 &&
+        // vacancies.length === 0 &&
+        renderedVacancies.length === 0 &&
         (!isMobile ? (
           <VacancySection
             titleSection={t("sortDropdown.saved")}
@@ -113,6 +114,7 @@ const VacancyMain: FC = () => {
             <VacancyCardFirst
               colorSectionBG="bg-color5-transparent"
               colorHoverBG="hover:bg-color5"
+              typeModal="addVacancy"
             />
           </VacancySection>
         ) : (
@@ -124,6 +126,7 @@ const VacancyMain: FC = () => {
             <VacancyCardFirst
               colorSectionBG="bg-color5-transparent"
               colorHoverBG="hover:bg-color5"
+              typeModal="addVacancy"
             />
           </VacancySectionBox>
         ))}
