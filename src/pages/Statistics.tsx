@@ -1,5 +1,16 @@
+import clsx from "clsx";
+
 import { RootState } from "../store/store.ts";
 import { useAppDispatch, useAppSelector } from "../store/hook.ts";
+import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice.ts";
+import { useGetPredictionDailyQuery } from "../store/querySlices/predictionsQuerySlice.ts";
+import {
+  setActiveTab,
+  setSelectedDate,
+  setSelectedMonth,
+  setSelectedYear,
+} from "@/store/slices/calendarSlice/calendarSlice.ts";
+
 import StatisticsPanel from "../components/Statistics/componets/statisticsPanel/StatisticsPanel";
 import StatisticsCalendarTab from "../components/Calendar/StatisticsCalendarTab.tsx";
 import StatisticsCalendarDay from "../components/Calendar/StatisticsCalendarDay.tsx";
@@ -8,21 +19,11 @@ import StatisticsCalendarYear from "../components/Calendar/StatisticsCalendarYea
 import ChartBarDay from "../components/charts/ChartBarDay.tsx";
 import ChartBarMonth from "../components/charts/ChartBarMonth.tsx";
 import ChartBarYear from "../components/charts/ChartBarYear.tsx";
-
 import DoughnutChart from "../components/charts/DoughnutChart.tsx";
-import { useGetAllUserDataQuery } from "../store/querySlices/profileQuerySlice.ts";
-import { useGetPredictionDailyQuery } from "../store/querySlices/predictionsQuerySlice.ts";
 import StatisticsPanelSkeleton from "../components/Statistics/componets/statisticsPanel/StatisticsPanelSkeleton.tsx";
 import NoVacancyCard from "../components/Statistics/componets/statisticsPanel/NoVacancyCard.tsx";
 import Soon from "../components/Soon/Soon.tsx";
 import RejectDiagram from "../components/Statistics/componets/statisticsDiagram/RejectDiagram.tsx";
-import {
-  setActiveTab,
-  setSelectedDate,
-  setSelectedMonth,
-  setSelectedYear,
-} from "@/store/slices/calendarSlice/calendarSlice.ts";
-import clsx from "clsx";
 
 function Statistics() {
   const dispatch = useAppDispatch();
@@ -93,7 +94,7 @@ function Statistics() {
           <div
             className={clsx(
               "flex flex-col items-center xl:flex-row xl:items-start xl:justify-between",
-              // "my-4 md:my-6 xl:my-8 2xl:my-10",
+
               "gap-4 md:gap-6"
             )}
           >
