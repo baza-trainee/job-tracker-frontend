@@ -15,6 +15,8 @@ import {
   notifySuccess,
 } from "../../../Notifications/NotificationService";
 import {
+  openConfirmation,
+  closeButton,
   closeConfirmation,
   closeModal,
 } from "@/store/slices/modalSlice/modalSlice";
@@ -53,7 +55,7 @@ const useEditVacancy = () => {
     getValues,
     setValue,
     watch,
-    formState: { errors},
+    formState: { errors },
   } = useForm<z.infer<typeof AddVacancySchema>>({
     defaultValues: {
       company: "",
@@ -74,7 +76,7 @@ const useEditVacancy = () => {
     mode: "onBlur",
   });
   //alex
-  console.log("vac", vacancyData);
+  // console.log("vac", vacancyData);
 
   useEffect(() => {
     if (vacancyData) {
@@ -100,7 +102,8 @@ const useEditVacancy = () => {
     }
   }, [vacancyData, reset, dispatch]);
 
-  // change Vacancy
+  // якщо зміна у вакансії відбулася, активна кнопка збереження
+  // та кнопка закриття модального вікна пропонує зберегти, якщо ні ...
   const watchedValues = watch();
   const isFormChanged = useMemo(() => {
     if (!vacancyData) return false;
@@ -111,10 +114,33 @@ const useEditVacancy = () => {
       watchedValues.communication !== vacancyData.communication ||
       watchedValues.location !== vacancyData.location ||
       watchedValues.note !== vacancyData.note ||
-      watchedValues.work_type !== vacancyData.work_type || JSON.stringify(previousStatuses) !== JSON.stringify(newStatuses)
+      watchedValues.work_type !== vacancyData.work_type ||
+      JSON.stringify(previousStatuses) !== JSON.stringify(newStatuses)
     );
   }, [watchedValues, vacancyData, previousStatuses, newStatuses]);
- 
+
+  // передача даних для кнопки закриття вікна
+  console.log("isFormChanged 1", isFormChanged);
+  console.log("watch", JSON.stringify(watchedValues).length);
+  console.log("vacancyData", JSON.stringify(vacancyData).length);
+
+  // useEffect(() => {
+  //   console.log("isFormChanged 2", isFormChanged)
+  //   dispatch(
+  //     closeButton({
+  //       isButtonOpen: isFormChanged,
+  //       resetForm: handleSubmit((data) => {
+  //         dispatch(
+  //           openConfirmation({
+  //             typeConfirmation: "saveEditVacancies",
+  //             dataConfirmation: data,
+  //           })
+  //         );
+  //       }),
+  //     })
+  //   );
+  // }, [isFormChanged,dispatch, handleSubmit]);
+
   // deleteVacancy
   const [deleteVacancyById] = useDeleteVacancyByIdMutation();
 
@@ -273,7 +299,7 @@ const useEditVacancy = () => {
     isLoading,
     vacancyData,
     deleteVacancy,
-    isFormChanged
+    isFormChanged,
   };
 };
 

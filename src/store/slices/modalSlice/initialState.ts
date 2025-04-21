@@ -16,4 +16,5 @@ export interface ModalProps {
   borderColorModal?: string | null;
   backgroundColorModal?: string | null;
   resetForm?: () => void;
+  isButtonOpen?:boolean
 }

@@ -13,8 +13,14 @@ import classNames from "classnames";
 
 const Modal: FC = () => {
   const dispatch = useAppDispatch();
-  const { isModalOpen, typeModal, isConfirmationOpen, typeConfirmation } =
-    useAppSelector((state) => state.modal);
+  const {
+    isModalOpen,
+    typeModal,
+    isConfirmationOpen,
+    typeConfirmation,
+    isButtonOpen,
+    resetForm,
+  } = useAppSelector((state) => state.modal);
 
   const modalData = contentMap[typeModal || "close"];
   const confirmationData = contentMap[typeConfirmation || "close"];
@@ -66,16 +72,10 @@ const Modal: FC = () => {
           })}
           modalData={modalData}
           btnFunc={() => {
-            // alex
-            // if (typeModal === "addVacancy" || typeModal === "editVacancy") {
-            //   return dispatch(
-            //     openConfirmation({
-            //       typeConfirmation: "saveEditVacancies",
-            //       dataConfirmation: dataConfirmation,
-            //     })
-            //   );
-            // }
-            return dispatch(closeModal());
+            console.log("isButtonOpen", isButtonOpen)
+            return isButtonOpen ? resetForm?.() : dispatch(closeModal());
+            // return isButtonOpen ? console.log("++") : console.log("--");
+            // return dispatch(closeModal());
           }}
         />
       </div>
