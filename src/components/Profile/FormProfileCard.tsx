@@ -262,6 +262,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               id={item.id}
               key={item.id}
               value={`${item.name} | ${item.technologies}`}
+              onChange={() => {}}
               name={item.id}
               placeholder={item.name}
               register={register}
@@ -293,6 +294,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               id={item.id}
               key={item.id}
               value={item.name}
+              onChange={() => {}}
               name={item.id}
               placeholder={item.name}
               register={register}
@@ -324,6 +326,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               id={item.id}
               key={item.id}
               value={item.name}
+              onChange={() => {}}
               name={item.id}
               placeholder={item.name}
               register={register}
