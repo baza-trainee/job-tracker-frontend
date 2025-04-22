@@ -1,9 +1,11 @@
-import Icon from "../../Icon/Icon";
+import cn from "clsx";
+
 import { selectTheme } from "../../../store/slices/themeSlice/themeSelector";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import { toggleTheme } from "../../../store/slices/themeSlice/themeSlice";
+
 import { ToggleProps } from "./Sidebar.props";
-import cn from "clsx";
+import Icon from "../../Icon/Icon";
 
 const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   const darkMode = useAppSelector(selectTheme);
@@ -28,9 +30,9 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
           "overflow-hidden fill-textBlack px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack md:py-[6px]",
           {
             "visible absolute left-0 z-[2] w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
-              !darkMode, // Відкрита тема
-            "flex-grow opacity-100": darkMode && isOpen, // Закрита тема
-            "sr-only m-0 w-0 opacity-0": darkMode && !isOpen, // Схована кнопка
+              !darkMode, 
+            "flex-grow opacity-100": darkMode && isOpen, 
+            "sr-only m-0 w-0 opacity-0": darkMode && !isOpen, 
           }
         )}
         type="button"
@@ -51,9 +53,9 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
 
           {
             "visible absolute right-0 w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
-              darkMode, // Відкрита тема
-            "flex-grow opacity-100": !darkMode && isOpen, // Закрита тема
-            "sr-only m-0 w-0 opacity-0": !darkMode && !isOpen, // Схована кнопка
+              darkMode, 
+            "flex-grow opacity-100": !darkMode && isOpen, 
+            "sr-only m-0 w-0 opacity-0": !darkMode && !isOpen, 
           }
         )}
         type="button"
