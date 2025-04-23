@@ -3,9 +3,6 @@ import { ModalProps } from "./initialState";
 import { CloseButton } from "react-toastify";
 
 const initialState: ModalProps = {
-  // isModalOpen: true,
-  // typeModal: "resetPasswordSuccess",
-
   isModalOpen: false,
   typeModal: "close",
   isConfirmationOpen: false,
@@ -16,7 +13,7 @@ const initialState: ModalProps = {
   backgroundColorModal: null,
   vacancyData: null,
   eventData: null,
-  isButtonOpen: true,
+  isButtonOpen: false,
 };
 
 const modalSlice = createSlice({

@@ -15,8 +15,6 @@ import {
   notifySuccess,
 } from "../../../Notifications/NotificationService";
 import {
-  openConfirmation,
-  closeButton,
   closeConfirmation,
   closeModal,
 } from "@/store/slices/modalSlice/modalSlice";
@@ -75,8 +73,6 @@ const useEditVacancy = () => {
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
   });
-  //alex
-  // console.log("vac", vacancyData);
 
   useEffect(() => {
     if (vacancyData) {
@@ -118,28 +114,6 @@ const useEditVacancy = () => {
       JSON.stringify(previousStatuses) !== JSON.stringify(newStatuses)
     );
   }, [watchedValues, vacancyData, previousStatuses, newStatuses]);
-
-  // передача даних для кнопки закриття вікна
-  console.log("isFormChanged 1", isFormChanged);
-  console.log("watch", JSON.stringify(watchedValues).length);
-  console.log("vacancyData", JSON.stringify(vacancyData).length);
-
-  // useEffect(() => {
-  //   console.log("isFormChanged 2", isFormChanged)
-  //   dispatch(
-  //     closeButton({
-  //       isButtonOpen: isFormChanged,
-  //       resetForm: handleSubmit((data) => {
-  //         dispatch(
-  //           openConfirmation({
-  //             typeConfirmation: "saveEditVacancies",
-  //             dataConfirmation: data,
-  //           })
-  //         );
-  //       }),
-  //     })
-  //   );
-  // }, [isFormChanged,dispatch, handleSubmit]);
 
   // deleteVacancy
   const [deleteVacancyById] = useDeleteVacancyByIdMutation();

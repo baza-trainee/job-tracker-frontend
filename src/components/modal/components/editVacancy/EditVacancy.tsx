@@ -4,7 +4,10 @@ import { Textarea } from "../../../Textarea/Textarea";
 import { t } from "i18next";
 import Icon from "../../../Icon/Icon";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
-import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
+import {
+  openConfirmation,
+  closeButton,
+} from "../../../../store/slices/modalSlice/modalSlice";
 // component
 import { CheckboxWithCalendar } from "../addVacancyModals/CheckboxWithCalendar";
 import { InputRadio } from "../../../inputs/InputRadio/InputRadio";
@@ -15,6 +18,7 @@ import { VacancyInputProps } from "../addVacancyModals/AddVacancy.props";
 import { TypesModal } from "../../ModalMain.types";
 // hook
 import useEditVacancy from "./useEditVacancy";
+import { useEffect, useState } from "react";
 
 const EditVacancy = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +41,8 @@ const EditVacancy = () => {
   const isArchived = vacancyData?.isArchived || "";
 
   const handleConfirmation = (typeConfirmation: TypesModal) => {
+    // alex
+    // console.log("data", getValues())
     handleSubmit((data) => {
       dispatch(
         openConfirmation({
@@ -47,10 +53,26 @@ const EditVacancy = () => {
     })();
   };
 
+  const [btnMem, setBtnMem] = useState<boolean>(isFormChanged);
+
   const deleteVacancy = () => handleConfirmation("deleteVacancy");
   const saveVacancy = () => handleConfirmation("saveEditVacancies");
   const handleSubmitArchive = () =>
     handleConfirmation(isArchived ? "restoreVacancy" : "arhiveVacancy");
+
+  const closeBtnModal = () => {
+    console.log("78");
+    setBtnMem(isFormChanged);
+    dispatch(
+      closeButton({
+        isButtonOpen: btnMem,
+        resetForm: saveVacancy,
+      })
+    );
+  };
+  useEffect(() => {
+    closeBtnModal();
+  }, [btnMem, isFormChanged]);
 
   return (
     <div className="w-full pt-[50px] xl:pt-[44px]">
