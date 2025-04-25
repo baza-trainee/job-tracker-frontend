@@ -1,6 +1,6 @@
-import Skeleton from "@/components/Sceleton/Sceleton";
-
 import { FC } from "react";
+
+import Skeleton from "@/components/Sceleton/Sceleton";
 
 const NoteCardSceleton: FC = () => {
   return (
