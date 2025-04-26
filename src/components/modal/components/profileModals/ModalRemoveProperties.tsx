@@ -24,7 +24,7 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
       <h2 className="font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]">
         {t("modalAddProperties.modalRemoveLinkTitle")}
       </h2>
-      <div className="flex gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         <Button type="button" onClick={() => dispatch(closeModal())}>
           {t("infoModal.button.cancel")}
         </Button>
