@@ -1,6 +1,4 @@
-type Props = {};
-
-function ConfirmToRemoveModal({}: Props) {
+function ConfirmToRemoveModal() {
   return <div>ConfirmToRemoveModal</div>;
 }
 
