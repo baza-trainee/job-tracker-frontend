@@ -9,8 +9,8 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useMediaQuery } from "react-responsive";
 import { Doughnut } from "react-chartjs-2";
 import { useTranslation } from "react-i18next";
-import { Vacancy } from "../../types/vacancies.types";
 
+import { Vacancy } from "../../types/vacancies.types";
 import DiagramTitle from "../Statistics/componets/statisticsDiagram/DiagramTitle";
 import CustomLegend from "./CustomLegend";
 
@@ -70,8 +70,6 @@ export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
     plugins: {
       legend: {
         display: false,
-        // position: "bottom",
-        // align: "start",
 
         labels: {
           boxWidth: 40,

@@ -4,6 +4,7 @@ import cn from "clsx";
 import Icon from "../../Icon/Icon.tsx";
 import { SidebarItemProps } from "./Sidebar.props.ts";
 import { useMediaQuery } from "react-responsive";
+import { useTranslation } from "react-i18next";
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
   icon,
@@ -12,6 +13,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   isOpen,
   onClick,
 }) => {
+  const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   return (
     <NavLink
@@ -39,7 +41,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
             : "sr-only m-0 w-0 -translate-x-5 opacity-0"
         )}
       >
-        {title}
+        {t(`navigation.${title}`)}
       </span>
     </NavLink>
   );

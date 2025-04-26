@@ -1,12 +1,14 @@
-import NoVacancyCard from "@/components/Statistics/componets/statisticsPanel/NoVacancyCard";
+import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+
 import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
-import NoteCard from "./NoteCard";
 import { useAppDispatch, useAppSelector, useFilteredNotes } from "@/store/hook";
 import { selectfilteredNotes } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
 import { setFilteredNotes } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
-import { useEffect } from "react";
+
 import NoteCardSceleton from "./NoteCardSceleton";
-import { useMediaQuery } from "react-responsive";
+import NoteCard from "./NoteCard";
+import NoVacancyCard from "@/components/Statistics/componets/statisticsPanel/NoVacancyCard";
 
 const NotesMain = () => {
   const dispatch = useAppDispatch();
@@ -26,12 +28,11 @@ const NotesMain = () => {
     dispatch(setFilteredNotes(filteredNotes));
   }, [sortNotesType, searchNotesQuery, dispatch]);
 
-  // const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
   const isDesktop = useMediaQuery({ minWidth: 1024, maxWidth: 1919 });
   const isLargeDesktop = useMediaQuery({ minWidth: 1920 });
 
   let skeletonCount = 2;
-  // if (isTablet) skeletonCount = 2;
+
   if (isDesktop) skeletonCount = 3;
   else if (isLargeDesktop) skeletonCount = 4;
 
