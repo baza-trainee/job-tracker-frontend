@@ -15,9 +15,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { socialLinksSchema } from "@/schemas/profile/socialLinksSchema";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function SocialLinksFields() {
+  const [isInputLoading, setIsInputLoading] = useState<string>("");
   const { data: profile } = useGetAllUserDataQuery();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -58,6 +59,7 @@ export default function SocialLinksFields() {
     }
 
     try {
+      setIsInputLoading(id as string);
       await updateSocialLink({
         idSocialLink: id as string,
         link: event,
@@ -67,6 +69,8 @@ export default function SocialLinksFields() {
       console.log("error", error);
       notifyError(t("notification.updatedErrorLink"));
       setValue(id as any, initialValues.current[id as string]);
+    } finally {
+      setIsInputLoading("");
     }
   };
 
@@ -89,6 +93,7 @@ export default function SocialLinksFields() {
                   onBlur={(e) => {
                     handleUpdateUserData(e.currentTarget.value, item.id);
                   }}
+                  disabled={isInputLoading === item.id}
                   id={item.id}
                   label={item.name}
                   type="vacancy"

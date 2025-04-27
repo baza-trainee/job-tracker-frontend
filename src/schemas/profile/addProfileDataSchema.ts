@@ -30,14 +30,22 @@ export const addProfileData: Schema = {
 
   addProjects: z.object({
     name: z.string().min(2, { message: "validation.min2Characters" }).trim(),
-    technologies: z.string().trim().optional(),
+    technologies: z
+      .string()
+      .trim()
+      .min(2, { message: "validation.min2Characters" })
+      .optional(),
     link: z
       .string()
       .url({ message: "validation.invalidUrl" })
       .regex(/\.[a-zA-Z]{2,}$/, { message: "validation.invalidUrl" })
       .trim()
       .optional(),
-    text: z.string().optional(),
+    text: z
+      .string()
+      .min(2, { message: "validation.min2Characters" })
+      .trim()
+      .optional(),
   }),
   addCoverLetters: z.object({
     name: z.string().min(2, { message: "validation.min2Characters" }).trim(),
