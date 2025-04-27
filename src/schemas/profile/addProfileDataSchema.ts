@@ -1,5 +1,3 @@
-// import { z } from "@/utils/i18n/i18n";
-
 import { PropsModalAddProperties } from "@/components/modal/components/profileModals/modalAddProperties.types";
 import { z, ZodObject, ZodOptional, ZodString } from "zod";
 

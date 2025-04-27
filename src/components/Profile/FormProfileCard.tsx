@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch } from "@/store/hook";
 import {
   useGetAllUserDataQuery,
-  useUpdateSocialLinkMutation,
   useUpdateUserProfileMutation,
 } from "../../store/querySlices/profileQuerySlice";
 import { copyInputValue } from "../../utils/copyInputValue";
@@ -20,7 +19,8 @@ import {
 } from "../Notifications/NotificationService";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { socialLinksSchema } from "@/schemas/socialLinksSchema";
+import { socialLinksSchema } from "@/schemas/profile/socialLinksSchema";
+import SocialLinksFields from "./fields/SocialLinksFields";
 
 const userData: ProfileKeys[] = ["username", "email", "phone"];
 
@@ -41,7 +41,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     mode: "all",
   });
 
-  const [updateSocialLink] = useUpdateSocialLinkMutation();
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
   const dispatch = useAppDispatch();
@@ -85,11 +84,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
       setValue(item, value);
       initialValues.current[item] = value as string;
     });
-    if (!profile.socials) return;
-    profile.socials.forEach((item) => {
-      setValue(item.id as any, item.link);
-      initialValues.current[item.id] = item.link;
-    });
   }, [profile, setValue]);
 
   const handleClickButtonRemoveInput = (id: string) => {
@@ -110,47 +104,27 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     );
   };
 
-  const handleUpdateUserData = async (
-    name: string,
-    event: string,
-    type: "profile" | "social",
-    id?: string
-  ) => {
+  const handleUpdateUserData = async (name: string, event: string) => {
     if (initialValues.current[name] === event) {
       return;
     }
     try {
-      if (type === "profile") {
-        await updateUserProfile({
-          [name]: event,
+      await updateUserProfile({
+        [name]: event,
+      })
+        .unwrap()
+        .then(() => {
+          if (name === "phone")
+            notifySuccess(t("notification.updatedPhoneSuccess"));
+          if (name === "username")
+            notifySuccess(t("notification.updatedUserNameSuccess"));
         })
-          .unwrap()
-          .then(() => {
-            if (name === "phone")
-              notifySuccess(t("notification.updatedPhoneSuccess"));
-            if (name === "username")
-              notifySuccess(t("notification.updatedUserNameSuccess"));
-          })
-          .catch(() => {
-            if (name === "phone") notifyError(t("notification.updatedPhone"));
-            if (name === "username")
-              notifyError(t("notification.updatedUserName"));
-            setValue(name as any, initialValues.current[name]);
-          });
-      }
-
-      if (type === "social") {
-        await updateSocialLink({
-          idSocialLink: id as string,
-          link: event,
-        })
-          .unwrap()
-          .then(() => notifySuccess(t("notification.updatedSuccess")))
-          .catch(() => {
-            notifyError(t("notification.updatedErrorLink"));
-            setValue(name as any, initialValues.current[name]);
-          });
-      }
+        .catch(() => {
+          if (name === "phone") notifyError(t("notification.updatedPhone"));
+          if (name === "username")
+            notifyError(t("notification.updatedUserName"));
+          setValue(name as any, initialValues.current[name]);
+        });
     } catch (error) {}
   };
 
@@ -172,14 +146,11 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                     onBlur={(e) => {
                       if (item === "email") return;
 
-                      handleUpdateUserData(
-                        item,
-                        e.currentTarget.value,
-                        "profile"
-                      );
+                      handleUpdateUserData(item, e.currentTarget.value);
                     }}
                     disabled={item === "email" ? true : false}
                     label={label}
+                    type="vacancy"
                     name={item}
                     placeholder={
                       item === "username"
@@ -206,51 +177,13 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
                     }
                   />
                   {index === userData.length - 1 && (
-                    <div className="mt-4 h-px w-full bg-backgroundSecondary" />
+                    <div className="bg- mt-4 h-px w-full bg-color9" />
                   )}
                 </li>
               );
             })}
           </ul>
-          <ul className="flex flex-col gap-4">
-            {profile?.socials
-              ? profile?.socials.map((item) => {
-                  return (
-                    <li key={item.id}>
-                      <Input
-                        onBlur={(e) =>
-                          handleUpdateUserData(
-                            item.name,
-                            e.currentTarget.value,
-                            "social",
-                            item.id
-                          )
-                        }
-                        id={item.id}
-                        label={item.name}
-                        name={item.id}
-                        placeholder={item.name}
-                        register={register}
-                        errors={errors}
-                        resetField={resetField}
-                        isCheckButtons={false}
-                        isButtonCopy={true}
-                        isButtonRemoveInput={true}
-                        handleClickButtonRemoveInput={() =>
-                          handleClickButtonRemoveInput(item.id)
-                        }
-                        handleClickButtonCopyInput={() =>
-                          copyInputValue({
-                            valueToCopy: item.link,
-                            text: t("notification.linkCopied"),
-                          })
-                        }
-                      />
-                    </li>
-                  );
-                })
-              : null}
-          </ul>
+          <SocialLinksFields />
         </>
       )}
 
@@ -263,6 +196,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               }
               id={item.id}
               key={item.id}
+              type="vacancy"
               value={`${item.name} | ${item.technologies}`}
               onChange={() => {}}
               name={item.id}
@@ -297,6 +231,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               key={item.id}
               value={item.name}
               onChange={() => {}}
+              type="vacancy"
               name={item.id}
               placeholder={item.name}
               register={register}
@@ -328,6 +263,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
               id={item.id}
               key={item.id}
               value={item.name}
+              type="vacancy"
               onChange={() => {}}
               name={item.id}
               placeholder={item.name}

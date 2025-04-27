@@ -188,7 +188,7 @@ export const Input = forwardRef<
                 >
                   <Icon
                     id="copy"
-                    className="h-6 w-6 cursor-pointer fill-black transition-all hover:fill-color5"
+                    className="h-6 w-6 cursor-pointer fill-black transition-all active:fill-color5 md:hover:fill-color5"
                   />
                 </button>
               )}
