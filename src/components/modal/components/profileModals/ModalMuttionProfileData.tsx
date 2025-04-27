@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { addProfileData } from "@/schemas/addProfileDataSchema";
+import { addProfileData } from "@/schemas/profile/addProfileDataSchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppSelector } from "@/store/hook";

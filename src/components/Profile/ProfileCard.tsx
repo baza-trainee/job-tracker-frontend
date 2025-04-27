@@ -9,7 +9,7 @@ function ProfileCard({ cardsType, className }: PropsProfileCard) {
     <div className={cn("flex flex-col", className)}>
       <div className="flex">
         <div className="rounded-[12px_12px_0_0] bg-backgroundSecondary px-3 py-1.5 md:py-3 xl:px-4">
-          <span> {text?.cardTitle}</span>
+          <span className="md:text-xl"> {text?.cardTitle}</span>
         </div>
       </div>
       <FormProfileCard cardsType={cardsType} />
