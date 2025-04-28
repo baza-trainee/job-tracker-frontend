@@ -20,7 +20,8 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     handleSubmit,
     resetField,
     setValue,
-    formState: { errors },
+    watch,
+    formState: { errors, isDirty },
   } = useForm<z.infer<(typeof addProfileData)[typeof cardsType]>>({
     resolver: zodResolver(addProfileData[cardsType]),
     mode: "all",
@@ -51,6 +52,19 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     setValue("text", updateItem.description || updateItem.text);
   }, [updateItem]);
 
+  const isDisabledSubmitButton =
+    isSubmitDisabled ||
+    !isDirty ||
+    ((updateItem.name ? updateItem.name === watch("name") : true) &&
+      (updateItem.link ? updateItem.link === watch("link") : true) &&
+      (updateItem.technologies
+        ? updateItem.technologies === watch("technologies")
+        : true) &&
+      (updateItem.description
+        ? updateItem.description === watch("text")
+        : true) &&
+      (updateItem.text ? updateItem.text === watch("text") : true));
+  console.log(isDisabledSubmitButton);
   return (
     <form
       className="flex h-full w-full flex-col gap-5"
@@ -117,7 +131,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           type="submit"
           className="gap-3"
           variant="accent"
-          disabled={isSubmitDisabled}
+          disabled={isDisabledSubmitButton}
         >
           {t("infoModal.button.save")}
           <Icon id="check-box" className="h-6 w-6" />
