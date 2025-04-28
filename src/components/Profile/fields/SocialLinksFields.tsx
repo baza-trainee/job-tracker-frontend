@@ -28,7 +28,7 @@ export default function SocialLinksFields() {
     trigger,
     setValue,
     formState: { errors },
-  } = useForm<Record<string, string>>({
+  } = useForm({
     resolver: zodResolver(socialLinksSchema),
     mode: "all",
   });
