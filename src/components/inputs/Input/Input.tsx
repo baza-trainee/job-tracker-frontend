@@ -60,7 +60,8 @@ export const Input = forwardRef<
       resetField(name);
     };
 
-    const { onBlur: hookFormOnBlur, ref: refInput } = register(name);
+    // const { onBlur: hookFormOnBlur, ref: refInput } = register(name);
+    const registerProps = register(name);
 
     return (
       <div
@@ -90,6 +91,7 @@ export const Input = forwardRef<
           <div className={cn("relative flex w-full items-center")}>
             {type === "textarea" ? (
               <textarea
+                {...registerProps}
                 id={`input-${name}`}
                 className={cn(
                   "w-full rounded-xl border p-3 text-base",
@@ -108,19 +110,21 @@ export const Input = forwardRef<
                 )}
                 placeholder={placeholder}
                 rows={rows || 4}
-                {...register(name)}
+                // {...register(name)}
                 {...(value && { value })}
                 onBlur={(event) => {
                   setValue?.(name, event.target.value.trim(), {
                     shouldValidate: true,
                   });
-                  hookFormOnBlur(event);
+                  // hookFormOnBlur(event);
+                  registerProps.onBlur(event);
                   onBlur?.(event);
                 }}
-                onChange={onChange}
+                onChange={(e) => (registerProps.onChange(e), onChange?.(e))}
               />
             ) : (
               <input
+                {...registerProps}
                 disabled={disabled}
                 {...(autoFocus && { autoFocus })}
                 onFocus={onFocus}
@@ -145,18 +149,20 @@ export const Input = forwardRef<
                 type={type}
                 {...(value && { value })}
                 {...(defaultValue && { defaultValue })}
-                {...register(name)}
+                // {...register(name)}
                 aria-describedby={`inputError-${name}`}
                 title={promptMessage}
                 onBlur={(event) => {
                   setValue?.(name, event.target.value.trim(), {
                     shouldValidate: true,
                   });
-                  hookFormOnBlur(event);
+                  // hookFormOnBlur(event);
+                  registerProps.onBlur(event);
                   onBlur?.(event);
                 }}
                 ref={(el) => {
-                  refInput(el);
+                  // refInput(el);
+                  registerProps.ref(el);
                   if (el) inputRef.current = el;
                   if (forwardedRef && typeof forwardedRef === "function") {
                     forwardedRef(el);
@@ -164,16 +170,13 @@ export const Input = forwardRef<
                     (forwardedRef as React.MutableRefObject<any>).current = el;
                   }
                 }}
-                // ref={(el) => {
-                //   refInput(el);
-                //   if (el) inputRef.current = el;
-                // }}
                 onClick={onClick}
-                // alex
                 onKeyDown={onKeyDown}
-                // onClick={(event) => event.stopPropagation()}
                 onInput={onInput}
-                onChange={onChange}
+                onChange={(e) => {
+                  registerProps.onChange(e);
+                  onChange?.(e);
+                }}
                 autoComplete={autoComplete}
                 maxLength={maxLength}
               />

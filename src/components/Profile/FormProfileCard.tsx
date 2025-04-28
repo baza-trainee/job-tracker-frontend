@@ -1,9 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "@/store/hook";
-import {
-  useGetAllUserDataQuery,
-  useUpdateUserProfileMutation,
-} from "../../store/querySlices/profileQuerySlice";
+import { useGetAllUserDataQuery } from "../../store/querySlices/profileQuerySlice";
 import { copyInputValue } from "../../utils/copyInputValue";
 
 import { PropsProfileCard } from "./profileCardProps.props";
@@ -11,18 +8,11 @@ import { Input } from "../inputs/Input/Input";
 import { Button } from "../buttons/Button/Button";
 import { openModal } from "@/store/slices/modalSlice/modalSlice";
 import useProfileTexts from "./textProfile/useProfileText";
-import { Profile, ProfileKeys } from "@/types/profile.types";
-import { useEffect, useRef } from "react";
-import {
-  notifyError,
-  notifySuccess,
-} from "../Notifications/NotificationService";
-import { useTranslation } from "react-i18next";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { socialLinksSchema } from "@/schemas/profile/socialLinksSchema";
-import SocialLinksFields from "./fields/SocialLinksFields";
+import { Profile } from "@/types/profile.types";
 
-const userData: ProfileKeys[] = ["username", "email", "phone"];
+import SocialLinksFields from "./fields/SocialLinksFields";
+import { useTranslation } from "react-i18next";
+import ProfileLinksField from "./fields/ProfileLinksField";
 
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
@@ -33,18 +23,12 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   const {
     register,
     resetField,
-    watch,
-    setValue,
     formState: { errors },
   } = useForm<Partial<Profile>>({
-    resolver: zodResolver(socialLinksSchema),
     mode: "all",
   });
 
-  const [updateUserProfile] = useUpdateUserProfileMutation();
-
   const dispatch = useAppDispatch();
-  const initialValues = useRef<Record<string, string>>({});
 
   const typeRemoveConfirmation = () => {
     switch (cardsType) {
@@ -77,15 +61,6 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     }
   };
 
-  useEffect(() => {
-    if (!profile) return;
-    userData.forEach((item) => {
-      const value = profile[item] ?? "";
-      setValue(item, value);
-      initialValues.current[item] = value as string;
-    });
-  }, [profile, setValue]);
-
   const handleClickButtonRemoveInput = (id: string) => {
     dispatch(
       openModal({
@@ -104,85 +79,11 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
     );
   };
 
-  const handleUpdateUserData = async (name: string, event: string) => {
-    if (initialValues.current[name] === event) {
-      return;
-    }
-    try {
-      await updateUserProfile({
-        [name]: event,
-      })
-        .unwrap()
-        .then(() => {
-          if (name === "phone")
-            notifySuccess(t("notification.updatedPhoneSuccess"));
-          if (name === "username")
-            notifySuccess(t("notification.updatedUserNameSuccess"));
-        })
-        .catch(() => {
-          if (name === "phone") notifyError(t("notification.updatedPhone"));
-          if (name === "username")
-            notifyError(t("notification.updatedUserName"));
-          setValue(name as any, initialValues.current[name]);
-        });
-    } catch (error) {}
-  };
-
   return (
     <div className="flex flex-col gap-2 rounded-[0_12px_12px_12px] border-[4px] border-solid border-backgroundSecondary bg-slate-50 px-2 py-4 md:px-6 md:py-6">
       {cardsType === "addPersonalProperties" && (
         <>
-          <ul className="flex flex-col gap-4">
-            {userData.map((item, index) => {
-              const label =
-                item === "email"
-                  ? "Email"
-                  : item === "phone"
-                    ? t("phone")
-                    : t("name");
-              return (
-                <li key={index}>
-                  <Input
-                    onBlur={(e) => {
-                      if (item === "email") return;
-
-                      handleUpdateUserData(item, e.currentTarget.value);
-                    }}
-                    disabled={item === "email" ? true : false}
-                    label={label}
-                    type="vacancy"
-                    name={item}
-                    placeholder={
-                      item === "username"
-                        ? "User123"
-                        : item === "phone"
-                          ? "+380123456789"
-                          : ""
-                    }
-                    register={register}
-                    errors={errors}
-                    resetField={resetField}
-                    isCheckButtons={false}
-                    isButtonCopy={true}
-                    handleClickButtonCopyInput={() =>
-                      copyInputValue({
-                        valueToCopy: watch(item) as string,
-                        text:
-                          item === "username"
-                            ? t("notification.userNameCopied")
-                            : item === "email"
-                              ? t("notification.emailCopied")
-                              : t("notification.phoneCopied"),
-                      })
-                    }
-                  />
-                  {index === userData.length - 1 && (
-                    <div className="bg- mt-4 h-px w-full bg-color9" />
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+          <ProfileLinksField />
           <SocialLinksFields />
         </>
       )}
