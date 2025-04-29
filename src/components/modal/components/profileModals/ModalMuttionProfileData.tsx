@@ -55,7 +55,8 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   const isDisabledSubmitButton =
     isSubmitDisabled ||
     !isDirty ||
-    ((updateItem.name ? updateItem.name === watch("name") : true) &&
+    (isUpdating &&
+      (updateItem.name ? updateItem.name === watch("name") : true) &&
       (updateItem.link ? updateItem.link === watch("link") : true) &&
       (updateItem.technologies
         ? updateItem.technologies === watch("technologies")
@@ -64,7 +65,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         ? updateItem.description === watch("text")
         : true) &&
       (updateItem.text ? updateItem.text === watch("text") : true));
-  console.log(isDisabledSubmitButton);
+
   return (
     <form
       className="flex h-full w-full flex-col gap-5"

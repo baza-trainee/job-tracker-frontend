@@ -21,6 +21,9 @@ export const addProfileData: Schema = {
     technologies: z.string().optional(),
     link: z
       .string()
+      .min(2, {
+        message: "validation.min2Characters",
+      })
       .url({ message: "validation.invalidUrl" })
       .regex(/\.[a-zA-Z]{2,}$/, { message: "validation.invalidUrl" })
       .trim()
@@ -37,6 +40,9 @@ export const addProfileData: Schema = {
       .optional(),
     link: z
       .string()
+      .min(2, {
+        message: "validation.min2Characters",
+      })
       .url({ message: "validation.invalidUrl" })
       .regex(/\.[a-zA-Z]{2,}$/, { message: "validation.invalidUrl" })
       .trim()
