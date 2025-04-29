@@ -79,7 +79,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         register={register}
         errors={errors}
         resetField={resetField}
-        isCheckButtons={false}
+        isCheckButtons={true}
       />
 
       {data[cardsType].technologies && (
@@ -90,7 +90,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={false}
+          isCheckButtons={true}
         />
       )}
       {data[cardsType].link && (
@@ -101,7 +101,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={false}
+          isCheckButtons={true}
         />
       )}
       {data[cardsType].text && (
@@ -114,7 +114,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={false}
+          isCheckButtons={true}
         />
       )}
       <div className="flex flex-col-reverse justify-center gap-5 md:flex-row">
