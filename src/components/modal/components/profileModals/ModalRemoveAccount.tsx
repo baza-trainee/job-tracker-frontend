@@ -15,7 +15,6 @@ function ModalRemoveAccount() {
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-
   const { data } = useGetAllUserDataQuery();
   const [removeUser, { isLoading }] = useRemoveUserMutation();
   const userId = data?.id as string;
