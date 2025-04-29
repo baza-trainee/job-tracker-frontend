@@ -24,8 +24,10 @@ export const addProfileData: Schema = {
       .min(2, {
         message: "validation.min2Characters",
       })
-      .url({ message: "validation.invalidUrl" })
-      .regex(/\.[a-zA-Z]{2,}$/, { message: "validation.invalidUrl" })
+      // .url({ message: "validation.invalidUrl" })
+      .regex(/^https?:\/\/.+\.[a-zA-Z]{2,}$/, {
+        message: "validation.invalidUrl",
+      })
       .trim()
       .optional(),
     text: z.string().optional(),
@@ -43,8 +45,10 @@ export const addProfileData: Schema = {
       .min(2, {
         message: "validation.min2Characters",
       })
-      .url({ message: "validation.invalidUrl" })
-      .regex(/\.[a-zA-Z]{2,}$/, { message: "validation.invalidUrl" })
+      // .url({ message: "validation.invalidUrl" })
+      .regex(/^https?:\/\/.+\.[a-zA-Z]{2,}$/, {
+        message: "validation.invalidUrl",
+      })
       .trim()
       .optional(),
     text: z
@@ -73,8 +77,8 @@ export const addProfileData: Schema = {
     link: z
       .string()
       .trim()
-      .url({ message: "validation.invalidUrl" })
-      .regex(/\.[a-zA-Z]{2,}$/, {
+      // .url({ message: "validation.invalidUrl" })
+      .regex(/^https?:\/\/.+\.[a-zA-Z]{2,}$/, {
         message: "validation.invalidUrl",
       })
       .optional(),
