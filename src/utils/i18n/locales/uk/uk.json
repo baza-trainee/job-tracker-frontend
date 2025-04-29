@@ -130,6 +130,7 @@
     "termsRequired": "Ви не надали згоду",
     "passwordMismatch": "Паролі мають збігатись",
     "min2Characters": "Мінімум 2 символи",
+    "max50Characters": "Максимум 50 символів",
     "invalidUrl": "Введіть коректне посилання",
     "invalidPdf": "Введіть коректне посилання .pdf"
   },
