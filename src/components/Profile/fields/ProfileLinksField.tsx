@@ -50,16 +50,13 @@ function ProfileLinksField() {
     }
 
     if (event !== "" && name === "phone") {
-      console.log(typeof event);
       const valueNumber = Number(event);
-      console.log(valueNumber);
       if (!valueNumber && event.length < 2) {
         notifyError(t("notification.updatedPhone"));
         setValue(name as any, initialValues.current[name]);
         return;
       }
       const isValid = await trigger(name as any);
-      console.log("isValid", isValid);
       if (!isValid) {
         setValue(name as any, initialValues.current[name]);
         return;

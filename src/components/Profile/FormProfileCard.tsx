@@ -17,7 +17,6 @@ import ProfileLinksField from "./fields/ProfileLinksField";
 function FormProfileCard({ cardsType }: PropsProfileCard) {
   const { data: profile } = useGetAllUserDataQuery();
   const { t } = useTranslation();
-  console.log("profile", profile);
 
   const text = useProfileTexts({ cardsType });
   const {

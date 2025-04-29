@@ -51,7 +51,6 @@ export default function SocialLinksFields() {
       return;
     }
     const isValid = await trigger(id as any);
-    console.log("isValid", isValid);
     if (!isValid) {
       console.warn("Validation failed for", id);
       setValue(id as any, initialValues.current[id as string]);
@@ -66,7 +65,7 @@ export default function SocialLinksFields() {
       }).unwrap();
       notifySuccess(t("notification.updatedSuccess"));
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
       notifyError(t("notification.updatedErrorLink"));
       setValue(id as any, initialValues.current[id as string]);
     } finally {
