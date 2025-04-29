@@ -10,13 +10,11 @@ import {
 } from "@/components/Notifications/NotificationService";
 import { clearTokens } from "@/store/slices/authSlice/authSlice";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function ModalRemoveAccount() {
   const [isConfirmModal, setIsConfirmModal] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { data } = useGetAllUserDataQuery();
   const [removeUser, { isLoading }] = useRemoveUserMutation();
   const userId = data?.id as string;
@@ -34,7 +32,6 @@ function ModalRemoveAccount() {
       notifySuccess("Account removed successfully");
       dispatch(closeModal());
       dispatch(clearTokens());
-      navigate("/sign-up");
     } catch (error) {
       notifyError("Error removing account");
       console.error(error);
