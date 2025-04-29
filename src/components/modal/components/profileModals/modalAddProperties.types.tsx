@@ -9,7 +9,7 @@ export type DataItem = {
   technologies?: string;
   placeholderTechnology?: string;
   link?: string;
-  placeholderLink: string;
+  placeholderLink?: string;
   text?: string;
   placeholderText?: string;
 };
@@ -47,7 +47,7 @@ export const useData = () => {
       name: t("modalAddProperties.linkName"),
       placeholderName: t("modalAddProperties.placeholderNameCoverLetter"),
       text: t("modalAddProperties.textNameCoverLetter"),
-      placeholderLink: t("modalAddProperties.placeholderTextCoverLetter"),
+      placeholderText: t("modalAddProperties.placeholderTextCoverLetter"),
     },
   };
 
