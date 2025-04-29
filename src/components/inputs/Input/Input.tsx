@@ -241,7 +241,7 @@ export const Input = forwardRef<
                     <div>
                       <Icon
                         id="check-box"
-                        className="h-6 w-6 cursor-pointer fill-color7"
+                        className="h-6 w-6 cursor-text fill-color7"
                       />
                     </div>
                   )
