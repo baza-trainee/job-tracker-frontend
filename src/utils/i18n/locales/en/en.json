@@ -1,11 +1,77 @@
 {
+  "or": "Or",
   "welcome": "Welcome to React and react-i18next",
   "user": "користувач",
+  "name": "Name",
+  "phone": "Phone number",
+  "modalAddProperties": {
+    "linkName": "Name",
+    "placeHolderSocials": "Enter the name of the link",
+    "linkSocial": "Link to social network",
+    "placeholderlinkSocial": "Insert a link to a social network",
+    "placeholderNameResume": "Enter the name of the resume",
+    "linkResume": "Link to resume",
+    "placeholderLinkResume": "Insert a link to your resume",
+    "placeholderNameCoverLetter": "Enter a name for the letter",
+    "textNameCoverLetter": "Cover letter",
+    "placeholderTextCoverLetter": "You should write your letter here",
+    "placeholderNameProject": "Enter the name of the project",
+    "technology": "Technologies",
+    "placeholderTechnology": "Specify the technologies used",
+    "linkProject": "Link to the project",
+    "placeholderlinkProject": "Insert a link to the project",
+    "textProject": "Description of the project",
+    "placeholderTextProject": "You can describe the project",
+    "modalRemoveLink": "Remove link",
+    "modalRemoveProject": "Remove project",
+    "modalRemoveCoverLetter": "Remove cover letter",
+    "modalRemoveResume": "Remove resume",
+    "modalRemoveLinkTitle": "Are you sure you want to delete?",
+    "removeAccountModalName": "Remove account",
+    "removeAccountModalText": "Are you sure you want to delete your account?",
+    "removeConfirmAccountModalText": "This action cannot be undone. Are you sure?"
+  },
+  "notification": {
+    "updatedSuccess": "Updated successfully",
+    "updatedError": "Failed to update",
+    "deletedError": "Failed to delete",
+    "addedError": "Failed to add",
+    "updatedErrorLink": "Enter a valid link",
+    "updatedPhone": "Enter a valid phone number",
+    "updatedEmail": "Enter a valid email",
+    "updatedUserName": "Enter a valid name",
+    "updatedPhoneSuccess": "Phone number successfully updated",
+    "updatedUserNameSuccess": "Name successfully updated",
+    "userNameCopied": "Name copied",
+    "phoneCopied": "Phone number copied",
+    "emailCopied": "Email copied",
+    "linkCopied": "Link copied",
+    "textCopied": "Text copied",
+    "empty": "Empty field",
+    "notSaveInfo": "Information not saved",
+    "fieldDeleted": "Field deleted",
+    "resumeDeleted": "Resume deleted",
+    "projectDeleted": "Project deleted",
+    "letterDeleted": "Letter deleted",
+    "fieldAdded": "Field added",
+    "resumeAdded": "Resume added",
+    "projectAdded": "Project added",
+    "letterAdded": "Letter added",
+    "vacancyAdded": "The data has been successfully saved. Thank you.",
+    "vacancyError": "An error occurred while saving the data. Please try again.",
+    "vacancyEdit": "The data has been successfully updated. Thank you.",
+    "vacancyDelete": "The vacancy has been successfully deleted. Thank you.",
+    "vacancyDeleteError": "An error occurred. The vacancy could not be deleted.",
+    "noteDelete": "The note has been successfully deleted. Thank you.",
+    "noteDeleteError": "An error occurred. The note was not deleted."
+  },
   "navigation": {
     "vacancies": "Vacancies",
     "statistics": "Statistics",
     "account": "Account",
     "notes": "Notes",
+    "archive": "Archive",
+    "support": "Contact Us",
     "logOut": "Log out"
   },
   "donate": "Support us",
@@ -24,23 +90,29 @@
     "privacyPolicy": " the privacy policy",
     "and": " and ",
     "userTerms": "the user terms",
-    "alreadyRegistered": "Already registered?"
+    "alreadyRegistered": "Already registered?",
+    "promptMessageEmail": "Format: xx@xx, 2-254 characters, no .ru/.by, Cyrillic, spaces, two consecutive dots.",
+    "promptMessagePassword": "Format: 8-14 characters, Latin, 1 uppercase, 1 lowercase letter, 1 digit, 1 special character (!@#$%^&*), no spaces."
   },
   "login": {
     "header": "Glad to see you again!",
     "subHeader": "Log in to continue tracking your responses",
     "forgotPassword": "Forgot password?",
-    "noAccount": "Don't have an account?"
+    "noAccount": "Don't have an account?",
+    "message": "Authorisation was successful. Now you can set up your profile."
   },
   "resetPassword": {
     "header": "Set a new password",
     "label": "Enter a new password",
-    "subHeader": "Enter a new password for further account access"
+    "subHeader": "Enter a new password for further account access",
+    "passwordChange": "Password change was successful. Log in with your new password",
+    "resetLink": "The password reset link is not valid. Please try again"
   },
   "forgotPassword": {
     "header": "Password recovery",
     "subHeader": "Enter the email associated with your account to recover your password.",
-    "button": "Recover"
+    "button": "Recover",
+    "passwordChange": "An email notification has been sent to you."
   },
   "infoCards": {
     "optimizeJobSearch": "Optimize your job search: save, analyze, achieve success",
@@ -51,15 +123,387 @@
   "validation": {
     "emailMax": "Email must be no more than 254 characters",
     "emailInvalid": "Enter a valid email",
+    "emailInvalidRuBy": "Domains of .ru and .by type are banned",
     "emailMin": "Email must be at least 4 characters",
     "passwordMax": "Password must be no more than 14 characters",
     "passwordInvalid": "Enter a valid password",
     "passwordMin": "Password must be at least 8 characters",
     "termsRequired": "You have not given consent",
-    "passwordMismatch": "Passwords must match"
+    "passwordMismatch": "Passwords must match",
+    "min2Characters": "Minimum 2 characters required",
+    "max50Characters": "Maximum 50 characters",
+    "invalidUrl": "Enter a valid URL",
+    "invalidPdf": "Enter a valid .pdf URL"
+  },
+  "vacanciesHeader": {
+    "search": "Search",
+    "sortBy": "Sort by",
+    "archive": "Feedback archive",
+    "addVacancy": "Add vacancy",
+    "searchResult": "search result",
+    "searchResult234": "search results",
+    "searchResults": "search results",
+    "emptySection": "There are no vacancies in this section...",
+    "cardFirst": "Save your first job"
+  },
+  "sortDropdown": {
+    "sortBy": "Sort by",
+    "newFirst": "New first",
+    "oldFirst": "Old first",
+    "workType": "By work type",
+    "office": "Office",
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "status": "By status",
+    "saved": "Saved",
+    "resume": "Sent",
+    "hr": "HR interview",
+    "test": "Test task",
+    "testShort": "Test task",
+    "tech": "Technical interview",
+    "techShort": "Tech interview",
+    "reject": "Rejection",
+    "offer": "Offer"
+  },
+  "statisticsHeader": {
+    "vacancies": "Total Vacancies",
+    "resumes": "Resumes Sent",
+    "testTasks": "Test Tasks Completed",
+    "interviews": "Interviews Attended",
+    "firstMessage": "Save at least one vacancy to see statistics!",
+    "predictions": "Predictions for today"
+  },
+  "statisticsDoughnatDiagram": "Statistics of active statuses",
+  "statisticsRejectDiagram": {
+    "title": "Reasons for rejections",
+    "OTHER": "Other",
+    "NO_ANSWER": "No answer",
+    "STOPPED": "Stopped",
+    "SOFT_SKILLS": "Soft Skills",
+    "TECH_SKILLS": "Tech-skills",
+    "ENGLISH": "English",
+    "EXPERIENCE": "Experience"
+  },
+  "notesHeader": {
+    "search": "Search",
+
+    "addNote": "Add a note",
+    "searchResult": "search result",
+    "searchResult234": "search results",
+    "searchResults": "search results",
+    "cardFirst": "Great ideas start with the first note. Write down something important!",
+    "cardFirstButton": "Create your first note",
+
+    "newNote": "New note",
+    "noteName": "Name file",
+    "noteText": "Text",
+    "editNote": "Edit note",
+    "createNote": "Create",
+    "deleteNote": {
+      "title": "Delete note?",
+      "text_1": "This action is irreversible.",
+      "button": "Delete"
+    },
+    "update": "Edit note"
+  },
+  "notesSortDropdown": {
+    "sortBy": "Sort by",
+    "newFirst": "New first",
+    "oldFirst": "Old first",
+    "alphabetically": "Alphabetically"
   },
   "footer": {
-    "development": "Development of Baza Trainee Ukraine 2024",
+    "development": "Development of Baza Trainee Ukraine ",
     "rights": " © All rights have been reserved"
+  },
+  "modalMappingContentMap": {
+    "success": "Success!",
+    "error": "Oops!",
+    "confirm": "Confirm action!",
+    "errorMailExist": "Oops!",
+    "recoveryPassword": "Password recovery"
+  },
+  "modalMappingModalTextMap": {
+    "success": "Registration was successful. Now you can customize your profile.",
+    "error": "Check the entered data and try again.",
+    "confirm": "",
+    "popup": "",
+    "custom": "",
+    "errorMailExist": "An account with this email already exists. Try logging in or resetting your password.",
+    "recoveryPassword": "An account with this email already exists. Try logging in or resetting your password."
+  },
+  "modalMappingButtonMap": {
+    "success": "Continue",
+    "error": "Retry",
+    "confirm": "Ok",
+    "popup": "",
+    "custom": "",
+    "errorMailExist": "Log In",
+    "recoveryPassword": "Recover"
+  },
+  "addVacancy": {
+    "form": {
+      "company": "Company",
+      "vacancy": "Position",
+      "link": "Job link",
+      "communication": "Communication channel",
+      "location": "Location",
+      "notes": "Notes",
+      "remote": "Remote",
+      "office": "Office",
+      "hybrid": "Hybrid",
+      "status": "Status",
+      "resume": "Resume sent",
+      "hr": "HR",
+      "test": "Test task",
+      "tech": "Technical interview",
+      "reject": "Rejection",
+      "offer": "Offer",
+      "archive": "Archive",
+      "restore": "Restore",
+      "save": "Save",
+      "delete": "Delete",
+      "confirm": "Ok",
+      "addStage": "Add stage"
+    },
+    "placeholders": {
+      "company": "Enter company name",
+      "vacancy": "Enter position",
+      "link": "Add job link",
+      "communication": "Enter communication channel with recruiter",
+      "location": "Enter company location",
+      "notes": "Place for your notes"
+    },
+    "nameModal": {
+      "name": "Add a new vacancy"
+    },
+    "titleResumeList": "Select the sent CV",
+    "titleRejectList": "Select the reason for rejection",
+    "titleAddStage": "Select an additional stage"
+  },
+  "addVacancySchema": {
+    "company": {
+      "max": "Maximum length is 40 characters",
+      "min": "Minimum length is 2 characters"
+    },
+    "position": {
+      "max": "Maximum length is 30 characters",
+      "min": "Minimum length is 2 characters"
+    },
+    "link": {
+      "url": "Invalid URL format",
+      "max": "Maximum length is 254 characters",
+      "min": "Minimum length is 4 characters"
+    },
+    "communication": {
+      "max": "Maximum length is 4000 characters",
+      "min": "Minimum length is 3 characters"
+    },
+    "location": {
+      "max": "Maximum length is 400 characters",
+      "min": "Minimum length is 4 characters"
+    },
+    "notes": {
+      "max": "Maximum length is 4000 characters"
+    }
+  },
+  "editVacancy": {
+    "nameModal": {
+      "name": "Edit the vacancy"
+    }
+  },
+  "calendar": {
+    "monthsShort": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "monthsFull": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June ",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
+  },
+  "addCoverLetters": {
+    "cardTitle": "Cover letters",
+    "buttonAdd": "Add cover letter",
+    "modalAddTitle": "Add cover letter",
+    "modalEditTitle": "Edit cover letter"
+  },
+  "addProjects": {
+    "cardTitle": "Projects",
+    "buttonAdd": "Add project link",
+    "modalAddTitle": "Add project",
+    "modalEditTitle": "Edit project"
+  },
+  "addResumes": {
+    "cardTitle": "Resumes",
+    "buttonAdd": "Add resume",
+    "modalAddTitle": "Add resume",
+    "modalEditTitle": "Edit resume"
+  },
+  "addPersonalProperties": {
+    "cardTitle": "Personal information",
+    "buttonAdd": "Add link",
+    "modalAddTitle": "Add link",
+    "modalEditTitle": "Edit link"
+  },
+  "buttonRemoveAccount": "Remove account",
+  "infoModal": {
+    "success": "Success!",
+    "oops": "Oops!",
+    "button": {
+      "cancel": "Cancel",
+      "logOut": "Log Out",
+      "save": "Save",
+      "archive": "Archive",
+      "undo": "Undo",
+      "toArchive": "To Archive",
+      "continue": "Continue",
+      "restore": "Restore",
+      "login": "Log In",
+      "try": "Try",
+      "delete": "Delete"
+    },
+    "logOut": {
+      "title": "Are you sure you want to log out?",
+      "text_1": "Logging out will end your session. To log back in, you will need to enter your credentials."
+    },
+    "saveAddVacancies": {
+      "title": "Save changes?",
+      "text_1": "If you do not save the data, it will be lost."
+    },
+    "deleteVacancy": {
+      "title": "Delete vacancy?",
+      "text_1": "This action is irreversible. Instead, you can move this vacancy to the archive."
+    },
+    "logInSuccess": {
+      "text_1": "Login was successful."
+    },
+    "logInError": {
+      "text_1": "Check the entered data and try again."
+    },
+    "signUpSuccess": {
+      "text_1": "Registration was successful.",
+      "text_2": "You can now set up your profile."
+    },
+    "signUpError": {
+      "text_1": "An account with this email already exists.",
+      "text_2": "Try logging in or resetting your password."
+    },
+    "forgotPasswordSuccess": {
+      "text_1": "Instructions for changing your password have been sent to your email"
+    },
+    "resetPasswordSuccess": {
+      "text_1": "Password changed successfully.",
+      "text_2": "Log in with your new password."
+    },
+    "resetPasswordErrorLink": {
+      "text_1": "The password reset link is invalid.",
+      "text_2": "Try again."
+    },
+    "saveAddEvent": {
+      "title": "Add an event?",
+      "text_1": "If you do not save the data, it will be lost.",
+      "notifyAddEventSuccess": "Event added successfully!",
+      "notifyAddEventError": "Failed to add event."
+    },
+    "saveEditEvent": {
+      "title": "Save changes?",
+      "text_1": "If you do not save the data, it will be lost.",
+      "notifyEditEventSuccess": "Event changes saved successfully!",
+      "notifyEditEventError": "Could not save changes."
+    },
+    "deleteEvent": {
+      "title": "Delete event?",
+      "text_1": "This action is irreversible!",
+      "notifyDeleteEventSuccess": "Event successfully deleted!",
+      "notifyDeleteEventError": "Failed to delete event."
+    },
+    "arhiveVacancy": {
+      "title": "Move a vacancy to the archive?",
+      "text_1": "You can always find it using the button in the upper right corner"
+    },
+    "restoreVacancy": {
+      "title": "Restore a vacancy from the archive?",
+      "text_1": "The vacancy will be moved to the main list"
+    }
+  },
+  "soonSection": {
+    "soon": "Soon",
+    "addEvent": "Add event",
+    "editEvent": "Edit event",
+    "soonName": "Name",
+    "soonNotes": "Notes",
+    "setTime": "Set time",
+    "save": "Save",
+    "delete": "Delete",
+    "soonModalNamePlaceholder": "Enter the event name",
+    "soonModalNameLength": "Event name must be between 1 and 50 char.",
+    "soonModalNotesPlaceholder": "Place for notes",
+    "soonModalNotes": "Notes must be no more than 1000 char.",
+    "soonModalTimeHours": "Hours",
+    "soonModalTimeMinutes": "Minutes",
+    "soonModalErrorsRequired": "This field is required",
+    "requiredHours": "Enter event time",
+    "invalidTimeContents": "Must contain 1-2 digits",
+    "invalidHours": "Hours must be between 0 and 23",
+    "invalidMinutes": "Minutes must be between 0 and 59",
+    "invalidPastDate": "Select the current date"
+  },
+  "calendarTabs": {
+    "day": "Day",
+    "month": "Month",
+    "year": "Year"
+  },
+  "chartBar": {
+    "sent": "Sent resume",
+    "responses": "Received responses"
+  },
+  "loading": {
+    "loading": "Loading",
+    "error": "Error fetching data"
+  },
+  "dayOfWeek": {
+    "Mon": "Mon",
+    "Tue": "Tue",
+    "Wed": "Wed",
+    "Thu": "Thu",
+    "Fri": "Fri",
+    "Sat": "Sat",
+    "Sun": "Sun"
+  },
+  "contactUs": {
+    "send": "Send",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "text": "Message text",
+    "textPlaceholder": "Enter your message",
+    "nameValidation": {
+      "min": "Minimum length is 2 characters",
+      "max": "Maximum length is 30 characters"
+    },
+    "textValidation": {
+      "min": "Minimum length is 10 characters",
+      "max": "Maximum length is 4000 characters"
+    }
   }
 }

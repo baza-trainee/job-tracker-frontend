@@ -12,26 +12,26 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "flex h-[50px] items-center justify-center rounded-xl font-nunito text-xl font-medium text-textBlack duration-300",
+        "flex h-[42px] items-center justify-center rounded-xl border-[1px] border-textBlack font-nunito text-xl font-medium text-textBlack duration-300 md:h-[50px]",
 
-        size === "small" && "px-8",
-        size === "big" && "h-[51px] px-12",
+        size === "small" && "px-[14px] md:px-8 xl:px-8",
+        size === "big" && "px-[30px] md:px-12",
 
         !disabled &&
           variant === "accent" &&
-          "text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary",
+          "bg-button active:border-iconHover active:bg-iconHover active:fill-textWhite active:text-textWhite md:hover:border-iconHover md:hover:bg-backgroundSecondary md:active:border-iconHover md:active:bg-iconHover md:active:fill-textWhite md:active:text-textWhite",
 
         !disabled &&
           variant === "ghost" &&
-          "border-[1px] border-[solid] border-iconHover bg-transperent hover:border-textBlack hover:bg-[#bfdef5] active:border-none active:bg-iconHover active:text-textWhite",
+          "relative bg-transparent active:border-transparent active:bg-transparent active:ring-[2px] active:ring-inset active:ring-iconHover md:hover:border-iconHover md:hover:bg-backgroundSecondary",
 
         disabled &&
           variant === "accent" &&
-          "bg-grey-40 text-grey-0 pointer-events-none",
+          "pointer-events-none border-transparent bg-backgroundSecondary text-color6",
 
         disabled &&
           variant === "ghost" &&
-          "bg-backgroundSecondary pointer-events-none ring-transparent",
+          "pointer-events-none border-transparent bg-backgroundSecondary text-color6 ring-transparent",
 
         className
       )}

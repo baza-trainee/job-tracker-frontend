@@ -8,27 +8,615 @@
   font-family: "nunito";
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
-  font-weight:
-    [ 200,
-    500,
-    700];
+  font-weight: 200, 500, 700;
   font-style: normal;
+}
+
+html {
+  scrollbar-gutter: stable;
 }
 
 body {
   @apply bg-backgroundMain;
 }
 
+.container {
+  max-width: 120rem;
+  @apply px-5 md:px-6;
+}
+
 .custom-hover {
   transition:
     fill 300ms ease-in-out,
-    color 300ms ease-in-out;
+    color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    background-color 300ms ease-in-out;
 }
 
 .custom-size {
   transition:
     width 500ms ease-in-out,
     padding 500ms ease-in-out,
+    margin 500ms ease-in-out,
     opacity 500ms ease-in-out,
     transform 500ms ease-in-out;
+}
+
+.custom-transition {
+  transition:
+    width 500ms ease-in-out,
+    padding 500ms ease-in-out,
+    margin 500ms ease-in-out,
+    opacity 500ms ease-in-out,
+    transform 500ms ease-in-out,
+    fill 300ms ease-in-out,
+    color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    background-color 300ms ease-in-out;
+}
+
+/* Firefox cтилі для горизонтального скролу - не коректно працюють */
+/*.scrollbar {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #c2c2c2 #eaeef2;
+} */
+
+.scrollbar::-webkit-scrollbar {
+  height: 8px;
+  margin-top: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #c2c2c2;
+  border-radius: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #eaeef2;
+  border-radius: 4px;
+}
+
+.scrollbar-y-sectionbox::-webkit-scrollbar {
+  width: 6px;
+}
+@media screen and (min-width: 768px) {
+  .scrollbar-y-sectionbox::-webkit-scrollbar {
+    width: 8px;
+  }
+}
+.scrollbar-y-sectionbox::-webkit-scrollbar-thumb {
+  background-color: #c2c2c2;
+  border-radius: 4px;
+}
+.scrollbar-y-sectionbox::-webkit-scrollbar-track {
+  background-color: #eaeef2;
+  border-radius: 4px;
+}
+.scrollbar-y-sectionbox::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* notification animation react-toastify*/
+.notificationAnimation-in {
+  animation: notificationAnimation-in 1s ease-out both;
+}
+@keyframes notificationAnimation-in {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.notificationAnimation-out {
+  animation: notificationAnimation-out 1s ease-in both;
+}
+@keyframes notificationAnimation-out {
+  0% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+/* react-calendar */
+/* .job-calendar.react-calendar {
+  border: 1px solid #436b88;
+  border-radius: 12px;
+  padding: 24px;
+  width: 385px;
+  max-width: 100%;
+  font-weight: 500;
+  background: #fdfeff;
+  font-family: "Nunito";
+  text-align: center;
+  color: #0a0a0a;
+} */
+
+/* alex */
+@media screen and (min-width: 1920px) {
+  .job-cal .react-calendar__month-view__weekdays abbr,
+  .job-cal abbr {
+    font-size: 16px !important;
+  }
+  .job-cal .react-calendar__month-view__days > button {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  font-weight: 500;
+}
+
+.job-calendar .react-calendar__navigation {
+  font-size: 20px;
+  line-height: 160%;
+}
+
+.statistics-calendar .react-calendar__navigation {
+  font-size: 16px;
+  gap: 8px;
+}
+@media screen and (min-width: 768px) {
+  .statistics-calendar .react-calendar__navigation {
+    font-size: 20px;
+    gap: 16px;
+  }
+}
+/* @media screen and (min-width: 1280px) {
+  .statistics-calendar .react-calendar__navigation {
+    font-size: 20px;
+    gap: 16px;
+  }
+} */
+/* @media screen and (min-width: 1440px) {
+  .statistics-calendar .react-calendar__navigation {
+    font-size: 20px;
+    gap: 16px;
+  }
+} */
+@media screen and (min-width: 1920px) {
+  .statistics-calendar .react-calendar__navigation {
+    font-size: 28px;
+  }
+}
+
+.react-calendar__navigation button {
+  text-transform: capitalize;
+}
+
+.job-calendar .react-calendar__navigation,
+.statistics-calendar__day .react-calendar__navigation {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.statistics-calendar.soon-calendar-modal .react-calendar__navigation {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: 16px;
+  gap: 16px;
+}
+@media screen and (min-width: 1280px) {
+  .statistics-calendar.soon-calendar-modal .react-calendar__navigation {
+    font-size: 20px;
+  }
+}
+
+.statistics-calendar__months .react-calendar__navigation,
+.statistics-calendar__years .react-calendar__navigation,
+.statistics-calendar__day .react-calendar__navigation {
+  margin-bottom: 12px;
+}
+@media screen and (min-width: 768px) {
+  .statistics-calendar__months .react-calendar__navigation,
+  .statistics-calendar__years .react-calendar__navigation {
+    margin-bottom: 16px; /* підігнати на дизайні */
+  }
+  .statistics-calendar__day .react-calendar__navigation {
+    margin-bottom: 0;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .statistics-calendar__months .react-calendar__navigation,
+  .statistics-calendar__years .react-calendar__navigation,
+  .statistics-calendar__day .react-calendar__navigation {
+    margin-bottom: 16px;
+  }
+}
+
+button.react-calendar__navigation__label {
+  min-width: 24px;
+  flex-grow: 0 !important;
+  text-align: center;
+  pointer-events: none;
+  cursor: default;
+}
+
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+.job-calendar .react-calendar__navigation button:enabled:hover,
+.job-calendar .react-calendar__navigation button:enabled:focus {
+  background-color: #fffefd;
+}
+.job-calendar .react-calendar__navigation button[disabled] {
+  background-color: #fdfeff;
+}
+
+.react-calendar__month-view__weekdays {
+  border-bottom: 1px solid #f5f5f5;
+  text-align: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+@media screen and (min-width: 768px) {
+  .react-calendar__month-view__weekdays {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.soon-calendar-modal .react-calendar__month-view__weekdays {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+@media screen and (min-width: 1280px) {
+  .soon-calendar-modal .react-calendar__month-view__weekdays {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+.statistics-calendar__day .react-calendar__month-view__weekdays abbr,
+.statistics-calendar__day abbr {
+  font-size: 14px;
+  line-height: 18.9px;
+  font-weight: 400;
+}
+@media screen and (min-width: 768px) {
+  .statistics-calendar__day .react-calendar__month-view__weekdays abbr,
+  .statistics-calendar__day abbr {
+    font-size: 16px;
+    line-height: 21.6px;
+    font-weight: 500;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .statistics-calendar__day .react-calendar__month-view__weekdays abbr,
+  .statistics-calendar__day abbr {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+.soon-calendar-modal .react-calendar__month-view__weekdays abbr,
+.soon-calendar-modal abbr {
+  font-size: 14px;
+  line-height: 18.9px;
+  font-weight: 400;
+}
+@media screen and (min-width: 1280px) {
+  .soon-calendar-modal .react-calendar__month-view__weekdays abbr,
+  .soon-calendar-modal abbr {
+    font-size: 16px;
+    line-height: 21.6px;
+    font-weight: 500;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .soon-calendar-modal .react-calendar__month-view__weekdays abbr,
+  .soon-calendar-modal abbr {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+/* .job-calendar .react-calendar__month-view__weekdays {
+  margin-bottom: 48px;
+} */
+
+abbr[title] {
+  text-decoration: none;
+}
+abbr {
+  text-transform: uppercase;
+  font-family: "Nunito";
+  text-align: center;
+}
+
+.job-calendar abbr {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 133%;
+}
+
+.react-calendar__month-view__days__day--weekend,
+.react-calendar__month-view__weekdays > div:nth-child(6),
+.react-calendar__month-view__weekdays > div:nth-child(7) {
+  color: #e9897c;
+}
+
+.job-calendar .react-calendar__month-view__days > button {
+  width: 48px;
+  height: 48px;
+}
+
+.statistics-calendar__day .react-calendar__month-view__days > button {
+  width: 36px;
+  height: 36px;
+}
+@media screen and (min-width: 768px) {
+  .statistics-calendar__day .react-calendar__month-view__days > button {
+    width: 48px;
+    height: 48px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .statistics-calendar__day .react-calendar__month-view__days > button {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.soon-calendar-modal .react-calendar__month-view__days > button {
+  width: 36px;
+  height: 36px;
+}
+@media screen and (min-width: 768px) {
+  .soon-calendar-modal .react-calendar__month-view__days > button {
+    width: 32px;
+    height: 32px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .soon-calendar-modal .react-calendar__month-view__days > button {
+    width: 48px;
+    height: 48px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .soon-calendar-modal .react-calendar__month-view__days > button {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.react-calendar__tile--now {
+  background: #dbdcdd;
+  border-radius: 100px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* .job-calendar .react-calendar__tile--now {
+  background: #bfdef5;
+  border-radius: 6px;
+  font-weight: 700;
+  color: #0a0a0a;
+}
+
+.statistics-calendar__day .react-calendar__tile--now,
+.statistics-calendar__months .react-calendar__tile--now,
+.statistics-calendar__years .react-calendar__tile--now {
+  background: #DBDCDD;
+  border-radius: 100px;
+  font-weight: 500;
+  color: #333
+} */
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus,
+.react-calendar__tile--active {
+  background: #c6e7ff;
+  border-radius: 100px;
+  color: #333;
+}
+
+/* .job-calendar .react-calendar__tile:enabled:hover,
+.job-calendar .react-calendar__tile:enabled:focus {
+  background: rgba(208, 232, 197, 0.4);
+  border-radius: 6px;
+  color: #0a0a0a;
+}
+
+.statistics-calendar__day .react-calendar__tile:enabled:hover,
+.statistics-calendar__day .react-calendar__tile:enabled:focus,
+.statistics-calendar__months .react-calendar__tile:enabled:hover,
+.statistics-calendar__months .react-calendar__tile:enabled:focus,
+.statistics-calendar__years .react-calendar__tile:enabled:hover,
+.statistics-calendar__years .react-calendar__tile:enabled:focus {
+  background: #C6E7FF;
+  border-radius: 100px;
+  color: #333;
+} */
+
+.react-calendar__year-view__months,
+.react-calendar__decade-view__years {
+  gap: 16px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+@media screen and (min-width: 768px) {
+  .react-calendar__year-view__months,
+  .react-calendar__decade-view__years {
+    gap: 16px;
+    padding-left: 47px;
+    padding-right: 47px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .react-calendar__year-view__months,
+  .react-calendar__decade-view__years {
+    gap: 24px;
+    padding-left: 58px;
+    padding-right: 58px;
+  }
+}
+
+.react-calendar__year-view__months > button,
+.react-calendar__decade-view__years > button {
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+  margin-inline-end: unset !important;
+  border-radius: 16px;
+  font-size: 20px;
+  font-weight: 500;
+}
+@media screen and (min-width: 1920px) {
+  .react-calendar__year-view__months > button,
+  .react-calendar__decade-view__years > button {
+    font-size: 24px;
+    font-weight: 500;
+  }
+}
+
+.react-calendar__year-view__months .react-calendar__tile--now,
+.react-calendar__year-view__months .react-calendar__tile:enabled:hover,
+.react-calendar__year-view__months .react-calendar__tile:enabled:focus,
+.react-calendar__decade-view__years .react-calendar__tile--now,
+.react-calendar__decade-view__years .react-calendar__tile:enabled:hover,
+.react-calendar__decade-view__years .react-calendar__tile:enabled:focus {
+  border-radius: 16px;
+}
+
+.react-calendar__year-view__months__month > abbr {
+  display: none; /* приховуємо стандартний текст місяців */
+}
+.react-calendar__year-view__months__month > span {
+  display: inline-block; /* кастомний скорочений текст місяців*/
+}
+
+/* Приховані клітинки для днів з іншого місяця */
+.calendar-hidden-cell {
+  visibility: hidden; /* Приховує текст і контент клітинки */
+  pointer-events: none; /* Вимикає взаємодію */
+  background-color: transparent; /* Зберігає прозорий фон */
+}
+
+.modalScroll {
+  height: auto;
+  max-height: calc(100vh * 0.75);
+  overflow: hidden auto;
+  scrollbar-width: thin;
+}
+
+@keyframes expandWidth {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: var(--target-width);
+  }
+}
+
+.bar {
+  animation: expandWidth 0.5s ease-out forwards;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+.soon-scroll::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 4px;
+  background-color: #eceff6; /* Колір фону під треком */
+}
+@media screen and (min-width: 768px) {
+  .soon-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+}
+.soon-scroll::-webkit-scrollbar-thumb {
+  width: 6px;
+  border-radius: 4px;
+  background-color: rgba(51, 51, 51, 0.5);
+}
+@media screen and (min-width: 768px) {
+  .soon-scroll::-webkit-scrollbar-thumb {
+    width: 8px;
+  }
+}
+.soon-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #8f99ad;
+}
+.soon-scroll__not-full::-webkit-scrollbar {
+  background-color: rgba(51, 51, 51, 0.5);
+}
+/* @layer utilities {
+  .scrollbar-transparent::-webkit-scrollbar {
+    background-color: transparent;
+  }
+} */
+
+.scrollbar-transparent::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.select__event-modal .react-select__control {
+  width: 100%;
+  height: 100%;
+  border-color: transparent;
+  border-radius: 8px;
+  background-color: #f7f8fb;
+  text-align: center;
+  cursor: pointer;
+  @apply text-[24px] xl:text-[30px] xl:leading-[36px];
+
+  /* ховаємо UI селекта з-під капота*/
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.select__event-modal .react-select__control:hover {
+  border-color: transparent;
+}
+.select__event-modal .react-select__control--is-focused.css-t3ipsp-control {
+  box-shadow: none;
+}
+.select__event-modal .react-select__value-container {
+  padding: 0 0;
+}
+.select__event-modal.css-b62m3t-container {
+  position: absolute;
+}
+
+.select__event-modal .react-select__menu {
+  @apply text-xl md:text-2xl xl:text-[28px];
+}
+.select__event-modal .react-select__menu-list {
+  overflow-y: auto;
+  @apply max-h-[174px] md:max-h-[146px] xl:max-h-[200px];
+}
+.select__event-modal .react-select__menu-list::-webkit-scrollbar {
+  width: 6px;
+}
+.select__event-modal .react-select__menu-list::-webkit-scrollbar-thumb {
+  background-color: rgba(51, 51, 51, 0.5);
+  border-radius: 4px;
+}
+.select__event-modal .react-select__menu-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+@media (min-width: 1920px) {
+  .textarea-event-lg {
+    min-height: calc(1.5em * 8 + 2rem);
+  }
 }

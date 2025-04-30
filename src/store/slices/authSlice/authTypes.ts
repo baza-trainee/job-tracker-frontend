@@ -15,7 +15,6 @@ export interface AuthStateProps {
   user: UserProps | null;
   tokens: AuthTokensProps | null;
   isLoggedIn: boolean;
-  loading: boolean;
   error: string | null;
 }
 

@@ -80,6 +80,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
   label,
   value,
   id,
+  promptMessage = "",
 }) => {
   const error = errors[name];
 
@@ -89,14 +90,20 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
     setShowPassword(!showPassword);
   };
 
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <div className={cn("relative", [className])} id={id}>
       {label && (
         <label
           htmlFor={`input-${name}`}
-          className="mb-3 block font-nunito text-[20px] font-medium leading-[135%] text-textBlack"
+          className={cn(
+            "mb-3 inline-block font-nunito font-medium leading-[135%] text-textBlack",
+            "sm: mb-[2px] text-[14px]",
+            "md:mb-2 md:text-[18px]",
+            "xl:mb-2 xl:text-[16px]",
+            "2xl:mb-3 2xl:text-[20px]"
+          )}
         >
           {label}
         </label>
@@ -106,9 +113,13 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "peer h-11 w-full rounded-xl border py-2 pl-6 pr-16 font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-accent focus:outline-none active:border-accent",
+              "w-full rounded-xl border font-nunito font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+              "sm h-[34px] px-4 py-2 pr-9 text-[12px]",
+              "md:h-11 md:px-6 md:py-3 md:pr-9 md:text-[14px]",
+              "xl:text-[14px]",
+              "2xl:text-[16px]",
               {
-                ["border-color5"]: !error,
+                ["border-color7"]: !error,
                 ["border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"]:
                   error,
               }
@@ -118,8 +129,9 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             {...(value && { value })}
             {...register(name)}
             aria-describedby={`inputError-${name}`}
+            title={promptMessage}
           />
-  
+
           <button
             type="button"
             onClick={toggleShowPassword}
@@ -130,10 +142,15 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
             {showPassword ? <EyeClosed_icon /> : <EyeOpen_icon />}
           </button>
         </div>
-        {errors[name] && (
+        {errors[name] && error !=undefined && (
           <span
             id={`inputError-${name}`}
-            className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
+            className={cn(
+              "inline-block font-nunito font-medium text-color2",
+              "sm text-[12px]",
+              "md:text-[14px]",
+              "2xl:text-[16px]"
+            )}
           >
             {t(String(errors[name]?.message))}
           </span>

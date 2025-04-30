@@ -1,11 +1,14 @@
 import { IconId } from "../../Icon/icons";
 
-export interface DonateItemProps {
+export interface SidebarActionItemProps {
   icon: IconId;
   link?: string;
   title: string;
   isOpen: boolean;
   useStroke?: boolean;
+  className?: string;
+  donateIcon?: boolean;
+  action?: () => void;
 }
 
 export interface SidebarItemProps {
@@ -15,6 +18,7 @@ export interface SidebarItemProps {
   isOpen: boolean;
   useStroke?: boolean;
   funcLogOut?: () => void;
+  onClick?: () => void;
 }
 
 export interface ToggleProps {
@@ -23,5 +27,11 @@ export interface ToggleProps {
 
 export interface SidebarBtnProps {
   handleOpenSidebar: () => void;
+  isOpenSidebar: boolean;
+}
+
+export interface SidebarOpenBtnProps {
+  handleOpenSidebar: () => void;
   isOpenSidebar?: boolean;
+  icon: IconId;
 }

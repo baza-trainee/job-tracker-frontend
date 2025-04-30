@@ -1,9 +1,11 @@
-import Icon from "../../Icon/Icon";
+import cn from "clsx";
+
 import { selectTheme } from "../../../store/slices/themeSlice/themeSelector";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import { toggleTheme } from "../../../store/slices/themeSlice/themeSlice";
+
 import { ToggleProps } from "./Sidebar.props";
-import cn from "clsx";
+import Icon from "../../Icon/Icon";
 
 const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   const darkMode = useAppSelector(selectTheme);
@@ -16,8 +18,8 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
-        "custom-hover custom-size",
+        "relative flex h-9 rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD] md:h-[39px]",
+        "custom-transition",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
     >
@@ -25,34 +27,46 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={!darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
+          "overflow-hidden fill-textBlack px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack md:py-[6px]",
           {
-            "visible w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
-              !darkMode, // Відкрита тема
-            "w-10 opacity-100": darkMode && isOpen, // Закрита тема
-            "sr-only w-0 opacity-0": darkMode && !isOpen, // Схована кнопка
+            "visible absolute left-0 z-[2] w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
+              !darkMode, 
+            "flex-grow opacity-100": darkMode && isOpen, 
+            "sr-only m-0 w-0 opacity-0": darkMode && !isOpen, 
           }
         )}
         type="button"
       >
-        <Icon id="day-mode" className="h-6 w-6" />
+        <Icon
+          id="day-mode"
+          className={cn("h-6 w-6 duration-1000", {
+            "opacity-0": darkMode && !isOpen,
+            "opacity-100": darkMode && isOpen,
+          })}
+        />
       </button>
       <button
         disabled={darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "overflow-hidden fill-textBlack px-2 py-[6px] hover:fill-iconHover disabled:hover:fill-textBlack",
+          "flex items-center justify-end overflow-hidden fill-textBlack px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack md:py-[6px]",
 
           {
-            "visible w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
-              darkMode, // Відкрита тема
-            "w-10 opacity-100": !darkMode && isOpen, // Закрита тема
-            "sr-only w-0 opacity-0": !darkMode && !isOpen, // Схована кнопка
+            "visible absolute right-0 w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
+              darkMode, 
+            "flex-grow opacity-100": !darkMode && isOpen, 
+            "sr-only m-0 w-0 opacity-0": !darkMode && !isOpen, 
           }
         )}
         type="button"
       >
-        <Icon id="night-mode" className="h-6 w-6" />
+        <Icon
+          id="night-mode"
+          className={cn("h-6 w-6 duration-1000", {
+            "opacity-0": !darkMode && !isOpen,
+            "opacity-100": !darkMode && isOpen,
+          })}
+        />
       </button>
     </div>
   );

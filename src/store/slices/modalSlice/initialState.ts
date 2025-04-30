@@ -1,15 +1,19 @@
-import { ReactNode } from "react";
+import { TypesModal } from "@/components/modal/ModalMain.types";
+import { Vacancy } from "@/types/vacancies.types";
+import { Note } from "@/types/notes.types";
+import { Event } from "@/types/event.types";
 
-export interface ModalState {
-  isModalOpen: boolean;
-  typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "confirm" | "popup" | "custom";
-  modalContent?: string | ReactNode;
-  onCallFunction?: () => void;
+export interface ModalProps {
+  isModalOpen?: boolean;
+  typeModal?: TypesModal; // string
+  isConfirmationOpen?: boolean;
+  typeConfirmation?: TypesModal | null; // string
+  idCardVacancy?: string;
+  vacancyData?: Vacancy | null;
+  noteData?: Note | null;
+  eventData?: Event | null;
+  dataConfirmation?: any | null; // alex
+  borderColorModal?: string | null;
+  backgroundColorModal?: string | null;
+  resetForm?: () => void;
 }
-
-export const initialState: ModalState = {
-  isModalOpen: false,
-  typeModal: "success",
-  modalContent: undefined,
-  onCallFunction: undefined,
-};

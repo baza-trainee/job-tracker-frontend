@@ -1,15 +1,80 @@
 {
+  "or": "Або",
   "welcome": "Ласкаво просимо до React і react-i18next",
   "user": "user",
+  "name": "Ім'я",
+  "phone": "Номер телефону",
+  "modalAddProperties": {
+    "linkName": "Назва",
+    "placeHolderSocials": "Вкажіть назву посилання",
+    "linkSocial": "Лінк на соціальну мережу",
+    "placeholderlinkSocial": "Вставте лінк на соціальну мережу",
+    "placeholderNameResume": "Вкажіть назву резюме",
+    "linkResume": "Лінк на резюме",
+    "placeholderLinkResume": "Вставте лінк на резюме",
+    "placeholderNameCoverLetter": "Вкажіть назву для листа",
+    "textNameCoverLetter": "Супровідний лист",
+    "placeholderTextCoverLetter": "Тут треба написати ваш лист",
+    "placeholderNameProject": "Вкажіть назву проєкту",
+    "technology": "Технології",
+    "placeholderTechnology": "Вкажіть технології які використовували",
+    "linkProject": "Лінк на проєкт",
+    "placeholderlinkProject": "Вставте лінк на проєкт",
+    "textProject": "Опис проєкту",
+    "placeholderTextProject": "Можете описати проєкт",
+    "modalRemoveLink": "Видалити посилання",
+    "modalRemoveProject": "Видалити проєкт",
+    "modalRemoveCoverLetter": "Видалити супровідний лист",
+    "modalRemoveResume": "Видалити резюме",
+    "modalRemoveLinkTitle": "Ви впевнені, що хочете видалити?",
+    "removeAccountModalName": "Видалити акаунт",
+    "removeAccountModalText": "Ви впевнені, що хочете видалити акаунт? ",
+    "removeConfirmAccountModalText": "Цю дії не можна бути відмінити. Ви впевнені?"
+  },
+  "notification": {
+    "updatedSuccess": "Успішно оновлено",
+    "updatedError": "Не вдалося оновити",
+    "deletedError": "Не вдалося видалити",
+    "addedError": "Не вдалося додати",
+    "updatedErrorLink": "Введіть коректне посилання",
+    "updatedPhone": "Введіть коректний номер телефону",
+    "updatedEmail": "Введіть коректну електронну адресу",
+    "updatedUserName": "Введіть коректне ім'я",
+    "updatedPhoneSuccess": "Номер телефону успішно оновлено",
+    "updatedUserNameSuccess": "Ім'я користувача успішно оновлено",
+    "userNameCopied": "Ім'я користувача скопійовано",
+    "phoneCopied": "Номер телефону скопійовано",
+    "emailCopied": "Електронну адресу скопійовано",
+    "linkCopied": "Посилання скопійовано",
+    "textCopied": "Текст скопійовано",
+    "empty": "Відсутні дані для копіювання",
+    "notSaveInfo": "Інформацію не збережно",
+    "fieldDeleted": "Поле видалено",
+    "resumeDeleted": "Резюме видалено",
+    "projectDeleted": "Проєкт видалено",
+    "letterDeleted": "Лист видалено",
+    "fieldAdded": "Поле додано",
+    "resumeAdded": "Резюме додано",
+    "projectAdded": "Проєкт додано",
+    "letterAdded": "Лист додано",
+    "vacancyAdded": "Дані успішно збережено. Дякую",
+    "vacancyError": "Помилка збереження даних. Спробуйте ще раз",
+    "vacancyEdit": "Дані успішно оновлено. Дякую",
+    "vacancyDelete": "Вакансію успішно видалено. Дякую",
+    "vacancyDeleteError": "Виникла помилка. Вакансію не видалено",
+    "noteDelete": "Нотатку успішно видалено. Дякую",
+    "noteDeleteError": "Виникла помилка. Нотатку не видалено"
+  },
   "navigation": {
     "vacancies": "Вакансії",
     "statistics": "Статистика",
     "account": "Профіль",
     "notes": "Нотатки",
+    "archive": "Архів",
+    "support": "Зв’язатись",
     "logOut": "Вийти"
   },
   "donate": "Підтримати нас",
-
   "authWelcome": "Вітаємо!",
   "registerButton": "Зареєструватись",
   "loginButton": "Увійти",
@@ -24,23 +89,29 @@
     "privacyPolicy": "політикой конфіденційності",
     "and": " та ",
     "userTerms": "умовами користувача",
-    "alreadyRegistered": "Вже зареєстровані?"
+    "alreadyRegistered": "Вже зареєстровані?",
+    "promptMessageEmail": "Формат: xx@xx, 2-254 символи, без .ru/.by, кирилиці, пробілів, двох крапок поспіль.",
+    "promptMessagePassword": "Формат: 8–14 символів, латиниця, 1 велика, 1 маленька літера, 1 цифра, 1 спец. символ (!@#$%^&*), без пробілів."
   },
   "login": {
     "header": "Раді вас знову бачити!",
     "subHeader": "Увійдіть, щоб продовжити відслідковувати ваші відгуки",
     "forgotPassword": "Забули пароль?",
-    "noAccount": "Немає облікового запису?"
+    "noAccount": "Немає облікового запису?",
+    "message": "Авторизація пройшла успішно. Зараз ви можете налаштувати свій профіль."
   },
   "resetPassword": {
     "header": "Встановіть новий пароль",
     "label": "Введіть новий пароль",
-    "subHeader": "Введіть новий пароль для подальшого входу в обліковий запис"
+    "subHeader": "Введіть новий пароль для подальшого входу в обліковий запис",
+    "passwordChange": "Зміна пароля успішна. Авторизуйтесь з новим паролем",
+    "resetLink": "Посилання на відновлення паролю не дійсне. Спробуйте ще раз"
   },
   "forgotPassword": {
     "header": "Відновлення паролю",
     "subHeader": "Введіть пошту яка привязана до облікового запису, для відновлення паролю.",
-    "button":"Відновити"
+    "button": "Відновити",
+    "passwordChange": "Вам надіслано повідомлення на електронну пошту."
   },
   "infoCards": {
     "optimizeJobSearch": "Оптимізуй свій пошук роботи: зберігай, аналізуй, досягай успіху",
@@ -51,15 +122,387 @@
   "validation": {
     "emailMax": "email повинен бути не більше 254 символів",
     "emailInvalid": "Введіть коректний email",
+    "emailInvalidRuBy": "Домени типу .ru та .by заборонено",
     "emailMin": "email повинен бути не менше 4 символів",
     "passwordMax": "Пароль повинен бути не більше 14 символів",
     "passwordInvalid": "Введіть коректний пароль",
     "passwordMin": "Пароль повинен бути не менше 8 символів",
     "termsRequired": "Ви не надали згоду",
-    "passwordMismatch": "Паролі мають збігатись"
+    "passwordMismatch": "Паролі мають збігатись",
+    "min2Characters": "Мінімум 2 символи",
+    "max50Characters": "Максимум 50 символів",
+    "invalidUrl": "Введіть коректне посилання",
+    "invalidPdf": "Введіть коректне посилання .pdf"
+  },
+  "vacanciesHeader": {
+    "search": "Пошук",
+    "sortBy": "Сортувати",
+    "archive": "Архів відгуків",
+    "addVacancy": "Додати вакансію",
+    "searchResult": "результат з пошуку",
+    "searchResult234": "результати з пошуку",
+    "searchResults": "результатів з пошуку",
+    "emptySection": "В цій секції не має вакансій...",
+    "cardFirst": "Збережіть вашу першу вакансію"
+  },
+  "sortDropdown": {
+    "sortBy": "Сортувати",
+    "newFirst": "Спочатку нові",
+    "oldFirst": "Спочатку старі",
+    "workType": "По типу роботи",
+    "office": "Офіс",
+    "remote": "Дистанційно",
+    "hybrid": "Змішаний",
+    "status": "По статусу",
+    "saved": "Збережені",
+    "resume": "Відправлені",
+    "hr": "HR співбесіда",
+    "test": "Тестове завдання",
+    "testShort": "Тест. завдання",
+    "tech": "Технічна співбесіда",
+    "techShort": "Тех. співбесіда",
+    "reject": "Відмова",
+    "offer": "Офер"
+  },
+  "statisticsHeader": {
+    "vacancies": "Всього вакансій",
+    "resumes": "Надісланих резюме",
+    "testTasks": "Зроблено тестових",
+    "interviews": "Пройдених інтерв’ю",
+    "firstMessage": "Збережіть хоча б одну вакансію для того, щоб бачити статистику!",
+    "predictions": "Передбачення на сьогодні"
+  },
+  "statisticsDoughnatDiagram": "Статистика активних статусів",
+  "statisticsRejectDiagram": {
+    "title": "Причини відмов",
+    "OTHER": "Інше",
+    "NO_ANSWER": "Без відповіді",
+    "STOPPED": "Не актуально",
+    "SOFT_SKILLS": "Soft Skills",
+    "TECH_SKILLS": "Tech-Skills",
+    "ENGLISH": "Англійська",
+    "EXPERIENCE": "Досвід"
+  },
+  "notesHeader": {
+    "search": "Пошук",
+
+    "addNote": "Додати нотатку",
+    "searchResult": "результат з пошуку",
+    "searchResult234": "результати з пошуку",
+    "searchResults": "результатів з пошуку",
+    "cardFirst": "Великі ідеї починаються з першої нотатки. Запишіть щось важливе!",
+    "cardFirstButton": "Створити першу нотатку",
+
+    "newNote": "Нова нотатка",
+    "noteName": "Назва файлу",
+    "noteText": "Текст",
+    "editNote": "Редагувати нотатку",
+    "createNote": "Створити",
+    "deleteNote": {
+      "title": "Видалити нотатку?",
+      "text_1": "Ця дія буде незворотною.",
+      "button": "Видалити"
+    },
+    "update": "Редагувати нотатку"
+  },
+  "notesSortDropdown": {
+    "sortBy": "Сортувати",
+    "newFirst": "Спочатку нові",
+    "oldFirst": "Спочатку старі",
+    "alphabetically": "За абеткою"
   },
   "footer": {
-    "development": "Розробка Baza Trainee Ukraine 2024",
+    "development": "Розробка Baza Trainee Ukraine ",
     "rights": " © Усі права захищені"
+  },
+  "modalMappingContentMap": {
+    "success": "Успіх!",
+    "error": "Упс!",
+    "confirm": "Підтвердіть дію!",
+    "errorMailExist": "Упс!",
+    "recoveryPassword": "Відновлення паролю"
+  },
+  "modalMappingModalTextMap": {
+    "success": "Реєстрація пройшла успішно. Зараз ви можете налаштувати свій профіль.",
+    "error": "Перевірте введені дані та спробуйте ще раз.",
+    "confirm": "",
+    "popup": "",
+    "custom": "",
+    "errorMailExist": "Обліковий запис з такою поштою вже існує. Спробуйте увійти або відновити пароль.",
+    "recoveryPassword": "Обліковий запис з такою поштою вже існує. Спробуйте увійти або відновити пароль."
+  },
+  "modalMappingButtonMap": {
+    "success": "Продовжити",
+    "error": "Повторити спробу",
+    "confirm": "Ок",
+    "popup": "",
+    "custom": "",
+    "errorMailExist": "Увійти",
+    "recoveryPassword": "Відновити"
+  },
+  "addVacancy": {
+    "form": {
+      "company": "Компанія",
+      "vacancy": "Позиція",
+      "link": "Лінк на вакансію",
+      "communication": "Канал зв'язку",
+      "location": "Локація",
+      "notes": "Нотатки",
+      "remote": "Дистанційно",
+      "office": "Офіс",
+      "hybrid": "Змішаний",
+      "status": "Статус",
+      "resume": "Відправлено резюме",
+      "hr": "HR",
+      "test": "Тестове завдання",
+      "tech": "Технічна співбесіда",
+      "reject": "Відмова",
+      "offer": "Офер",
+      "archive": "В архів",
+      "restore": "Відновити",
+      "save": "Зберегти",
+      "delete": "Видалити",
+      "addStage": "Додати етап"
+    },
+    "placeholders": {
+      "company": "Вкажіть назву компанії",
+      "vacancy": "Вкажіть посаду",
+      "link": "Додайте посилання на вакансію",
+      "communication": "Вкажіть канал зв'язку з рекрутером",
+      "location": "Вкажіть місце розташування компанії",
+      "notes": "Місце для ваших нотаток"
+    },
+    "nameModal": {
+      "name": "Додати нову вакансію"
+    },
+    "titleResumeList": "Оберіть відправлене резюме",
+    "titleRejectList": "Оберіть причину відмови",
+    "titleAddStage": "Оберіть додатковий етап"
+  },
+  "addVacancySchema": {
+    "company": {
+      "max": "Максимальна довжина 40 символів",
+      "min": "Мінімальна довжина 2 символи"
+    },
+    "position": {
+      "max": "Максимальна довжина 30 символів",
+      "min": "Мінімальна довжина 2 символи"
+    },
+    "link": {
+      "url": "Некоректний формат URL",
+      "max": "Максимальна довжина 254 символи",
+      "min": "Мінімальна довжина 4 символи"
+    },
+    "communication": {
+      "max": "Максимальна довжина 4000 символів",
+      "min": "Мінімальна довжина 3 символа"
+    },
+    "location": {
+      "max": "Максимальна довжина 400 символів",
+      "min": "Мінімальна довжина 4 символи"
+    },
+    "notes": {
+      "max": "Максимальна довжина 4000 символів"
+    }
+  },
+  "editVacancy": {
+    "nameModal": {
+      "name": "Редагувати вакансію"
+    }
+  },
+  "calendar": {
+    "monthsShort": [
+      "Січ",
+      "Лют",
+      "Берез",
+      "Квіт",
+      "Трав",
+      "Черв",
+      "Лип",
+      "Серп",
+      "Верес",
+      "Жовт",
+      "Лист",
+      "Груд"
+    ],
+    "monthsFull": [
+      "Січень",
+      "Лютий",
+      "Березень",
+      "Квітень",
+      "Травень",
+      "Червень ",
+      "Липень",
+      "Серпень",
+      "Вересень",
+      "Жовтень",
+      "Листопад",
+      "Грудень"
+    ]
+  },
+  "addCoverLetters": {
+    "cardTitle": "Супровідні листи",
+    "buttonAdd": "Додати лист",
+    "modalAddTitle": "Додати супровідний лист",
+    "modalEditTitle": "Редагувати супровідний лист"
+  },
+  "addProjects": {
+    "cardTitle": "Проєкти",
+    "buttonAdd": "Додати посилання на проєкт",
+    "modalAddTitle": "Додати проєкт",
+    "modalEditTitle": "Редагувати проєкт"
+  },
+  "addResumes": {
+    "cardTitle": "Резюме",
+    "buttonAdd": "Додати резюме",
+    "modalAddTitle": "Додати резюме",
+    "modalEditTitle": "Редагувати резюме"
+  },
+  "addPersonalProperties": {
+    "cardTitle": "Персональна інформація",
+    "buttonAdd": "Додати посилання",
+    "modalAddTitle": "Додати посилання",
+    "modalEditTitle": "Редагувати посилання"
+  },
+  "buttonRemoveAccount": "Видалити акаунт",
+  "infoModal": {
+    "success": "Успіх",
+    "oops": "Упс!",
+    "button": {
+      "cancel": "Скасувати",
+      "logOut": "Вийти",
+      "save": "Зберегти",
+      "archive": "Архівувати",
+      "undo": "Відмінити",
+      "toArchive": "В архів",
+      "continue": "Продовжити",
+      "restore": "Відновити",
+      "login": "Увійти",
+      "try": "Спробувати",
+      "delete": "Видалити",
+      "confirm": "Ок"
+    },
+    "logOut": {
+      "title": "Ви впевнені, що хочете вийти?",
+      "text_1": "Вихід з акаунту призведе до завершення вашої сесії. Для повторного входу потрібно буде ввести ваші облікові дані."
+    },
+    "saveAddVacancies": {
+      "title": "Зберегти зміни?",
+      "text_1": "Якщо ви не збережете данні, вони будуть втрачені."
+    },
+    "deleteVacancy": {
+      "title": "Видалити вакансію?",
+      "text_1": "Ця дія буде незворотною. Натомість, ви можете перенести цю вакансію в архів"
+    },
+    "logInSuccess": {
+      "text_1": "Авторизація пройшла успішно."
+    },
+    "logInError": {
+      "text_1": "Перевірте введені дані та спробуйте ще раз."
+    },
+    "signUpSuccess": {
+      "text_1": "Реєстрація пройшла успішно.",
+      "text_2": "Зараз ви можете налаштувати свій профіль."
+    },
+    "signUpError": {
+      "text_1": "Обліковий запис з такою поштою вже існує.",
+      "text_2": "Спробуйте увійти або відновити пароль."
+    },
+    "forgotPasswordSuccess": {
+      "text_1": "Вам відправлено на пошту інструкцію для зміни пароля"
+    },
+    "resetPasswordSuccess": {
+      "text_1": "Зміна пароля успішна.",
+      "text_2": "Авторизуйтесь з новим паролем"
+    },
+    "resetPasswordErrorLink": {
+      "text_1": "Посилання на відновлення паролю не дійсне.",
+      "text_2": "Спробуйте ще раз"
+    },
+    "saveAddEvent": {
+      "title": "Додати подію?",
+      "text_1": "Якщо ви не збережете данні, вони будуть втрачені.",
+      "notifyAddEventSuccess": "Подію успішно додано!",
+      "notifyAddEventError": "Не вдалося додати подію."
+    },
+    "saveEditEvent": {
+      "title": "Зберегти зміни?",
+      "text_1": "Якщо ви не збережете данні, вони будуть втрачені.",
+      "notifyEditEventSuccess": "Зміни в події успішно збережено!",
+      "notifyEditEventError": "Не вдалося зберегти зміни."
+    },
+    "deleteEvent": {
+      "title": "Видалити подію?",
+      "text_1": "Ця дія буде незворотною!",
+      "notifyDeleteEventSuccess": "Подію успішно видалено!",
+      "notifyDeleteEventError": "Не вдалося видалити подію."
+    },
+    "arhiveVacancy": {
+      "title": "Перенести вакансію в архів?",
+      "text_1": "Ви завжди зможете знайти її за допомогою кнопки в верхньому правому куті"
+    },
+    "restoreVacancy": {
+      "title": "Відновити вакансію з архіву?",
+      "text_1": "Вакансію буде перенесено до основного списку"
+    }
+  },
+  "soonSection": {
+    "soon": "Незабаром",
+    "addEvent": "Додати подію",
+    "editEvent": "Редагувати подію",
+    "soonName": "Назва",
+    "soonNotes": "Нотатки",
+    "setTime": "Встановити час",
+    "save": "Зберегти",
+    "delete": "Видалити",
+    "soonModalNamePlaceholder": "Введіть назву події",
+    "soonModalNameLength": "Назва події має бути від 1 до 50 символів",
+    "soonModalNotesPlaceholder": "Місце для нотаток",
+    "soonModalNotes": "Нотатки мають бути не більше 1000 символів",
+    "soonModalTimeHours": "Години",
+    "soonModalTimeMinutes": "Хвилини",
+    "soonModalErrorsRequired": "Це поле є обов'язковим",
+    "requiredHours": "Введіть час події",
+    "invalidTimeContents": "Мають містити 1-2 цифри",
+    "invalidHours": "Години мають бути від 0 до 23",
+    "invalidMinutes": "Хвилини мають бути від 0 до 59",
+    "invalidPastDate": "Оберіть актуальну дату"
+  },
+  "calendarTabs": {
+    "day": "День",
+    "month": "Місяць",
+    "year": "Рік"
+  },
+  "chartBar": {
+    "sent": "Надіслано резюме",
+    "responses": "Отримано відповідей"
+  },
+  "loading": {
+    "loading": "Завантажуємо",
+    "error": "Помилка отримання даних"
+  },
+  "dayOfWeek": {
+    "Mon": "Пн",
+    "Tue": "Вт",
+    "Wed": "Ср",
+    "Thu": "Чт",
+    "Fri": "Пт",
+    "Sat": "Сб",
+    "Sun": "Нд"
+  },
+  "contactUs": {
+    "send": "Надіслати",
+    "name": "Ім'я",
+    "namePlaceholder": "Вкажіть ваше ім’я",
+    "text": "Текст звернення",
+    "textPlaceholder": "Введіть текст звернення",
+    "nameValidation": {
+      "min": "Мінімальна довжина 2 символи",
+      "max": "Максимальна довжина 30 символів"
+    },
+    "textValidation": {
+      "min": "Мінімальна довжина 10 символів",
+      "max": "Максимальна довжина 4000 символів"
+    }
   }
 }

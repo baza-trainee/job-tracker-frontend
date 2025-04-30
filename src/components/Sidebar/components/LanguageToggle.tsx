@@ -10,8 +10,8 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "flex h-[39px] rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD]",
-        "custom-hover custom-size text-textBlack",
+        "relative flex h-[36px] items-center rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD] md:h-[39px]",
+        "custom-transition lead font-medium leading-[132%] text-textBlack",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
     >
@@ -19,34 +19,48 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={isUA && isOpen}
         onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
         className={cn(
-          "overflow-hidden py-1 hover:text-iconHover disabled:hover:text-textBlack",
+          "flex overflow-hidden px-3 py-[5px] hover:text-iconHover disabled:hover:text-textBlack md:px-2 md:py-1",
           {
-            "relative w-16 rounded-[20px] bg-backgroundMain px-[10px] opacity-100":
+            "visible absolute left-0 z-[2] w-16 justify-center rounded-[20px] bg-backgroundMain opacity-100":
               isUA,
-            "w-10 opacity-100": !isUA && isOpen,
-            "w-0 opacity-0": !isUA && !isOpen,
+            "flex-grow opacity-100": !isUA && isOpen,
+            "sr-only m-0 w-0 opacity-0": !isUA && !isOpen,
           }
         )}
         type="button"
       >
-        UA
+        <span
+          className={cn("duration-1000", {
+            "opacity-0": !isUA && !isOpen,
+            "opacity-100": !isUA && isOpen,
+          })}
+        >
+          UA
+        </span>
       </button>
       <button
         disabled={!isUA && isOpen}
         onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
         className={cn(
-          "overflow-hidden py-1 hover:text-iconHover disabled:hover:text-textBlack",
+          "flex justify-end overflow-hidden px-2 py-[5px] hover:text-iconHover disabled:hover:text-textBlack md:py-1",
 
           {
-            "relative w-16 rounded-[20px] bg-backgroundMain px-[10px] opacity-100":
+            "visible absolute right-0 w-16 justify-center rounded-[20px] bg-backgroundMain opacity-100":
               !isUA,
-            "w-10 opacity-100": isUA && isOpen,
-            "w-0 opacity-0": isUA && !isOpen,
+            "flex-grow opacity-100": isUA && isOpen,
+            "sr-only m-0 w-0 opacity-0": isUA && !isOpen,
           }
         )}
         type="button"
       >
-        EN
+        <span
+          className={cn("duration-1000", {
+            "opacity-0": isUA && !isOpen,
+            "opacity-100": isUA && isOpen,
+          })}
+        >
+          EN
+        </span>
       </button>
     </div>
   );

@@ -6,13 +6,20 @@ export const ResetPasswordSchema = z
   .object({
     password: z
       .string()
-      .max(14, `validation.passwordMax`)
+      .min(8, `validation.passwordMin`)
       .regex(passwordRegex, `validation.passwordInvalid`)
-      .min(8, `validation.passwordMin`),
+      .max(14, `validation.passwordMax`)
+      .or(z.literal("")),
 
     confirmPassword: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: `validation.passwordMismatch`,
-  });
+  .refine(
+    (data) => {
+      if (data.confirmPassword.length === 0) return true;
+      return data.password === data.confirmPassword;
+    },
+    {
+      path: ["confirmPassword"],
+      message: `validation.passwordMismatch`,
+    }
+  );

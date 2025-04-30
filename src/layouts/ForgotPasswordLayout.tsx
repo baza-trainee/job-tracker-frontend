@@ -3,16 +3,15 @@ import { useAuthForm } from "../components/AuthComponents/useAuth";
 import { Input } from "../components/inputs/Input/Input";
 import { Button } from "../components/buttons/Button/Button";
 
-import { useAppSelector } from "../store/hook";
 import { useTranslation } from "react-i18next";
 
 import { AuthHeader } from "../components/AuthComponents/AuthHeader/AuthHeader";
 
-type AuthorizationLayoutProps = {
+type ForgotPasswordLayoutProps = {
   type: "forgotPassword";
 };
 
-const ForgotPasswordLayout = ({ type }: AuthorizationLayoutProps) => {
+const ForgotPasswordLayout = ({ type }: ForgotPasswordLayoutProps) => {
   const {
     register,
     handleSubmit,
@@ -20,17 +19,18 @@ const ForgotPasswordLayout = ({ type }: AuthorizationLayoutProps) => {
     onSubmit,
     errors,
     isCleanInputsForm,
+    isLoading,
+    setValue,
   } = useAuthForm(type);
 
-  const { loading } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();
 
   const error = !!Object.keys(errors).length;
 
   return (
     <section>
-      <div className="px-12 py-[50px]">
-        <form className="" onSubmit={handleSubmit(onSubmit)}>
+      <div className="text-left sm:max-w-[264px] sm:px-[5px] sm:py-[28px] md:max-w-full md:py-[62px]">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <AuthHeader type={type} />
 
           <Input
@@ -43,13 +43,15 @@ const ForgotPasswordLayout = ({ type }: AuthorizationLayoutProps) => {
             className=""
             label={t("register.email")}
             errors={errors}
+            promptMessage={t("register.promptMessageEmail")}
+            setValue={setValue}
           />
 
           <Button
             type="submit"
-            className="mx-auto mt-8"
-            disabled={isCleanInputsForm() || error || loading}
-            variant="ghost"
+            className="mx-auto mt-8 sm:mt-[24px] sm:text-[14px] md:text-[20px] xl:mt-4 2xl:mt-8 2xl:text-[20px]"
+            disabled={isCleanInputsForm() || error || isLoading}
+            variant="accent"
             size="big"
           >
             {t("forgotPassword.button")}

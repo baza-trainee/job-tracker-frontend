@@ -1,29 +1,60 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialState } from "./initialState";
+import { ModalProps } from "./initialState";
 
-type modalPayload =
-  | { typeModal: "success" | "error" | "errorMailExist" | "recoveryPassword" | "popup"; modalContent?: string; onCallFunction?: () => void }
-  | { typeModal: "confirm"; modalContent?: string; onCallFunction: () => void };
+const initialState: ModalProps = {
+  // isModalOpen: true,
+  // typeModal: "resetPasswordSuccess",
 
+  isModalOpen: false,
+  typeModal: "close",
+  isConfirmationOpen: false,
+  typeConfirmation: "close",
+  idCardVacancy: "",
+  dataConfirmation: null,
+  borderColorModal: null,
+  backgroundColorModal: null,
+  vacancyData: null,
+  eventData: null,
+};
 
 const modalSlice = createSlice({
   name: "modal",
   initialState: initialState,
   reducers: {
-    openModal: (state, action: PayloadAction<modalPayload>) => {
+    openModal: (state, action: PayloadAction<ModalProps>) => {
       state.isModalOpen = true;
-      state.modalContent = action.payload.modalContent;
-      state.onCallFunction = action.payload.onCallFunction;
       state.typeModal = action.payload.typeModal;
+      state.idCardVacancy = action.payload.idCardVacancy;
+      state.borderColorModal = action.payload.borderColorModal;
+      state.backgroundColorModal = action.payload.backgroundColorModal;
+      state.vacancyData = action.payload.vacancyData;
+      state.eventData = action.payload.eventData || null;
+      state.dataConfirmation = action.payload.dataConfirmation;
+      state.noteData = action.payload.noteData;
     },
     closeModal: (state) => {
       state.isModalOpen = false;
-      state.modalContent = undefined;
-      state.onCallFunction = undefined;
-      state.typeModal = "success";
+      state.typeModal = "close";
+      state.idCardVacancy = "";
+      state.borderColorModal = "";
+      state.backgroundColorModal = "";
+      state.vacancyData = null;
+      state.dataConfirmation = null;
+      state.noteData = null;
+    },
+    openConfirmation: (state, action: PayloadAction<ModalProps>) => {
+      state.isConfirmationOpen = true;
+      state.typeConfirmation = action.payload.typeConfirmation;
+      state.dataConfirmation = action.payload.dataConfirmation;
+    },
+    closeConfirmation: (state) => {
+      state.isConfirmationOpen = false;
+      state.typeConfirmation = "close";
+      state.dataConfirmation = null;
     },
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openModal, closeModal, openConfirmation, closeConfirmation } =
+  modalSlice.actions;
 export default modalSlice.reducer;

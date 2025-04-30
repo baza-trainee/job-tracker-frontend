@@ -5,6 +5,7 @@ export default {
   theme: {
     screens: {
       sm: "320px",
+      smPlus: "576px", // Нова точка зламу
       md: "768px",
       xl: "1280px",
       "2xl": "1440px",
@@ -15,17 +16,21 @@ export default {
     },
     extend: {
       container: {
+        screens: true,
         center: true,
-        padding: {
-          DEFAULT: "1.25rem",
-          sm: "1.25rem",
-          md: "1.25rem",
-          xl: "1.25rem",
-        },
+        // padding: {
+        //   DEFAULT: "1.25rem",
+        //   sm: "1.25rem",
+        //   md: "1.5rem",
+        //   xl: "1.5rem",
+        //   "2xl": "1.5rem",
+        //   "3xl": "1.5rem",
+        // }, // Перенесла в головний index.css, бо тут не коректно відпрацьовує
       },
       boxShadow: {
         button_hover: "0px 0px 6px 0px rgba(198, 231, 255, 0.5)",
-        form_shadow: " 0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+        form_shadow: "0px 0px 4px 0px rgba(0, 0, 0, 0.25)",
+        section_shadow: "0px 0px 3px 0px rgba(0, 0, 0, 0.20)",
       },
       colors: {
         textBlack: "#333333",
@@ -37,29 +42,57 @@ export default {
         backgroundSecondary: "#ECEFF6",
         backgroundTertiary: "#F7F8FB",
         iconHover: "#436B88",
-        color1: "#C6E7FF", // blue
-        color2: "#FC8972", // error red
-        color3: "#FEEE91", // yellow  
-        color4: "#CDC1FF", // purple
-        color5: "#D0E8C5", // green-light
-        color6: "#A6AEBF", // grey
-        color7: "#B1D690", // green
-        color7Light: "rgba(177, 214, 144, 0.3)", // це колір #B1D690 з opacity
+        color1: {
+          DEFAULT: "#C6E7FF", // blue
+          transparent: "rgba(198, 231, 255, 0.40)",
+        }, // blue with opacity
+        color2: {
+          DEFAULT: "#FC8972", // error red
+          transparent: "rgba(252, 137, 114, 0.40)",
+        }, // error red with opacity
+        color3: {
+          DEFAULT: "#FEEE91", // yellow
+          transparent: "rgba(254, 238, 145, 0.40)",
+        }, // yellow with opacity
+        color4: {
+          DEFAULT: "#CDC1FF", // purple
+          transparent: "rgba(205, 193, 255, 0.40)",
+        }, // purple with opacity
+        color5: {
+          DEFAULT: "#D0E8C5", // green-light
+          transparent: "rgba(208, 232, 197, 0.40)",
+        }, // green-light with opacity
+        color6: {
+          DEFAULT: "#A6AEBF", // grey
+          transparent: "rgba(166, 174, 191, 0.40)",
+        }, // grey with opacity
+        color7: {
+          DEFAULT: "#B1D690", // green
+          transparent: "rgba(177, 214, 144, 0.40)",
+        }, // green with opacity 0.4
+        color7Light: "rgba(177, 214, 144, 0.3)", // color7 green with opacity 0.3
         color8: "#76925D", // green-dark
-   
+        color9: {
+          DEFAULT: "#DBDCDD", // grey
+          transparent: "rgba(219, 220, 221, 0.40)",
+        }, // grey with opacity
+        borderLight: "#CECECE", // немає в дизайні, додати
+        // scrollbarThumb: "#C2C2C2", // Колір повзунка, немає в дизайні, додати
+        // scrollbarTrack: "#EAEEF2", // Колір треку, немає в дизайні, додати
+
         // text: {
-          // primary: "#333333",  // дубль
-          // gray: "rgba(51, 51, 51, 0.5)", // немає в дизайні, це колір #333333 з opacity
-          // link: "#288dd5",  // дубль
-          // active: "#121212",  // не використовується
+        // primary: "#333333",  // дубль
+        // gray: "rgba(51, 51, 51, 0.5)", // немає в дизайні, це колір #333333 з opacity
+        // link: "#288dd5",  // дубль
+        // active: "#121212",  // не використовується
         // },
         // card: {
-          // blue: "#C6E7FF", // дубль
-          // red: "#FC8972", // дубль
-          // yellow: "#FEEE91", // дубль
-          // purple: "#CDC1FF", // дубль
-          // green: "#D0E8C5", // дубль
-          // gray: "#A6AEBF", // дубль
+        // blue: "#C6E7FF", // дубль
+        // red: "#FC8972", // дубль
+        // yellow: "#FEEE91", // дубль
+        // purple: "#CDC1FF", // дубль
+        // green: "#D0E8C5", // дубль
+        // gray: "#A6AEBF", // дубль
         // },
         background: {
           // page: "#F6F6F6", // замінила на backgroundMain
@@ -77,7 +110,13 @@ export default {
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
       },
+      // borderRadius: {
+      //   scrollbar: "4px", // Border-radius для скролу
+      // },
     },
   },
-  plugins: [],
+
+  // plugins: [
+  //   require("tailwind-scrollbar"),
+  // ],
 };

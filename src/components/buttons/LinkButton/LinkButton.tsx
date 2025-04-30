@@ -16,7 +16,7 @@ export const LinkButton = ({
     <Link
       to={href}
       className={cn(
-        "inline-flex h-[50px] items-center justify-center rounded-xl py-3 font-nunito text-xl font-medium text-textBlack duration-300",
+        "inline-flex h-[51px] items-center justify-center rounded-xl py-3 font-nunito text-xl font-medium text-textBlack duration-300",
         {
           ["min-w-[180px] px-8"]: size == "small",
           ["min-w-[260px] px-12"]: size == "big",
@@ -26,12 +26,12 @@ export const LinkButton = ({
           // ["text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary"]:
           //   variant == "accent",
 
-          ["bg-transparent ring-1 ring-inset ring-textBlack hover:shadow-button_hover hover:ring-[3px] hover:ring-accent focus:shadow-button_hover focus:ring-[3px] focus:ring-accent"]:
+          ["border-[1px] border-textBlack bg-transparent hover:border-iconHover hover:bg-backgroundSecondary active:border-transparent active:bg-transparent active:ring-[2px] active:ring-inset active:ring-iconHover"]:
             variant == "ghost",
         },
         disabled && {
           // ["bg-grey-40 text-grey-0 pointer-events-none"]: variant == "accent",
-          ["pointer-events-none bg-background-backgroundSecondary ring-transparent"]:
+          ["bg-background-backgroundSecondary pointer-events-none ring-transparent"]:
             variant == "ghost",
         },
         className

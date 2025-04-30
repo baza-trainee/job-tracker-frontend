@@ -1,147 +1,93 @@
 import { FC, useEffect } from "react";
-import clsx from "clsx";
 
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { closeModal, openModal } from "../../store/slices/modalSlice/modalSlice";
+import {
+  closeConfirmation,
+  closeModal,
+} from "../../store/slices/modalSlice/modalSlice";
 
-import { contentMap, colorType, buttonMap, modalTextMap } from "./modalMappings";
+import { contentMap } from "./modalMappings";
 
-import { Button } from '../buttons/Button/Button';
-import Icon from "../Icon/Icon.tsx";
-
-// Alex
-import { useNavigate } from "react-router-dom";
+import ModalMain from "./ModalMain.tsx";
+import classNames from "classnames";
 
 const Modal: FC = () => {
+  const dispatch = useAppDispatch();
+  const { isModalOpen, typeModal, isConfirmationOpen, typeConfirmation } =
+    useAppSelector((state) => state.modal);
 
-    const dispatch = useAppDispatch();
-    const { isModalOpen, modalContent, onCallFunction, typeModal } = useAppSelector(
-        (state) => state.modal,
-    );
+  const modalData = contentMap[typeModal || "close"];
+  const confirmationData = contentMap[typeConfirmation || "close"];
 
-    const confirmModal = (): void => {
-        onCallFunction?.();
-        setTimeout(() => {
-            dispatch(closeModal())
-        }, 800)
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        if (isConfirmationOpen) {
+          return dispatch(closeConfirmation());
+        }
+        dispatch(closeModal());
+      }
+    };
+
+    if (isModalOpen) {
+      window.addEventListener("keydown", handleEscKey);
     }
 
-    const functionButtonMap = {
-        success: () => dispatch(closeModal()),
-        error: () => dispatch(closeModal()),
-        errorMailExist: () => {
-            console.log("спрацювала функція functionButtonMap");
-            dispatch(closeModal())
-        },
-        recoveryPassword: () => dispatch(closeModal()),
-        confirm: confirmModal,
-        popup: null,
-        custom: null,
+    return () => {
+      window.removeEventListener("keydown", handleEscKey);
+    };
+  }, [dispatch, isModalOpen, isConfirmationOpen]);
+
+  const handleCloseModal = () => {
+    if (isConfirmationOpen) {
+      return;
     }
+    dispatch(closeModal());
+  };
 
-    useEffect(() => {
-        const handleEscKey = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                dispatch(closeModal());
-            }
-        };
+  if (!isModalOpen) return null;
 
-        if (isModalOpen) {
-            window.addEventListener("keydown", handleEscKey);
-        };
-
-        return () => {
-            window.removeEventListener("keydown", handleEscKey);
-        };
-    }, [dispatch, isModalOpen]);
-
-    useEffect(() => {
-        let timerModalPopup: number;
-        if (typeModal === "popup") {
-            timerModalPopup = setTimeout(() => {
-                dispatch(closeModal());
-            // TODO: 3000 -> 10000
-            }, 10000);
-        };
-        return () => clearTimeout(timerModalPopup);
-        
-    }, [typeModal, dispatch]);
-    
-    //Alex
-    const navigate = useNavigate()
-
-
-    if (!isModalOpen) return null;
-
-    return (
-
+  return (
+    <div
+      className={classNames(
+        "fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center overflow-auto bg-black bg-opacity-50 font-nunito backdrop-blur-sm"
+      )}
+      onClick={() => handleCloseModal()}
+    >
+      <div className="flex">
+        <ModalMain
+          className={classNames("", {
+            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]":
+              typeModal === "addVacancy" ||
+              typeModal === "editVacancy" ||
+              typeModal === "forgotPassword" ||
+              typeModal === "addEvent" ||
+              typeModal === "editEvent",
+          })}
+          modalData={modalData}
+          btnFunc={() => {
+            return dispatch(closeModal());
+          }}
+        />
+      </div>
+      {isConfirmationOpen ? (
         <div
-            className="fixed top-0 right-0 w-full h-full z-10 flex justify-center items-center bg-black bg-opacity-50 font-nunito"
-            onClick={() => dispatch(closeModal())}>
-
-            <div>
-                <div className={clsx(
-                    "relative top-1 w-[130px] h-[30px] rounded-tr-xl z-30 rounded-tl-xl",
-                    colorType[typeModal]?.background
-                )}>
-                </div>
-                <div
-                    className={clsx(
-                        "flex flex-row justify-between items-start p-4 w-auto h-auto z-40 bg-white rounded-lg rounded-tl-none shadow-form_shadow border-4",
-                        colorType[typeModal]?.border)}
-                    onClick={e => e.stopPropagation()}>
-
-                    <div
-                        className="flex flex-col min-w-[550px] min-h-[289px] justify-center items-center gap-8">
-                        {contentMap[typeModal]}
-                        <div className="text-center text-xl">{modalContent ? modalContent : modalTextMap[typeModal]}</div>
-                        {typeModal !== "popup" && typeModal !== "custom" ? (
-                            typeModal === "errorMailExist" ? (
-                                <div className="flex gap-4">
-                                    {buttonMap[typeModal].map((buttonText, index) => (
-                                        <Button
-                                            key={index}
-                                            disabled={false}
-                                            variant="ghost"
-                                            size="small"
-                                            onClick={
-                                                index === 0
-                                                    // ? () => {console.log("Увійти натиснуто"); functionButtonMap[typeModal]()}
-                                                    // : () => {console.log("Відновити натиснуто"); functionButtonMap[typeModal]()}
-                                                    ? () => {console.log("Увійти натиснуто"); functionButtonMap[typeModal](); navigate("log-in")}
-                                                    : () => {console.log("Відновити натиснуто"); functionButtonMap[typeModal](); dispatch(openModal({typeModal:"popup"}))}
-                                            }
-                                        >
-                                            {buttonText}
-                                        </Button>
-                                    ))}
-                                </div>
-                            ) : (
-                                (<Button
-                                    disabled={false}
-                                    variant="ghost"
-                                    size={typeModal === "error" ? "small" : "big"}
-                                    onClick={functionButtonMap[typeModal] || (() => dispatch(closeModal()))}>
-                                    {buttonMap[typeModal]}
-                                </Button>)
-                            )
-                        )
-                            : (null)
-                        }
-                    </div>
-                    <button
-                        onClick={() => dispatch(closeModal())}
-                        className="rounded-md hover:bg-color2">
-                        <Icon id="close" className="w-6 h-6 fill-textBlack"/>
-                    </button>
-
-                </div>
-            </div>
-
+          className={classNames(
+            "fixed right-0 top-0 z-50 flex w-full items-center justify-center bg-[#C2C2C2] bg-opacity-50 xl:h-full",
+            typeModal === "addVacancy" || typeModal === "editVacancy"
+              ? "h-[1300px]"
+              : "h-full"
+          )}
+        >
+          <ModalMain
+            className="sticky mb-[210px] mt-auto md:mb-[145px] xl:mb-auto"
+            modalData={confirmationData}
+            btnFunc={() => dispatch(closeConfirmation())}
+          />
         </div>
-
-    );
-
+      ) : null}
+    </div>
+  );
 };
 
 export default Modal;

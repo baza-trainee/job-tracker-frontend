@@ -13,24 +13,24 @@ export interface IconProps {
 export const Icon: FC<IconProps> = ({
   id,
   className,
-  dataActive,
-  useStroke,
+  // dataActive,
+  // useStroke,
 }) => {
   return (
     <svg
       className={cn(
-        useStroke
-          ? [
-              "stroke-gray-400 hover:stroke-iconHover active:stroke-black",
-              dataActive === true && "stroke-red-700",
-              dataActive === false && "stroke-green-700",
-            ]
-          : [
+        // useStroke
+          // ? [
+              // "stroke-gray-400 hover:stroke-iconHover active:stroke-black",
+              // dataActive === true && "stroke-red-700",
+              // dataActive === false && "stroke-green-700",
+            // ]
+          // : [
               // "fill-gray-400 hover:fill-iconHover active:fill-black group-hover:fill-iconHover",
-
-              dataActive === true && "fill-red-700",
-              dataActive === false && "fill-green-700",
-            ],
+// 
+              // dataActive === true && "fill-red-700",
+              // dataActive === false && "fill-green-700",
+            // ],
         className
       )}
     >
