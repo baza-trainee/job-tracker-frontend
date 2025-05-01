@@ -37,7 +37,9 @@ const NoteCard: FC<Note> = (note) => {
         {name}
       </div>
       <div className="flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
-        <p className="mb-6 line-clamp-[7] break-all">{text}</p>
+        <p className="mb-6 line-clamp-[7] break-words smOnly:break-all">
+          {text}
+        </p>
 
         <div className="flex items-end justify-between">
           <div className="text-sm font-medium">{formattedDate}</div>
