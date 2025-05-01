@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { addProfileData } from "@/schemas/addProfileDataSchema";
+import { addProfileData } from "@/schemas/profile/addProfileDataSchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppSelector } from "@/store/hook";
@@ -20,7 +20,8 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     handleSubmit,
     resetField,
     setValue,
-    formState: { errors },
+    watch,
+    formState: { errors, isDirty },
   } = useForm<z.infer<(typeof addProfileData)[typeof cardsType]>>({
     resolver: zodResolver(addProfileData[cardsType]),
     mode: "all",
@@ -51,6 +52,20 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     setValue("text", updateItem.description || updateItem.text);
   }, [updateItem]);
 
+  const isDisabledSubmitButton =
+    isSubmitDisabled ||
+    !isDirty ||
+    (isUpdating &&
+      (updateItem.name ? updateItem.name === watch("name") : true) &&
+      (updateItem.link ? updateItem.link === watch("link") : true) &&
+      (updateItem.technologies
+        ? updateItem.technologies === watch("technologies")
+        : true) &&
+      (updateItem.description
+        ? updateItem.description === watch("text")
+        : true) &&
+      (updateItem.text ? updateItem.text === watch("text") : true));
+
   return (
     <form
       className="flex h-full w-full flex-col gap-5"
@@ -64,7 +79,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         register={register}
         errors={errors}
         resetField={resetField}
-        isCheckButtons={false}
+        isCheckButtons={true}
       />
 
       {data[cardsType].technologies && (
@@ -75,7 +90,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={false}
+          isCheckButtons={true}
         />
       )}
       {data[cardsType].link && (
@@ -86,7 +101,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={false}
+          isCheckButtons={true}
         />
       )}
       {data[cardsType].text && (
@@ -99,7 +114,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={false}
+          isCheckButtons={true}
         />
       )}
       <div className="flex flex-col-reverse justify-center gap-5 md:flex-row">
@@ -117,7 +132,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           type="submit"
           className="gap-3"
           variant="accent"
-          disabled={isSubmitDisabled}
+          disabled={isDisabledSubmitButton}
         >
           {t("infoModal.button.save")}
           <Icon id="check-box" className="h-6 w-6" />

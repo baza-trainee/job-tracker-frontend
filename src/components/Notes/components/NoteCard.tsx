@@ -1,12 +1,13 @@
-import Icon from "@/components/Icon/Icon";
-import { ICON } from "@/components/Icon/icons";
-import { IconButton } from "@/components/buttons/IconButton/IconButton";
-import { Note } from "@/types/notes.types";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useAppDispatch } from "@/store/hook";
 import { openModal } from "@/store/slices/modalSlice/modalSlice";
+
+import Icon from "@/components/Icon/Icon";
+import { ICON } from "@/components/Icon/icons";
+import { IconButton } from "@/components/buttons/IconButton/IconButton";
+import { Note } from "@/types/notes.types";
 
 const NoteCard: FC<Note> = (note) => {
   const { i18n } = useTranslation();
@@ -29,7 +30,6 @@ const NoteCard: FC<Note> = (note) => {
       })
     );
   };
-
 
   return (
     <div className="w-full font-nunito text-base leading-[135%]" id={id}>

@@ -3,16 +3,22 @@ import cn from "clsx";
 
 import Icon from "../../Icon/Icon.tsx";
 import { SidebarItemProps } from "./Sidebar.props.ts";
+import { useMediaQuery } from "react-responsive";
+import { useTranslation } from "react-i18next";
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
   icon,
   link,
   title,
   isOpen,
+  onClick,
 }) => {
+  const { t } = useTranslation();
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   return (
     <NavLink
       to={link}
+      onClick={isMobile ? onClick : undefined}
       className={({ isActive, isPending }) =>
         cn(
           "flex items-center rounded-[20px] border-2 border-transparent fill-textBlack py-[2px] text-textBlack dark:fill-slate-300 dark:text-slate-300",
@@ -35,7 +41,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
             : "sr-only m-0 w-0 -translate-x-5 opacity-0"
         )}
       >
-        {title}
+        {t(`navigation.${title}`)}
       </span>
     </NavLink>
   );

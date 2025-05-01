@@ -7,10 +7,7 @@ import { z } from "zod";
 import { ContactUsSchema } from "../../../../schemas/ContactUsSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../../store/hook";
-import {
-  closeModal,
-  openConfirmation,
-} from "../../../../store/slices/modalSlice/modalSlice";
+import { closeModal } from "../../../../store/slices/modalSlice/modalSlice";
 import { useGetAllUserDataQuery } from "@/store/querySlices/profileQuerySlice";
 import { useEffect } from "react";
 

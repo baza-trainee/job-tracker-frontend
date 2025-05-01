@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -9,14 +10,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { selectSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector";
 import { setSearchQuery } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice";
 import { closeSearch } from "@/store/slices/searchSlice/searchSlice";
+import { selectNotesSearchQuery } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
+import { setNotesSearchQuery } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
 import { cn } from "../../../utils/utils";
 
 import Icon from "../../Icon/Icon";
 import { SearchResults } from "./SearchResults";
-
-import { selectNotesSearchQuery } from "@/store/slices/filteredNotesSlice/filteredNotesSelector";
-import { setNotesSearchQuery } from "@/store/slices/filteredNotesSlice/filteredNotesSlice";
-import { useLocation } from "react-router-dom";
 
 const SearchSchema = z.object({
   query: z.string().min(1, "Search query cannot be empty"),
@@ -55,7 +54,7 @@ export const SearchForm: React.FC = () => {
       break;
 
     default:
-      console.log("default");
+      break;
   }
 
   const queryFromRedux = useSelector(selector);
@@ -110,15 +109,6 @@ export const SearchForm: React.FC = () => {
         className="relative flex w-full items-center font-nunito text-xl leading-[135%] text-textBlack hover:fill-iconHover active:fill-textBlack"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {/* <Input
-          register={register}
-          resetField={resetField}
-          name="query"
-          placeholder={t("vacanciesHeader.search")}
-          type="text"
-          className="flex-grow"
-          errors={errors}
-        /> */}
         <div className="relative w-full">
           <div className="relative flex items-center sm:w-full md:w-[280px] xl:w-[355px] 2xl:w-[380px] 3xl:w-[516px]">
             <input
@@ -126,7 +116,6 @@ export const SearchForm: React.FC = () => {
               className={cn(
                 "h-[41px] w-full rounded-lg border border-textBlack py-[10px] pl-[58px] pr-2 font-nunito text-xl font-medium text-textBlack transition placeholder:font-nunito placeholder:text-base placeholder:text-textBlackLight placeholder-shown:border-textBlack hover:border-iconHover hover:placeholder:text-iconHover focus:outline-none focus:placeholder:text-iconHover active:border-textBlack xl:h-[51px] xl:rounded-xl",
 
-                // !error && "border-color5",
                 error &&
                   "border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"
               )}

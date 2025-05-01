@@ -75,13 +75,6 @@ function Sidebar() {
           ? "w-full md:w-[256px]"
           : "w-[92px] translate-x-[92px] xl:transform-none xl:px-3 3xl:px-3"
       )}
-      // className={cn(
-      //   "fixed right-0 top-0 z-20 box-border flex h-fit max-h-dvh flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito font-medium dark:bg-slate-800 md:h-[780px] md:w-[256px] md:p-6 md:text-xl xl:left-0 xl:h-dvh xl:rounded-r-[20px] smOnly:overflow-y-scroll mdOnly:rounded-l-[20px]",
-      //   "custom-size",
-      //   !isOpenSidebar
-      //     ? "items-center px-3 md:w-[92px] md:px-3 smOnly:w-0 smOnly:px-0 mdOnly:translate-x-[92px]"
-      //     : "smOnly:w-full smOnly:px-5"
-      // )}
     >
       <div className={cn("flex flex-col")}>
         <div
@@ -114,6 +107,7 @@ function Sidebar() {
                 link={item.link}
                 title={item.title}
                 isOpen={isOpenSidebar}
+                onClick={handleCloseSidebar}
               />
             );
           })}

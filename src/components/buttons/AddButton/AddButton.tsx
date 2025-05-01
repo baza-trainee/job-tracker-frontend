@@ -1,12 +1,15 @@
-import { Button } from "../Button/Button";
+import { useTranslation } from "react-i18next";
+
 import { useAppDispatch } from "../../../store/hook";
 import { openModal } from "../../../store/slices/modalSlice/modalSlice";
-import Icon from "../../Icon/Icon";
 import { cn } from "@/utils/utils";
-import { TypesModal } from "@/components/modal/ModalMain.types";
-import { useTranslation } from "react-i18next";
 import { createNewStatuses } from "@/store/slices/statusVacancy/vacancyStatusSlice";
 import { vacancyStatusesInfo } from "@/store/slices/statusVacancy/vacancyStatusOperation";
+
+import { ICON } from "@/components/Icon/icons";
+import { Button } from "../Button/Button";
+import Icon from "../../Icon/Icon";
+import { TypesModal } from "@/components/modal/ModalMain.types";
 
 export interface AddButtonProps {
   className?: string;
@@ -40,7 +43,7 @@ const AddButton: React.FC<AddButtonProps> = ({ className, variant }) => {
       break;
 
     default:
-      console.log("default");
+      break;
   }
 
   const handleClick = () => {
@@ -65,7 +68,7 @@ const AddButton: React.FC<AddButtonProps> = ({ className, variant }) => {
       <span className="text-nowrap text-sm leading-[135%] md:text-base">
         {buttonText}
       </span>
-      <Icon id="plus" className="size-6" />
+      <Icon id={ICON.PLUS} className="size-6" />
     </Button>
   );
 };

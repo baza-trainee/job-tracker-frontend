@@ -126,71 +126,82 @@ export const CheckboxWithCalendar = ({
   const error = errors[`${name}Dropdown`];
 
   return (
-    <div className="relative">
-      <div>
-        <div className="flex w-full items-center justify-between">
-          <Checkbox
-            name={name}
-            id={id}
-            label={t(`${label}`)}
-            register={register}
-            type="signUp"
-            errors={errors}
-            checked={isChecked}
-            onClick={handleCheckbox}
-          />
-          <span
-            className="cursor-pointer text-[14px] underline 2xl:text-[16px]"
-            onClick={() => setIsOpenCalendar(true)}
-          >
-            {isChecked && valueCalendar}
-          </span>
+    <>
+      <div className="relative">
+        <div>
+          <div className="flex w-full items-center justify-between">
+            <Checkbox
+              name={name}
+              id={id}
+              label={t(`${label}`)}
+              register={register}
+              type="signUp"
+              errors={errors}
+              checked={isChecked}
+              onClick={handleCheckbox}
+            />
+            <span
+              className="cursor-pointer text-[14px] underline 2xl:text-[16px]"
+              onClick={() => setIsOpenCalendar(true)}
+            >
+              {isChecked && valueCalendar}
+            </span>
+          </div>
+
+          {/* ----------- Error ----------------- */}
+          {error && (
+            <span
+              id={`inputError-${name}`}
+              className={classNames(
+                "inline-block pl-[9.5px] pt-1 font-nunito text-base font-medium text-color2"
+              )}
+            >
+              {t(String(error?.message))}
+            </span>
+          )}
         </div>
 
-        {/* ----------- Error ----------------- */}
-        {error && (
-          <span
-            id={`inputError-${name}`}
+        {/* ----------- Dropdown ----------------- */}
+        {isDropdown ? (
+          <div
+            onClick={(e) => e.stopPropagation()}
             className={classNames(
-              "inline-block pl-[9.5px] pt-1 font-nunito text-base font-medium text-color2"
+              isChecked
+                ? "visible relative z-10 mt-3 h-[44px] text-[10px] opacity-100"
+                : "sr-only h-0 opacity-0"
             )}
           >
-            {t(String(error?.message))}
-          </span>
-        )}
-      </div>
+            <Dropdown
+              options={optionsDropDown()}
+              setValue={setValueDropDowm}
+              isInModal={true}
+              name={`${name}Dropdown`}
+              register={register}
+              getValues={getValues}
+            />
+          </div>
+        ) : null}
 
-      {/* ----------- Dropdown ----------------- */}
-      {isDropdown ? (
+        {/* ------------ Calendar ---------------- */}
         <div
-          onClick={(e) => e.stopPropagation()}
           className={classNames(
-            isChecked
-              ? "visible relative z-50 mt-3 h-[44px] text-[10px] opacity-100"
+            isOpenCalendar && isChecked
+              ? "visible absolute right-0 top-[34px] z-50 opacity-100"
               : "sr-only h-0 opacity-0"
           )}
         >
-          <Dropdown
-            options={optionsDropDown()}
-            setValue={setValueDropDowm}
-            isInModal={true}
-            name={`${name}Dropdown`}
-            register={register}
-            getValues={getValues}
-          />
+          <JobCalendar changeDate={changeDate} dateState={dateState} />
         </div>
-      ) : null}
-
-      {/* ------------ Calendar ---------------- */}
+      </div>
+      {/* ----- Calendar Click Away Zone --------- */}
       <div
         className={classNames(
           isOpenCalendar && isChecked
-            ? "visible absolute right-0 top-[34px] z-50 opacity-100"
-            : "sr-only h-0 opacity-0"
+            ? "visible fixed left-0 top-0 z-[40] h-full w-full"
+            : "hidden"
         )}
-      >
-        <JobCalendar changeDate={changeDate} dateState={dateState} />
-      </div>
-    </div>
+        onClick={() => setIsOpenCalendar(false)}
+      ></div>
+    </>
   );
 };

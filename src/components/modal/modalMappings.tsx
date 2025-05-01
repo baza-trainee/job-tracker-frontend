@@ -10,6 +10,7 @@ import EditEventModal from "../Soon/EditEventModal";
 import ModalRemoveAccount from "./components/profileModals/ModalRemoveAccount";
 import ModalMuttionProfileData from "./components/profileModals/ModalMuttionProfileData";
 import ModalRemoveProperties from "./components/profileModals/ModalRemoveProperties";
+import ConfirmToRemoveModal from "./components/confirmToRemove/ConfirmToRemoveModal";
 
 const colorDefault: Color = {
   text: "text-white",
@@ -212,7 +213,12 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-
+  confirmToRemove: {
+    content: <ConfirmToRemoveModal />,
+    nameModal: "Confrm to remove",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
   addEvent: {
     content: <AddEventModal />,
     nameModal: "soonSection.addEvent",

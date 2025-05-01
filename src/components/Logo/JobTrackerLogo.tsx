@@ -1,7 +1,7 @@
-import JobTrackerLogo from "../../assets/Logo.svg";
 import { Link } from "react-router-dom";
 
 import { cn } from "@/utils/utils";
+import JobTrackerLogo from "../../assets/Logo.svg";
 
 function Logo({ className }: { className: string }) {
   return (

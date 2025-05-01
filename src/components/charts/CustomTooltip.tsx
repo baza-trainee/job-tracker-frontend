@@ -15,7 +15,7 @@ const CustomTooltip: React.FC<{
         transform: "translate(-50%, -50%)",
         opacity: visible ? 1 : 0,
         transition:
-          "top 0.3s ease-in-out, left 0.3s ease-in-out, opacity 0.7s ease-in-out", // Додаємо анімацію
+          "top 0.3s ease-in-out, left 0.3s ease-in-out, opacity 0.7s ease-in-out", 
       }}
       className={cn(
         "pointer-events-none absolute z-50 flex cursor-default flex-col items-center gap-1 rounded-xl rounded-bl-none border border-iconHover bg-backgroundMain px-3 py-2 font-nunito text-sm font-bold transition-transform",

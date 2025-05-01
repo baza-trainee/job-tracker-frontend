@@ -130,6 +130,7 @@
     "termsRequired": "Ви не надали згоду",
     "passwordMismatch": "Паролі мають збігатись",
     "min2Characters": "Мінімум 2 символи",
+    "max50Characters": "Максимум 50 символів",
     "invalidUrl": "Введіть коректне посилання",
     "invalidPdf": "Введіть коректне посилання .pdf"
   },
@@ -457,7 +458,7 @@
     "soonModalNamePlaceholder": "Введіть назву події",
     "soonModalNameLength": "Назва події має бути від 1 до 50 символів",
     "soonModalNotesPlaceholder": "Місце для нотаток",
-    "soonModalNotesLength": "Нотатки мають бути не більше 1000 символів",
+    "soonModalNotes": "Нотатки мають бути не більше 1000 символів",
     "soonModalTimeHours": "Години",
     "soonModalTimeMinutes": "Хвилини",
     "soonModalErrorsRequired": "Це поле є обов'язковим",

@@ -1,33 +1,31 @@
-import { useTranslation } from "react-i18next";
 import { ICON } from "../../Icon/icons";
 
 const NavList = () => {
-  const { t } = useTranslation();
   return [
     {
       icon: ICON.VACANCY,
       link: "/vacancies",
-      title: t("navigation.vacancies"),
+      title: "vacancies",
     },
     {
       icon: ICON.STATISTICS,
       link: "/statistics",
-      title: t("navigation.statistics"),
+      title: "statistics",
     },
     {
       icon: ICON.ACCOUNT,
       link: "/profile",
-      title: t("navigation.account"),
+      title: "account",
     },
     {
       icon: ICON.NOTE,
       link: "/notes",
-      title: t("navigation.notes"),
+      title: "notes",
     },
     {
       icon: ICON.ARCHIVE,
       link: "/archive",
-      title: t("navigation.archive"),
+      title: "archive",
     },
   ];
 };

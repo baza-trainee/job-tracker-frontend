@@ -41,6 +41,7 @@ export const Input = forwardRef<
       onInput,
       autoComplete,
       maxLength,
+      // watch,
     },
     forwardedRef
   ) => {
@@ -49,13 +50,18 @@ export const Input = forwardRef<
     const [isIcon, setIsIcon] = useState<boolean>(false);
     const { t } = useTranslation();
 
+    // const watchedValue = watch ? watch(name) : "";
+    // const watchedValue = watch?.(name) ?? "";
+
     const isIconVisible: boolean = Boolean(inputRef.current?.value);
+    // const isIconVisible = Boolean(watchedValue);
 
     const handleResetField = (name: string) => {
       resetField(name);
     };
 
-    const { onBlur: hookFormOnBlur, ref: refInput } = register(name);
+    // const { onBlur: hookFormOnBlur, ref: refInput } = register(name);
+    const registerProps = register(name);
 
     return (
       <div
@@ -85,46 +91,55 @@ export const Input = forwardRef<
           <div className={cn("relative flex w-full items-center")}>
             {type === "textarea" ? (
               <textarea
+                {...registerProps}
                 id={`input-${name}`}
                 className={cn(
                   "w-full rounded-xl border p-3 text-base",
-                  "active:border-accent peer w-full rounded-xl border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                  "peer w-full font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight",
+                  "rounded-xl border border-color7 focus:border-textOther focus:outline-none active:border-textOther",
+                  "placeholder-shown:border-textBlack",
                   "sm:px-4 sm:py-2 sm:text-[12px]",
                   "md:px-6 md:py-3 md:text-[14px]",
                   "xl:text-[14px]",
                   "2xl:text-[16px]",
                   {
-                    "border-color7": !error,
+                    // "border-color7": !error,
                     "border-color2": error,
                   },
                   classNameInputCustom
                 )}
                 placeholder={placeholder}
                 rows={rows || 4}
-                {...register(name)}
+                // {...register(name)}
                 {...(value && { value })}
                 onBlur={(event) => {
                   setValue?.(name, event.target.value.trim(), {
                     shouldValidate: true,
                   });
-                  hookFormOnBlur(event);
+                  // hookFormOnBlur(event);
+                  registerProps.onBlur(event);
                   onBlur?.(event);
                 }}
+                onChange={(e) => (registerProps.onChange(e), onChange?.(e))}
               />
             ) : (
               <input
+                {...registerProps}
                 disabled={disabled}
                 {...(autoFocus && { autoFocus })}
                 onFocus={onFocus}
                 id={`input-${name}`}
                 className={cn(
-                  "active:border-accent peer w-full rounded-lg border font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                  "peer w-full font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight",
+                  "rounded-lg border border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                  // "placeholder-shown:border-textBlack",
                   "h-[34px] px-4 py-2 pr-8 text-[12px]",
                   "md:h-11 md:px-6 md:py-3 md:pr-8 md:text-[14px]",
                   "xl:text-[14px]",
                   "2xl:text-[16px]",
                   {
-                    "border-color7": !error,
+                    // "border-color7": !error,
+                    "border-color7": !error && isIconVisible,
                     "border-color2": error,
                     "pr-16 md:pr-16": isButtonRemoveInput,
                   },
@@ -134,18 +149,20 @@ export const Input = forwardRef<
                 type={type}
                 {...(value && { value })}
                 {...(defaultValue && { defaultValue })}
-                {...register(name)}
+                // {...register(name)}
                 aria-describedby={`inputError-${name}`}
                 title={promptMessage}
                 onBlur={(event) => {
                   setValue?.(name, event.target.value.trim(), {
                     shouldValidate: true,
                   });
-                  hookFormOnBlur(event);
+                  // hookFormOnBlur(event);
+                  registerProps.onBlur(event);
                   onBlur?.(event);
                 }}
                 ref={(el) => {
-                  refInput(el);
+                  // refInput(el);
+                  registerProps.ref(el);
                   if (el) inputRef.current = el;
                   if (forwardedRef && typeof forwardedRef === "function") {
                     forwardedRef(el);
@@ -153,16 +170,13 @@ export const Input = forwardRef<
                     (forwardedRef as React.MutableRefObject<any>).current = el;
                   }
                 }}
-                // ref={(el) => {
-                //   refInput(el);
-                //   if (el) inputRef.current = el;
-                // }}
                 onClick={onClick}
-                // alex
                 onKeyDown={onKeyDown}
-                // onClick={(event) => event.stopPropagation()}
                 onInput={onInput}
-                onChange={onChange}
+                onChange={(e) => {
+                  registerProps.onChange(e);
+                  onChange?.(e);
+                }}
                 autoComplete={autoComplete}
                 maxLength={maxLength}
               />
@@ -177,7 +191,7 @@ export const Input = forwardRef<
                 >
                   <Icon
                     id="copy"
-                    className="h-6 w-6 cursor-pointer fill-black transition-all hover:fill-color5"
+                    className="h-6 w-6 cursor-pointer fill-black transition-all active:fill-color5 md:hover:fill-color5"
                   />
                 </button>
               )}
@@ -193,7 +207,7 @@ export const Input = forwardRef<
                   />
                 </button>
               )}
-              {isCheckButtons && isIconVisible ? (
+              {/* {isCheckButtons && isIconVisible ? (
                 error ? (
                   <button onClick={() => handleResetField(name)}>
                     <Icon
@@ -211,6 +225,27 @@ export const Input = forwardRef<
                     </div>
                   )
                 )
+              ) : null} */}
+              {/* Оля */}
+              {isCheckButtons ? (
+                error ? (
+                  <button onClick={() => handleResetField(name)}>
+                    <Icon
+                      id="cancel-in-round"
+                      className="h-6 w-6 cursor-pointer fill-color2"
+                    />
+                  </button>
+                ) : (
+                  isIconVisible &&
+                  !isIcon && (
+                    <div>
+                      <Icon
+                        id="check-box"
+                        className="h-6 w-6 cursor-text fill-color7"
+                      />
+                    </div>
+                  )
+                )
               ) : null}
             </div>
           </div>
@@ -223,8 +258,10 @@ export const Input = forwardRef<
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-color2 bg-white p-2 text-color2"
-              )}
+                  "absolute top-[130%] z-10 w-[66vw] rounded-md bg-white pb-2 pl-4 pt-1 text-start text-xs text-color2 md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
+                name === "hours" && "left-[-90%] md:left-[-80%]",
+                name === "minutes" && "left-[-286%] md:left-[-80%]"
+              )} //md:text-center text-end
             >
               {t(String(error?.message))}
             </span>
