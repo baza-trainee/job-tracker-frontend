@@ -1,5 +1,4 @@
 import NotesMain from "@/components/Notes/components/NotesMain";
-
 import PageHeader from "@/components/commonComponents/PageHeader";
 
 function Notes() {
