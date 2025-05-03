@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ModalProps } from "./initialState";
-import { CloseButton } from "react-toastify";
 
 const initialState: ModalProps = {
   isModalOpen: false,
@@ -52,7 +51,6 @@ const modalSlice = createSlice({
       state.dataConfirmation = null;
     },
     closeButton: (state, action: PayloadAction<ModalProps>) => {
-      console.log("redux", action.payload.isButtonOpen);
       state.isButtonOpen = action.payload.isButtonOpen;
       state.resetForm = action.payload.resetForm;
     },
