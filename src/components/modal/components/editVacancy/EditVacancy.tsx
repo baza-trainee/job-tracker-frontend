@@ -4,7 +4,10 @@ import { Textarea } from "../../../Textarea/Textarea";
 import { t } from "i18next";
 import Icon from "../../../Icon/Icon";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
-import { openConfirmation } from "../../../../store/slices/modalSlice/modalSlice";
+import {
+  openConfirmation,
+  closeButton,
+} from "../../../../store/slices/modalSlice/modalSlice";
 // component
 import { CheckboxWithCalendar } from "../addVacancyModals/CheckboxWithCalendar";
 import { InputRadio } from "../../../inputs/InputRadio/InputRadio";
@@ -15,6 +18,7 @@ import { VacancyInputProps } from "../addVacancyModals/AddVacancy.props";
 import { TypesModal } from "../../ModalMain.types";
 // hook
 import useEditVacancy from "./useEditVacancy";
+import { useEffect } from "react";
 
 const EditVacancy = () => {
   const dispatch = useAppDispatch();
@@ -51,6 +55,15 @@ const EditVacancy = () => {
   const saveVacancy = () => handleConfirmation("saveEditVacancies");
   const handleSubmitArchive = () =>
     handleConfirmation(isArchived ? "restoreVacancy" : "arhiveVacancy");
+
+  useEffect(() => {
+    dispatch(
+      closeButton({
+        isButtonOpen: isFormChanged,
+        resetForm: () => handleConfirmation("closeModalsaveEditVacancies"),
+      })
+    );
+  }, [isFormChanged]);
 
   return (
     <div className="w-full pt-[50px] xl:pt-[44px]">

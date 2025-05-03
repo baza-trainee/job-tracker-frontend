@@ -53,7 +53,7 @@ const useEditVacancy = () => {
     getValues,
     setValue,
     watch,
-    formState: { errors},
+    formState: { errors },
   } = useForm<z.infer<typeof AddVacancySchema>>({
     defaultValues: {
       company: "",
@@ -73,8 +73,6 @@ const useEditVacancy = () => {
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
   });
-  //alex
-  // console.log("vac", vacancyData);
 
   useEffect(() => {
     if (vacancyData) {
@@ -100,7 +98,8 @@ const useEditVacancy = () => {
     }
   }, [vacancyData, reset, dispatch]);
 
-  // change Vacancy
+  // якщо зміна у вакансії відбулася, активна кнопка збереження
+  // та кнопка закриття модального вікна пропонує зберегти, якщо ні ...
   const watchedValues = watch();
   const isFormChanged = useMemo(() => {
     if (!vacancyData) return false;
@@ -111,10 +110,11 @@ const useEditVacancy = () => {
       watchedValues.communication !== vacancyData.communication ||
       watchedValues.location !== vacancyData.location ||
       watchedValues.note !== vacancyData.note ||
-      watchedValues.work_type !== vacancyData.work_type || JSON.stringify(previousStatuses) !== JSON.stringify(newStatuses)
+      watchedValues.work_type !== vacancyData.work_type ||
+      JSON.stringify(previousStatuses) !== JSON.stringify(newStatuses)
     );
   }, [watchedValues, vacancyData, previousStatuses, newStatuses]);
- 
+
   // deleteVacancy
   const [deleteVacancyById] = useDeleteVacancyByIdMutation();
 
@@ -273,7 +273,7 @@ const useEditVacancy = () => {
     isLoading,
     vacancyData,
     deleteVacancy,
-    isFormChanged
+    isFormChanged,
   };
 };
 

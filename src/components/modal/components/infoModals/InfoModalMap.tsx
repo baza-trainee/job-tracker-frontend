@@ -36,7 +36,7 @@ const InfoModalMap = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [logOut] = useLogOutUserMutation();
+  const [logOut, { isLoading: isLoadinglogOut }] = useLogOutUserMutation();
   const dataModalForConfirm = useAppSelector(
     (state) => state.modal.dataConfirmation
   );
@@ -76,7 +76,6 @@ const InfoModalMap = () => {
   const handleLogOut = useCallback((): void => {
     dispatch(setSearchQuery(""));
     dispatch(setSortType(""));
-
     logOut();
   }, [dispatch, logOut]);
 
@@ -89,6 +88,12 @@ const InfoModalMap = () => {
   const handleCloseConfirmation = useCallback((): void => {
     notifyInfo(t("notification.notSaveInfo")); // test
     dispatch(closeConfirmation());
+  }, [dispatch]);
+
+  const handleCloseBtnModal = useCallback((): void => {
+    notifyInfo(t("notification.notSaveInfo")); // test
+    dispatch(closeConfirmation());
+    dispatch(closeModal());
   }, [dispatch]);
 
   // Видалити вакансію
@@ -332,11 +337,21 @@ const InfoModalMap = () => {
       titleSize: "small",
       text: [t("infoModal.logOut.text_1")],
       button: [
-        createButton(t("infoModal.button.cancel"), handleCancel, "text-[20px]"),
+        createButton(
+          t("infoModal.button.cancel"),
+          handleCancel,
+          "text-[20px]",
+          "small",
+          "ghost",
+          isLoadinglogOut
+        ),
         createButton(
           t("infoModal.button.logOut"),
           handleLogOut,
-          "text-[20px] w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
+          "text-[20px] w-full bg-button md:mx-auto xl:mx-0 xl:w-auto",
+          "small",
+          "ghost",
+          isLoadinglogOut
         ),
       ],
     },
@@ -380,7 +395,7 @@ const InfoModalMap = () => {
           "",
           "small",
           "ghost",
-          addVacanciesLoading
+          editVacanciesLoading
         ),
         createButton(
           t("infoModal.button.delete"),
@@ -388,7 +403,7 @@ const InfoModalMap = () => {
           "",
           "big",
           "accent",
-          addVacanciesLoading
+          editVacanciesLoading
         ),
       ],
     },
@@ -567,6 +582,29 @@ const InfoModalMap = () => {
           "big",
           "accent",
           notesLoading
+        ),
+      ],
+    },
+    closeModalsaveEditVacancies: {
+      title: t("infoModal.saveAddVacancies.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveAddVacancies.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.cancel"),
+          handleCloseBtnModal,
+          "",
+          "small",
+          "ghost",
+          editVacanciesLoading
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleEditVacancy,
+          "",
+          "big",
+          "accent",
+          editVacanciesLoading
         ),
       ],
     },

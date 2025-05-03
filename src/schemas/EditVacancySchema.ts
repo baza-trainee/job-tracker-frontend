@@ -14,7 +14,7 @@ export const EditVacancySchema = z.object({
     .trim(),
   communication: z
     .string()
-    .max(4000, `addVacancySchema.communication.max`)
+    .max(1000, `addVacancySchema.communication.max`)
     .min(10, `addVacancySchema.communication.min`)
     .trim(),
   company: z
@@ -30,7 +30,7 @@ export const EditVacancySchema = z.object({
   work_type: z.enum(["remote", "office", "hybrid"], {
     errorMap: () => ({ message: "addVacancySchema.workType.invalid" }),
   }),
-  note: z.string().max(4000, `addVacancySchema.notes.max`).trim(),
+  note: z.string().max(1000, `addVacancySchema.notes.max`).trim(),
   isArchived: z.boolean(),
 });
 

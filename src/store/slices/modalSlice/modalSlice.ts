@@ -2,9 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ModalProps } from "./initialState";
 
 const initialState: ModalProps = {
-  // isModalOpen: true,
-  // typeModal: "resetPasswordSuccess",
-
   isModalOpen: false,
   typeModal: "close",
   isConfirmationOpen: false,
@@ -15,6 +12,7 @@ const initialState: ModalProps = {
   backgroundColorModal: null,
   vacancyData: null,
   eventData: null,
+  isButtonOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -52,9 +50,18 @@ const modalSlice = createSlice({
       state.typeConfirmation = "close";
       state.dataConfirmation = null;
     },
+    closeButton: (state, action: PayloadAction<ModalProps>) => {
+      state.isButtonOpen = action.payload.isButtonOpen;
+      state.resetForm = action.payload.resetForm;
+    },
   },
 });
 
-export const { openModal, closeModal, openConfirmation, closeConfirmation } =
-  modalSlice.actions;
+export const {
+  openModal,
+  closeModal,
+  openConfirmation,
+  closeConfirmation,
+  closeButton,
+} = modalSlice.actions;
 export default modalSlice.reducer;
