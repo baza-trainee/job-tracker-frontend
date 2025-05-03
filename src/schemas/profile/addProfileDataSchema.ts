@@ -6,7 +6,7 @@ type Schema = {
     name: ZodString;
     technologies: ZodOptional<ZodString>;
     link: ZodOptional<ZodString>;
-    text: ZodOptional<ZodString>;
+    text: any;
   }>;
 };
 
@@ -22,10 +22,6 @@ export const addProfileData: Schema = {
     technologies: z.string().optional(),
     link: z
       .string()
-      .min(2, {
-        message: "validation.min2Characters",
-      })
-      // .url({ message: "validation.invalidUrl" })
       .regex(/^https?:\/\/[a-zA-Z0-9-]{2,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
         message: "validation.invalidUrl",
       })
@@ -47,20 +43,13 @@ export const addProfileData: Schema = {
       .optional(),
     link: z
       .string()
-      .min(2, {
-        message: "validation.min2Characters",
-      })
-      // .url({ message: "validation.invalidUrl" })
       .regex(/^https?:\/\/[a-zA-Z0-9-]{2,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
         message: "validation.invalidUrl",
       })
       .trim()
       .optional(),
-    text: z
-      .string()
-      .min(2, { message: "validation.min2Characters" })
-      .trim()
-      .optional(),
+    text: z.string().min(2, { message: "validation.min2Characters" }).trim(),
+    // .optional(),
   }),
   addCoverLetters: z.object({
     name: z
@@ -72,9 +61,10 @@ export const addProfileData: Schema = {
     link: z.string().optional(),
     text: z
       .string()
-      .min(2, { message: "validation.min2Characters" })
+      // .min(2, { message: "validation.min2Characters" })
       .trim()
-      .optional(),
+      .regex(/^.{2,}$/, { message: "validation.min2Characters" }),
+    // .optional(),
   }),
   addPersonalProperties: z.object({
     name: z
@@ -90,15 +80,15 @@ export const addProfileData: Schema = {
     link: z
       .string()
       .trim()
-      // .url({ message: "validation.invalidUrl" })
       .regex(/^https?:\/\/[a-zA-Z0-9-]{2,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
         message: "validation.invalidUrl",
       })
       .optional(),
     text: z
       .string()
-      .min(2, { message: "validation.min2Characters" })
+      // .min(2, { message: "validation.min2Characters" })
       .trim()
+      .regex(/^.{2,}$/, { message: "validation.min2Characters" })
       .optional(),
   }),
 };

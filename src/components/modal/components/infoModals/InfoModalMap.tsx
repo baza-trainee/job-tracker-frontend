@@ -232,6 +232,7 @@ const InfoModalMap = () => {
       }
     >
   > = {
+    removeCoverLetters: { title: t("ll"), text: ["jhhvggcg"], button: [] },
     logInSuccess: {
       title: t("infoModal.success"),
       text: [t("infoModal.logInSuccess.text_1")],
