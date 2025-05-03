@@ -91,6 +91,12 @@ const InfoModalMap = () => {
     dispatch(closeConfirmation());
   }, [dispatch]);
 
+  const handleCloseBtnModal = useCallback((): void => {
+    notifyInfo(t("notification.notSaveInfo")); // test
+    dispatch(closeConfirmation());
+    dispatch(closeModal());
+  }, [dispatch]);
+
   // Видалити вакансію
   const handleDeleteVacancy = useCallback((): void => {
     console.log("handleDeleteVacancy");
@@ -379,7 +385,7 @@ const InfoModalMap = () => {
           "",
           "small",
           "ghost",
-          addVacanciesLoading
+          editVacanciesLoading
         ),
         createButton(
           t("infoModal.button.delete"),
@@ -387,7 +393,7 @@ const InfoModalMap = () => {
           "",
           "big",
           "accent",
-          addVacanciesLoading
+          editVacanciesLoading
         ),
       ],
     },
@@ -566,6 +572,29 @@ const InfoModalMap = () => {
           "big",
           "accent",
           notesLoading
+        ),
+      ],
+    },
+    closeModalsaveEditVacancies: {
+      title: t("infoModal.saveAddVacancies.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveAddVacancies.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.cancel"),
+          handleCloseBtnModal,
+          "",
+          "small",
+          "ghost",
+          editVacanciesLoading
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleEditVacancy,
+          "",
+          "big",
+          "accent",
+          editVacanciesLoading
         ),
       ],
     },

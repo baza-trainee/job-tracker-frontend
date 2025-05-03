@@ -297,7 +297,8 @@
     },
     "communication": {
       "max": "Maximum length is 4000 characters",
-      "min": "Minimum length is 3 characters"
+      "min": "Minimum length is 3 characters",
+      "spaces": "The string must not contain any spaces"
     },
     "location": {
       "max": "Maximum length is 400 characters",

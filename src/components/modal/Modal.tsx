@@ -74,6 +74,8 @@ const Modal: FC = () => {
           btnFunc={() => {
             console.log("isButtonOpen", isButtonOpen)
             return isButtonOpen ? resetForm?.() : dispatch(closeModal());
+
+            
             // return isButtonOpen ? console.log("++") : console.log("--");
             // return dispatch(closeModal());
           }}

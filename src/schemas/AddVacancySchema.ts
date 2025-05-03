@@ -17,7 +17,10 @@ export const AddVacancySchema = z
     communication: z
       .string()
       .min(3, `addVacancySchema.communication.min`)
-      .max(4000, `addVacancySchema.communication.max`)
+      .regex(/^[^\s]+$/, {
+        message: "addVacancySchema.communication.spaces",
+      })
+      .max(1000, `addVacancySchema.communication.max`)
       .trim(),
     company: z
       .string()
@@ -37,7 +40,7 @@ export const AddVacancySchema = z
     resumeDropdown: z.string(),
     rejectDropdown: z.string(),
 
-    note: z.string().max(4000, `addVacancySchema.notes.max`).trim(),
+    note: z.string().max(1000, `addVacancySchema.notes.max`).trim(),
     isArchived: z.boolean(),
   })
   .refine((data) => !(data.resume && !data.resumeDropdown), {

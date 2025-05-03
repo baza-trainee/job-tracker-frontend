@@ -60,7 +60,7 @@ const EditVacancy = () => {
     dispatch(
       closeButton({
         isButtonOpen: isFormChanged,
-        resetForm: () => handleConfirmation("saveEditVacancies"),
+        resetForm: () => handleConfirmation("closeModalsaveEditVacancies"),
       })
     );
   }, [isFormChanged]);
@@ -190,20 +190,3 @@ const EditVacancy = () => {
 };
 
 export default EditVacancy;
-
-// other variant
-// const [btnMem, setBtnMem] = useState<boolean>(isFormChanged);
-
-// const closeBtnModal = () => {
-//   console.log("78");
-//   setBtnMem(isFormChanged);
-//   dispatch(
-//     closeButton({
-//       isButtonOpen: btnMem,
-//       resetForm: saveVacancy,
-//     })
-//   );
-// };
-// useEffect(() => {
-//   closeBtnModal();
-// }, [btnMem, isFormChanged]);
