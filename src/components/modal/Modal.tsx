@@ -62,20 +62,22 @@ const Modal: FC = () => {
     >
       <div className="flex">
         <ModalMain
-          className={classNames("", {
-            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]":
-              typeModal === "addVacancy" ||
-              typeModal === "editVacancy" ||
-              typeModal === "forgotPassword" ||
-              typeModal === "addEvent" ||
-              typeModal === "editEvent",
-          })}
+          // className={classNames("", {
+          //   "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]":
+          //     typeModal === "addVacancy" ||
+          //     typeModal === "editVacancy" ||
+          //     typeModal === "forgotPassword" ||
+          //     typeModal === "addEvent" ||
+          //     typeModal === "editEvent",
+          // })}
+          className={classNames(
+            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]"
+          )}
           modalData={modalData}
           btnFunc={() => {
-            console.log("isButtonOpen", isButtonOpen)
+            console.log("isButtonOpen", isButtonOpen);
             return isButtonOpen ? resetForm?.() : dispatch(closeModal());
 
-            
             // return isButtonOpen ? console.log("++") : console.log("--");
             // return dispatch(closeModal());
           }}
