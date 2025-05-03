@@ -13,9 +13,10 @@ import { Profile } from "@/types/profile.types";
 import SocialLinksFields from "./fields/SocialLinksFields";
 import { useTranslation } from "react-i18next";
 import ProfileLinksField from "./fields/ProfileLinksField";
+import SceletonProfile from "./SceletonProfile";
 
 function FormProfileCard({ cardsType }: PropsProfileCard) {
-  const { data: profile } = useGetAllUserDataQuery();
+  const { data: profile, isLoading } = useGetAllUserDataQuery();
   const { t } = useTranslation();
 
   const text = useProfileTexts({ cardsType });
@@ -80,120 +81,125 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
 
   return (
     <div className="flex flex-col gap-2 rounded-[0_12px_12px_12px] border-[4px] border-solid border-backgroundSecondary bg-slate-50 px-2 py-4 md:px-6 md:py-6">
-      {cardsType === "addPersonalProperties" && (
+      {isLoading ? (
+        <SceletonProfile />
+      ) : (
         <>
-          <ProfileLinksField />
-          <SocialLinksFields />
+          {cardsType === "addPersonalProperties" && (
+            <>
+              <ProfileLinksField />
+              <SocialLinksFields />
+            </>
+          )}
+          {cardsType === "addProjects" && (
+            <>
+              {profile?.projects.map((item) => (
+                <Input
+                  onFocus={() =>
+                    handleUpdateInput({ ...item, typeModal: "update" })
+                  }
+                  id={item.id}
+                  key={item.id}
+                  type="vacancy"
+                  value={`${item.name} | ${item.technologies}`}
+                  onChange={() => {}}
+                  name={item.id}
+                  placeholder={item.name}
+                  register={register}
+                  errors={errors}
+                  resetField={resetField}
+                  isCheckButtons={false}
+                  isButtonCopy={true}
+                  isButtonRemoveInput={true}
+                  handleClickButtonCopyInput={() =>
+                    copyInputValue({
+                      valueToCopy: item.link,
+                      text: t("notification.linkCopied"),
+                    })
+                  }
+                  handleClickButtonRemoveInput={() => {
+                    handleClickButtonRemoveInput(item.id);
+                  }}
+                />
+              ))}
+            </>
+          )}
+          {cardsType === "addResumes" && (
+            <>
+              {profile?.resumes.map((item) => (
+                <Input
+                  onFocus={() =>
+                    handleUpdateInput({ ...item, typeModal: "update" })
+                  }
+                  id={item.id}
+                  key={item.id}
+                  value={item.name}
+                  onChange={() => {}}
+                  type="vacancy"
+                  name={item.id}
+                  placeholder={item.name}
+                  register={register}
+                  errors={errors}
+                  resetField={resetField}
+                  isCheckButtons={false}
+                  isButtonCopy={true}
+                  isButtonRemoveInput={true}
+                  handleClickButtonCopyInput={() =>
+                    copyInputValue({
+                      valueToCopy: item.link,
+                      text: t("notification.linkCopied"),
+                    })
+                  }
+                  handleClickButtonRemoveInput={() => {
+                    handleClickButtonRemoveInput(item.id);
+                  }}
+                />
+              ))}
+            </>
+          )}
+          {cardsType === "addCoverLetters" && (
+            <>
+              {profile?.coverLetters.map((item) => (
+                <Input
+                  onFocus={() =>
+                    handleUpdateInput({ ...item, typeModal: "update" })
+                  }
+                  id={item.id}
+                  key={item.id}
+                  value={item.name}
+                  type="vacancy"
+                  onChange={() => {}}
+                  name={item.id}
+                  placeholder={item.name}
+                  register={register}
+                  errors={errors}
+                  resetField={resetField}
+                  isCheckButtons={false}
+                  isButtonCopy={true}
+                  isButtonRemoveInput={true}
+                  handleClickButtonCopyInput={() =>
+                    copyInputValue({
+                      valueToCopy: item.text,
+                      text: t("notification.textCopied"),
+                    })
+                  }
+                  handleClickButtonRemoveInput={() => {
+                    handleClickButtonRemoveInput(item.id);
+                  }}
+                />
+              ))}
+            </>
+          )}
+          <Button
+            className="mx-auto h-[48px] w-auto"
+            type="button"
+            variant="ghost"
+            onClick={() => dispatch(openModal({ typeModal: cardsType }))}
+          >
+            {text.buttonAdd} +
+          </Button>
         </>
       )}
-
-      {cardsType === "addProjects" && (
-        <>
-          {profile?.projects.map((item) => (
-            <Input
-              onFocus={() =>
-                handleUpdateInput({ ...item, typeModal: "update" })
-              }
-              id={item.id}
-              key={item.id}
-              type="vacancy"
-              value={`${item.name} | ${item.technologies}`}
-              onChange={() => {}}
-              name={item.id}
-              placeholder={item.name}
-              register={register}
-              errors={errors}
-              resetField={resetField}
-              isCheckButtons={false}
-              isButtonCopy={true}
-              isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() =>
-                copyInputValue({
-                  valueToCopy: item.link,
-                  text: t("notification.linkCopied"),
-                })
-              }
-              handleClickButtonRemoveInput={() => {
-                handleClickButtonRemoveInput(item.id);
-              }}
-            />
-          ))}
-        </>
-      )}
-      {cardsType === "addResumes" && (
-        <>
-          {profile?.resumes.map((item) => (
-            <Input
-              onFocus={() =>
-                handleUpdateInput({ ...item, typeModal: "update" })
-              }
-              id={item.id}
-              key={item.id}
-              value={item.name}
-              onChange={() => {}}
-              type="vacancy"
-              name={item.id}
-              placeholder={item.name}
-              register={register}
-              errors={errors}
-              resetField={resetField}
-              isCheckButtons={false}
-              isButtonCopy={true}
-              isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() =>
-                copyInputValue({
-                  valueToCopy: item.link,
-                  text: t("notification.linkCopied"),
-                })
-              }
-              handleClickButtonRemoveInput={() => {
-                handleClickButtonRemoveInput(item.id);
-              }}
-            />
-          ))}
-        </>
-      )}
-      {cardsType === "addCoverLetters" && (
-        <>
-          {profile?.coverLetters.map((item) => (
-            <Input
-              onFocus={() =>
-                handleUpdateInput({ ...item, typeModal: "update" })
-              }
-              id={item.id}
-              key={item.id}
-              value={item.name}
-              type="vacancy"
-              onChange={() => {}}
-              name={item.id}
-              placeholder={item.name}
-              register={register}
-              errors={errors}
-              resetField={resetField}
-              isCheckButtons={false}
-              isButtonCopy={true}
-              isButtonRemoveInput={true}
-              handleClickButtonCopyInput={() =>
-                copyInputValue({
-                  valueToCopy: item.text,
-                  text: t("notification.textCopied"),
-                })
-              }
-              handleClickButtonRemoveInput={() => {
-                handleClickButtonRemoveInput(item.id);
-              }}
-            />
-          ))}
-        </>
-      )}
-      <Button
-        className="mx-auto h-[48px] w-auto"
-        type="button"
-        variant="ghost"
-        onClick={() => dispatch(openModal({ typeModal: cardsType }))}
-      >
-        {text.buttonAdd} +
-      </Button>
     </div>
   );
 }

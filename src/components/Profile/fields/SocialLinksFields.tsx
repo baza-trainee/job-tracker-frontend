@@ -30,7 +30,7 @@ export default function SocialLinksFields() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(socialLinksSchema),
-    mode: "all",
+    mode: "onChange",
   });
 
   const initialValues = useRef<Record<string, string>>({});
@@ -46,6 +46,10 @@ export default function SocialLinksFields() {
   }, [profile?.socials, setValue]);
 
   const handleUpdateUserData = async (event: string, id?: string) => {
+    if (event === "") {
+      setValue(id as any, initialValues.current[id as string]);
+      return;
+    }
     if (initialValues.current[id as string] === event) {
       console.warn("Value did not change for", id);
       return;

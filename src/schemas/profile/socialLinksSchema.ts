@@ -3,7 +3,6 @@ import { z } from "zod";
 export const socialLinksSchema = z.record(
   z
     .string()
-
     .refine(
       (value) =>
         value === "" ||

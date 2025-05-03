@@ -65,6 +65,14 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         ? updateItem.description === watch("text")
         : true) &&
       (updateItem.text ? updateItem.text === watch("text") : true));
+  //     ||
+  //   !(
+  //     (watch("name") ? watch("name") !== "" : true) &&
+  //     (watch("link") ? watch("link") !== "" : true) &&
+  //     (watch("technologies") ? watch("technologies") !== "" : true) &&
+  //     (watch("text") ? watch("text") !== "" : true)
+  //   );
+  // console.log(watch("name") === "");
 
   return (
     <form
