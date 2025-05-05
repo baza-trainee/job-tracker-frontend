@@ -42,10 +42,6 @@ function Statistics() {
     isError: isPredictionError,
   } = useGetPredictionDailyQuery();
 
-  // const prediction = "hello";
-  // const isPredictionLoading = false;
-  // const isPredictionError = false;
-
   const renderCalendar = () => {
     switch (activeTab) {
       case "day":
