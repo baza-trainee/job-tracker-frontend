@@ -40,9 +40,11 @@ const InfoModalMap = () => {
   const dataModalForConfirm = useAppSelector(
     (state) => state.modal.dataConfirmation
   );
-  console.log("dataModalForConfirm -", dataModalForConfirm);
+  // console.log("dataModalForConfirm -", dataModalForConfirm);
+
   const { onSubmit: addVacanciesSubmit, isLoading: addVacanciesLoading } =
     useVacancy();
+
   const {
     onSubmit: editVacanciesSubmit,
     isLoading: editVacanciesLoading,
@@ -165,8 +167,18 @@ const InfoModalMap = () => {
 
   // Збереження редагування події
   const handleEditEvent = useCallback(async () => {
-    if (!dataModalForConfirm) return;
+    console.log("handleEditEvent викликано!"); // Додали цей console.log на самому початку
+    if (!dataModalForConfirm) {
+      console.log("handleEditEvent: dataModalForConfirm is null");
+      notifyError(t("infoModal.saveEditEvent.notifyEditEventError"));
+      return;
+    }
+    console.log(
+      "handleEditEvent: dataModalForConfirm перед відправкою -",
+      dataModalForConfirm
+    );
     try {
+      // const response = await updateEventById({
       await updateEventById({
         id: dataModalForConfirm.id,
         name: dataModalForConfirm.soonEventName,
@@ -174,11 +186,13 @@ const InfoModalMap = () => {
         time: `${dataModalForConfirm.hours}:${dataModalForConfirm.minutes}:00`,
         date: dataModalForConfirm.date,
       }).unwrap();
+      // console.log("handleEditEvent: успішна відповідь -", response);
       dispatch(closeConfirmation());
       dispatch(closeModal());
       refetch();
       notifySuccess(t("infoModal.saveEditEvent.notifyEditEventSuccess"));
     } catch (error) {
+      // console.error("handleEditEvent: помилка при збереженні -", error);
       notifyError(t("infoModal.saveEditEvent.notifyEditEventError"));
     }
   }, [dataModalForConfirm, updateEventById, dispatch, refetch]);
@@ -605,6 +619,27 @@ const InfoModalMap = () => {
           "big",
           "accent",
           editVacanciesLoading
+        ),
+      ],
+    },
+    closeModalsaveEditEvent: {
+      title: t("infoModal.saveEditEvent.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveEditEvent.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.cancel"),
+          handleCloseBtnModal,
+          "",
+          "small",
+          "ghost"
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleEditEvent,
+          "",
+          "big",
+          "accent"
         ),
       ],
     },
