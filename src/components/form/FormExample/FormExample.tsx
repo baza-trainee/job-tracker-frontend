@@ -48,7 +48,7 @@ export const FormExample = () => {
   return (
     <>
       <form
-        className="space-y-[30px] rounded-[20px] bg-background-form px-12 py-6 shadow-form_shadow"
+        className="bg-form-background space-y-[30px] rounded-[20px] px-12 py-6 shadow-form_shadow"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col gap-[30px]">
