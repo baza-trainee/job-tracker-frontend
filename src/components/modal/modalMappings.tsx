@@ -5,7 +5,7 @@ import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import EditVacancy from "./components/editVacancy/EditVacancy";
 import NotesModal from "./components/notesModals/NotesModal";
 import { Color, ContentMapProps } from "./ModalMain.types";
-import AddEventModal from "../Soon/AddEventModal";
+import AddEventModal from "../Soon/addEventModal/AddEventModal";
 import EditEventModal from "../Soon/editEvent/EditEventModal";
 import ModalRemoveAccount from "./components/profileModals/ModalRemoveAccount";
 import ModalMuttionProfileData from "./components/profileModals/ModalMuttionProfileData";

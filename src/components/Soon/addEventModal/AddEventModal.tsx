@@ -5,14 +5,14 @@ import { Button } from "../../buttons/Button/Button.tsx";
 import Icon from "../../Icon/Icon.tsx";
 import Select from "react-select";
 import clsx from "clsx";
-import useEditEventModal from "./useEditEventModal";
+import useAddEventModal from "./useAddEventModal";
 
 interface OptionType {
   value: number;
   label: string;
 }
 
-const EditEventModal = () => {
+const AddEventModal = () => {
   const {
     t,
     register,
@@ -20,10 +20,7 @@ const EditEventModal = () => {
     setValue,
     resetField,
     watch,
-    // trigger,
     errors,
-    confirmDelete,
-    confirmSave,
     hourOptions,
     minuteOptions,
     menuOpenHours,
@@ -38,14 +35,18 @@ const EditEventModal = () => {
     handleMinuteSelectChange,
     handleDateChange,
     handleInputChange,
-  } = useEditEventModal();
+    isLoading,
+  } = useAddEventModal();
 
   const selectHoursRef = useRef<any>(null);
   const selectMinutesRef = useRef<any>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <form className="mt-4 flex w-full flex-col gap-3 align-middle md:gap-4 xl:mt-10 3xl:mt-14 3xl:gap-6">
+    <form
+      onSubmit={handleSubmit} // Використовуємо handleSubmit, який повертає useForm
+      className="mt-4 flex w-full flex-col gap-3 align-middle md:gap-4 xl:mt-10 3xl:mt-14 3xl:gap-6"
+    >
       <div className="flex w-full flex-col gap-4 md:flex-row xl:gap-6">
         <div>
           <SoonCalendarModal onSelectDate={handleDateChange} />
@@ -71,7 +72,7 @@ const EditEventModal = () => {
             isRequired={true}
             isCheckButtons={true}
             classNameInputCustom="rounded-lg"
-            onChange={handleInputChange} // handleInputChange вже все робить
+            onChange={handleInputChange}
             autoComplete="off"
           />
 
@@ -93,7 +94,7 @@ const EditEventModal = () => {
             rows={4}
             isCheckButtons={false}
             classNameInputCustom="resize-none textarea-event-lg textarea-event"
-            onChange={handleInputChange} // handleInputChange вже все робить
+            onChange={handleInputChange}
             autoComplete="off"
           />
 
@@ -233,32 +234,18 @@ const EditEventModal = () => {
         </div>
       </div>
 
-      <div className="flex flex-col-reverse justify-center gap-2 md:flex-row md:gap-6">
-        <Button
-          type="button"
-          className="md:px-8"
-          variant="ghost"
-          size="big"
-          onClick={confirmDelete}
-        >
-          {t("soonSection.delete")}
-          <Icon id={"delete"} className="ml-3 h-6 w-6" />
-        </Button>
-
-        <Button
-          type="submit"
-          className="bg-button"
-          variant="ghost"
-          size="big"
-          onClick={handleSubmit(confirmSave)}
-          disabled={inputChanged === false}
-        >
-          {t("soonSection.save")}
-          <Icon id={"check-box"} className="ml-3 h-6 w-6" />
-        </Button>
-      </div>
+      <Button
+        type="submit"
+        className="mx-auto bg-button"
+        variant="ghost"
+        size="big"
+        disabled={isLoading || inputChanged === false}
+      >
+        {isLoading ? t("loading") : t("soonSection.save")}
+        <Icon id={"check-box"} className="ml-3 h-6 w-6" />
+      </Button>
     </form>
   );
 };
 
-export default EditEventModal;
+export default AddEventModal;

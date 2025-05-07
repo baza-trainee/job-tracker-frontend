@@ -4,6 +4,7 @@ import {
   closeModal,
   openModal,
   openConfirmation,
+  closeButton,
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
@@ -96,6 +97,7 @@ const InfoModalMap = () => {
     notifyInfo(t("notification.notSaveInfo")); // test
     dispatch(closeConfirmation());
     dispatch(closeModal());
+    dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));
   }, [dispatch]);
 
   // Видалити вакансію
@@ -107,6 +109,7 @@ const InfoModalMap = () => {
   // Збереження редагованої вакансії
   const handleEditVacancy = useCallback((): void => {
     editVacanciesSubmit(dataModalForConfirm);
+    dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));
   }, [editVacanciesSubmit, dataModalForConfirm]);
 
   // Архівувати вакансію
@@ -189,6 +192,7 @@ const InfoModalMap = () => {
       // console.log("handleEditEvent: успішна відповідь -", response);
       dispatch(closeConfirmation());
       dispatch(closeModal());
+      dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));
       refetch();
       notifySuccess(t("infoModal.saveEditEvent.notifyEditEventSuccess"));
     } catch (error) {
