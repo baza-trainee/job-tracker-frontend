@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../../store/hook.ts";
 import {
   openConfirmation,
   closeButton,
+  closeModal,
 } from "../../../store/slices/modalSlice/modalSlice.ts";
 import { getEventSchema } from "../../../schemas/eventModalSchema.ts";
 import { useCreateEventMutation } from "../../../store/querySlices/eventsQuerySlice.ts";
@@ -15,8 +16,8 @@ import { TypesModal } from "../../modal/ModalMain.types.ts";
 type FormValues = {
   soonEventName: string;
   soonEventNotes: string;
-  hours: number | null;
-  minutes: number | null;
+  hours: number | undefined;
+  minutes: number | undefined;
   date: string;
 };
 
@@ -47,8 +48,8 @@ const useAddEventModal = () => {
     defaultValues: {
       soonEventName: "",
       soonEventNotes: "",
-      hours: null,
-      minutes: null,
+      hours: undefined,
+      minutes: undefined,
       date: "",
     },
   });
@@ -62,23 +63,33 @@ const useAddEventModal = () => {
     typeConfirmation: TypesModal,
     data?: FormValues
   ) => {
-    dispatch(
-      openConfirmation({
-        typeConfirmation,
-        dataConfirmation: data
-          ? {
-              ...data,
-              time: `${String(data.hours || "00").padStart(2, "0")}:${String(
-                data.minutes || "00"
-              ).padStart(2, "0")}`,
-            }
-          : undefined,
-        resetForm: reset,
-      })
-    );
+    console.log(
+      "useAddEventModal: handleConfirmation викликано з типом:",
+      typeConfirmation,
+      "та даними:",
+      data
+    ),
+      dispatch(
+        openConfirmation({
+          typeConfirmation,
+          dataConfirmation: data
+            ? {
+                ...data,
+                time: `${String(data.hours !== undefined ? data.hours : "00").padStart(2, "0")}:${String(
+                  data.minutes !== undefined ? data.minutes : "00"
+                  // data.minutes ? data.minutes : "00"
+                  // time: `${String(data.hours || "00").padStart(2, "0")}:${String(
+                  //   data.minutes || "00"
+                ).padStart(2, "0")}`,
+              }
+            : undefined,
+          resetForm: reset,
+        })
+      );
   };
 
   const confirmSave = handleSubmit(async (data) => {
+    console.log("useAddEventModal: confirmSave викликано з даними:", data);
     handleConfirmation("saveAddEvent", data);
   });
 
@@ -86,10 +97,43 @@ const useAddEventModal = () => {
     dispatch(
       closeButton({
         isButtonOpen: inputChanged,
-        resetForm: () => handleConfirmation("closeModalsaveEditEvent"), // Зверніть увагу на тип модалки
+        resetForm: () => {
+          trigger().then((isValidOnClose) => {
+            const currentFormData = watch();
+            console.log(
+              "useAddEventModal: isValidOnClose -",
+              isValidOnClose,
+              "inputChanged -",
+              inputChanged,
+              "currentFormData перед handleConfirmation -",
+              currentFormData
+            );
+            const formDataWithDefaultMinutes = {
+              ...currentFormData,
+              minutes:
+                currentFormData.minutes !== undefined
+                  ? currentFormData.minutes
+                  : undefined, // Залишаємо undefined, щоб спрацювала логіка в handleConfirmation
+            };
+            if (isValidOnClose && inputChanged) {
+              handleConfirmation(
+                "closeModalsaveAddEvent",
+                formDataWithDefaultMinutes
+              );
+            } else if (inputChanged) {
+              dispatch(
+                openConfirmation({
+                  typeConfirmation: "closeDiscardModal",
+                })
+              );
+            } else {
+              dispatch(closeModal());
+            }
+          });
+        },
       })
     );
-  }, [inputChanged, dispatch, handleConfirmation]);
+  }, [inputChanged, dispatch, handleConfirmation, trigger, watch, reset]);
 
   const hourOptions = Array.from({ length: 24 }, (_, i) => ({
     value: i,
@@ -140,7 +184,7 @@ const useAddEventModal = () => {
   const handleHourSelectChange = (selectedOption: SingleValue<OptionType>) => {
     handleInputChange();
     setMenuOpenHours(false);
-    setValue("hours", selectedOption ? selectedOption.value : null, {
+    setValue("hours", selectedOption ? selectedOption.value : undefined, {
       shouldValidate: true,
     });
     trigger("hours");
@@ -151,7 +195,7 @@ const useAddEventModal = () => {
   ) => {
     handleInputChange();
     setMenuOpenMinutes(false);
-    setValue("minutes", selectedOption ? selectedOption.value : null, {
+    setValue("minutes", selectedOption ? selectedOption.value : undefined, {
       shouldValidate: true,
     });
     trigger("minutes");

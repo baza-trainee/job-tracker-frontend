@@ -291,4 +291,18 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
+  closeModalsaveAddEvent: {
+    content: (
+      <InfoModal type="closeModalsaveAddEvent" textColor={colorButton.text} />
+    ),
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  closeDiscardModal: {
+    content: (
+      <InfoModal type="closeDiscardModal" textColor={colorButton.text} />
+    ),
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
 };

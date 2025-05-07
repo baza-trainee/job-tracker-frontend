@@ -41,7 +41,9 @@ export type TypesModal =
   | "updateNote"
   | "confirmToRemove"
   | "closeModalsaveEditVacancies"
-  | "closeModalsaveEditEvent";
+  | "closeModalsaveEditEvent"
+  | "closeModalsaveAddEvent"
+  | "closeDiscardModal";
 
 export type Color = {
   text: "text-white" | "text-button" | "text-color2" | "text-color8";

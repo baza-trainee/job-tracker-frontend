@@ -9,6 +9,7 @@ import { selectEventData } from "../../../store/slices/modalSlice/selectors.ts";
 import {
   openConfirmation,
   closeButton,
+  closeModal,
 } from "../../../store/slices/modalSlice/modalSlice.ts";
 import { getEventSchema } from "../../../schemas/eventModalSchema.ts";
 import { TypesModal } from "../../modal/ModalMain.types.ts";
@@ -49,6 +50,7 @@ const useEditEventModal = () => {
       minutes: null,
       date: "",
     },
+    mode: "onChange",
   });
 
   const [menuOpenHours, setMenuOpenHours] = useState(false);
@@ -83,10 +85,24 @@ const useEditEventModal = () => {
     dispatch(
       closeButton({
         isButtonOpen: inputChanged,
-        resetForm: () => handleConfirmation("closeModalsaveEditEvent"),
+        resetForm: () => {
+          trigger().then((isValidOnClose) => {
+            if (isValidOnClose && inputChanged) {
+              handleConfirmation("closeModalsaveEditEvent");
+            } else if (inputChanged) {
+              dispatch(
+                openConfirmation({
+                  typeConfirmation: "closeDiscardModal",
+                })
+              );
+            } else {
+              dispatch(closeModal());
+            }
+          });
+        },
       })
     );
-  }, [inputChanged, dispatch, handleConfirmation]);
+  }, [inputChanged, dispatch, handleConfirmation, trigger]);
 
   const confirmDelete = () => handleConfirmation("deleteEvent");
   const confirmSave = () => handleConfirmation("saveEditEvent");
