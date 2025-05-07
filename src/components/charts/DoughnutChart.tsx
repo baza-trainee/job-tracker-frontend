@@ -146,15 +146,15 @@ export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
   };
 
   return (
-    <div className="flex h-fit w-full flex-col gap-2 md:gap-4 xl:mt-8 xl:w-[390px] xl:gap-6 2xl:mt-[50px] 2xl:w-[558px] 3xl:mt-10 3xl:w-[633px] 3xl:gap-8">
+    <div className="flex h-fit w-full flex-col gap-2 md:gap-4 xl:mt-8 xl:w-[390px] xl:gap-6 2xl:mt-[50px] 2xl:w-fit 3xl:mt-10 3xl:w-[633px] 3xl:gap-8">
       <DiagramTitle title={t(`statisticsDoughnatDiagram`)} />
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:px-8 xl:flex-col xl:justify-center xl:gap-6 xl:px-5 3xl:px-8">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:px-8 xl:flex-col xl:justify-center xl:gap-6 xl:px-5 2xl:px-0">
         <div className="mx-auto aspect-square h-[calc(100%-60px)] w-[calc(100%-60px)] md:mx-0 md:w-[370px] xl:mx-auto xl:w-[350px] 2xl:w-[400px] 3xl:w-[556px]">
           <Doughnut data={chartData} options={options} />
         </div>
         <CustomLegend
           data={chartData}
-          className="h-[130px] gap-2 md:h-fit md:w-[270px] md:gap-4 md:py-6 2xl:h-[170px] 2xl:w-full 2xl:gap-6 3xl:h-[202px] 3xl:py-8"
+          className="h-[130px] gap-2 md:h-fit md:w-[270px] md:gap-4 md:py-6 2xl:h-[170px] 2xl:w-[523px] 2xl:gap-6 3xl:h-[202px] 3xl:w-full 3xl:py-8"
         />
       </div>
     </div>
