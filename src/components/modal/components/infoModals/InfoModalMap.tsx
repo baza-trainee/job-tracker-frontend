@@ -131,10 +131,7 @@ const InfoModalMap = () => {
 
   // Додавання (створення) події
   const handleAddEvent = useCallback(async () => {
-    console.log(
-      "InfoModalMap: handleAddEvent викликано з даними:",
-      dataModalForConfirm
-    );
+    // console.log("InfoModalMap: handleAddEvent викликано з даними:", dataModalForConfirm);
     if (!dataModalForConfirm) return;
     try {
       await addCreateEvent({
@@ -175,26 +172,23 @@ const InfoModalMap = () => {
 
   // Збереження редагування події
   const handleEditEvent = useCallback(async () => {
-    console.log("handleEditEvent викликано!");
+    // console.log("handleEditEvent викликано!");
     if (!dataModalForConfirm) {
-      console.log("handleEditEvent: dataModalForConfirm is null");
+      // console.log("handleEditEvent: dataModalForConfirm is null");
       notifyError(t("infoModal.saveEditEvent.notifyEditEventError"));
       return;
     }
-    console.log(
-      "handleEditEvent: dataModalForConfirm перед відправкою -",
-      dataModalForConfirm
-    );
+    // console.log("handleEditEvent: dataModalForConfirm перед відправкою -", dataModalForConfirm);
     try {
-      const response = await updateEventById({
-        // await updateEventById({
+      // const response = await updateEventById({
+      await updateEventById({
         id: dataModalForConfirm.id,
         name: dataModalForConfirm.soonEventName,
         text: dataModalForConfirm.soonEventNotes,
         time: `${dataModalForConfirm.hours}:${dataModalForConfirm.minutes}:00`,
         date: dataModalForConfirm.date,
       }).unwrap();
-      console.log("handleEditEvent: успішна відповідь -", response);
+      // console.log("handleEditEvent: успішна відповідь -", response);
       dispatch(closeConfirmation());
       dispatch(closeModal());
       dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));

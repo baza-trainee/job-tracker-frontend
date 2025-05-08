@@ -63,33 +63,28 @@ const useAddEventModal = () => {
     typeConfirmation: TypesModal,
     data?: FormValues
   ) => {
-    console.log(
-      "useAddEventModal: handleConfirmation викликано з типом:",
-      typeConfirmation,
-      "та даними:",
-      data
-    ),
-      dispatch(
-        openConfirmation({
-          typeConfirmation,
-          dataConfirmation: data
-            ? {
-                ...data,
-                time: `${String(data.hours !== undefined ? data.hours : "00").padStart(2, "0")}:${String(
-                  data.minutes !== undefined ? data.minutes : "00"
-                  // data.minutes ? data.minutes : "00"
-                  // time: `${String(data.hours || "00").padStart(2, "0")}:${String(
-                  //   data.minutes || "00"
-                ).padStart(2, "0")}`,
-              }
-            : undefined,
-          resetForm: reset,
-        })
-      );
+    // console.log("useAddEventModal: handleConfirmation викликано з типом:", typeConfirmation, "та даними:",data),
+    dispatch(
+      openConfirmation({
+        typeConfirmation,
+        dataConfirmation: data
+          ? {
+              ...data,
+              time: `${String(data.hours !== undefined ? data.hours : "00").padStart(2, "0")}:${String(
+                data.minutes !== undefined ? data.minutes : "00"
+                // data.minutes ? data.minutes : "00"
+                // time: `${String(data.hours || "00").padStart(2, "0")}:${String(
+                //   data.minutes || "00"
+              ).padStart(2, "0")}`,
+            }
+          : undefined,
+        resetForm: reset,
+      })
+    );
   };
 
   const confirmSave = handleSubmit(async (data) => {
-    console.log("useAddEventModal: confirmSave викликано з даними:", data);
+    // console.log("useAddEventModal: confirmSave викликано з даними:", data);
     handleConfirmation("saveAddEvent", data);
   });
 
@@ -100,21 +95,17 @@ const useAddEventModal = () => {
         resetForm: () => {
           trigger().then((isValidOnClose) => {
             const currentFormData = watch();
-            console.log(
-              "useAddEventModal: isValidOnClose -",
-              isValidOnClose,
-              "inputChanged -",
-              inputChanged,
-              "currentFormData перед handleConfirmation -",
-              currentFormData
-            );
+            // console.log("useAddEventModal: isValidOnClose -",isValidOnClose,
+            // "inputChanged -",inputChanged,
+            // "currentFormData перед handleConfirmation -", currentFormData);
             const formDataWithDefaultMinutes = {
               ...currentFormData,
               minutes:
                 currentFormData.minutes !== undefined
                   ? currentFormData.minutes
-                  : undefined, // Залишаємо undefined, щоб спрацювала логіка в handleConfirmation
+                  : +"00",
             };
+            // console.log("formDataWithDefaultMinutes", formDataWithDefaultMinutes);
             if (isValidOnClose && inputChanged) {
               handleConfirmation(
                 "closeModalsaveAddEvent",
