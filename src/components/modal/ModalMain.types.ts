@@ -40,7 +40,10 @@ export type TypesModal =
   | "deleteNote"
   | "updateNote"
   | "confirmToRemove"
-  | "closeModalsaveEditVacancies";
+  | "closeModalsaveEditVacancies"
+  | "closeModalsaveEditEvent"
+  | "closeModalsaveAddEvent"
+  | "closeDiscardModal";
 
 export type Color = {
   text: "text-white" | "text-button" | "text-color2" | "text-color8";

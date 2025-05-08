@@ -5,8 +5,8 @@ import AddVacancy from "./components/addVacancyModals/AddVacancy";
 import EditVacancy from "./components/editVacancy/EditVacancy";
 import NotesModal from "./components/notesModals/NotesModal";
 import { Color, ContentMapProps } from "./ModalMain.types";
-import AddEventModal from "../Soon/AddEventModal";
-import EditEventModal from "../Soon/EditEventModal";
+import AddEventModal from "../Soon/addEventModal/AddEventModal";
+import EditEventModal from "../Soon/editEvent/EditEventModal";
 import ModalRemoveAccount from "./components/profileModals/ModalRemoveAccount";
 import ModalMuttionProfileData from "./components/profileModals/ModalMuttionProfileData";
 import ModalRemoveProperties from "./components/profileModals/ModalRemoveProperties";
@@ -276,7 +276,31 @@ export const contentMap: ContentMapProps = {
   },
   closeModalsaveEditVacancies: {
     content: (
-      <InfoModal type="closeModalsaveEditVacancies" textColor={colorButton.text} />
+      <InfoModal
+        type="closeModalsaveEditVacancies"
+        textColor={colorButton.text}
+      />
+    ),
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  closeModalsaveEditEvent: {
+    content: (
+      <InfoModal type="closeModalsaveEditEvent" textColor={colorButton.text} />
+    ),
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  closeModalsaveAddEvent: {
+    content: (
+      <InfoModal type="closeModalsaveAddEvent" textColor={colorButton.text} />
+    ),
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  closeDiscardModal: {
+    content: (
+      <InfoModal type="closeDiscardModal" textColor={colorButton.text} />
     ),
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
