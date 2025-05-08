@@ -98,14 +98,14 @@ export const useFilteredNotes = (
       case "newFirst":
         result = result.sort(
           (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
         );
         break;
 
       case "oldFirst":
         result = result.sort(
           (a, b) =>
-            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
         );
         break;
 

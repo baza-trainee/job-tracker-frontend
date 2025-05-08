@@ -37,7 +37,10 @@ const NoteCard: FC<Note> = (note) => {
         {name}
       </div>
       <div className="flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
-        <p className="mb-6 line-clamp-[7] break-words smOnly:break-all">
+        <p
+          className="mb-6 line-clamp-[7] cursor-pointer break-words smOnly:break-all"
+          onClick={() => handleNoteCard("updateNote")}
+        >
           {text}
         </p>
 
