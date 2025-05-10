@@ -297,7 +297,8 @@
     },
     "communication": {
       "max": "Maximum length is 4000 characters",
-      "min": "Minimum length is 3 characters"
+      "min": "Minimum length is 3 characters",
+      "spaces": "The string must not contain any spaces"
     },
     "location": {
       "max": "Maximum length is 400 characters",
@@ -381,7 +382,9 @@
       "restore": "Restore",
       "login": "Log In",
       "try": "Try",
-      "delete": "Delete"
+      "delete": "Delete",
+      "edit": "Edit",
+      "close": "Close"
     },
     "logOut": {
       "title": "Are you sure you want to log out?",
@@ -445,6 +448,10 @@
     "restoreVacancy": {
       "title": "Restore a vacancy from the archive?",
       "text_1": "The vacancy will be moved to the main list"
+    },
+    "discardModal": {
+      "title": "The form has incorrectly filled in fields!",
+      "text_1": "You can close without saving changes or return to editing."
     }
   },
   "soonSection": {

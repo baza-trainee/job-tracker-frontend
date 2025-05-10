@@ -4,7 +4,8 @@ import { Profile } from "../../types/profile.types";
 
 export const profileQuerySlice = createApi({
   reducerPath: "profileQuerySlice",
-  refetchOnMountOrArgChange: true,
+  // refetchOnMountOrArgChange: true,
+  keepUnusedDataFor: 0,
   tagTypes: ["Profile"],
 
   baseQuery: baseQueryWithReauth,

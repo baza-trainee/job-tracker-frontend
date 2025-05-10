@@ -7,7 +7,10 @@ export const userDataSchema = z.object({
     .string()
     .refine(
       (value: string) =>
-        value === "" || (/^\d+$/.test(value) && value.length >= 2),
-      { message: "Only numbers" }
+        value === "" ||
+        (/^\+?\d+$/.test(value) &&
+          value.replace("+", "").length >= 2 &&
+          value.replace("+", "").length <= 12),
+      { message: "Only digits (2–11), optionally starting with +" }
     ),
 });

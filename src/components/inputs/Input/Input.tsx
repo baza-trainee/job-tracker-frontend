@@ -104,7 +104,7 @@ export const Input = forwardRef<
                   "2xl:text-[16px]",
                   {
                     // "border-color7": !error,
-                    "border-color2": error,
+                    "border-color2 placeholder-shown:border-color2": error, // Serhii 01-05
                   },
                   classNameInputCustom
                 )}

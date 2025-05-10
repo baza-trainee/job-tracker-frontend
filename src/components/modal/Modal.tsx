@@ -13,8 +13,14 @@ import classNames from "classnames";
 
 const Modal: FC = () => {
   const dispatch = useAppDispatch();
-  const { isModalOpen, typeModal, isConfirmationOpen, typeConfirmation } =
-    useAppSelector((state) => state.modal);
+  const {
+    isModalOpen,
+    typeModal,
+    isConfirmationOpen,
+    typeConfirmation,
+    isButtonOpen,
+    resetForm,
+  } = useAppSelector((state) => state.modal);
 
   const modalData = contentMap[typeModal || "close"];
   const confirmationData = contentMap[typeConfirmation || "close"];
@@ -56,17 +62,21 @@ const Modal: FC = () => {
     >
       <div className="flex">
         <ModalMain
-          className={classNames("", {
-            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]":
-              typeModal === "addVacancy" ||
-              typeModal === "editVacancy" ||
-              typeModal === "forgotPassword" ||
-              typeModal === "addEvent" ||
-              typeModal === "editEvent",
-          })}
+          // className={classNames("", {
+          //   "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]":
+          //     typeModal === "addVacancy" ||
+          //     typeModal === "editVacancy" ||
+          //     typeModal === "forgotPassword" ||
+          //     typeModal === "addEvent" ||
+          //     typeModal === "editEvent",
+          // })}
+          className={classNames(
+            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]"
+          )}
           modalData={modalData}
           btnFunc={() => {
-            return dispatch(closeModal());
+            console.log("isButtonOpen", isButtonOpen);
+            return isButtonOpen ? resetForm?.() : dispatch(closeModal());
           }}
         />
       </div>
