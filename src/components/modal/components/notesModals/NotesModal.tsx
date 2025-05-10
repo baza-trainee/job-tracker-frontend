@@ -79,7 +79,7 @@ const NotesModal = ({ type }: NotesProps) => {
                 onClick={() => handleButton("saveNote")}
               >
                 {t("notesHeader.createNote")}
-                <Icon id={"plus"} className="ml-3 h-6 w-6" />
+                <Icon id={"plus"} className="ml-3 h-6 w-6 fill-textBlack" />
               </Button>
             ) : (
               <>

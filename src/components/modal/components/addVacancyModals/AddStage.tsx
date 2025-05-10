@@ -53,7 +53,7 @@ const AddVacancyStage = ({
         onClick={handleStage}
         type="button"
       >
-        <Icon id="plus" className="size-6" />
+        <Icon id="plus" className="size-6 fill-textBlack" />
         {t("addVacancy.form.addStage")}
       </button>
 

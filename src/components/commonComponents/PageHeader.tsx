@@ -104,7 +104,7 @@ const PageHeader: FC = () => {
             onClick={handleShowDropdown}
             className="mr-[30px] p-0 outline-none"
           >
-            <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-black" />
+            <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-textBlack" />
           </IconButton>
         )}
         {!isArchive && !isMobile && (
@@ -113,7 +113,7 @@ const PageHeader: FC = () => {
               <span className="w-[124px] text-base leading-[135%] xl:w-[125px]">
                 {t("vacanciesHeader.archive")}
               </span>
-              <Icon id={"archive-outline"} className="size-6" />
+              <Icon id={"archive-outline"} className="size-6 fill-textBlack" />
             </div>
           </LinkButton>
         )}

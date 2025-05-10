@@ -53,7 +53,7 @@ export const Textarea = ({
               "md:text-[14px]",
               "2xl:text-[16px]",
               (name === "hours" || name === "minutes") &&
-                "absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-color2 bg-white p-2 text-color2"
+                "bg-whiteColor absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-color2 p-2 text-color2"
             )}
           >
             {t(String(error?.message))}

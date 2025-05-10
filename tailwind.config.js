@@ -25,14 +25,18 @@ export default {
         section_shadow: "0px 0px 3px 0px rgba(0, 0, 0, 0.20)",
       },
       colors: {
+        whiteColor: "#ffffff",
+        blackColor: "#333333",
         // textBlack: "#333333", // перевела на дві теми в index.css
         textBlack: "var(--textBlack)",
-        // textBlackLight: "rgba(51, 51, 51, 0.5)", // це колір #333333 з opacity // перевела на дві теми в index.css
-        textBlackLight: "var(--textBlackLight)", // це колір #333333 з opacity
-        // textWhite: "#ECF0F6", // перевела на дві теми в index.css
+        textBlackLight: "rgba(51, 51, 51, 0.5)", // це колір #333333 з opacity // перевела на дві теми в index.css
+        // textBlackLight: "var(--textBlackLight)", // це колір #333333 з opacity
+        // textWhite: "#ffffff", // усюди йшов як white від tailwind, перевела на нашу змінну і в index.css
         textWhite: "var(--textWhite)",
-        // textOther: "#288DD5", // перевела на дві теми в index.css
-        textOther: "var(--textOther)",
+        // textMediumWhite: "#ECF0F6", // перевела на дві теми в index.css
+        textMediumWhite: "var(--textMediumWhite)",
+        textOther: "#288DD5", // перевела на дві теми в index.css
+        // textOther: "var(--textOther)",
         // button: "#BFDEF5", // перевела на дві теми в index.css
         button: "var(--button)",
         // backgroundMain: "#FDFEFF", // перевела на дві теми в index.css
@@ -41,8 +45,10 @@ export default {
         backgroundSecondary: "var(--backgroundSecondary)",
         // backgroundTertiary: "#F7F8FB", // перевела на дві теми в index.css
         backgroundTertiary: "var(--backgroundTertiary)",
-        // iconHover: "#436B88", // перевела на дві теми в index.css
-        iconHover: "var(--iconHover)",
+        iconHover: "#436B88", // перевела на дві теми в index.css
+        // iconHover: "var(--iconHover)",
+        colorWhite: "#ffffff", // усюди йшов як white від tailwind, перевела на нашу змінну і в index.css
+        // colorWhite: "var(--colorWhite)",
         // color1: {
         //   DEFAULT: "#C6E7FF", // blue
         //   transparent: "rgba(198, 231, 255, 0.40)",
@@ -99,10 +105,10 @@ export default {
           DEFAULT: "var(--color7)", // green
           transparent: "var(--color7-transparent)", // green with opacity 0.4
         },
-        // color7Light: "rgba(177, 214, 144, 0.3)", // color7 green with opacity 0.3
-        color7Light: "var(--color7Light)", // color7 green with opacity 0.3
-        // color8: "#76925D", // green-dark
-        color8: "var(--color8)", // green-dark
+        color7Light: "rgba(177, 214, 144, 0.3)", // color7 green with opacity 0.3
+        // color7Light: "var(--color7Light)", // color7 green with opacity 0.3
+        color8: "#76925D", // green-dark
+        // color8: "var(--color8)", // green-dark
         // color9: {
         //   DEFAULT: "#DBDCDD", // grey
         //   transparent: "rgba(219, 220, 221, 0.40)", // grey with opacity
@@ -111,14 +117,14 @@ export default {
           DEFAULT: "var(--color9)", // grey
           transparent: "var(--color9-transparent)", // grey with opacity
         },
-        // borderLight: "#CECECE", // немає в дизайні, додати // перевела на дві теми в index.css
-        borderLight: "var(--borderLight)",
-        // form: {
-        //   background: "rgba(255, 255, 255, 0.5)", // немає в дизайні, це #ffffff з opacity
-        // },
+        borderLight: "#CECECE", // немає в дизайні, додати // перевела на дві теми в index.css
+        // borderLight: "var(--borderLight)",
         form: {
-          background: "var(--form-background)", // немає в дизайні, це #ffffff з opacity
+          background: "rgba(255, 255, 255, 0.5)", // немає в дизайні, це #ffffff з opacity
         },
+        // form: {
+        //   background: "var(--form-background)", // немає в дизайні, це #ffffff з opacity
+        // },
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],

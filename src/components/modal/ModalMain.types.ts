@@ -46,9 +46,13 @@ export type TypesModal =
   | "closeDiscardModal";
 
 export type Color = {
-  text: "text-white" | "text-button" | "text-color2" | "text-color8";
-  bg: "bg-white" | "bg-button" | "bg-color2" | "bg-color8";
-  border: "border-white" | "border-button" | "border-color2" | "border-color8";
+  text: "text-textWhite" | "text-button" | "text-color2" | "text-color8";
+  bg: "bg-whiteColor" | "bg-button" | "bg-color2" | "bg-color8";
+  border:
+    | "border-whiteColor"
+    | "border-button"
+    | "border-color2"
+    | "border-color8";
 };
 
 export type ContentMapProps = {

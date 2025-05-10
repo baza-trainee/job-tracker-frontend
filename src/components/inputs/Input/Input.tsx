@@ -97,7 +97,7 @@ export const Input = forwardRef<
                   "w-full rounded-xl border p-3 text-base",
                   "peer w-full font-nunito text-base font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight",
                   "rounded-xl border border-color7 focus:border-textOther focus:outline-none active:border-textOther",
-                  "placeholder-shown:border-textBlack",
+                  "placeholder-shown: border-textBlack",
                   "sm:px-4 sm:py-2 sm:text-[12px]",
                   "md:px-6 md:py-3 md:text-[14px]",
                   "xl:text-[14px]",
@@ -258,7 +258,7 @@ export const Input = forwardRef<
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "absolute top-[130%] z-10 w-[66vw] rounded-md bg-white pb-2 pl-4 pt-1 text-start text-xs text-color2 md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
+                  "bg-whiteColor absolute top-[130%] z-10 w-[66vw] rounded-md pb-2 pl-4 pt-1 text-start text-xs text-color2 md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
                 name === "hours" && "left-[-90%] md:left-[-80%]",
                 name === "minutes" && "left-[-286%] md:left-[-80%]"
               )} //md:text-center text-end
