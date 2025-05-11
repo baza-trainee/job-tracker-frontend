@@ -4,6 +4,7 @@ import {
   closeModal,
   openModal,
   openConfirmation,
+  closeButton,
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
 import { useNavigate } from "react-router-dom";
@@ -40,9 +41,11 @@ const InfoModalMap = () => {
   const dataModalForConfirm = useAppSelector(
     (state) => state.modal.dataConfirmation
   );
-  console.log("dataModalForConfirm -", dataModalForConfirm);
+  // console.log("dataModalForConfirm -", dataModalForConfirm);
+
   const { onSubmit: addVacanciesSubmit, isLoading: addVacanciesLoading } =
     useVacancy();
+
   const {
     onSubmit: editVacanciesSubmit,
     isLoading: editVacanciesLoading,
@@ -94,6 +97,7 @@ const InfoModalMap = () => {
     notifyInfo(t("notification.notSaveInfo")); // test
     dispatch(closeConfirmation());
     dispatch(closeModal());
+    dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));
   }, [dispatch]);
 
   // Видалити вакансію
@@ -105,6 +109,7 @@ const InfoModalMap = () => {
   // Збереження редагованої вакансії
   const handleEditVacancy = useCallback((): void => {
     editVacanciesSubmit(dataModalForConfirm);
+    dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));
   }, [editVacanciesSubmit, dataModalForConfirm]);
 
   // Архівувати вакансію
@@ -126,6 +131,7 @@ const InfoModalMap = () => {
 
   // Додавання (створення) події
   const handleAddEvent = useCallback(async () => {
+    // console.log("InfoModalMap: handleAddEvent викликано з даними:", dataModalForConfirm);
     if (!dataModalForConfirm) return;
     try {
       await addCreateEvent({
@@ -146,6 +152,7 @@ const InfoModalMap = () => {
       }
     } catch (error) {
       notifyError(t("infoModal.saveAddEvent.notifyAddEventError"));
+      console.error("handleAddEvent: помилка при збереженні -", error);
     }
   }, [dataModalForConfirm, addCreateEvent, dispatch, refetch]);
 
@@ -165,8 +172,15 @@ const InfoModalMap = () => {
 
   // Збереження редагування події
   const handleEditEvent = useCallback(async () => {
-    if (!dataModalForConfirm) return;
+    // console.log("handleEditEvent викликано!");
+    if (!dataModalForConfirm) {
+      // console.log("handleEditEvent: dataModalForConfirm is null");
+      notifyError(t("infoModal.saveEditEvent.notifyEditEventError"));
+      return;
+    }
+    // console.log("handleEditEvent: dataModalForConfirm перед відправкою -", dataModalForConfirm);
     try {
+      // const response = await updateEventById({
       await updateEventById({
         id: dataModalForConfirm.id,
         name: dataModalForConfirm.soonEventName,
@@ -174,11 +188,14 @@ const InfoModalMap = () => {
         time: `${dataModalForConfirm.hours}:${dataModalForConfirm.minutes}:00`,
         date: dataModalForConfirm.date,
       }).unwrap();
+      // console.log("handleEditEvent: успішна відповідь -", response);
       dispatch(closeConfirmation());
       dispatch(closeModal());
+      dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));
       refetch();
       notifySuccess(t("infoModal.saveEditEvent.notifyEditEventSuccess"));
     } catch (error) {
+      console.error("handleEditEvent: помилка при збереженні -", error);
       notifyError(t("infoModal.saveEditEvent.notifyEditEventError"));
     }
   }, [dataModalForConfirm, updateEventById, dispatch, refetch]);
@@ -212,6 +229,11 @@ const InfoModalMap = () => {
     funcButton,
     disabled,
   });
+
+  // Закриваємо інфо-модалку і повертаємося до редагування основної модалки при закритті х
+  const handleReturnToEdit = useCallback(() => {
+    dispatch(closeConfirmation());
+  }, [dispatch]);
 
   const map: Partial<
     Record<
@@ -605,6 +627,69 @@ const InfoModalMap = () => {
           "big",
           "accent",
           editVacanciesLoading
+        ),
+      ],
+    },
+    closeModalsaveEditEvent: {
+      title: t("infoModal.saveEditEvent.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveEditEvent.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.cancel"),
+          handleCloseBtnModal,
+          "",
+          "small",
+          "ghost"
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleEditEvent,
+          "",
+          "big",
+          "accent"
+        ),
+      ],
+    },
+    closeModalsaveAddEvent: {
+      title: t("infoModal.saveAddEvent.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveAddEvent.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.cancel"),
+          handleCloseBtnModal,
+          "",
+          "small",
+          "ghost"
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleAddEvent,
+          "",
+          "big",
+          "accent"
+        ),
+      ],
+    },
+    closeDiscardModal: {
+      title: t("infoModal.discardModal.title"),
+      titleSize: "small",
+      text: [t("infoModal.discardModal.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.close"),
+          handleCloseBtnModal,
+          "",
+          "small",
+          "ghost"
+        ),
+        createButton(
+          t("infoModal.button.edit"),
+          handleReturnToEdit,
+          "",
+          "big",
+          "accent"
         ),
       ],
     },
