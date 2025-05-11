@@ -57,7 +57,7 @@ const EditEventModal = () => {
         <div className="flex w-full flex-col font-medium md:w-[350px] xl:w-[445px]">
           <label
             htmlFor="soonEventName"
-            className="text-base xl:text-xl 3xl:text-2xl"
+            className="text-base text-textBlack xl:text-xl 3xl:text-2xl"
           >
             {t("soonSection.soonName")}
           </label>
@@ -77,7 +77,7 @@ const EditEventModal = () => {
 
           <label
             htmlFor="soonEventNotes"
-            className="mt-3 block text-base xl:mt-4 xl:text-xl 3xl:text-2xl"
+            className="mt-3 block text-base text-textBlack xl:mt-4 xl:text-xl 3xl:text-2xl"
           >
             {t("soonSection.soonNotes")}
           </label>
@@ -97,8 +97,8 @@ const EditEventModal = () => {
             autoComplete="off"
           />
 
-          <div className="flex w-full flex-col items-center md:items-start">
-            <p className="mt-3 text-base xl:mt-4 xl:text-xl 3xl:text-2xl">
+          <div className="flex w-full flex-col items-center text-textBlack md:items-start">
+            <p className="mt-3 text-base text-textBlack xl:mt-4 xl:text-xl 3xl:text-2xl">
               {t("soonSection.setTime")}
             </p>
             <div className="time-content grid auto-cols-max auto-rows-max gap-x-2 gap-y-1">
@@ -116,12 +116,12 @@ const EditEventModal = () => {
                   autoComplete="off"
                   maxLength={2}
                   className={clsx(
-                    "pointer-events-auto z-10",
+                    "pointer-events-auto z-10 text-textBlack",
                     "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-2 text-center xl:py-[9px]",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
                   classNameInputCustom={clsx(
-                    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
+                    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium text-textBlack",
                     "sm:h-auto sm:p-0 sm:text-[24px]",
                     "md:h-auto md:p-0 md:text-[24px]",
                     "xl:text-[32px] xl:font-normal",
@@ -159,7 +159,7 @@ const EditEventModal = () => {
               </div>
 
               <div className="flex h-[60px] w-6 items-center justify-center">
-                <span className="box-border text-[44px] font-normal leading-[44px] md:pb-[3px] md:text-[57px] md:leading-[57px]">
+                <span className="box-border text-[44px] font-normal leading-[44px] text-textBlack md:pb-[3px] md:text-[57px] md:leading-[57px]">
                   :
                 </span>
               </div>
@@ -178,7 +178,7 @@ const EditEventModal = () => {
                   autoComplete="off"
                   maxLength={2}
                   className={clsx(
-                    "pointer-events-auto z-10",
+                    "pointer-events-auto z-10 text-textBlack",
                     "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}

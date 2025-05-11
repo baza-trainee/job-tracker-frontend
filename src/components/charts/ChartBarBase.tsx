@@ -30,6 +30,7 @@ interface ChartBarBaseProps {
     borderWidth: number;
   }>;
   selectedIndex: number; // пропс для підкреслення обраного елемента по осі x
+  isDarkMode: boolean;
 }
 
 interface ExtendedChartOptions extends ChartOptions<"bar"> {
@@ -40,6 +41,7 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
   labels,
   datasets,
   selectedIndex,
+  isDarkMode,
 }) => {
   const selectedLabel = labels[selectedIndex]; // Визначаємо обране значення по осі x
   const chartData = { labels, datasets };
@@ -105,8 +107,17 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
           color: (context) => {
             const index = context.index;
             // console.log("selected index", index, "tickValue:", context.tick.value, "labels:", labels);
-            return index === selectedIndex ? "#436B88" : "rgba(51, 51, 51, 1)";
+            const baseColor = isDarkMode
+              ? "rgba(236, 240, 246, 1)"
+              : "rgba(51, 51, 51, 1)";
+            return index === selectedIndex ? "#436B88" : baseColor;
           },
+        },
+        grid: {
+          color: isDarkMode
+            ? "rgba(255, 255, 255, 0.1)" // світла сіточка на темному фоні
+            : "rgba(0, 0, 0, 0.05)", // темна сіточка на світлому фоні
+          // drawBorder: false,
         },
         border: {
           display: false, // Прибираємо рамку осі X
@@ -122,7 +133,17 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
               weight: width >= 1027 ? 500 : 400,
             };
           },
-          color: "rgba(51, 51, 51, 1)",
+          color: () => {
+            return isDarkMode
+              ? "rgba(236, 240, 246, 1)"
+              : "rgba(51, 51, 51, 1)";
+          },
+        },
+        grid: {
+          color: isDarkMode
+            ? "rgba(255, 255, 255, 0.1)"
+            : "rgba(0, 0, 0, 0.05)",
+          // drawBorder: false,
         },
       },
     },

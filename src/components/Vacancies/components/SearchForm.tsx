@@ -114,7 +114,7 @@ export const SearchForm: React.FC = () => {
             <input
               id={`input-query`}
               className={cn(
-                "h-[41px] w-full rounded-lg border border-textBlack py-[10px] pl-[58px] pr-2 font-nunito text-xl font-medium text-textBlack transition placeholder:font-nunito placeholder:text-base placeholder:text-textBlackLight placeholder-shown:border-textBlack hover:border-iconHover hover:placeholder:text-iconHover focus:outline-none focus:placeholder:text-iconHover active:border-textBlack xl:h-[51px] xl:rounded-xl",
+                "h-[41px] w-full rounded-lg border border-textBlack bg-transparent py-[10px] pl-[58px] pr-2 font-nunito text-xl font-medium text-textBlack transition placeholder:font-nunito placeholder:text-base placeholder:text-textBlackLight placeholder-shown:border-textBlack hover:border-iconHover hover:placeholder:text-iconHover focus:outline-none focus:placeholder:text-iconHover active:border-textBlack xl:h-[51px] xl:rounded-xl",
 
                 error &&
                   "border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"
@@ -132,24 +132,10 @@ export const SearchForm: React.FC = () => {
                   "absolute right-2 top-[50%] z-30 mt-auto h-6 translate-y-[-50%] cursor-pointer"
                 }
               >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  type="butt"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g id="Icons/cancel_24px">
-                    <path
-                      id="icon"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 10.59L15.59 7L17 8.41L13.41 12L17 15.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59Z"
-                      fill="#FC8972"
-                    />
-                  </g>
-                </svg>
+                <Icon
+                  id="cancel-in-round"
+                  className="h-6 w-6 cursor-pointer fill-color2"
+                />
               </button>
             )}
           </div>
@@ -167,7 +153,7 @@ export const SearchForm: React.FC = () => {
           className="absolute left-6"
           disabled={isSearching}
         >
-          <Icon id={"search"} className="size-6" />
+          <Icon id={"search"} className="size-6 fill-textBlack" />
         </button>
       </form>
       {isDesctop && <SearchResults onClear={() => resetField("query")} />}

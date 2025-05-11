@@ -4,6 +4,7 @@ import { RootState } from "../../store/store.ts";
 import { useGetAllVacancyQuery } from "../../store/querySlices/vacanciesQuerySlice.ts";
 import ChartBarBase from "./ChartBarBase.tsx";
 import CustomLegendChart from "./CustomLegendChart.tsx";
+import { useIsDarkMode } from "./useIsDarkMode.ts";
 
 const ChartBarMonth: React.FC = () => {
   const { t } = useTranslation();
@@ -11,6 +12,7 @@ const ChartBarMonth: React.FC = () => {
     (state: RootState) => state.calendar.selectedMonth
   );
   const { data: vacancies, isLoading, isError } = useGetAllVacancyQuery();
+  const isDarkMode = useIsDarkMode();
 
   if (isLoading)
     return (
@@ -76,22 +78,35 @@ const ChartBarMonth: React.FC = () => {
     {
       label: t("chartBar.sent"),
       data: filteredData.map((d) => d.sent),
-      backgroundColor: "rgba(208, 232, 197, 1)",
-      borderColor: "rgba(208, 232, 197, 1)",
+      backgroundColor: isDarkMode
+        ? "rgba(208, 232, 197, 0.7)"
+        : "rgba(208, 232, 197, 1)", // Зелений
+      borderColor: isDarkMode
+        ? "rgba(208, 232, 197, 0.7)"
+        : "rgba(208, 232, 197, 1)",
       borderWidth: 1,
     },
     {
       label: t("chartBar.responses"),
       data: filteredData.map((d) => d.responses),
-      backgroundColor: "rgba(198, 231, 255, 1)",
-      borderColor: "rgba(198, 231, 255, 1)",
+      backgroundColor: isDarkMode
+        ? "rgba(198, 231, 255, 0.7)"
+        : "rgba(198, 231, 255, 1)", // Синій
+      borderColor: isDarkMode
+        ? "rgba(198, 231, 255, 0.7)"
+        : "rgba(198, 231, 255, 1)",
       borderWidth: 1,
     },
   ];
 
   return (
     <div className="flex flex-col items-center">
-      <ChartBarBase labels={labels} datasets={datasets} selectedIndex={3} />
+      <ChartBarBase
+        labels={labels}
+        datasets={datasets}
+        selectedIndex={3}
+        isDarkMode={isDarkMode}
+      />
       <CustomLegendChart datasets={datasets} />
     </div>
   );
