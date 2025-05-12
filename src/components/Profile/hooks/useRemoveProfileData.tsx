@@ -11,7 +11,11 @@ import {
 } from "@/store/querySlices/profileQuerySlice";
 import { useDeleteProjectByIdMutation } from "@/store/querySlices/projectQuerySlice";
 import { useDeleteResumeByIdMutation } from "@/store/querySlices/resumesQuerySlices";
-import { closeModal } from "@/store/slices/modalSlice/modalSlice";
+import {
+  closeModal,
+  closeConfirmation,
+  closeButton,
+} from "@/store/slices/modalSlice/modalSlice";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -96,7 +100,11 @@ function useRemoveProfileData({
     ) {
       notifySuccess(messageMap[cardsType] || "");
       refetchProfile();
-      shoudCloseModal && dispatch(closeModal());
+      if (shoudCloseModal) {
+        dispatch(closeConfirmation());
+        dispatch(closeModal());
+        dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));
+      }
     }
   }, [
     isSuccessRemoveCoverLetter,

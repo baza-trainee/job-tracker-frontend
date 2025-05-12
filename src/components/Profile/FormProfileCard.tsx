@@ -73,7 +73,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   const handleUpdateInput = (data: any) => {
     dispatch(
       openModal({
-        dataConfirmation: data,
+        profileData: data,
         typeModal: modalTypeUpdate(),
       })
     );

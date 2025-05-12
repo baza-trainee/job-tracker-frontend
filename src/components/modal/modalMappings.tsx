@@ -11,6 +11,7 @@ import ModalRemoveAccount from "./components/profileModals/ModalRemoveAccount";
 import ModalMuttionProfileData from "./components/profileModals/ModalMuttionProfileData";
 import ModalRemoveProperties from "./components/profileModals/ModalRemoveProperties";
 import ConfirmToRemoveModal from "./components/confirmToRemove/ConfirmToRemoveModal";
+import ModalAddProperties from "./components/profileModals/ModalAddProperties";
 
 const colorDefault: Color = {
   text: "text-textWhite",
@@ -302,6 +303,31 @@ export const contentMap: ContentMapProps = {
     content: (
       <InfoModal type="closeDiscardModal" textColor={colorButton.text} />
     ),
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  // alex
+  updateResumes: {
+    content: <ModalAddProperties cardsType="updateResumes" />,
+    // nameModal: "addResumes.modalAddTitle",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  updateProjects: {
+    content: <ModalAddProperties cardsType="updateProjects" />,
+    // nameModal: "addProjects.modalAddTitle",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  updateCoverLetters: {
+    content: <ModalAddProperties cardsType="updateCoverLetters" />,
+    // nameModal: "addCoverLetters.modalAddTitle",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
+  updatePersonalProperties: {
+    content: <ModalAddProperties cardsType="updatePersonalProperties" />,
+    // nameModal: "addCoverLetters.modalAddTitle",
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },

@@ -1,6 +1,9 @@
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 
-import { closeModal } from "@/store/slices/modalSlice/modalSlice";
+import {
+  closeModal,
+  closeConfirmation,
+} from "@/store/slices/modalSlice/modalSlice";
 
 import { useTranslation } from "react-i18next";
 import { PropsModalAddProperties } from "./modalAddProperties.types";
@@ -10,7 +13,13 @@ import Icon from "@/components/Icon/Icon";
 import useRemoveProfileData from "@/components/Profile/hooks/useRemoveProfileData";
 
 function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
-  const idRemoveItem = useAppSelector((state) => state.modal.dataConfirmation);
+  // const idRemoveItem = useAppSelector((state) => state.modal.dataConfirmation);
+  const {
+    isModalOpen,
+    isConfirmationOpen,
+    isButtonOpen,
+    dataConfirmation: idRemoveItem,
+  } = useAppSelector((state) => state.modal);
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -19,13 +28,28 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
     idRemoveItem,
   });
 
+  // alex
+  const handleClose = (): void => {
+    if (!isConfirmationOpen) {
+      dispatch(closeModal());
+    }
+    if (isConfirmationOpen) {
+      dispatch(closeConfirmation());
+    }
+    if (isModalOpen && isButtonOpen) {
+      dispatch(closeModal());
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-10">
-      <h2 className="font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]">
+      <h2 className="font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]"> 
         {t("modalAddProperties.modalRemoveLinkTitle")}
       </h2>
       <div className="flex flex-col gap-4 md:flex-row">
-        <Button type="button" onClick={() => dispatch(closeModal())}>
+        {/* <Button type="button" onClick={() => dispatch(closeModal())}> */}
+        {/* alex */}
+        <Button type="button" onClick={handleClose}>
           {t("infoModal.button.cancel")}
         </Button>
 

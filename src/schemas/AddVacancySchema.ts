@@ -12,14 +12,14 @@ export const AddVacancySchema = z
       .string()
       .url(`addVacancySchema.link.url`)
       .min(4, `addVacancySchema.link.min`)
+      .regex(/^[^\s]+$/, {
+        message: "addVacancySchema.communication.spaces",
+      })
       .max(254, `addVacancySchema.link.max`)
       .trim(),
     communication: z
       .string()
       .min(3, `addVacancySchema.communication.min`)
-      .regex(/^[^\s]+$/, {
-        message: "addVacancySchema.communication.spaces",
-      })
       .max(1000, `addVacancySchema.communication.max`)
       .trim(),
     company: z

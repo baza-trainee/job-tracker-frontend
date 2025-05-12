@@ -24,7 +24,11 @@ import {
   useCreateResumeMutation,
   useUpdateResumeByIdMutation,
 } from "@/store/querySlices/resumesQuerySlices";
-import { closeModal } from "@/store/slices/modalSlice/modalSlice";
+import {
+  closeModal,
+  closeConfirmation,
+  closeButton,
+} from "@/store/slices/modalSlice/modalSlice";
 import { useEffect } from "react";
 import { FieldErrors, SubmitHandler } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -154,7 +158,9 @@ function useMutationProfileData({
           : t(messageCreate[cardsType])
       );
       refetchProfile();
+      dispatch(closeConfirmation());
       dispatch(closeModal());
+      dispatch(closeButton({ isButtonOpen: false, resetForm: undefined }));
     }
   }, [
     isSuccessCoverLetter,
@@ -177,6 +183,7 @@ function useMutationProfileData({
       );
     }
   }, [isErrorCoverLetter, isErrorProject, isErrorResume, isErrorSocialLink]);
+
   return { onSubmit, isSubmitDisabled };
 }
 

@@ -296,7 +296,7 @@
       "min": "Minimum length is 4 characters"
     },
     "communication": {
-      "max": "Maximum length is 4000 characters",
+      "max": "Maximum length is 1000 characters",
       "min": "Minimum length is 3 characters",
       "spaces": "The string must not contain any spaces"
     },
@@ -305,7 +305,7 @@
       "min": "Minimum length is 4 characters"
     },
     "notes": {
-      "max": "Maximum length is 4000 characters"
+      "max": "Maximum length is 1000 characters"
     }
   },
   "editVacancy": {
