@@ -111,15 +111,16 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
 
   // closeButtonModal
   useEffect(() => {
-    const typeConfirmationForModal: string = "update" + cardsType.slice(3);
-    console.log("typeConfirmation", typeConfirmationForModal);
-    dispatch(
-      closeButton({
-        isButtonOpen: !isDisabledSubmitButton,
-        resetForm: () =>
-          handleConfirmation(typeConfirmationForModal as TypesModal, true),
-      })
-    );
+    if (cardsType !== "addPersonalProperties") {
+      const typeConfirmationForModal: string = "update" + cardsType.slice(3);
+      dispatch(
+        closeButton({
+          isButtonOpen: !isDisabledSubmitButton,
+          resetForm: () =>
+            handleConfirmation(typeConfirmationForModal as TypesModal, true),
+        })
+      );
+    }
   }, [isDisabledSubmitButton]);
 
   return (

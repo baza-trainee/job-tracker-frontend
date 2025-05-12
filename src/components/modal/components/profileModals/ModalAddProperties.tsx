@@ -12,7 +12,7 @@ import Icon from "@/components/Icon/Icon";
 import useMutationProfileData from "@/components/Profile/hooks/useMutationProfileData";
 
 type PropsModalAddProperties = {
-  cardsType: "updateResumes" | "updateProjects" | "updateCoverLetters";
+  cardsType: "updateResumes" | "updateProjects" | "updateCoverLetters" | "updatePersonalProperties";
 };
 
 function ModalAddProperties({ cardsType }: PropsModalAddProperties) {
@@ -34,13 +34,13 @@ function ModalAddProperties({ cardsType }: PropsModalAddProperties) {
     cardsType: typeConfirmationAdd as
       | "addResumes"
       | "addProjects"
-      | "addCoverLetters",
+      | "addCoverLetters"
+      | "addPersonalProperties",
     updateItem,
     errors,
   });
 
   const handleSubmit = () => {
-    console.log("dddd", dataConfirmation)
     onSubmit(dataConfirmation);
   };
 

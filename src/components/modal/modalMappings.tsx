@@ -325,4 +325,10 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
+  updatePersonalProperties: {
+    content: <ModalAddProperties cardsType="updatePersonalProperties" />,
+    // nameModal: "addCoverLetters.modalAddTitle",
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
 };
