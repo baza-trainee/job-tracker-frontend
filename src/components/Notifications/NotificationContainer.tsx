@@ -16,7 +16,7 @@ const NotificationContainer = (): JSX.Element => {
       pauseOnHover
       transition={notificationAnimation}
       closeButton={false}
-      className="right-6 top-0"
+      className="right-6 top-0 bg-transparent"
     />
   );
 };

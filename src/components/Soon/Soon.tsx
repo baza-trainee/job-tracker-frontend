@@ -145,7 +145,7 @@ export const Soon = () => {
         >
           <Icon
             id="plus"
-            className="mx-[13px] size-6 md:mx-[14.5px] 3xl:ml-4 3xl:mr-[13px]"
+            className="mx-[13px] size-6 fill-textBlack md:mx-[14.5px] 3xl:ml-4 3xl:mr-[13px]"
           />
           {t("soonSection.addEvent")}
         </Button>

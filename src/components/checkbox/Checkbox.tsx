@@ -43,7 +43,7 @@ export const Checkbox = ({
           />
           {type === "signUp" && (
             <svg
-              className="peer-checked:!fill- pointer-events-none absolute h-4 w-4 fill-none stroke-background-form peer-checked:!stroke-textOther"
+              className="peer-checked:!fill- pointer-events-none absolute h-4 w-4 fill-none stroke-form-background peer-checked:!stroke-textOther"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -61,7 +61,7 @@ export const Checkbox = ({
           className={classNames(
             type === "signUp" &&
               // "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px]"
-              "ml-3 font-nunito font-medium leading-[135%] text-textBlack text-[14px] md:text-[16px]"
+              "ml-3 font-nunito text-[14px] font-medium leading-[135%] text-textBlack md:text-[16px]"
           )}
         >
           {label}

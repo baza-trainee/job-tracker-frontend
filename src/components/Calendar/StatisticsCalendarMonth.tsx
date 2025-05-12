@@ -21,7 +21,7 @@ export const StatisticsCalendarMonth: React.FC<
   return (
     <div
       className={clsx(
-        "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary",
+        "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary text-textBlack",
         "w-[276px] md:w-[356px] 3xl:w-[468px]",
         "h-[332px] md:h-[398px] 3xl:h-[514px]", //h-[318px]
         "p-4 md:px-4 md:pb-6 md:pt-4 3xl:px-8 3xl:py-6"
@@ -43,8 +43,10 @@ export const StatisticsCalendarMonth: React.FC<
         }}
         value={selectedMonth}
         className="statistics-calendar__months"
-        nextLabel={<Icon id={"arrow-right"} className="size-6" />}
-        prevLabel={<Icon id={"arrow-left"} className="size-6" />}
+        nextLabel={
+          <Icon id={"arrow-right"} className="size-6 fill-textBlack" />
+        }
+        prevLabel={<Icon id={"arrow-left"} className="size-6 fill-textBlack" />}
         tileContent={({ date, view }) => {
           if (view === "year") {
             // Додаємо кастомні назви місяців (скорочені по дизайну)

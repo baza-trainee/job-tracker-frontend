@@ -11,7 +11,7 @@ export const NotificationCustom = React.memo(
     message,
   }: NotificationCustomProps) {
     return (
-      <div className="text-[14px] font-normal leading-[135%] text-textBlack">
+      <div className="bg-transparent text-[14px] font-normal leading-[135%] text-textBlack">
         {title ? <h4>{title}</h4> : null}
         <p>{message}</p>
       </div>

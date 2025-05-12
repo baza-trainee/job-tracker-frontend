@@ -11,10 +11,10 @@ export const JobCalendar = ({ changeDate, dateState }: JobCalendarProps) => {
     <Calendar
       locale={i18n.language}
       className={classNames(
-        "custom-size z-10 w-full bg-backgroundMain statistics-calendar__day border-[1px] border-[solid] border-[#436b88] rounded-[12px] py-3 job-cal"
+        "custom-size statistics-calendar__day job-cal z-10 w-full rounded-[12px] border-[1px] border-[solid] border-iconHover bg-backgroundMain py-3 text-textBlack"
       )}
-      nextLabel={<Icon id={"arrow-right"} className="h-6 w-6" />}
-      prevLabel={<Icon id={"arrow-left"} className="h-6 w-6" />}
+      nextLabel={<Icon id={"arrow-right"} className="h-6 w-6 fill-textBlack" />}
+      prevLabel={<Icon id={"arrow-left"} className="h-6 w-6 fill-textBlack" />}
       formatMonthYear={(locale, date) =>
         `${date.toLocaleDateString(locale, { month: "long" })} ${date.getFullYear()}`
       }
@@ -23,7 +23,6 @@ export const JobCalendar = ({ changeDate, dateState }: JobCalendarProps) => {
     />
   );
 };
-
 
 // приклад CheckboxCalendarItem.tsx
 // поточна дата

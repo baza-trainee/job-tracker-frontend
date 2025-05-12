@@ -13,9 +13,9 @@ import ModalRemoveProperties from "./components/profileModals/ModalRemovePropert
 import ConfirmToRemoveModal from "./components/confirmToRemove/ConfirmToRemoveModal";
 
 const colorDefault: Color = {
-  text: "text-white",
-  bg: "bg-white",
-  border: "border-white",
+  text: "text-textWhite",
+  bg: "bg-whiteColor",
+  border: "border-whiteColor",
 };
 
 const colorButton: Color = {

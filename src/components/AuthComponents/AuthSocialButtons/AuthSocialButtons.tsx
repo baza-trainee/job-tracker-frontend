@@ -7,7 +7,7 @@ import Icon from "../../Icon/Icon";
 
 export const AuthSocialButtons = () => {
   return (
-    <div className="flex justify-center px-2 gap-[22px] xl:gap-[35px] 2xl:gap-8">
+    <div className="flex justify-center gap-[22px] px-2 xl:gap-[35px] 2xl:gap-8">
       <Button
         type="button"
         className="gap-3 text-[14px] md:gap-1 md:text-[20px] 2xl:text-[20px]"
@@ -31,7 +31,7 @@ export const AuthSocialButtons = () => {
         <span className="font-nunito font-medium leading-[135%] text-textBlack">
           GitHub
         </span>
-        <Icon id="GitHub" className="h-6 w-6 md:h-9 md:w-9" />
+        <Icon id="GitHub" className="h-6 w-6 fill-textBlack md:h-9 md:w-9" />
       </Button>
     </div>
   );

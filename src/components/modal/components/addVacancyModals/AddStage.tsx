@@ -49,11 +49,11 @@ const AddVacancyStage = ({
   return (
     <div>
       <button
-        className="flex w-fit items-center justify-start gap-2 2xl:mx-[9.5px]"
+        className="flex w-fit items-center justify-start gap-2 text-textBlack 2xl:mx-[9.5px]"
         onClick={handleStage}
         type="button"
       >
-        <Icon id="plus" className="size-6" />
+        <Icon id="plus" className="size-6 fill-textBlack" />
         {t("addVacancy.form.addStage")}
       </button>
 

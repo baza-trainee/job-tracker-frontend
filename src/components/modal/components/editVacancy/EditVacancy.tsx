@@ -106,7 +106,7 @@ const EditVacancy = () => {
             </div>
 
             {/* TODO:Cтатус: Відправлене резюме, Тестове завдання ... Оффер*/}
-            <div className="relative flex flex-col gap-3 md:gap-4 2xl:pt-2">
+            <div className="relative flex flex-col gap-3 text-textBlack md:gap-4 2xl:pt-2">
               <label>{t("addVacancy.form.status")}</label>
               <div className="flex flex-col gap-3 md:gap-4 xl:w-[274px] 2xl:w-[342px]">
                 {statusVacancy.map((checkboxCalendar: VacancyInputProps) => (
@@ -157,7 +157,7 @@ const EditVacancy = () => {
                 {t(`addVacancy.form.${isArchived ? "restore" : "archive"}`)}
                 <Icon
                   id={isArchived ? "restore" : "send"}
-                  className="ml-3 h-6 w-6"
+                  className="ml-3 h-6 w-6 fill-textBlack"
                 />
               </Button>
               <Button
@@ -168,7 +168,7 @@ const EditVacancy = () => {
                 onClick={deleteVacancy}
               >
                 {t("addVacancy.form.delete")}
-                <Icon id={"delete"} className="ml-3 h-6 w-6" />
+                <Icon id={"delete"} className="ml-3 h-6 w-6 fill-textBlack" />
               </Button>
             </div>
             <Button
@@ -180,7 +180,7 @@ const EditVacancy = () => {
               onClick={saveVacancy}
             >
               {t("addVacancy.form.save")}
-              <Icon id={"check-box"} className="ml-3 h-6 w-6" />
+              <Icon id={"check-box"} className="ml-3 h-6 w-6 fill-textBlack" />
             </Button>
           </div>
         </div>

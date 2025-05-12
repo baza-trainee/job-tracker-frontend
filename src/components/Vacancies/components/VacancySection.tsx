@@ -156,10 +156,13 @@ const VacancySection: FC<VacancySectionProps> = ({
             aria-label="Scroll Left"
             disabled={isScrollLeftDisabled}
             className={clsx("transition", {
-              "cursor-not-allowed opacity-50": isScrollLeftDisabled,
+              "opacity-50": isScrollLeftDisabled,
             })}
           >
-            <Icon id="arrow-left" className="h-3 w-3 smPlus:h-6 smPlus:w-6" />
+            <Icon
+              id="arrow-left"
+              className="h-3 w-3 fill-textBlack smPlus:h-6 smPlus:w-6"
+            />
           </button>
 
           <div
@@ -188,10 +191,13 @@ const VacancySection: FC<VacancySectionProps> = ({
             aria-label="Scroll Right"
             disabled={isScrollRightDisabled}
             className={clsx("transition", {
-              "cursor-not-allowed opacity-50": isScrollRightDisabled,
+              "opacity-50": isScrollRightDisabled,
             })}
           >
-            <Icon id="arrow-right" className="h-3 w-3 smPlus:h-6 smPlus:w-6" />
+            <Icon
+              id="arrow-right"
+              className="h-3 w-3 fill-textBlack smPlus:h-6 smPlus:w-6"
+            />
           </button>
         </div>
       </div>

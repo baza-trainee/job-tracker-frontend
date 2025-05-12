@@ -143,7 +143,7 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
   return (
     <div
       ref={containerRef}
-      className="relative mb-3 mt-4 flex w-full flex-col gap-2 md:mt-6 md:gap-4 xl:mt-8 xl:gap-6 3xl:mt-10"
+      className="relative mb-3 mt-4 flex w-full flex-col gap-2 text-textBlack md:mt-6 md:gap-4 xl:mt-8 xl:gap-6 3xl:mt-10"
     >
       <DiagramTitle title={t(`statisticsRejectDiagram.title`)} />
       <ul

@@ -1,4 +1,4 @@
-import { cn } from "../../utils/utils";
+import clsx from "clsx";
 
 interface DatasetItem {
   label: string;
@@ -13,8 +13,10 @@ interface CustomLegendProps {
 const CustomLegend: React.FC<CustomLegendProps> = ({ datasets, className }) => {
   return (
     <div
-      className={cn(
-        "mt-1 flex w-fit flex-wrap gap-3 rounded-xl bg-backgroundTertiary p-3 md:mt-3 md:gap-12 md:px-6 xl:mt-4 2xl:py-4 3xl:py-6",
+      className={clsx(
+        "flex w-fit flex-wrap gap-3 rounded-xl bg-backgroundTertiary text-textBlack md:gap-12",
+        "p-3 md:px-6 2xl:py-4 3xl:py-6",
+        "mt-1 md:mt-3 xl:mt-4",
         className
       )}
     >

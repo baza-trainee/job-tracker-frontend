@@ -34,12 +34,12 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           "relative z-0 flex w-fit max-w-[300px] items-center justify-center rounded-tl-xl rounded-tr-xl",
           "top-[1px] min-h-[20px] min-w-[100px] px-4 py-2",
           "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
-          backgroundColorModal || modalData?.bgColor || "bg-white" // Тимчасово, пошукати далі
+          backgroundColorModal || modalData?.bgColor || "bg-backgroundTertiary" // Тимчасово, пошукати далі
         )}
         onClick={(e) => e.stopPropagation()}
       >
         {modalData?.nameModal && (
-          <span className="text-[16px] md:text-[20px]">
+          <span className="text-[16px] font-bold text-blackColor md:text-[20px]">
             {t(modalData.nameModal)}
           </span>
         )}
@@ -48,12 +48,12 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
         className={clsx(
           //alex mb-11
           "z-0 mb-11 flex h-auto w-[280px] md:w-auto",
-          "flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-white p-2 shadow-form_shadow md:p-4",
+          "flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-backgroundTertiary p-2 shadow-form_shadow md:p-4",
           // alex p-2 ---> md:p-5
           "border-[2px]",
           "md:border-[4px]",
-          borderColorModal || modalData?.borderColor || "bg-white", // Тимчасово, пошукати далі
-          modalData?.paddingAddEventModal || "sm:p-2" // Тимчасово, пошукати далі
+          borderColorModal || modalData?.borderColor || "bg-backgroundTertiary",
+          modalData?.paddingAddEventModal || "sm:p-2"
         )}
         onClick={(e) => e.stopPropagation()}
       >
