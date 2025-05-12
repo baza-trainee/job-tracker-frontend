@@ -45,7 +45,7 @@ export const StatisticsCalendarDay: React.FC<StatisticsCalendarDayProps> = ({
   return (
     <div
       className={clsx(
-        "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary",
+        "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary text-textBlack",
         "w-[276px] md:w-[356px] 3xl:w-[468px]",
         "h-[332px] md:h-[398px] 3xl:h-[514px]", //h-[318px]
         "p-3 md:p-2 3xl:px-6 3xl:py-4"
@@ -59,8 +59,10 @@ export const StatisticsCalendarDay: React.FC<StatisticsCalendarDayProps> = ({
           onDateChange(date as Date);
         }}
         className="statistics-calendar__day"
-        nextLabel={<Icon id={"arrow-right"} className="size-6" />}
-        prevLabel={<Icon id={"arrow-left"} className="size-6" />}
+        nextLabel={
+          <Icon id={"arrow-right"} className="size-6 fill-textBlack" />
+        }
+        prevLabel={<Icon id={"arrow-left"} className="size-6 fill-textBlack" />}
         formatMonthYear={(locale, date) =>
           `${date.toLocaleDateString(locale, { month: "long" })} ${date.getFullYear()}`
         }

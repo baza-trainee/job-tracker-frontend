@@ -22,12 +22,12 @@ export const IconButton = ({
           //   ["text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary"]:
           //     variant == "filled",
 
-          ["bg-white ring-1 ring-inset ring-textBlackLight hover:shadow-button_hover hover:ring-[3px] hover:ring-accent focus:shadow-button_hover focus:ring-[3px] focus:ring-accent"]:
+          ["bg-whiteColor hover:ring-accent focus:ring-accent ring-1 ring-inset ring-textBlackLight hover:shadow-button_hover hover:ring-[3px] focus:shadow-button_hover focus:ring-[3px]"]:
             variant == "outline",
         },
         disabled && {
           //   ["bg-grey-40 text-grey-0 pointer-events-none"]: variant == "filled",
-          ["pointer-events-none bg-background-backgroundSecondary ring-transparent"]:
+          ["bg-background-backgroundSecondary pointer-events-none ring-transparent"]:
             variant == "outline",
         },
         className

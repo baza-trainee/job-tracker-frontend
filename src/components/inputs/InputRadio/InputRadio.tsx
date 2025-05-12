@@ -39,7 +39,7 @@ export const InputRadio = ({
         />
         {className === "addVacancy" && (
           <svg
-            className="peer-checked:!fill- pointer-events-none absolute h-4 w-4 fill-none stroke-background-form peer-checked:!stroke-textOther"
+            className="peer-checked:!fill- stroke-form-background pointer-events-none absolute h-4 w-4 fill-none peer-checked:!stroke-textOther"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             stroke="currentColor"

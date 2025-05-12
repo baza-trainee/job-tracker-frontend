@@ -68,7 +68,7 @@ const AddButton: React.FC<AddButtonProps> = ({ className, variant }) => {
       <span className="text-nowrap text-sm leading-[135%] md:text-base">
         {buttonText}
       </span>
-      <Icon id={ICON.PLUS} className="size-6" />
+      <Icon id={ICON.PLUS} className="size-6 fill-textBlack" />
     </Button>
   );
 };

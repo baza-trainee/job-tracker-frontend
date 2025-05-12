@@ -80,7 +80,7 @@ function FormProfileCard({ cardsType }: PropsProfileCard) {
   };
 
   return (
-    <div className="flex flex-col gap-2 rounded-[0_12px_12px_12px] border-[4px] border-solid border-backgroundSecondary bg-slate-50 px-2 py-4 md:px-6 md:py-6">
+    <div className="flex flex-col gap-2 rounded-[0_12px_12px_12px] border-[4px] border-solid border-backgroundSecondary bg-backgroundTertiary px-2 py-4 md:px-6 md:py-6">
       {isLoading ? (
         <SceletonProfile />
       ) : (
