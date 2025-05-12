@@ -12,9 +12,15 @@ export interface ModalProps {
   vacancyData?: Vacancy | null;
   noteData?: Note | null;
   eventData?: Event | null;
+  // alex
+  profileData?: any | null;
+
+  // import { DataItem } from "@/components/modal/components/profileModals/modalAddProperties.types";
+  // profileData додати типи DataItem
+
   dataConfirmation?: any | null; // alex
   borderColorModal?: string | null;
   backgroundColorModal?: string | null;
   resetForm?: () => void;
-  isButtonOpen?:boolean
+  isButtonOpen?: boolean;
 }

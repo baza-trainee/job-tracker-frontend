@@ -12,6 +12,7 @@ const initialState: ModalProps = {
   backgroundColorModal: null,
   vacancyData: null,
   eventData: null,
+  profileData: null,
   isButtonOpen: false,
 };
 
@@ -27,6 +28,7 @@ const modalSlice = createSlice({
       state.backgroundColorModal = action.payload.backgroundColorModal;
       state.vacancyData = action.payload.vacancyData;
       state.eventData = action.payload.eventData || null;
+      state.profileData = action.payload.profileData;
       state.dataConfirmation = action.payload.dataConfirmation;
       state.noteData = action.payload.noteData;
     },
@@ -38,6 +40,7 @@ const modalSlice = createSlice({
       state.backgroundColorModal = "";
       state.vacancyData = null;
       state.dataConfirmation = null;
+      state.profileData = null;
       state.noteData = null;
     },
     openConfirmation: (state, action: PayloadAction<ModalProps>) => {

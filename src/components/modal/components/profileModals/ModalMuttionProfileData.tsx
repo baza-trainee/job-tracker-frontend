@@ -4,15 +4,21 @@ import { useForm } from "react-hook-form";
 import { addProfileData } from "@/schemas/profile/addProfileDataSchema";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppSelector } from "@/store/hook";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { useTranslation } from "react-i18next";
 
 import { Input } from "@/components/inputs/Input/Input";
 import { Button } from "@/components/buttons/Button/Button";
 import { PropsModalAddProperties, useData } from "./modalAddProperties.types";
 import Icon from "@/components/Icon/Icon";
-import useMutationProfileData from "@/components/Profile/hooks/useMutationProfileData";
-import useRemoveProfileData from "@/components/Profile/hooks/useRemoveProfileData";
+// import useMutationProfileData from "@/components/Profile/hooks/useMutationProfileData";
+// import useRemoveProfileData from "@/components/Profile/hooks/useRemoveProfileData";
+
+import {
+  openConfirmation,
+  closeButton,
+} from "@/store/slices/modalSlice/modalSlice";
+import { TypesModal } from "../../ModalMain.types";
 
 function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   const {
@@ -30,20 +36,21 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   const { t } = useTranslation();
 
   const updateItem =
-    useAppSelector((state) => state.modal.dataConfirmation) || false;
+    useAppSelector((state) => state.modal.profileData) || false;
 
   const isUpdating = Boolean(updateItem?.typeModal);
-  const { onSubmit, isSubmitDisabled } = useMutationProfileData({
-    isUpdating,
-    cardsType,
-    updateItem,
-    errors,
-  });
-  const { handleRemove, isDisabledButtonRemove } = useRemoveProfileData({
-    cardsType,
-    idRemoveItem: updateItem.id,
-    shoudCloseModal: true,
-  });
+  // const { onSubmit, isSubmitDisabled } = useMutationProfileData({
+  //   isUpdating,
+  //   cardsType,
+  //   updateItem,
+  //   errors,
+  // });
+
+  // const { handleRemove, isDisabledButtonRemove } = useRemoveProfileData({
+  //   cardsType,
+  //   idRemoveItem: updateItem.id,
+  //   shoudCloseModal: true,
+  // });
   useEffect(() => {
     if (!updateItem) return;
     setValue("name", updateItem.name || "");
@@ -53,7 +60,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   }, [updateItem]);
 
   const isDisabledSubmitButton =
-    isSubmitDisabled ||
+    // isSubmitDisabled ||
     !isDirty ||
     (isUpdating &&
       (updateItem.name ? updateItem.name === watch("name") : true) &&
@@ -74,10 +81,51 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   //   );
   // console.log(watch("name") === "");
 
+  //alex
+  const dispatch = useAppDispatch();
+  const handleConfirmation = (
+    typeConfirmation: TypesModal,
+    // якщо add - дані форми, якщо ні = id резюме, листа або проекта
+    add: boolean = false
+  ) => {
+    handleSubmit((data) => {
+      dispatch(
+        openConfirmation({
+          typeConfirmation,
+          dataConfirmation: add ? data : updateItem.id,
+        })
+      );
+    })();
+  };
+  // add
+  const handleAddButton = () => {
+    const typeConfirmationAdd: string = "update" + cardsType.slice(3);
+    handleConfirmation(typeConfirmationAdd as TypesModal, true);
+  };
+
+  // remove
+  const handleRemoveButton = () => {
+    const typeConfirmationRemove: string = "remove" + cardsType.slice(3);
+    handleConfirmation(typeConfirmationRemove as TypesModal);
+  };
+
+  // closeButtonModal
+  useEffect(() => {
+    const typeConfirmationForModal: string = "update" + cardsType.slice(3);
+    console.log("typeConfirmation", typeConfirmationForModal);
+    dispatch(
+      closeButton({
+        isButtonOpen: !isDisabledSubmitButton,
+        resetForm: () =>
+          handleConfirmation(typeConfirmationForModal as TypesModal, true),
+      })
+    );
+  }, [isDisabledSubmitButton]);
+
   return (
     <form
       className="flex h-full w-full flex-col gap-5"
-      onSubmit={handleSubmit(onSubmit)}
+      // onSubmit={handleSubmit(onSubmit)}
     >
       <Input
         autoFocus
@@ -128,18 +176,22 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
       <div className="flex flex-col-reverse justify-center gap-5 md:flex-row">
         {cardsType !== "addPersonalProperties" && isUpdating && (
           <Button
-            type="reset"
-            onClick={handleRemove}
-            disabled={isDisabledButtonRemove}
+            // type="reset"
+            // onClick={handleRemove}
+            type="button"
+            onClick={handleRemoveButton}
+            // disabled={isDisabledButtonRemove}
           >
             {t("infoModal.button.delete")}
             <Icon id="delete" className="h-6 w-6" />
           </Button>
         )}
         <Button
-          type="submit"
+          // type="submit"
+          type="button"
           className="gap-3"
           variant="accent"
+          onClick={handleAddButton}
           disabled={isDisabledSubmitButton}
         >
           {t("infoModal.button.save")}

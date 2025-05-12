@@ -31,7 +31,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
     <div className={className}>
       <div
         className={clsx(
-          "relative z-0 flex w-fit max-w-[300px] items-center justify-center rounded-tl-xl rounded-tr-xl",
+          "relative z-0 flex w-fit max-w-[330px] items-center justify-center rounded-tl-xl rounded-tr-xl",
           "top-[1px] min-h-[20px] min-w-[100px] px-4 py-2",
           "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
           backgroundColorModal || modalData?.bgColor || "bg-white" // Тимчасово, пошукати далі

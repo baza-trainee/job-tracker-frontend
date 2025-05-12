@@ -43,7 +43,10 @@ export type TypesModal =
   | "closeModalsaveEditVacancies"
   | "closeModalsaveEditEvent"
   | "closeModalsaveAddEvent"
-  | "closeDiscardModal";
+  | "closeDiscardModal"
+  | "updateResumes"
+  | "updateProjects"
+  | "updateCoverLetters";
 
 export type Color = {
   text: "text-white" | "text-button" | "text-color2" | "text-color8";
