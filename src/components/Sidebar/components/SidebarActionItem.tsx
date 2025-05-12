@@ -32,7 +32,7 @@ const SidebarActionItem: React.FC<SidebarActionItemProps> = ({
       />
       <span
         className={cn(
-          "custom-size overflow-hidden whitespace-nowrap",
+          "custom-size overflow-hidden whitespace-nowrap text-textBlack",
           isOpen
             ? "visible w-[148px] opacity-100"
             : "sr-only m-0 w-0 -translate-x-5 opacity-0"

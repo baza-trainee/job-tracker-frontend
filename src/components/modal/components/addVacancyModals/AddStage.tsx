@@ -49,7 +49,7 @@ const AddVacancyStage = ({
   return (
     <div>
       <button
-        className="flex w-fit items-center justify-start gap-2 2xl:mx-[9.5px]"
+        className="flex w-fit items-center justify-start gap-2 text-textBlack 2xl:mx-[9.5px]"
         onClick={handleStage}
         type="button"
       >

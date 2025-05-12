@@ -29,8 +29,8 @@ export default {
         blackColor: "#333333",
         // textBlack: "#333333", // перевела на дві теми в index.css
         textBlack: "var(--textBlack)",
-        textBlackLight: "rgba(51, 51, 51, 0.5)", // це колір #333333 з opacity // перевела на дві теми в index.css
-        // textBlackLight: "var(--textBlackLight)", // це колір #333333 з opacity
+        // textBlackLight: "rgba(51, 51, 51, 0.5)", // це колір #333333 з opacity // перевела на дві теми в index.css
+        textBlackLight: "var(--textBlackLight)", // це колір #333333 з opacity
         // textWhite: "#ffffff", // усюди йшов як white від tailwind, перевела на нашу змінну і в index.css
         textWhite: "var(--textWhite)",
         // textMediumWhite: "#ECF0F6", // перевела на дві теми в index.css

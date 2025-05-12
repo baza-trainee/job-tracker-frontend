@@ -245,7 +245,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                   <Icon
                     id={"arrow-down"}
                     className={cn(
-                      "h-6 w-6 rotate-[270deg]",
+                      "h-6 w-6 rotate-[270deg] fill-textBlack",
                       openSubMenu === option.id
                         ? "rotate-90 duration-500 smOnly:rotate-180"
                         : "rotate-[270deg] duration-500 smOnly:rotate-0"

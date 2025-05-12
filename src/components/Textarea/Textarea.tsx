@@ -31,9 +31,10 @@ export const Textarea = ({
           <textarea
             id={`textarea-${name}`}
             className={cn(
-              "peer h-32 w-full resize-none rounded-xl border px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther md:text-[14px] 2xl:text-[16px]",
+              "peer h-32 w-full resize-none rounded-xl border border-textBlack px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther md:text-[14px] 2xl:text-[16px]",
               "md:px-6 md:py-3",
               "2xl:px-6 2xl:py-2",
+              "bg-transparent placeholder-shown:border-textBlack",
               {
                 ["h-[230px]"]: name === "noteText",
               }
@@ -53,7 +54,7 @@ export const Textarea = ({
               "md:text-[14px]",
               "2xl:text-[16px]",
               (name === "hours" || name === "minutes") &&
-                "bg-whiteColor absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-color2 p-2 text-color2"
+                "absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-color2 bg-whiteColor p-2 text-color2"
             )}
           >
             {t(String(error?.message))}

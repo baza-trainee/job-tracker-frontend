@@ -183,7 +183,8 @@ export const Input = forwardRef<
               />
             )}
 
-            <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] gap-2 mix-blend-multiply">
+            <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] gap-2">
+              {/* mix-blend-multiply */}
               {isButtonCopy && (
                 <button
                   type="button"
@@ -192,7 +193,7 @@ export const Input = forwardRef<
                 >
                   <Icon
                     id="copy"
-                    className="h-6 w-6 cursor-pointer fill-black transition-all active:fill-color5 md:hover:fill-color5"
+                    className="h-6 w-6 cursor-pointer fill-textBlack transition-all active:fill-color5 md:hover:fill-color5"
                   />
                 </button>
               )}
@@ -204,7 +205,7 @@ export const Input = forwardRef<
                 >
                   <Icon
                     id="close-default"
-                    className="h-6 w-6 cursor-pointer fill-black transition-all hover:fill-color2"
+                    className="h-6 w-6 cursor-pointer fill-textBlack transition-all hover:fill-color2"
                   />
                 </button>
               )}
@@ -241,8 +242,10 @@ export const Input = forwardRef<
                   !isIcon && (
                     <div>
                       <Icon
-                        id="check-box"
-                        className="h-6 w-6 cursor-text fill-color7"
+                        // id="check-box"
+                        id="check-box-green"
+                        // className="h-6 w-6 cursor-text fill-color7"
+                        className="h-6 w-6 cursor-text"
                       />
                     </div>
                   )

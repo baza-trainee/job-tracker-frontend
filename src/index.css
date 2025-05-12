@@ -51,14 +51,14 @@ html {
 
 .dark {
   --textBlack: #ecf0f6;
-  --textBlackLight: rgba(255, 255, 255, 0.5);
+  --textBlackLight: rgba(236, 240, 246, 0.5);
   /* це колір #333333 з opacity 0.5*/
   --textWhite: #6e7985;
   --textMediumWhite: #333333;
   --textOther: #b3c6d3;
   --button: #134e79;
   --backgroundMain: #252a34;
-  --backgroundSecondary: #353536;
+  --backgroundSecondary: #5f687c;
   --backgroundTertiary: #292d36;
   --iconHover: #b0d9f7;
   --borderLight: #464646;
@@ -492,6 +492,13 @@ abbr {
   background: #c6e7ff;
   border-radius: 100px;
   color: #333;
+}
+
+.dark .react-calendar__tile:enabled:hover,
+.dark .react-calendar__tile:enabled:focus,
+.dark .react-calendar__tile--active {
+  background: #134e79;
+  color: #ecf0f6;
 }
 
 /* .job-calendar .react-calendar__tile:enabled:hover,

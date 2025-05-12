@@ -63,7 +63,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <input
             id={`input-${name}`}
             className={cn(
-              "w-full rounded-xl border font-nunito font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+              "w-full rounded-xl border bg-transparent font-nunito font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight placeholder-shown:border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
               "sm h-[34px] px-4 py-2 pr-9 text-[12px]",
               "md:h-11 md:px-6 md:py-3 md:pr-9 md:text-[14px]",
               "xl:text-[14px]",
