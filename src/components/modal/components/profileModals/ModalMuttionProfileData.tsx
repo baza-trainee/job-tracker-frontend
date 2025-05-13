@@ -127,7 +127,6 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     //   if (cardsType !== "addPersonalProperties") {
     // }
   }, [isDisabledSubmitButton]);
-  console.log("isDisabledSubmitButton", !isDisabledSubmitButton);
 
   return (
     <form
