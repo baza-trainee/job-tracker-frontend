@@ -88,7 +88,11 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     // якщо add - дані форми, якщо ні = id резюме, листа або проекта
     add: boolean = false
   ) => {
+    if (Object.keys(errors).length) {
+      dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
+    }
     handleSubmit((data) => {
+      console.log("data", data);
       dispatch(
         openConfirmation({
           typeConfirmation,
@@ -111,16 +115,17 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
 
   // closeButtonModal
   useEffect(() => {
-    if (cardsType !== "addPersonalProperties") {
-      const typeConfirmationForModal: string = "update" + cardsType.slice(3);
-      dispatch(
-        closeButton({
-          isButtonOpen: !isDisabledSubmitButton,
-          resetForm: () =>
-            handleConfirmation(typeConfirmationForModal as TypesModal, true),
-        })
-      );
-    }
+    const typeConfirmationForModal: string = "update" + cardsType.slice(3);
+    dispatch(
+      closeButton({
+        isButtonOpen: !isDisabledSubmitButton,
+        resetForm: () =>
+          handleConfirmation(typeConfirmationForModal as TypesModal, true),
+      })
+    );
+    // alex
+    //   if (cardsType !== "addPersonalProperties") {
+    // }
   }, [isDisabledSubmitButton]);
 
   return (
