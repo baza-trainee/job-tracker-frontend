@@ -139,9 +139,6 @@ const VacancySection: FC<VacancySectionProps> = ({
   const classNameSectionBackground = darkTheme
     ? `${colorSectionBG}-transparent`
     : colorSectionBG;
-  const classNameSectionBorder = darkTheme
-    ? `${colorSectionBorder}-transparent`
-    : colorSectionBorder;
 
   return (
     <section className="text-textBlack">
@@ -157,7 +154,7 @@ const VacancySection: FC<VacancySectionProps> = ({
         className={clsx(
           "box-border flex w-full justify-center rounded-[0px_12px_12px_12px] border-2 border-solid md:border-2 xl:border-4",
           "px-1 py-6 smPlus:px-4 xl:p-6",
-          classNameSectionBorder
+          colorSectionBorder
         )}
       >
         <div className="box-border flex w-full items-center gap-1 smPlus:w-[500px] smPlus:gap-2 md:w-full xl:gap-4">

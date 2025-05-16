@@ -27,12 +27,12 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={!darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "overflow-hidden fill-textBlack px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack md:py-[6px]",
+          "overflow-hidden fill-blackColor px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack md:py-[6px]",
           {
             "visible absolute left-0 z-[2] w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
-              !darkMode, 
-            "flex-grow opacity-100": darkMode && isOpen, 
-            "sr-only m-0 w-0 opacity-0": darkMode && !isOpen, 
+              !darkMode,
+            "flex-grow opacity-100": darkMode && isOpen,
+            "sr-only m-0 w-0 opacity-0": darkMode && !isOpen,
           }
         )}
         type="button"
@@ -53,9 +53,9 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
 
           {
             "visible absolute right-0 w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
-              darkMode, 
-            "flex-grow opacity-100": !darkMode && isOpen, 
-            "sr-only m-0 w-0 opacity-0": !darkMode && !isOpen, 
+              darkMode,
+            "flex-grow opacity-100": !darkMode && isOpen,
+            "sr-only m-0 w-0 opacity-0": !darkMode && !isOpen,
           }
         )}
         type="button"

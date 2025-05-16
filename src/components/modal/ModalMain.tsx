@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Icon from "../Icon/Icon";
 import { ReactNode } from "react";
 import { useAppSelector } from "@/store/hook";
+import { selectTheme } from "../../store/slices/themeSlice/themeSelector";
 
 //alex
 import { useTranslation } from "react-i18next";
@@ -25,6 +26,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
   const { borderColorModal, backgroundColorModal } = useAppSelector(
     (state) => state.modal
   );
+  const darkTheme = useAppSelector(selectTheme);
   const { t } = useTranslation();
 
   return (
@@ -34,10 +36,26 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
           "relative z-0 flex w-fit max-w-[330px] items-center justify-center rounded-tl-xl rounded-tr-xl",
           "top-[1px] min-h-[20px] min-w-[100px] px-4 py-2",
           "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
-          backgroundColorModal || modalData?.bgColor || "bg-backgroundTertiary" // Тимчасово, пошукати далі
+          darkTheme
+            ? backgroundColorModal
+              ? `${backgroundColorModal}-transparent`
+              : modalData?.bgColor
+            : backgroundColorModal || modalData?.bgColor
+          // backgroundColorModal || modalData?.bgColor || "bg-backgroundTertiary" // Тимчасово, пошукати далі
         )}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* <div
+          className={clsx(
+            "absolute z-[-100] h-full w-full rounded-tl-xl rounded-tr-xl",
+            "top-0",
+            darkTheme
+              ? backgroundColorModal
+                ? `${backgroundColorModal}-transparent`
+                : modalData?.bgColor
+              : backgroundColorModal || modalData?.bgColor
+          )}
+        ></div> */}
         {modalData?.nameModal && (
           <span className="text-[16px] font-bold text-textBlack md:text-[20px]">
             {t(modalData.nameModal)}
