@@ -13,11 +13,11 @@ import ModalRemoveProperties from "./components/profileModals/ModalRemovePropert
 import ConfirmToRemoveModal from "./components/confirmToRemove/ConfirmToRemoveModal";
 import ModalAddProperties from "./components/profileModals/ModalAddProperties";
 
-const colorDefault: Color = {
-  text: "text-textWhite",
-  bg: "bg-whiteColor",
-  border: "border-whiteColor",
-};
+// const colorDefault: Color = {
+//   text: "text-textWhite",
+//   bg: "bg-whiteColor",
+//   border: "border-whiteColor",
+// };
 
 const colorButton: Color = {
   text: "text-button",
