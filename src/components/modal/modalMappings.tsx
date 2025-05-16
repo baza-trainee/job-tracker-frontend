@@ -13,11 +13,11 @@ import ModalRemoveProperties from "./components/profileModals/ModalRemovePropert
 import ConfirmToRemoveModal from "./components/confirmToRemove/ConfirmToRemoveModal";
 import ModalAddProperties from "./components/profileModals/ModalAddProperties";
 
-const colorDefault: Color = {
-  text: "text-textWhite",
-  bg: "bg-whiteColor",
-  border: "border-whiteColor",
-};
+// const colorDefault: Color = {
+//   text: "text-textWhite",
+//   bg: "bg-whiteColor",
+//   border: "border-whiteColor",
+// };
 
 const colorButton: Color = {
   text: "text-button",
@@ -41,8 +41,8 @@ export const contentMap: ContentMapProps = {
   addVacancy: {
     content: <AddVacancy />,
     nameModal: "addVacancy.nameModal.name",
-    bgColor: colorDefault.bg,
-    borderColor: colorDefault.border,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
   editVacancy: {
     content: <EditVacancy />,

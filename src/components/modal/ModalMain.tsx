@@ -39,7 +39,7 @@ const ModalMain = ({ className, modalData, btnFunc }: ModalMainProps) => {
         onClick={(e) => e.stopPropagation()}
       >
         {modalData?.nameModal && (
-          <span className="text-[16px] font-bold text-blackColor md:text-[20px]">
+          <span className="text-[16px] font-bold text-textBlack md:text-[20px]">
             {t(modalData.nameModal)}
           </span>
         )}

@@ -29,7 +29,7 @@ const CustomLegend: React.FC<{ data: ChartData; className?: string }> = ({
             }}
             className="mr-1 h-[30px] w-[30px] rounded md:mr-2 md:w-[70px]"
           ></div>
-          <span className="max-w-24 text-sm leading-none md:max-w-full md:text-base 3xl:text-xl">
+          <span className="max-w-24 text-sm leading-none text-textBlack md:max-w-full md:text-base 3xl:text-xl">
             {label}
           </span>
         </div>
