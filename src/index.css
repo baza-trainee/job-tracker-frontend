@@ -622,6 +622,9 @@ input[type="password"]::-ms-clear {
   border-radius: 4px;
   background-color: rgba(51, 51, 51, 0.5);
 }
+.dark .soon-scroll::-webkit-scrollbar-thumb {
+  background-color: #a6aebf;
+}
 @media screen and (min-width: 768px) {
   .soon-scroll::-webkit-scrollbar-thumb {
     width: 8px;

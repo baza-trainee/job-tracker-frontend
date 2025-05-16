@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from "react";
+import { useAppSelector } from "../../../../store/hook.ts";
 import { useTranslation } from "react-i18next";
 import { RejectReason, Vacancy } from "../../../../types/vacancies.types";
 import { cn } from "../../../../utils/utils";
@@ -7,7 +8,10 @@ import DiagramTitle from "./DiagramTitle";
 import CustomLegend from "../../../charts/CustomLegend";
 import CustomTooltip from "../../../charts/CustomTooltip";
 
+import { selectTheme } from "../../../../store/slices/themeSlice/themeSelector.ts";
+
 const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
+  const isDarkMode = useAppSelector(selectTheme);
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -80,22 +84,36 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
           label: "",
           hoverBorderColor: "#436B88",
           backgroundColor: [
-            "#B1D690",
-            "#A6AEBF",
-            "#CDC1FF",
-            "#D0E8C5",
-            "#FEEE91",
-            "#FC8972",
-            "#C6E7FF",
+            // "#B1D690",
+            // "#A6AEBF",
+            // "#CDC1FF",
+            // "#D0E8C5",
+            // "#FEEE91",
+            // "#FC8972",
+            // "#C6E7FF",
+            isDarkMode ? "rgba(177, 214, 144, 0.7)" : "color7",
+            isDarkMode ? "rgba(166, 174, 191, 0.7)" : "color6",
+            isDarkMode ? "rgba(205, 193, 255, 0.7)" : "color4",
+            isDarkMode ? "rgba(208, 232, 197, 0.7)" : "color5",
+            isDarkMode ? "rgba(254, 238, 145, 0.7)" : "color3",
+            isDarkMode ? "rgba(252, 137, 114, 0.7)" : "color2",
+            isDarkMode ? "rgba(177, 214, 144, 0.7)" : "color1",
           ],
           borderColor: [
-            "#B1D690",
-            "#A6AEBF",
-            "#CDC1FF",
-            "#D0E8C5",
-            "#FEEE91",
-            "#FC8972",
-            "#C6E7FF",
+            // "#B1D690",
+            // "#A6AEBF",
+            // "#CDC1FF",
+            // "#D0E8C5",
+            // "#FEEE91",
+            // "#FC8972",
+            // "#C6E7FF",
+            isDarkMode ? "rgba(177, 214, 144, 0.7)" : "color7",
+            isDarkMode ? "rgba(166, 174, 191, 0.7)" : "color6",
+            isDarkMode ? "rgba(205, 193, 255, 0.7)" : "color4",
+            isDarkMode ? "rgba(208, 232, 197, 0.7)" : "color5",
+            isDarkMode ? "rgba(254, 238, 145, 0.7)" : "color3",
+            isDarkMode ? "rgba(252, 137, 114, 0.7)" : "color2",
+            isDarkMode ? "rgba(177, 214, 144, 0.7)" : "color1",
           ],
           borderWidth: 2,
         },

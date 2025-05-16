@@ -41,8 +41,8 @@ export const contentMap: ContentMapProps = {
   addVacancy: {
     content: <AddVacancy />,
     nameModal: "addVacancy.nameModal.name",
-    bgColor: colorDefault.bg,
-    borderColor: colorDefault.border,
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
   },
   editVacancy: {
     content: <EditVacancy />,

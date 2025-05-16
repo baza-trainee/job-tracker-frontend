@@ -27,6 +27,7 @@ export default {
       colors: {
         whiteColor: "#ffffff",
         blackColor: "#333333",
+        greyLightcolor: "#dbdcdd",
         // textBlack: "#333333", // перевела на дві теми в index.css
         textBlack: "var(--textBlack)",
         // textBlackLight: "rgba(51, 51, 51, 0.5)", // це колір #333333 з opacity // перевела на дві теми в index.css

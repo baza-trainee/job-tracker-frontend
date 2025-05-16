@@ -1,6 +1,8 @@
 import { FC, ReactNode, useRef, useState, useEffect } from "react";
+import { useAppSelector } from "../../../store/hook.ts";
 import clsx from "clsx";
 import Icon from "../../Icon/Icon.tsx";
+import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
 
 export type VacancySectionProps = {
   titleSection: string;
@@ -22,6 +24,7 @@ const VacancySection: FC<VacancySectionProps> = ({
   const [hasScroll, setHasScroll] = useState(false);
   const [row1, setRow1] = useState<ReactNode[]>([]);
   const [row2, setRow2] = useState<ReactNode[]>([]);
+  const darkTheme = useAppSelector(selectTheme);
 
   const validChildren = Array.isArray(children) ? children : [children];
 
@@ -133,12 +136,19 @@ const VacancySection: FC<VacancySectionProps> = ({
     });
   };
 
+  const classNameSectionBackground = darkTheme
+    ? `${colorSectionBG}-transparent`
+    : colorSectionBG;
+  const classNameSectionBorder = darkTheme
+    ? `${colorSectionBorder}-transparent`
+    : colorSectionBorder;
+
   return (
     <section className="text-textBlack">
       <div
         className={clsx(
           "w-fit rounded-tl-lg rounded-tr-lg px-3 py-[6px] text-xl font-medium shadow-section_shadow",
-          colorSectionBG
+          classNameSectionBackground
         )}
       >
         {titleSection}
@@ -147,7 +157,7 @@ const VacancySection: FC<VacancySectionProps> = ({
         className={clsx(
           "box-border flex w-full justify-center rounded-[0px_12px_12px_12px] border-2 border-solid md:border-2 xl:border-4",
           "px-1 py-6 smPlus:px-4 xl:p-6",
-          colorSectionBorder
+          classNameSectionBorder
         )}
       >
         <div className="box-border flex w-full items-center gap-1 smPlus:w-[500px] smPlus:gap-2 md:w-full xl:gap-4">

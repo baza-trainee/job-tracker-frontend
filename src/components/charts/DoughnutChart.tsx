@@ -1,3 +1,4 @@
+import { useAppSelector } from "../../store/hook.ts";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -13,10 +14,12 @@ import { useTranslation } from "react-i18next";
 import { Vacancy } from "../../types/vacancies.types";
 import DiagramTitle from "../Statistics/componets/statisticsDiagram/DiagramTitle";
 import CustomLegend from "./CustomLegend";
+import { selectTheme } from "../../store/slices/themeSlice/themeSelector.ts";
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
+  const isDarkMode = useAppSelector(selectTheme);
   const { t } = useTranslation();
   const isMobile = useMediaQuery({ maxWidth: 1279 });
 
@@ -44,20 +47,20 @@ export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
         data,
         hoverBorderColor: "#436B88",
         backgroundColor: [
-          "#C6E7FF",
-          "#CDC1FF",
-          "#FEEE91",
-          "#A6AEBF",
-          "#FC8972",
-          "#B1D690",
+          isDarkMode ? "rgba(198, 231, 255, 0.7)" : "#C6E7FF", // color1
+          isDarkMode ? "rgba(205, 193, 255, 0.7)" : "#CDC1FF", // color4
+          isDarkMode ? "rgba(254, 238, 145, 0.7)" : "#FEEE91", // color3
+          isDarkMode ? "rgba(166, 174, 191, 0.7)" : "#A6AEBF", // color6
+          isDarkMode ? "rgba(252, 137, 114, 0.7)" : "#FC8972", // color2
+          isDarkMode ? "rgba(177, 214, 144, 0.7)" : "#B1D690", // color7
         ],
         borderColor: [
-          "#C6E7FF",
-          "#CDC1FF",
-          "#FEEE91",
-          "#A6AEBF",
-          "#FC8972",
-          "#B1D690",
+          isDarkMode ? "rgba(198, 231, 255, 0.7)" : "#C6E7FF", // color1
+          isDarkMode ? "rgba(205, 193, 255, 0.7)" : "#CDC1FF", // color4
+          isDarkMode ? "rgba(254, 238, 145, 0.7)" : "#FEEE91", // color3
+          isDarkMode ? "rgba(166, 174, 191, 0.7)" : "#A6AEBF", // color6
+          isDarkMode ? "rgba(252, 137, 114, 0.7)" : "#FC8972", // color2
+          isDarkMode ? "rgba(177, 214, 144, 0.7)" : "#B1D690", // color7
         ],
         borderWidth: 2,
       },

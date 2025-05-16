@@ -33,10 +33,10 @@ const NoteCard: FC<Note> = (note) => {
 
   return (
     <div className="w-full font-nunito text-base leading-[135%]" id={id}>
-      <div className="w-[118px] truncate rounded-t-xl bg-backgroundSecondary px-3 py-[6px] font-medium text-textBlack md:w-[141px] md:text-xl xl:w-[149px] xl:px-4">
+      <div className="dark:bg-greyLightcolor w-[118px] truncate rounded-t-xl bg-backgroundSecondary px-3 py-[6px] font-medium text-blackColor md:w-[141px] md:text-xl xl:w-[149px] xl:px-4">
         {name}
       </div>
-      <div className="flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
+      <div className="dark:border-greyLightcolor flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
         <p
           className="mb-6 line-clamp-[7] cursor-pointer break-words text-textBlack smOnly:break-all"
           onClick={() => handleNoteCard("updateNote")}
