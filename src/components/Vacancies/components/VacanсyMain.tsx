@@ -8,6 +8,7 @@ import {
 import { setFilteredVacancies } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSlice.ts";
 import { selectfilteredVacancies } from "../../../store/slices/filteredVacanciesSlice/filteredVacanciesSelector.ts";
 import { useGetAllUserDataQuery } from "../../../store/querySlices/profileQuerySlice.ts";
+import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
 
 import VacancySection from "./VacancySection.tsx";
 import VacancySectionBox from "./VacancySectionBox.tsx";
@@ -28,9 +29,10 @@ import { useLocation } from "react-router-dom";
 const VacancyMain: FC = () => {
   const { sortType, searchQuery } = useAppSelector(selectfilteredVacancies);
   const dispatch = useAppDispatch();
+  const darkTheme = useAppSelector(selectTheme);
   const { t } = useTranslation();
   const location = useLocation();
-  const localizedSections = getLocalizedSectionConfig();
+  const localizedSections = getLocalizedSectionConfig(darkTheme);
 
   const { data, isLoading, isError } = useGetAllUserDataQuery();
 

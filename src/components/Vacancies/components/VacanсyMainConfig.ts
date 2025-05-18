@@ -22,11 +22,12 @@ export const getVacanciesByStatus = (
     .filter((v) => v.statuses[0].name === statusName);
 };
 
-export const sectionsConfig: SectionConfig[] = [
+// export const sectionsConfig: SectionConfig[] = [
+export const getSectionsConfig = (darkTheme: boolean): SectionConfig[] => [
   {
     sectionName: "saved",
     title: "sortDropdown.saved",
-    borderColor: "border-color5",
+    borderColor: darkTheme ? "border-color5-transparent" : "border-color5",
     backgroundColor: "bg-color5",
     backgroundTransparent: "bg-color5-transparent",
     hoverColor: "hover:bg-color5",
@@ -34,7 +35,7 @@ export const sectionsConfig: SectionConfig[] = [
   {
     sectionName: "resume",
     title: "sortDropdown.resume",
-    borderColor: "border-color1",
+    borderColor: darkTheme ? "border-color1-transparent" : "border-color1",
     backgroundColor: "bg-color1",
     backgroundTransparent: "bg-color1-transparent",
     hoverColor: "hover:bg-color1",
@@ -42,7 +43,7 @@ export const sectionsConfig: SectionConfig[] = [
   {
     sectionName: "hr",
     title: "sortDropdown.hr",
-    borderColor: "border-color4",
+    borderColor: darkTheme ? "border-color4-transparent" : "border-color4",
     backgroundColor: "bg-color4",
     backgroundTransparent: "bg-color4-transparent",
     hoverColor: "hover:bg-color4",
@@ -50,7 +51,7 @@ export const sectionsConfig: SectionConfig[] = [
   {
     sectionName: "test",
     title: "sortDropdown.test",
-    borderColor: "border-color3",
+    borderColor: darkTheme ? "border-color3-transparent" : "border-color3",
     backgroundColor: "bg-color3",
     backgroundTransparent: "bg-color3-transparent",
     hoverColor: "hover:bg-color3",
@@ -58,7 +59,7 @@ export const sectionsConfig: SectionConfig[] = [
   {
     sectionName: "tech",
     title: "sortDropdown.tech",
-    borderColor: "border-color6",
+    borderColor: darkTheme ? "border-color6-transparent" : "border-color6",
     backgroundColor: "bg-color6",
     backgroundTransparent: "bg-color6-transparent",
     hoverColor: "hover:bg-color6",
@@ -66,7 +67,7 @@ export const sectionsConfig: SectionConfig[] = [
   {
     sectionName: "reject",
     title: "sortDropdown.reject",
-    borderColor: "border-color2",
+    borderColor: darkTheme ? "border-color2-transparent" : "border-color2",
     backgroundColor: "bg-color2",
     backgroundTransparent: "bg-color2-transparent",
     hoverColor: "hover:bg-color2",
@@ -74,15 +75,17 @@ export const sectionsConfig: SectionConfig[] = [
   {
     sectionName: "offer",
     title: "sortDropdown.offer",
-    borderColor: "border-color7",
+    borderColor: darkTheme ? "border-color7-transparent" : "border-color7",
     backgroundColor: "bg-color7",
     backgroundTransparent: "bg-color7-transparent",
     hoverColor: "hover:bg-color7",
   },
 ];
 
-export const getLocalizedSectionConfig = (): SectionConfig[] => {
-  return sectionsConfig.map((section) => ({
+export const getLocalizedSectionConfig = (
+  darkTheme: boolean
+): SectionConfig[] => {
+  return getSectionsConfig(darkTheme).map((section) => ({
     ...section,
     title: i18n.t(section.title),
   }));

@@ -31,7 +31,10 @@ export const AuthSocialButtons = () => {
         <span className="font-nunito font-medium leading-[135%] text-textBlack">
           GitHub
         </span>
-        <Icon id="GitHub" className="h-6 w-6 fill-textBlack md:h-9 md:w-9" />
+        <Icon
+          id="GitHub"
+          className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor md:h-9 md:w-9"
+        />
       </Button>
     </div>
   );

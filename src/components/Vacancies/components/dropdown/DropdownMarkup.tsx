@@ -171,7 +171,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           }
           onMouseEnter={() => setFocusedOption("sortButton")}
           className={cn(
-            "flex w-full items-center justify-between rounded-t-xl pb-[13px] pl-8 pr-[22px] pt-3 text-textBlack",
+            "group flex w-full items-center justify-between rounded-t-xl pb-[13px] pl-8 pr-[22px] pt-3 text-textBlack dark:hover:text-blackColor",
             isDropdownOpen && "hover:bg-button",
             !isDropdownOpen && !isInModal && "rounded-xl",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button",
@@ -185,7 +185,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           <Icon
             id={"arrow-down"}
             className={cn(
-              "size-6 fill-textBlack",
+              "size-6 fill-textBlack dark:group-hover:fill-blackColor",
               isDropdownOpen
                 ? "rotate-180 duration-500"
                 : "rotate-0 duration-500"

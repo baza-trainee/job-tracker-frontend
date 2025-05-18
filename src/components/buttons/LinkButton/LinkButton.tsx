@@ -26,12 +26,12 @@ export const LinkButton = ({
           // ["text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary"]:
           //   variant == "accent",
 
-          ["border-[1px] border-textBlack bg-transparent hover:border-iconHover hover:bg-backgroundSecondary active:border-transparent active:bg-transparent active:ring-[2px] active:ring-inset active:ring-iconHover"]:
+          ["group border-[1px] border-textBlack bg-transparent hover:border-iconHover hover:bg-backgroundSecondary active:border-transparent active:bg-transparent active:ring-[2px] active:ring-inset active:ring-iconHover dark:hover:text-blackColor"]:
             variant == "ghost",
         },
         disabled && {
           // ["bg-grey-40 text-grey-0 pointer-events-none"]: variant == "accent",
-          ["bg-background-backgroundSecondary pointer-events-none ring-transparent"]:
+          ["bg-background-backgroundSecondary group pointer-events-none ring-transparent"]:
             variant == "ghost",
         },
         className

@@ -113,7 +113,10 @@ const PageHeader: FC = () => {
               <span className="w-[124px] text-base leading-[135%] xl:w-[125px]">
                 {t("vacanciesHeader.archive")}
               </span>
-              <Icon id={"archive-outline"} className="size-6 fill-textBlack" />
+              <Icon
+                id={"archive-outline"}
+                className="size-6 fill-textBlack dark:group-hover:fill-blackColor"
+              />
             </div>
           </LinkButton>
         )}

@@ -24,7 +24,7 @@ const SidebarActionItem: React.FC<SidebarActionItemProps> = ({
       <Icon
         id={icon}
         className={cn(
-          "custom-size",
+          "custom-size fill-textBlack",
           donateIcon ? "h-6 w-6" : "h-8 w-8",
           !isOpen && "ml-[18px]",
           !isOpen && donateIcon && "ml-[10px]"

@@ -124,23 +124,29 @@ const AddVacancy = () => {
           <div className="flex w-full flex-col justify-center gap-3 md:flex-row xl:mt-6">
             <Button
               type="button"
-              className="w-full md:mx-auto xl:mx-0 xl:w-auto"
+              className="group w-full md:mx-auto xl:mx-0 xl:w-auto"
               variant="ghost"
               size="small"
               onClick={handleSubmitArchive}
             >
               {t("addVacancy.form.archive")}
-              <Icon id={"send"} className="ml-3 h-6 w-6 fill-textBlack" />
+              <Icon
+                id={"send"}
+                className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+              />
             </Button>
             <Button
               type="button"
-              className="w-full md:mx-auto xl:mx-0 xl:w-auto"
+              className="group w-full dark:hover:fill-blackColor md:mx-auto xl:mx-0 xl:w-auto"
               variant="accent"
               size="big"
               onClick={saveVacancy}
             >
               {t("addVacancy.form.save")}
-              <Icon id={"check-box"} className="ml-3 h-6 w-6 fill-textBlack" />
+              <Icon
+                id={"check-box"}
+                className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+              />
             </Button>
           </div>
         </div>
