@@ -384,7 +384,8 @@
       "try": "Try",
       "delete": "Delete",
       "edit": "Edit",
-      "close": "Close"
+      "close": "Close",
+      "agree": "Yes"
     },
     "logOut": {
       "title": "Are you sure you want to log out?",

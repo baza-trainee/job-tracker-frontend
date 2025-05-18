@@ -61,7 +61,7 @@ function ModalRemoveAccount() {
         }}
       >
         {!isConfirmModal
-          ? t("infoModal.button.confirm")
+          ? t("infoModal.button.agree")
           : t("infoModal.button.delete")}
       </Button>
     </div>
