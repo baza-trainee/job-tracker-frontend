@@ -79,7 +79,10 @@ const NotesModal = ({ type }: NotesProps) => {
                 onClick={() => handleButton("saveNote")}
               >
                 {t("notesHeader.createNote")}
-                <Icon id={"plus"} className="ml-3 h-6 w-6 fill-textBlack" />
+                <Icon
+                  id={"plus"}
+                  className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+                />
               </Button>
             ) : (
               <>
@@ -91,7 +94,10 @@ const NotesModal = ({ type }: NotesProps) => {
                   onClick={() => handleButton("deleteNote")}
                 >
                   {t("addVacancy.form.delete")}
-                  <Icon id={"delete"} className="ml-3 h-6 w-6 fill-textBlack" />
+                  <Icon
+                    id={"delete"}
+                    className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+                  />
                 </Button>
                 <Button
                   type="button"
@@ -105,7 +111,7 @@ const NotesModal = ({ type }: NotesProps) => {
                   {t("addVacancy.form.save")}
                   <Icon
                     id={"check-box"}
-                    className="ml-3 h-6 w-6 fill-textBlack"
+                    className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
                   />
                 </Button>
               </>

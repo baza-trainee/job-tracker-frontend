@@ -79,10 +79,10 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   //     (watch("technologies") ? watch("technologies") !== "" : true) &&
   //     (watch("text") ? watch("text") !== "" : true)
   //   );
-  // console.log(watch("name") === "");
 
   //alex
   const dispatch = useAppDispatch();
+
   const handleConfirmation = (
     typeConfirmation: TypesModal,
     // якщо add - дані форми, якщо ні = id резюме, листа або проекта
@@ -123,9 +123,6 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           handleConfirmation(typeConfirmationForModal as TypesModal, true),
       })
     );
-    // alex
-    //   if (cardsType !== "addPersonalProperties") {
-    // }
   }, [isDisabledSubmitButton]);
 
   return (
@@ -189,7 +186,10 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
             // disabled={isDisabledButtonRemove}
           >
             {t("infoModal.button.delete")}
-            <Icon id="delete" className="h-6 w-6 fill-textBlack" />
+            <Icon
+              id="delete"
+              className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+            />
           </Button>
         )}
         <Button
@@ -201,7 +201,10 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           disabled={isDisabledSubmitButton}
         >
           {t("infoModal.button.save")}
-          <Icon id="check-box" className="h-6 w-6 fill-textBlack" />
+          <Icon
+            id={`${isDisabledSubmitButton ? "check-box-gray" : "check-box"}`}
+            className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+          />
         </Button>
       </div>
     </form>

@@ -242,7 +242,10 @@ const AddEventModal = () => {
         disabled={isLoading || inputChanged === false}
       >
         {isLoading ? t("loading") : t("soonSection.save")}
-        <Icon id={"check-box"} className="ml-3 h-6 w-6 fill-textBlack" />
+        <Icon
+          id={"check-box"}
+          className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+        />
       </Button>
     </form>
   );

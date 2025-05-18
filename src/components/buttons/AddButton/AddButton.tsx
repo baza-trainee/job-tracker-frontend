@@ -62,13 +62,16 @@ const AddButton: React.FC<AddButtonProps> = ({ className, variant }) => {
     <Button
       variant="accent"
       size="big"
-      className={cn("h-[50px] w-[280px] gap-[10px] md:w-auto", className)}
+      className={cn("group h-[50px] w-[280px] gap-[10px] md:w-auto", className)}
       onClick={handleClick}
     >
       <span className="text-nowrap text-sm leading-[135%] md:text-base">
         {buttonText}
       </span>
-      <Icon id={ICON.PLUS} className="size-6 fill-textBlack" />
+      <Icon
+        id={ICON.PLUS}
+        className="size-6 fill-textBlack dark:group-hover:fill-blackColor"
+      />
     </Button>
   );
 };

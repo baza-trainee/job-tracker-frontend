@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import {
@@ -31,7 +31,7 @@ const Modal: FC = () => {
         if (isConfirmationOpen) {
           return dispatch(closeConfirmation());
         }
-        dispatch(closeModal());
+        return isButtonOpen ? resetForm?.() : dispatch(closeModal());
       }
     };
 
@@ -48,8 +48,26 @@ const Modal: FC = () => {
     if (isConfirmationOpen) {
       return;
     }
-    dispatch(closeModal());
+    return isButtonOpen ? resetForm?.() : dispatch(closeModal());
   };
+
+  // alex Авто скрол до вікна підтвердження
+  const isCustomHeightModal = [
+    "addVacancy",
+    "editVacancy",
+    "forgotPassword",
+    "addEvent",
+    "editEvent",
+  ].includes(typeModal ?? "");
+  const modalRef = useRef<HTMLDivElement>(null);
+  const modalHeigthRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (modalRef.current) {
+      modalRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isConfirmationOpen]);
+  //
 
   if (!isModalOpen) return null;
 
@@ -62,16 +80,13 @@ const Modal: FC = () => {
     >
       <div className="flex">
         <ModalMain
-          // className={classNames("", {
-          //   "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]":
-          //     typeModal === "addVacancy" ||
-          //     typeModal === "editVacancy" ||
-          //     typeModal === "forgotPassword" ||
-          //     typeModal === "addEvent" ||
-          //     typeModal === "editEvent",
-          // })}
+          ref={modalHeigthRef}
           className={classNames(
-            "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]"
+            // "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]",
+            "scrollbar-transparent absolute left-2/4 top-2/4 mt-[10px] -translate-x-2/4 -translate-y-2/4",
+            {
+              "top-10 -translate-y-0": isCustomHeightModal,
+            }
           )}
           modalData={modalData}
           btnFunc={() => {
@@ -83,13 +98,18 @@ const Modal: FC = () => {
       {isConfirmationOpen ? (
         <div
           className={classNames(
-            "fixed right-0 top-0 z-50 flex w-full items-center justify-center bg-[#C2C2C2] bg-opacity-50 xl:h-full",
-            typeModal === "addVacancy" || typeModal === "editVacancy"
-              ? "h-[1300px]"
-              : "h-full"
+            "fixed right-0 top-0 z-50 flex w-full items-center justify-center bg-[#C2C2C2] bg-opacity-50 xl:h-full"
           )}
+          style={
+            isCustomHeightModal && modalHeigthRef.current?.scrollHeight
+              ? {
+                  height: `calc(${modalHeigthRef.current.scrollHeight}px + 150px)`,
+                }
+              : { height: "100%" }
+          }
         >
           <ModalMain
+            ref={modalRef}
             className="sticky mb-[210px] mt-auto md:mb-[145px] xl:mb-auto"
             modalData={confirmationData}
             btnFunc={() => dispatch(closeConfirmation())}

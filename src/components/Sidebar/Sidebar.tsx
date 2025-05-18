@@ -70,7 +70,7 @@ function Sidebar() {
   return (
     <aside
       className={cn(
-        "custom-size fixed right-0 top-0 z-20 flex h-fit max-h-dvh flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-base font-medium leading-[135%] dark:bg-slate-800 md:h-[780px] md:p-6 md:text-xl xl:left-0 xl:h-dvh xl:rounded-r-[20px] 3xl:py-8 smOnly:overflow-y-scroll mdOnly:overflow-y-scroll mdOnly:rounded-l-[20px]",
+        "custom-size fixed right-0 top-0 z-20 flex h-fit max-h-dvh flex-col justify-between bg-backgroundSecondary px-5 py-4 font-nunito text-base font-medium leading-[135%] dark:bg-backgroundTertiary md:h-[780px] md:p-6 md:text-xl xl:left-0 xl:h-dvh xl:rounded-r-[20px] 3xl:py-8 smOnly:overflow-y-scroll mdOnly:overflow-y-scroll mdOnly:rounded-l-[20px]",
         isOpenSidebar
           ? "w-full md:w-[256px]"
           : "w-[92px] translate-x-[92px] xl:transform-none xl:px-3 3xl:px-3"
@@ -130,7 +130,7 @@ function Sidebar() {
             title={t("navigation.support")}
             isOpen={isOpenSidebar}
             donateIcon={false}
-            className="border-transparent dark:fill-slate-300 dark:text-slate-300"
+            className="border-transparent"
             action={handleSupportModal}
           />
           <SidebarActionItem
@@ -138,14 +138,14 @@ function Sidebar() {
             title={t("donate")}
             isOpen={isOpenSidebar}
             donateIcon={true}
-            className="active:fill-textMediumWhite active:text-textMediumWhite xl:active:fill-textMediumWhite xl:active:text-textMediumWhite border-textBlack bg-button px-3 active:border-iconHover active:bg-iconHover xl:hover:border-iconHover xl:hover:bg-backgroundSecondary xl:hover:fill-textBlack xl:hover:text-textBlack xl:active:border-iconHover xl:active:bg-iconHover"
+            className="border-textBlack bg-button px-3 active:border-iconHover active:bg-iconHover active:fill-textMediumWhite active:text-textMediumWhite xl:hover:border-iconHover xl:hover:bg-backgroundSecondary xl:hover:fill-textBlack xl:hover:text-textBlack xl:active:border-iconHover xl:active:bg-iconHover xl:active:fill-textMediumWhite xl:active:text-textMediumWhite"
           />
           <SidebarActionItem
             icon="log-out"
             title={t("navigation.logOut")}
             isOpen={isOpenSidebar}
             donateIcon={false}
-            className="border-transparent dark:fill-slate-300 dark:text-slate-300"
+            className="border-transparent"
             action={handleLogOut}
           />
         </div>

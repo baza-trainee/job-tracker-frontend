@@ -79,7 +79,10 @@ export const SearchResults: FC<{ onClear?: () => void }> = ({ onClear }) => {
         <span className="pl-4 text-textOther">{query}</span>
       </p>
       <IconButton label="Close button" variant="default" onClick={handleClear}>
-        <Icon id={"close-default"} className="h-6 w-6 fill-textBlack" />
+        <Icon
+          id={"close-default"}
+          className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+        />
       </IconButton>
     </div>
   );

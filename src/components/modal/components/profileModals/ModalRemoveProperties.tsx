@@ -42,11 +42,11 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-10">
-      <h2 className="font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]"> 
+    <div className="flex flex-col items-center justify-center gap-5 md:gap-10">
+      <h2 className="text-center font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]">
         {t("modalAddProperties.modalRemoveLinkTitle")}
       </h2>
-      <div className="flex flex-col gap-4 md:flex-row">
+      <div className="flex w-full flex-col justify-center gap-4 md:flex-row">
         {/* <Button type="button" onClick={() => dispatch(closeModal())}> */}
         {/* alex */}
         <Button type="button" onClick={handleClose}>
@@ -61,7 +61,10 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
           className="gap-3"
         >
           {t("infoModal.button.delete")}
-          <Icon id="delete" className="h-6 w-6 fill-textBlack" />
+          <Icon
+            id="delete"
+            className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+          />
         </Button>
       </div>
     </div>
