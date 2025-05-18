@@ -1,10 +1,5 @@
 import i18n from "i18next";
-import { useSelector } from "react-redux";
 import { Vacancy, VacancyStatus } from "../../../types/vacancies.types";
-// import { useAppSelector } from "../../../store/hook.ts";
-import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
-
-const darkTheme = () => useSelector(selectTheme);
 
 export type SectionConfig = {
   sectionName: string;
@@ -27,7 +22,8 @@ export const getVacanciesByStatus = (
     .filter((v) => v.statuses[0].name === statusName);
 };
 
-export const sectionsConfig: SectionConfig[] = [
+// export const sectionsConfig: SectionConfig[] = [
+export const getSectionsConfig = (darkTheme: boolean): SectionConfig[] => [
   {
     sectionName: "saved",
     title: "sortDropdown.saved",
@@ -86,8 +82,10 @@ export const sectionsConfig: SectionConfig[] = [
   },
 ];
 
-export const getLocalizedSectionConfig = (): SectionConfig[] => {
-  return sectionsConfig.map((section) => ({
+export const getLocalizedSectionConfig = (
+  darkTheme: boolean
+): SectionConfig[] => {
+  return getSectionsConfig(darkTheme).map((section) => ({
     ...section,
     title: i18n.t(section.title),
   }));
