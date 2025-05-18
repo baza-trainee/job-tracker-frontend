@@ -631,7 +631,7 @@ const InfoModalMap = () => {
       ],
     },
     closeModalsaveEditEvent: {
-      title: t("infoModal.saveEditEvent.title"),
+      title: t("infoModal.saveEditEvent.title 999"),
       titleSize: "small",
       text: [t("infoModal.saveEditEvent.text_1")],
       button: [

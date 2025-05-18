@@ -12,7 +12,11 @@ import Icon from "@/components/Icon/Icon";
 import useMutationProfileData from "@/components/Profile/hooks/useMutationProfileData";
 
 type PropsModalAddProperties = {
-  cardsType: "updateResumes" | "updateProjects" | "updateCoverLetters" | "updatePersonalProperties";
+  cardsType:
+    | "updateResumes"
+    | "updateProjects"
+    | "updateCoverLetters"
+    | "updatePersonalProperties";
 };
 
 function ModalAddProperties({ cardsType }: PropsModalAddProperties) {
@@ -58,14 +62,14 @@ function ModalAddProperties({ cardsType }: PropsModalAddProperties) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-7">
+    <div className="flex flex-col items-center justify-center gap-1 md:gap-7">
       <h4 className="mb-3 font-nunito font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]">
         {t("infoModal.saveAddVacancies.title")}
       </h4>
-      <div className="mb-8 font-nunito font-medium leading-[135%] sm:text-[14px] md:text-[14px] xl:text-[20px]">
+      <div className="mb-8 text-center font-nunito font-medium leading-[135%] sm:text-[14px] md:text-[14px] xl:text-[20px]">
         {t("infoModal.saveAddVacancies.text_1")}
       </div>
-      <div className="flex flex-col gap-4 md:flex-row">
+      <div className="flex w-full flex-col gap-4 md:flex-row">
         <Button type="button" onClick={handleClose}>
           {t("infoModal.button.cancel")}
         </Button>
