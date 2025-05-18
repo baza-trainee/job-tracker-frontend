@@ -180,7 +180,10 @@ const EditVacancy = () => {
               onClick={saveVacancy}
             >
               {t("addVacancy.form.save")}
-              <Icon id={"check-box"} className="ml-3 h-6 w-6 fill-textBlack" />
+              <Icon
+                id={`${isFormChanged ? "check-box" : "check-box-gray"}`}
+                className="ml-3 h-6 w-6 fill-textBlack"
+              />
             </Button>
           </div>
         </div>

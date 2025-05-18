@@ -40,7 +40,7 @@ function ModalRemoveAccount() {
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      <h2 className="col-span-1 font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:col-span-2 md:text-[24px] xl:text-[32px]">
+      <h2 className="col-span-1 font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:col-span-2 md:text-[24px] xl:text-[32px] text-center">
         {!isConfirmModal
           ? t("modalAddProperties.removeAccountModalText")
           : t("modalAddProperties.removeConfirmAccountModalText")}
