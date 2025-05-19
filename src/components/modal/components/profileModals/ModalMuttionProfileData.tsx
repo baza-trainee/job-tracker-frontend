@@ -123,7 +123,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           handleConfirmation(typeConfirmationForModal as TypesModal, true),
       })
     );
-  }, [isDisabledSubmitButton]);
+  }, [isDisabledSubmitButton, errors]);
 
   return (
     <form

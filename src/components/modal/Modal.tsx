@@ -42,7 +42,7 @@ const Modal: FC = () => {
     return () => {
       window.removeEventListener("keydown", handleEscKey);
     };
-  }, [dispatch, isModalOpen, isConfirmationOpen]);
+  }, [dispatch, isModalOpen, isConfirmationOpen, isButtonOpen, resetForm]);
 
   const handleCloseModal = () => {
     if (isConfirmationOpen) {
