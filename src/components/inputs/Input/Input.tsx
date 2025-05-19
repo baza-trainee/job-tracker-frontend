@@ -132,7 +132,7 @@ export const Input = forwardRef<
                 className={cn(
                   "peer w-full font-nunito text-base font-medium transition placeholder:font-nunito",
                   "rounded-lg border border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
-                  "bg-transparent text-textBlack placeholder:text-textBlackLight",
+                  "bg-transparent text-textBlack placeholder:text-textBlackLight active:bg-transparent",
                   // "placeholder-shown:border-textBlack",
                   "h-[34px] px-4 py-2 pr-8 text-[12px]",
                   "md:h-11 md:px-6 md:py-3 md:pr-8 md:text-[14px]",

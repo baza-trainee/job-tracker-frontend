@@ -698,3 +698,21 @@ input[type="password"]::-ms-clear {
     min-height: calc(1.5em * 8 + 2rem);
   }
 }
+
+/* перебиття стилів від браузера при автозаповненні */
+/* замість background - box-shadow, бо перший ігнорується барузером, другий накладається */
+@layer utilities {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    box-shadow: 0 0 0px 1000px transparent inset; /* фон передостанній параметр */
+    -webkit-text-fill-color: var(--textBlack); /* 👈 колір тексту */
+    transition: background-color 5000s ease-in-out 0s; /* 👈 хак для Safari/Chrome */
+  }
+}
