@@ -53,7 +53,7 @@ html {
   --textBlack: #ecf0f6;
   --textBlackLight: rgba(236, 240, 246, 0.5);
   /* це колір #333333 з opacity 0.5*/
-  --textWhite: #6e7985;
+  --textWhite: #333333;
   --textMediumWhite: #333333;
   --textOther: #b3c6d3;
   --button: #134e79;
@@ -61,7 +61,7 @@ html {
   --backgroundSecondary: #eceff6;
   /* --backgroundSecondary: #5f687c */
   --backgroundTertiary: #292d36;
-  --iconHover: #b0d9f7;
+  --iconHover: #134e79;
   --borderLight: #464646;
   --color1: rgba(198, 231, 255, 0.7);
   --color1-transparent: rgba(198, 231, 255, 0.3);
