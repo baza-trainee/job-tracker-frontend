@@ -69,7 +69,7 @@ function ModalAddProperties({ cardsType }: PropsModalAddProperties) {
       <div className="mb-8 text-center font-nunito font-medium leading-[135%] sm:text-[14px] md:text-[14px] xl:text-[20px]">
         {t("infoModal.saveAddVacancies.text_1")}
       </div>
-      <div className="flex w-full flex-col gap-4 md:flex-row">
+      <div className="flex w-full flex-col gap-4 md:flex-row justify-center">
         <Button type="button" onClick={handleClose}>
           {t("infoModal.button.cancel")}
         </Button>
