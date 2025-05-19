@@ -42,7 +42,7 @@ const Modal: FC = () => {
     return () => {
       window.removeEventListener("keydown", handleEscKey);
     };
-  }, [dispatch, isModalOpen, isConfirmationOpen]);
+  }, [dispatch, isModalOpen, isConfirmationOpen, isButtonOpen, resetForm]);
 
   const handleCloseModal = () => {
     if (isConfirmationOpen) {
@@ -52,13 +52,20 @@ const Modal: FC = () => {
   };
 
   // alex Авто скрол до вікна підтвердження
-  const isCustomHeightModal = [
+  const modalsWithCustomHeight = [
     "addVacancy",
     "editVacancy",
     "forgotPassword",
     "addEvent",
     "editEvent",
-  ].includes(typeModal ?? "");
+  ];
+  const hasCustomHeight: boolean = modalsWithCustomHeight.includes(
+    typeModal ?? ""
+  );
+  const modalPositionClass: string = hasCustomHeight
+    ? "top-10 -translate-y-0 xl:top-2/4 xl:-translate-y-2/4"
+    : "top-2/4 -translate-y-2/4";
+
   const modalRef = useRef<HTMLDivElement>(null);
   const modalHeigthRef = useRef<HTMLDivElement>(null);
 
@@ -73,6 +80,7 @@ const Modal: FC = () => {
 
   return (
     <div
+      ref={modalHeigthRef}
       className={classNames(
         "fixed right-0 top-0 z-50 flex h-full w-full items-center justify-center overflow-auto bg-black bg-opacity-50 font-nunito backdrop-blur-sm"
       )}
@@ -80,13 +88,9 @@ const Modal: FC = () => {
     >
       <div className="flex">
         <ModalMain
-          ref={modalHeigthRef}
           className={classNames(
-            // "scrollbar-transparent absolute left-2/4 top-11 -translate-x-2/4 xl:top-[10%]",
-            "scrollbar-transparent absolute left-2/4 top-2/4 mt-[10px] -translate-x-2/4 -translate-y-2/4",
-            {
-              "top-10 -translate-y-0": isCustomHeightModal,
-            }
+            "scrollbar-transparent absolute left-2/4 mt-[10px] -translate-x-2/4",
+            modalPositionClass
           )}
           modalData={modalData}
           btnFunc={() => {
@@ -98,15 +102,9 @@ const Modal: FC = () => {
       {isConfirmationOpen ? (
         <div
           className={classNames(
-            "fixed right-0 top-0 z-50 flex w-full items-center justify-center bg-[#C2C2C2] bg-opacity-50 xl:h-full"
+            "fixed right-0 top-0 z-50 flex w-full items-center justify-center bg-[#C2C2C2] bg-opacity-50"
           )}
-          style={
-            isCustomHeightModal && modalHeigthRef.current?.scrollHeight
-              ? {
-                  height: `calc(${modalHeigthRef.current.scrollHeight}px + 150px)`,
-                }
-              : { height: "100%" }
-          }
+          style={{ height: modalHeigthRef.current?.scrollHeight }}
         >
           <ModalMain
             ref={modalRef}
