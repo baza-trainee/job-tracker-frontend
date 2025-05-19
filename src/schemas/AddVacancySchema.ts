@@ -21,7 +21,8 @@ export const AddVacancySchema = z
       .string()
       .min(3, `addVacancySchema.communication.min`)
       .max(1000, `addVacancySchema.communication.max`)
-      .trim(),
+      .trim()
+      .or(z.literal("")),
     company: z
       .string()
       .min(2, `addVacancySchema.company.min`)

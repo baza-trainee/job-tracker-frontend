@@ -82,7 +82,7 @@ const EditVacancy = () => {
                     placeholder={input.placeholder || ""}
                     label={input.label}
                     errors={errors}
-                    isRequired={true}
+                    isRequired={input.name !== "communication" ? true : false}
                     setValue={setValue}
                   />
                 ))}
