@@ -157,7 +157,7 @@ const EditVacancy = () => {
                 {t(`addVacancy.form.${isArchived ? "restore" : "archive"}`)}
                 <Icon
                   id={isArchived ? "restore" : "send"}
-                  className="ml-3 h-6 w-6 fill-textBlack"
+                  className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
                 />
               </Button>
               <Button
@@ -168,7 +168,10 @@ const EditVacancy = () => {
                 onClick={deleteVacancy}
               >
                 {t("addVacancy.form.delete")}
-                <Icon id={"delete"} className="ml-3 h-6 w-6 fill-textBlack" />
+                <Icon
+                  id={"delete"}
+                  className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+                />
               </Button>
             </div>
             <Button
@@ -182,7 +185,7 @@ const EditVacancy = () => {
               {t("addVacancy.form.save")}
               <Icon
                 id={`${isFormChanged ? "check-box" : "check-box-gray"}`}
-                className="ml-3 h-6 w-6 fill-textBlack"
+                className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
               />
             </Button>
           </div>

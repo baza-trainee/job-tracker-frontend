@@ -58,7 +58,8 @@ html {
   --textOther: #b3c6d3;
   --button: #134e79;
   --backgroundMain: #252a34;
-  --backgroundSecondary: #5f687c;
+  --backgroundSecondary: #eceff6;
+  /* --backgroundSecondary: #5f687c */
   --backgroundTertiary: #292d36;
   --iconHover: #b0d9f7;
   --borderLight: #464646;

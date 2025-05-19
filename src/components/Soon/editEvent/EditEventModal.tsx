@@ -242,7 +242,10 @@ const EditEventModal = () => {
           onClick={confirmDelete}
         >
           {t("soonSection.delete")}
-          <Icon id={"delete"} className="ml-3 h-6 w-6 fill-textBlack" />
+          <Icon
+            id={"delete"}
+            className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+          />
         </Button>
 
         <Button
@@ -254,7 +257,10 @@ const EditEventModal = () => {
           disabled={inputChanged === false}
         >
           {t("soonSection.save")}
-          <Icon id={"check-box"} className="ml-3 h-6 w-6 fill-textBlack" />
+          <Icon
+            id={"check-box"}
+            className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+          />
         </Button>
       </div>
     </form>

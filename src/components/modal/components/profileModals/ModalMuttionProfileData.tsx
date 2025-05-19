@@ -186,7 +186,10 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
             // disabled={isDisabledButtonRemove}
           >
             {t("infoModal.button.delete")}
-            <Icon id="delete" className="h-6 w-6 fill-textBlack" />
+            <Icon
+              id="delete"
+              className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+            />
           </Button>
         )}
         <Button
@@ -200,7 +203,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           {t("infoModal.button.save")}
           <Icon
             id={`${isDisabledSubmitButton ? "check-box-gray" : "check-box"}`}
-            className="h-6 w-6 fill-textBlack"
+            className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
           />
         </Button>
       </div>
