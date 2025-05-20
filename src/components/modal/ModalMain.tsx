@@ -36,7 +36,7 @@ const ModalMain = forwardRef<HTMLDivElement, ModalMainProps>(
         <div
           className={clsx(
             "relative z-0 flex w-fit max-w-[330px] items-center justify-center rounded-tl-xl rounded-tr-xl",
-            "top-[1px] min-h-[20px] min-w-[100px] px-4 py-2",
+            "top-0 min-h-[20px] min-w-[100px] px-4 py-2",
             "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
             darkTheme
               ? backgroundColorModal
@@ -47,7 +47,7 @@ const ModalMain = forwardRef<HTMLDivElement, ModalMainProps>(
           )}
           onClick={(e) => e.stopPropagation()}
         >
-          <div
+          {/* <div
             className={clsx(
               "absolute z-[-100] h-full w-full rounded-tl-xl rounded-tr-xl",
               "top-0",
@@ -57,7 +57,7 @@ const ModalMain = forwardRef<HTMLDivElement, ModalMainProps>(
                   : modalData?.bgColor
                 : backgroundColorModal || modalData?.bgColor
             )}
-          ></div>
+          ></div> */}
           {modalData?.nameModal && (
             <span className="text-[16px] font-bold text-textBlack md:text-[20px]">
               {t(modalData.nameModal)}

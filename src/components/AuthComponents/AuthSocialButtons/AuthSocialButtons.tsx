@@ -10,12 +10,12 @@ export const AuthSocialButtons = () => {
     <div className="flex justify-center gap-[22px] px-2 xl:gap-[35px] 2xl:gap-8">
       <Button
         type="button"
-        className="gap-3 text-[14px] md:gap-1 md:text-[20px] 2xl:text-[20px]"
+        className="group gap-3 text-[14px] md:gap-1 md:text-[20px] 2xl:text-[20px]"
         variant="ghost"
         size="small"
         onClick={GoogleLogin}
       >
-        <span className="font-nunito font-medium leading-[135%] text-textBlack">
+        <span className="font-nunito font-medium leading-[135%] text-textBlack dark:group-hover:text-blackColor">
           Google
         </span>
         <Icon id="Google" className="h-6 w-6 md:h-9 md:w-9" />
@@ -23,12 +23,12 @@ export const AuthSocialButtons = () => {
 
       <Button
         type="button"
-        className="gap-3 text-[14px] md:gap-1 md:text-[20px] 2xl:text-[20px]"
+        className="group gap-3 text-[14px] md:gap-1 md:text-[20px] 2xl:text-[20px]"
         variant="ghost"
         size="small"
         onClick={GithubLogin}
       >
-        <span className="font-nunito font-medium leading-[135%] text-textBlack">
+        <span className="font-nunito font-medium leading-[135%] text-textBlack dark:group-hover:text-blackColor">
           GitHub
         </span>
         <Icon
