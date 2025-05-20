@@ -65,7 +65,7 @@ const Modal: FC = () => {
     typeModal ?? ""
   );
   const modalPositionClass: string = hasCustomHeight
-    ? "top-10 -translate-y-0 xl:top-2/4 xl:-translate-y-2/4"
+    ? "top-10 -translate-y-0"
     : "top-2/4 -translate-y-2/4";
 
   const modalRef = useRef<HTMLDivElement>(null);
