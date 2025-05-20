@@ -33,13 +33,14 @@ export const InputRadio = ({
           {...props}
           className={classNames(
             className === "addVacancy" &&
-              "peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none rounded-[4px] border-[1px] border-solid border-textBlack",
-            "md:h-6 md:w-6 md:border-2"
+              "peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none",
+            "md:h-6 md:w-6 md:border-2",
+            "rounded-[4px] border-[1px] border-solid border-textBlack focus:border-textOther"
           )}
         />
         {className === "addVacancy" && (
           <svg
-            className="peer-checked:!fill- stroke-form-background pointer-events-none absolute h-4 w-4 fill-none peer-checked:!stroke-textOther"
+            className="peer-checked:!fill- pointer-events-none absolute h-4 w-4 fill-none stroke-form-background peer-checked:!stroke-textOther"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             stroke="currentColor"
