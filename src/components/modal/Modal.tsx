@@ -36,10 +36,12 @@ const Modal: FC = () => {
     };
 
     if (isModalOpen) {
+      document.body.style.overflow = "hidden"; // відключення скролу background
       window.addEventListener("keydown", handleEscKey);
     }
 
     return () => {
+      document.body.style.overflow = "unset"; // включення скролу
       window.removeEventListener("keydown", handleEscKey);
     };
   }, [dispatch, isModalOpen, isConfirmationOpen, isButtonOpen, resetForm]);
