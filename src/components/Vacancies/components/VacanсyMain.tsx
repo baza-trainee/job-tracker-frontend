@@ -110,7 +110,7 @@ const VacancyMain: FC = () => {
         (!isMobile ? (
           <VacancySection
             titleSection={t("sortDropdown.saved")}
-            colorSectionBorder="border-color5"
+            colorSectionBorder="border-color5 dark:border-color5-transparent"
             colorSectionBG="bg-color5"
           >
             <VacancyCardFirst
@@ -123,7 +123,7 @@ const VacancyMain: FC = () => {
           <VacancySectionBox
             titleSection={t("sortDropdown.saved")}
             colorSectionBG="bg-color5"
-            colorSectionBorder="border-color5"
+            colorSectionBorder="border-color5 dark:border-color5-transparent"
           >
             <VacancyCardFirst
               colorSectionBG="bg-color5-transparent"
@@ -137,7 +137,7 @@ const VacancyMain: FC = () => {
       {isArchive && renderedVacancies.length > 0 && (
         <VacancySectionBox
           titleSection={t("vacanciesHeader.archive")}
-          colorSectionBorder="border-color9"
+          colorSectionBorder="border-color9 dark:border-color9-transparent"
           colorSectionBG="bg-color9"
         >
           {renderedVacancies.map((vacancy) => (
@@ -159,7 +159,7 @@ const VacancyMain: FC = () => {
 
       {/* В цій секції не має вакансій... - під час сортування*/}
       {!isLoading && renderedVacancies.length === 0 && (
-        <p className="mt-4 font-nunito text-xl">
+        <p className="mt-4 font-nunito text-xl text-textBlack">
           {t("vacanciesHeader.emptySection")}
         </p>
       )}

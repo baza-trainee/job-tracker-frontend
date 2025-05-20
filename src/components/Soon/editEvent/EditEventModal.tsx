@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import SoonCalendarModal from "../../Calendar/SoonCalendarModal.tsx";
 import { Input } from "../../inputs/Input/Input.tsx";
 import { Button } from "../../buttons/Button/Button.tsx";
@@ -43,6 +43,24 @@ const EditEventModal = () => {
   const selectHoursRef = useRef<any>(null);
   const selectMinutesRef = useRef<any>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const selectWrapperRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectWrapperRef.current &&
+        !selectWrapperRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpenHours(false);
+        setMenuOpenMinutes(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <form className="mt-4 flex w-full flex-col gap-3 align-middle md:gap-4 xl:mt-10 3xl:mt-14 3xl:gap-6">
@@ -97,7 +115,7 @@ const EditEventModal = () => {
             autoComplete="off"
           />
 
-          <div className="flex w-full flex-col items-center text-textBlack md:items-start">
+          <div className="flex w-full flex-col items-center md:items-start">
             <p className="mt-3 text-base text-textBlack xl:mt-4 xl:text-xl 3xl:text-2xl">
               {t("soonSection.setTime")}
             </p>
@@ -132,30 +150,33 @@ const EditEventModal = () => {
                   ref={inputRef}
                   onInput={() => setMenuOpenHours(false)}
                 />
-                <Select<OptionType>
-                  ref={selectHoursRef}
-                  options={hourOptions}
-                  value={hourOptions.find(
-                    (option) => option.value === Number(watch("hours")) || null
-                  )}
-                  onChange={handleHourSelectChange}
-                  placeholder="00"
-                  className={clsx(
-                    "select__event-modal",
-                    "z-1 left-0 top-0 cursor-pointer",
-                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-3 py-[9px]",
-                    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
-                  )}
-                  classNamePrefix="react-select"
-                  isSearchable={false}
-                  components={{
-                    DropdownIndicator: () => null,
-                    IndicatorSeparator: () => null,
-                  }}
-                  menuIsOpen={menuOpenHours}
-                  onMenuOpen={() => setMenuOpenHours(true)}
-                  onMenuClose={() => setMenuOpenHours(false)}
-                />
+                <div ref={selectWrapperRef}>
+                  <Select<OptionType>
+                    ref={selectHoursRef}
+                    options={hourOptions}
+                    value={hourOptions.find(
+                      (option) =>
+                        option.value === Number(watch("hours")) || null
+                    )}
+                    onChange={handleHourSelectChange}
+                    placeholder="00"
+                    className={clsx(
+                      "select__event-modal",
+                      "z-1 left-0 top-0 cursor-pointer",
+                      "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-3 py-[9px]",
+                      "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+                    )}
+                    classNamePrefix="react-select"
+                    isSearchable={false}
+                    components={{
+                      DropdownIndicator: () => null,
+                      IndicatorSeparator: () => null,
+                    }}
+                    menuIsOpen={menuOpenHours}
+                    onMenuOpen={() => setMenuOpenHours(true)}
+                    onMenuClose={() => setMenuOpenHours(false)}
+                  />
+                </div>
               </div>
 
               <div className="flex h-[60px] w-6 items-center justify-center">
@@ -178,12 +199,12 @@ const EditEventModal = () => {
                   autoComplete="off"
                   maxLength={2}
                   className={clsx(
-                    "pointer-events-auto z-10 text-textBlack",
+                    "pointer-events-auto z-10",
                     "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
                   classNameInputCustom={clsx(
-                    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium",
+                    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium text-textBlack",
                     "sm:h-auto sm:p-0 sm:text-[24px]",
                     "md:h-auto md:p-0 md:text-[24px]",
                     "xl:text-[32px] xl:font-normal",
@@ -194,38 +215,39 @@ const EditEventModal = () => {
                   ref={inputRef}
                   onInput={() => setMenuOpenMinutes(false)}
                 />
-
-                <Select<OptionType>
-                  ref={selectMinutesRef}
-                  options={minuteOptions}
-                  value={minuteOptions.find(
-                    (option) =>
-                      option.value === Number(watch("minutes")) || null
-                  )}
-                  onChange={handleMinuteSelectChange}
-                  placeholder="00"
-                  className={clsx(
-                    "select__event-modal",
-                    "z-1 left-0 top-0 cursor-pointer",
-                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
-                    "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
-                  )}
-                  classNamePrefix="react-select"
-                  isSearchable={false}
-                  components={{
-                    DropdownIndicator: () => null,
-                    IndicatorSeparator: () => null,
-                  }}
-                  menuIsOpen={menuOpenMinutes}
-                  onMenuOpen={() => setMenuOpenMinutes(true)}
-                  onMenuClose={() => setMenuOpenMinutes(false)}
-                />
+                <div ref={selectWrapperRef}>
+                  <Select<OptionType>
+                    ref={selectMinutesRef}
+                    options={minuteOptions}
+                    value={minuteOptions.find(
+                      (option) =>
+                        option.value === Number(watch("minutes")) || null
+                    )}
+                    onChange={handleMinuteSelectChange}
+                    placeholder="00"
+                    className={clsx(
+                      "select__event-modal",
+                      "z-1 left-0 top-0 cursor-pointer",
+                      "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px]",
+                      "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
+                    )}
+                    classNamePrefix="react-select"
+                    isSearchable={false}
+                    components={{
+                      DropdownIndicator: () => null,
+                      IndicatorSeparator: () => null,
+                    }}
+                    menuIsOpen={menuOpenMinutes}
+                    onMenuOpen={() => setMenuOpenMinutes(true)}
+                    onMenuClose={() => setMenuOpenMinutes(false)}
+                  />
+                </div>
               </div>
 
-              <p className="col-span-2 row-start-2 text-sm xl:text-base 3xl:text-xl">
+              <p className="col-span-2 row-start-2 pr-6 text-center text-sm text-textBlack xl:text-base 3xl:text-xl">
                 {t("soonSection.soonModalTimeHours")}
               </p>
-              <p className="col-span-1 row-start-2 text-sm xl:text-base 3xl:text-xl">
+              <p className="col-span-1 row-start-2 text-center text-sm text-textBlack xl:text-base 3xl:text-xl">
                 {t("soonSection.soonModalTimeMinutes")}
               </p>
             </div>
@@ -258,7 +280,7 @@ const EditEventModal = () => {
         >
           {t("soonSection.save")}
           <Icon
-            id={"check-box"}
+            id={`${inputChanged ? "check-box" : "check-box-gray"}`}
             className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
           />
         </Button>
