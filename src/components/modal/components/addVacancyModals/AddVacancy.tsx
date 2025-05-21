@@ -15,8 +15,6 @@ import { VacancyInputProps } from "./AddVacancy.props";
 //hook
 import useVacancy from "./useVacancy";
 import { useKeyBoardNavigation } from "./useKeyBoardNavigation";
-import { useRef } from "react";
-import { Ref } from "react";
 
 const AddVacancy = () => {
   const dispatch = useAppDispatch();
