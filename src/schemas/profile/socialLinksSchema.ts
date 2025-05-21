@@ -6,7 +6,7 @@ export const socialLinksSchema = z.record(
     .refine(
       (value) =>
         value === "" ||
-        /^https?:\/\/[a-zA-Z0-9-]{2,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/.test(
+        /^https?:\/\/[a-zA-Z0-9-]{1,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/.test(
           value
         ),
       {
