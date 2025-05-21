@@ -14,7 +14,9 @@ import AddVacancyInfo from "./AddVacancyInfo";
 import { VacancyInputProps } from "./AddVacancy.props";
 //hook
 import useVacancy from "./useVacancy";
-import { useEffect, useRef, useState } from "react";
+import { useKeyBoardNavigation } from "./useKeyBoardNavigation";
+import { useRef } from "react";
+import { Ref } from "react";
 
 const AddVacancy = () => {
   const dispatch = useAppDispatch();
@@ -42,48 +44,16 @@ const AddVacancy = () => {
     saveVacancy();
   };
 
-  //ALex
-  const [focusedId, setFocusedId] = useState<string>("");
-  const inputRefs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>(
-    []
-  );
-
-  const focusFields  = [
+  // keyBoardNavigation
+  const focusFields: string[] = [
     ...vacancyFields.map((f) => f.id),
     ...workTypeOptions.map((f) => f.id),
     ...statusVacancy.map((f) => f.id),
     "note",
   ];
 
-  const handleFormKeyNavigation = (e: React.KeyboardEvent<HTMLFormElement>) => {
-    if (e.key === "ArrowDown" || e.key === "Tab") {
-      moveFocus(1);
-    }
-    if (e.key === "ArrowUp") {
-      moveFocus(-1);
-    }
-
-    function moveFocus(direction: number) {
-      e.preventDefault();
-
-      const currentIndex = focusFields .findIndex((el) => el === focusedId);
-      const nextIndex = currentIndex + direction;
-
-      if (nextIndex >= 0 && nextIndex < focusFields .length) {
-        inputRefs.current[nextIndex]?.focus();
-      }
-    }
-  };
-
-  const assignInputRef = (
-    id: string,
-    el: HTMLInputElement | HTMLTextAreaElement | null
-  ) => {
-    const index = focusFields .findIndex((itemId) => itemId === id);
-    if (index !== -1) {
-      inputRefs.current[index] = el;
-    }
-  };
+  const { setFocusedId, handleFormKeyNavigation, assignInputRef } =
+    useKeyBoardNavigation({ focusFields });
 
   return (
     <div className="w-full pt-[50px] xl:pt-[44px]">
@@ -122,6 +92,7 @@ const AddVacancy = () => {
                     register={register}
                     errors={errors}
                     value={inputRadio.value}
+                    ref={(el) => assignInputRef(inputRadio.id, el)}
                     onFocus={() => setFocusedId(inputRadio.id)}
                   />
                 ))}
