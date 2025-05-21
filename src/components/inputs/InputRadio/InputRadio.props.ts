@@ -1,4 +1,5 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { Ref } from "react";
 
 export interface InputRadioProps {
   name: string;
@@ -11,6 +12,8 @@ export interface InputRadioProps {
   disabled?: boolean;
   required?: boolean;
   value?: string;
+
+  ref?: Ref<HTMLInputElement>;
   onClick?: () => void;
   onFocus?: () => void;
 }

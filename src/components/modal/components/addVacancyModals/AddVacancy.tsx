@@ -44,53 +44,50 @@ const AddVacancy = () => {
 
   //ALex
   const [focusedId, setFocusedId] = useState<string>("");
-  console.log("focus", focusedId);
   const inputRefs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>(
     []
   );
-  useEffect(() => {
-    // const ids = inputRefs.current
-    //   .filter((el): el is HTMLInputElement | HTMLTextAreaElement => el !== null)
-    //   .map((el) => {
-    //     const parts = el.id.split("-");
-    //     return parts[parts.length - 1]; // последнее слово
-    //   });
-    // console.log("Последние слова из id:", ids);
-    // inputRefs.current[2]?.focus()
-    // console.log(arr);
-    // console.log("ref", inputRefs.current);
-    console.log("sds", document.getElementById("note"));
-  }, []);
 
-  const arr = [
-    ...vacancyFields.map((f) => {
-      return "input-" + f.id;
-    }),
+  const focusFields  = [
+    ...vacancyFields.map((f) => f.id),
     ...workTypeOptions.map((f) => f.id),
     ...statusVacancy.map((f) => f.id),
-    "textarea-note",
+    "note",
   ];
+
+  const handleFormKeyNavigation = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === "ArrowDown" || e.key === "Tab") {
+      moveFocus(1);
+    }
+    if (e.key === "ArrowUp") {
+      moveFocus(-1);
+    }
+
+    function moveFocus(direction: number) {
+      e.preventDefault();
+
+      const currentIndex = focusFields .findIndex((el) => el === focusedId);
+      const nextIndex = currentIndex + direction;
+
+      if (nextIndex >= 0 && nextIndex < focusFields .length) {
+        inputRefs.current[nextIndex]?.focus();
+      }
+    }
+  };
+
+  const assignInputRef = (
+    id: string,
+    el: HTMLInputElement | HTMLTextAreaElement | null
+  ) => {
+    const index = focusFields .findIndex((itemId) => itemId === id);
+    if (index !== -1) {
+      inputRefs.current[index] = el;
+    }
+  };
 
   return (
     <div className="w-full pt-[50px] xl:pt-[44px]">
-      <form
-        onKeyDown={(e) => {
-          console.log(e.key)
-          if (e.key === "ArrowDown" || e.key === "Tab") {
-            e.preventDefault();
-
-            const currentIndex = arr.findIndex((el) => el === focusedId);
-
-            if (currentIndex !== -1 && currentIndex < arr.length - 1) {
-              const next = arr[currentIndex + 1];
-
-              if (next) {
-                document.getElementById(next)?.focus();
-              }
-            }
-          }
-        }}
-      >
+      <form onKeyDown={handleFormKeyNavigation}>
         <div className="flex flex-col items-center gap-3">
           <div className="flex w-full flex-col gap-4 xl:flex-row xl:gap-6">
             <div className="flex flex-col justify-start gap-3">
@@ -107,17 +104,8 @@ const AddVacancy = () => {
                     errors={errors}
                     isRequired={input.name !== "communication" ? true : false}
                     type="vacancy"
-                    // ref={(el) => {
-                    //   const index = arr.findIndex((id) => id === input.id);
-                    //   if (index !== -1) {
-                    //     inputRefs.current[index] = el;
-                    //   }
-                    // }}
-                    onFocus={() =>
-                      setFocusedId(() => {
-                        return "input-" + input.id;
-                      })
-                    }
+                    ref={(el) => assignInputRef(input.id, el)}
+                    onFocus={() => setFocusedId(input.id)}
                   />
                 ))}
               </div>

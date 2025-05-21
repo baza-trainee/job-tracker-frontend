@@ -12,6 +12,7 @@ export const InputRadio = ({
   required = false,
   className,
   onFocus,
+  ref,
   ...props
 }: InputRadioProps) => {
   const error = errors[name];
@@ -39,6 +40,7 @@ export const InputRadio = ({
             "rounded-[4px] border-[1px] border-solid border-textBlack focus:border-textOther focus:outline-none"
           )}
           onFocus={onFocus}
+          ref={ref}
         />
         {className === "addVacancy" && (
           <svg

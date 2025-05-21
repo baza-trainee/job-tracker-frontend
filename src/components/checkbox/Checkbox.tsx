@@ -63,7 +63,6 @@ export const Checkbox = ({
           htmlFor={id}
           className={classNames(
             type === "signUp" &&
-              // "ml-3 font-nunito font-medium leading-[135%] text-textBlackLight sm:text-[10px] md:text-[14px] 2xl:text-[16px]"
               "ml-3 font-nunito text-[14px] font-medium leading-[135%] text-textBlack md:text-[16px]"
           )}
         >
