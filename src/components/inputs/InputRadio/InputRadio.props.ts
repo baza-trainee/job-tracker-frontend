@@ -10,6 +10,7 @@ export interface InputRadioProps {
   id?: string;
   disabled?: boolean;
   required?: boolean;
+  value?: string;
   onClick?: () => void;
-  value?:string
+  onFocus?: () => void;
 }

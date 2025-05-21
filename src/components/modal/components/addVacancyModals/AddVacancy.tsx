@@ -14,6 +14,7 @@ import AddVacancyInfo from "./AddVacancyInfo";
 import { VacancyInputProps } from "./AddVacancy.props";
 //hook
 import useVacancy from "./useVacancy";
+import { useEffect, useRef, useState } from "react";
 
 const AddVacancy = () => {
   const dispatch = useAppDispatch();
@@ -41,9 +42,55 @@ const AddVacancy = () => {
     saveVacancy();
   };
 
+  //ALex
+  const [focusedId, setFocusedId] = useState<string>("");
+  console.log("focus", focusedId);
+  const inputRefs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>(
+    []
+  );
+  useEffect(() => {
+    // const ids = inputRefs.current
+    //   .filter((el): el is HTMLInputElement | HTMLTextAreaElement => el !== null)
+    //   .map((el) => {
+    //     const parts = el.id.split("-");
+    //     return parts[parts.length - 1]; // последнее слово
+    //   });
+    // console.log("Последние слова из id:", ids);
+    // inputRefs.current[2]?.focus()
+    // console.log(arr);
+    // console.log("ref", inputRefs.current);
+    console.log("sds", document.getElementById("note"));
+  }, []);
+
+  const arr = [
+    ...vacancyFields.map((f) => {
+      return "input-" + f.id;
+    }),
+    ...workTypeOptions.map((f) => f.id),
+    ...statusVacancy.map((f) => f.id),
+    "textarea-note",
+  ];
+
   return (
     <div className="w-full pt-[50px] xl:pt-[44px]">
-      <form>
+      <form
+        onKeyDown={(e) => {
+          console.log(e.key)
+          if (e.key === "ArrowDown" || e.key === "Tab") {
+            e.preventDefault();
+
+            const currentIndex = arr.findIndex((el) => el === focusedId);
+
+            if (currentIndex !== -1 && currentIndex < arr.length - 1) {
+              const next = arr[currentIndex + 1];
+
+              if (next) {
+                document.getElementById(next)?.focus();
+              }
+            }
+          }
+        }}
+      >
         <div className="flex flex-col items-center gap-3">
           <div className="flex w-full flex-col gap-4 xl:flex-row xl:gap-6">
             <div className="flex flex-col justify-start gap-3">
@@ -60,6 +107,17 @@ const AddVacancy = () => {
                     errors={errors}
                     isRequired={input.name !== "communication" ? true : false}
                     type="vacancy"
+                    // ref={(el) => {
+                    //   const index = arr.findIndex((id) => id === input.id);
+                    //   if (index !== -1) {
+                    //     inputRefs.current[index] = el;
+                    //   }
+                    // }}
+                    onFocus={() =>
+                      setFocusedId(() => {
+                        return "input-" + input.id;
+                      })
+                    }
                   />
                 ))}
               </div>
@@ -76,6 +134,7 @@ const AddVacancy = () => {
                     register={register}
                     errors={errors}
                     value={inputRadio.value}
+                    onFocus={() => setFocusedId(inputRadio.id)}
                   />
                 ))}
               </div>
@@ -96,6 +155,7 @@ const AddVacancy = () => {
                     date={checkboxCalendar.date}
                     getValues={getValues}
                     setValue={setValue}
+                    onFocus={() => setFocusedId(checkboxCalendar.id)}
                   />
                 ))}
               </div>
@@ -117,6 +177,7 @@ const AddVacancy = () => {
                 className=""
                 label={t("addVacancy.form.notes")}
                 errors={errors}
+                onFocus={() => setFocusedId("note")}
               />
             </div>
           </div>

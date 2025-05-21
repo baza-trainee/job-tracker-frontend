@@ -12,6 +12,7 @@ export const Checkbox = ({
   checked,
   disabled = false,
   required = false,
+  onFocus,
   ...props
 }: CheckboxProps) => {
   const error = errors[name];
@@ -37,9 +38,11 @@ export const Checkbox = ({
             checked={checked}
             className={classNames(
               type === "signUp" &&
-                "peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none rounded-[4px] border-[1px] border-solid border-textBlack",
-              "md:h-6 md:w-6 md:border-2"
+                "peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none",
+              "md:h-6 md:w-6 md:border-2",
+              "rounded-[4px] border-[1px] border-solid border-textBlack focus:border-textOther focus:outline-none"
             )}
+            onFocus={onFocus}
           />
           {type === "signUp" && (
             <svg

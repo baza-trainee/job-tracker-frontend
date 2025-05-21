@@ -11,6 +11,7 @@ export const InputRadio = ({
   disabled = false,
   required = false,
   className,
+  onFocus,
   ...props
 }: InputRadioProps) => {
   const error = errors[name];
@@ -35,8 +36,9 @@ export const InputRadio = ({
             className === "addVacancy" &&
               "peer relative h-5 w-5 shrink-0 cursor-pointer appearance-none",
             "md:h-6 md:w-6 md:border-2",
-            "rounded-[4px] border-[1px] border-solid border-textBlack focus:border-textOther"
+            "rounded-[4px] border-[1px] border-solid border-textBlack focus:border-textOther focus:outline-none"
           )}
+          onFocus={onFocus}
         />
         {className === "addVacancy" && (
           <svg

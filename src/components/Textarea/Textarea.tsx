@@ -12,6 +12,7 @@ export const Textarea = ({
   errors,
   value,
   id,
+  onFocus,
 }: TextareaProps) => {
   const error = errors[name];
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ export const Textarea = ({
             {...(value && { value })}
             {...register(name)}
             aria-describedby={`textareaError-${name}`}
+            onFocus={onFocus}
           ></textarea>
         </div>
         {error ? (

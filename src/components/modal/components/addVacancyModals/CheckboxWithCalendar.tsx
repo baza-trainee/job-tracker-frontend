@@ -25,6 +25,7 @@ export const CheckboxWithCalendar = ({
   date,
   getValues,
   setValue,
+  onFocus,
 }: CheckboxProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(
     date !== "1970-01-01T00:00:00.000Z"
@@ -139,6 +140,7 @@ export const CheckboxWithCalendar = ({
               errors={errors}
               checked={isChecked}
               onClick={handleCheckbox}
+              onFocus={onFocus}
             />
             <span
               className="cursor-pointer text-[14px] underline 2xl:text-[16px]"
