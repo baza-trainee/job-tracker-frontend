@@ -135,6 +135,7 @@ const AddVacancy = () => {
                 className=""
                 label={t("addVacancy.form.notes")}
                 errors={errors}
+                ref={(el) => assignInputRef("note", el)}
                 onFocus={() => setFocusedId("note")}
               />
             </div>
