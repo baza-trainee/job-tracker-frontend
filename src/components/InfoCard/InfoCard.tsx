@@ -26,9 +26,11 @@ const InfoCard = ({
     >
       <span
         className={classNames(
-          "absolute top-[-29px] flex h-[30px] w-[130px] rounded-bl-[0] rounded-br-[0] rounded-tl-[12px] rounded-tr-[12px]",
+          "absolute top-[-30px] flex h-[30px] w-[130px] rounded-bl-[0] rounded-br-[0] rounded-tl-[12px] rounded-tr-[12px]",
           "3xl:w-[134px]",
-          color === "blue" ? "bg-color1" : "bg-color5",
+          color === "blue"
+            ? "bg-color1 dark:bg-color1-transparent"
+            : "bg-color5 dark:bg-color5-transparent",
           position === "left"
             ? "-translate-0 left-0"
             : "left-full -translate-x-full"
@@ -40,7 +42,9 @@ const InfoCard = ({
           "xl:gap-1 xl:px-6 xl:py-[9px]",
           "2xl:gap-2 2xl:p-[14px]",
           "3xl:gap-4 3xl:px-[63px] 3xl:py-[14px]",
-          color === "blue" ? "border-color1" : "border-color5",
+          color === "blue"
+            ? "border-color1 dark:border-color1-transparent"
+            : "border-color5 dark:border-color5-transparent",
           `${border}`
         )}
       >
@@ -56,7 +60,7 @@ const InfoCard = ({
         <Icon
           id={icon}
           className={classNames(
-            "h-[100px] w-[100px] p-1",
+            "h-[100px] w-[100px] fill-textBlack",
             "2xl:h-[120px] 2xl:w-[120px]"
           )}
         />

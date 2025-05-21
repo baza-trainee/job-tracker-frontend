@@ -88,24 +88,63 @@ const VacancySection: FC<VacancySectionProps> = ({
     };
   }, [children]);
 
+  // useEffect(() => {
+  //   const container = containerRef.current;
+
+  //   if (container) {
+  //     const resizeObserver = new ResizeObserver(() => {
+  //       checkScrollPosition();
+  //     });
+
+  //     resizeObserver.observe(container);
+  //     container.addEventListener("scroll", checkScrollPosition);
+
+  //     checkScrollPosition();
+
+  //     return () => {
+  //       resizeObserver.unobserve(container);
+  //       container.removeEventListener("scroll", checkScrollPosition);
+  //     };
+  //   }
+  // }, []);
+
   useEffect(() => {
     const container = containerRef.current;
 
-    if (container) {
-      const resizeObserver = new ResizeObserver(() => {
+    if (!container) return;
+
+    // MutationObserver — реагує на додавання/видалення DOM-елементів
+    const mutationObserver = new MutationObserver(() => {
+      // Використовуємо requestAnimationFrame — чекаємо, поки DOM оновиться
+      requestAnimationFrame(() => {
         checkScrollPosition();
       });
+    });
 
-      resizeObserver.observe(container);
-      container.addEventListener("scroll", checkScrollPosition);
+    mutationObserver.observe(container, {
+      childList: true, // Спостерігати за змінами у дочірніх елементах
+      subtree: true, // У тому числі вкладених елементів (наприклад картки в рядках)
+    });
 
+    // ResizeObserver — реагує на зміну розміру контейнера (якщо щось розтягується)
+    const resizeObserver = new ResizeObserver(() => {
       checkScrollPosition();
+    });
 
-      return () => {
-        resizeObserver.unobserve(container);
-        container.removeEventListener("scroll", checkScrollPosition);
-      };
-    }
+    resizeObserver.observe(container);
+
+    // Слухаємо скролл вручну (Scroll listener — для зміни стану кнопок (вліво/вправо))
+    container.addEventListener("scroll", checkScrollPosition);
+
+    // Перша перевірка (ініціальна)
+    checkScrollPosition();
+
+    // Очищення після демонтажу
+    return () => {
+      mutationObserver.disconnect();
+      resizeObserver.unobserve(container);
+      container.removeEventListener("scroll", checkScrollPosition);
+    };
   }, []);
 
   // Кількість пікселів для ширини кроків по горизонтального скроллу (ширина картки + відступ)
@@ -163,12 +202,15 @@ const VacancySection: FC<VacancySectionProps> = ({
             aria-label="Scroll Left"
             disabled={isScrollLeftDisabled}
             className={clsx("transition", {
-              "opacity-50": isScrollLeftDisabled,
+              // "opacity-50": isScrollLeftDisabled,
             })}
           >
             <Icon
               id="arrow-left"
-              className="h-3 w-3 fill-textBlack smPlus:h-6 smPlus:w-6"
+              className={clsx(
+                "h-3 w-3 fill-textBlack duration-300 hover:fill-iconHover smPlus:h-6 smPlus:w-6",
+                { "fill-color6 hover:fill-color6": isScrollLeftDisabled }
+              )}
             />
           </button>
 
@@ -198,12 +240,15 @@ const VacancySection: FC<VacancySectionProps> = ({
             aria-label="Scroll Right"
             disabled={isScrollRightDisabled}
             className={clsx("transition", {
-              "opacity-50": isScrollRightDisabled,
+              // "opacity-50": isScrollRightDisabled,
             })}
           >
             <Icon
               id="arrow-right"
-              className="h-3 w-3 fill-textBlack smPlus:h-6 smPlus:w-6"
+              className={clsx(
+                "h-3 w-3 fill-textBlack duration-300 hover:fill-iconHover smPlus:h-6 smPlus:w-6",
+                { "fill-color6 hover:fill-color6": isScrollRightDisabled }
+              )}
             />
           </button>
         </div>

@@ -53,7 +53,7 @@ export type Color = {
   text: "text-textWhite" | "text-button" | "text-color2" | "text-color8";
   bg: "bg-whiteColor" | "bg-button" | "bg-color2" | "bg-color8";
   border:
-    | "border-whiteColor"
+    | "border-textWhite"
     | "border-button"
     | "border-color2"
     | "border-color8";

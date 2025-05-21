@@ -130,7 +130,7 @@ function Sidebar() {
             title={t("navigation.support")}
             isOpen={isOpenSidebar}
             donateIcon={false}
-            className="border-transparent"
+            className="box-border border-2 border-transparent active:border-iconHover active:bg-whiteColor dark:hover:bg-backgroundSecondary dark:active:bg-transparent"
             action={handleSupportModal}
           />
           <SidebarActionItem
@@ -138,14 +138,14 @@ function Sidebar() {
             title={t("donate")}
             isOpen={isOpenSidebar}
             donateIcon={true}
-            className="border-textBlack bg-button px-3 active:border-iconHover active:bg-iconHover active:fill-textMediumWhite active:text-textMediumWhite xl:hover:border-iconHover xl:hover:bg-backgroundSecondary xl:hover:fill-textBlack xl:hover:text-textBlack xl:active:border-iconHover xl:active:bg-iconHover xl:active:fill-textMediumWhite xl:active:text-textMediumWhite"
+            className="border-textBlack bg-button px-3 hover:border-iconHover hover:bg-backgroundSecondary hover:fill-textBlack hover:text-textBlack active:border-iconHover active:bg-iconHover active:fill-white active:text-white"
           />
           <SidebarActionItem
             icon="log-out"
             title={t("navigation.logOut")}
             isOpen={isOpenSidebar}
             donateIcon={false}
-            className="border-transparent"
+            className="box-border border-2 border-transparent active:border-iconHover active:bg-whiteColor dark:hover:bg-backgroundSecondary dark:active:bg-transparent"
             action={handleLogOut}
           />
         </div>

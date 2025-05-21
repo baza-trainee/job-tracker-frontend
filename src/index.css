@@ -53,7 +53,7 @@ html {
   --textBlack: #ecf0f6;
   --textBlackLight: rgba(236, 240, 246, 0.5);
   /* це колір #333333 з opacity 0.5*/
-  --textWhite: #6e7985;
+  --textWhite: #333333;
   --textMediumWhite: #333333;
   --textOther: #b3c6d3;
   --button: #134e79;
@@ -61,7 +61,7 @@ html {
   --backgroundSecondary: #eceff6;
   /* --backgroundSecondary: #5f687c */
   --backgroundTertiary: #292d36;
-  --iconHover: #b0d9f7;
+  --iconHover: #134e79;
   --borderLight: #464646;
   --color1: rgba(198, 231, 255, 0.7);
   --color1-transparent: rgba(198, 231, 255, 0.3);
@@ -139,10 +139,16 @@ body {
   background-color: #c2c2c2;
   border-radius: 4px;
 }
+.dark .scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color9);
+}
 
 .scrollbar::-webkit-scrollbar-track {
   background-color: #eaeef2;
   border-radius: 4px;
+}
+.dark .scrollbar::-webkit-scrollbar-track {
+  background-color: rgba(234, 238, 242, 0.3);
 }
 
 .scrollbar-y-sectionbox::-webkit-scrollbar {
@@ -157,9 +163,15 @@ body {
   background-color: #c2c2c2;
   border-radius: 4px;
 }
+.dark .scrollbar-y-sectionbox::-webkit-scrollbar-thumb {
+  background-color: var(--color9);
+}
 .scrollbar-y-sectionbox::-webkit-scrollbar-track {
   background-color: #eaeef2;
   border-radius: 4px;
+}
+.dark .scrollbar-y-sectionbox::-webkit-scrollbar-track {
+  background-color: rgba(234, 238, 242, 0.3);
 }
 .scrollbar-y-sectionbox::-webkit-scrollbar-button {
   display: none;
@@ -696,5 +708,23 @@ input[type="password"]::-ms-clear {
 @media (min-width: 1920px) {
   .textarea-event-lg {
     min-height: calc(1.5em * 8 + 2rem);
+  }
+}
+
+/* перебиття стилів від браузера при автозаповненні */
+/* замість background - box-shadow, бо перший ігнорується барузером, другий накладається */
+@layer utilities {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    box-shadow: 0 0 0px 1000px transparent inset; /* фон передостанній параметр */
+    -webkit-text-fill-color: var(--textBlack); /* 👈 колір тексту */
+    transition: background-color 5000s ease-in-out 0s; /* 👈 хак для Safari/Chrome */
   }
 }

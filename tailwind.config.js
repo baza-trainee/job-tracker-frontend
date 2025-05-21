@@ -46,10 +46,8 @@ export default {
         backgroundSecondary: "var(--backgroundSecondary)",
         // backgroundTertiary: "#F7F8FB", // перевела на дві теми в index.css
         backgroundTertiary: "var(--backgroundTertiary)",
-        iconHover: "#436B88", // перевела на дві теми в index.css
-        // iconHover: "var(--iconHover)",
-        colorWhite: "#ffffff", // усюди йшов як white від tailwind, перевела на нашу змінну і в index.css
-        // colorWhite: "var(--colorWhite)",
+        // iconHover: "#436B88", // перевела на дві теми в index.css
+        iconHover: "var(--iconHover)",
         // color1: {
         //   DEFAULT: "#C6E7FF", // blue
         //   transparent: "rgba(198, 231, 255, 0.40)",

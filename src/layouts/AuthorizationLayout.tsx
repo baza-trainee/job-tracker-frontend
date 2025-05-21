@@ -53,7 +53,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
   };
 
   return (
-    <div className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary">
+    <div className="grid min-h-screen grid-rows-[auto_1fr_auto] bg-backgroundSecondary dark:bg-backgroundMain">
       <header
         className={classNames(
           "flex p-5 pb-0",
@@ -95,7 +95,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
 
               <div
                 className={classNames(
-                  "relative rounded-[20px] bg-backgroundMain px-2 py-4 shadow-form_shadow",
+                  "relative rounded-[20px] bg-backgroundMain px-2 py-4 shadow-form_shadow dark:bg-backgroundTertiary",
                   "md:p-8",
                   "xl:-mb-[42px] xl:px-8 xl:py-8",
                   "2xl:px-12 2xl:py-10",
