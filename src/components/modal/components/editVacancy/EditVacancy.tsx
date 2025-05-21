@@ -18,6 +18,7 @@ import { VacancyInputProps } from "../addVacancyModals/AddVacancy.props";
 import { TypesModal } from "../../ModalMain.types";
 // hook
 import useEditVacancy from "./useEditVacancy";
+import { useKeyBoardNavigation } from "../addVacancyModals/useKeyBoardNavigation";
 import { useEffect } from "react";
 
 const EditVacancy = () => {
@@ -65,9 +66,21 @@ const EditVacancy = () => {
     );
   }, [isFormChanged]);
 
+  // keyBoardNavigation
+  const focusFields: string[] = [
+    ...vacancyFields.map((f) => f.id),
+    ...workTypeOptions.map((f) => f.id),
+    ...statusVacancy.map((f) => f.id),
+    "addVacancyStage",
+    "note",
+  ];
+
+  const { setFocusedId, handleFormKeyNavigation, assignInputRef } =
+    useKeyBoardNavigation({ focusFields });
+
   return (
     <div className="w-full pt-[50px] xl:pt-[44px]">
-      <form>
+      <form onKeyDown={handleFormKeyNavigation}>
         <div className="flex flex-col items-center gap-3">
           <div className="flex w-full flex-col gap-4 xl:flex-row xl:gap-6">
             <div className="flex flex-col justify-start gap-3">
@@ -84,6 +97,8 @@ const EditVacancy = () => {
                     errors={errors}
                     isRequired={input.name !== "communication" ? true : false}
                     setValue={setValue}
+                    ref={(el) => assignInputRef(input.id, el)}
+                    onFocus={() => setFocusedId(input.id)}
                   />
                 ))}
               </div>
@@ -100,6 +115,8 @@ const EditVacancy = () => {
                     register={register}
                     errors={errors}
                     value={inputRadio.value}
+                    ref={(el) => assignInputRef(inputRadio.id, el)}
+                    onFocus={() => setFocusedId(inputRadio.id)}
                   />
                 ))}
               </div>
@@ -120,6 +137,8 @@ const EditVacancy = () => {
                     date={checkboxCalendar.date}
                     getValues={getValues}
                     setValue={setValue}
+                    ref={(el) => assignInputRef(checkboxCalendar.id, el)}
+                    onFocus={() => setFocusedId(checkboxCalendar.id)}
                   />
                 ))}
               </div>
@@ -127,6 +146,7 @@ const EditVacancy = () => {
                 register={register}
                 getValues={getValues}
                 setValue={setValue}
+                ref={(el) => assignInputRef("addVacancyStage", el)}
               />
             </div>
 
@@ -141,6 +161,8 @@ const EditVacancy = () => {
                 className=""
                 label={t("addVacancy.form.notes")}
                 errors={errors}
+                ref={(el) => assignInputRef("note", el)}
+                onFocus={() => setFocusedId("note")}
               />
             </div>
           </div>

@@ -47,6 +47,7 @@ const AddVacancy = () => {
     ...vacancyFields.map((f) => f.id),
     ...workTypeOptions.map((f) => f.id),
     ...statusVacancy.map((f) => f.id),
+    "addVacancyStage",
     "note",
   ];
 
@@ -121,6 +122,7 @@ const AddVacancy = () => {
                 register={register}
                 getValues={getValues}
                 setValue={setValue}
+                ref={(el) => assignInputRef("addVacancyStage", el)}
               />
             </div>
 

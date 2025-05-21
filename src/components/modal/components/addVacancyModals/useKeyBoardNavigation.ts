@@ -6,9 +6,9 @@ type Props = {
 
 export function useKeyBoardNavigation({ focusFields }: Props) {
   const [focusedId, setFocusedId] = useState<string>("");
-  const inputRefs = useRef<(HTMLInputElement | HTMLTextAreaElement | null)[]>(
-    []
-  );
+  const inputRefs = useRef<
+    (HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | null)[]
+  >([]);
 
   const handleFormKeyNavigation = (e: React.KeyboardEvent<HTMLFormElement>) => {
     switch (e.key) {
@@ -40,7 +40,7 @@ export function useKeyBoardNavigation({ focusFields }: Props) {
 
   const assignInputRef = (
     id: string,
-    el: HTMLInputElement | HTMLTextAreaElement | null
+    el: HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement | null
   ) => {
     const index = focusFields.findIndex((itemId: string) => itemId === id);
     if (index !== -1) {
