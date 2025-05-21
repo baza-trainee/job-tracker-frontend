@@ -23,8 +23,15 @@ const AddVacancy = () => {
   const statusVacancy = useAppSelector(
     (state) => state.statusVacancy.newStatuses
   );
-  const { register, resetField, handleSubmit, errors, getValues, setValue } =
-    useVacancy();
+  const {
+    register,
+    resetField,
+    handleSubmit,
+    errors,
+    getValues,
+    setValue,
+    isButtonDisabled,
+  } = useVacancy();
 
   const saveVacancy = () => {
     handleSubmit((data) => {
@@ -149,6 +156,7 @@ const AddVacancy = () => {
               className="group w-full md:mx-auto xl:mx-0 xl:w-auto"
               variant="ghost"
               size="small"
+              disabled={isButtonDisabled()}
               onClick={handleSubmitArchive}
             >
               {t("addVacancy.form.archive")}
@@ -162,11 +170,12 @@ const AddVacancy = () => {
               className="group w-full dark:hover:fill-blackColor md:mx-auto xl:mx-0 xl:w-auto"
               variant="accent"
               size="big"
+              disabled={isButtonDisabled()}
               onClick={saveVacancy}
             >
               {t("addVacancy.form.save")}
               <Icon
-                id={"check-box"}
+                id={`${isButtonDisabled() ? "check-box-gray" : "check-box"}`}
                 className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
               />
             </Button>
