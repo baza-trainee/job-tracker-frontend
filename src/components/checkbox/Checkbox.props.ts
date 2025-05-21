@@ -17,4 +17,5 @@ export interface CheckboxProps {
   onFocus?: () => void;
   getValues?: UseFormGetValues<any>;
   setValue?: UseFormSetValue<any>;
+  ref:any;
 }

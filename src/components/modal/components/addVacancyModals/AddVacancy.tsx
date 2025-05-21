@@ -112,6 +112,7 @@ const AddVacancy = () => {
                     date={checkboxCalendar.date}
                     getValues={getValues}
                     setValue={setValue}
+                    ref={(el) => assignInputRef(checkboxCalendar.id, el)}
                     onFocus={() => setFocusedId(checkboxCalendar.id)}
                   />
                 ))}
