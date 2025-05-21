@@ -14,6 +14,7 @@ import AddVacancyInfo from "./AddVacancyInfo";
 import { VacancyInputProps } from "./AddVacancy.props";
 //hook
 import useVacancy from "./useVacancy";
+import { useKeyBoardNavigation } from "./useKeyBoardNavigation";
 
 const AddVacancy = () => {
   const dispatch = useAppDispatch();
@@ -22,8 +23,15 @@ const AddVacancy = () => {
   const statusVacancy = useAppSelector(
     (state) => state.statusVacancy.newStatuses
   );
-  const { register, resetField, handleSubmit, errors, getValues, setValue } =
-    useVacancy();
+  const {
+    register,
+    resetField,
+    handleSubmit,
+    errors,
+    getValues,
+    setValue,
+    isButtonDisabled,
+  } = useVacancy();
 
   const saveVacancy = () => {
     handleSubmit((data) => {
@@ -41,9 +49,21 @@ const AddVacancy = () => {
     saveVacancy();
   };
 
+  // keyBoardNavigation
+  const focusFields: string[] = [
+    ...vacancyFields.map((f) => f.id),
+    ...workTypeOptions.map((f) => f.id),
+    ...statusVacancy.map((f) => f.id),
+    "addVacancyStage",
+    "note",
+  ];
+
+  const { setFocusedId, handleFormKeyNavigation, assignInputRef } =
+    useKeyBoardNavigation({ focusFields });
+
   return (
     <div className="w-full pt-[50px] xl:pt-[44px]">
-      <form>
+      <form onKeyDown={handleFormKeyNavigation}>
         <div className="flex flex-col items-center gap-3">
           <div className="flex w-full flex-col gap-4 xl:flex-row xl:gap-6">
             <div className="flex flex-col justify-start gap-3">
@@ -58,8 +78,10 @@ const AddVacancy = () => {
                     placeholder={input.placeholder || ""}
                     label={input.label}
                     errors={errors}
-                    isRequired={true}
+                    isRequired={input.name !== "communication" ? true : false}
                     type="vacancy"
+                    ref={(el) => assignInputRef(input.id, el)}
+                    onFocus={() => setFocusedId(input.id)}
                   />
                 ))}
               </div>
@@ -76,6 +98,8 @@ const AddVacancy = () => {
                     register={register}
                     errors={errors}
                     value={inputRadio.value}
+                    ref={(el) => assignInputRef(inputRadio.id, el)}
+                    onFocus={() => setFocusedId(inputRadio.id)}
                   />
                 ))}
               </div>
@@ -96,6 +120,8 @@ const AddVacancy = () => {
                     date={checkboxCalendar.date}
                     getValues={getValues}
                     setValue={setValue}
+                    ref={(el) => assignInputRef(checkboxCalendar.id, el)}
+                    onFocus={() => setFocusedId(checkboxCalendar.id)}
                   />
                 ))}
               </div>
@@ -103,6 +129,7 @@ const AddVacancy = () => {
                 register={register}
                 getValues={getValues}
                 setValue={setValue}
+                ref={(el) => assignInputRef("addVacancyStage", el)}
               />
             </div>
 
@@ -117,6 +144,8 @@ const AddVacancy = () => {
                 className=""
                 label={t("addVacancy.form.notes")}
                 errors={errors}
+                ref={(el) => assignInputRef("note", el)}
+                onFocus={() => setFocusedId("note")}
               />
             </div>
           </div>
@@ -127,6 +156,7 @@ const AddVacancy = () => {
               className="group w-full md:mx-auto xl:mx-0 xl:w-auto"
               variant="ghost"
               size="small"
+              disabled={isButtonDisabled()}
               onClick={handleSubmitArchive}
             >
               {t("addVacancy.form.archive")}
@@ -140,11 +170,12 @@ const AddVacancy = () => {
               className="group w-full dark:hover:fill-blackColor md:mx-auto xl:mx-0 xl:w-auto"
               variant="accent"
               size="big"
+              disabled={isButtonDisabled()}
               onClick={saveVacancy}
             >
               {t("addVacancy.form.save")}
               <Icon
-                id={"check-box"}
+                id={`${isButtonDisabled() ? "check-box-gray" : "check-box"}`}
                 className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
               />
             </Button>

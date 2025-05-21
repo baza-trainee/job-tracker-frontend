@@ -12,16 +12,21 @@ export const AddVacancySchema = z
       .string()
       .url(`addVacancySchema.link.url`)
       .min(4, `addVacancySchema.link.min`)
-      .regex(/^[^\s]+$/, {
-        message: "addVacancySchema.communication.spaces",
-      })
+      .regex(
+        /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/\S*)?$/i,
+        {
+          message: "validation.emailInvalid",
+        }
+      )
+
       .max(254, `addVacancySchema.link.max`)
       .trim(),
     communication: z
       .string()
       .min(3, `addVacancySchema.communication.min`)
       .max(1000, `addVacancySchema.communication.max`)
-      .trim(),
+      .trim()
+      .or(z.literal("")),
     company: z
       .string()
       .min(2, `addVacancySchema.company.min`)

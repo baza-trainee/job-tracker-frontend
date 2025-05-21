@@ -14,6 +14,8 @@ export interface CheckboxProps {
   checked?: boolean;
   date?: string;
   onClick?: () => void;
+  onFocus?: () => void;
   getValues?: UseFormGetValues<any>;
   setValue?: UseFormSetValue<any>;
+  ref:any;
 }

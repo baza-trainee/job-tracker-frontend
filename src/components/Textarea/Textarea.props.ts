@@ -10,4 +10,5 @@ export interface TextareaProps {
   value?: string;
   id?: string;
   resetField(name: string): void;
+  onFocus?: () => void;
 }

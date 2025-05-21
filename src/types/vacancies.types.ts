@@ -1,4 +1,5 @@
 export type WorkType = "remote" | "office" | "hybrid";
+export type RequiredFieldsProps = "company" | "vacancy" | "link" | "location";
 
 export type Vacancy = {
   id: string;
@@ -42,3 +43,4 @@ export enum RejectReason {
   NO_ANSWER = "NO_ANSWER",
   OTHER = "OTHER",
 }
+

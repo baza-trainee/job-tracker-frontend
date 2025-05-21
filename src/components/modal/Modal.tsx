@@ -36,10 +36,12 @@ const Modal: FC = () => {
     };
 
     if (isModalOpen) {
+      document.body.style.overflow = "hidden"; // відключення скролу background
       window.addEventListener("keydown", handleEscKey);
     }
 
     return () => {
+      document.body.style.overflow = "unset"; // включення скролу
       window.removeEventListener("keydown", handleEscKey);
     };
   }, [dispatch, isModalOpen, isConfirmationOpen, isButtonOpen, resetForm]);
@@ -63,7 +65,7 @@ const Modal: FC = () => {
     typeModal ?? ""
   );
   const modalPositionClass: string = hasCustomHeight
-    ? "top-10 -translate-y-0 xl:top-2/4 xl:-translate-y-2/4"
+    ? "top-10"
     : "top-2/4 -translate-y-2/4";
 
   const modalRef = useRef<HTMLDivElement>(null);

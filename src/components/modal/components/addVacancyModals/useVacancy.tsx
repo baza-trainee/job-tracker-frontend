@@ -17,8 +17,12 @@ import {
   closeModal,
 } from "../../../../store/slices/modalSlice/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../../store/hook";
-import { StatusName, RejectReason } from "../../../../types/vacancies.types";
-import { useState } from "react";
+import {
+  StatusName,
+  RejectReason,
+  RequiredFieldsProps,
+} from "../../../../types/vacancies.types";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const useVacancy = () => {
@@ -39,6 +43,7 @@ const useVacancy = () => {
     handleSubmit,
     getValues,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<z.infer<typeof AddVacancySchema>>({
     defaultValues: {
@@ -57,6 +62,23 @@ const useVacancy = () => {
     resolver: zodResolver(AddVacancySchema),
     mode: "onBlur",
   });
+
+  const isButtonDisabled = useCallback(() => {
+    const requiredFields: RequiredFieldsProps[] = [
+      "company",
+      "vacancy",
+      "link",
+      "location",
+    ];
+    const hasEmptyRequiredFields = requiredFields.some(
+      (field: RequiredFieldsProps) => {
+        const value = watch(field);
+        return !value;
+      }
+    );
+    const hasValidationErrors = !!Object.keys(errors).length;
+    return hasEmptyRequiredFields || hasValidationErrors;
+  }, [watch, errors]);
 
   const onSubmit: SubmitHandler<z.infer<typeof AddVacancySchema>> = async (
     data
@@ -132,6 +154,7 @@ const useVacancy = () => {
     errors,
     onSubmit,
     isLoading,
+    isButtonDisabled,
   };
 };
 
