@@ -9,4 +9,5 @@ export const passwordRegex =
 export const textContactUsRegex =
   /^(?!.*[ЁёЫыЭэЪъ])(?!(?:.*?[<>"'`/\\|]){5,})[\wа-яА-Я\s,.!?;:()\[\]{}@#$%^&*+=~\-]{10,4000}$/;
 
-export const nameRegex = /^(?!.*[ЁёЫыЭэЪъ])[A-Za-zА-Яа-я’`’\-\s]{2,30}$/;
+export const nameRegex =
+  /^(?!.*[ЁёЫыЭэЪъ`])([A-Za-zА-Яа-яІі’']+(-[A-Za-zА-Яа-яІі’']+)*\s?)*[A-Za-zА-Яа-яІі’']+(-[A-Za-zА-Яа-яІі’']+)*$/;
