@@ -81,9 +81,7 @@ const AuthorizationLayout = ({ type }: AuthorizationLayoutProps) => {
             <div
               className={classNames(
                 "flex w-full flex-col font-nunito",
-                // alex comment
                 "max-w-[444px]",
-                // "xl:max-w-[444px]",
                 "2xl:max-w-[526px]",
                 "3xl:max-w-[498px]",
                 type === "resetPassword" &&

@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 import { useAppSelector } from "@/store/hook";
 import { selectTheme } from "../../store/slices/themeSlice/themeSelector";
 
-//alex
 import { useTranslation } from "react-i18next";
 import { forwardRef } from "react";
 
@@ -67,10 +66,8 @@ const ModalMain = forwardRef<HTMLDivElement, ModalMainProps>(
         <div
           ref={ref}
           className={clsx(
-            //alex mb-11
             "z-0 mb-11 flex h-auto w-[280px] md:w-auto",
             "flex-row items-start justify-between rounded-lg rounded-tl-none border-4 bg-backgroundTertiary p-2 shadow-form_shadow md:p-4",
-            // alex p-2 ---> md:p-5
             "border-[2px]",
             "md:border-[4px]",
             borderColorModal ||

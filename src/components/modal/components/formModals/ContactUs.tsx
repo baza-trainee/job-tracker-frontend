@@ -66,7 +66,6 @@ const ContactUs = () => {
             className=""
             label={t("contactUs.name")}
             errors={errors}
-            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
           <Input
             register={register}
@@ -78,7 +77,6 @@ const ContactUs = () => {
             className=""
             label={t("register.email")}
             errors={errors}
-            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
           <Textarea
             register={register}
