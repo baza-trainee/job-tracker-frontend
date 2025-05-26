@@ -22,6 +22,7 @@ const ContactUs = () => {
     reset,
     resetField,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<z.infer<typeof ContactUsSchema>>({
     defaultValues: {
@@ -66,7 +67,7 @@ const ContactUs = () => {
             className=""
             label={t("contactUs.name")}
             errors={errors}
-            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+            setValue={setValue}
           />
           <Input
             register={register}
@@ -78,7 +79,7 @@ const ContactUs = () => {
             className=""
             label={t("register.email")}
             errors={errors}
-            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+            setValue={setValue}
           />
           <Textarea
             register={register}

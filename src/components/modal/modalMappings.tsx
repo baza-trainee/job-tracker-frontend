@@ -306,7 +306,6 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-  // alex
   updateResumes: {
     content: <ModalAddProperties cardsType="updateResumes" />,
     // nameModal: "addResumes.modalAddTitle",

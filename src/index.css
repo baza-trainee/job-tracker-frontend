@@ -207,20 +207,6 @@ body {
 }
 
 /* react-calendar */
-/* .job-calendar.react-calendar {
-  border: 1px solid #436b88;
-  border-radius: 12px;
-  padding: 24px;
-  width: 385px;
-  max-width: 100%;
-  font-weight: 500;
-  background: #fdfeff;
-  font-family: "Nunito";
-  text-align: center;
-  color: #0a0a0a;
-} */
-
-/* alex */
 @media screen and (min-width: 1920px) {
   .job-cal .react-calendar__month-view__weekdays abbr,
   .job-cal abbr {

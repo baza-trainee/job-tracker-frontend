@@ -46,18 +46,6 @@ const NotesModal = ({ type }: NotesProps) => {
             errors={errors}
             onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
             // alex
-            // onKeyDown={(e) => {
-            //   if (e.key === "Enter") {
-            //     e.preventDefault();
-            //     const formElements = Array.from(
-            //       e.currentTarget.form?.elements || []
-            //     ) as HTMLInputElement[];
-            //     const index = formElements.indexOf(e.currentTarget);
-            //     if (index !== -1 && index < formElements.length - 1) {
-            //       formElements[index + 1].focus();
-            //     }
-            //   }
-            // }}
           />
           <Textarea
             register={register}
@@ -101,8 +89,6 @@ const NotesModal = ({ type }: NotesProps) => {
                 </Button>
                 <Button
                   type="button"
-                  // alex
-                  // className="w-full bg-button md:mx-auto xl:mx-0 xl:w-auto"
                   className="w-full bg-button md:mx-0 md:w-auto"
                   variant="ghost"
                   size="big"
