@@ -22,7 +22,7 @@ export const addProfileData: Schema = {
     technologies: z.string().optional(),
     link: z
       .string()
-      .regex(/^https?:\/\/[a-zA-Z0-9-]{2,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
+      .regex(/^https?:\/\/[a-zA-Z0-9-]{1,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
         message: "validation.invalidUrl",
       })
       .trim()
@@ -43,13 +43,12 @@ export const addProfileData: Schema = {
       .optional(),
     link: z
       .string()
-      .regex(/^https?:\/\/[a-zA-Z0-9-]{2,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
+      .regex(/^https?:\/\/[a-zA-Z0-9-]{1,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
         message: "validation.invalidUrl",
       })
       .trim()
       .optional(),
     text: z.string().min(2, { message: "validation.min2Characters" }).trim(),
-    // .optional(),
   }),
   addCoverLetters: z.object({
     name: z
@@ -61,10 +60,8 @@ export const addProfileData: Schema = {
     link: z.string().optional(),
     text: z
       .string()
-      // .min(2, { message: "validation.min2Characters" })
       .trim()
       .regex(/^.{2,}$/, { message: "validation.min2Characters" }),
-    // .optional(),
   }),
   addPersonalProperties: z.object({
     name: z
@@ -80,13 +77,12 @@ export const addProfileData: Schema = {
     link: z
       .string()
       .trim()
-      .regex(/^https?:\/\/[a-zA-Z0-9-]{2,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
+      .regex(/^https?:\/\/[a-zA-Z0-9-]{1,}(\.[a-zA-Z0-9-]{2,})+(\/[^\s]*)?$/, {
         message: "validation.invalidUrl",
       })
       .optional(),
     text: z
       .string()
-      // .min(2, { message: "validation.min2Characters" })
       .trim()
       .regex(/^.{2,}$/, { message: "validation.min2Characters" })
       .optional(),
