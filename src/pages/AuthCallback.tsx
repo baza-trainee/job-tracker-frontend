@@ -26,7 +26,7 @@ export const AuthCallback = () => {
 
   return (
     <div className="nunito flex h-screen items-center justify-center text-5xl">
-      <p>Loading ...</p>
+      <p className="text-textBlack">Loading ...</p>
     </div>
   );
 };

@@ -63,13 +63,13 @@ function ModalAddProperties({ cardsType }: PropsModalAddProperties) {
 
   return (
     <div className="flex flex-col items-center justify-center gap-1 md:gap-7">
-      <h4 className="mb-3 font-nunito font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]">
+      <h4 className="mb-3 font-nunito font-bold leading-[135%] text-textBlack sm:text-[20px] md:text-[24px] xl:text-[32px]">
         {t("infoModal.saveAddVacancies.title")}
       </h4>
-      <div className="mb-8 text-center font-nunito font-medium leading-[135%] sm:text-[14px] md:text-[14px] xl:text-[20px]">
+      <div className="mb-8 text-center font-nunito font-medium leading-[135%] text-textBlack sm:text-[14px] md:text-[14px] xl:text-[20px]">
         {t("infoModal.saveAddVacancies.text_1")}
       </div>
-      <div className="flex w-full flex-col gap-4 md:flex-row justify-center">
+      <div className="flex w-full flex-col justify-center gap-4 md:flex-row">
         <Button type="button" onClick={handleClose}>
           {t("infoModal.button.cancel")}
         </Button>
@@ -79,10 +79,13 @@ function ModalAddProperties({ cardsType }: PropsModalAddProperties) {
           variant="accent"
           onClick={handleSubmit}
           disabled={isSubmitDisabled}
-          className="gap-3"
+          className="group gap-3"
         >
           {t("infoModal.button.save")}
-          <Icon id="check-box" className="h-6 w-6" />
+          <Icon
+            id="check-box"
+            className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+          />
         </Button>
       </div>
     </div>

@@ -18,7 +18,7 @@ const CloseSidebarBtn: React.FC<SidebarBtnProps> = ({
     >
       <Icon
         id={ICON.ARROW_LEFT}
-        className="size-11 rotate-180 fill-black active:fill-iconHover dark:fill-slate-300 xl:size-6 xl:rotate-0 xl:hover:fill-iconHover dark:xl:hover:fill-iconHover"
+        className="size-11 rotate-180 fill-textBlack hover:fill-iconHover active:fill-iconHover xl:size-6 xl:rotate-0"
       />
     </div>
   );

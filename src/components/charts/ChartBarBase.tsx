@@ -172,12 +172,20 @@ const ChartBarBase: React.FC<ChartBarBaseProps> = ({
       tooltip: {
         mode: "index",
         intersect: false,
+        backgroundColor: isDarkMode ? "#252a34" : "#fdfeff",
+        titleColor: isDarkMode ? "#fdfeff" : "#333333",
+        bodyColor: isDarkMode ? "#fdfeff" : "#333333",
+        borderColor: isDarkMode ? "#134e79" : "#436b88",
+        borderWidth: 0.8,
         titleFont: {
           size: 14,
+          lineHeight: 1.3,
         },
         bodyFont: {
           size: 14,
+          lineHeight: 1.3,
         },
+        padding: 10,
       },
     },
     selectedLabel, // Додаємо обране значення на осі x

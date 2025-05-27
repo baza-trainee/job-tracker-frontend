@@ -134,7 +134,7 @@ export const Soon = () => {
 
         <Button
           className={clsx(
-            "flex items-center justify-start border-iconHover bg-backgroundTertiary",
+            "group flex items-center justify-start border-iconHover bg-backgroundTertiary",
             "w-full max-w-[calc(100%-10px)] md:max-w-[calc(100%-18px)] 2xl:max-w-[calc(100%-20px)] 3xl:max-w-[calc(100%-24px)]",
             "p-3 md:px-4 xl:px-4 3xl:px-6",
             "gap-2 3xl:gap-4",
@@ -145,7 +145,7 @@ export const Soon = () => {
         >
           <Icon
             id="plus"
-            className="mx-[13px] size-6 fill-textBlack md:mx-[14.5px] 3xl:ml-4 3xl:mr-[13px]"
+            className="mx-[13px] size-6 fill-textBlack dark:group-hover:fill-blackColor md:mx-[14.5px] 3xl:ml-4 3xl:mr-[13px]"
           />
           {t("soonSection.addEvent")}
         </Button>

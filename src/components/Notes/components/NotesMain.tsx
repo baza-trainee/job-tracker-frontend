@@ -42,7 +42,7 @@ const NotesMain = () => {
         Array.from({ length: skeletonCount }).map((_, index) => (
           <NoteCardSceleton key={index} />
         ))}
-      {isError && <h2>Error...</h2>}
+      {isError && <h2 className="text-textBlack">Error...</h2>}
 
       {!isLoading && !isError && notes.length === 0 && <NoVacancyCard />}
       {!isLoading && !isError && notes.length > 0 && (

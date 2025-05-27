@@ -7,7 +7,7 @@ import Icon from "../../../Icon/Icon";
 import { DropdownMarkupProps } from "./Dropdown.props";
 import { ICON } from "@/components/Icon/icons";
 
-export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
+export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
   (
     {
       isDropdownOpen,
@@ -27,6 +27,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
   ) => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const variant = location.pathname.replace(/^\/+/, "");
+    // const [mainOptionsLength, setMainOptionsLength] = useState(true);
     return (
       // <div
       //   ref={ref}
@@ -171,14 +172,15 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           }
           onMouseEnter={() => setFocusedOption("sortButton")}
           className={cn(
-            "group flex w-full items-center justify-between rounded-t-xl pb-[13px] pl-8 pr-[22px] pt-3 text-textBlack dark:hover:text-blackColor",
+            "TEST group flex w-full items-center justify-between rounded-t-xl pb-[13px] pl-8 pr-[22px] pt-3 text-textBlack dark:hover:text-blackColor",
             isDropdownOpen && "hover:bg-button",
             !isDropdownOpen && !isInModal && "rounded-xl",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button",
             isInModal
               ? "px-2 py-[5px] text-textBlackLight md:py-[10px] smOnly:text-xs"
               : "smOnly:hidden",
-            !isTypeSelected && isInModal && "text-textBlack"
+            !isTypeSelected && isInModal && "text-textBlack",
+            mainOptions.length === 0 && "rounded-b-xl"
           )}
         >
           {buttonLabel}
@@ -223,8 +225,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                   option.subOptions && "flex justify-between smOnly:py-[5px]",
                   focusedOption === option.id && "bg-button",
                   selectedSortType === option.id &&
-                    !isMobile &&
-                    "bg-backgroundSecondary",
+                    "bg-backgroundSecondary text-blackColor",
                   openSubMenu === option.id && "smOnly:last:rounded-b-none"
                 )}
                 onClick={() =>
@@ -264,7 +265,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                           focusedOption === subOption.id && "bg-button",
                           selectedSortType === subOption.id &&
                             !isMobile &&
-                            "bg-backgroundSecondary"
+                            "bg-backgroundSecondary text-blackColor"
                         )}
                         onClick={() => handleOptionSelect(subOption.id)}
                         onMouseEnter={() => setFocusedOption(subOption.id)}
@@ -272,7 +273,7 @@ export const DropdowmMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                         {!isInModal && selectedSortType === subOption.id && (
                           <Icon
                             id={ICON.CHECK_SMALL}
-                            className="absolute left-5 top-[5px] size-6 text-iconHover md:hidden"
+                            className="absolute left-5 top-[5px] size-6 fill-textBlack text-iconHover md:hidden"
                           />
                         )}
                         {subOption.label}

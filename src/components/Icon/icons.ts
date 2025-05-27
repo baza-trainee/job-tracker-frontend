@@ -56,8 +56,9 @@ export const ICON = {
   BASELINE_MORE_HORIZ: "baseline-more-horiz",
   STAR: "star", // фарбувати stroke
   SEND: "send",
+  SEND_GRAY: "send-gray",
   BURGER_MENU: "burger-menu",
-  MAGE_FILTER: "mage-filter", // фарбувати stroke
+  MAGE_FILTER: "mage-filter", // фарбувати і stroke, і fill
   PIN_FOR_CHROME: "pin-for-chrome",
 } as const;
 

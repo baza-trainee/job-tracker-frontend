@@ -104,7 +104,10 @@ const PageHeader: FC = () => {
             onClick={handleShowDropdown}
             className="mr-[30px] p-0 outline-none"
           >
-            <Icon id={ICON.MAGE_FILTER} className="size-10 stroke-textBlack" />
+            <Icon
+              id={ICON.MAGE_FILTER}
+              className="size-10 fill-whiteColor stroke-textBlack hover:stroke-iconHover dark:fill-blackColor"
+            />
           </IconButton>
         )}
         {!isArchive && !isMobile && (

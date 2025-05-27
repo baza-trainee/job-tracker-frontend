@@ -43,7 +43,7 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
 
   return (
     <div className="flex flex-col items-center justify-center gap-5 md:gap-10">
-      <h2 className="text-center font-nunito text-[20px] font-bold leading-[135%] sm:text-[20px] md:text-[24px] xl:text-[32px]">
+      <h2 className="text-center font-nunito text-[20px] font-bold leading-[135%] text-textBlack sm:text-[20px] md:text-[24px] xl:text-[32px]">
         {t("modalAddProperties.modalRemoveLinkTitle")}
       </h2>
       <div className="flex w-full flex-col justify-center gap-4 md:flex-row">

@@ -83,7 +83,9 @@ function Statistics() {
   return (
     <div className="container pb-5 pt-4 sm:pb-6 sm:pt-4 md:py-6 xl:py-10">
       {(isLoading || isPredictionLoading) && <StatisticsPanelSkeleton />}
-      {(isError || isPredictionError) && <h2>Error...</h2>}
+      {(isError || isPredictionError) && (
+        <h2 className="text-textBlack">Error...</h2>
+      )}
 
       {!isLoading && vacanciesForStat && prediction && (
         <StatisticsPanel vacancies={vacanciesForStat} prediction={prediction} />
