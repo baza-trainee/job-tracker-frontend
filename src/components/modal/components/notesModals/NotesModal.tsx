@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import useNotes from "./useNotes";
 
 import { Input } from "@/components/inputs/Input/Input";
 import { Textarea } from "@/components/Textarea/Textarea";
@@ -6,22 +8,29 @@ import { Button } from "@/components/buttons/Button/Button";
 import Icon from "@/components/Icon/Icon";
 
 import { useAppDispatch } from "@/store/hook";
-import { openConfirmation } from "@/store/slices/modalSlice/modalSlice";
+import {
+  openConfirmation,
+  closeButton,
+} from "@/store/slices/modalSlice/modalSlice";
 
-import useNotes from "./useNotes";
+import { TypesModal } from "../../ModalMain.types";
+import { NoteType } from "@/types/notes.types";
 
-type NotesProps = {
-  type: "addNote" | "updateNote";
-};
-
-const NotesModal = ({ type }: NotesProps) => {
+const NotesModal = ({ type }: NoteType) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const isAddNote = type === "addNote";
 
-  const { register, resetField, handleSubmit, errors } = useNotes(type);
+  const { register, resetField, handleSubmit, errors, isNoteChanged } =
+    useNotes(type);
 
-  const handleButton = (typeConfirmation: "saveNote" | "deleteNote") => {
+  const error = !!Object.keys(errors).length;
+  const isDisabledButton = !isNoteChanged || error;
+
+  const handleConfirmation = (typeConfirmation: TypesModal) => {
+    if (Object.keys(errors).length) {
+      dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
+    }
     handleSubmit((data) => {
       dispatch(
         openConfirmation({
@@ -31,6 +40,23 @@ const NotesModal = ({ type }: NotesProps) => {
       );
     })();
   };
+
+  const deleteNote = () => handleConfirmation("deleteNote");
+  const saveNote = () => handleConfirmation("saveNote");
+
+  const handleButton = (typeConfirmation: TypesModal) => {
+    handleConfirmation(typeConfirmation);
+  };
+
+  useEffect(() => {
+    dispatch(
+      closeButton({
+        isButtonOpen: isNoteChanged,
+        resetForm: () => handleConfirmation("closeModalsaveNote"),
+      })
+    );
+  }, [isNoteChanged]);
+
   return (
     <div className="mb-4 mt-10 w-full text-left xl:my-12 xl:mb-4 xl:mt-10">
       <form>
@@ -45,7 +71,6 @@ const NotesModal = ({ type }: NotesProps) => {
             className=""
             errors={errors}
             onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
-            // alex
           />
           <Textarea
             register={register}
@@ -64,6 +89,7 @@ const NotesModal = ({ type }: NotesProps) => {
                 className="w-full bg-button md:mx-0 md:w-auto"
                 variant="ghost"
                 size="big"
+                disabled={isDisabledButton}
                 onClick={() => handleButton("saveNote")}
               >
                 {t("notesHeader.createNote")}
@@ -79,7 +105,7 @@ const NotesModal = ({ type }: NotesProps) => {
                   className="w-full md:mx-0 md:w-auto"
                   variant="ghost"
                   size="small"
-                  onClick={() => handleButton("deleteNote")}
+                  onClick={deleteNote}
                 >
                   {t("addVacancy.form.delete")}
                   <Icon
@@ -92,11 +118,12 @@ const NotesModal = ({ type }: NotesProps) => {
                   className="w-full bg-button md:mx-0 md:w-auto"
                   variant="ghost"
                   size="big"
-                  onClick={() => handleButton("saveNote")}
+                  disabled={isDisabledButton}
+                  onClick={saveNote}
                 >
                   {t("addVacancy.form.save")}
                   <Icon
-                    id={"check-box"}
+                    id={`${isDisabledButton ? "check-box-gray" : "check-box"}`}
                     className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
                   />
                 </Button>

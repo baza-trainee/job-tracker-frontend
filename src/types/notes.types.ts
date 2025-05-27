@@ -5,3 +5,7 @@ export type Note = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type NoteType = {
+  type: "addNote" | "updateNote";
+};
