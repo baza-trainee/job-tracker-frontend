@@ -33,14 +33,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </label>
         )}
         <div className="relative">
-          <div className={"relative flex w-full items-center"}>
+          <div className="relative flex w-full items-center overflow-hidden rounded-xl border border-textBlack">
             <textarea
               id={`textarea-${name}`}
               className={cn(
-                "peer h-32 w-full resize-none rounded-xl border border-textBlack px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther md:text-[14px] 2xl:text-[16px]",
+                "peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther md:text-[14px] 2xl:text-[16px]",
                 "md:px-6 md:py-3",
                 "2xl:px-6 2xl:py-2",
-                "bg-transparent placeholder-shown:border-textBlack",
+                "bg-transparent placeholder-shown:border-none",
                 {
                   ["h-[230px]"]: name === "noteText",
                 }
@@ -56,7 +56,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                   ref(el);
                 }
               }}
-            ></textarea>
+            />
           </div>
           {error ? (
             <span

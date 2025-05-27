@@ -47,7 +47,8 @@ export type TypesModal =
   | "updateResumes"
   | "updateProjects"
   | "updateCoverLetters"
-  | "updatePersonalProperties";
+  | "updatePersonalProperties"
+  | "closeModalsaveNote";
 
 export type Color = {
   text: "text-textWhite" | "text-button" | "text-color2" | "text-color8";

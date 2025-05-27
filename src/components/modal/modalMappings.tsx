@@ -275,6 +275,16 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
+  closeModalsaveNote: {
+    content: (
+      <InfoModal
+        type="closeModalsaveNote"
+        textColor={colorButton.text}
+      />
+    ),
+    bgColor: colorButton.bg,
+    borderColor: colorButton.border,
+  },
   closeModalsaveEditVacancies: {
     content: (
       <InfoModal
@@ -306,7 +316,6 @@ export const contentMap: ContentMapProps = {
     bgColor: colorButton.bg,
     borderColor: colorButton.border,
   },
-  // alex
   updateResumes: {
     content: <ModalAddProperties cardsType="updateResumes" />,
     // nameModal: "addResumes.modalAddTitle",
