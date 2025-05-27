@@ -693,6 +693,29 @@ const InfoModalMap = () => {
         ),
       ],
     },
+    closeModalsaveNote: {
+      title: t("infoModal.saveAddVacancies.title"),
+      titleSize: "small",
+      text: [t("infoModal.saveAddVacancies.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.cancel"),
+          handleCloseBtnModal,
+          "",
+          "small",
+          "ghost",
+          editVacanciesLoading
+        ),
+        createButton(
+          t("infoModal.button.save"),
+          handleAddNotes,
+          "",
+          "big",
+          "accent",
+          editVacanciesLoading
+        ),
+      ],
+    },
   };
   return map;
 };

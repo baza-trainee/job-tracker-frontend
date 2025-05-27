@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import useNotes from "./useNotes";
 
 import { Input } from "@/components/inputs/Input/Input";
 import { Textarea } from "@/components/Textarea/Textarea";
@@ -11,25 +13,24 @@ import {
   closeButton,
 } from "@/store/slices/modalSlice/modalSlice";
 
-import { useEffect } from "react";
+import { TypesModal } from "../../ModalMain.types";
+import { NoteType } from "@/types/notes.types";
 
-import useNotes from "./useNotes";
-
-type NotesProps = {
-  type: "addNote" | "updateNote";
-};
-
-const NotesModal = ({ type }: NotesProps) => {
+const NotesModal = ({ type }: NoteType) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const isAddNote = type === "addNote";
 
   const { register, resetField, handleSubmit, errors, isNoteChanged } =
     useNotes(type);
+
   const error = !!Object.keys(errors).length;
   const isDisabledButton = !isNoteChanged || error;
 
-  const handleButton = (typeConfirmation: "saveNote" | "deleteNote") => {
+  const handleConfirmation = (typeConfirmation: TypesModal) => {
+    if (Object.keys(errors).length) {
+      dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
+    }
     handleSubmit((data) => {
       dispatch(
         openConfirmation({
@@ -40,26 +41,15 @@ const NotesModal = ({ type }: NotesProps) => {
     })();
   };
 
-  // alez
-
-  const handleConfirmation = (
-    typeConfirmation: "saveNote" | "deleteNote" | "closeModalsaveEditVacancies"
-  ) => {
-    handleSubmit((data) => {
-      dispatch(
-        openConfirmation({
-          typeConfirmation,
-          dataConfirmation: data,
-        })
-      );
-    })();
+  const handleButton = (typeConfirmation: TypesModal) => {
+    handleConfirmation(typeConfirmation);
   };
 
   useEffect(() => {
     dispatch(
       closeButton({
         isButtonOpen: isNoteChanged,
-        resetForm: () => handleConfirmation("deleteNote"),
+        resetForm: () => handleConfirmation("closeModalsaveNote"),
       })
     );
   }, [isNoteChanged]);
@@ -77,7 +67,6 @@ const NotesModal = ({ type }: NotesProps) => {
             type="text"
             className=""
             errors={errors}
-            // alex
             onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
           <Textarea
