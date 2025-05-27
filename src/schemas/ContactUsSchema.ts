@@ -1,9 +1,11 @@
 import { z } from "zod";
 
-import { emailRegex } from "./regSchema";
-import { emailRuByRegex } from "./regSchema";
-import { nameRegex } from "./regSchema";
-import { textContactUsRegex } from "./regSchema";
+import {
+  emailRegex,
+  emailRuByRegex,
+  nameRegex,
+  textContactUsRegex,
+} from "./regSchema";
 
 export const ContactUsSchema = z.object({
   name: z
