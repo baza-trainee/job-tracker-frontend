@@ -41,6 +41,9 @@ const NotesModal = ({ type }: NoteType) => {
     })();
   };
 
+  const deleteNote = () => handleConfirmation("deleteNote");
+  const saveNote = () => handleConfirmation("saveNote");
+
   const handleButton = (typeConfirmation: TypesModal) => {
     handleConfirmation(typeConfirmation);
   };
@@ -102,7 +105,7 @@ const NotesModal = ({ type }: NoteType) => {
                   className="w-full md:mx-0 md:w-auto"
                   variant="ghost"
                   size="small"
-                  onClick={() => handleButton("deleteNote")}
+                  onClick={deleteNote}
                 >
                   {t("addVacancy.form.delete")}
                   <Icon
@@ -116,7 +119,7 @@ const NotesModal = ({ type }: NoteType) => {
                   variant="ghost"
                   size="big"
                   disabled={isDisabledButton}
-                  onClick={() => handleButton("saveNote")}
+                  onClick={saveNote}
                 >
                   {t("addVacancy.form.save")}
                   <Icon
