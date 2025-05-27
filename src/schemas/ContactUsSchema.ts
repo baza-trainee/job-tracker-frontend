@@ -24,8 +24,8 @@ export const ContactUsSchema = z.object({
   requestText: z
     .string()
     .min(10, `contactUs.textValidation.min`)
-    .regex(textContactUsRegex, `Введіть коректний текст`)
-    .max(4000, `contactUs.textValidation.max`)
+    .regex(textContactUsRegex, `contactUs.textValidation.min`)
+    .max(4000, `contactUs.textValidation.text`)
     .trim()
     .or(z.literal("")),
 });

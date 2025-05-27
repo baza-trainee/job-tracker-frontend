@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { z } from "zod";
@@ -39,6 +39,7 @@ function useNotes(type: "addNote" | "updateNote") {
     resetField,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<z.infer<typeof NoteSchema>>({
     defaultValues: {
@@ -77,6 +78,24 @@ function useNotes(type: "addNote" | "updateNote") {
     dispatch(closeConfirmation());
     dispatch(closeModal());
   };
+
+  // якщо зміна у нотатках відбулася, активна кнопка збереження
+  // та кнопка закриття модального вікна пропонує зберегти, якщо ні ...
+  const watchedValues = watch();
+  const isNoteChanged = useMemo(() => {
+    if (type === "addNote") {
+      return (
+        watchedValues?.noteName?.length > 0 &&
+        watchedValues?.noteText?.length > 0
+      );
+    }
+
+    if (!noteData) return false;
+    return (
+      watchedValues?.noteName !== noteData.name ||
+      watchedValues?.noteText !== noteData.text
+    );
+  }, [watchedValues, noteData, type]);
 
   const onSubmit: SubmitHandler<z.infer<typeof NoteSchema>> = async (data) => {
     try {
@@ -118,6 +137,7 @@ function useNotes(type: "addNote" | "updateNote") {
     onSubmit,
     isLoading,
     deleteNote,
+    isNoteChanged,
   };
 }
 

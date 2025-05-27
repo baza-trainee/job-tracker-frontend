@@ -9,6 +9,7 @@ import { useAppDispatch } from "@/store/hook";
 import { openConfirmation } from "@/store/slices/modalSlice/modalSlice";
 
 import useNotes from "./useNotes";
+import { useEffect } from "react";
 
 type NotesProps = {
   type: "addNote" | "updateNote";
@@ -19,7 +20,8 @@ const NotesModal = ({ type }: NotesProps) => {
   const { t } = useTranslation();
   const isAddNote = type === "addNote";
 
-  const { register, resetField, handleSubmit, errors } = useNotes(type);
+  const { register, resetField, handleSubmit, errors, isNoteChanged } =
+    useNotes(type);
 
   const handleButton = (typeConfirmation: "saveNote" | "deleteNote") => {
     handleSubmit((data) => {
@@ -31,6 +33,8 @@ const NotesModal = ({ type }: NotesProps) => {
       );
     })();
   };
+
+
   return (
     <div className="mb-4 mt-10 w-full text-left xl:my-12 xl:mb-4 xl:mt-10">
       <form>
@@ -64,6 +68,7 @@ const NotesModal = ({ type }: NotesProps) => {
                 className="w-full bg-button md:mx-0 md:w-auto"
                 variant="ghost"
                 size="big"
+                disabled={!isNoteChanged}
                 onClick={() => handleButton("saveNote")}
               >
                 {t("notesHeader.createNote")}
@@ -92,6 +97,7 @@ const NotesModal = ({ type }: NotesProps) => {
                   className="w-full bg-button md:mx-0 md:w-auto"
                   variant="ghost"
                   size="big"
+                  disabled={!isNoteChanged}
                   onClick={() => handleButton("saveNote")}
                 >
                   {t("addVacancy.form.save")}
