@@ -123,7 +123,7 @@ const NotesModal = ({ type }: NoteType) => {
                 >
                   {t("addVacancy.form.save")}
                   <Icon
-                    id={"check-box"}
+                    id={`${isDisabledButton ? "check-box-gray" : "check-box"}`}
                     className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
                   />
                 </Button>
