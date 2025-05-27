@@ -6,10 +6,14 @@ import { Button } from "@/components/buttons/Button/Button";
 import Icon from "@/components/Icon/Icon";
 
 import { useAppDispatch } from "@/store/hook";
-import { openConfirmation } from "@/store/slices/modalSlice/modalSlice";
+import {
+  openConfirmation,
+  closeButton,
+} from "@/store/slices/modalSlice/modalSlice";
+
+import { useEffect } from "react";
 
 import useNotes from "./useNotes";
-import { useEffect } from "react";
 
 type NotesProps = {
   type: "addNote" | "updateNote";
@@ -22,6 +26,8 @@ const NotesModal = ({ type }: NotesProps) => {
 
   const { register, resetField, handleSubmit, errors, isNoteChanged } =
     useNotes(type);
+  const error = !!Object.keys(errors).length;
+  const isDisabledButton = !isNoteChanged || error;
 
   const handleButton = (typeConfirmation: "saveNote" | "deleteNote") => {
     handleSubmit((data) => {
@@ -34,6 +40,29 @@ const NotesModal = ({ type }: NotesProps) => {
     })();
   };
 
+  // alez
+
+  const handleConfirmation = (
+    typeConfirmation: "saveNote" | "deleteNote" | "closeModalsaveEditVacancies"
+  ) => {
+    handleSubmit((data) => {
+      dispatch(
+        openConfirmation({
+          typeConfirmation,
+          dataConfirmation: data,
+        })
+      );
+    })();
+  };
+
+  useEffect(() => {
+    dispatch(
+      closeButton({
+        isButtonOpen: isNoteChanged,
+        resetForm: () => handleConfirmation("deleteNote"),
+      })
+    );
+  }, [isNoteChanged]);
 
   return (
     <div className="mb-4 mt-10 w-full text-left xl:my-12 xl:mb-4 xl:mt-10">
@@ -48,8 +77,8 @@ const NotesModal = ({ type }: NotesProps) => {
             type="text"
             className=""
             errors={errors}
-            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
             // alex
+            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           />
           <Textarea
             register={register}
@@ -68,7 +97,7 @@ const NotesModal = ({ type }: NotesProps) => {
                 className="w-full bg-button md:mx-0 md:w-auto"
                 variant="ghost"
                 size="big"
-                disabled={!isNoteChanged}
+                disabled={isDisabledButton}
                 onClick={() => handleButton("saveNote")}
               >
                 {t("notesHeader.createNote")}
@@ -97,7 +126,7 @@ const NotesModal = ({ type }: NotesProps) => {
                   className="w-full bg-button md:mx-0 md:w-auto"
                   variant="ghost"
                   size="big"
-                  disabled={!isNoteChanged}
+                  disabled={isDisabledButton}
                   onClick={() => handleButton("saveNote")}
                 >
                   {t("addVacancy.form.save")}

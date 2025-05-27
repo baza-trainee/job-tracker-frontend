@@ -48,7 +48,7 @@ function useNotes(type: "addNote" | "updateNote") {
       noteType: type,
     },
     resolver: zodResolver(NoteSchema),
-    mode: "onSubmit",
+    mode: "onBlur",
   });
 
   useEffect(() => {
