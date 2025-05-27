@@ -10,7 +10,7 @@ const LoginCardImages = () => {
     <div>
       <div
         className={classNames(
-          " flex h-0 w-0 scale-0 flex-col gap-[33px] overflow-hidden pt-[30px]",
+          "flex h-0 w-0 scale-0 flex-col gap-[33px] overflow-hidden pt-[30px]",
           "xl:flex xl:h-auto xl:w-[693px] xl:scale-100 xl:gap-[33px]",
           "2xl:w-[683px] 2xl:gap-[13px]",
           "3xl:w-[924px] 3xl:gap-[50px]"

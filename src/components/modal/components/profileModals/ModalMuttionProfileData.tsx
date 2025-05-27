@@ -183,6 +183,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
             // onClick={handleRemove}
             type="button"
             onClick={handleRemoveButton}
+            className="group gap-3"
             // disabled={isDisabledButtonRemove}
           >
             {t("infoModal.button.delete")}
@@ -195,7 +196,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         <Button
           // type="submit"
           type="button"
-          className="gap-3"
+          className="group gap-3"
           variant="accent"
           onClick={handleAddButton}
           disabled={isDisabledSubmitButton}

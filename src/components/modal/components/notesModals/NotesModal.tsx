@@ -86,7 +86,7 @@ const NotesModal = ({ type }: NoteType) => {
             {isAddNote ? (
               <Button
                 type="button"
-                className="w-full bg-button md:mx-0 md:w-auto"
+                className="group w-full bg-button md:mx-0 md:w-auto"
                 variant="ghost"
                 size="big"
                 disabled={isDisabledButton}

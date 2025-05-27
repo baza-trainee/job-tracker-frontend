@@ -7,7 +7,7 @@ import { useAppDispatch } from "@/store/hook";
 import { hideDropdown } from "@/store/slices/searchSlice/searchSlice";
 import { selectDropdownShown } from "@/store/slices/searchSlice/searchSelector";
 
-import { DropdowmMarkup } from "./DropdownMarkup";
+import { DropdownMarkup } from "./DropdownMarkup";
 import { SortDropdownProps } from "./Dropdown.props";
 
 const Dropdown: FC<SortDropdownProps> = ({
@@ -189,7 +189,7 @@ const Dropdown: FC<SortDropdownProps> = ({
   return (
     <>
       {register && <input type="hidden" {...register(name)} />}
-      <DropdowmMarkup
+      <DropdownMarkup
         id={name}
         ref={dropdownRef}
         isDropdownOpen={isDropdownOpen}

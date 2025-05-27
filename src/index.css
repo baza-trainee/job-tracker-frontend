@@ -609,7 +609,8 @@ input[type="password"]::-ms-clear {
 .soon-scroll::-webkit-scrollbar {
   width: 6px;
   border-radius: 4px;
-  background-color: #eceff6; /* Колір фону під треком */
+  background-color: #ecf0f6; /* Колір фону під треком */
+  @apply dark:bg-[#eaeef24d];
 }
 @media screen and (min-width: 768px) {
   .soon-scroll::-webkit-scrollbar {
@@ -620,6 +621,7 @@ input[type="password"]::-ms-clear {
   width: 6px;
   border-radius: 4px;
   background-color: rgba(51, 51, 51, 0.5);
+  @apply dark:bg-[#dbdcdd];
 }
 .dark .soon-scroll::-webkit-scrollbar-thumb {
   background-color: #a6aebf;
@@ -634,6 +636,7 @@ input[type="password"]::-ms-clear {
 }
 .soon-scroll__not-full::-webkit-scrollbar {
   background-color: rgba(51, 51, 51, 0.5);
+  @apply dark:bg-[#ecf0f6];
 }
 /* @layer utilities {
   .scrollbar-transparent::-webkit-scrollbar {

@@ -81,7 +81,10 @@ function MobHeader() {
             onClick={toggleSearch}
             className="p-0"
           >
-            <Icon id={ICON.SEARCH} className="size-10 fill-textBlack" />
+            <Icon
+              id={ICON.SEARCH}
+              className="size-10 fill-textBlack hover:fill-iconHover"
+            />
           </IconButton>
         )}
 
@@ -91,7 +94,10 @@ function MobHeader() {
           onClick={handleOpenSidebar}
           className="p-0"
         >
-          <Icon id={ICON.BURGER_MENU} className="size-10 fill-textBlack" />
+          <Icon
+            id={ICON.BURGER_MENU}
+            className="size-10 fill-textBlack hover:fill-iconHover"
+          />
         </IconButton>
       </div>
     </header>

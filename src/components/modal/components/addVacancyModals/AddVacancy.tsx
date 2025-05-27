@@ -161,7 +161,7 @@ const AddVacancy = () => {
             >
               {t("addVacancy.form.archive")}
               <Icon
-                id={"send"}
+                id={`${isButtonDisabled() ? "send-gray" : "send"}`}
                 className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
               />
             </Button>

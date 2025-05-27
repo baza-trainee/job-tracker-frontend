@@ -101,7 +101,7 @@ const VacancyMain: FC = () => {
     <div className="flex w-full flex-col gap-6">
       {/* Показ скелетону під час завантаження */}
       {isLoading && <VacancySectionSkeleton />}
-      {isError && <h2>Error...</h2>}
+      {isError && <h2 className="text-textBlack">Error...</h2>}
 
       {/* Заглушка "картка Створіть вашу першу вакансію", якщо взагалі вакансій немає, секція "Збережені" */}
       {!isLoading &&
