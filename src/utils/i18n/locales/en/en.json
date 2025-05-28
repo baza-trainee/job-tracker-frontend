@@ -475,7 +475,9 @@
     "invalidTimeContents": "Must contain 1-2 digits",
     "invalidHours": "Hours must be between 0 and 23",
     "invalidMinutes": "Minutes must be between 0 and 59",
-    "invalidPastDate": "Select the current date"
+    "invalidPastDate": "Select the current date",
+    "showEventArchive": "Show event archive",
+    "hideEventArchive": "Hide event archive"
   },
   "calendarTabs": {
     "day": "Day",

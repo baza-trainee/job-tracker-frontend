@@ -14,8 +14,10 @@ export const Soon = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { data: events, isLoading, error } = useGetAllEventsQuery();
+  const [showArchived, setShowArchived] = useState(false);
   const [hasScroll, setHasScroll] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isIOS, setIsIOS] = useState(false);
 
   const actualEvents = events?.filter((event) => {
     const dateToday = new Date();
@@ -59,6 +61,16 @@ export const Soon = () => {
     );
   };
 
+  const handleOpenArchivedEvents = () => {
+    setShowArchived((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const ua = window.navigator.userAgent;
+    const isIOSDevice = /iPad|iPhone|iPod/.test(ua) && !("MSStream" in window);
+    setIsIOS(isIOSDevice);
+  }, []);
+
   return (
     <div
       className={clsx(
@@ -69,12 +81,30 @@ export const Soon = () => {
     >
       <h3
         className={clsx(
-          "w-full px-4 font-nunito font-medium leading-[135%] text-textBlack",
+          "flex w-full items-center justify-between px-4 font-nunito font-medium leading-[135%] text-textBlack",
           "text-[16px] md:text-[20px] 2xl:text-[24px] 3xl:text-[28px]",
           "mb-3 xl:mb-2 2xl:mb-4 3xl:mb-6"
         )}
       >
         {t("soonSection.soon")}
+        <div className="group relative">
+          <button
+            onClick={handleOpenArchivedEvents}
+            // title={showArchived ? "Сховати архів" : "Показати архів"}
+          >
+            <Icon
+              id={showArchived ? "eye-off-outline" : "archive-outline"}
+              className="size-6 cursor-pointer fill-textBlack hover:fill-iconHover"
+            />
+          </button>
+          {/* Tooltip */}
+          {/* -top-9 -translate-x-1/2 left-1/2*/}
+          <div className="absolute right-[100%] top-0 z-10 whitespace-nowrap rounded bg-color6 px-2 py-1 text-[10px] text-textBlack opacity-0 transition-opacity group-hover:opacity-100 smPlus:text-xs">
+            {showArchived
+              ? t("soonSection.hideEventArchive")
+              : t("soonSection.showEventArchive")}
+          </div>
+        </div>
       </h3>
 
       <div
@@ -83,52 +113,57 @@ export const Soon = () => {
           hasScroll ? "justify-between" : "justify-start"
         )}
       >
-        <div
-          ref={scrollContainerRef}
-          className={clsx(
-            // hasScroll ? "soon-scroll relative w-full overflow-y-scroll" : "",
-            !hasScroll ? "soon-scroll__not-full" : "",
-            "soon-scroll relative w-full overflow-y-scroll",
-            "max-h-[202.8px] md:max-h-[346px] xl:max-h-[345px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
-            "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
-          )}
-        >
-          {isLoading && (
-            <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
-              {t("loading.loading")}...
-            </div>
-          )}
+        <div className="soon-scroll-wrapper relative">
+          <div
+            ref={scrollContainerRef}
+            className={clsx(
+              // hasScroll ? "soon-scroll relative w-full overflow-y-scroll" : "",
+              !hasScroll ? "soon-scroll__not-full" : "",
+              "soon-scroll relative w-full overflow-y-scroll",
+              "max-h-[202.8px] md:max-h-[346px] xl:max-h-[345px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
+              "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
+            )}
+          >
+            {isLoading && (
+              <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
+                {t("loading.loading")}...
+              </div>
+            )}
 
-          {error && (
-            <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
-              {t("loading.error")}...
-            </div>
-          )}
+            {error && (
+              <div className="flex justify-start py-4 text-lg font-medium text-textBlack">
+                {t("loading.error")}...
+              </div>
+            )}
 
-          {!isLoading && !error && (
-            <ul className="w-full">
-              {/* Локалізацію day потрібно зробити нижче */}
-              {actualEvents?.map((event) => {
-                const dayKey = new Date(event.date)
-                  .toLocaleString("en-US", { weekday: "short" }) // Отримуємо англійську назву дня в якості ключа локалізації
-                  .replace(".", ""); // у деяких локалях є зайва крапка "Thu." замість "Thu"
+            {!isLoading && !error && (
+              <ul className="w-full">
+                {/* Локалізацію day потрібно зробити нижче */}
+                {(showArchived ? events : actualEvents)?.map((event) => {
+                  const dayKey = new Date(event.date)
+                    .toLocaleString("en-US", { weekday: "short" }) // Отримуємо англійську назву дня в якості ключа локалізації
+                    .replace(".", ""); // у деяких локалях є зайва крапка "Thu." замість "Thu"
 
-                return (
-                  <li key={event.id}>
-                    <CardSoon
-                      day={t(`dayOfWeek.${dayKey}`)}
-                      date={new Date(event.date).toLocaleString("uk-Ua", {
-                        day: "2-digit",
-                        month: "2-digit",
-                      })}
-                      title={event.name}
-                      time={event.time.slice(0, 5)}
-                      onClick={() => handleOpenEditModal(event)}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
+                  return (
+                    <li key={event.id}>
+                      <CardSoon
+                        day={t(`dayOfWeek.${dayKey}`)}
+                        date={new Date(event.date).toLocaleString("uk-Ua", {
+                          day: "2-digit",
+                          month: "2-digit",
+                        })}
+                        title={event.name}
+                        time={event.time.slice(0, 5)}
+                        onClick={() => handleOpenEditModal(event)}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+          {isIOS && (
+            <div className="soon-scroll__custom-ios pointer-events-none absolute right-[2px] top-0 h-full w-[6px] rounded-md bg-[#c0c0c0] opacity-70" />
           )}
         </div>
 

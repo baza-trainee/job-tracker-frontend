@@ -474,7 +474,9 @@
     "invalidTimeContents": "Мають містити 1-2 цифри",
     "invalidHours": "Години мають бути від 0 до 23",
     "invalidMinutes": "Хвилини мають бути від 0 до 59",
-    "invalidPastDate": "Оберіть актуальну дату"
+    "invalidPastDate": "Оберіть актуальну дату",
+    "showEventArchive": "Показати архів подій",
+    "hideEventArchive": "Сховати архів подій"
   },
   "calendarTabs": {
     "day": "День",

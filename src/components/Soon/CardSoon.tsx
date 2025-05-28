@@ -18,7 +18,7 @@ const CardSoon: React.FC<CardSoonProps> = ({
   return (
     <button
       className={clsx(
-        "grid w-full rounded-2xl bg-backgroundTertiary hover:bg-backgroundSecondary dark:hover:bg-textMediumWhite",
+        "grid w-full rounded-2xl bg-backgroundTertiary hover:bg-backgroundSecondary dark:hover:bg-color6",
         "grid-cols-[auto_3fr]",
         "px-2 py-3 xl:px-4 xl:py-2 2xl:py-[10px] 3xl:px-6 3xl:py-3",
         "gap-2 2xl:gap-4",

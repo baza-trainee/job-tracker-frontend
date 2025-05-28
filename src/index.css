@@ -643,6 +643,19 @@ input[type="password"]::-ms-clear {
     background-color: transparent;
   }
 } */
+.soon-scroll-wrapper {
+  position: relative;
+}
+.soon-scroll__custom-ios {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  width: 6px;
+  height: 100%;
+  background-color: rgba(160, 160, 160, 0.6);
+  border-radius: 4px;
+  pointer-events: none; /* щоб не заважало скроллу */
+}
 
 .scrollbar-transparent::-webkit-scrollbar {
   background-color: transparent;
