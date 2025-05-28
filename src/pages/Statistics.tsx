@@ -102,7 +102,7 @@ function Statistics() {
           >
             <div
               className={clsx(
-                "md:grid-cols-[auto, auto] mt-8 grid auto-rows-max grid-cols-1 justify-items-center",
+                "md:grid-cols-[auto, auto] mt-8 grid w-full auto-rows-max grid-cols-1 justify-items-center",
                 "md:gap-x-5 xl:gap-x-2 3xl:gap-x-6"
               )}
             >
