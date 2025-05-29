@@ -11,6 +11,6 @@ export const userDataSchema = z.object({
         (/^\+?\d+$/.test(value) &&
           value.replace("+", "").length >= 3 &&
           value.replace("+", "").length <= 12),
-      { message: "Only digits (3–12), optionally starting with +" }
+      { message: "validation.phoneNumberInvalid" }
     ),
 });
