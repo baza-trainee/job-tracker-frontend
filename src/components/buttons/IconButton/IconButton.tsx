@@ -17,12 +17,12 @@ export const IconButton = ({
       disabled={disabled}
       aria-label={label}
       className={cn(
-        "flex items-center justify-center rounded-2xl px-3 py-1 text-textBlack transition",
+        "flex items-center justify-center rounded-2xl fill-textBlack px-3 py-1 text-textBlack transition hover:fill-iconHover",
         !disabled && {
           //   ["text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary"]:
           //     variant == "filled",
 
-          ["bg-whiteColor hover:ring-accent focus:ring-accent ring-1 ring-inset ring-textBlackLight hover:shadow-button_hover hover:ring-[3px] focus:shadow-button_hover focus:ring-[3px]"]:
+          ["hover:ring-accent focus:ring-accent bg-whiteColor ring-1 ring-inset ring-textBlackLight hover:shadow-button_hover hover:ring-[3px] focus:shadow-button_hover focus:ring-[3px]"]:
             variant == "outline",
         },
         disabled && {

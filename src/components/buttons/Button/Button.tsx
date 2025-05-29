@@ -12,7 +12,7 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "flex h-[42px] items-center justify-center rounded-xl border-[1px] border-textBlack font-nunito text-xl font-medium text-textBlack duration-300 dark:hover:text-blackColor md:h-[50px]",
+        "flex h-[42px] items-center justify-center rounded-xl border-[1px] border-textBlack fill-textBlack font-nunito text-xl font-medium text-textBlack duration-300 dark:hover:fill-blackColor dark:hover:text-blackColor md:h-[50px]",
 
         size === "small" && "px-[14px] md:px-8 xl:px-8",
         size === "big" && "px-[30px] md:px-12",

@@ -606,6 +606,9 @@ input[type="password"]::-ms-clear {
   display: none;
 }
 
+.soon-scroll {
+  -webkit-overflow-scrolling: touch;
+}
 .soon-scroll::-webkit-scrollbar {
   width: 6px;
   border-radius: 4px;
@@ -655,6 +658,14 @@ input[type="password"]::-ms-clear {
   background-color: rgba(160, 160, 160, 0.6);
   border-radius: 4px;
   pointer-events: none; /* щоб не заважало скроллу */
+}
+
+.scroll-soon-firefox {
+  scrollbar-width: auto; /* або thin / none */
+  scrollbar-color: rgba(51, 51, 51, 0.5) transparent; /* thumb колір + трек колір */
+}
+.dark .scroll-soon-firefox {
+  scrollbar-color: #dbdcdd transparent;
 }
 
 .scrollbar-transparent::-webkit-scrollbar {

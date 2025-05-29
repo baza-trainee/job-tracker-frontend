@@ -18,6 +18,7 @@ export const Soon = () => {
   const [hasScroll, setHasScroll] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isIOS, setIsIOS] = useState(false);
+  const [isFirefox, setIsFirefox] = useState(false);
 
   const actualEvents = events?.filter((event) => {
     const dateToday = new Date();
@@ -66,9 +67,16 @@ export const Soon = () => {
   };
 
   useEffect(() => {
-    const ua = window.navigator.userAgent;
-    const isIOSDevice = /iPad|iPhone|iPod/.test(ua) && !("MSStream" in window);
+    // const ua = window.navigator.userAgent;
+    // /.../i — це регулярний вираз: // iPhone|iPad|iPod — означає "будь-яке з трьох" // i — означає "ігноруй регістр"
+    // const isIOSDevice = /iPad|iPhone|iPod/i.test(ua) && !("MSStream" in window);
+
+    const ua = window.navigator.userAgent.toLowerCase();
+    const isIOSDevice = /iphone|ipad|ipod/.test(ua);
+    const isFirefoxBrowser = ua.includes("firefox");
+
     setIsIOS(isIOSDevice);
+    setIsFirefox(isFirefoxBrowser);
   }, []);
 
   return (
@@ -120,8 +128,9 @@ export const Soon = () => {
               // hasScroll ? "soon-scroll relative w-full overflow-y-scroll" : "",
               !hasScroll ? "soon-scroll__not-full" : "",
               "soon-scroll relative w-full overflow-y-scroll",
+              isFirefox && "scroll-soon-firefox",
               "max-h-[202.8px] md:max-h-[346px] xl:max-h-[345px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
-              "pr-[10px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
+              "pr-[14px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
             )}
           >
             {isLoading && (
@@ -162,7 +171,8 @@ export const Soon = () => {
               </ul>
             )}
           </div>
-          {isIOS && (
+          {/* подумати про створення хука useScrollPlatform() або зробити загальний компонент ScrollWrapper */}
+          {(isIOS || isFirefox) && (
             <div className="soon-scroll__custom-ios pointer-events-none absolute right-[2px] top-0 h-full w-[6px] rounded-md bg-[#c0c0c0] opacity-70" />
           )}
         </div>

@@ -33,10 +33,10 @@ const NoteCard: FC<Note> = (note) => {
 
   return (
     <div className="w-full font-nunito text-base leading-[135%]" id={id}>
-      <div className="dark:bg-greyLightcolor w-[118px] truncate rounded-t-xl bg-backgroundSecondary px-3 py-[6px] font-medium text-blackColor md:w-[141px] md:text-xl xl:w-[149px] xl:px-4">
+      <div className="w-[118px] truncate rounded-t-xl bg-backgroundSecondary px-3 py-[6px] font-medium text-blackColor dark:bg-greyLightcolor md:w-[141px] md:text-xl xl:w-[149px] xl:px-4">
         {name}
       </div>
-      <div className="dark:border-greyLightcolor flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3">
+      <div className="flex h-auto flex-col justify-between rounded-xl rounded-tl-none border-4 border-backgroundSecondary p-3 dark:border-greyLightcolor">
         <p
           className="mb-6 line-clamp-[7] cursor-pointer break-words text-textBlack smOnly:break-all"
           onClick={() => handleNoteCard("updateNote")}
@@ -55,10 +55,7 @@ const NoteCard: FC<Note> = (note) => {
               onClick={() => handleNoteCard("deleteNote")}
               className="custom-hover p-0 hover:fill-iconHover active:fill-iconHover"
             >
-              <Icon
-                id={ICON.DELETE}
-                className="size-10 fill-textBlack md:size-6"
-              />
+              <Icon id={ICON.DELETE} className="size-10 md:size-6" />
             </IconButton>
             <IconButton
               label="Edit_note_ button"
@@ -66,10 +63,7 @@ const NoteCard: FC<Note> = (note) => {
               onClick={() => handleNoteCard("updateNote")}
               className="custom-hover p-0 hover:fill-iconHover active:fill-iconHover"
             >
-              <Icon
-                id={ICON.EDIT}
-                className="size-10 fill-textBlack md:size-6"
-              />
+              <Icon id={ICON.EDIT} className="size-10 md:size-6" />
             </IconButton>
           </div>
         </div>
