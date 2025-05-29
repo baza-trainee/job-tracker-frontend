@@ -9,8 +9,8 @@ export const userDataSchema = z.object({
       (value: string) =>
         value === "" ||
         (/^\+?\d+$/.test(value) &&
-          value.replace("+", "").length >= 10 &&
-          value.replace("+", "").length <= 13),
-      { message: "Only digits (10–13), optionally starting with +" }
+          value.replace("+", "").length >= 3 &&
+          value.replace("+", "").length <= 12),
+      { message: "Only digits (3–12), optionally starting with +" }
     ),
 });
