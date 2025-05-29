@@ -28,6 +28,7 @@ export default function SocialLinksFields() {
     trigger,
     setValue,
     formState: { errors },
+    clearErrors,
   } = useForm({
     resolver: zodResolver(socialLinksSchema),
     mode: "onChange",
@@ -56,7 +57,7 @@ export default function SocialLinksFields() {
     }
     const isValid = await trigger(id as any);
     if (!isValid) {
-      console.warn("Validation failed for", id);
+      clearErrors(id);
       setValue(id as any, initialValues.current[id as string]);
       return;
     }
