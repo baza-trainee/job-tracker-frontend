@@ -116,7 +116,7 @@ export default {
           DEFAULT: "var(--color9)", // grey
           transparent: "var(--color9-transparent)", // grey with opacity
         },
-        borderLight: "#CECECE", // немає в дизайні, додати // перевела на дві теми в index.css
+        // borderLight: "#CECECE", // немає в дизайні, додати // перевела на дві теми в index.css
         // borderLight: "var(--borderLight)",
         form: {
           background: "rgba(255, 255, 255, 0.5)", // немає в дизайні, це #ffffff з opacity

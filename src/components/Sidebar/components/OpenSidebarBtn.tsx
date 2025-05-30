@@ -9,12 +9,9 @@ const OpenSidebarBtn: React.FC<SidebarOpenBtnProps> = ({
   return (
     <div
       onClick={handleOpenSidebar}
-      className="custom-hover cursor-pointer py-[7px]"
+      className="custom-hover cursor-pointer fill-textBlack py-[7px] hover:fill-iconHover active:fill-iconHover"
     >
-      <Icon
-        id={icon}
-        className="h-[30px] w-[54px] fill-textBlack transition-colors duration-500 ease-in-out hover:fill-iconHover active:fill-iconHover"
-      />
+      <Icon id={icon} className="h-[30px] w-[56px]" />
     </div>
   );
 };

@@ -95,7 +95,7 @@ function Sidebar() {
 
         <nav
           className={cn(
-            "mt-6 flex flex-col gap-4 border-b-[1px] border-borderLight pb-5",
+            "mt-6 flex flex-col gap-4 border-b-[1px] border-color9 pb-5",
             !isOpenSidebar && "items-center"
           )}
         >
@@ -121,7 +121,7 @@ function Sidebar() {
 
         <div
           className={cn(
-            "flex flex-col gap-4 border-t-[1px] border-borderLight pt-6",
+            "flex flex-col gap-4 border-t-[1px] border-color9 pt-6",
             !isOpenSidebar && "items-center"
           )}
         >
@@ -130,7 +130,10 @@ function Sidebar() {
             title={t("navigation.support")}
             isOpen={isOpenSidebar}
             donateIcon={false}
-            className="box-border border-2 border-transparent active:border-iconHover active:bg-whiteColor dark:hover:bg-backgroundSecondary dark:active:bg-transparent"
+            className={cn(
+              "box-border border-2 border-transparent active:border-iconHover",
+              "active:bg-whiteColor dark:hover:bg-backgroundSecondary dark:active:bg-transparent"
+            )}
             action={handleSupportModal}
           />
           <SidebarActionItem
@@ -138,14 +141,20 @@ function Sidebar() {
             title={t("donate")}
             isOpen={isOpenSidebar}
             donateIcon={true}
-            className="border-textBlack bg-button px-3 hover:border-iconHover hover:bg-backgroundSecondary hover:fill-textBlack hover:text-textBlack active:border-iconHover active:bg-iconHover active:fill-white active:text-white"
+            className={cn(
+              "group border-textBlack bg-button px-3 hover:border-iconHover hover:bg-backgroundSecondary active:border-iconHover active:bg-iconHover"
+              // "hover:fill-textBlack hover:text-textBlack active:fill-whiteColor active:text-whiteColor dark:group-hover:fill-blackColor dark:group-active:text-whiteColor"
+            )}
           />
           <SidebarActionItem
             icon="log-out"
             title={t("navigation.logOut")}
             isOpen={isOpenSidebar}
             donateIcon={false}
-            className="box-border border-2 border-transparent active:border-iconHover active:bg-whiteColor dark:hover:bg-backgroundSecondary dark:active:bg-transparent"
+            className={cn(
+              "box-border border-2 border-transparent active:border-iconHover",
+              "active:bg-whiteColor dark:hover:bg-backgroundSecondary dark:active:bg-transparent"
+            )}
             action={handleLogOut}
           />
         </div>
