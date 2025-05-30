@@ -19,7 +19,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={isUA && isOpen}
         onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
         className={cn(
-          "flex overflow-hidden px-3 py-[5px] text-textBlack hover:text-iconHover disabled:hover:text-iconHover dark:hover:text-button md:px-2 md:py-1",
+          "flex overflow-hidden px-3 py-[5px] text-textBlack hover:text-iconHover disabled:hover:text-textBlack dark:hover:text-button dark:disabled:hover:text-textBlack md:px-2 md:py-1",
           {
             "visible absolute left-0 z-[2] w-16 justify-center rounded-[20px] bg-backgroundMain opacity-100":
               isUA,
@@ -42,7 +42,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={!isUA && isOpen}
         onClick={() => i18n.changeLanguage(isUA ? LOCALS.EN : LOCALS.UA)}
         className={cn(
-          "flex justify-end overflow-hidden px-2 py-[5px] hover:text-iconHover disabled:hover:text-iconHover dark:hover:text-button md:py-1",
+          "flex justify-end overflow-hidden px-2 py-[5px] hover:text-iconHover disabled:hover:text-textBlack dark:hover:text-button dark:disabled:hover:text-textBlack md:py-1",
 
           {
             "visible absolute right-0 w-16 justify-center rounded-[20px] bg-backgroundMain text-textBlack opacity-100":
