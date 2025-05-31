@@ -42,6 +42,23 @@ function Statistics() {
     isError: isPredictionError,
   } = useGetPredictionDailyQuery();
 
+  console.log("PredictionError", isPredictionError);
+  const now = new Date();
+
+  const predictionObj = {
+    id: "1",
+    textUk: "заглушка:) все буде добре!",
+    textEn: "temporary text:) everything will be ok!",
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  const predictionForRender = !isPredictionLoading
+    ? prediction
+      ? prediction
+      : predictionObj
+    : null;
+
   const renderCalendar = () => {
     switch (activeTab) {
       case "day":
@@ -83,12 +100,13 @@ function Statistics() {
   return (
     <div className="container pb-5 pt-4 sm:pb-6 sm:pt-4 md:py-6 xl:py-10">
       {(isLoading || isPredictionLoading) && <StatisticsPanelSkeleton />}
-      {(isError || isPredictionError) && (
-        <h2 className="text-textBlack">Error...</h2>
-      )}
+      {isError && <h2 className="text-textBlack">Error...</h2>}
 
-      {!isLoading && vacanciesForStat && prediction && (
-        <StatisticsPanel vacancies={vacanciesForStat} prediction={prediction} />
+      {!isLoading && vacanciesForStat && predictionForRender && (
+        <StatisticsPanel
+          vacancies={vacanciesForStat}
+          prediction={predictionForRender}
+        />
       )}
       {!isLoading && vacanciesForStat.length === 0 && <NoVacancyCard />}
       {!isLoading && vacanciesForStat.length !== 0 && (
