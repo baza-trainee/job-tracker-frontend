@@ -85,7 +85,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <span
             id={`inputError-${name}`}
             className={classNames(
-              "inline-block font-nunito font-medium text-color2",
+              "text-redColor inline-block font-nunito font-medium",
               "sm:text-[12px]",
               "md:text-[14px]",
               "2xl:text-[16px]"

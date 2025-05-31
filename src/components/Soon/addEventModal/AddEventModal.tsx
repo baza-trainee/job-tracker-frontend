@@ -69,7 +69,7 @@ const AddEventModal = () => {
         <div>
           <SoonCalendarModal onSelectDate={handleDateChange} />
           {errors.date?.message && (
-            <p className="text-color2">{String(errors.date.message)}</p>
+            <p className="text-redColor">{String(errors.date.message)}</p>
           )}
         </div>
 
@@ -258,15 +258,15 @@ const AddEventModal = () => {
 
       <Button
         type="submit"
-        className="mx-auto bg-button"
-        variant="ghost"
+        className="mx-auto"
+        variant="accent"
         size="big"
         disabled={isLoading || inputChanged === false}
       >
         {isLoading ? t("loading") : t("soonSection.save")}
         <Icon
           id={`${inputChanged ? "check-box" : "check-box-gray"}`}
-          className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+          className="ml-3 h-6 w-6"
         />
       </Button>
     </form>

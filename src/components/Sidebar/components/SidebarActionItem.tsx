@@ -14,9 +14,10 @@ const SidebarActionItem: React.FC<SidebarActionItemProps> = ({
   return (
     <div
       className={cn(
-        "group flex h-[43px] cursor-pointer items-center gap-2 rounded-xl border-[1px] fill-textBlack hover:border-iconHover hover:text-iconHover active:fill-iconHover active:text-iconHover",
-        "custom-transition",
+        "group flex h-[43px] cursor-pointer items-center gap-2 rounded-xl border-[1px] hover:border-iconHover",
+        "custom-transition fill-textBlack text-textBlack dark:hover:fill-blackColor dark:hover:text-blackColor dark:active:fill-textBlack dark:active:text-textBlack",
         isOpen ? "w-[206px]" : "w-[68px]",
+        donateIcon ? "active:fill-whiteColor active:text-whiteColor" : "",
         className
       )}
       onClick={action}
@@ -24,19 +25,18 @@ const SidebarActionItem: React.FC<SidebarActionItemProps> = ({
       <Icon
         id={icon}
         className={cn(
-          "custom-size fill-textBlack dark:group-hover:fill-blackColor",
-          donateIcon ? "h-6 w-6 group-active:fill-whiteColor" : "h-8 w-8",
+          "custom-size",
+          donateIcon ? "h-6 w-6" : "h-8 w-8",
           !isOpen && "ml-[18px]",
           !isOpen && donateIcon && "ml-[10px]"
         )}
       />
       <span
         className={cn(
-          "custom-size overflow-hidden whitespace-nowrap text-textBlack dark:group-hover:text-blackColor",
+          "custom-size overflow-hidden whitespace-nowrap",
           isOpen
             ? "visible w-[148px] opacity-100"
-            : "sr-only m-0 w-0 -translate-x-5 opacity-0",
-          donateIcon ? "group-active:text-whiteColor" : ""
+            : "sr-only m-0 w-0 -translate-x-5 opacity-0"
         )}
       >
         {title}

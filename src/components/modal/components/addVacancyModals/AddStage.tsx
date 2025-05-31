@@ -54,7 +54,10 @@ const AddVacancyStage = forwardRef<HTMLButtonElement, AddVacancyStageProps>(
           type="button"
           ref={ref}
         >
-          <Icon id="plus" className="size-6 fill-textBlack" />
+          <Icon
+            id="plus"
+            className="size-6 fill-textBlack hover:fill-iconHover dark:hover:fill-iconHover"
+          />
           {t("addVacancy.form.addStage")}
         </button>
 

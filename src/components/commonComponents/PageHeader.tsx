@@ -106,7 +106,7 @@ const PageHeader: FC = () => {
           >
             <Icon
               id={ICON.MAGE_FILTER}
-              className="size-10 fill-whiteColor stroke-textBlack hover:stroke-iconHover dark:fill-blackColor"
+              className="size-10 fill-whiteColor stroke-textBlack hover:fill-whiteColor hover:stroke-iconHover dark:fill-blackColor dark:hover:fill-blackColor"
             />
           </IconButton>
         )}
@@ -118,7 +118,8 @@ const PageHeader: FC = () => {
               </span>
               <Icon
                 id={"archive-outline"}
-                className="size-6 fill-textBlack dark:group-hover:fill-blackColor"
+                className="size-6"
+                // dark:group-hover:fill-blackColor
               />
             </div>
           </LinkButton>

@@ -156,7 +156,7 @@ export const CheckboxWithCalendar = forwardRef<HTMLInputElement, CheckboxProps>(
               <span
                 id={`inputError-${name}`}
                 className={classNames(
-                  "inline-block pl-[9.5px] pt-1 font-nunito text-base font-medium text-color2"
+                  "text-redColor inline-block pl-[9.5px] pt-1 font-nunito text-base font-medium"
                 )}
               >
                 {t(String(error?.message))}

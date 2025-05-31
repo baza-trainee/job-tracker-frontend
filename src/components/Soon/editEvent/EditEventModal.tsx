@@ -68,7 +68,7 @@ const EditEventModal = () => {
         <div>
           <SoonCalendarModal onSelectDate={handleDateChange} />
           {errors.date?.message && (
-            <p className="text-color2">{String(errors.date.message)}</p>
+            <p className="text-redColor">{String(errors.date.message)}</p>
           )}
         </div>
 
@@ -264,16 +264,13 @@ const EditEventModal = () => {
           onClick={confirmDelete}
         >
           {t("soonSection.delete")}
-          <Icon
-            id={"delete"}
-            className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
-          />
+          <Icon id={"delete"} className="ml-3 h-6 w-6" />
         </Button>
 
         <Button
           type="submit"
-          className="bg-button"
-          variant="ghost"
+          className=""
+          variant="accent"
           size="big"
           onClick={handleSubmit(confirmSave)}
           disabled={inputChanged === false}
@@ -281,7 +278,7 @@ const EditEventModal = () => {
           {t("soonSection.save")}
           <Icon
             id={`${inputChanged ? "check-box" : "check-box-gray"}`}
-            className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+            className="ml-3 h-6 w-6"
           />
         </Button>
       </div>

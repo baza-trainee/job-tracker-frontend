@@ -16,7 +16,7 @@ export const LinkButton = ({
     <Link
       to={href}
       className={cn(
-        "inline-flex h-[51px] items-center justify-center rounded-xl py-3 font-nunito text-xl font-medium text-textBlack duration-300",
+        "inline-flex h-[51px] items-center justify-center rounded-xl fill-textBlack py-3 font-nunito text-xl font-medium text-textBlack duration-300 active:fill-textBlack dark:hover:fill-blackColor dark:active:fill-textBlack dark:active:text-textBlack",
         {
           ["min-w-[180px] px-8"]: size == "small",
           ["min-w-[260px] px-12"]: size == "big",

@@ -18,7 +18,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "relative flex h-9 rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD] md:h-[39px]",
+        "relative flex h-9 rounded-[20px] border-2 border-color9 bg-color9 md:h-[39px]",
         "custom-transition",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}

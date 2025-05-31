@@ -26,9 +26,9 @@ const colorButton: Color = {
 };
 
 const colorError: Color = {
-  text: "text-color2",
-  bg: "bg-color2",
-  border: "border-color2",
+  text: "text-redColor",
+  bg: "bg-redColor",
+  border: "border-redColor",
 };
 
 const colorSuccess: Color = {
@@ -277,10 +277,7 @@ export const contentMap: ContentMapProps = {
   },
   closeModalsaveNote: {
     content: (
-      <InfoModal
-        type="closeModalsaveNote"
-        textColor={colorButton.text}
-      />
+      <InfoModal type="closeModalsaveNote" textColor={colorButton.text} />
     ),
     bgColor: colorButton.bg,
     borderColor: colorButton.border,

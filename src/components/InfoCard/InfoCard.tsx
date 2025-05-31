@@ -60,7 +60,7 @@ const InfoCard = ({
         <Icon
           id={icon}
           className={classNames(
-            "h-[100px] w-[100px] fill-textBlack",
+            "h-[100px] w-[100px]",
             "2xl:h-[120px] 2xl:w-[120px]"
           )}
         />

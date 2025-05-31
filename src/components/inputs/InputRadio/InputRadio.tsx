@@ -80,7 +80,7 @@ export const InputRadio = forwardRef<HTMLInputElement, InputRadioProps>(
         {error && (
           <span
             id={`inputError-${name}`}
-            className="absolute left-0 top-[46px] inline-block font-nunito text-base font-medium text-color2"
+            className="text-redColor absolute left-0 top-[46px] inline-block font-nunito text-base font-medium"
           >
             {t(String(error?.message))}
           </span>

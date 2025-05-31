@@ -51,12 +51,12 @@ export type TypesModal =
   | "closeModalsaveNote";
 
 export type Color = {
-  text: "text-textWhite" | "text-button" | "text-color2" | "text-color8";
-  bg: "bg-whiteColor" | "bg-button" | "bg-color2" | "bg-color8";
+  text: "text-textWhite" | "text-button" | "text-redColor" | "text-color8";
+  bg: "bg-whiteColor" | "bg-button" | "bg-redColor" | "bg-color8";
   border:
     | "border-textWhite"
     | "border-button"
-    | "border-color2"
+    | "border-redColor"
     | "border-color8";
 };
 

@@ -47,20 +47,20 @@ export default function DoughnutChart({ vacancies }: { vacancies: Vacancy[] }) {
         data,
         hoverBorderColor: "#436B88",
         backgroundColor: [
-          isDarkMode ? "rgba(198, 231, 255, 0.7)" : "#C6E7FF", // color1
-          isDarkMode ? "rgba(205, 193, 255, 0.7)" : "#CDC1FF", // color4
-          isDarkMode ? "rgba(254, 238, 145, 0.7)" : "#FEEE91", // color3
-          isDarkMode ? "rgba(166, 174, 191, 0.7)" : "#A6AEBF", // color6
-          isDarkMode ? "rgba(252, 137, 114, 0.7)" : "#FC8972", // color2
-          isDarkMode ? "rgba(177, 214, 144, 0.7)" : "#B1D690", // color7
+          "#C6E7FF", // color1
+          "#CDC1FF", // color4
+          "#FEEE91", // color3
+          "#A6AEBF", // color6
+          "#FC8972", // color2
+          "#B1D690", // color7
         ],
         borderColor: [
-          isDarkMode ? "rgba(198, 231, 255, 0.7)" : "#C6E7FF", // color1
-          isDarkMode ? "rgba(205, 193, 255, 0.7)" : "#CDC1FF", // color4
-          isDarkMode ? "rgba(254, 238, 145, 0.7)" : "#FEEE91", // color3
-          isDarkMode ? "rgba(166, 174, 191, 0.7)" : "#A6AEBF", // color6
-          isDarkMode ? "rgba(252, 137, 114, 0.7)" : "#FC8972", // color2
-          isDarkMode ? "rgba(177, 214, 144, 0.7)" : "#B1D690", // color7
+          "#C6E7FF", // color1
+          "#CDC1FF", // color4
+          "#FEEE91", // color3
+          "#A6AEBF", // color6
+          "#FC8972", // color2
+          "#B1D690", // color7
         ],
         borderWidth: 2,
       },

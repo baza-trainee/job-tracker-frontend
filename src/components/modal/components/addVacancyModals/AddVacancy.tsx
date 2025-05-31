@@ -162,12 +162,12 @@ const AddVacancy = () => {
               {t("addVacancy.form.archive")}
               <Icon
                 id={`${isButtonDisabled() ? "send-gray" : "send"}`}
-                className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+                className="ml-3 h-6 w-6"
               />
             </Button>
             <Button
               type="button"
-              className="group w-full dark:hover:fill-blackColor md:mx-auto xl:mx-0 xl:w-auto"
+              className="group w-full md:mx-auto xl:mx-0 xl:w-auto"
               variant="accent"
               size="big"
               disabled={isButtonDisabled()}
@@ -176,7 +176,7 @@ const AddVacancy = () => {
               {t("addVacancy.form.save")}
               <Icon
                 id={`${isButtonDisabled() ? "check-box-gray" : "check-box"}`}
-                className="ml-3 h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
+                className="ml-3 h-6 w-6"
               />
             </Button>
           </div>

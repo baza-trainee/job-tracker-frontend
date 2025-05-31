@@ -11,10 +11,20 @@ export const JobCalendar = ({ changeDate, dateState }: JobCalendarProps) => {
     <Calendar
       locale={i18n.language}
       className={classNames(
-        "custom-size statistics-calendar__day job-cal z-10 w-full rounded-[12px] border-[1px] border-[solid] border-iconHover bg-backgroundMain py-3 text-textBlack"
+        "custom-size statistics-calendar__day job-cal z-10 w-full rounded-[12px] border-[1px] border-iconHover bg-backgroundMain py-3 text-textBlack"
       )}
-      nextLabel={<Icon id={"arrow-right"} className="h-6 w-6 fill-textBlack" />}
-      prevLabel={<Icon id={"arrow-left"} className="h-6 w-6 fill-textBlack" />}
+      nextLabel={
+        <Icon
+          id={"arrow-right"}
+          className="h-6 w-6 fill-textBlack hover:fill-iconHover active:fill-iconHover dark:hover:fill-iconHover"
+        />
+      }
+      prevLabel={
+        <Icon
+          id={"arrow-left"}
+          className="h-6 w-6 fill-textBlack hover:fill-iconHover active:fill-iconHover dark:hover:fill-iconHover"
+        />
+      }
       formatMonthYear={(locale, date) =>
         `${date.toLocaleDateString(locale, { month: "long" })} ${date.getFullYear()}`
       }

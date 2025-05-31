@@ -62,12 +62,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             <span
               id={`inputError-${name}`}
               className={cn(
-                "inline-block font-nunito font-medium text-color2",
+                "text-redColor inline-block font-nunito font-medium",
                 "text-[12px]",
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-color2 bg-whiteColor p-2 text-color2"
+                  "text-redColor border-redColor absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border bg-whiteColor p-2"
               )}
             >
               {t(String(error?.message))}

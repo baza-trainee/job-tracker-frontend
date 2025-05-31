@@ -10,7 +10,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "relative flex h-[36px] items-center rounded-[20px] border-2 border-[#DBDCDD] bg-[#DBDCDD] md:h-[39px]",
+        "relative flex h-[36px] items-center rounded-[20px] border-2 border-color9 bg-color9 md:h-[39px]",
         "custom-transition lead font-medium leading-[132%] text-textBlack",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}

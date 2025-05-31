@@ -1,8 +1,8 @@
 import { FC, ReactNode, useRef, useState, useEffect } from "react";
-import { useAppSelector } from "../../../store/hook.ts";
+// import { useAppSelector } from "../../../store/hook.ts";
 import clsx from "clsx";
 import Icon from "../../Icon/Icon.tsx";
-import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
+// import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
 
 export type VacancySectionProps = {
   titleSection: string;
@@ -24,7 +24,7 @@ const VacancySection: FC<VacancySectionProps> = ({
   const [hasScroll, setHasScroll] = useState(false);
   const [row1, setRow1] = useState<ReactNode[]>([]);
   const [row2, setRow2] = useState<ReactNode[]>([]);
-  const darkTheme = useAppSelector(selectTheme);
+  // const darkTheme = useAppSelector(selectTheme);
 
   const validChildren = Array.isArray(children) ? children : [children];
 
@@ -175,16 +175,17 @@ const VacancySection: FC<VacancySectionProps> = ({
     });
   };
 
-  const classNameSectionBackground = darkTheme
-    ? `${colorSectionBG}-transparent`
-    : colorSectionBG;
+  // const classNameSectionBackground = darkTheme
+  //   ? `${colorSectionBG}-transparent`
+  //   : colorSectionBG;
 
   return (
     <section className="text-textBlack">
       <div
         className={clsx(
           "w-fit rounded-tl-lg rounded-tr-lg px-3 py-[6px] text-xl font-medium shadow-section_shadow",
-          classNameSectionBackground
+          // classNameSectionBackground
+          colorSectionBG
         )}
       >
         {titleSection}
@@ -208,8 +209,11 @@ const VacancySection: FC<VacancySectionProps> = ({
             <Icon
               id="arrow-left"
               className={clsx(
-                "h-3 w-3 fill-textBlack duration-300 hover:fill-iconHover smPlus:h-6 smPlus:w-6",
-                { "fill-color6 hover:fill-color6": isScrollLeftDisabled }
+                "h-3 w-3 fill-textBlack duration-300 hover:fill-iconHover active:fill-iconHover smPlus:h-6 smPlus:w-6",
+                {
+                  "fill-color6 hover:fill-color6 dark:hover:fill-color6":
+                    isScrollLeftDisabled,
+                }
               )}
             />
           </button>
@@ -246,8 +250,11 @@ const VacancySection: FC<VacancySectionProps> = ({
             <Icon
               id="arrow-right"
               className={clsx(
-                "h-3 w-3 fill-textBlack duration-300 hover:fill-iconHover smPlus:h-6 smPlus:w-6",
-                { "fill-color6 hover:fill-color6": isScrollRightDisabled }
+                "h-3 w-3 fill-textBlack duration-300 hover:fill-iconHover active:fill-iconHover dark:hover:fill-iconHover smPlus:h-6 smPlus:w-6",
+                {
+                  "fill-color6 hover:fill-color6 dark:hover:fill-color6":
+                    isScrollRightDisabled,
+                }
               )}
             />
           </button>

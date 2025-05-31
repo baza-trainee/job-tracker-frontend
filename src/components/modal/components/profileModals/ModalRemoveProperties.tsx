@@ -61,10 +61,7 @@ function ModalRemoveProperties({ cardsType }: PropsModalAddProperties) {
           className="gap-3"
         >
           {t("infoModal.button.delete")}
-          <Icon
-            id="delete"
-            className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
-          />
+          <Icon id="delete" className="h-6 w-6" />
         </Button>
       </div>
     </div>

@@ -134,7 +134,7 @@ function ProfileLinksField() {
               }
             />
             {index === userData.length - 1 && (
-              <div className="bg- mt-4 h-px w-full bg-color9" />
+              <div className="bg-borderLight mt-4 h-px w-full" />
             )}
           </li>
         );
