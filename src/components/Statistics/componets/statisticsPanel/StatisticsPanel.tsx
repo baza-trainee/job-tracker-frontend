@@ -19,7 +19,7 @@ const StatisticsPanel: FC<StatisticsPanelProps> = ({
   const { i18n, t } = useTranslation();
 
   const predictionText =
-    i18n.language === "uk" ? prediction?.textUk : prediction?.textEn;
+    i18n.language === "uk-UA" ? prediction?.textUk : prediction?.textEn;
 
   const localizedHeaders = useMemo(() => {
     return {
@@ -37,7 +37,7 @@ const StatisticsPanel: FC<StatisticsPanelProps> = ({
   );
 
   return (
-    <div className="text-blackColor flex w-full flex-wrap gap-y-2 md:justify-between">
+    <div className="flex w-full flex-wrap gap-y-2 text-blackColor md:justify-between">
       <ul
         className={cn(
           "flex flex-wrap gap-x-3 gap-y-2 smPlus:w-full md:gap-2 xl:w-auto xl:gap-3 2xl:gap-5 2xl:self-start 3xl:gap-8 mdOnly:w-1/2"

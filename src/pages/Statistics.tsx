@@ -102,12 +102,15 @@ function Statistics() {
       {(isLoading || isPredictionLoading) && <StatisticsPanelSkeleton />}
       {isError && <h2 className="text-textBlack">Error...</h2>}
 
-      {!isLoading && vacanciesForStat && predictionForRender && (
-        <StatisticsPanel
-          vacancies={vacanciesForStat}
-          prediction={predictionForRender}
-        />
-      )}
+      {!isLoading &&
+        !isPredictionLoading &&
+        vacanciesForStat &&
+        predictionForRender && (
+          <StatisticsPanel
+            vacancies={vacanciesForStat}
+            prediction={predictionForRender}
+          />
+        )}
       {!isLoading && vacanciesForStat.length === 0 && <NoVacancyCard />}
       {!isLoading && vacanciesForStat.length !== 0 && (
         <>
