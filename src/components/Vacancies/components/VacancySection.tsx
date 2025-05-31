@@ -1,8 +1,8 @@
 import { FC, ReactNode, useRef, useState, useEffect } from "react";
-import { useAppSelector } from "../../../store/hook.ts";
+// import { useAppSelector } from "../../../store/hook.ts";
 import clsx from "clsx";
 import Icon from "../../Icon/Icon.tsx";
-import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
+// import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
 
 export type VacancySectionProps = {
   titleSection: string;
@@ -24,7 +24,7 @@ const VacancySection: FC<VacancySectionProps> = ({
   const [hasScroll, setHasScroll] = useState(false);
   const [row1, setRow1] = useState<ReactNode[]>([]);
   const [row2, setRow2] = useState<ReactNode[]>([]);
-  const darkTheme = useAppSelector(selectTheme);
+  // const darkTheme = useAppSelector(selectTheme);
 
   const validChildren = Array.isArray(children) ? children : [children];
 
