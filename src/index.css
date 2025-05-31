@@ -109,7 +109,8 @@ body {
     fill 300ms ease-in-out,
     color 300ms ease-in-out,
     border-color 300ms ease-in-out,
-    background-color 300ms ease-in-out;
+    background-color 300ms ease-in-out,
+    text-decoration-color 300ms ease-in-out;
 }
 
 .custom-size {
