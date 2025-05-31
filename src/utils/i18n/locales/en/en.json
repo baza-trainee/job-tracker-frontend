@@ -133,7 +133,8 @@
     "min2Characters": "Minimum 2 characters required",
     "max50Characters": "Maximum 50 characters",
     "invalidUrl": "Enter a valid URL",
-    "invalidPdf": "Enter a valid .pdf URL"
+    "invalidPdf": "Enter a valid .pdf URL",
+    "phoneNumberInvalid": "Only digits (3–12), optionally starting with +"
   },
   "vacanciesHeader": {
     "search": "Search",

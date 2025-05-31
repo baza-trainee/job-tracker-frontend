@@ -22,6 +22,7 @@ function ProfileLinksField() {
     watch,
     setValue,
     trigger,
+    clearErrors,
     formState: { errors },
   } = useForm<Pick<Profile, "username" | "email" | "phone">>({
     resolver: zodResolver(userDataSchema),
@@ -51,13 +52,15 @@ function ProfileLinksField() {
 
     if (event !== "" && name === "phone") {
       const valueNumber = Number(event);
-      if (!valueNumber && event.length < 2) {
-        notifyError(t("notification.updatedPhone"));
+
+      if (!valueNumber && event.length <= 2) {
+        clearErrors(name);
         setValue(name as any, initialValues.current[name]);
         return;
       }
       const isValid = await trigger(name as any);
       if (!isValid) {
+        clearErrors(name);
         setValue(name as any, initialValues.current[name]);
         return;
       }
