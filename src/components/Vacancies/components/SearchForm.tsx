@@ -117,7 +117,7 @@ export const SearchForm: React.FC = () => {
                 "h-[41px] w-full rounded-lg border border-textBlack bg-transparent py-[10px] pl-[58px] pr-2 font-nunito text-xl font-medium text-textBlack transition placeholder:font-nunito placeholder:text-base placeholder:text-textBlackLight placeholder-shown:border-textBlack hover:border-iconHover hover:placeholder:text-iconHover focus:outline-none focus:placeholder:text-iconHover active:border-textBlack xl:h-[51px] xl:rounded-xl",
 
                 error &&
-                  "border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"
+                  "border-redColor placeholder-shown:border-redColor focus:border-redColor active:border-redColor"
               )}
               placeholder={t("vacanciesHeader.search")}
               type={"text"}
@@ -134,7 +134,7 @@ export const SearchForm: React.FC = () => {
               >
                 <Icon
                   id="cancel-in-round"
-                  className="h-6 w-6 cursor-pointer fill-color2"
+                  className="fill-redColor h-6 w-6 cursor-pointer"
                 />
               </button>
             )}
@@ -142,7 +142,7 @@ export const SearchForm: React.FC = () => {
           {error && (
             <span
               id={`inputError-query`}
-              className="absolute left-0 top-[38px] inline-block font-nunito text-base font-medium text-color2 md:top-10 xl:top-[46px]"
+              className="absolute left-0 top-[38px] inline-block font-nunito text-base font-medium text-[redColor] md:top-10 xl:top-[46px]"
             >
               {t(String(error?.message))}
             </span>

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Icon from "../Icon/Icon";
 import { ReactNode } from "react";
 import { useAppSelector } from "@/store/hook";
-import { selectTheme } from "../../store/slices/themeSlice/themeSelector";
+// import { selectTheme } from "../../store/slices/themeSlice/themeSelector";
 
 import { useTranslation } from "react-i18next";
 import { forwardRef } from "react";
@@ -27,7 +27,7 @@ const ModalMain = forwardRef<HTMLDivElement, ModalMainProps>(
     const { borderColorModal, backgroundColorModal } = useAppSelector(
       (state) => state.modal
     );
-    const darkTheme = useAppSelector(selectTheme);
+    // const darkTheme = useAppSelector(selectTheme);
     const { t } = useTranslation();
 
     return (
@@ -37,12 +37,15 @@ const ModalMain = forwardRef<HTMLDivElement, ModalMainProps>(
             "relative z-0 flex w-fit items-center justify-center rounded-tl-xl rounded-tr-xl",
             "top-0 min-h-[20px] min-w-[100px] px-4 py-2",
             "md:min-h-[32px] md:min-w-[134px] md:px-6 md:py-3",
-            darkTheme
-              ? backgroundColorModal
-                ? `${backgroundColorModal}-transparent`
-                : modalData?.bgColor
-              : backgroundColorModal || modalData?.bgColor
-            // backgroundColorModal || modalData?.bgColor || "bg-backgroundTertiary" // Тимчасово, пошукати далі
+            // darkTheme
+            //   ? backgroundColorModal
+            //     ? // ? `${backgroundColorModal}-transparent`
+            //       backgroundColorModal
+            //     : modalData?.bgColor
+            //   : backgroundColorModal || modalData?.bgColor
+            backgroundColorModal ||
+              modalData?.bgColor ||
+              "bg-backgroundTertiary" // Тимчасово, пошукати далі
           )}
           onClick={(e) => e.stopPropagation()}
         >
@@ -90,12 +93,14 @@ const ModalMain = forwardRef<HTMLDivElement, ModalMainProps>(
           </div>
           <button
             onClick={btnFunc}
-            className={"z-0 -ml-6 rounded-md md:hover:bg-color2"}
+            className={
+              "hover:bg-redColor z-0 -ml-6 rounded-md dark:hover:fill-textBlack dark:active:fill-textBlack"
+            }
           >
             <Icon
               id="close-default"
               className={clsx(
-                "fill-textBlack",
+                "fill-textBlack dark:hover:fill-textBlack dark:active:fill-textBlack",
                 modalData?.iconCloseEventModal || "h-6 w-6"
               )}
             />

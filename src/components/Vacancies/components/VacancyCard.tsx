@@ -55,7 +55,7 @@ const VacancyCard: FC<VacancyCardProps> = ({
       <div className="box-border flex items-center gap-1 font-medium">
         <Icon
           id={`location-${workType}`}
-          className="h-6 w-6 shrink-0 fill-textBlack"
+          className="h-6 w-6 shrink-0 fill-textBlack hover:fill-textBlack dark:hover:fill-textBlack"
         />
         <span className="text-[14px] leading-[135%]">
           {locationLabel[workType]}

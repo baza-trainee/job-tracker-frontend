@@ -5,7 +5,7 @@ import Icon from "../Icon/Icon";
 export const notifyError = (message: string, title?: string): void => {
   toast.error(<NotificationCustom title={title} message={message} />, {
     className:
-      "bg-backgroundTertiary w-fit border-t-transparent border-[1px] border-solid border-color2 rounded-tl-[0] rounded-br-[12px] rounded-tr-[0] rounded-bl-[12px] min-h-9 h-9",
+      "bg-backgroundTertiary w-fit border-t-transparent border-[1px] border-solid border-redColor rounded-tl-[0] rounded-br-[12px] rounded-tr-[0] rounded-bl-[12px] min-h-9 h-9",
     icon: <Icon id="cancel-in-round" className="h-6 w-6" />,
   });
 };

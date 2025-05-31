@@ -70,7 +70,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
               "2xl:text-[16px]",
               {
                 ["border-color7"]: !error,
-                ["border-color2 placeholder-shown:border-color2 focus:border-color2 active:border-color2"]:
+                ["border-redColor active:border-redColor placeholder-shown:border-redColor focus:border-redColor"]:
                   error,
               }
             )}
@@ -96,7 +96,7 @@ export const InputPassword: React.FC<InputPasswordProps> = ({
           <span
             id={`inputError-${name}`}
             className={cn(
-              "inline-block font-nunito font-medium text-color2",
+              "inline-block font-nunito font-medium text-[redColor]",
               "sm text-[12px]",
               "md:text-[14px]",
               "2xl:text-[16px]"

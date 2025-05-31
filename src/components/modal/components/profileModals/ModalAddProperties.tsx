@@ -82,10 +82,7 @@ function ModalAddProperties({ cardsType }: PropsModalAddProperties) {
           className="group gap-3"
         >
           {t("infoModal.button.save")}
-          <Icon
-            id="check-box"
-            className="h-6 w-6 fill-textBlack dark:group-hover:fill-blackColor"
-          />
+          <Icon id="check-box" className="h-6 w-6" />
         </Button>
       </div>
     </div>

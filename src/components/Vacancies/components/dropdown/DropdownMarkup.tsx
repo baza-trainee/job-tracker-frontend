@@ -149,7 +149,7 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
       <div
         ref={ref}
         className={cn(
-          "absolute z-[2] inline-block w-full rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300 smOnly:text-sm",
+          "absolute z-[2] inline-block w-full rounded-xl border border-textBlack bg-backgroundMain text-left font-nunito text-base leading-[135%] text-textBlack duration-300 hover:text-blackColor smOnly:text-sm",
           isInModal && "w-full",
           isDropdownOpen
             ? isInModal
@@ -172,12 +172,12 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           }
           onMouseEnter={() => setFocusedOption("sortButton")}
           className={cn(
-            "TEST group flex w-full items-center justify-between rounded-t-xl pb-[13px] pl-8 pr-[22px] pt-3 text-textBlack dark:hover:text-blackColor",
-            isDropdownOpen && "hover:bg-button",
+            "group flex w-full items-center justify-between rounded-t-xl pb-[13px] pl-8 pr-[22px] pt-3 text-textBlack hover:fill-iconHover hover:text-blackColor",
+            isDropdownOpen && "hover:bg-button hover:text-textBlack",
             !isDropdownOpen && !isInModal && "rounded-xl",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button",
             isInModal
-              ? "px-2 py-[5px] text-textBlackLight md:py-[10px] smOnly:text-xs"
+              ? "px-2 py-[5px] text-textBlackLight hover:text-textBlack md:py-[10px] smOnly:text-xs"
               : "smOnly:hidden",
             !isTypeSelected && isInModal && "text-textBlack",
             mainOptions.length === 0 && "rounded-b-xl"
@@ -187,7 +187,7 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           <Icon
             id={"arrow-down"}
             className={cn(
-              "size-6 fill-textBlack dark:group-hover:fill-blackColor",
+              "size-6 fill-textBlack group-hover:fill-iconHover",
               isDropdownOpen
                 ? "rotate-180 duration-500"
                 : "rotate-0 duration-500"
@@ -199,7 +199,7 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
 
         <div
           className={cn(
-            "custom-size left-0 z-20 w-full rounded-b-xl bg-backgroundMain",
+            "custom-size left-0 z-20 w-full rounded-b-xl bg-backgroundMain text-textBlack",
             isInModal ? "z-[50] rounded-b-xl" : "smOnly:rounded-xl",
             isDropdownOpen
               ? isInModal
@@ -238,7 +238,7 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                 {!isInModal && selectedSortType === option.id && (
                   <Icon
                     id={ICON.CHECK_SMALL}
-                    className="absolute left-1 top-1 size-6 text-iconHover md:hidden"
+                    className="absolute left-1 top-1 size-6 fill-textBlack text-iconHover md:hidden"
                   />
                 )}
                 {option.label}
@@ -246,7 +246,7 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                   <Icon
                     id={"arrow-down"}
                     className={cn(
-                      "h-6 w-6 rotate-[270deg] fill-textBlack",
+                      "h-6 w-6 rotate-[270deg] fill-textBlack hover:fill-iconHover group-hover:fill-iconHover dark:hover:fill-iconHover",
                       openSubMenu === option.id
                         ? "rotate-90 duration-500 smOnly:rotate-180"
                         : "rotate-[270deg] duration-500 smOnly:rotate-0"
@@ -261,7 +261,7 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                       <li
                         key={subOption.id}
                         className={cn(
-                          "cursor-pointer px-5 py-2 first:rounded-t-xl last:rounded-b-xl smOnly:relative smOnly:pl-12 smOnly:first:rounded-t-none",
+                          "cursor-pointer px-5 py-2 text-textBlack first:rounded-t-xl last:rounded-b-xl smOnly:relative smOnly:pl-12 smOnly:first:rounded-t-none",
                           focusedOption === subOption.id && "bg-button",
                           selectedSortType === subOption.id &&
                             !isMobile &&

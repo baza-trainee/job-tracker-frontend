@@ -24,10 +24,9 @@ html {
   --textOther: #288dd5;
   --button: #bfdef5;
   --backgroundMain: #fdfeff;
-  --backgroundSecondary: #eceff6;
+  /* --backgroundSecondary: #eceff6; */
   --backgroundTertiary: #f7f8fb;
   --iconHover: #436b88;
-  /* --borderLight: #cecece; */
   --color1: #c6e7ff;
   --color1-transparent: rgba(198, 231, 255, 0.4);
   --color2: #fc8972;
@@ -42,7 +41,7 @@ html {
   --color6-transparent: rgba(166, 174, 191, 0.4);
   --color7: #b1d690;
   --color7-transparent: rgba(177, 214, 144, 0.4);
-  --color7Light: rgba(177, 214, 144, 0.3);
+  /* --color7Light: rgba(177, 214, 144, 0.3); */
   --color8: #76925d;
   --color9: #dbdcdd;
   --color9-transparent: rgba(219, 220, 221, 0.4);
@@ -58,40 +57,28 @@ html {
   --textOther: #b3c6d3;
   --button: #134e79;
   --backgroundMain: #252a34;
-  --backgroundSecondary: #eceff6;
+  /* --backgroundSecondary: #eceff6; */
   /* --backgroundSecondary: #5f687c */
   --backgroundTertiary: #292d36;
-  /* --iconHover: #134e79; */
   --iconHover: #436b88;
-  /* --borderLight: #464646; */
-  /* --borderLight: #ecf0f6; */
-  /* --color1: rgba(198, 231, 255, 0.7); */
   --color1: #3b454d;
-  --color1-transparent: #3b454d;
-  /* --color2: rgba(252, 137, 114, 0.7); */
+  --color1-transparent: rgba(59, 69, 77, 0.4);
   --color2: #4c2922;
-  --color2-transparent: #4c2922;
-  /* --color3: rgba(254, 238, 145, 0.7); */
+  --color2-transparent: rgba(76, 41, 34, 0.4);
   --color3: #4c472c;
-  --color3-transparent: #4c472c;
-  /* --color4: rgba(205, 193, 255, 0.7); */
+  --color3-transparent: rgba(76, 71, 44, 0.4);
   --color4: #3e3a4d;
-  --color4-transparent: #3e3a4d;
-  /* --color5: rgba(208, 232, 197, 0.7); */
+  --color4-transparent: rgba(62, 58, 77, 0.4);
   --color5: #3e463b;
-  --color5-transparent: #3e463b;
-  /* --color6: rgba(166, 174, 191, 0.7); */
+  --color5-transparent: rgba(62, 70, 59, 0.4);
   --color6: #42464c;
-  --color6-transparent: #42464c;
-  /* --color7: rgba(177, 214, 144, 0.7); */
+  --color6-transparent: rgba(66, 70, 76, 0.4);
   --color7: #47563a;
-  --color7-transparent: #47563a;
-  --color7Light: rgba(116, 216, 28, 0.3);
-  /* --color8: #8d9488; */
+  --color7-transparent: rgba(71, 86, 58, 0.4);
+  /* --color7Light: rgba(116, 216, 28, 0.3); */
   --color8: #2f3a25;
-  /* --color9: rgba(219, 220, 221, 0.7); */
-  --color9: #ecf0f6;
-  --color9-transparent: #ecf0f6;
+  --color9: rgba(219, 220, 221, 0.3);
+  --color9-transparent: rgba(219, 220, 221, 0.1);
   --form-background: rgba(93, 93, 93, 0.5);
 }
 

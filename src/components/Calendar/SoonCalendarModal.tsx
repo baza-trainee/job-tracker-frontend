@@ -61,9 +61,17 @@ export const SoonCalendarModal: React.FC<SoonCalendarModalProps> = ({
         value={selectedDate}
         className="statistics-calendar__day"
         nextLabel={
-          <Icon id={"arrow-right"} className="size-6 fill-textBlack" />
+          <Icon
+            id={"arrow-right"}
+            className="size-6 fill-textBlack hover:fill-iconHover active:fill-iconHover dark:hover:fill-iconHover"
+          />
         }
-        prevLabel={<Icon id={"arrow-left"} className="size-6 fill-textBlack" />}
+        prevLabel={
+          <Icon
+            id={"arrow-left"}
+            className="size-6 fill-textBlack hover:fill-iconHover active:fill-iconHover dark:hover:fill-iconHover"
+          />
+        }
         formatMonthYear={(locale, date) =>
           `${date.toLocaleDateString(locale, { month: "long" })} ${date.getFullYear()}`
         }

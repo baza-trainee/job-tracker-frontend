@@ -50,7 +50,10 @@ const VacancyCardFirst: FC<VacancyCardFirstProps> = ({
       onClick={handleClick}
     >
       <div className="pl-[10px] xl:pl-7">
-        <Icon id="plus" className="h-6 w-6 fill-textBlack" />
+        <Icon
+          id="plus"
+          className="h-6 w-6 fill-textBlack hover:fill-textBlack dark:hover:fill-textBlack"
+        />
       </div>
       <div className="w-full">
         <p className="w-[135px] text-start text-base smPlus:w-full xl:w-[154px]">

@@ -17,7 +17,7 @@ export const IconButton = ({
       disabled={disabled}
       aria-label={label}
       className={cn(
-        "flex items-center justify-center rounded-2xl fill-textBlack px-3 py-1 text-textBlack transition hover:fill-iconHover",
+        "flex items-center justify-center rounded-2xl fill-textBlack px-3 py-1 text-textBlack transition hover:fill-iconHover active:fill-iconHover",
         !disabled && {
           //   ["text-grey-0 hover:bg-accent-hover focus:bg-accent-pressed bg-accent-primary"]:
           //     variant == "filled",

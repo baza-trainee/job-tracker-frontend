@@ -1,8 +1,8 @@
 import { FC, useState, useRef, useEffect } from "react";
-import { useAppSelector } from "../../../store/hook.ts";
+// import { useAppSelector } from "../../../store/hook.ts";
 import clsx from "clsx";
 import { VacancySectionProps } from "./VacancySection.tsx";
-import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
+// import { selectTheme } from "../../../store/slices/themeSlice/themeSelector.ts";
 
 interface VacancySectionBoxProps extends VacancySectionProps {
   isSorted?: boolean;
@@ -22,7 +22,7 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
   const [hasScroll, setHasScroll] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [isFirefox, setIsFirefox] = useState(false);
-  const darkTheme = useAppSelector(selectTheme);
+  // const darkTheme = useAppSelector(selectTheme);
 
   useEffect(() => {
     const element = contentRef.current;
@@ -59,9 +59,9 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
   // console.log("isSorted", isSorted);
   // console.log("status", maxHeightClass);
 
-  const classNameSectionBackground = darkTheme
-    ? `${colorSectionBG}-transparent`
-    : colorSectionBG;
+  // const classNameSectionBackground = darkTheme
+  //   ? `${colorSectionBG}-transparent`
+  //   : colorSectionBG;
 
   useEffect(() => {
     // const ua = window.navigator.userAgent;
@@ -82,7 +82,8 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
       <div
         className={clsx(
           "w-fit rounded-tl-lg rounded-tr-lg px-3 py-[6px] text-xl font-medium",
-          classNameSectionBackground
+          // classNameSectionBackground
+          colorSectionBG
         )}
       >
         {titleSection}

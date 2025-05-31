@@ -8,7 +8,7 @@ function ButtonRemoveAccount() {
   const dispatch = useAppDispatch();
   return (
     <button
-      className="relative font-nunito text-[20px] font-medium leading-[1.35] text-textBlack before:absolute before:-bottom-2 before:h-px before:w-full before:bg-color2 before:transition-all hover:text-color2 hover:transition-all"
+      className="hover:text-redColor before:bg-redColor relative font-nunito text-[20px] font-medium leading-[1.35] text-textBlack before:absolute before:-bottom-2 before:h-px before:w-full before:transition-all hover:transition-all"
       type="button"
       onClick={() => {
         dispatch(openModal({ typeModal: "removeAccount" }));

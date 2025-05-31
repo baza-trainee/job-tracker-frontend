@@ -110,12 +110,12 @@ const VacancyMain: FC = () => {
         (!isMobile ? (
           <VacancySection
             titleSection={t("sortDropdown.saved")}
-            colorSectionBorder="border-color5 dark:border-color5-transparent"
+            colorSectionBorder="border-color5"
             colorSectionBG="bg-color5"
           >
             <VacancyCardFirst
-              colorSectionBG="bg-color5-transparent"
-              colorHoverBG="hover:bg-color5"
+              colorSectionBG="bg-color5-transparent dark:bg-color5"
+              colorHoverBG="hover:bg-color5 dark:hover:bg-color5-transparent"
               typeModal="addVacancy"
             />
           </VacancySection>
@@ -123,11 +123,11 @@ const VacancyMain: FC = () => {
           <VacancySectionBox
             titleSection={t("sortDropdown.saved")}
             colorSectionBG="bg-color5"
-            colorSectionBorder="border-color5 dark:border-color5-transparent"
+            colorSectionBorder="border-color5"
           >
             <VacancyCardFirst
-              colorSectionBG="bg-color5-transparent"
-              colorHoverBG="hover:bg-color5"
+              colorSectionBG="bg-color5-transparent dark:bg-color5"
+              colorHoverBG="hover:bg-color5 dark:hover:bg-color5-transparent"
               typeModal="addVacancy"
             />
           </VacancySectionBox>
@@ -137,14 +137,14 @@ const VacancyMain: FC = () => {
       {isArchive && renderedVacancies.length > 0 && (
         <VacancySectionBox
           titleSection={t("vacanciesHeader.archive")}
-          colorSectionBorder="border-color9 dark:border-color9-transparent"
+          colorSectionBorder="border-color9"
           colorSectionBG="bg-color9"
         >
           {renderedVacancies.map((vacancy) => (
             <VacancyCard
               key={vacancy.id}
-              colorSectionBG="bg-color9-transparent"
-              colorHoverBG="hover:bg-color9"
+              colorSectionBG="bg-color9-transparent dark:bg-color9"
+              colorHoverBG="hover:bg-color9 dark:hover:bg-color9-transparent"
               titleVacancy={vacancy.vacancy}
               company={vacancy.company}
               workType={vacancy.work_type}

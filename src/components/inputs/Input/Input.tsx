@@ -84,7 +84,8 @@ export const Input = forwardRef<
               { "2xl:mb-1 2xl:text-[16px]": type === "vacancy" }
             )}
           >
-            {label} {isRequired && <span className={cn("text-color2")}>*</span>}
+            {label}{" "}
+            {isRequired && <span className={cn("text-redColor")}>*</span>}
           </label>
         )}
         <div className="relative">
@@ -104,7 +105,7 @@ export const Input = forwardRef<
                   "2xl:text-[16px]",
                   {
                     // "border-color7": !error,
-                    "border-color2 placeholder-shown:border-color2": error, // Serhii 01-05
+                    "border-redColor placeholder-shown:border-redColor": error, // Serhii 01-05
                   },
                   classNameInputCustom
                 )}
@@ -142,7 +143,7 @@ export const Input = forwardRef<
                   {
                     // "border-color7": !error,
                     "border-color7": !error && isIconVisible,
-                    "border-color2": error,
+                    "border-redColor": error,
                     "pr-16 md:pr-16": isButtonRemoveInput,
                   },
                   classNameInputCustom
@@ -206,7 +207,7 @@ export const Input = forwardRef<
                 >
                   <Icon
                     id="close-default"
-                    className="h-6 w-6 cursor-pointer fill-textBlack transition-all hover:fill-color2"
+                    className="hover:fill-redColor h-6 w-6 cursor-pointer fill-textBlack transition-all"
                   />
                 </button>
               )}
@@ -235,7 +236,7 @@ export const Input = forwardRef<
                   <button onClick={() => handleResetField(name)}>
                     <Icon
                       id="cancel-in-round"
-                      className="h-6 w-6 cursor-pointer fill-color2"
+                      className="fill-redColor h-6 w-6 cursor-pointer"
                     />
                   </button>
                 ) : (
@@ -258,12 +259,12 @@ export const Input = forwardRef<
             <span
               id={`inputError-${name}`}
               className={cn(
-                "inline-block font-nunito font-medium text-color2",
+                "text-redColor inline-block font-nunito font-medium",
                 "text-[12px]",
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "absolute top-[130%] z-10 w-[66vw] rounded-md bg-whiteColor pb-2 pl-4 pt-1 text-start text-xs text-color2 md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
+                  "text-redColor absolute top-[130%] z-10 w-[66vw] rounded-md bg-whiteColor pb-2 pl-4 pt-1 text-start text-xs md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
                 name === "hours" && "left-[-90%] md:left-[-80%]",
                 name === "minutes" && "left-[-286%] md:left-[-80%]"
               )} //md:text-center text-end

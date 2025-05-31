@@ -27,23 +27,25 @@ export default {
       colors: {
         whiteColor: "#ffffff",
         blackColor: "#333333",
+        redColor: "#fc8972", // error red
+        // redColor: "rgba(252, 137, 114, 1)",
         greyLightcolor: "#dbdcdd",
         // textBlack: "#333333", // перевела на дві теми в index.css
         textBlack: "var(--textBlack)",
         // textBlackLight: "rgba(51, 51, 51, 0.5)", // це колір #333333 з opacity // перевела на дві теми в index.css
         textBlackLight: "var(--textBlackLight)", // це колір #333333 з opacity
-        // textWhite: "#ffffff", // усюди йшов як white від tailwind, перевела на нашу змінну і в index.css
+        // textWhite: "#ffffff", // перевела на дві теми в index.css
         textWhite: "var(--textWhite)",
         // textMediumWhite: "#ECF0F6", // перевела на дві теми в index.css
         textMediumWhite: "var(--textMediumWhite)",
-        textOther: "#288DD5", // перевела на дві теми в index.css
+        textOther: "#288DD5",
         // textOther: "var(--textOther)",
         // button: "#BFDEF5", // перевела на дві теми в index.css
         button: "var(--button)",
         // backgroundMain: "#FDFEFF", // перевела на дві теми в index.css
         backgroundMain: "var(--backgroundMain)",
-        // backgroundSecondary: "#ECEFF6", // перевела на дві теми в index.css
-        backgroundSecondary: "var(--backgroundSecondary)",
+        backgroundSecondary: "#ECEFF6",
+        // backgroundSecondary: "var(--backgroundSecondary)",
         // backgroundTertiary: "#F7F8FB", // перевела на дві теми в index.css
         backgroundTertiary: "var(--backgroundTertiary)",
         // iconHover: "#436B88", // перевела на дві теми в index.css
@@ -104,7 +106,7 @@ export default {
           DEFAULT: "var(--color7)", // green
           transparent: "var(--color7-transparent)", // green with opacity 0.4
         },
-        color7Light: "rgba(177, 214, 144, 0.3)", // color7 green with opacity 0.3
+        // color7LightRed: "rgba(177, 214, 144, 0.3)", // color7 green with opacity 0.3
         // color7Light: "var(--color7Light)", // color7 green with opacity 0.3
         color8: "#76925D", // green-dark
         // color8: "var(--color8)", // green-dark
@@ -116,8 +118,7 @@ export default {
           DEFAULT: "var(--color9)", // grey
           transparent: "var(--color9-transparent)", // grey with opacity
         },
-        // borderLight: "#CECECE", // немає в дизайні, додати // перевела на дві теми в index.css
-        // borderLight: "var(--borderLight)",
+        borderLight: "##DBDCDD", // grey Light
         form: {
           background: "rgba(255, 255, 255, 0.5)", // немає в дизайні, це #ffffff з opacity
         },

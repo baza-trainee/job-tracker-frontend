@@ -35,9 +35,17 @@ export const StatisticsCalendarYear: React.FC<StatisticsCalendarYearProps> = ({
         value={selectedYear}
         className="statistics-calendar__years"
         nextLabel={
-          <Icon id={"arrow-right"} className="size-6 fill-textBlack" />
+          <Icon
+            id={"arrow-right"}
+            className="size-6 fill-textBlack hover:fill-iconHover active:fill-iconHover dark:hover:fill-iconHover"
+          />
         }
-        prevLabel={<Icon id={"arrow-left"} className="size-6 fill-textBlack" />}
+        prevLabel={
+          <Icon
+            id={"arrow-left"}
+            className="size-6 fill-textBlack hover:fill-iconHover active:fill-iconHover dark:hover:fill-iconHover"
+          />
+        }
         tileClassName={({ date, view }) =>
           `${
             view === "decade" &&

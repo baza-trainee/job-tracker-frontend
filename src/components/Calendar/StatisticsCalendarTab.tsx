@@ -31,7 +31,9 @@ export const StatisticsCalendarTab: React.FC<StatisticsCalendarTabProps> = ({
           key={tab.key}
           className={clsx(
             "h-full border-b px-4 py-2",
-            activeTab === tab.key ? "border-b-textBlack" : "border-b-color9"
+            activeTab === tab.key
+              ? "border-b-textBlack"
+              : "border-b-borderLight dark:border-b-blackColor"
           )}
           onClick={() => setActiveTab(tab.key)}
         >
