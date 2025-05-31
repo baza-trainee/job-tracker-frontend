@@ -173,7 +173,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={true}
+          isCheckButtons={false}
         />
       )}
       <div className="flex flex-col-reverse justify-center gap-5 md:flex-row">

@@ -5,7 +5,7 @@ import cn from "clsx";
 
 const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   const { i18n } = useTranslation();
-  const isUA = i18n.language === LOCALS.UA;
+  const isUA = i18n.language.includes(LOCALS.UA);
 
   return (
     <div
