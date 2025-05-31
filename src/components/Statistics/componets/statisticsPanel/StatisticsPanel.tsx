@@ -18,8 +18,9 @@ const StatisticsPanel: FC<StatisticsPanelProps> = ({
 }) => {
   const { i18n, t } = useTranslation();
 
-  const predictionText =
-    i18n.language === "uk-UA" ? prediction?.textUk : prediction?.textEn;
+  const predictionText = i18n.language.includes("uk")
+    ? prediction?.textUk
+    : prediction?.textEn;
 
   const localizedHeaders = useMemo(() => {
     return {
