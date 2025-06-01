@@ -51,11 +51,11 @@ const NotesModal = ({ type }: NoteType) => {
   useEffect(() => {
     dispatch(
       closeButton({
-        isButtonOpen: isNoteChanged || error,
+        isButtonOpen: isNoteChanged || !!watch("noteName") || !!watch("noteText"),
         resetForm: () => handleConfirmation("closeModalsaveNote"),
       })
     );
-  }, [isNoteChanged, error]);
+  }, [isNoteChanged, watch]);
 
   return (
     <div className="mb-4 mt-10 w-full text-left xl:my-12 xl:mb-4 xl:mt-10">
