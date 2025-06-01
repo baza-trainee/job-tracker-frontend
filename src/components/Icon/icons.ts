@@ -41,6 +41,7 @@ export const ICON = {
   NOTE: "note",
   NOTIFICATION: "notification",
   PLUS: "plus",
+  PLUS_GRAY: "plus-gray",
   SEARCH: "search",
   SETTINGS: "settings",
   STATISTICS: "statistics",
