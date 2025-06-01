@@ -33,7 +33,18 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </label>
         )}
         <div className="relative">
-          <div className={cn("relative flex w-full items-center")}>
+          <div
+            className={cn(
+              "relative flex w-full items-center",
+              "rounded-xl border",
+              {
+                "border-redColor": error,
+                "border-textBlack": !error,
+                "focus-within:border-textOther active:border-textOther": true,
+              },
+              "overflow-hidden"
+            )}
+          >
             <textarea
               id={`textarea-${name}`}
               className={cn(
@@ -41,12 +52,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 "md:px-6 md:py-3",
                 "2xl:px-6 2xl:py-2",
                 "bg-transparent focus:outline-none",
-                "rounded-xl border",
-                "focus:border-textOther active:border-textOther",
+                "rounded-none", // убрать скругление у textarea, чтобы не конфликтовало с контейнером
+                "border-none", // убрать бордер у textarea
                 {
                   ["h-[230px]"]: name === "noteText",
-                  "border-redColor": error,
-                  "border-textBlack": !error,
                 }
               )}
               placeholder={placeholder}
