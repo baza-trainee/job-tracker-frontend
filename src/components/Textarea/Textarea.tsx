@@ -21,6 +21,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const error = errors[name];
     const { t } = useTranslation();
     const registerProps = register(name);
+    const borderColor = error
+      ? "border-redColor"
+      : "border-textBlack focus:border-textOther active:border-textOther";
 
     return (
       <div className={cn("relative", [className])} id={id}>
@@ -33,19 +36,16 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </label>
         )}
         <div className="relative">
-          <div
-            className={cn(
-              "relative flex w-full items-center overflow-hidden rounded-xl border",
-              { "border-redColor": error, "border-textBlack": !error }
-            )}
-          >
+          <div className={cn("relative flex w-full items-center")}>
             <textarea
               id={`textarea-${name}`}
               className={cn(
-                "peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther md:text-[14px] 2xl:text-[16px]",
+                "peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight md:text-[14px] 2xl:text-[16px]",
                 "md:px-6 md:py-3",
                 "2xl:px-6 2xl:py-2",
-                "bg-transparent placeholder-shown:border-none",
+                "bg-transparent focus:outline-none",
+                "rounded-xl border",
+                borderColor,
                 {
                   ["h-[230px]"]: name === "noteText",
                 }
