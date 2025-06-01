@@ -88,7 +88,7 @@ const NotesModal = ({ type }: NoteType) => {
               <Button
                 type="button"
                 className="group w-full bg-button md:mx-0 md:w-auto"
-                variant="ghost"
+                variant="accent"
                 size="big"
                 disabled={isDisabledButton}
                 onClick={() => handleButton("saveNote")}
@@ -111,7 +111,7 @@ const NotesModal = ({ type }: NoteType) => {
                 <Button
                   type="button"
                   className="w-full bg-button md:mx-0 md:w-auto"
-                  variant="ghost"
+                  variant="accent"
                   size="big"
                   disabled={isDisabledButton}
                   onClick={saveNote}
