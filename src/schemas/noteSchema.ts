@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-import { nameRegex, textContactUsRegex } from "./regSchema";
+import { nameContactUsRegex, textContactUsRegex } from "./regSchema";
 
 export const NoteSchema = z.object({
   noteName: z
     .string()
     .min(2, `contactUs.nameValidation.min`)
-    .regex(nameRegex, `notification.updatedUserName`)
+    .regex(nameContactUsRegex, `notification.updatedUserName`)
     .max(30, `contactUs.nameValidation.max`)
     .trim()
     .or(z.literal("")),
