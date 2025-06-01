@@ -94,7 +94,6 @@ const InfoModalMap = () => {
   }, [dispatch]);
 
   const handleCloseBtnModal = useCallback((): void => {
-    console.log("alex delete");
     notifyInfo(t("notification.notSaveInfo")); // test
     dispatch(closeConfirmation());
     dispatch(closeModal());
