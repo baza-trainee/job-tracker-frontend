@@ -70,13 +70,13 @@ function useNotes(type: "addNote" | "updateNote") {
       await deleteNoteById({ id: noteData?.id as string }).unwrap();
       refetchNote();
       notifySuccess(t("notification.noteDelete"));
+      dispatch(closeModal());
     } catch (err) {
       console.log(err);
       notifyError(t("notification.noteDeleteError"));
     }
     setIsLoading(false);
     dispatch(closeConfirmation());
-    dispatch(closeModal());
   };
 
   // якщо зміна у нотатках відбулася, активна кнопка збереження
@@ -120,13 +120,13 @@ function useNotes(type: "addNote" | "updateNote") {
       refetchNote();
       notifySuccess(t("notification.vacancyAdded"));
       setIsLoading(true);
+      dispatch(closeModal());
     } catch (error) {
       notifyError(t("notification.vacancyError"));
       console.error(error);
     }
     setIsLoading(false);
     dispatch(closeConfirmation());
-    dispatch(closeModal());
   };
 
   return {
