@@ -591,7 +591,7 @@ const InfoModalMap = () => {
       button: [
         createButton(
           t("infoModal.button.cancel"),
-          handleCancel,
+          handleCloseConfirmation,
           "",
           "small",
           "ghost",

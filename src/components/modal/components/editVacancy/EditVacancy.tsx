@@ -37,6 +37,7 @@ const EditVacancy = () => {
     setValue,
     vacancyData,
     isFormChanged,
+    watch,
   } = useEditVacancy();
 
   const isArchived = vacancyData?.isArchived || "";
@@ -163,6 +164,7 @@ const EditVacancy = () => {
                 errors={errors}
                 ref={(el) => assignInputRef("note", el)}
                 onFocus={() => setFocusedId("note")}
+                watch={watch}
               />
             </div>
           </div>

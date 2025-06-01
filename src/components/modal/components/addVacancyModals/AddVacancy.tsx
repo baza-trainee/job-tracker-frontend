@@ -31,6 +31,7 @@ const AddVacancy = () => {
     getValues,
     setValue,
     isButtonDisabled,
+    watch,
   } = useVacancy();
 
   const saveVacancy = () => {
@@ -146,6 +147,7 @@ const AddVacancy = () => {
                 errors={errors}
                 ref={(el) => assignInputRef("note", el)}
                 onFocus={() => setFocusedId("note")}
+                watch={watch}
               />
             </div>
           </div>

@@ -274,6 +274,7 @@ const useEditVacancy = () => {
     vacancyData,
     deleteVacancy,
     isFormChanged,
+    watch,
   };
 };
 
