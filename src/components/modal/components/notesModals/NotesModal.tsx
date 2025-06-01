@@ -21,7 +21,7 @@ const NotesModal = ({ type }: NoteType) => {
   const { t } = useTranslation();
   const isAddNote = type === "addNote";
 
-  const { register, resetField, handleSubmit, errors, isNoteChanged } =
+  const { register, resetField, handleSubmit, errors, isNoteChanged, watch } =
     useNotes(type);
 
   const error = !!Object.keys(errors).length;
@@ -80,6 +80,7 @@ const NotesModal = ({ type }: NoteType) => {
             placeholder={t("notesHeader.noteText")}
             className=""
             errors={errors}
+            watch={watch}
           />
 
           <div className="flex flex-col justify-center gap-2 md:flex-row xl:mt-4">

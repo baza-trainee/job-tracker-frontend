@@ -15,12 +15,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       value,
       id,
       onFocus,
+      watch,
     },
     ref
   ) => {
     const error = errors[name];
     const { t } = useTranslation();
     const registerProps = register(name);
+    const fieldValue = watch ? watch(name) : false;
 
     return (
       <div className={cn("relative", [className])} id={id}>
@@ -39,7 +41,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               "rounded-xl border",
               {
                 "border-redColor": error,
-                "border-textBlack": !error,
+                "border-textBlack": !error && !fieldValue,
+                "border-color7": !!fieldValue,
                 "focus-within:border-textOther active:border-textOther": true,
               },
               "overflow-hidden"

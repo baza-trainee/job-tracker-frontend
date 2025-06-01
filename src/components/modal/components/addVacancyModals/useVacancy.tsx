@@ -155,6 +155,7 @@ const useVacancy = () => {
     onSubmit,
     isLoading,
     isButtonDisabled,
+    watch,
   };
 };
 

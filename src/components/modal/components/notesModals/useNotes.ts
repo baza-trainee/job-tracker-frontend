@@ -138,6 +138,7 @@ function useNotes(type: "addNote" | "updateNote") {
     isLoading,
     deleteNote,
     isNoteChanged,
+    watch,
   };
 }
 

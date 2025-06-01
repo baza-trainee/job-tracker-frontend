@@ -1,4 +1,4 @@
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 
 export interface TextareaProps {
   name: string;
@@ -11,4 +11,5 @@ export interface TextareaProps {
   id?: string;
   resetField(name: string): void;
   onFocus?: () => void;
+  watch?: UseFormWatch<any> | undefined;
 }
