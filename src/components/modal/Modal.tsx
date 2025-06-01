@@ -54,20 +54,6 @@ const Modal: FC = () => {
   };
 
   // alex Авто скрол до вікна підтвердження
-  const modalsWithCustomHeight = [
-    "addVacancy",
-    "editVacancy",
-    "forgotPassword",
-    "addEvent",
-    "editEvent",
-  ];
-  const hasCustomHeight: boolean = modalsWithCustomHeight.includes(
-    typeModal ?? ""
-  );
-  const modalPositionClass: string = hasCustomHeight
-    ? "top-10"
-    : "top-2/4 -translate-y-2/4";
-
   const modalRef = useRef<HTMLDivElement>(null);
   const modalHeigthRef = useRef<HTMLDivElement>(null);
 
@@ -91,8 +77,7 @@ const Modal: FC = () => {
       <div className="flex">
         <ModalMain
           className={classNames(
-            "scrollbar-transparent absolute left-2/4 mt-[10px] -translate-x-2/4",
-            modalPositionClass
+            "scrollbar-transparent absolute left-2/4 top-10 mt-[10px] -translate-x-2/4"
           )}
           modalData={modalData}
           btnFunc={() => {
