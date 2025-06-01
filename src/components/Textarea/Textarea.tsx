@@ -33,7 +33,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </label>
         )}
         <div className="relative">
-          <div className="relative flex w-full items-center overflow-hidden rounded-xl border border-textBlack">
+          <div
+            className={cn(
+              "relative flex w-full items-center overflow-hidden rounded-xl border",
+              { "border-redColor": error, "border-textBlack": !error }
+            )}
+          >
             <textarea
               id={`textarea-${name}`}
               className={cn(
@@ -62,12 +67,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             <span
               id={`inputError-${name}`}
               className={cn(
-                "text-redColor inline-block font-nunito font-medium",
+                "inline-block font-nunito font-medium text-redColor",
                 "text-[12px]",
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "text-redColor border-redColor absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border bg-whiteColor p-2"
+                  "absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-redColor bg-whiteColor p-2 text-redColor"
               )}
             >
               {t(String(error?.message))}
