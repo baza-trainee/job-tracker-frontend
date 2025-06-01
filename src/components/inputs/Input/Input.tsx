@@ -98,13 +98,13 @@ export const Input = forwardRef<
                   "peer w-full rounded-xl border p-3 text-base",
                   "font-nunito font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight",
                   "border-color7 bg-transparent focus:border-textOther focus:outline-none active:border-textOther",
-                  "placeholder-shown: border-textBlack",
+                  "placeholder-shown:border-textBlack",
                   "sm:px-4 sm:py-2 sm:text-[12px]",
                   "md:px-6 md:py-3 md:text-[14px]",
                   "xl:text-[14px]",
                   "2xl:text-[16px]",
                   {
-                    // "border-color7": !error,
+                    "border-color7": !error && value !== null,
                     "border-redColor placeholder-shown:border-redColor": error, // Serhii 01-05
                   },
                   classNameInputCustom
@@ -207,7 +207,7 @@ export const Input = forwardRef<
                 >
                   <Icon
                     id="close-default"
-                    className="hover:fill-redColor h-6 w-6 cursor-pointer fill-textBlack transition-all"
+                    className="h-6 w-6 cursor-pointer fill-textBlack transition-all hover:fill-redColor"
                   />
                 </button>
               )}
@@ -236,7 +236,7 @@ export const Input = forwardRef<
                   <button onClick={() => handleResetField(name)}>
                     <Icon
                       id="cancel-in-round"
-                      className="fill-redColor h-6 w-6 cursor-pointer"
+                      className="h-6 w-6 cursor-pointer fill-redColor"
                     />
                   </button>
                 ) : (
@@ -259,12 +259,12 @@ export const Input = forwardRef<
             <span
               id={`inputError-${name}`}
               className={cn(
-                "text-redColor inline-block font-nunito font-medium",
+                "inline-block font-nunito font-medium text-redColor",
                 "text-[12px]",
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "text-redColor absolute top-[130%] z-10 w-[66vw] rounded-md bg-whiteColor pb-2 pl-4 pt-1 text-start text-xs md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
+                  "absolute top-[130%] z-10 w-[66vw] rounded-md bg-whiteColor pb-2 pl-4 pt-1 text-start text-xs text-redColor md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
                 name === "hours" && "left-[-90%] md:left-[-80%]",
                 name === "minutes" && "left-[-286%] md:left-[-80%]"
               )} //md:text-center text-end

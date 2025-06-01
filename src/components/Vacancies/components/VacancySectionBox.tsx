@@ -52,9 +52,9 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
       };
     }
   }, []);
-
+  // "max-h-[399.2px]"
   const maxHeightClass =
-    isSorted || isArchived ? "max-h-[60vh]" : "max-h-[399.2px]";
+    isSorted || isArchived ? "max-h-[60vh]" : "max-h-[405.6px]";
   // console.log("isArchived", isArchived);
   // console.log("isSorted", isSorted);
   // console.log("status", maxHeightClass);
@@ -103,6 +103,7 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
             className={clsx(
               "scrollbar-y-sectionbox h-auto overflow-y-auto",
               { "pr-[12px] md:pr-4": hasScroll },
+              { "pr-[12px] md:pr-4": isIOS || isFirefox },
               isFirefox && "scroll-soon-firefox",
               maxHeightClass
             )}
