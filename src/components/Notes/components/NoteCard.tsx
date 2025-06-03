@@ -22,7 +22,7 @@ const NoteCard: FC<Note> = (note) => {
   }).format(new Date(updatedAt));
 
   const dispatch = useAppDispatch();
-  const handleNoteCard = (typeModal: "updateNote" | "deleteNote") => {
+  const handleNoteCard = (typeModal: "updateNote" | "closeModaldeleteNote") => {
     dispatch(
       openModal({
         typeModal,
@@ -52,7 +52,7 @@ const NoteCard: FC<Note> = (note) => {
             <IconButton
               label="Delete_note_button"
               variant="default"
-              onClick={() => handleNoteCard("deleteNote")}
+              onClick={() => handleNoteCard("closeModaldeleteNote")}
               className="custom-hover p-0 hover:fill-iconHover active:fill-iconHover"
             >
               <Icon id={ICON.DELETE} className="size-10 md:size-6" />
