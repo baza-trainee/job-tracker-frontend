@@ -24,13 +24,14 @@ const NotesModal = ({ type }: NoteType) => {
   const { register, resetField, handleSubmit, errors, isNoteChanged, watch } =
     useNotes(type);
 
-  const noteName = !!watch("noteName");
-  const noteText = !!watch("noteText");
-  const error = Object.keys(errors).length > 0;
-  const isDisabledButton = !isNoteChanged || error || !noteName || !noteText;
+  const hasNoteName = Boolean(watch("noteName"));
+  const hasNoteText = Boolean(watch("noteText"));
+  const hasErrors = Object.keys(errors).length > 0;
+  const isDisabledButton =
+    !isNoteChanged || hasErrors || !hasNoteName || !hasNoteText;
 
   const handleConfirmation = (typeConfirmation: TypesModal) => {
-    if (error || !noteName || !noteText) {
+    if (hasErrors || !hasNoteName || !hasNoteText) {
       dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
     } else {
       handleSubmit((data) => {
@@ -44,16 +45,12 @@ const NotesModal = ({ type }: NoteType) => {
     }
   };
 
-  const deleteNote = () => handleConfirmation("deleteNote");
   const saveNote = () => handleConfirmation("saveNote");
-
-  const handleButton = (typeConfirmation: TypesModal) => {
-    handleConfirmation(typeConfirmation);
-  };
+  const deleteNote = () => handleConfirmation("deleteNote");
 
   useEffect(() => {
     const isButtonOpen =
-      type === "updateNote" ? isNoteChanged : noteName || noteText;
+      type === "updateNote" ? isNoteChanged : hasNoteName || hasNoteText;
 
     dispatch(
       closeButton({
@@ -61,7 +58,8 @@ const NotesModal = ({ type }: NoteType) => {
         resetForm: () => handleConfirmation("closeModalsaveNote"),
       })
     );
-  }, [isNoteChanged, type, dispatch, noteName, noteText, error]);
+  }, [isNoteChanged, type, dispatch, hasNoteName, hasNoteText, hasErrors]);
+
   return (
     <div className="mb-4 mt-10 w-full text-left xl:my-12 xl:mb-4 xl:mt-10">
       <form>
@@ -69,7 +67,6 @@ const NotesModal = ({ type }: NoteType) => {
           <Input
             register={register}
             resetField={resetField}
-            key="noteName"
             name="noteName"
             placeholder={t("notesHeader.noteName")}
             type="text"
@@ -80,7 +77,6 @@ const NotesModal = ({ type }: NoteType) => {
           <Textarea
             register={register}
             resetField={resetField}
-            key="noteText"
             name="noteText"
             placeholder={t("notesHeader.noteText")}
             className=""
@@ -96,7 +92,7 @@ const NotesModal = ({ type }: NoteType) => {
                 variant="accent"
                 size="big"
                 disabled={isDisabledButton}
-                onClick={() => handleButton("saveNote")}
+                onClick={saveNote}
               >
                 {t("notesHeader.createNote")}
                 <Icon id={"plus"} className="ml-3 h-6 w-6" />
