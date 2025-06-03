@@ -24,8 +24,8 @@ const NotesModal = ({ type }: NoteType) => {
   const { register, resetField, handleSubmit, errors, isNoteChanged, watch } =
     useNotes(type);
 
-  const noteName = watch("noteName")?.trim() || "";
-  const noteText = watch("noteText")?.trim() || "";
+  const noteName = !!watch("noteName");
+  const noteText = !!watch("noteText");
   const error = Object.keys(errors).length > 0;
   const isDisabledButton = !isNoteChanged || error || !noteName || !noteText;
 
