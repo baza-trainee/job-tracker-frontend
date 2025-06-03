@@ -24,13 +24,13 @@ const NotesModal = ({ type }: NoteType) => {
   const { register, resetField, handleSubmit, errors, isNoteChanged, watch } =
     useNotes(type);
 
-  const noteName = !!watch("noteName");
-  const noteText = !!watch("noteText");
-  const error = !!Object.keys(errors).length;
+  const noteName = watch("noteName")?.trim() || "";
+  const noteText = watch("noteText")?.trim() || "";
+  const error = Object.keys(errors).length > 0;
   const isDisabledButton = !isNoteChanged || error || !noteName || !noteText;
 
   const handleConfirmation = (typeConfirmation: TypesModal) => {
-    if (Object.keys(errors).length || !noteName || !noteText) {
+    if (error || !noteName || !noteText) {
       dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
     } else {
       handleSubmit((data) => {
