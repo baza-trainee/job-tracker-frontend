@@ -716,6 +716,29 @@ const InfoModalMap = () => {
         ),
       ],
     },
+    closeModaldeleteNote: {
+      title: t("notesHeader.deleteNote.title"),
+      titleSize: "small",
+      text: [t("notesHeader.deleteNote.text_1")],
+      button: [
+        createButton(
+          t("infoModal.button.cancel"),
+          handleCancel,
+          "",
+          "small",
+          "ghost",
+          notesLoading
+        ),
+        createButton(
+          t("notesHeader.deleteNote.button"),
+          handleDeleteNotes,
+          "",
+          "big",
+          "accent",
+          notesLoading
+        ),
+      ],
+    },
   };
   return map;
 };
