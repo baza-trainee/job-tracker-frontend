@@ -24,21 +24,24 @@ const NotesModal = ({ type }: NoteType) => {
   const { register, resetField, handleSubmit, errors, isNoteChanged, watch } =
     useNotes(type);
 
+  const noteName = !!watch("noteName");
+  const noteText = !!watch("noteText");
   const error = !!Object.keys(errors).length;
-  const isDisabledButton = !isNoteChanged || error;
+  const isDisabledButton = !isNoteChanged || error || !noteName || !noteText;
 
   const handleConfirmation = (typeConfirmation: TypesModal) => {
-    if (Object.keys(errors).length) {
+    if (Object.keys(errors).length || !noteName || !noteText) {
       dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
+    } else {
+      handleSubmit((data) => {
+        dispatch(
+          openConfirmation({
+            typeConfirmation,
+            dataConfirmation: data,
+          })
+        );
+      })();
     }
-    handleSubmit((data) => {
-      dispatch(
-        openConfirmation({
-          typeConfirmation,
-          dataConfirmation: data,
-        })
-      );
-    })();
   };
 
   const deleteNote = () => handleConfirmation("deleteNote");
@@ -49,14 +52,16 @@ const NotesModal = ({ type }: NoteType) => {
   };
 
   useEffect(() => {
+    const isButtonOpen =
+      type === "updateNote" ? isNoteChanged : noteName || noteText;
+
     dispatch(
       closeButton({
-        isButtonOpen: isNoteChanged || !!watch("noteName") || !!watch("noteText"),
+        isButtonOpen,
         resetForm: () => handleConfirmation("closeModalsaveNote"),
       })
     );
-  }, [isNoteChanged, watch]);
-
+  }, [isNoteChanged, type, dispatch, noteName, noteText, error]);
   return (
     <div className="mb-4 mt-10 w-full text-left xl:my-12 xl:mb-4 xl:mt-10">
       <form>
