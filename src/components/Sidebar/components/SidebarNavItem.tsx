@@ -29,7 +29,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
           !isActive &&
             "hover:fill-iconHover hover:text-iconHover active:fill-iconHover active:text-iconHover",
           isActive &&
-            "!border-color9 bg-backgroundMain dark:bg-[#fdfeff] dark:bg-backgroundMain dark:fill-textWhite dark:text-textWhite"
+            "!dark:bg-backgroundMain !border-color9 bg-backgroundMain dark:bg-[#fdfeff] dark:fill-textWhite dark:text-textWhite"
         )
       }
     >
