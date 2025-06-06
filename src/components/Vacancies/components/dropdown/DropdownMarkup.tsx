@@ -187,10 +187,10 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           <Icon
             id={"arrow-down"}
             className={cn(
-              "size-6 fill-textBlack group-hover:fill-iconHover",
+              "size-6 fill-textBlack",
               isDropdownOpen
                 ? "rotate-180 duration-500"
-                : "rotate-0 duration-500"
+                : "rotate-0 duration-500 dark:group-hover:fill-textWhite"
             )}
           />
         </button>
