@@ -21,7 +21,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         className={cn(
           "flex overflow-hidden px-3 py-[5px] text-textBlack hover:text-iconHover disabled:hover:text-textBlack dark:hover:text-button dark:disabled:hover:text-textBlack md:px-2 md:py-1",
           {
-            "visible absolute left-0 z-[2] w-16 justify-center rounded-[20px] bg-backgroundMain opacity-100":
+            "visible absolute left-0 z-[2] w-16 justify-center rounded-[20px] bg-backgroundMain opacity-100 dark:bg-backgroundTertiary":
               isUA,
             "flex-grow opacity-100 dark:text-blackColor": !isUA && isOpen,
             "sr-only m-0 w-0 opacity-0": !isUA && !isOpen,
@@ -45,7 +45,7 @@ const LanguageToggle: React.FC<ToggleProps> = ({ isOpen }) => {
           "flex justify-end overflow-hidden px-2 py-[5px] hover:text-iconHover disabled:hover:text-textBlack dark:hover:text-button dark:disabled:hover:text-textBlack md:py-1",
 
           {
-            "visible absolute right-0 w-16 justify-center rounded-[20px] bg-backgroundMain text-textBlack opacity-100":
+            "visible absolute right-0 w-16 justify-center rounded-[20px] bg-backgroundMain text-textBlack opacity-100 dark:bg-backgroundTertiary":
               !isUA,
             "flex-grow opacity-100 dark:text-blackColor": isUA && isOpen,
             "sr-only m-0 w-0 opacity-0": isUA && !isOpen,

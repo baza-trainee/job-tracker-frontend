@@ -18,7 +18,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
   return (
     <div
       className={cn(
-        "relative flex h-9 rounded-[20px] border-2 border-color9 bg-color9 dark:border-textBlack dark:bg-inherit md:h-[39px]",
+        "relative flex h-9 rounded-[20px] border-2 border-color9 bg-color9 dark:border-textBlack dark:bg-textBlack md:h-[39px]",
         "custom-transition",
         isOpen ? "w-[108px]" : "w-[68px]"
       )}
@@ -27,7 +27,7 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={!darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "overflow-hidden fill-blackColor px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack dark:fill-textBlack md:py-[6px]",
+          "overflow-hidden fill-blackColor px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack dark:fill-textWhite md:py-[5.5px]",
           {
             "visible absolute left-0 z-[2] w-16 rounded-[20px] bg-backgroundMain px-5 text-center opacity-100":
               !darkMode,
@@ -49,10 +49,10 @@ const ThemeToggle: React.FC<ToggleProps> = ({ isOpen }) => {
         disabled={darkMode && isOpen}
         onClick={handleThemeToggle}
         className={cn(
-          "flex items-center justify-end overflow-hidden fill-textBlack px-2 py-1 hover:fill-iconHover disabled:hover:fill-textWhite md:py-[6px]",
+          "flex items-center justify-end overflow-hidden fill-textBlack px-2 py-1 hover:fill-iconHover disabled:hover:fill-textBlack md:py-[5.5px]",
 
           {
-            "visible absolute right-0 w-16 rounded-[20px] bg-textBlack fill-textWhite px-5 text-center opacity-100":
+            "visible absolute right-0 w-16 rounded-[20px] bg-backgroundTertiary fill-textBlack px-5 text-center opacity-100":
               darkMode,
             "flex-grow opacity-100": !darkMode && isOpen,
             "sr-only m-0 w-0 opacity-0": !darkMode && !isOpen,
