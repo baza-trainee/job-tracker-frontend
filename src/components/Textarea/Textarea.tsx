@@ -15,12 +15,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       value,
       id,
       onFocus,
+      watch,
     },
     ref
   ) => {
     const error = errors[name];
     const { t } = useTranslation();
     const registerProps = register(name);
+    const fieldValue = watch ? watch(name) : false;
 
     return (
       <div className={cn("relative", [className])} id={id}>
@@ -33,14 +35,26 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </label>
         )}
         <div className="relative">
-          <div className="relative flex w-full items-center overflow-hidden rounded-xl border border-textBlack">
+          <div
+            className={cn(
+              "relative flex w-full items-center",
+              "rounded-xl border",
+              {
+                "border-redColor": error,
+                "border-textBlack": !error && !fieldValue,
+                "border-color7": !!fieldValue,
+                "focus-within:border-textOther active:border-textOther": true,
+              },
+              "overflow-hidden"
+            )}
+          >
             <textarea
               id={`textarea-${name}`}
               className={cn(
-                "peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight focus:border-textOther focus:outline-none active:border-textOther md:text-[14px] 2xl:text-[16px]",
+                "peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight md:text-[14px] 2xl:text-[16px]",
                 "md:px-6 md:py-3",
                 "2xl:px-6 2xl:py-2",
-                "bg-transparent placeholder-shown:border-none",
+                "rounded-none border-none bg-transparent focus:outline-none",
                 {
                   ["h-[230px]"]: name === "noteText",
                 }
@@ -62,12 +76,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             <span
               id={`inputError-${name}`}
               className={cn(
-                "text-redColor inline-block font-nunito font-medium",
+                "inline-block font-nunito font-medium text-redColor",
                 "text-[12px]",
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "text-redColor border-redColor absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border bg-whiteColor p-2"
+                  "absolute left-[-50%] top-[80%] z-10 w-[100px] rounded-md border border-redColor bg-whiteColor p-2 text-redColor"
               )}
             >
               {t(String(error?.message))}
