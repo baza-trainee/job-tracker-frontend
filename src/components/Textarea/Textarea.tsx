@@ -51,7 +51,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             <textarea
               id={`textarea-${name}`}
               className={cn(
-                "peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight md:text-[14px] 2xl:text-[16px]",
+                "textarea-scroll peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight md:text-[14px] 2xl:text-[16px]",
                 "md:px-6 md:py-3",
                 "2xl:px-6 2xl:py-2",
                 "rounded-none border-none bg-transparent focus:outline-none",
