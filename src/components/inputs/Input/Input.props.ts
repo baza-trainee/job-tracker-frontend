@@ -15,7 +15,8 @@ export interface InputProps {
   label?: string;
   register: UseFormRegister<any>;
   errors: FieldErrors;
-  type?: React.HTMLInputTypeAttribute | "textarea" | "vacancy";
+  // type?: React.HTMLInputTypeAttribute | "textarea" | "vacancy";
+  type?: React.HTMLInputTypeAttribute | "vacancy";
   value?: string;
   id?: string;
   defaultValue?: string;
