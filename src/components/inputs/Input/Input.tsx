@@ -33,7 +33,7 @@ export const Input = forwardRef<
       isRequired,
       promptMessage = "",
       setValue,
-      rows,
+      // rows,
       classNameInputCustom,
       onKeyDown,
       onClick,
@@ -90,7 +90,7 @@ export const Input = forwardRef<
         )}
         <div className="relative">
           <div className={cn("relative flex w-full items-center")}>
-            {type === "textarea" ? (
+            {/* {type === "textarea" ? (
               <textarea
                 {...registerProps}
                 id={`input-${name}`}
@@ -123,67 +123,67 @@ export const Input = forwardRef<
                 }}
                 onChange={(e) => (registerProps.onChange(e), onChange?.(e))}
               />
-            ) : (
-              <input
-                {...registerProps}
-                disabled={disabled}
-                {...(autoFocus && { autoFocus })}
-                onFocus={onFocus}
-                id={`input-${name}`}
-                className={cn(
-                  "peer w-full font-nunito text-base font-medium transition placeholder:font-nunito",
-                  "rounded-lg border border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
-                  "bg-transparent text-textBlack placeholder:text-textBlackLight active:bg-transparent",
-                  "overflow-hidden text-ellipsis whitespace-nowrap", // alex три крапка для великого тексту 20/05
-                  // "placeholder-shown:border-textBlack",
-                  "h-[34px] px-4 py-2 pr-8 text-[12px]",
-                  "md:h-11 md:px-6 md:py-3 md:pr-8 md:text-[14px]",
-                  "xl:text-[14px]",
-                  "2xl:text-[16px]",
-                  {
-                    // "border-color7": !error,
-                    "border-color7": !error && isIconVisible,
-                    "border-redColor": error,
-                    "pr-16 md:pr-16": isButtonRemoveInput,
-                  },
-                  classNameInputCustom
-                )}
-                placeholder={placeholder}
-                type={type}
-                {...(value && { value })}
-                {...(defaultValue && { defaultValue })}
-                // {...register(name)}
-                aria-describedby={`inputError-${name}`}
-                title={promptMessage}
-                onBlur={(event) => {
-                  setValue?.(name, event.target.value.trim(), {
-                    shouldValidate: true,
-                  });
-                  // hookFormOnBlur(event);
-                  registerProps.onBlur(event);
-                  onBlur?.(event);
-                }}
-                ref={(el) => {
-                  // refInput(el);
-                  registerProps.ref(el);
-                  if (el) inputRef.current = el;
-                  if (forwardedRef && typeof forwardedRef === "function") {
-                    forwardedRef(el);
-                  } else if (forwardedRef) {
-                    (forwardedRef as React.MutableRefObject<any>).current = el;
-                  }
-                }}
-                onClick={onClick}
-                onKeyDown={onKeyDown}
-                onInput={onInput}
-                onChange={(e) => {
-                  registerProps.onChange(e);
-                  onChange?.(e);
-                }}
-                autoComplete={autoComplete}
-                maxLength={maxLength}
-              />
-            )}
+            ) : ( */}
+            <input
+              {...registerProps}
+              disabled={disabled}
+              {...(autoFocus && { autoFocus })}
+              onFocus={onFocus}
+              id={`input-${name}`}
+              className={cn(
+                "peer w-full font-nunito text-base font-medium transition placeholder:font-nunito",
+                "rounded-lg border border-textBlack focus:border-textOther focus:outline-none active:border-textOther",
+                "bg-transparent text-textBlack placeholder:text-textBlackLight active:bg-transparent",
+                "overflow-hidden text-ellipsis whitespace-nowrap", // alex три крапка для великого тексту 20/05
+                // "placeholder-shown:border-textBlack",
+                "h-[34px] px-4 py-2 pr-8 text-[12px]",
+                "md:h-11 md:px-6 md:py-3 md:pr-8 md:text-[14px]",
+                "xl:text-[14px]",
+                "2xl:text-[16px]",
+                {
+                  // "border-color7": !error,
+                  "border-color7": !error && isIconVisible,
+                  "border-redColor": error,
+                  "pr-16 md:pr-16": isButtonRemoveInput,
+                },
+                classNameInputCustom
+              )}
+              placeholder={placeholder}
+              type={type}
+              {...(value && { value })}
+              {...(defaultValue && { defaultValue })}
+              // {...register(name)}
+              aria-describedby={`inputError-${name}`}
+              title={promptMessage}
+              onBlur={(event) => {
+                setValue?.(name, event.target.value.trim(), {
+                  shouldValidate: true,
+                });
+                // hookFormOnBlur(event);
+                registerProps.onBlur(event);
+                onBlur?.(event);
+              }}
+              ref={(el) => {
+                // refInput(el);
+                registerProps.ref(el);
+                if (el) inputRef.current = el;
+                if (forwardedRef && typeof forwardedRef === "function") {
+                  forwardedRef(el);
+                } else if (forwardedRef) {
+                  (forwardedRef as React.MutableRefObject<any>).current = el;
+                }
+              }}
+              onClick={onClick}
+              onKeyDown={onKeyDown}
+              onInput={onInput}
+              onChange={(e) => {
+                registerProps.onChange(e);
+                onChange?.(e);
+              }}
+              autoComplete={autoComplete}
+              maxLength={maxLength}
+            />
+            {/* )} */}
 
             <div className="absolute right-2 top-[50%] mt-auto flex h-6 translate-y-[-50%] gap-2">
               {/* mix-blend-multiply */}

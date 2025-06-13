@@ -712,7 +712,8 @@ input[type="password"]::-ms-clear {
 }
 .select__event-modal .react-select__menu-list {
   overflow-y: auto;
-  @apply max-h-[174px] md:max-h-[146px] xl:max-h-[200px];
+  /* @apply max-h-[174px] md:max-h-[146px] xl:max-h-[200px]; */
+  @apply max-h-[136px] xl:max-h-[146px];
 }
 .select__event-modal .react-select__menu-list::-webkit-scrollbar {
   width: 6px;
