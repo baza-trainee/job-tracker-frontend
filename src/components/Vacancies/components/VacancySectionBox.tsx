@@ -104,6 +104,7 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
               "scrollbar-y-sectionbox h-auto overflow-y-auto",
               { "pr-[12px] md:pr-4": hasScroll },
               { "pr-[12px] md:pr-4": isIOS || isFirefox },
+              isIOS && "soon-scroll-ios",
               isFirefox && "scroll-soon-firefox",
               maxHeightClass
             )}
@@ -118,9 +119,9 @@ const VacancySectionBox: FC<VacancySectionBoxProps> = ({
               {validChildren}
             </div>
           </div>
-          {/* подумати про створення хука useScrollPlatform() або зробити загальний компонент ScrollWrapper */}
+          {/* підкладка під скролл для isIOS і isFirefox */}
           {(isIOS || isFirefox) && (
-            <div className="soon-scroll__custom-ios pointer-events-none absolute right-[2px] top-0 h-full w-[6px] rounded-md bg-[#c0c0c0] opacity-70" />
+            <div className="pointer-events-none absolute right-[2px] top-0 h-full w-[6px] rounded-md bg-[#a0a0a0] opacity-30" />
           )}
         </div>
       </div>
