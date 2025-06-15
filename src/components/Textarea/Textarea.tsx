@@ -10,11 +10,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       placeholder,
       label,
       className,
+      classNameInputCustom,
       register,
+      isRequired,
+      rows,
       errors,
       value,
       id,
       onFocus,
+      onChange,
       watch,
     },
     ref
@@ -31,7 +35,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             htmlFor={`input-${name}`}
             className="mb-[2px] block font-nunito text-[14px] font-medium leading-[135%] text-textBlack md:mb-2 md:text-[16px] xl:mb-3 2xl:mb-3 2xl:text-[20px]"
           >
-            {label}
+            {label}{" "}
+            {isRequired && <span className={cn("text-redColor")}>*</span>}
           </label>
         )}
         <div className="relative">
@@ -51,17 +56,19 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             <textarea
               id={`textarea-${name}`}
               className={cn(
-                "peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight md:text-[14px] 2xl:text-[16px]",
+                "textarea-scroll peer h-32 w-full resize-none px-2 py-3 font-nunito text-[12px] font-medium text-textBlack transition placeholder:font-nunito placeholder:text-textBlackLight md:text-[14px] 2xl:text-[16px]",
                 "md:px-6 md:py-3",
                 "2xl:px-6 2xl:py-2",
                 "rounded-none border-none bg-transparent focus:outline-none",
                 {
                   ["h-[230px]"]: name === "noteText",
-                }
+                },
+                classNameInputCustom
               )}
               placeholder={placeholder}
               {...(value && { value })}
               {...register(name)}
+              rows={rows || 4}
               aria-describedby={`textareaError-${name}`}
               onFocus={onFocus}
               ref={(el) => {
@@ -70,6 +77,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                   ref(el);
                 }
               }}
+              onChange={(e) => (registerProps.onChange(e), onChange?.(e))}
             />
           </div>
           {error ? (

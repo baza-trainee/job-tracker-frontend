@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { useTranslation } from "react-i18next";
 
 import { Input } from "@/components/inputs/Input/Input";
+import { Textarea } from "@/components/Textarea/Textarea.tsx";
 import { Button } from "@/components/buttons/Button/Button";
 import { PropsModalAddProperties, useData } from "./modalAddProperties.types";
 import Icon from "@/components/Icon/Icon";
@@ -164,16 +165,26 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         />
       )}
       {data[cardsType].text && (
-        <Input
+        // <Input
+        //   id="textCoverLetter"
+        //   type="textarea"
+        //   label={data[cardsType].text}
+        //   name="text"
+        //   placeholder={data[cardsType].placeholderText}
+        //   register={register}
+        //   errors={errors}
+        //   resetField={resetField}
+        //   isCheckButtons={false}
+        // />
+        <Textarea
           id="textCoverLetter"
-          type="textarea"
           label={data[cardsType].text}
           name="text"
           placeholder={data[cardsType].placeholderText}
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={false}
+          watch={watch}
         />
       )}
       <div className="flex flex-col-reverse justify-center gap-5 md:flex-row">
