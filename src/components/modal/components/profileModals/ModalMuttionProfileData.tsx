@@ -56,28 +56,30 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
   const text = watch("text");
   const error = Object.keys(errors).length > 0;
 
-  const isFormChanged = (): boolean => {
-    if (updateItem) {
-      return (
-        (updateItem.name ? updateItem.name === name : true) &&
-        (updateItem.link ? updateItem.link === link : true) &&
-        (updateItem.technologies
-          ? updateItem.technologies === technologies
-          : true) &&
-        (updateItem.description ? updateItem.description === text : true) &&
-        (updateItem.text ? updateItem.text === text : true)
-      );
-    }
+  const isFormEmpty: boolean =
+    (!name || name === "") &&
+    (!link || link === "") &&
+    (!technologies || technologies === "") &&
+    (!text || text === "");
 
-    return (
-      (name !== undefined && !name) ||
-      (link !== undefined && !link) ||
-      (technologies !== undefined && !technologies) ||
-      (text !== undefined && !text)
-    );
-  };
+  const isFormComplete: boolean =
+    (name !== undefined ? name !== "" : true) &&
+    (link !== undefined ? link !== "" : true) &&
+    (technologies !== undefined ? technologies !== "" : true) &&
+    (text !== undefined ? text !== "" : true);
 
-  //alex
+  const isFormChanged: boolean = updateItem
+    ? (updateItem.name ? updateItem.name === name : true) &&
+      (updateItem.link ? updateItem.link === link : true) &&
+      (updateItem.technologies
+        ? updateItem.technologies === technologies
+        : true) &&
+      (updateItem.description ? updateItem.description === text : true) &&
+      (updateItem.text ? updateItem.text === text : true)
+    : isFormEmpty;
+
+  const isButtonDisabled = isFormChanged || error || !isFormComplete;
+
   const dispatch = useAppDispatch();
 
   const handleConfirmation = (
@@ -115,12 +117,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     const typeConfirmationForModal: string = "update" + cardsType.slice(3);
     dispatch(
       closeButton({
-        isButtonOpen: updateItem
-          ? !isFormChanged()
-          : (name !== undefined && !!name) ||
-            (link !== undefined && !!link) ||
-            (technologies !== undefined && !!technologies) ||
-            (text !== undefined && !!text),
+        isButtonOpen: !isFormChanged,
         resetForm: () =>
           handleConfirmation(typeConfirmationForModal as TypesModal, true),
       })
@@ -205,11 +202,11 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           className="group gap-3"
           variant="accent"
           onClick={handleAddButton}
-          disabled={isFormChanged()}
+          disabled={isButtonDisabled}
         >
           {t("infoModal.button.save")}
           <Icon
-            id={`${isFormChanged() ? "check-box-gray" : "check-box"}`}
+            id={`${isButtonDisabled ? "check-box-gray" : "check-box"}`}
             className="h-6 w-6"
           />
         </Button>
