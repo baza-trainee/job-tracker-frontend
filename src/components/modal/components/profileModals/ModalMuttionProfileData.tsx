@@ -28,7 +28,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     resetField,
     setValue,
     watch,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<z.infer<(typeof addProfileData)[typeof cardsType]>>({
     resolver: zodResolver(addProfileData[cardsType]),
     mode: "all",
@@ -40,18 +40,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     useAppSelector((state) => state.modal.profileData) || false;
 
   const isUpdating = Boolean(updateItem?.typeModal);
-  // const { onSubmit, isSubmitDisabled } = useMutationProfileData({
-  //   isUpdating,
-  //   cardsType,
-  //   updateItem,
-  //   errors,
-  // });
 
-  // const { handleRemove, isDisabledButtonRemove } = useRemoveProfileData({
-  //   cardsType,
-  //   idRemoveItem: updateItem.id,
-  //   shoudCloseModal: true,
-  // });
   useEffect(() => {
     if (!updateItem) return;
     setValue("name", updateItem.name || "");
@@ -60,26 +49,33 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     setValue("text", updateItem.description || updateItem.text);
   }, [updateItem]);
 
-  const isDisabledSubmitButton =
-    // isSubmitDisabled ||
-    !isDirty ||
-    (isUpdating &&
-      (updateItem.name ? updateItem.name === watch("name") : true) &&
-      (updateItem.link ? updateItem.link === watch("link") : true) &&
-      (updateItem.technologies
-        ? updateItem.technologies === watch("technologies")
-        : true) &&
-      (updateItem.description
-        ? updateItem.description === watch("text")
-        : true) &&
-      (updateItem.text ? updateItem.text === watch("text") : true));
-  //     ||
-  //   !(
-  //     (watch("name") ? watch("name") !== "" : true) &&
-  //     (watch("link") ? watch("link") !== "" : true) &&
-  //     (watch("technologies") ? watch("technologies") !== "" : true) &&
-  //     (watch("text") ? watch("text") !== "" : true)
-  //   );
+  // alex
+  const name = watch("name");
+  const link = watch("link");
+  const technologies = watch("technologies");
+  const text = watch("text");
+  const error = Object.keys(errors).length > 0;
+
+  const isFormChanged = (): boolean => {
+    if (updateItem) {
+      return (
+        (updateItem.name ? updateItem.name === name : true) &&
+        (updateItem.link ? updateItem.link === link : true) &&
+        (updateItem.technologies
+          ? updateItem.technologies === technologies
+          : true) &&
+        (updateItem.description ? updateItem.description === text : true) &&
+        (updateItem.text ? updateItem.text === text : true)
+      );
+    }
+
+    return (
+      (name !== undefined && !name) ||
+      (link !== undefined && !link) ||
+      (technologies !== undefined && !technologies) ||
+      (text !== undefined && !text)
+    );
+  };
 
   //alex
   const dispatch = useAppDispatch();
@@ -89,7 +85,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     // якщо add - дані форми, якщо ні = id резюме, листа або проекта
     add: boolean = false
   ) => {
-    if (Object.keys(errors).length) {
+    if (error) {
       dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
     }
     handleSubmit((data) => {
@@ -119,18 +115,20 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     const typeConfirmationForModal: string = "update" + cardsType.slice(3);
     dispatch(
       closeButton({
-        isButtonOpen: !isDisabledSubmitButton,
+        isButtonOpen: updateItem
+          ? !isFormChanged()
+          : (name !== undefined && !!name) ||
+            (link !== undefined && !!link) ||
+            (technologies !== undefined && !!technologies) ||
+            (text !== undefined && !!text),
         resetForm: () =>
           handleConfirmation(typeConfirmationForModal as TypesModal, true),
       })
     );
-  }, [isDisabledSubmitButton, errors]);
+  }, [isFormChanged, errors]);
 
   return (
-    <form
-      className="flex h-full w-full flex-col gap-5"
-      // onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="flex h-full w-full flex-col gap-5">
       <Input
         autoFocus
         label={data[cardsType].name}
@@ -207,11 +205,11 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           className="group gap-3"
           variant="accent"
           onClick={handleAddButton}
-          disabled={isDisabledSubmitButton}
+          disabled={isFormChanged()}
         >
           {t("infoModal.button.save")}
           <Icon
-            id={`${isDisabledSubmitButton ? "check-box-gray" : "check-box"}`}
+            id={`${isFormChanged() ? "check-box-gray" : "check-box"}`}
             className="h-6 w-6"
           />
         </Button>
