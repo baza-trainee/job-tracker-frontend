@@ -49,7 +49,7 @@ export const Soon = () => {
 
     window.addEventListener("resize", checkScroll);
     return () => window.removeEventListener("resize", checkScroll);
-  }, [events]);
+  }, [events, showArchived]);
 
   const handleOpenModal = () => {
     dispatch(openModal({ isModalOpen: true, typeModal: "addEvent" }));
@@ -174,7 +174,12 @@ export const Soon = () => {
           </div>
           {/* підкладка під скролл для isIOS і isFirefox */}
           {(isIOS || isFirefox) && (
-            <div className="pointer-events-none absolute right-[2px] top-0 h-full w-[6px] rounded-md bg-[#a0a0a0] opacity-30" />
+            <div
+              className={clsx(
+                "pointer-events-none absolute right-[2px] top-0 h-full w-[6px] rounded-md bg-[#a0a0a0] opacity-30",
+                isIOS && "2xl:bg-transparent"
+              )}
+            />
           )}
         </div>
 
