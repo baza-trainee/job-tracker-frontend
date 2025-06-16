@@ -95,7 +95,10 @@ const NotesModal = ({ type }: NoteType) => {
                 onClick={saveNote}
               >
                 {t("notesHeader.createNote")}
-                <Icon id={"plus"} className="ml-3 h-6 w-6" />
+                <Icon
+                  id={`${isDisabledButton ? "plus-gray" : "plus"}`}
+                  className="ml-3 h-6 w-6"
+                />
               </Button>
             ) : (
               <>
