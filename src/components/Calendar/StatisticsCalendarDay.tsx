@@ -46,7 +46,7 @@ export const StatisticsCalendarDay: React.FC<StatisticsCalendarDayProps> = ({
     <div
       className={clsx(
         "statistics-calendar box-border rounded-[20px] bg-backgroundTertiary text-textBlack",
-        "w-[276px] md:w-[356px] 3xl:w-[468px]",
+        "w-[276px] smPlus:w-[468px] md:w-[356px] 3xl:w-[468px]",
         "h-[332px] md:h-[398px] 3xl:h-[514px]", //h-[318px]
         "p-3 md:p-2 3xl:px-6 3xl:py-4"
       )}

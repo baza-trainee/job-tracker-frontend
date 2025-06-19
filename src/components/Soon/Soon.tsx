@@ -49,7 +49,7 @@ export const Soon = () => {
 
     window.addEventListener("resize", checkScroll);
     return () => window.removeEventListener("resize", checkScroll);
-  }, [events]);
+  }, [events, showArchived]);
 
   const handleOpenModal = () => {
     dispatch(openModal({ isModalOpen: true, typeModal: "addEvent" }));
@@ -128,6 +128,7 @@ export const Soon = () => {
               // hasScroll ? "soon-scroll relative w-full overflow-y-scroll" : "",
               !hasScroll ? "soon-scroll__not-full" : "",
               "soon-scroll relative w-full overflow-y-scroll",
+              isIOS && "soon-scroll-ios",
               isFirefox && "scroll-soon-firefox",
               "max-h-[202.8px] md:max-h-[346px] xl:max-h-[345px] 2xl:max-h-[353.2px] 3xl:max-h-[465px]",
               "pr-[14px] md:pr-[18px] 2xl:pr-5 3xl:pr-6"
@@ -171,9 +172,14 @@ export const Soon = () => {
               </ul>
             )}
           </div>
-          {/* подумати про створення хука useScrollPlatform() або зробити загальний компонент ScrollWrapper */}
+          {/* підкладка під скролл для isIOS і isFirefox */}
           {(isIOS || isFirefox) && (
-            <div className="soon-scroll__custom-ios pointer-events-none absolute right-[2px] top-0 h-full w-[6px] rounded-md bg-[#c0c0c0] opacity-70" />
+            <div
+              className={clsx(
+                "pointer-events-none absolute right-[2px] top-0 h-full w-[6px] rounded-md bg-[#a0a0a0] opacity-30",
+                isIOS && "2xl:bg-transparent"
+              )}
+            />
           )}
         </div>
 

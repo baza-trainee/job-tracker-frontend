@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { useTranslation } from "react-i18next";
 
 import { Input } from "@/components/inputs/Input/Input";
+import { Textarea } from "@/components/Textarea/Textarea.tsx";
 import { Button } from "@/components/buttons/Button/Button";
 import { PropsModalAddProperties, useData } from "./modalAddProperties.types";
 import Icon from "@/components/Icon/Icon";
@@ -27,7 +28,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     resetField,
     setValue,
     watch,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = useForm<z.infer<(typeof addProfileData)[typeof cardsType]>>({
     resolver: zodResolver(addProfileData[cardsType]),
     mode: "all",
@@ -39,18 +40,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     useAppSelector((state) => state.modal.profileData) || false;
 
   const isUpdating = Boolean(updateItem?.typeModal);
-  // const { onSubmit, isSubmitDisabled } = useMutationProfileData({
-  //   isUpdating,
-  //   cardsType,
-  //   updateItem,
-  //   errors,
-  // });
 
-  // const { handleRemove, isDisabledButtonRemove } = useRemoveProfileData({
-  //   cardsType,
-  //   idRemoveItem: updateItem.id,
-  //   shoudCloseModal: true,
-  // });
   useEffect(() => {
     if (!updateItem) return;
     setValue("name", updateItem.name || "");
@@ -59,28 +49,37 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     setValue("text", updateItem.description || updateItem.text);
   }, [updateItem]);
 
-  const isDisabledSubmitButton =
-    // isSubmitDisabled ||
-    !isDirty ||
-    (isUpdating &&
-      (updateItem.name ? updateItem.name === watch("name") : true) &&
-      (updateItem.link ? updateItem.link === watch("link") : true) &&
-      (updateItem.technologies
-        ? updateItem.technologies === watch("technologies")
-        : true) &&
-      (updateItem.description
-        ? updateItem.description === watch("text")
-        : true) &&
-      (updateItem.text ? updateItem.text === watch("text") : true));
-  //     ||
-  //   !(
-  //     (watch("name") ? watch("name") !== "" : true) &&
-  //     (watch("link") ? watch("link") !== "" : true) &&
-  //     (watch("technologies") ? watch("technologies") !== "" : true) &&
-  //     (watch("text") ? watch("text") !== "" : true)
-  //   );
+  // alex
+  const name = watch("name");
+  const link = watch("link");
+  const technologies = watch("technologies");
+  const text = watch("text");
+  const error = Object.keys(errors).length > 0;
 
-  //alex
+  const isFormEmpty: boolean =
+    (!name || name === "") &&
+    (!link || link === "") &&
+    (!technologies || technologies === "") &&
+    (!text || text === "");
+
+  const isFormComplete: boolean =
+    (name !== undefined ? name !== "" : true) &&
+    (link !== undefined ? link !== "" : true) &&
+    (technologies !== undefined ? technologies !== "" : true) &&
+    (text !== undefined ? text !== "" : true);
+
+  const isFormChanged: boolean = updateItem
+    ? (updateItem.name ? updateItem.name === name : true) &&
+      (updateItem.link ? updateItem.link === link : true) &&
+      (updateItem.technologies
+        ? updateItem.technologies === technologies
+        : true) &&
+      (updateItem.description ? updateItem.description === text : true) &&
+      (updateItem.text ? updateItem.text === text : true)
+    : isFormEmpty;
+
+  const isButtonDisabled = isFormChanged || error || !isFormComplete;
+
   const dispatch = useAppDispatch();
 
   const handleConfirmation = (
@@ -88,7 +87,7 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     // якщо add - дані форми, якщо ні = id резюме, листа або проекта
     add: boolean = false
   ) => {
-    if (Object.keys(errors).length) {
+    if (error) {
       dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
     }
     handleSubmit((data) => {
@@ -118,18 +117,15 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
     const typeConfirmationForModal: string = "update" + cardsType.slice(3);
     dispatch(
       closeButton({
-        isButtonOpen: !isDisabledSubmitButton,
+        isButtonOpen: !isFormChanged,
         resetForm: () =>
           handleConfirmation(typeConfirmationForModal as TypesModal, true),
       })
     );
-  }, [isDisabledSubmitButton, errors]);
+  }, [isFormChanged, errors]);
 
   return (
-    <form
-      className="flex h-full w-full flex-col gap-5"
-      // onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="flex h-full w-full flex-col gap-5">
       <Input
         autoFocus
         label={data[cardsType].name}
@@ -164,16 +160,26 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
         />
       )}
       {data[cardsType].text && (
-        <Input
+        // <Input
+        //   id="textCoverLetter"
+        //   type="textarea"
+        //   label={data[cardsType].text}
+        //   name="text"
+        //   placeholder={data[cardsType].placeholderText}
+        //   register={register}
+        //   errors={errors}
+        //   resetField={resetField}
+        //   isCheckButtons={false}
+        // />
+        <Textarea
           id="textCoverLetter"
-          type="textarea"
           label={data[cardsType].text}
           name="text"
           placeholder={data[cardsType].placeholderText}
           register={register}
           errors={errors}
           resetField={resetField}
-          isCheckButtons={false}
+          watch={watch}
         />
       )}
       <div className="flex flex-col-reverse justify-center gap-5 md:flex-row">
@@ -196,11 +202,11 @@ function ModalMuttionProfileData({ cardsType }: PropsModalAddProperties) {
           className="group gap-3"
           variant="accent"
           onClick={handleAddButton}
-          disabled={isDisabledSubmitButton}
+          disabled={isButtonDisabled}
         >
           {t("infoModal.button.save")}
           <Icon
-            id={`${isDisabledSubmitButton ? "check-box-gray" : "check-box"}`}
+            id={`${isButtonDisabled ? "check-box-gray" : "check-box"}`}
             className="h-6 w-6"
           />
         </Button>

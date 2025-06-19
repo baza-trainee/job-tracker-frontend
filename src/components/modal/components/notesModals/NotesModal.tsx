@@ -21,41 +21,44 @@ const NotesModal = ({ type }: NoteType) => {
   const { t } = useTranslation();
   const isAddNote = type === "addNote";
 
-  const { register, resetField, handleSubmit, errors, isNoteChanged } =
+  const { register, resetField, handleSubmit, errors, isNoteChanged, watch } =
     useNotes(type);
 
-  const error = !!Object.keys(errors).length;
-  const isDisabledButton = !isNoteChanged || error;
+  const hasNoteName = Boolean(watch("noteName"));
+  const hasNoteText = Boolean(watch("noteText"));
+  const hasErrors = Object.keys(errors).length > 0;
+  const isDisabledButton =
+    !isNoteChanged || hasErrors || !hasNoteName || !hasNoteText;
 
   const handleConfirmation = (typeConfirmation: TypesModal) => {
-    if (Object.keys(errors).length) {
+    if (hasErrors || !hasNoteName || !hasNoteText) {
       dispatch(openConfirmation({ typeConfirmation: "closeDiscardModal" }));
+    } else {
+      handleSubmit((data) => {
+        dispatch(
+          openConfirmation({
+            typeConfirmation,
+            dataConfirmation: data,
+          })
+        );
+      })();
     }
-    handleSubmit((data) => {
-      dispatch(
-        openConfirmation({
-          typeConfirmation,
-          dataConfirmation: data,
-        })
-      );
-    })();
   };
 
-  const deleteNote = () => handleConfirmation("deleteNote");
   const saveNote = () => handleConfirmation("saveNote");
-
-  const handleButton = (typeConfirmation: TypesModal) => {
-    handleConfirmation(typeConfirmation);
-  };
+  const deleteNote = () => handleConfirmation("deleteNote");
 
   useEffect(() => {
+    const isButtonOpen =
+      type === "updateNote" ? isNoteChanged : hasNoteName || hasNoteText;
+
     dispatch(
       closeButton({
-        isButtonOpen: isNoteChanged,
+        isButtonOpen,
         resetForm: () => handleConfirmation("closeModalsaveNote"),
       })
     );
-  }, [isNoteChanged]);
+  }, [isNoteChanged, type, dispatch, hasNoteName, hasNoteText, hasErrors]);
 
   return (
     <div className="mb-4 mt-10 w-full text-left xl:my-12 xl:mb-4 xl:mt-10">
@@ -64,7 +67,6 @@ const NotesModal = ({ type }: NoteType) => {
           <Input
             register={register}
             resetField={resetField}
-            key="noteName"
             name="noteName"
             placeholder={t("notesHeader.noteName")}
             type="text"
@@ -75,25 +77,28 @@ const NotesModal = ({ type }: NoteType) => {
           <Textarea
             register={register}
             resetField={resetField}
-            key="noteText"
             name="noteText"
             placeholder={t("notesHeader.noteText")}
             className=""
             errors={errors}
+            watch={watch}
           />
 
           <div className="flex flex-col justify-center gap-2 md:flex-row xl:mt-4">
             {isAddNote ? (
               <Button
                 type="button"
-                className="group w-full bg-button md:mx-0 md:w-auto"
-                variant="ghost"
+                className="group w-full md:mx-0 md:w-auto"
+                variant="accent"
                 size="big"
                 disabled={isDisabledButton}
-                onClick={() => handleButton("saveNote")}
+                onClick={saveNote}
               >
                 {t("notesHeader.createNote")}
-                <Icon id={"plus"} className="ml-3 h-6 w-6" />
+                <Icon
+                  id={`${isDisabledButton ? "plus-gray" : "plus"}`}
+                  className="ml-3 h-6 w-6"
+                />
               </Button>
             ) : (
               <>
@@ -109,8 +114,8 @@ const NotesModal = ({ type }: NoteType) => {
                 </Button>
                 <Button
                   type="button"
-                  className="w-full bg-button md:mx-0 md:w-auto"
-                  variant="ghost"
+                  className="w-full md:mx-0 md:w-auto"
+                  variant="accent"
                   size="big"
                   disabled={isDisabledButton}
                   onClick={saveNote}

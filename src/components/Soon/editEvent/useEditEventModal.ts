@@ -68,8 +68,11 @@ const useEditEventModal = () => {
       minutes: isNaN(minutes) ? null : minutes,
       date: eventData.date || "",
     });
+    setTimeout(() => {
+      trigger();
+    }, 0);
     setInputChanged(false);
-  }, [eventData, reset]);
+  }, [eventData, reset, trigger]);
 
   const handleConfirmation = (typeConfirmation: TypesModal) => {
     const currentFormData = watch(); // Отримуємо поточні значення форми

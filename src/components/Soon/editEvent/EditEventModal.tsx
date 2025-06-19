@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import SoonCalendarModal from "../../Calendar/SoonCalendarModal.tsx";
 import { Input } from "../../inputs/Input/Input.tsx";
+import { Textarea } from "../../Textarea/Textarea.tsx";
 import { Button } from "../../buttons/Button/Button.tsx";
 import Icon from "../../Icon/Icon.tsx";
 import Select from "react-select";
@@ -89,7 +90,7 @@ const EditEventModal = () => {
             isRequired={true}
             isCheckButtons={true}
             classNameInputCustom="rounded-lg"
-            onChange={handleInputChange} // handleInputChange вже все робить
+            onChange={handleInputChange}
             autoComplete="off"
           />
 
@@ -99,7 +100,7 @@ const EditEventModal = () => {
           >
             {t("soonSection.soonNotes")}
           </label>
-          <Input
+          {/* <Input
             name="soonEventNotes"
             placeholder={t("soonSection.soonModalNotesPlaceholder")}
             register={register}
@@ -113,6 +114,18 @@ const EditEventModal = () => {
             classNameInputCustom="resize-none textarea-event-lg textarea-event"
             onChange={handleInputChange} // handleInputChange вже все робить
             autoComplete="off"
+          /> */}
+          <Textarea
+            name="soonEventNotes"
+            placeholder={t("soonSection.soonModalNotesPlaceholder")}
+            register={register}
+            errors={errors}
+            resetField={resetField}
+            isRequired={false}
+            rows={4}
+            classNameInputCustom="resize-none textarea-event-lg textarea-event"
+            onChange={handleInputChange}
+            watch={watch}
           />
 
           <div className="flex w-full flex-col items-center md:items-start">
@@ -134,12 +147,12 @@ const EditEventModal = () => {
                   autoComplete="off"
                   maxLength={2}
                   className={clsx(
-                    "pointer-events-auto z-10 text-textBlack",
-                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-2 text-center xl:py-[9px]",
+                    "pointer-events-auto z-10 bg-textMediumWhite text-textBlack",
+                    "h-full w-full rounded-lg border-2 border-transparent px-4 py-2 text-center xl:py-[9px]",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
                   classNameInputCustom={clsx(
-                    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium text-textBlack",
+                    "border-0 bg-textMediumWhite p-0 text-center text-[28px] font-medium text-textBlack",
                     "sm:h-auto sm:p-0 sm:text-[24px]",
                     "md:h-auto md:p-0 md:text-[24px]",
                     "xl:text-[32px] xl:font-normal",
@@ -199,12 +212,12 @@ const EditEventModal = () => {
                   autoComplete="off"
                   maxLength={2}
                   className={clsx(
-                    "pointer-events-auto z-10",
-                    "h-full w-full rounded-lg border-2 border-transparent bg-backgroundTertiary px-4 py-[9px] text-center",
+                    "pointer-events-auto z-10 bg-textMediumWhite",
+                    "h-full w-full rounded-lg border-2 border-transparent px-4 py-[9px] text-center",
                     "focus-within:border-color1 hover:border-color1 focus:border-color1 active:border-color1"
                   )}
                   classNameInputCustom={clsx(
-                    "border-0 bg-backgroundTertiary p-0 text-center text-[28px] font-medium text-textBlack",
+                    "border-0 bg-textMediumWhite p-0 text-center text-[28px] font-medium text-textBlack",
                     "sm:h-auto sm:p-0 sm:text-[24px]",
                     "md:h-auto md:p-0 md:text-[24px]",
                     "xl:text-[32px] xl:font-normal",
