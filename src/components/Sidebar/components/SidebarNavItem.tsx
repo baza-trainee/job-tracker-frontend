@@ -22,17 +22,18 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       className={({ isActive, isPending }) =>
         cn(
           "group flex items-center rounded-[20px] border-2 border-transparent py-[2px]",
-          "custom-transition hover:underline active:underline",
+          "custom-transition",
           "fill-textBlack text-textBlack",
           isOpen ? "w-[206px]" : "w-[68px]",
           isPending && "bg-red-500",
           !isActive &&
             "hover:fill-iconHover hover:text-iconHover active:fill-iconHover active:text-iconHover",
-          isActive && "!border-color9 bg-backgroundMain"
+          isActive &&
+            "!dark:bg-backgroundMain !border-color9 bg-backgroundMain dark:bg-[#fdfeff] dark:fill-textWhite dark:text-textWhite"
         )
       }
     >
-      <Icon id={icon} className={cn("group mx-[16px] h-8 w-8")} />
+      <Icon id={icon} className={cn("mx-[16px] h-8 w-8")} />
       <span
         className={cn(
           "custom-size overflow-hidden whitespace-nowrap",

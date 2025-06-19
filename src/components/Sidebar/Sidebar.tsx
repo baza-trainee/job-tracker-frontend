@@ -95,7 +95,7 @@ function Sidebar() {
 
         <nav
           className={cn(
-            "mt-6 flex flex-col gap-4 border-b-[1px] border-color9 pb-5",
+            "mt-6 flex flex-col gap-4 border-b-[1px] border-color9 pb-5 dark:border-textBlack",
             !isOpenSidebar && "items-center"
           )}
         >
@@ -121,7 +121,7 @@ function Sidebar() {
 
         <div
           className={cn(
-            "flex flex-col gap-4 border-t-[1px] border-color9 pt-6",
+            "flex flex-col gap-4 border-t-[1px] border-color9 pt-6 dark:border-textBlack",
             !isOpenSidebar && "items-center"
           )}
         >

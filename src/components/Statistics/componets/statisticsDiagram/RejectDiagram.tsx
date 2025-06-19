@@ -38,37 +38,37 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
     return [
       {
         title: RejectReason.OTHER,
-        color: "color7",
+        color: `#B1D690`,
         width: `${countRejectPercent(RejectReason.OTHER)}%`,
       },
       {
         title: RejectReason.NO_ANSWER,
-        color: "color6",
+        color: "#A6AEBF",
         width: `${countRejectPercent(RejectReason.NO_ANSWER)}%`,
       },
       {
         title: RejectReason.STOPPED,
-        color: "color4",
+        color: "#CDC1FF",
         width: `${countRejectPercent(RejectReason.STOPPED)}%`,
       },
       {
         title: RejectReason.SOFT_SKILLS,
-        color: "color5",
+        color: "#D0E8C5",
         width: `${countRejectPercent(RejectReason.SOFT_SKILLS)}%`,
       },
       {
         title: RejectReason.TECH_SKILLS,
-        color: "color3",
+        color: "#FEEE91",
         width: `${countRejectPercent(RejectReason.TECH_SKILLS)}%`,
       },
       {
         title: RejectReason.ENGLISH,
-        color: "color2",
+        color: `#FC8972`,
         width: `${countRejectPercent(RejectReason.ENGLISH)}%`,
       },
       {
         title: RejectReason.EXPERIENCE,
-        color: "color1",
+        color: "#C6E7FF",
         width: `${countRejectPercent(RejectReason.EXPERIENCE)}%`,
       },
     ];
@@ -179,13 +179,14 @@ const RejectDiagram = ({ vacancies }: { vacancies: Vacancy[] }) => {
               style={
                 {
                   "--target-width": item.width,
+
+                  backgroundColor: item.color,
+                  borderColor: item.color,
                 } as React.CSSProperties
               }
               onMouseEnter={(e) => handleMouseEnter(e, item)}
               onMouseLeave={handleMouseLeave}
               className={cn(
-                `bg-${item.color}`,
-                `border-${item.color}`,
                 `bar group relative border-2 transition-colors first:rounded-s-md last:rounded-e-md hover:border-iconHover hover:brightness-90 hover:saturate-200 md:first:rounded-s-xl md:last:rounded-e-xl`
               )}
             ></li>

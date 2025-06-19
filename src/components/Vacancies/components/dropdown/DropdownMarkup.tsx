@@ -173,7 +173,8 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           onMouseEnter={() => setFocusedOption("sortButton")}
           className={cn(
             "group flex w-full items-center justify-between rounded-t-xl pb-[13px] pl-8 pr-[22px] pt-3 text-textBlack hover:fill-iconHover hover:text-blackColor",
-            isDropdownOpen && "hover:bg-button hover:text-textBlack",
+            isDropdownOpen &&
+              "hover:bg-button hover:text-textBlack dark:hover:fill-textBlack",
             !isDropdownOpen && !isInModal && "rounded-xl",
             focusedOption === "sortButton" && isDropdownOpen && "bg-button",
             isInModal
@@ -187,10 +188,12 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
           <Icon
             id={"arrow-down"}
             className={cn(
-              "size-6 fill-textBlack group-hover:fill-iconHover",
+              "size-6 fill-textBlack",
               isDropdownOpen
                 ? "rotate-180 duration-500"
-                : "rotate-0 duration-500"
+                : isInModal
+                  ? "rotate-0 duration-500 dark:group-hover:fill-textBlack"
+                  : "rotate-0 duration-500 dark:group-hover:fill-textWhite"
             )}
           />
         </button>
@@ -246,7 +249,7 @@ export const DropdownMarkup = forwardRef<HTMLDivElement, DropdownMarkupProps>(
                   <Icon
                     id={"arrow-down"}
                     className={cn(
-                      "h-6 w-6 rotate-[270deg] fill-textBlack hover:fill-iconHover group-hover:fill-iconHover dark:hover:fill-iconHover",
+                      "h-6 w-6 rotate-[270deg] fill-textBlack hover:fill-iconHover group-hover:fill-iconHover dark:hover:fill-textBlack",
                       openSubMenu === option.id
                         ? "rotate-90 duration-500 smOnly:rotate-180"
                         : "rotate-[270deg] duration-500 smOnly:rotate-0"
