@@ -21,15 +21,15 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       onClick={isMobile ? onClick : undefined}
       className={({ isActive, isPending }) =>
         cn(
-          "group flex items-center rounded-[20px] border-2 border-transparent py-[2px]",
+          "group flex items-center rounded-[20px] border-2 py-[2px]",
           "custom-transition",
           "fill-textBlack text-textBlack",
           isOpen ? "w-[206px]" : "w-[68px]",
           isPending && "bg-red-500",
           !isActive &&
-            "hover:fill-iconHover hover:text-iconHover active:fill-iconHover active:text-iconHover",
+            "border-transparent hover:fill-iconHover hover:text-iconHover active:fill-iconHover active:text-iconHover",
           isActive &&
-            "!dark:bg-backgroundMain !border-color9 bg-backgroundMain dark:bg-[#fdfeff] dark:fill-textWhite dark:text-textWhite"
+            "bg-backgroundMain active:border-color9 dark:border-button dark:bg-[#fdfeff] dark:fill-textWhite dark:text-textWhite"
         )
       }
     >
