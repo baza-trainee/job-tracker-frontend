@@ -9,6 +9,7 @@ import {
 import { closeModal, openModal } from "../slices/modalSlice/modalSlice";
 import { BACKEND_ENDPOINTS } from "../api/api-routes";
 import { profileQuerySlice } from "./profileQuerySlice";
+import { eventQuerySlice } from "./eventsQuerySlice";
 
 type AuthResponse = { access_token: string; refresh_token: string };
 type AuthRequest = { email: string; password: string };
@@ -47,6 +48,7 @@ export const authPublicQuerySlice = createApi({
           dispatch(isLoggedIn());
 
           dispatch(profileQuerySlice.util.invalidateTags(["Profile"]));
+          dispatch(eventQuerySlice.util.invalidateTags(["events"]));
         } catch (error) {
           dispatch(
             openModal({
@@ -76,6 +78,7 @@ export const authPublicQuerySlice = createApi({
           dispatch(isLoggedIn());
 
           dispatch(profileQuerySlice.util.invalidateTags(["Profile"]));
+          dispatch(eventQuerySlice.util.invalidateTags(["events"]));
         } catch (error) {
           dispatch(
             openModal({
@@ -137,6 +140,7 @@ export const authPrivateQuerySlice = createApi({
           await queryFulfilled;
           dispatch(clearTokens());
           dispatch(closeModal());
+          dispatch(eventQuerySlice.util.invalidateTags(["events"]));
         } catch (error) {
           dispatch(
             openModal({
