@@ -264,7 +264,7 @@ export const Input = forwardRef<
                 "md:text-[14px]",
                 "2xl:text-[16px]",
                 (name === "hours" || name === "minutes") &&
-                  "absolute top-[130%] z-10 w-[66vw] rounded-md bg-whiteColor pb-2 pl-4 pt-1 text-start text-xs text-redColor md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
+                  "absolute top-[130%] z-10 w-[220px] rounded-md bg-whiteColor pb-2 pl-4 pt-1 text-start text-xs text-redColor md:top-[120%] md:w-[250px] md:text-sm xl:top-[110%] xl:w-[280px] 2xl:text-base",
                 name === "hours" && "left-[-90%] md:left-[-80%]",
                 name === "minutes" && "left-[-286%] md:left-[-80%]"
               )} //md:text-center text-end
